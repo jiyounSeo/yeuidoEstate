@@ -26,6 +26,7 @@ public class JsonTestController {
 	
 	@Resource(name="jsonTestService")
 	protected JsonTestService jsonTestService;
+	
 	//Controller
 	@RequestMapping(value= "/jsonTest.do", method=RequestMethod.POST)
 	public ModelAndView AjaxView( @RequestParam("id") String id)  {  
@@ -54,7 +55,7 @@ public class JsonTestController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    logger.info(listMap.get(0).get("no").toString());
+	    logger.info(listMap.get(0).get("id").toString());
 	    
 	    mav.addObject("person",listMap);
 	    mav.setViewName("jsonView");

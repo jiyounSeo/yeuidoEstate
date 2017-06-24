@@ -20,6 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      -->
 	<select id="testList" parameterType="hashmap" resultType="hashmap">
 		select *
-		  from attend_manager
+		  from member
 	</select>
 </mapper>

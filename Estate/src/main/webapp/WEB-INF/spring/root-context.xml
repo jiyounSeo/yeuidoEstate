@@ -6,9 +6,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
       <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-      <property name="url" value="jdbc:mysql://adppark7.cafe24.com:3306/adppark7" />
-      <property name="username" value="adppark7" />
-      <property name="password" value="qkrwldms0536!" />
+      <property name="url" value="jdbc:mysql://127.0.0.1:3306/estate" />
+      <property name="username" value="root" />
+      <property name="password" value="1234" />
     </bean>
 
 <!-- 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
