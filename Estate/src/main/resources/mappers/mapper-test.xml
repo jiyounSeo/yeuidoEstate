@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="jsonTestDAO">
+ <!-- 
+    <resultMap type="com.test.dto.TestDTO" id="TestResultList">
+        <result property="id" column="id" />
+        <result property="name" column="name" />
+    </resultMap>
+ 
+    <select id="selectUsers" resultMap="TestResultList">
+        SELECT id,name FROM user
+    </select>
+ 
+    <insert id="insertUser" parameterType="com.test.dto.TestDTO">
+        INSERT into user (id, name) values(#{id}, #{name})
+    </insert>
+     -->
+	<select id="testList" parameterType="hashmap" resultType="hashmap">
+		select *
+		  from attend_manager
+	</select>
+</mapper>
