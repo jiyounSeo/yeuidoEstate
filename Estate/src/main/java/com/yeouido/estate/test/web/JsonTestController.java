@@ -56,6 +56,8 @@ public class JsonTestController {
 			e.printStackTrace();
 		}
 	    logger.info(listMap.get(0).get("id").toString());
+	    logger.info(listMap.get(0).get("name").toString());
+	    
 	    
 	    mav.addObject("person",listMap);
 	    mav.setViewName("jsonView");

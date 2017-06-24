@@ -32,7 +32,7 @@
                 var html = '';
                	$.each (data, function(index,key) {
                		var info = data[index];
-                	html += '아이디<input type="text" name=id" value="'+info.name+'">';
+                	html += '아이디<input type="text" name=name" value="'+info.name+'">';
                 });
                 //html += '나이<input type="text"  name="age" value="'+data.age+'">';
                $("#container").after(html);
