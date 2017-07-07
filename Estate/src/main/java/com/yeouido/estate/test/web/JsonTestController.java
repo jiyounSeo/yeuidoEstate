@@ -28,16 +28,17 @@ public class JsonTestController {
 	protected JsonTestService jsonTestService;
 	
 	//Controller
-	@RequestMapping(value= "/jsonTest.do", method=RequestMethod.POST)
-	public ModelAndView AjaxView( @RequestParam("id") String id)  {  
+	@RequestMapping(value= "/joinMember.do", method=RequestMethod.POST)
+	public ModelAndView jsonTest(@RequestParam Map<String,Object> map)  {  
+		logger.info(map.get("name").toString());
+	    
 		ModelAndView mav= new ModelAndView();
+//
+//	    Map<String, Object> map = new HashMap<String,Object>();
+//	    map.put("id", "abc");
+//	    map.put("name", "홍길동");
+//	    map.put("age", 28);
 
-	    Map<String, Object> map = new HashMap<String,Object>();
-	    map.put("id", "abc");
-	    map.put("name", "홍길동");
-	    map.put("age", 28);
-
-	    logger.info(map.get("name").toString());
 	    
 	    mav.addObject("person",map);
 	    mav.setViewName("jsonView");
