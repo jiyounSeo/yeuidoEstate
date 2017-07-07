@@ -9,7 +9,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>test 게시판</title>
+    <title>test 게시판!!</title>
 
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
