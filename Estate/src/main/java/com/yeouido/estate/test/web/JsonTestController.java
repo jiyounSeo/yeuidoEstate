@@ -28,7 +28,7 @@ public class JsonTestController {
 	protected JsonTestService jsonTestService;
 	
 	//Controller
-	@RequestMapping(value= "/joinMember.do", method=RequestMethod.POST)
+	@RequestMapping(value= "/joinMember2.do", method=RequestMethod.POST)
 	public ModelAndView jsonTest(@RequestParam Map<String,Object> map)  {  
 		logger.info(map.get("name").toString());
 	    
@@ -36,7 +36,7 @@ public class JsonTestController {
 //
 //	    Map<String, Object> map = new HashMap<String,Object>();
 //	    map.put("id", "abc");
-//	    map.put("name", "홍길동");
+//	    map.put("name", "�솉湲몃룞");
 //	    map.put("age", 28);
 
 	    

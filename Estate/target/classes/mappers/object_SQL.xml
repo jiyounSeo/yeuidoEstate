@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="objectDAO">
+
+    <insert id="insertObject" parameterType="java.util.HashMap" >
+    <![CDATA[
+        INSERT into saleobject
+				  ( objtTp
+				  , objtNm
+				  , custNm
+				  , custTel1
+				  , custTel2
+				  , custTel3
+				  , buildNm
+				  , area
+				  , saleTp
+				  , bargainAmt 
+				  , depositAmt 
+				  , monthlyAmt 
+				  , dong
+				  , floor
+				  , directionTp
+				  , dueDt
+				  , roomCnt
+				  , bathCnt
+				  , ondolYn 
+				  , availableTp
+				  , availableDt 
+				  , conditionTp
+				  , memo
+				  , activeTp
+				  , divisionTp
+				  , parcelArea
+				  , realArea
+				  , rightAmt 
+				  , manageAmt 
+				  , interiorYn 
+				  , surtaxYn
+				  , parcelAmt 
+				  , premiumAmt )
+        	values ( #{objtTp}
+				  , #{objtNm}
+				  , #{custNm}
+				  , #{custTel1}
+				  , #{custTel2}
+				  , #{custTel3}
+				  , #{buildNm}
+				  , #{area}
+				  , #{saleTp}
+				  , #{bargainAmt} 
+				  , #{depositAmt} 
+				  , #{monthlyAmt} 
+				  , #{dong}
+				  , #{floor}
+				  , #{directionTp}
+				  , #{dueDt}
+				  , #{roomCnt}
+				  , #{bathCnt}
+				  , #{ondolYn} 
+				  , #{availableTp}
+				  , CASE WHEN #{availableDt} = '' THEN NULL ELSE #{availableDt} END
+				  , #{conditionTp}
+				  , #{memo}
+				  , #{activeTp}
+				  , #{divisionTp}
+				  , #{parcelArea}
+				  , #{realArea}
+				  , #{rightAmt} 
+				  , #{manageAmt} 
+				  , #{interiorYn} 
+				  , #{surtaxYn}
+				  , #{parcelAmt} 
+				  , #{premiumAmt}
+        	)
+       ]]>
+		
+    </insert>
+    
+    <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT a.objtTp, a.saleTp, ifnull(cntSaleTp, 0) cntSaleTp
+	FROM
+		(
+		SELECT a.commCd objtTp, b.commCd saleTp
+		  FROM commCd a, commCd b
+		 where a.groupCd = 'OT'
+		   and b.groupCd = 'ST'
+		) AS A
+	LEFT OUTER JOIN 
+	   (SELECT objtTp, saleTp, count(saleTp) cntSaleTp
+		  FROM saleobject
+		  GROUP BY objtTp, saleTp
+		) AS B
+	 ON A.objtTp = B.objtTp
+	 A.saleTp = B.saleTp
+	ORDER BY a.objtTp, a.saleTp
+    </select>
+    
+	<select id="selectObjectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select mbr_id, mbr_pw, mbr_nm, phone1, phone2, phone3, agency, DATE_FORMAT(reg_date, '%Y-%m-%d') reg_date
+		  from member
+	</select>
+</mapper>

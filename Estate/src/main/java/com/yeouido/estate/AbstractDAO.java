@@ -1,6 +1,7 @@
 package com.yeouido.estate;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,13 +14,23 @@ public class AbstractDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	protected void printQueryId(String queryId) {
+	protected void printQueryMap(Map queryId) {
 		if(log.isDebugEnabled()){
 			log.debug("\t QueryId  \t:  " + queryId);
 		}
 	}
 	
+	protected void printQueryId(String queryId) {
+		if(log.isDebugEnabled()){
+			log.debug("\t QueryId  \t:  " + queryId);
+		}
+	}
+	/*
 	public Object insert(String queryId, Object params){
+		printQueryId(queryId);
+		return sqlSession.insert(queryId, params);
+	}*/
+	public int insert(String queryId, Object params){
 		printQueryId(queryId);
 		return sqlSession.insert(queryId, params);
 	}
@@ -39,16 +50,19 @@ public class AbstractDAO {
 		return sqlSession.selectOne(queryId);
 	}
 	
-	public Object selectOne(String queryId, Object params){
+	public int selectOne(String queryId, Object params){
 		printQueryId(queryId);
-		return sqlSession.selectOne(queryId, params);
+		int result = sqlSession.selectOne(queryId, params);
+		return result;
 	}
-	
+
+
 	@SuppressWarnings("rawtypes")
 	public List selectList(String queryId){
 		printQueryId(queryId);
 		return sqlSession.selectList(queryId);
 	}
+	
 	
 	@SuppressWarnings("rawtypes")
 	public List selectList(String queryId, Object params){

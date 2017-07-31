@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="memberDAO">
+<!--
+    <resultMap type="com.test.dto.TestDTO" id="TestResultList">
+        <result property="id" column="id" />
+        <result property="name" column="name" />
+    </resultMap>
+ 
+    <select id="selectUsers" resultMap="TestResultList">
+        SELECT id,name FROM user
+    </select>
+    -->
+    <insert id="insertMember" parameterType="java.util.HashMap">
+        INSERT into member  (mbr_id, mbr_pw, mbr_nm, phone1, phone2, phone3, agency, reg_date) 
+        			values  (#{mbr_id}, #{mbr_pw}, #{mbr_nm}, #{phone1}, #{phone2}, #{phone3}, #{agency} , DATE_FORMAT(sysdate(), '%Y-%m-%d'))
+            			
+    </insert>
+    
+	<select id="selectMemberList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select mbr_id, mbr_pw, mbr_nm, phone1, phone2, phone3, agency, DATE_FORMAT(reg_date, '%Y-%m-%d') reg_date
+		  from member
+	</select>
+</mapper>
