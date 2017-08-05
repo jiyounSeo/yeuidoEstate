@@ -229,6 +229,16 @@
 	border-right: 1px solid #b2b2b2;	
 }
 
+.new_page_table input[type=number] {
+    width: 100%;
+    height: 42px;
+    padding: 12px 20px;
+    margin: 0;
+    box-sizing: border-box;
+    border: 1px solid #d3d3d3;
+    background-color: #fff;
+}
+
 .new_page_table input[type=text] {
     width: 100%;
     height: 42px;

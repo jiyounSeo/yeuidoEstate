@@ -74,9 +74,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{surtaxYn}
 				  , #{parcelAmt} 
 				  , #{premiumAmt}
-        	)
+        	);
        ]]>
-		
+		<if test="publicYn != null and advertiseYn != null  ">
+		INSERT into division
+		 		( objtTpNo
+				  , publicYn
+				  , advertiseYn
+				  )
+		VALUES ( 
+				(SELECT MAX(objtTpNo) FROM saleobject )
+				, #{publicYn}
+				, #{advertiseYn}
+				);
+		</if>
     </insert>
     
     <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -94,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  GROUP BY objtTp, saleTp
 		) AS B
 	 ON A.objtTp = B.objtTp
-	 A.saleTp = B.saleTp
+	 AND A.saleTp = B.saleTp
 	ORDER BY a.objtTp, a.saleTp
     </select>
     

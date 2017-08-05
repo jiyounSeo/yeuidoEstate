@@ -1,10 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html; charset=utf-8" %>
 <% request.setCharacterEncoding("utf-8");%>
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/list/newObApt.js"></script>
-
+<!-- 아파트 -->
 <form id="newObApt" method="post" > 
 <div class="new_page_title">
 	<img src="./resources/images/title_new_ob_1.jpg">
@@ -20,9 +24,9 @@
 			<td class="title2">성명 </td>
 			<td width="365px"><input type="text" id="custNm" name="custNm" ></td>
 			<td class="title2">연락처</td>
-			<td><input type="text" style="width:130px" id="custTel1" name="custTel1">
-				 - <input type="text" style="width:155px" id="custTel2" name="custTel2">
-				 - <input type="text" style="width:155px" id="custTel3" name="custTel3"></td>
+			<td><input type="number" style="width:120px" id="custTel1" name="custTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
+				 - <input type="number" style="width:130px" id="custTel2" name="custTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
+				 - <input type="number" style="width:130px" id="custTel3" name="custTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
 		</tr>
 		<tr>
 			<td class="title">단지명/면적</td>
@@ -30,7 +34,7 @@
 				<select  id="buildNm" name="buildNm" style="width:350px">
 					<option value="AP001">샘플아파트</option>
 				</select>&nbsp;
-				<input type="text" style="width:135px" id="area" name="area"> 평형
+				<input type="number" style="width:135px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형
 				<input type= "button" onClick="goPopup();" value= " 팝업 " /> 
 			</td>
 			
@@ -45,16 +49,17 @@
 		</tr>
 		<tr>
 			<td class="title">매매가</td>
-			<td colspan="2"><input type="text"  id="bargainAmt" name="bargainAmt" style="width:140px"> 만원</td>
+			<td colspan="2">
+			<input type="text" id="bargainAmt" name="bargainAmt"  onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/> 만원</td>
 			<td class="title">보증금</td>
-			<td><input type="text" style="width:140px" id="depositAmt" name="depositAmt"> 만원 / 월세 
-				<input type="text" style="width:140px" id="monthlyAmt" name="monthlyAmt"> 만원</td>
+			<td><input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/> 만원 / 월세 
+				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/> 만원</td>
 		</tr>
 		<tr>
 			<td class="title">동 / 층 / 향</td>
 			<td colspan="2">
 				<select style="width:130px" id="dong" name="dong"><option>A</option></select> 동&nbsp;&nbsp;&nbsp;
-				<input type="text" name="floor" name="floor" maxlength="3"/> 층&nbsp;&nbsp;&nbsp;
+				<input type="number" name="floor" name="floor" style="width:140px" min="0" max="999" oninput="if(this.value.length>3) this.value=this.value.slice(0,3)"  /> 층&nbsp;&nbsp;&nbsp;
 				<select style="width:130px" id="directionTp" name="directionTp" >
 					<option value="DR001">동</option>
 					<option value="DR002">서</option>
@@ -67,17 +72,18 @@
 				</select>
 			</td>
 			<td class="title">만기일</td>
-			<td><input type="text" id="dueDt" name="dueDt" style="width:140px"><img src="./resources/images/icon_cal.jpg"></td>
+			<td><input type="text" id="dueDt" name="dueDt" class="datepicker" style="width:140px"><img src="./resources/images/icon_cal.jpg"></td>
 		</tr>
 		<tr>
 			<td class="title">방 수 / 욕실 수</td>
 			<td colspan="2">
-				<input type="text" style="width:140px" id="roomCnt" name="roomCnt" > 개 / 
-				<input type="text" style="width:140px" id="bathCnt" name="bathCnt" > 개</td>
+				<input type="number" id="roomCnt" name="roomCnt" min="0" max="99" oninput="if(this.value.length>3) this.value=this.value.slice(0,2)" style="width:140px" > 개 / 
+				<input type="number" id="bathCnt" name="bathCnt" min="0" max="99" oninput="if(this.value.length>3) this.value=this.value.slice(0,2)" style="width:140px"> 개 
+			</td>
 			<td class="title">온돌</td>
 			<td>
-				<input type="radio" name="ondolYn" id="ondolYn1" value="Y" /><label for="ondolYn1">있음</label>
-				<input type="radio" name="onDolYn" id="onDolYn2" value="N" /><label for="ondolYn2">없음</label>
+			  <input type="radio" id="ondolYn1" name="ondolYn" value="Y"/><label for="ondolYn1">있음</label>
+			  <input type="radio" id="ondolYn2" name="ondolYn" value="N"/><label for="ondolYn2">없음</label>
 			</td>
 		</tr>
 		<tr>
@@ -89,7 +95,7 @@
 			  <input type="radio" id="availableTp4" name="availableTp" value="AD004"/><label for="availableTp4">주전</label>
 			  <input type="radio" id="availableTp5" name="availableTp" value="AD005"/><label for="availableTp5">세안고</label>
 			  <input type="radio" id="availableTp6" name="availableTp" value="AD006"/><label for="availableTp6">협의</label>
-			  <input type="text" style="width:140px" id="availableDt" name="availableDt"> 일
+			  <input type="text" style="width:140px" id="availableDt" name="availableDt" class="datepicker"> 일
 			</td>
 		</tr>
 		<tr>
