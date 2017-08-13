@@ -15,7 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , custTel2
 				  , custTel3
 				  , buildNm
+				  , businessNm
 				  , area
+				  , realArea
 				  , saleTp
 				  , bargainAmt 
 				  , depositAmt 
@@ -48,7 +50,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{custTel2}
 				  , #{custTel3}
 				  , #{buildNm}
+				  , #{businessNm}
 				  , #{area}
+				  , #{realArea}
 				  , #{saleTp}
 				  , #{bargainAmt} 
 				  , #{depositAmt} 
