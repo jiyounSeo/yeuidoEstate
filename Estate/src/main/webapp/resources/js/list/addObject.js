@@ -54,7 +54,42 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	
 
 function f_saleobject_save() {
-	var param = $("#newObApt").serialize();
+	
+	var formId = $("form").attr("id");
+	var param = $("#"+formId).serialize();
+	console.log (param);
+
+	
+	if ( $("#objtNm").val() == "") {
+		alert ("물건명은 필수입력 값입니다.");
+		return;
+	}
+	
+	if ( $("#custNm").val() == "") {
+		alert ("고객명은 필수입력 값입니다.");
+		return;
+	}
+	
+	
+	if (  $("input[name=saleTp]").val() == "" ) {
+		alert ("유형은 필수입력 값입니다.");
+		return;
+	} else {
+		param.saleTp = $("input[name=saleTp]").val();
+	}
+	
+	if ( $("#dueDt").val() == "") {
+		alert ("만기일은 필수입력 값입니다.");
+		return;
+	}
+	console.log ($("input[name=activeTp]").val());
+	if (  $("input[name=activeTp]").val() == "" ) {
+		alert ("분류 [활성 or 분류]은 필수입력 값입니다.");
+		return;
+	} else {
+		param.activeTp = $("input[name=activeTp]").val();
+	}
+	
 	
 	$.ajax({
 	  url : "/estate/insertObject.do",

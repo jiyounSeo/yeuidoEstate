@@ -6,9 +6,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="objectDAO">
 
     <insert id="insertObject" parameterType="java.util.HashMap" >
+      <selectKey resultType="string" keyProperty="objtNo" order="BEFORE">
+        SELECT  ifnull (MAX(objtNo)+1,1) from saleobject       
+      </selectKey>
     <![CDATA[
         INSERT into saleobject
-				  ( objtTp
+				  ( objtNo
+				  , objtTp
 				  , objtNm
 				  , custNm
 				  , custTel1
@@ -34,16 +38,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , conditionTp
 				  , memo
 				  , activeTp
-				  , divisionTp
+				  , publicYn
+				  , advertiseYn
 				  , parcelArea
-				  , realArea
 				  , rightAmt 
 				  , manageAmt 
 				  , interiorYn 
 				  , surtaxYn
 				  , parcelAmt 
-				  , premiumAmt )
-        	values ( #{objtTp}
+				  , premiumAmt
+				  
+				  )
+        	values ( 
+        			#{objtNo}
+        		  , #{objtTp}
 				  , #{objtNm}
 				  , #{custNm}
 				  , #{custTel1}
@@ -51,47 +59,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{custTel3}
 				  , #{buildNm}
 				  , #{businessNm}
-				  , #{area}
-				  , #{realArea}
-				  , #{saleTp}
-				  , #{bargainAmt} 
-				  , #{depositAmt} 
-				  , #{monthlyAmt} 
+				  , CASE WHEN #{area} = '' THEN 0 ELSE #{area} END
+				  , CASE WHEN #{realArea} = '' THEN 0 ELSE #{realArea} END
+				  , #{saleTp} 
+				  , CASE WHEN #{bargainAmt} = '' THEN 0 ELSE #{bargainAmt} END 
+				  , CASE WHEN #{depositAmt} = '' THEN 0 ELSE #{depositAmt} END  
+				  , CASE WHEN #{monthlyAmt} = '' THEN 0 ELSE #{monthlyAmt} END  
 				  , #{dong}
-				  , #{floor}
+				  , CASE WHEN #{floor} = '' THEN NULL ELSE #{floor} END 
 				  , #{directionTp}
 				  , #{dueDt}
-				  , #{roomCnt}
-				  , #{bathCnt}
+				  , CASE WHEN #{roomCnt} = '' THEN NULL ELSE #{roomCnt} END 
+				  , CASE WHEN #{bathCnt} = '' THEN NULL ELSE #{bathCnt} END 
 				  , #{ondolYn} 
 				  , #{availableTp}
 				  , CASE WHEN #{availableDt} = '' THEN NULL ELSE #{availableDt} END
 				  , #{conditionTp}
 				  , #{memo}
 				  , #{activeTp}
-				  , #{divisionTp}
-				  , #{parcelArea}
-				  , #{realArea}
-				  , #{rightAmt} 
-				  , #{manageAmt} 
-				  , #{interiorYn} 
-				  , #{surtaxYn}
-				  , #{parcelAmt} 
-				  , #{premiumAmt}
+				  , CASE WHEN #{advertiseYn} = 'Y' THEN 'Y' ELSE 'N' END
+				  , CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END
+				  , CASE WHEN #{parcelArea} = '' THEN 0 ELSE #{parcelArea} END
+				  , CASE WHEN #{rightAmt} = '' THEN 0 ELSE #{rightAmt} END  
+				  , CASE WHEN #{manageAmt} = '' THEN 0 ELSE #{manageAmt} END  
+				  , CASE WHEN #{interiorYn} = '' THEN NULL ELSE #{interiorYn} END 
+				  , CASE WHEN #{surtaxYn} = '' THEN NULL ELSE #{surtaxYn} END 
+				  , CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END 
+				  , CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END 
+				  
         	);
        ]]>
-		<if test="publicYn != null and advertiseYn != null  ">
-		INSERT into division
-		 		( objtTpNo
-				  , publicYn
-				  , advertiseYn
-				  )
-		VALUES ( 
-				(SELECT MAX(objtTpNo) FROM saleobject )
-				, #{publicYn}
-				, #{advertiseYn}
-				);
-		</if>
+		
     </insert>
     
     <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">

@@ -8,7 +8,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/list/addObject.js"></script>
-
+<form id="newObStore" method="post" > 
 <div class="new_page_title">
 	<img src="./resources/images/title_new_ob_2.jpg">
 </div>
@@ -112,8 +112,8 @@
 			  <input type="radio" id="activeTp1" name="activeTp" value="AT001"/><label for="activeTp1">활성</label>
 			  <input type="radio" id="activeTp2" name="activeTp" value="AT002"/><label for="activeTp2">보류</label>
 			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			  <input type="checkbox" name="divisionTp" id="divisionTp1" value="DT001"/><label for="divisionTp1">공동</label>
-			  <input type="checkbox" name="divisionTp" id="divisionTp2" value="DT002"/><label for="divisionTp2">광고</label>
+			  <input type="checkbox" name="publicYn" id="publicYn" value="Y" /><label for="publicYn">공동</label>
+			  <input type="checkbox" name="advertiseYn" id="advertiseYn" value="Y" /><label for="advertiseYn">광고</label>
 			</td>
 		</tr>
 	</table>
@@ -124,4 +124,7 @@
 		<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
 	</div>
 </div>
+<input type="hidden" name="objtTp" id="objtTp" value="OT002"/>
+
+</form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

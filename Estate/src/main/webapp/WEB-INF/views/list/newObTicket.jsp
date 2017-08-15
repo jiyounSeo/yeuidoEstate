@@ -9,7 +9,7 @@
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/list/addObject.js"></script>
 
-
+<form id="newObTicket" method="post" > 
 <div class="new_page_title">
 	<img src="./resources/images/title_new_ob_6.jpg">
 </div>
@@ -18,7 +18,7 @@
 	<table class="new_page_table">
 		<tr>
 			<td class="title">물건명</td>
-			<td colspan="4"><input type="text" id="objtNm" name="objtNm" value="물건명"> </td>
+			<td colspan="4"><input type="text" id="objtNm" name="objtNm"> </td>
 		</tr>
 		<tr>
 			<td class="title">고객정보</td>
@@ -100,8 +100,8 @@
 			  <input type="radio" id="activeTp1" name="activeTp" value="AT001"/><label for="activeTp1">활성</label>
 			  <input type="radio" id="activeTp2" name="activeTp" value="AT002"/><label for="activeTp2">보류</label>
 			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			  <input type="checkbox" name="divisionTp" id="divisionTp1" value="DT001"/><label for="divisionTp1">공동</label>
-			  <input type="checkbox" name="divisionTp" id="divisionTp2" value="DT002"/><label for="divisionTp2">광고</label>
+			  <input type="checkbox" name="publicYn" id="publicYn" value="Y" /><label for="publicYn">공동</label>
+			  <input type="checkbox" name="advertiseYn" id="advertiseYn" value="Y" /><label for="advertiseYn">광고</label>
 			</td>
 		</tr>
 	</table>
@@ -109,7 +109,9 @@
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">
 		<a href="#"><img src="./resources/images/btn_add.jpg" onclick="f_saleobject_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
+		<a hrefs="#"><img src="./resources/images/btn_cancel.jpg"></a>
 	</div>
 </div>
+<input type="hidden" name="objtTp" id="objtTp" value="OT006"/>
+</form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
