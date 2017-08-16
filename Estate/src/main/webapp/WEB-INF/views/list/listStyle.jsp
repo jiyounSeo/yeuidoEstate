@@ -217,7 +217,16 @@
 	border-bottom: 1px solid #fff;
 }
 .new_page_table td.title2 {
-	width:155px;
+	width:145px;
+	text-align:center;
+	background:#d4d4d4;
+	color:#000;
+	font-weight: bold;
+	border-bottom: 1px solid #fff;
+}
+
+.new_page_table td.title3 {
+	width:115px;
 	text-align:center;
 	background:#d4d4d4;
 	color:#000;
@@ -227,16 +236,6 @@
 
 .new_page_table td:last-child {
 	border-right: 1px solid #b2b2b2;	
-}
-
-.new_page_table input[type=number] {
-    width: 100%;
-    height: 42px;
-    padding: 12px 20px;
-    margin: 0;
-    box-sizing: border-box;
-    border: 1px solid #d3d3d3;
-    background-color: #fff;
 }
 
 .new_page_table input[type=text] {
@@ -261,12 +260,13 @@
 	-webkit-appearance: none; 
 	-moz-appearance: none;    
 	appearance: none;
-	background: url('./resources/images/icon_sel.jpg') no-repeat 100% 50%;	
+	background: url('./images/icon_sel.jpg') no-repeat 100% 50%;	
 }
 
 .new_page_table select::-ms-expand {
 	display:none;
 }
+
 /*
 input[type=checkbox].ckbox {
 	position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
@@ -450,4 +450,5 @@ label.rb-label {
 	-ms-user-select: none;
 	user-select: none;
 }*/
+
 </style>

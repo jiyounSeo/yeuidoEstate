@@ -73,37 +73,184 @@
 									<c:when test="${mainc == 6}"><tr class="title${tab+4}"></c:when>
 									<c:otherwise><tr class="title${tab}"></c:otherwise>
 								</c:choose>
-										<td>등록일</td>
-										<td>단지명</td>
-										<td>평형</td>
-										<td>동</td>
-										<td>층</td>
-										<td>향</td>
-										<td>매매가</td>
-										<td>명도</td>
-										<td>온돌</td>
-										<td>상태</td>
-										<td>등록인</td>
-										<td>분류</td>
-										<td>기타</td>
-									</tr>
-									<c:forEach var="i" begin="1" end="${numOfRow}" step="1">
-									<tr>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>											
-									</tr>
-									</c:forEach>										
+								<c:choose>
+									<c:when test="${mainc == 1}">
+											<td>등록일</td>
+											<td>단지명</td>
+											<td>평형</td>
+											<td>동</td>
+											<td>층</td>
+											<td>향</td>
+											<td>매매가</td>
+											<td>명도</td>
+											<td>온돌</td>
+											<td>상태</td>
+											<td>등록인</td>
+											<td>분류</td>
+											<td>기타</td>
+										</tr>
+										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
+										<tr>
+											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>											
+										</tr>
+										</c:forEach>
+									</c:when>
+									<c:when test="${mainc == 2}">
+											<td>등록일</td>
+											<td>분양평수</td>
+											<td>실평수</td>
+											<td>층</td>
+											<td>보증금 / 월세</td>
+											<td>권리금</td>
+											<td>명도</td>
+											<td>등록인</td>
+											<td>분류</td>
+											<td>기타</td>
+										</tr>
+										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
+										<tr>
+											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+										</tr>
+										</c:forEach>				
+									</c:when>
+									<c:when test="${mainc == 3}">
+											<td>등록일</td>
+											<td>분양평수</td>
+											<td>실평수</td>
+											<td>층</td>
+											<td>매매가</td>
+											<td>명도</td>
+											<td>등록인</td>
+											<td>분류</td>
+											<td>기타</td>
+										</tr>
+										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
+										<tr>
+											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+										</tr>
+										</c:forEach>			
+									</c:when>
+									<c:when test="${mainc == 4}">
+											<td>등록일</td>
+											<td>건물명</td>
+											<td>평형</td>
+											<td>동</td>
+											<td>층</td>
+											<td>향</td>
+											<td>보증금/월세</td>
+											<td>부가세</td>
+											<td>명도</td>
+											<td>등록인</td>
+											<td>분류</td>
+											<td>기타</td>
+										</tr>
+										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
+										<tr>
+											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+										</tr>
+										</c:forEach>					
+									</c:when>
+									<c:when test="${mainc == 5}">
+											<td>등록일</td>
+											<td>건물명</td>
+											<td>평형</td>
+											<td>동</td>
+											<td>층</td>
+											<td>향</td>
+											<td>보증금</td>
+											<td>명도</td>
+											<td>등록인</td>
+											<td>분류</td>
+											<td>기타</td>
+										</tr>
+										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
+										<tr>
+											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+										</tr>
+										</c:forEach>			
+									</c:when>
+									<c:when test="${mainc == 6}">
+											<td>등록일</td>
+											<td>건물명</td>
+											<td>면적</td>
+											<td>동</td>
+											<td>층</td>
+											<td>향</td>
+											<td>분양가</td>
+											<td>프리미엄</td>
+											<td>입주일</td>
+											<td>등록인</td>
+											<td>분류</td>
+											<td>기타</td>
+										</tr>
+										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
+										<tr>
+											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+											<td>-</td>
+										</tr>
+										</c:forEach>		
+									</c:when>
+								</c:choose>																			
 								</table>
 							</td>
 						</tr>

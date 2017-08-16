@@ -7,12 +7,15 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/common.js"></script>
+	
+	
 </head>
 
 <div style="width:1485px; margin:auto">
 <table width="1485px" cellpadding="0" cellspaing="0" border="0">
 	<tr>
 		<td width="1103px" valign="top">
+		
 			<%@ include file="/WEB-INF/views/admin/cal.jsp" %> 
 		</td>
 		<td width="17px"></td>

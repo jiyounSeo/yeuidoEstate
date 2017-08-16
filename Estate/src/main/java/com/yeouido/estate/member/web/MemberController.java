@@ -39,10 +39,27 @@ public class MemberController {
 		 return mv;
 	}
 	
+	@RequestMapping(value= "/loginView.do")
+	public ModelAndView loginView(@RequestParam Map<String,Object> map)  {  
+		 ModelAndView mv = new ModelAndView("/mbr/login");
+		 return mv;
+	}
+	
+	@RequestMapping(value= "/regView.do")
+	public ModelAndView regView(@RequestParam Map<String,Object> map)  {  
+		 ModelAndView mv = new ModelAndView("/mbr/joinMember");
+		 return mv;
+	}
+	
+	@RequestMapping(value= "/adminMainView.do")
+	public ModelAndView adminMainView(@RequestParam Map<String,Object> map)  {  
+		 ModelAndView mv = new ModelAndView("/adminMain");
+		 return mv;
+	}
+	
 	//member insert 
 	@RequestMapping(value= "/joinMember.do", method=RequestMethod.POST)
 	public ModelAndView joinMember(@RequestParam Map<String,Object> map)  {  
-		
 		try {
 			memberService.insertMemberList(map);
 		} catch (Exception e) {

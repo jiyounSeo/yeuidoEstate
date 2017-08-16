@@ -57,8 +57,6 @@ function f_saleobject_save() {
 	
 	var formId = $("form").attr("id");
 	var param = $("#"+formId).serialize();
-	console.log (param);
-
 	
 	if ( $("#objtNm").val() == "") {
 		alert ("물건명은 필수입력 값입니다.");
@@ -71,26 +69,27 @@ function f_saleobject_save() {
 	}
 	
 	
-	if (  $("input[name=saleTp]").val() == "" ) {
+	if (  $("input[name=saleTp]:checked").val() == undefined ) {
 		alert ("유형은 필수입력 값입니다.");
 		return;
 	} else {
-		param.saleTp = $("input[name=saleTp]").val();
+		param.saleTp = $("input[name=saleTp]:checked").val();
 	}
 	
 	if ( $("#dueDt").val() == "") {
 		alert ("만기일은 필수입력 값입니다.");
 		return;
 	}
-	console.log ($("input[name=activeTp]").val());
-	if (  $("input[name=activeTp]").val() == "" ) {
+	console.log ("activeTp : " + $("input[name=activeTp]:checked").val());
+	if (  $("input[name=activeTp]:checked").val() == undefined ) {
 		alert ("분류 [활성 or 분류]은 필수입력 값입니다.");
 		return;
 	} else {
-		param.activeTp = $("input[name=activeTp]").val();
+		param.activeTp = $("input[name=activeTp]:checked").val();
 	}
 	
-	
+	console.log (param);
+
 	$.ajax({
 	  url : "/estate/insertObject.do",
 	  type: "post",
@@ -103,7 +102,6 @@ function f_saleobject_save() {
 //	 			$("#listTemplte").tmpl(data).appendTo("#target");
 	  }
 	});
-	
 }
 
 function f_member_list() {

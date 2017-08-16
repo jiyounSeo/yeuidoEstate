@@ -19,7 +19,7 @@
 			<img src="./resources/images/btn_m7.jpg">
 		</td>
 	</tr>
-	<tr><td><img src="./resources/images/btn_m8.jpg"></td></tr>
+	<tr><td><a href=""><img src="./resources/images/btn_m8.jpg"></a></td></tr>
 	<tr><td height="6px"></td></tr>
 	<tr>
 		<td>

@@ -54,9 +54,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         		  , #{objtTp}
 				  , #{objtNm}
 				  , #{custNm}
-				  , #{custTel1}
-				  , #{custTel2}
-				  , #{custTel3}
+				  , CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END
+				  , CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END
+				  , CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END
 				  , #{buildNm}
 				  , #{businessNm}
 				  , CASE WHEN #{area} = '' THEN 0 ELSE #{area} END

@@ -4,7 +4,7 @@
 <% response.setContentType("text/html; charset=utf-8"); %>
 <%@ page session="false" %>
 
-<c:set var="contextPath" value="<%= request.getContextPath()%>"></c:set>  
+<c:set var="contextPath" value="./resources"></c:set>  
 
 <html>
   <head>
