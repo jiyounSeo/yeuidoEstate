@@ -68,7 +68,7 @@
 					<option value="DR004">북</option>
 					<option value="DR005">남동</option>
 					<option value="DR006">남서</option>
-					<option value="DR007">북서</option>
+					<option value="DR007" >북서</option>
 					<option value="DR008">북동</option>
 				</select>
 			</td>
