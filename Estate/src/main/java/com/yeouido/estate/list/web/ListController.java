@@ -386,14 +386,14 @@ public class ListController {
 		
 		return model;
 	}
-	
+	/*
 	@RequestMapping(value= "/viewObApt.do", method=RequestMethod.GET)
 	public ModelAndView newViewObAptView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/listpage/viewObApt");
 		 return mv;
 	}	
-
-	@RequestMapping(value="/viewObApt",method = RequestMethod.GET)
+*/
+	@RequestMapping(value="/viewObApt.do",method = RequestMethod.GET)
 	public String goViewObAptView(@RequestParam Map<String,Object> map, Model model){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
@@ -405,69 +405,71 @@ public class ListController {
 		
 		//ModelAndView mv = new ModelAndView();
 		return "/listpage/viewObApt";
+	
 	}
 
 	@RequestMapping(value= "/viewObHrapt.do", method=RequestMethod.GET)
-	public ModelAndView newViewObHraptView(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/listpage/viewObHrapt");
-		 return mv;
-	}	
-
-	@RequestMapping(value="/viewObHrapt",method = RequestMethod.GET)
-	public String goViewObHraptView(HttpServletRequest request,Model model){
+	public String newViewObHraptView(@RequestParam Map<String,Object> map, Model model)  {  
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			result = objectService.selectObjectInfo(map);
+			model.addAllAttributes(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		model = goView(request, model);
-		return "/listpage/viewObHrapt";	
-	}
-	
-	@RequestMapping(value= "/viewObOffice.do", method=RequestMethod.GET)
-	public ModelAndView newViewObOfficeView(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/listpage/viewObOffice");
-		 return mv;
+		return "/listpage/viewObHrapt";
 	}	
 
-	@RequestMapping(value="/viewObOffice",method = RequestMethod.GET)
-	public String goViewObOfficeView(HttpServletRequest request,Model model){
-		model = goView(request, model);
+	@RequestMapping(value="/viewObOffice.do",method = RequestMethod.GET)
+	public String goViewObOfficeView(@RequestParam Map<String,Object> map, Model model){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			result = objectService.selectObjectInfo(map);
+			model.addAllAttributes(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "/listpage/viewObOffice";	
 	}
 	
-	@RequestMapping(value= "/viewObOps.do", method=RequestMethod.GET)
-	public ModelAndView newViewObOpsView(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/listpage/viewObOps");
-		 return mv;
-	}	
-
-	@RequestMapping(value="/viewObOps",method = RequestMethod.GET)
-	public String goViewObOpsView(HttpServletRequest request,Model model){
+	@RequestMapping(value="/viewObOps.do",method = RequestMethod.GET)
+	public String goViewObOpsView(@RequestParam Map<String,Object> map, Model model){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			result = objectService.selectObjectInfo(map);
+			model.addAllAttributes(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		model = goView(request, model);
 		return "/listpage/viewObOps";	
 	}
 
-	@RequestMapping(value= "/viewObStore.do", method=RequestMethod.GET)
-	public ModelAndView newViewObStoreView(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/listpage/viewObStore");
-		 return mv;
-	}	
-
-	@RequestMapping(value="/viewObStore",method = RequestMethod.GET)
-	public String goViewObStoreView(HttpServletRequest request,Model model){
+	@RequestMapping(value="/viewObStore.do",method = RequestMethod.GET)
+	public String goViewObStoreView(@RequestParam Map<String,Object> map, Model model){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			result = objectService.selectObjectInfo(map);
+			model.addAllAttributes(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		model = goView(request, model);
 		return "/listpage/viewObStore";	
 	}
-	
-	@RequestMapping(value= "/viewObTicket.do", method=RequestMethod.GET)
-	public ModelAndView newViewObTicketView(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/listpage/viewObTicket");
-		 return mv;
-	}	
 
-	@RequestMapping(value="/viewObTicket",method = RequestMethod.GET)
-	public String goViewObTicketView(HttpServletRequest request,Model model){
+	@RequestMapping(value="/viewObTicket.do",method = RequestMethod.GET)
+	public String goViewObTicketView(@RequestParam Map<String,Object> map, Model model){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			result = objectService.selectObjectInfo(map);
+			model.addAllAttributes(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		model = goView(request, model);
 		return "/listpage/viewObTicket";	
 	}
 	

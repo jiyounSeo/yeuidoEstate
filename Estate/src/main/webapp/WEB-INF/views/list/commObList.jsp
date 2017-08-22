@@ -211,7 +211,7 @@
 <script id="objtListTemplte1" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.dong}}</td>
@@ -230,7 +230,7 @@
 <script id="objtListTemplte2" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.realArea}}</td>
 		<td>{{html $value.floor}}</td>
@@ -246,7 +246,7 @@
 <script id="objtListTemplte3" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.realArea}}</td>
 		<td>{{html $value.floor}}</td>
@@ -261,7 +261,7 @@
 <script id="objtListTemplte4" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.dong}}</td>
@@ -280,7 +280,7 @@
 <script id="objtListTemplte5" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.dong}}</td>
@@ -298,7 +298,7 @@
 <script id="objtListTemplte6" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.dong}}</td>

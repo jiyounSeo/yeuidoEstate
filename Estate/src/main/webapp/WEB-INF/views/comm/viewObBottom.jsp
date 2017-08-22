@@ -4,8 +4,8 @@
 			<tr>
 				<td align="left" width="50%">
 					<a href="./addObject"><img src="./resources/images/btn_new_ob.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#"><img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#"><img src="./resources/images/btn_del.jpg"></a>
+					<a href="./modifyObject"><img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="./deleteObjt"><img src="./resources/images/btn_del.jpg"></a>
 				</td>
 				<td align="right">
 					<c:if test="${list_url != null }">

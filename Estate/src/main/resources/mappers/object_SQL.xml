@@ -145,32 +145,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectObjectInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
-	     , objtNo
+	SELECT objtNo
 	     , objtTp
+	     , (select commNm from commcd where commCd = objtTp ) objtTpNm
 	     , objtNm
+	     , custNm
+	     , custTel1
+	     , custTel2
+	     , custTel3
+	     , businessNm
+	     , buildNm
+	     , saleTp
+	     , (select commNm from commcd where commCd = saleTp ) saleTpNm
 	     , area
 	     , realArea
+	     , bargainAmt
+	     , depositAmt
+	     , monthlyAmt
 	     , dong
 	     , floor
 	     , directionTp
 	     , (select commNm from commcd where commCd = directionTp ) directionTpNm
-	     , bargainAmt
-	     , concat(depositAmt , '/' , monthlyAmt) depositAmt
-	     , rightAmt
+	     , DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
+	 	 , roomCnt
+	 	 , bathCnt
 	     , ifnull (ondolYn, 'N') ondolYn
+	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
+	 	 , rightAmt
 	     , conditionTp 
 	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
 	     , firstRegUser
 	     , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
 	     , surtaxYn
+	     , ifnull (interiorYn, 'N')  interiorYn
 	     , advertiseYn
 	     , publicYn
-	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
-	 	 , parcelAmt
-	 	 ,  premiumAmt
+	     , parcelAmt
+	 	 , premiumAmt
+	 	 , memo
 	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
+	     , DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
 	     , firstRegUser firstRegNm
 	  FROM estate.saleobject
 	 WHERE objtNo = #{objtNo}

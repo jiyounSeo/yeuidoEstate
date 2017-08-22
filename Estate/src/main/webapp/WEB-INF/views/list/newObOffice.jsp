@@ -34,12 +34,8 @@
 				<select  id="buildNm" name="buildNm" style="width:150px">
 					<option value="AP001">샘플아파트</option>
 				</select>&nbsp;
-				분양 <input type="number" style="width:80px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형
-				/ 실 <input type="number" style="width:80px" id="realArea" name="realArea" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형
-				
 				<input type= "button" onClick="goPopup();" value= " 팝업 " /> 
 			</td>
-			
 			<td class="title">유형</td>
 			<td>
 			  <input type="radio" id="saleTp1" name="saleTp" value="ST001"/><label for="saleTp1">매매</label>
@@ -49,6 +45,13 @@
 			
 			</td>
 		</tr>
+		<tr>
+			<td class="title">면적</td>
+			<td colspan="2"><input type="number" style="width:80px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"></td>
+			<td class="title">실평형</td>
+			<td><input type="number" style="width:80px" id="realArea" name="realArea" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"></td>
+		</tr>
+		
 		<tr>
 			<td class="title">매매가</td>
 			<td colspan="2">
