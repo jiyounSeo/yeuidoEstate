@@ -1,7 +1,16 @@
-<%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html; charset=utf-8" %>
+<% request.setCharacterEncoding("utf-8");%>
+<%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./resources/js/list/objtList.js"></script>
+<script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
+	
+	
 <div id="ob_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_comm_ob_list.jpg">
@@ -60,7 +69,9 @@
 										</td>
 										</c:forEach>
 										<td width="100%" align="right" valign="bottom">
-											<input type="checkbox">활성 <input type="checkbox">보류 <input type="checkbox">내가등록한물건만보기
+										 <input type="checkbox" name="activeTp1" id="activeTp1" value="AT001" /><label for="activeTp1">활성</label>
+									 	 <input type="checkbox" name="activeTp2" id="activeTp2" value="AT002" /><label for="activeTp2">보류</label>
+			  							 <input type="checkbox" name="activeTp3" id="activeTp3" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
 										</td>
 									</tr>									
 								</table>
@@ -68,7 +79,7 @@
 						</tr>
 						<tr><!-- list -->
 							<td height="306" valign="top">
-								<table class="ob_list">
+								<table class="ob_list" id="objtTable">
 								<c:choose>
 									<c:when test="${mainc == 6}"><tr class="title${tab+4}"></c:when>
 									<c:otherwise><tr class="title${tab}"></c:otherwise>
@@ -82,30 +93,12 @@
 											<td>층</td>
 											<td>향</td>
 											<td>매매가</td>
-											<td>명도</td>
 											<td>온돌</td>
 											<td>상태</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>											
-										</tr>
-										</c:forEach>
 									</c:when>
 									<c:when test="${mainc == 2}">
 											<td>등록일</td>
@@ -114,25 +107,10 @@
 											<td>층</td>
 											<td>보증금 / 월세</td>
 											<td>권리금</td>
-											<td>명도</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>				
 									</c:when>
 									<c:when test="${mainc == 3}">
 											<td>등록일</td>
@@ -140,24 +118,10 @@
 											<td>실평수</td>
 											<td>층</td>
 											<td>매매가</td>
-											<td>명도</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>			
 									</c:when>
 									<c:when test="${mainc == 4}">
 											<td>등록일</td>
@@ -168,27 +132,10 @@
 											<td>향</td>
 											<td>보증금/월세</td>
 											<td>부가세</td>
-											<td>명도</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>					
 									</c:when>
 									<c:when test="${mainc == 5}">
 											<td>등록일</td>
@@ -198,26 +145,10 @@
 											<td>층</td>
 											<td>향</td>
 											<td>보증금</td>
-											<td>명도</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>			
 									</c:when>
 									<c:when test="${mainc == 6}">
 											<td>등록일</td>
@@ -233,24 +164,11 @@
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>		
 									</c:when>
-								</c:choose>																			
+								</c:choose>	
+								<tbody id="objtTbody">
+								</tbody>																		
+								
 								</table>
 							</td>
 						</tr>
@@ -283,5 +201,124 @@
 		</table>		
 	</div>
 </div>
+<input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>
+<input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
+<input type="hidden" name="viewUrl" id="viewUrl" value="${viewUrl[0]}"/>
+<input type="hidden" name="pageMark" id="pageMark" value="${pageMark}"/>
 
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<!-- <a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a> -->
+<script id="objtListTemplte1" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.ondolYn}}</td>
+		<td>{{html $value.conditionTpNm}}</td>
+		<td>{{html $value.firstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>											
+	</tr>
+{{/each}}	
+</script>
+
+<script id="objtListTemplte2" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.realArea}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.rightAmt}}</td>
+		<td>{{html $value.firstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<script id="objtListTemplte3" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.realArea}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.firstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<script id="objtListTemplte4" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.surtaxYn}}</td>
+		<td>{{html $value.firstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>	
+	</tr>
+{{/each}}	
+</script>
+
+
+<script id="objtListTemplte5" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.firstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>	
+	</tr>
+{{/each}}	
+</script>
+
+	
+<script id="objtListTemplte6" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="{{html $value.viewUrl}}?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.firstRegDt}}</a></td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.parcelAmt}}</td>
+		<td>{{html $value.premiumAmt}}</td>
+		<td>{{html $value.availableDt}}</td>
+		<td>{{html $value.firstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>	
+	</tr>
+{{/each}}	
+</script>
+
+<script id="objtListEmptyTemplte" type="text/x-jquery-tmpl">	
+	<tr>
+		<td colspan = {{html col}}>해당하는 물건이 존재하지 않습니다.</td>
+	</tr>
+</script>
+
+
+

@@ -54,4 +54,5 @@
 		</td>
 	</tr>
 {{/each}}
+</script>
 

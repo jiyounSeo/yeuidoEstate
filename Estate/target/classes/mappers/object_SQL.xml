@@ -112,7 +112,72 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
 	<select id="selectObjectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		select mbr_id, mbr_pw, mbr_nm, phone1, phone2, phone3, agency, DATE_FORMAT(reg_date, '%Y-%m-%d') reg_date
-		  from member
+	SELECT DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
+	     , objtNo
+	     , objtTp
+	     , objtNm
+	     , area
+	     , realArea
+	     , dong
+	     , floor
+	     , directionTp
+	     , (select commNm from commcd where commCd = directionTp ) directionTpNm
+	     , bargainAmt
+	     , concat(depositAmt , '/' , monthlyAmt) depositAmt
+	     , rightAmt
+	     , ifnull (ondolYn, 'N') ondolYn
+	     , conditionTp 
+	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
+	     , firstRegUser
+	     , activeTp
+	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
+	     , surtaxYn
+	     , advertiseYn
+	     , publicYn
+	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
+	 	 , parcelAmt
+	 	 ,  premiumAmt
+	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
+	     , firstRegUser firstRegNm
+	  FROM estate.saleobject
+	 WHERE objtTp = #{objtTp}
+	   AND saleTp = #{saleTp}	
 	</select>
+	
+	<select id="selectObjectInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
+	     , objtNo
+	     , objtTp
+	     , objtNm
+	     , area
+	     , realArea
+	     , dong
+	     , floor
+	     , directionTp
+	     , (select commNm from commcd where commCd = directionTp ) directionTpNm
+	     , bargainAmt
+	     , concat(depositAmt , '/' , monthlyAmt) depositAmt
+	     , rightAmt
+	     , ifnull (ondolYn, 'N') ondolYn
+	     , conditionTp 
+	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
+	     , firstRegUser
+	     , activeTp
+	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
+	     , surtaxYn
+	     , advertiseYn
+	     , publicYn
+	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
+	 	 , parcelAmt
+	 	 ,  premiumAmt
+	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
+	     , firstRegUser firstRegNm
+	  FROM estate.saleobject
+	 WHERE objtNo = #{objtNo}
+	   AND objtTp = #{objtTp}
+	</select>
+	
+	
+	
+	
 </mapper>

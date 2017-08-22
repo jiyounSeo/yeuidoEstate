@@ -58,19 +58,19 @@ public class ObjectController {
 		    mav.setViewName("jsonView");
 	    return mav;
 	}
-	
+
 	
 	@RequestMapping(value= "/selectObjectList.do", method=RequestMethod.POST)
-	public ModelAndView memberList( @RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectObjectList( @RequestParam Map<String,Object> map)  {  
 		ModelAndView mav= new ModelAndView();
-		 List<Object> mbrList = new ArrayList<Object>();
+		 List<Object> objtList = new ArrayList<Object>();
 			try {
-				mbrList = objectService.selectObjectList(map);
+				objtList = objectService.selectObjectList(map);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		    mav.addObject("mbrList",mbrList);
+		    mav.addObject("objtList",objtList);
 		    mav.setViewName("jsonView");
 	    return mav;
 	}

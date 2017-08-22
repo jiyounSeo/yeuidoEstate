@@ -62,10 +62,10 @@
 				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/> 만원</td>
 		</tr>
 		<tr>
-			
 			<td class="title">권리금</td>
 			<td colspan="2">
-				권리금 <input type="text" style="width:140px"> 만원 / 관리비 <input type="text" style="width:140px"> 만원	
+				권리금 <input type="text" id="rightAmt" name="rightAmt"  onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/>  만원 / 
+				관리비 <input type="text" id="manageAmt" name="manageAmt"  onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/>만원	
 			</td>
 			
 			<td class="title">만기일</td>

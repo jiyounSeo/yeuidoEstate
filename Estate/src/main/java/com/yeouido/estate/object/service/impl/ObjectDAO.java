@@ -26,4 +26,11 @@ public class ObjectDAO extends AbstractDAO
    }
    
 
+   @SuppressWarnings("unchecked")
+   public Map selectObjectInfo(Map map) throws Exception{
+       return selectMap("objectDAO.selectObjectInfo", map);
+   }
+   
+   
+
 }

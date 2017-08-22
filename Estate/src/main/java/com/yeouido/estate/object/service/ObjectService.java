@@ -10,5 +10,6 @@ public interface ObjectService
 	
 	public List<Object> selectObjectList(Map map) throws Exception;
 	
+	public Map selectObjectInfo(Map map) throws Exception;
 	
 }

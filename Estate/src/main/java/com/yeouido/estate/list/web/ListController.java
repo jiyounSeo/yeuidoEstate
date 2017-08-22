@@ -1,6 +1,7 @@
 package com.yeouido.estate.list.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import com.yeouido.estate.list.service.ListService;
+import com.yeouido.estate.object.service.ObjectService;
 
 @Controller
 public class ListController {
@@ -50,7 +52,10 @@ public class ListController {
 	
 	@Resource(name="listService")
 	protected ListService listService;
-
+	
+	@Resource(name="objectService")
+	protected ObjectService objectService;
+	
 	@RequestMapping(value= "/totalList.do", method=RequestMethod.GET)
 	public ModelAndView totalListView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/list/totalList");
@@ -171,7 +176,7 @@ public class ListController {
 	
 	@RequestMapping(value="/commObList",method = RequestMethod.GET)
 	public String goCommObList(HttpServletRequest request,Model model){
-		
+
 		int mainc = 1;
 		int tab = 1;
 		String subc= request.getParameter("subc");
@@ -185,6 +190,10 @@ public class ListController {
 			tab = Integer.parseInt(request.getParameter("tab"));			
 		}
 		
+		ArrayList<String> array = objtTpmappingCd (mainc, tab);
+		model.addAttribute("objtTp", array.get(0));
+		model.addAttribute("saleTp", array.get(1));
+		
 		String [] main_category_state = new String[OBJECT_MAIN_CATEGORY_NUM+1];
 		ArrayList<String> tab_category_state = new ArrayList<String>();
 		
@@ -196,7 +205,6 @@ public class ListController {
 	
 		int numOfTab = tab_category_state.size();
 		int numOfRow = 15;
-		
 		
 		model.addAttribute("main_category_state", main_category_state);
 		model.addAttribute("mainc", mainc);
@@ -211,6 +219,77 @@ public class ListController {
 		return "/list/commObList";	
 	}
 	
+	public ArrayList objtTpmappingCd (int mainc, int tab) {
+		ArrayList<String> array = new ArrayList<String>();
+		String objtTp = "";
+		String saleTp = "";
+		switch (mainc) {
+			case 1 :
+				objtTp = "OT001"; //아파트
+				if (tab == 1) {
+					saleTp = "ST001";  // 매매
+				} else if (tab == 2) {
+					saleTp = "ST002";  // 전세
+				} else if (tab == 3) {
+					saleTp = "ST003";  // 월세
+				} else if (tab == 4) {
+					saleTp = "ST004";  // 렌트
+				}
+				break;
+			case 2 :
+				objtTp = "OT002"; //상가
+				if (tab == 1) {
+					saleTp = "ST001";  // 매매
+				} else if (tab == 2) {
+					saleTp = "ST005";  // 임대
+				} 
+				break;
+			case 3 :
+				objtTp = "OT003"; // 사무실/빌딩
+				if (tab == 1) {
+					saleTp = "ST001";  // 매매
+				} else if (tab == 2) {
+					saleTp = "ST005";  // 임대
+				} break;
+			case 4 : 
+				objtTp = "OT004"; // 오피스텔
+				if (tab == 1) {
+					saleTp = "ST001";  // 매매
+				} else if (tab == 2) {
+					saleTp = "ST002";  // 전세
+				} else if (tab == 3) {
+					saleTp = "ST003";  // 월세
+				} else if (tab == 4) {
+					saleTp = "ST004";  // 렌트
+				}
+				break;
+			case 5 : 
+				objtTp = "OT005"; // 주상복합
+				if (tab == 1) {
+					saleTp = "ST001";  // 매매
+				} else if (tab == 2) {
+					saleTp = "ST002";  // 전세
+				} else if (tab == 3) {
+					saleTp = "ST003";  // 월세
+				} else if (tab == 4) {
+					saleTp = "ST004";  // 렌트
+				}
+				break;
+			case 6 : 
+				objtTp = "OT006"; // 분양권
+				if (tab == 1) {
+					saleTp = "ST006";  // 분양권
+				} else if (tab == 2) {
+					saleTp = "ST007";  // 전매
+				}
+				break;
+		}
+		array.add(0, objtTp);
+		array.add(1, saleTp);
+		
+		return array;
+		
+	}
 	@RequestMapping(value="/totalList",method = RequestMethod.GET)
 	public String goTotalList(HttpServletRequest request,Model model){
 		
@@ -315,10 +394,17 @@ public class ListController {
 	}	
 
 	@RequestMapping(value="/viewObApt",method = RequestMethod.GET)
-	public String goViewObAptView(HttpServletRequest request,Model model){
+	public String goViewObAptView(@RequestParam Map<String,Object> map, Model model){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			result = objectService.selectObjectInfo(map);
+			model.addAllAttributes(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		model = goView(request, model);
-		return "/listpage/viewObApt";	
+		//ModelAndView mv = new ModelAndView();
+		return "/listpage/viewObApt";
 	}
 
 	@RequestMapping(value= "/viewObHrapt.do", method=RequestMethod.GET)
@@ -342,7 +428,6 @@ public class ListController {
 
 	@RequestMapping(value="/viewObOffice",method = RequestMethod.GET)
 	public String goViewObOfficeView(HttpServletRequest request,Model model){
-		
 		model = goView(request, model);
 		return "/listpage/viewObOffice";	
 	}

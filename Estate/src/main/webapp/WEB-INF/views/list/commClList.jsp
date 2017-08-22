@@ -14,7 +14,10 @@
 				<table width="1460px" cellpadding="0" cellspacing="0" border="0">
 					<tr>
 						<td width="100%" align="right" valign="bottom">
-							<input type="checkbox">활성 <input type="checkbox">보류 <input type="checkbox">내가등록한고객만보기
+							<input type="checkbox" name="activeTp" id="activeTp" value="AT001" />활성
+							<input type="checkbox">활성 
+							<input type="checkbox">보류 
+							<input type="checkbox">내가등록한고객만보기
 						</td>
 					</tr>
 					<tr>
