@@ -112,6 +112,7 @@
 		<a hrefs="#"><img src="./resources/images/btn_cancel.jpg"></a>
 	</div>
 </div>
+<input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
 <input type="hidden" name="objtTp" id="objtTp" value="OT006"/>
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

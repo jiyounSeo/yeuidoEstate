@@ -3,8 +3,12 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/list/addObject.js"></script>
 
+<form id="addObject" method="post" > 
 <div id="ob_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_ob_list.jpg">
@@ -63,5 +67,5 @@
 		<tr><td style="text-align:center"><a href="#"><img src="./resources/images/btn_cancel.jpg"></a></td></tr>
 	</table>
 </div>
-
+</form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

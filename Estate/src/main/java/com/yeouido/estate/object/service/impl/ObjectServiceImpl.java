@@ -18,7 +18,11 @@ public class ObjectServiceImpl  implements ObjectService
    public int insertObject(Map map) throws Exception {
 	   return objectDAO.insertObject(map);
    }
+   public int modifyObject(Map map) throws Exception {
+	   return objectDAO.modifyObject(map);
+   }
    
+   //
    public List<Object> selectObjectCnt(Map map) throws Exception {
 	   return objectDAO.selectObjectCnt(map);
    }

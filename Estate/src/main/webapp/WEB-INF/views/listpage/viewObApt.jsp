@@ -3,7 +3,6 @@
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 
 <%@ include file="/WEB-INF/views/comm/viewTitle.jsp" %> 
-
 <div class="new_page_container">
 	<table class="new_page_table">
 		<tr>
@@ -68,6 +67,8 @@
 			<td colspan="4">${activeTpNm}, ${etc}<!-- 분류 --></td>
 		</tr>
 	</table>
+<input type=hidden name="objtTp" id="objtTp" value="${objtTp}"/>
+<input type=hidden name="objtNo" id="objtNo" value="${objtNo}"/>
 
 <%@ include file="/WEB-INF/views/comm/viewObBottom.jsp" %> 
 </div>

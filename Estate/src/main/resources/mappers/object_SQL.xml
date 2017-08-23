@@ -77,8 +77,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{conditionTp}
 				  , #{memo}
 				  , #{activeTp}
-				  , CASE WHEN #{advertiseYn} = 'Y' THEN 'Y' ELSE 'N' END
 				  , CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END
+				  , CASE WHEN #{advertiseYn} = 'Y' THEN 'Y' ELSE 'N' END
 				  , CASE WHEN #{parcelArea} = '' THEN 0 ELSE #{parcelArea} END
 				  , CASE WHEN #{rightAmt} = '' THEN 0 ELSE #{rightAmt} END  
 				  , CASE WHEN #{manageAmt} = '' THEN 0 ELSE #{manageAmt} END  
@@ -91,6 +91,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        ]]>
 		
     </insert>
+    
+    <update  id="modifyObject" parameterType="java.util.HashMap" >
+     UPDATE saleobject
+       SET objtNm = #{objtNm}
+		 , custNm = #{custNm}
+		 , custTel1 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel1} END)
+		 , custTel2 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END)
+		 , custTel3 = (CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END)
+		 , buildNm = #{buildNm}
+		 , businessNm =  #{businessNm}
+		 , area = (CASE WHEN #{area} = '' THEN 0 ELSE #{area} END)
+		 , realArea = ( CASE WHEN #{realArea} = '' THEN 0 ELSE #{realArea} END)
+		 , saleTp = #{saleTp} 
+		 , bargainAmt = (CASE WHEN #{bargainAmt} = '' THEN 0 ELSE #{bargainAmt} END )
+		 , depositAmt = ( CASE WHEN #{depositAmt} = '' THEN 0 ELSE #{depositAmt} END  )
+		 , monthlyAmt = (CASE WHEN #{monthlyAmt} = '' THEN 0 ELSE #{monthlyAmt} END)
+		 , dong =  #{dong}
+		 , floor = (CASE WHEN #{floor} = '' THEN NULL ELSE #{floor} END )
+		 , directionTp = #{directionTp}
+		 , dueDt =  #{dueDt}
+		 , roomCnt = ( CASE WHEN #{roomCnt} = '' THEN NULL ELSE #{roomCnt} END )
+		 , bathCnt = (CASE WHEN #{bathCnt} = '' THEN NULL ELSE #{bathCnt} END )
+		 , ondolYn = #{ondolYn} 
+		 , availableTp = #{availableTp}
+		 , availableDt = (CASE WHEN #{availableDt} = '' THEN NULL ELSE #{availableDt} END) 
+		 , conditionTp =  #{conditionTp}
+		 , memo =  #{memo}
+		 , activeTp =  #{activeTp}
+		 , publicYn = (CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END)
+		 , advertiseYn = (CASE WHEN #{advertiseYn} = 'Y' THEN 'Y' ELSE 'N' END)
+		 , parcelArea = (CASE WHEN #{parcelArea} = '' THEN 0 ELSE #{parcelArea} END)
+		 , rightAmt = (CASE WHEN #{rightAmt} = '' THEN 0 ELSE #{rightAmt} END  )
+		 , manageAmt = ( CASE WHEN #{manageAmt} = '' THEN 0 ELSE #{manageAmt} END  )
+		, interiorYn = (CASE WHEN #{interiorYn} = '' THEN NULL ELSE #{interiorYn} END )
+		, surtaxYn = (CASE WHEN #{surtaxYn} = '' THEN NULL ELSE #{surtaxYn} END )
+		, parcelAmt = (CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END )
+		, premiumAmt = (CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END )
+				  
+     WHERE objtNo = #{objtNo}
+       AND objtTp = #{objtTp}
+    </update>
+    
     
     <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT a.objtTp, a.saleTp, ifnull(cntSaleTp, 0) cntSaleTp

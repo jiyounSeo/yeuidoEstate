@@ -260,7 +260,7 @@
 	-webkit-appearance: none; 
 	-moz-appearance: none;    
 	appearance: none;
-	background: url('./images/icon_sel.jpg') no-repeat 100% 50%;	
+	background: url('./resources/images/icon_sel.jpg') no-repeat 100% 50%;	
 }
 
 .new_page_table select::-ms-expand {

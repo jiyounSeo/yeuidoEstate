@@ -1,22 +1,88 @@
 $(document).ready(function(){
-	f_objectCnt_select();
+	formId = $("form").attr("id");
+	console.log ("!!" +formId);
+	if (formId == "addObject") {
+		f_objectCnt_select();
+	} else {
+		f_objectDtl_select();
+	}
+	$( ".datepicker" ).datepicker({
+	    dateFormat: 'yy-mm-dd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    changeMonth: true,
+	    changeYear: true,
+	    yearSuffix: '년'
+	 });
+	
 });
-$(function() {
-  $( ".datepicker" ).datepicker({
-    dateFormat: 'yy-mm-dd',
-    prevText: '이전 달',
-    nextText: '다음 달',
-    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    dayNames: ['일','월','화','수','목','금','토'],
-    dayNamesShort: ['일','월','화','수','목','금','토'],
-    dayNamesMin: ['일','월','화','수','목','금','토'],
-    showMonthAfterYear: true,
-    changeMonth: true,
-    changeYear: true,
-    yearSuffix: '년'
-  });
-});
+
+
+function f_objectDtl_select() {
+	var param = {
+		objtNo : $("#objtNo").val()
+		, objtTp : $("#objtTp").val()
+	};
+	var serial = $("#"+formId).serialize();
+	console.log (serial);
+	$.ajax({
+		  url : "/estate/selectObjectDtl.do",
+		  type: "post",
+		  data : param,
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+			  var result = data.objtInfo;
+			  console.log ("search success");
+			  console.log (result);
+			  f_setting_text(result);
+				
+				
+//		 			 $(sampleTmpl).tmpl(tmplVal).appendTo("#tmplView");
+//		 			$("#listTemplte").tmpl(data).appendTo("#target");
+		  }
+	});
+}
+
+function f_setting_text(result) {
+
+	$("#objtNm").val(result.objtNm);
+	$("#custNm").val(result.custNm);
+	$("#custTel1").val(result.custTel1);
+	$("#custTel2").val(result.custTel2);
+	$("#custTel3").val(result.custTel3);
+	$("#buildNm").val(result.buildNm);
+	$("#area").val(result.area);
+	$("#bargainAmt").val(result.bargainAmt);
+	$("#depositAmt").val(result.depositAmt);
+	$("#monthlyAmt").val(result.monthlyAmt);
+	$("#dong").val(result.dong);
+	$("input[name='floor']").val(result.floor);
+	$("#directionTp").val(result.directionTp);
+	$("#dueDt").val(result.dueDt);
+	$("#roomCnt").val(result.roomCnt);
+	$("#bathCnt").val(result.bathCnt);
+	$('input[name="saleTp"]:radio:input[value="' + result.saleTp + '"]').attr('checked', 'checked');
+	$('input[name="availableTp"]:radio:input[value="' + result.availableTp + '"]').attr('checked', 'checked');
+	$('input[name="conditionTp"]:radio:input[value="' + result.conditionTp + '"]').attr('checked', 'checked');
+	$('input[name="ondolYn"]:radio:input[value="' + result.ondolYn + '"]').attr('checked', 'checked');
+	$('input[name="activeTp"]:radio:input[value="' + result.activeTp + '"]').attr('checked', 'checked');
+	$('input[name="interiorYn"]:radio:input[value="' + result.interiorYn + '"]').attr('checked', 'checked');
+	
+	if ( result.advertiseYn == "Y") {
+		$('input:checkbox[id="advertiseYn"]').attr("checked", true); //단일건
+	}
+	if (result.publicYn  == "Y") {
+		$('input:checkbox[id="publicYn"]').attr("checked", true); //단일건
+	}
+	$("#memo").val(result.memo);
+}
 
 function inputNumberFormat(obj) { 
     obj.value = comma(uncomma(obj.value)); 
@@ -55,7 +121,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 function f_saleobject_save() {
 	
-	var formId = $("form").attr("id");
+	
 	var param = $("#"+formId).serialize();
 	
 	if ( $("#objtNm").val() == "") {
@@ -80,7 +146,6 @@ function f_saleobject_save() {
 		alert ("만기일은 필수입력 값입니다.");
 		return;
 	}
-	console.log ("activeTp : " + $("input[name=activeTp]:checked").val());
 	if (  $("input[name=activeTp]:checked").val() == undefined ) {
 		alert ("분류 [활성 or 분류]은 필수입력 값입니다.");
 		return;
@@ -88,17 +153,30 @@ function f_saleobject_save() {
 		param.activeTp = $("input[name=activeTp]:checked").val();
 	}
 	
-	console.log (param);
 
+	var urlStr = "";
+	console.log ("objtNo" + $("#objtNo").val());
+	if ($("#objtNo").val() != "" ) {
+		urlStr = "modifyObject.do";
+	} else {
+		urlStr = "insertObject.do";
+	}
+	console.log (urlStr);
 	$.ajax({
-	  url : "/estate/insertObject.do",
+	  url : "/estate/" + urlStr,
 	  type: "post",
 	  data : param,
 	  dataType : "json",
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(responseData){
-		  alert ("물건 등록에 성공하였습니다.");
-//	 			 $(sampleTmpl).tmpl(tmplVal).appendTo("#tmplView");
+		  if ( urlStr == "insertObject.do" ) {
+			  alert ("물건 등록에 성공하였습니다.");
+		  } else {
+			  alert ("물건 수정에 성공하였습니다.");
+					  
+		  }
+	  
+	//			 $(sampleTmpl).tmpl(tmplVal).appendTo("#tmplView");
 //	 			$("#listTemplte").tmpl(data).appendTo("#target");
 	  }
 	});
@@ -109,6 +187,7 @@ function f_member_list() {
    comSubmit.setUrl("/estate/memberListView.do");
    comSubmit.submit();
 }
+
 
 function f_objectCnt_select() {
 	

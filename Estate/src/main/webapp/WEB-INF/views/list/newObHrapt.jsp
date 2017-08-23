@@ -125,6 +125,6 @@
 	</div>
 </div>
 <input type="hidden" name="objtTp" id="objtTp" value="OT005"/>
-
+<input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

@@ -6,6 +6,8 @@ public interface ObjectService
 {
 	public int insertObject(Map map) throws Exception;
 	
+	public int modifyObject(Map map) throws Exception;
+	
 	public List<Object> selectObjectCnt(Map map) throws Exception;
 	
 	public List<Object> selectObjectList(Map map) throws Exception;
