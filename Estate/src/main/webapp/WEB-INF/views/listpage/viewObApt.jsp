@@ -1,8 +1,8 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
-
 <%@ include file="/WEB-INF/views/comm/viewTitle.jsp" %> 
+<form id="viewObApt">
 <div class="new_page_container">
 	<table class="new_page_table">
 		<tr>
@@ -69,8 +69,7 @@
 	</table>
 <input type=hidden name="objtTp" id="objtTp" value="${objtTp}"/>
 <input type=hidden name="objtNo" id="objtNo" value="${objtNo}"/>
-
 <%@ include file="/WEB-INF/views/comm/viewObBottom.jsp" %> 
 </div>
-
+</form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

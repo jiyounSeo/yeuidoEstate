@@ -8,6 +8,8 @@ public interface ObjectService
 	
 	public int modifyObject(Map map) throws Exception;
 	
+	public int deleteObject(Map map) throws Exception;
+	
 	public List<Object> selectObjectCnt(Map map) throws Exception;
 	
 	public List<Object> selectObjectList(Map map) throws Exception;

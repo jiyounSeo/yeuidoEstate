@@ -182,9 +182,21 @@ function f_saleobject_save() {
 	});
 }
 
+function f_objt_delete() {
+	if (confirm ("물건을 삭제하시겠습니까?")) {
+	   var comSubmit = new ComSubmit($('form').attr('id'));
+	   comSubmit.setUrl("/estate/deleteObject.do");
+	   comSubmit.submit();
+	     
+	}
+}
+
 function f_member_list() {
    var comSubmit = new ComSubmit("joinMember");
    comSubmit.setUrl("/estate/memberListView.do");
+   
+   var frm = $("#"+this.bodyt)[0];
+   
    comSubmit.submit();
 }
 

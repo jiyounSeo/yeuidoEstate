@@ -133,6 +133,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        AND objtTp = #{objtTp}
     </update>
     
+    <delete id="deleteObject" parameterType="java.util.HashMap" >
+    DELETE FROM saleobject 
+    WHERE objtNo = #{objtNo}
+      AND objtTp = #{objtTp}
+    </delete>
+    
     
     <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT a.objtTp, a.saleTp, ifnull(cntSaleTp, 0) cntSaleTp

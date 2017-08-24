@@ -290,6 +290,74 @@ public class ListController {
 		return array;
 		
 	}
+	
+	public ArrayList mappingObjectTp (String objtTp, String saleTp) {
+		ArrayList array = new ArrayList();
+		int mainc = 1;
+		int tab = 1;
+		
+		if ( ("OT001").equals(objtTp) ) {
+			mainc = 1;
+			if ( ("ST001").equals(saleTp)) {
+				tab = 1;
+			} else if ( ("ST002").equals(saleTp)) {
+				tab = 2;
+			} else if ( ("ST003").equals(saleTp)) {
+				tab = 3;
+			} else if ( ("ST004").equals(saleTp)) {
+				tab = 4;
+			}
+		} else if ( ("OT002").equals(objtTp) ) {
+			mainc = 2;
+			if ( ("ST001").equals(saleTp)) {
+				tab = 1;
+			} else if ( ("ST005").equals(saleTp)) {
+				tab = 2;
+			} 
+		} else if ( ("OT003").equals(objtTp) ) {
+			mainc = 3;
+			if ( ("ST001").equals(saleTp)) {
+				tab = 1;
+			} else if ( ("ST005").equals(saleTp)) {
+				tab = 2;
+			} 
+		} else if ( ("OT004").equals(objtTp) ) {
+			mainc = 4;
+			if ( ("ST001").equals(saleTp)) {
+				tab = 1;
+			} else if ( ("ST002").equals(saleTp)) {
+				tab = 2;
+			} else if ( ("ST003").equals(saleTp)) {
+				tab = 3;
+			} else if ( ("ST004").equals(saleTp)) {
+				tab = 4;
+			}
+		} else if ( ("OT005").equals(objtTp) ) {
+			mainc = 5;
+			if ( ("ST001").equals(saleTp)) {
+				tab = 1;
+			} else if ( ("ST002").equals(saleTp)) {
+				tab = 2;
+			} else if ( ("ST003").equals(saleTp)) {
+				tab = 3;
+			} else if ( ("ST004").equals(saleTp)) {
+				tab = 4;
+			}
+		} else if ( ("OT006").equals(objtTp) ) {
+			mainc = 6;
+			if ( ("ST006").equals(saleTp)) {
+				tab = 1;
+			} else if ( ("ST007").equals(saleTp)) {
+				tab = 2;
+			}
+		}    
+		
+		array.add(0, mainc);
+		array.add(1, tab);
+		
+		return array;
+		
+	}
 	@RequestMapping(value="/totalList",method = RequestMethod.GET)
 	public String goTotalList(HttpServletRequest request,Model model){
 		

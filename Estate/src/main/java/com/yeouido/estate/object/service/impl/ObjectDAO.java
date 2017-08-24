@@ -15,9 +15,12 @@ public class ObjectDAO extends AbstractDAO
        return insert("objectDAO.insertObject",map);
    }
    public int modifyObject(Map<String, Object> map) throws Exception{
-       return insert("objectDAO.modifyObject",map);
+       return update("objectDAO.modifyObject",map);
    }
-   //
+   public int deleteObject(Map<String, Object> map) throws Exception{
+       return delete("objectDAO.deleteObject",map);
+   }
+
    @SuppressWarnings("unchecked")
    public List<Object> selectObjectCnt(Map map) throws Exception{
        return selectList("objectDAO.selectObjectCnt", map);
