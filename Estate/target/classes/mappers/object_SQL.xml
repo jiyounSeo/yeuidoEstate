@@ -47,7 +47,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , surtaxYn
 				  , parcelAmt 
 				  , premiumAmt
-				  
+				  , firstRegDt
+				  , firstRegUser
+				  , modfRegDt
+				  , modfRegUser
 				  )
         	values ( 
         			#{objtNo}
@@ -86,7 +89,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , CASE WHEN #{surtaxYn} = '' THEN NULL ELSE #{surtaxYn} END 
 				  , CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END 
 				  , CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END 
-				  
+				  , now()
+				  , 'testUser'
+				  , now()
+				  , 'testUser'
         	);
        ]]>
 		
@@ -128,7 +134,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, surtaxYn = (CASE WHEN #{surtaxYn} = '' THEN NULL ELSE #{surtaxYn} END )
 		, parcelAmt = (CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END )
 		, premiumAmt = (CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END )
-				  
+		 , modfRegDt = now()
+		 , modfRegUser = 'testUser'
      WHERE objtNo = #{objtNo}
        AND objtTp = #{objtTp}
     </update>

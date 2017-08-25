@@ -34,7 +34,42 @@ public class ObjectController {
 	@Resource(name="objectService")
 	protected ObjectService objectService;
 	
-	//object insert 
+	/* 
+	 * 물건목록조회
+	 */
+	@RequestMapping(value= "/selectObjectList.do", method=RequestMethod.POST)
+	public ModelAndView selectObjectList( @RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		Paging paging = new Paging();
+        			
+		List<Map<String,Object>> objtList = new ArrayList<Map<String,Object>>();
+		try {
+			int currentPage = Integer.parseInt(map.get("currentPage").toString());
+			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+			map.put("rowNum", (currentPage-1)*pagePerRow);
+			map.put("pagePerRow", pagePerRow);
+			
+			objtList = objectService.selectObjectList(map);
+			if (!objtList.isEmpty()) {
+				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
+						
+				int totalCount = Integer.parseInt(objtList.get(0).get("totalCnt").toString());
+				int pageSize = Integer.parseInt(map.get("pageSize").toString());
+				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+				mav.addAllObjects(pagingMap);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("objtList",objtList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
+	
+	/*
+	 * 물건등록 
+	 */
 	@RequestMapping(value= "/insertObject.do", method=RequestMethod.POST)
 	public ModelAndView insertObject(@RequestParam Map<String,Object> map)  {  
 		
@@ -67,43 +102,9 @@ public class ObjectController {
 	}
 
 	
-	@RequestMapping(value= "/selectObjectList.do", method=RequestMethod.POST)
-	public ModelAndView selectObjectList( @RequestParam Map<String,Object> map)  {  
-		ModelAndView mav= new ModelAndView();
-		Paging paging = new Paging();
-        			
-		List<Map<String,Object>> objtList = new ArrayList<Map<String,Object>>();
-		try {
-			int currentPage = Integer.parseInt(map.get("currentPage").toString());
-			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
-			map.put("rowNum", (currentPage-1)*pagePerRow);
-			map.put("pagePerRow", pagePerRow);
-			
-			objtList = objectService.selectObjectList(map);
-			if (!objtList.isEmpty()) {
-				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
-						
-				int totalCount = Integer.parseInt(objtList.get(0).get("totalCnt").toString());
-				int pageSize = Integer.parseInt(map.get("pageSize").toString());
-				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
-				mav.addAllObjects(pagingMap);
-			}
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/*mav.addObject("currentPage", currentPage);
-		mav.addObject("startPage", map.get("startPage"));
-		mv.addObject("pageSize", map.get("pageSize"));
-		mv.addObject("endPage", map.get("endPage"));
-		mv.addObject("lastPage", map.get("lastPage"));
-		*/
-	    mav.addObject("objtList",objtList);
-	    mav.setViewName("jsonView");
-	    return mav;
-	}
-	
+	/*
+	 * 물건 상세 조회
+	 */	
 	@RequestMapping(value= "/selectObjectDtl.do", method=RequestMethod.POST)
 	public ModelAndView selectObjectDtl(@RequestParam Map<String,Object> map)  {  
 		ModelAndView mav= new ModelAndView();
@@ -118,35 +119,13 @@ public class ObjectController {
 	    return mav;
 	}	
 	
-	@RequestMapping(value="/modifyObjectInfo.do",method = RequestMethod.GET)
-	public String goViewObAptView(@RequestParam Map<String,Object> map, Model model){
-		model.addAllAttributes(map);
-		String viewNm = "";
-		
-		String objtTp = map.get("objtTp").toString();
-		
-		if ( ("OT001").equals(objtTp)) {
-			viewNm = "newObApt";
-		} else if ( ("OT002").equals(objtTp)) {
-			viewNm = "newObStore";
-		} else if ( ("OT003").equals(objtTp)) {
-			viewNm = "newObOffice";
-		} else if ( ("OT004").equals(objtTp)) {
-			viewNm = "newObOps";
-		} else if ( ("OT005").equals(objtTp)) {
-			viewNm = "newObHrapt";
-		} else if ( ("OT006").equals(objtTp)) {
-			viewNm = "newObTicket";
-		}  
-		return "/list/" + viewNm;
-	
-	}
-	
+	/*
+	 * 물건 수정 조회
+	 */		
 	@RequestMapping(value= "/modifyObject.do", method=RequestMethod.POST)
 	public ModelAndView modifyObject(@RequestParam Map<String,Object> map)  {  
 		
 		try {
-			//logger.debug("hhihih");
 			int result = objectService.modifyObject(map);
 			logger.debug("result : "+  result );
 		} catch (Exception e) {
@@ -157,7 +136,10 @@ public class ObjectController {
 		mav.setViewName("jsonView");	
 	    return mav;
 	}
-	
+
+	/*
+	 * 물건 삭제
+	 */	
 	@RequestMapping(value="/deleteObject.do",method = RequestMethod.POST)
 	public String deleteObject(HttpServletRequest request,Model model){
 		ListController listView = new ListController();
@@ -205,6 +187,36 @@ public class ObjectController {
 		
 		return "/list/commObList";	
 	}
+	
+	/*
+	 * 물건 상세페이지에서 물건 선택 시 수정페이지로 이동 
+	 * 물건 신규입력 = 수정 페이지가 같음
+	 */	
+	@RequestMapping(value="/modifyObjectInfo.do",method = RequestMethod.GET)
+	public String goViewObAptView(@RequestParam Map<String,Object> map, Model model){
+		model.addAllAttributes(map);
+		String viewNm = "";
+		
+		String objtTp = map.get("objtTp").toString();
+		
+		if ( ("OT001").equals(objtTp)) {
+			viewNm = "newObApt";
+		} else if ( ("OT002").equals(objtTp)) {
+			viewNm = "newObStore";
+		} else if ( ("OT003").equals(objtTp)) {
+			viewNm = "newObOffice";
+		} else if ( ("OT004").equals(objtTp)) {
+			viewNm = "newObOps";
+		} else if ( ("OT005").equals(objtTp)) {
+			viewNm = "newObHrapt";
+		} else if ( ("OT006").equals(objtTp)) {
+			viewNm = "newObTicket";
+		}  
+		return "/list/" + viewNm;
+	
+	}
+
+	
 	
 	
 	
