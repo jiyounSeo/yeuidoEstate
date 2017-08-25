@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./resources/js/comm/common.js"></script>	
 
 <body style="margin:0; background-color: #f6f8f7;overflow-x:hidden;">  
 <table width="100%" height="121px" cellpadding="0" cellspacing="0" border="0">

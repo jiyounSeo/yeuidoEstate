@@ -28,7 +28,7 @@ public class ObjectServiceImpl  implements ObjectService
 	   return objectDAO.selectObjectCnt(map);
    }
    
-   public List<Object> selectObjectList(Map map) throws Exception {
+   public List<Map<String,Object>> selectObjectList(Map map) throws Exception {
 	   return objectDAO.selectObjectList(map);
    }
    

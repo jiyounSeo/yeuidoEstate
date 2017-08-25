@@ -33,3 +33,40 @@ function ComSubmit(opt_formId) {
     };
 }
 
+//페이징 html추가
+function groupPaging(startPage, pageSize, endPage, lastPage){
+	var html ="";
+	if(startPage>1){
+		html+= ("<a href='#' id='page"+Number(startPage-pageSize)+"' class='pagingBtn'>&laquo;</a>"); //
+	} else {
+		html+= ("<a href='#' id='page' class='pagingBtn'>&laquo;</a>"); //
+	}
+	for(var i=startPage; i<=endPage; i++){
+		html+= "<a href='#' id='page"+i+"' class='pagingBtn'>"+i+"</a>";
+	}
+	if(endPage != lastPage){
+		html+= "<a href='#' id='page"+Number(startPage+pageSize)+"' class='pagingBtn'>&raquo;</a>"; //
+	}else {
+		html+= ("<a href='#' id='page' class='pagingBtn'>&raquo;</a>"); //
+	}
+	
+	return html;
+}
+
+//페이징 버튼 클릭이벤트
+currPage = 1;
+
+$(document).on('click', '.pagingBtn', function() {
+	
+	var currPageStr = $(this).attr("id").substr(4);
+	
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_objectList_select();
+	}
+	
+});
+
+
+
+

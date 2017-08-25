@@ -67,8 +67,7 @@
 			<td colspan="4">${activeTpNm}, ${etc}<!-- 분류 --></td>
 		</tr>
 	</table>
-<input type=hidden name="objtTp" id="objtTp" value="${objtTp}"/>
-<input type=hidden name="objtNo" id="objtNo" value="${objtNo}"/>
+
 <%@ include file="/WEB-INF/views/comm/viewObBottom.jsp" %> 
 </div>
 </form>

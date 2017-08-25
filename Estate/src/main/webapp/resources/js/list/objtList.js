@@ -2,11 +2,14 @@ $(document).ready(function(){
 	f_objectList_select();
 });
 
-
 function f_objectList_select() {
+	console.log ("currPage : " + currPage);
 	var param = {
 		objtTp : $("#objtTp").val()
 	   , saleTp : $("#saleTp").val() 
+	   , currentPage : Number(currPage)
+	   , pagePerRow : 10
+	   , pageSize : 10
 	};
 	$.ajax({
 	  url : "/estate/selectObjectList.do",
@@ -16,7 +19,6 @@ function f_objectList_select() {
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(result){
 		  $("#objtTbody").empty();
-		  console.log (result);
 		  
 		  var tmplNm = "";
 		  var colCnt;
@@ -51,9 +53,15 @@ function f_objectList_select() {
 				  result.objtList[index].viewUrl = $("#viewUrl").val();
 			  })
 			  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
+			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
+			  $("#page" + currPage).addClass("active");
+
 		  } else {
+			  $("#pagingDiv").empty();
 			  $("#objtListEmptyTemplte").tmpl({col : colCnt}).appendTo("#objtTbody");
 		  }
+		  
+
 	  }
 	});
 	

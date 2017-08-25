@@ -7,14 +7,16 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script type="text/javascript" src="./resources/js/list/objtList.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
-	
+<script type="text/javascript" src="./resources/js/list/objtList.js"></script>	
+
 	
 <div id="ob_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_comm_ob_list.jpg">
 	</div>
+
+
 	<div class="list_div2">	
 		<table width="1500px" height="520px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
@@ -184,7 +186,9 @@
 												<a href="#"><img src="./resources/images/btn_export_excel.jpg" border="0"></a>
 											</div>
 										</td>
-										<td width="486px" align="center"><img src="./resources/images/page_temp.jpg"></td>
+										<td width="486px" align="center">
+											<div id="pagingDiv" class="pagination"></div>
+										</td>
 										<td width="486px" align="right">
 											<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
 												<a href="./addObject"><img src="./resources/images/btn_new_ob.jpg"></a>
@@ -200,7 +204,11 @@
 			</tr>
 		</table>		
 	</div>
+							
+
+
 </div>
+
 <input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>
 <input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
 <input type="hidden" name="viewUrl" id="viewUrl" value="${viewUrl[0]}"/>

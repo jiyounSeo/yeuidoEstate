@@ -18,3 +18,8 @@
 			</tr>
 		</table>
 	</div>
+	<input type=hidden name="objtTp" id="objtTp" value="${objtTp}"/>
+	<input type=hidden name="objtNo" id="objtNo" value="${objtNo}"/>
+	<input type=hidden name="saleTp" id="saleTp" value="${saleTp}"/>
+	
+	

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yeouido.estate.Paging;
 import com.yeouido.estate.list.web.ListController;
 import com.yeouido.estate.object.service.ObjectService;
 
@@ -69,15 +70,37 @@ public class ObjectController {
 	@RequestMapping(value= "/selectObjectList.do", method=RequestMethod.POST)
 	public ModelAndView selectObjectList( @RequestParam Map<String,Object> map)  {  
 		ModelAndView mav= new ModelAndView();
-		 List<Object> objtList = new ArrayList<Object>();
-			try {
-				objtList = objectService.selectObjectList(map);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		Paging paging = new Paging();
+        			
+		List<Map<String,Object>> objtList = new ArrayList<Map<String,Object>>();
+		try {
+			int currentPage = Integer.parseInt(map.get("currentPage").toString());
+			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+			map.put("rowNum", (currentPage-1)*pagePerRow);
+			map.put("pagePerRow", pagePerRow);
+			
+			objtList = objectService.selectObjectList(map);
+			if (!objtList.isEmpty()) {
+				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
+						
+				int totalCount = Integer.parseInt(objtList.get(0).get("totalCnt").toString());
+				int pageSize = Integer.parseInt(map.get("pageSize").toString());
+				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+				mav.addAllObjects(pagingMap);
 			}
-		    mav.addObject("objtList",objtList);
-		    mav.setViewName("jsonView");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*mav.addObject("currentPage", currentPage);
+		mav.addObject("startPage", map.get("startPage"));
+		mv.addObject("pageSize", map.get("pageSize"));
+		mv.addObject("endPage", map.get("endPage"));
+		mv.addObject("lastPage", map.get("lastPage"));
+		*/
+	    mav.addObject("objtList",objtList);
+	    mav.setViewName("jsonView");
 	    return mav;
 	}
 	
@@ -142,6 +165,8 @@ public class ObjectController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("objtTp", request.getParameter("objtTp"));
 		map.put("objtNo", request.getParameter("objtNo"));
+		map.put("saleTp", request.getParameter("saleTp"));
+		
 		try {
 			int result = objectService.deleteObject(map);
 		} catch (Exception e) {

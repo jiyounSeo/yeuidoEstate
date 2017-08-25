@@ -62,6 +62,8 @@
 			<td>&nbsp;</td>
 		</tr>	
 	</table>
+	<div id="pagingDiv">
+	</div>
 	<table width="1500px" cellpadding="0" cellspacing="0" border="0">
 		<tr><td height="50px"></td></tr>
 		<tr><td style="text-align:center"><a href="#"><img src="./resources/images/btn_cancel.jpg"></a></td></tr>

@@ -187,9 +187,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 ,  premiumAmt
 	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
 	     , firstRegUser firstRegNm
+	  	 , (SELECT COUNT(*) FROM estate.saleobject WHERE objtTp = #{objtTp} and saleTp = #{saleTp} ) totalCnt
 	  FROM estate.saleobject
 	 WHERE objtTp = #{objtTp}
 	   AND saleTp = #{saleTp}	
+	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
 	<select id="selectObjectInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
