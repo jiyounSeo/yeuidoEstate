@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="customerDAO">
+
+    <insert id="insertCustomer" parameterType="java.util.HashMap" >
+      <selectKey resultType="int" keyProperty="custNo" order="BEFORE">
+        SELECT  ifnull (MAX(custNo)+1,1) from customer       
+      </selectKey>
+		INSERT INTO 
+			customer (custNo
+				  , custNm
+				  , custTel1
+				  , custTel2
+				  , custTel3 
+				  , homeTel1
+				  , homeTel2
+				  , homeTel3
+				  , companyTel1
+				  , companyTel2
+				  , companyTel3
+				  , faxTel1
+				  , faxTel2
+				  , faxTel3
+				  , grade
+				  , budgetAmt
+				  , requestMemo
+				  , custPoint
+				  , buyCondition
+				  , memo 
+				  , activeTp 
+				  , publicYn 
+				  , firstRegDt
+				  , firstRegUser
+				  , modfRegDt
+				  , modfRegUser
+				  , manager
+				  )
+		VALUES  (
+        			#{custNo}
+				  , #{custNm}
+				  , CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END
+				  , CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END
+				  , CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END
+				  , CASE WHEN #{homeTel1} = '' THEN NULL ELSE #{homeTel1} END
+				  , CASE WHEN #{homeTel2} = '' THEN NULL ELSE #{homeTel2} END
+				  , CASE WHEN #{homeTel3} = '' THEN NULL ELSE #{homeTel3} END
+				  , CASE WHEN #{companyTel1} = '' THEN NULL ELSE #{companyTel1} END
+				  , CASE WHEN #{companyTel2} = '' THEN NULL ELSE #{companyTel2} END
+				  , CASE WHEN #{companyTel3} = '' THEN NULL ELSE #{companyTel3} END
+				  , CASE WHEN #{faxTel1} = '' THEN NULL ELSE #{faxTel1} END
+				  , CASE WHEN #{faxTel2} = '' THEN NULL ELSE #{faxTel2} END
+				  , CASE WHEN #{faxTel3} = '' THEN NULL ELSE #{faxTel3} END
+				  , #{grade}
+				  , CASE WHEN #{budgetAmt} = '' THEN 0 ELSE #{budgetAmt} END 
+				  , #{requestMemo}
+				  , #{custPoint}
+				  , #{buyCondition} 
+				  , #{memo}
+				  , #{activeTp}
+				  , CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END
+				  , now()
+				  , 'testUser'
+				  , now()
+				  , 'testUser'
+				  , 'testUser'
+        	);
+		
+    </insert>
+    
+    <update  id="modifyCustomer" parameterType="java.util.HashMap" >
+    UPDATE customer
+       SET custNm = #{custNm}
+		 , custTel1 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel1} END)
+		 , custTel2 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END)
+		 , custTel3 = (CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END)
+		 , homeTel1 = (CASE WHEN #{homeTel1} = '' THEN NULL ELSE #{homeTel1} END)
+		 , homeTel2 = (CASE WHEN #{homeTel2} = '' THEN NULL ELSE #{homeTel2} END)
+		 , homeTel3 = (CASE WHEN #{homeTel3} = '' THEN NULL ELSE #{homeTel3} END)
+		 , companyTel1 = (CASE WHEN #{companyTel1} = '' THEN NULL ELSE #{companyTel1} END)
+		 , companyTel2 = (CASE WHEN #{companyTel2} = '' THEN NULL ELSE #{companyTel2} END)
+		 , companyTel3 = (CASE WHEN #{companyTel3} = '' THEN NULL ELSE #{companyTel3} END)
+		 , faxTel1 = (CASE WHEN #{faxTel1} = '' THEN NULL ELSE #{faxTel1} END)
+		 , faxTel2 = (CASE WHEN #{faxTel2} = '' THEN NULL ELSE #{faxTel2} END)
+		 , faxTel3 = (CASE WHEN #{faxTel3} = '' THEN NULL ELSE #{faxTel3} END)
+		 , grade = #{grade}
+		 , budgetAmt = (CASE WHEN #{budgetAmt} = '' THEN 0 ELSE #{budgetAmt} END  )
+		 , requestMemo =  #{requestMemo}
+		 , custPoint = #{custPoint}
+		 , buyCondition = #{buyCondition}
+		 , memo =  #{memo}
+		 , activeTp =  #{activeTp}
+		 , publicYn = (CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END)
+		 , modfRegDt = now()
+		 , modfRegUser = 'testUser'
+		 , manager = 'testUser'
+     WHERE custNo = #{custNo}
+    </update>
+    
+    <delete id="deleteCustomer" parameterType="java.util.HashMap" >
+    DELETE FROM customer 
+    WHERE custNo = #{custNo}
+    </delete>
+    
+	<select id="selectCustomerList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT custNo
+	     , custNm
+	     , custTel1
+	     , custTel2
+	     , custTel3
+	     , homeTel1
+	     , homeTel2
+	     , homeTel3
+	     , companyTel1
+	     , companyTel2
+	     , companyTel3
+	     , faxTel1
+	     , faxTel2
+	     , faxTel3
+	     , grade
+	     , budgetAmt
+	     , requestMemo
+	     , custPoint
+	     , buyCondition
+	     , memo
+		 , activeTp
+	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
+	     , publicYn
+	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
+	     , DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
+	     , firstRegUser firstRegNm
+	     , (SELECT COUNT(*) FROM customer) totalCnt
+	  FROM customer
+	 WHERE 1=1 
+	 LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+	
+	<select id="selectCustomerInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT custNo
+	     , custNm
+	     , custTel1
+	     , custTel2
+	     , custTel3
+	     , homeTel1
+	     , homeTel2
+	     , homeTel3
+	     , companyTel1
+	     , companyTel2
+	     , companyTel3
+	     , faxTel1
+	     , faxTel2
+	     , faxTel3
+	     , grade
+	     , budgetAmt
+	     , requestMemo
+	     , custPoint
+	     , buyCondition
+	     , memo
+		 , activeTp
+	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
+	     , publicYn
+	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
+	     , DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
+	     , firstRegUser firstRegNm
+	  FROM customer
+	 WHERE custNo = #{custNo}
+	</select>
+	
+	
+	
+	
+</mapper>

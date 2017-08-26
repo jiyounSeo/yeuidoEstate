@@ -1,7 +1,9 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
+<script type="text/javascript" src="./resources/js/list/addClient.js"></script>
 
+<form id="newClient">
 <div class="new_page_title">
 	<img src="./resources/images/title_new_cl_list.jpg">
 </div>
@@ -10,67 +12,78 @@
 	<table class="new_page_table">
 		<tr>
 			<td class="title">고객명</td>
-			<td colspan="2"><input type="text"></td>
-			<td class="title">담당자</td>
-			<td><input type="text"></td>
+			<td colspan="4"><input type="text" style="width:200px" id="custNm" name="custNm"></td>
 		</tr>
 		<tr>
 			<td class="title" rowspan="2">고객정보</td>
+			<td class="title2">핸드폰</td>
+			<td><input type="number" style="width:105px" id="custTel1" name="custTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
+				 - <input type="number" style="width:105px" id="custTel2" name="custTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
+				 - <input type="number" style="width:105px" id="custTel3" name="custTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
 			<td class="title2">자택 </td>
-			<td width="365px"><input type="text" style="width:105px"> - <input type="text" style="width:115px"> - <input type="text" style="width:115px"></td>
-			<td class="title">회사</td>
-			<td><input type="text" style="width:135px"> - <input type="text" style="width:155px"> - <input type="text" style="width:155px"></td>
+			<td><input type="number" style="width:105px" id="homeTel1" name="homeTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
+				 - <input type="number" style="width:105px" id="homeTel2" name="homeTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
+				 - <input type="number" style="width:105px" id="homeTel3" name="homeTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+		
 		</tr>
 		<tr>
-			<td class="title2">핸드폰 </td>
-			<td width="365px"><input type="text" style="width:105px"> - <input type="text" style="width:115px"> - <input type="text" style="width:115px"></td>
-			<td class="title">팩스</td>
-			<td><input type="text" style="width:135px"> - <input type="text" style="width:155px"> - <input type="text" style="width:155px"></td>
+			<td class="title2">회사 </td>
+				<td><input type="number" style="width:105px;height:90%;" id="companyTel1" name="companyTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
+				 - <input type="number" style="width:105px" id="companyTel2" name="companyTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
+				 - <input type="number" style="width:105px" id="companyTel3" name="companyTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+			<td class="title2">팩스</td>
+			<td><input type="number" style="width:105px" id="faxTel1" name="faxTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
+				 - <input type="number" style="width:105px" id="faxTel2" name="faxTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
+				 - <input type="number" style="width:105px" id="faxTel3" name="faxTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
 		</tr>
+		
 		<tr>
 			<td class="title">등급</td>
 			<td colspan="2">
-				<input type="radio" name="grade_rb" id="grade_rb1" class="rbbox" /><label for="grade_rb1" class="rb-label grade">A</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="radio" name="grade_rb" id="grade_rb2" class="rbbox" /><label for="grade_rb2" class="rb-label grade">B</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="radio" name="grade_rb" id="grade_rb3" class="rbbox" /><label for="grade_rb3" class="rb-label grade">C</label>
+			  <input type="radio" id="grade1" name="grade" value="A"/><label for="grade1">A</label>
+			  <input type="radio" id="grade2" name="grade" value="B"/><label for="grade2">B</label>
+			  <input type="radio" id="grade3" name="grade" value="C"/><label for="grade3">C</label>
 			</td>
 			<td class="title">예산</td>
-			<td><input type="text" style="width:140px"> 만원</td>
+			<td><input type="text" style="width:140px" id="budgetAmt" name="budgetAmt"> 만원</td>
 		</tr>
 		<tr>
 			<td class="title">의뢰내용</td>
 			<td colspan="4">
-				<textarea rows="10" cols="50"></textarea>
+				<textarea rows="10" cols="50" id="requestMemo" name="requestMemo"></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="title">특징</td>
-			<td colspan="4"><input type="text"></td>
+			<td colspan="4"><input type="text" id="custPoint" name="custPoint"></td>
 		</tr>
 		<tr>
 			<td class="title">구입조건</td>
-			<td colspan="4"><input type="text"></td>
+			<td colspan="4"><input type="text" id="buyCondition" name="buyCondition"></td>
 		</tr>
 		<tr>
 			<td class="title">상세내역</td>
 			<td colspan="4">
-				<textarea rows="10" cols="50"></textarea>
+				<textarea rows="10" cols="50" id="memo" name="memo"></textarea>
 			</td>
 		</tr>
 		<tr>
-			<td class="title">상태</td>
+			<td class="title">분류</td>
 			<td colspan="4">
-				<input type="radio" name="type_rb" id="type_rb1" class="rbbox" /><label for="type_rb1" class="rb-label cardType">활성</label>&nbsp;&nbsp;
-				<input type="radio" name="type_rb" id="type_rb2" class="rbbox" /><label for="type_rb2" class="rb-label cardType">보류</label>&nbsp;&nbsp;
-				<input type="checkbox">&nbsp;공동&nbsp;&nbsp;		
+			  <input type="radio" id="activeTp1" name="activeTp" value="AT001"/><label for="activeTp1">활성</label>
+			  <input type="radio" id="activeTp2" name="activeTp" value="AT002"/><label for="activeTp2">보류</label>
+			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			  <input type="checkbox" name="publicYn" id="publicYn" value="Y" /><label for="publicYn">공동</label>
 			</td>
 		</tr>
+		
 	</table>
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">
-		<a href="#"><img src="./resources/images/btn_add.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="#"><img src="./resources/images/btn_add.jpg" onclick="f_customer_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
 	</div>
 </div>
-
+<input type="hidden" name="custNo" id="custNo" value="${custNo}"/>
+</form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

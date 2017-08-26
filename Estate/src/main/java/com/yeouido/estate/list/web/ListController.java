@@ -105,7 +105,7 @@ public class ListController {
 	}	
 	
 	@RequestMapping(value= "/newClient.do", method=RequestMethod.GET)
-	public ModelAndView newClientView(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView newClientView(@RequestParam Map<String,Object> map)  { 
 		 ModelAndView mv = new ModelAndView("/listpage/newClient");
 		 return mv;
 	}	
@@ -541,17 +541,17 @@ public class ListController {
 		return "/listpage/viewObTicket";	
 	}
 	
-	@RequestMapping(value= "/viewClient.do", method=RequestMethod.GET)
+
+	
+	
+	/*@RequestMapping(value= "/viewClient.do", method=RequestMethod.GET)
 	public ModelAndView viewClientView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/listpage/viewClient");
 		 return mv;
 	}	
+	*/
 	
-	@RequestMapping(value="/viewClient",method = RequestMethod.GET)
-	public String goViewClientView(HttpServletRequest request,Model model){
-		
-		model = goView(request, model);
-		return "/listpage/viewClient";	
-	}
+
+	
 	
 }

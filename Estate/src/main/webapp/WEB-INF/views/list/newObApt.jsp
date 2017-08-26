@@ -20,6 +20,7 @@
 			<td class="title">물건명</td>
 			<td colspan="4"><input type="text" id="objtNm" name="objtNm"> </td>
 		</tr>
+		
 		<tr>
 			<td class="title">고객정보</td>
 			<td class="title2">성명 </td>
