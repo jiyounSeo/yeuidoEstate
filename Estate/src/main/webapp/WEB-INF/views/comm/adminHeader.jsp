@@ -16,7 +16,7 @@
 	<tr><td height="14px">&nbsp;</td></tr>
 	<tr>
 		<td height="36px" align="center">
-			<div style="width:1486px; height:36px;text-align:left;"><b>홍길동</b> 님  | 회원정보수정 | 회원관리 | 로그아웃 | <a href="/mbr/memberList">회원관리</a> </div>
+			<div style="width:1486px; height:36px;text-align:left;"><b>홍길동</b> 님  | 회원정보수정 | 회원관리 |  <a href="./loginView.do">로그인</a> | <a href="./memberListView.do">회원관리</a> </div>
 		</td>
 	</tr>
 </table>
