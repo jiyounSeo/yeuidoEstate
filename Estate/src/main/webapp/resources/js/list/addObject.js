@@ -98,6 +98,13 @@ function uncomma(str) {
     return str.replace(/[^\d]+/g, ''); 
 }
 
+function buildingPopup(){ 
+	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
+	//호출하게 됩니다. 
+	var pop = window.open("./WEB-INF/views/list/newBuilding.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");  
+}
+
+
 function goPopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 

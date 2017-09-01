@@ -87,11 +87,11 @@
 <script id="custListTemplte" type="text/x-jquery-tmpl">	
 {{each custList}}					
 	<tr>
-		<td><a href="./viewClient.do?custNo={{html $value.custNo}}">{{html $value.firstRegDt}}</a></td>
+		<td><a href="./viewClient.do?custId={{html $value.custId}}">{{html $value.frstRegDt}}</a></td>
 		<td>{{html $value.custNm}}</td>
 		<td>{{html $value.custTel1}}-{{html $value.custTel2}}-{{html $value.custTel3}}</td>
-		<td>{{html $value.requestMemo}}</td>
-		<td>{{html $value.firstRegNm}}</td>
+		<td>{{html $value.reqContent}}</td>
+		<td>{{html $value.frstRegNm}}</td>
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 							

@@ -135,12 +135,10 @@
 	</table>
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">
-		<a href="#"><img src="./resources/images/btn_add.jpg" onclick="f_saleobject_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="#"><img src="./resources/images/btn_add.jpg" onclick="f_building_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
 	</div>
 </div>
-<input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
-<input type="hidden" name="objtTp" id="objtTp" value="OT001"/>
 
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

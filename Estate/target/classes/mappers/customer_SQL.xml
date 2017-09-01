@@ -6,66 +6,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="customerDAO">
 
     <insert id="insertCustomer" parameterType="java.util.HashMap" >
-      <selectKey resultType="int" keyProperty="custNo" order="BEFORE">
-        SELECT  ifnull (MAX(custNo)+1,1) from customer       
+      <selectKey resultType="int" keyProperty="custId" order="BEFORE">
+        SELECT  ifnull (MAX(custId)+1,1) from customer       
       </selectKey>
 		INSERT INTO 
-			customer (custNo
+			customer (custId
 				  , custNm
+				  , mbrId
 				  , custTel1
 				  , custTel2
 				  , custTel3 
 				  , homeTel1
 				  , homeTel2
 				  , homeTel3
-				  , companyTel1
-				  , companyTel2
-				  , companyTel3
+				  , orgnTel1
+				  , orgnTel2
+				  , orgnTel3
 				  , faxTel1
 				  , faxTel2
 				  , faxTel3
-				  , grade
-				  , budgetAmt
-				  , requestMemo
-				  , custPoint
-				  , buyCondition
-				  , memo 
+				  , gradeTp
+				  , budAmt
+				  , reqContent
+				  , feature
+				  , buyCond
+				  , dtlContent 
 				  , activeTp 
 				  , publicYn 
-				  , firstRegDt
-				  , firstRegUser
+				  , frstRegDt
+				  , frstRegUser
 				  , modfRegDt
 				  , modfRegUser
-				  , manager
+				 
 				  )
 		VALUES  (
-        			#{custNo}
+        			#{custId}
 				  , #{custNm}
+				  , 'test'
 				  , CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END
 				  , CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END
 				  , CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END
 				  , CASE WHEN #{homeTel1} = '' THEN NULL ELSE #{homeTel1} END
 				  , CASE WHEN #{homeTel2} = '' THEN NULL ELSE #{homeTel2} END
 				  , CASE WHEN #{homeTel3} = '' THEN NULL ELSE #{homeTel3} END
-				  , CASE WHEN #{companyTel1} = '' THEN NULL ELSE #{companyTel1} END
-				  , CASE WHEN #{companyTel2} = '' THEN NULL ELSE #{companyTel2} END
-				  , CASE WHEN #{companyTel3} = '' THEN NULL ELSE #{companyTel3} END
+				  , CASE WHEN #{orgnTel1} = '' THEN NULL ELSE #{orgnTel1} END
+				  , CASE WHEN #{orgnTel2} = '' THEN NULL ELSE #{orgnTel2} END
+				  , CASE WHEN #{orgnTel3} = '' THEN NULL ELSE #{orgnTel3} END
 				  , CASE WHEN #{faxTel1} = '' THEN NULL ELSE #{faxTel1} END
 				  , CASE WHEN #{faxTel2} = '' THEN NULL ELSE #{faxTel2} END
 				  , CASE WHEN #{faxTel3} = '' THEN NULL ELSE #{faxTel3} END
-				  , #{grade}
-				  , CASE WHEN #{budgetAmt} = '' THEN 0 ELSE #{budgetAmt} END 
-				  , #{requestMemo}
-				  , #{custPoint}
-				  , #{buyCondition} 
-				  , #{memo}
+				  , #{gradeTp}
+				  , CASE WHEN #{budAmt} = '' THEN 0 ELSE #{budAmt} END 
+				  , #{reqContent}
+				  , #{feature}
+				  , #{buyCond} 
+				  , #{dtlContent}
 				  , #{activeTp}
 				  , CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END
 				  , now()
-				  , 'testUser'
+				  , 'test'
 				  , now()
-				  , 'testUser'
-				  , 'testUser'
+				  , 'test'
+				  
         	);
 		
     </insert>
@@ -79,33 +81,69 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , homeTel1 = (CASE WHEN #{homeTel1} = '' THEN NULL ELSE #{homeTel1} END)
 		 , homeTel2 = (CASE WHEN #{homeTel2} = '' THEN NULL ELSE #{homeTel2} END)
 		 , homeTel3 = (CASE WHEN #{homeTel3} = '' THEN NULL ELSE #{homeTel3} END)
-		 , companyTel1 = (CASE WHEN #{companyTel1} = '' THEN NULL ELSE #{companyTel1} END)
-		 , companyTel2 = (CASE WHEN #{companyTel2} = '' THEN NULL ELSE #{companyTel2} END)
-		 , companyTel3 = (CASE WHEN #{companyTel3} = '' THEN NULL ELSE #{companyTel3} END)
+		 , orgnTel1 = (CASE WHEN #{orgnTel1} = '' THEN NULL ELSE #{orgnTel1} END)
+		 , orgnTel2 = (CASE WHEN #{orgnTel2} = '' THEN NULL ELSE #{orgnTel2} END)
+		 , orgnTel3 = (CASE WHEN #{orgnTel3} = '' THEN NULL ELSE #{orgnTel3} END)
 		 , faxTel1 = (CASE WHEN #{faxTel1} = '' THEN NULL ELSE #{faxTel1} END)
 		 , faxTel2 = (CASE WHEN #{faxTel2} = '' THEN NULL ELSE #{faxTel2} END)
 		 , faxTel3 = (CASE WHEN #{faxTel3} = '' THEN NULL ELSE #{faxTel3} END)
-		 , grade = #{grade}
-		 , budgetAmt = (CASE WHEN #{budgetAmt} = '' THEN 0 ELSE #{budgetAmt} END  )
-		 , requestMemo =  #{requestMemo}
-		 , custPoint = #{custPoint}
-		 , buyCondition = #{buyCondition}
-		 , memo =  #{memo}
+		 , gradeTp = #{gradeTp}
+		 , budAmt = (CASE WHEN #{budAmt} = '' THEN 0 ELSE #{budAmt} END  )
+		 , reqContent =  #{reqContent}
+		 , feature = #{feature}
+		 , buyCond = #{buyCond}
+		 , dtlContent =  #{dtlContent}
 		 , activeTp =  #{activeTp}
 		 , publicYn = (CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END)
 		 , modfRegDt = now()
-		 , modfRegUser = 'testUser'
-		 , manager = 'testUser'
-     WHERE custNo = #{custNo}
+		 , modfRegUser = 'test'
+		 , mbrId = 'test'
+     WHERE custId = #{custId}
     </update>
     
     <delete id="deleteCustomer" parameterType="java.util.HashMap" >
     DELETE FROM customer 
-    WHERE custNo = #{custNo}
+    WHERE custId = #{custId}
     </delete>
-    
+   	
+   	<select id="selectCustomerConfirm" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT custId, custId2
+	  FROM
+		(SELECT 1 num, max(custId) custId
+	   	  FROM customer
+	   	 WHERE custNm = #{custNm}
+	   	   AND custTel1 = #{custTel1}
+	   	   AND custTel2 = #{custTel2}
+	   	   AND custTel3 = #{custTel3}
+		) A, 
+		(
+		SELECT 1 num, IFNULL(MAX(custId) + 1, 1) custId2
+		  FROM customer
+		)B
+	WHERE A.num = B.num
+	</select>
+
+ 	<insert id="insertNewCustomer" parameterType="java.util.HashMap" >
+		INSERT INTO 
+			customer (custId
+			       , mbrId
+			       , custNm
+			       , custTel1
+			       , custTel2
+			       , custTel3)
+			values (
+				  , #{custId}
+				  , 'test'
+				  , #{custNm}
+				  , #{custTel1}
+				  , #{custTel2}
+				  , #{custTle3}
+			)
+			
+			   		
+	</insert>
 	<select id="selectCustomerList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT custNo
+	SELECT custId
 	     , custNm
 	     , custTel1
 	     , custTel2
@@ -113,32 +151,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , homeTel1
 	     , homeTel2
 	     , homeTel3
-	     , companyTel1
-	     , companyTel2
-	     , companyTel3
+	     , orgnTel1
+	     , orgnTel2
+	     , orgnTel3
 	     , faxTel1
 	     , faxTel2
 	     , faxTel3
-	     , grade
-	     , budgetAmt
-	     , requestMemo
-	     , custPoint
-	     , buyCondition
-	     , memo
+	     , gradeTp
+	     , budAmt
+	     , reqContent
+	     , feature
+	     , buyCond
+	     , dtlContent
 		 , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
 	     , publicYn
 	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
-	     , DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
-	     , firstRegUser firstRegNm
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , frstRegUser frstRegNm
 	     , (SELECT COUNT(*) FROM customer) totalCnt
+	     , mbrId
 	  FROM customer
 	 WHERE 1=1 
 	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
 	<select id="selectCustomerInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT custNo
+	SELECT custId
 	     , custNm
 	     , custTel1
 	     , custTel2
@@ -146,26 +185,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , homeTel1
 	     , homeTel2
 	     , homeTel3
-	     , companyTel1
-	     , companyTel2
-	     , companyTel3
+	     , orgnTel1
+	     , orgnTel2
+	     , orgnTel3
 	     , faxTel1
 	     , faxTel2
 	     , faxTel3
-	     , grade
-	     , budgetAmt
-	     , requestMemo
-	     , custPoint
-	     , buyCondition
-	     , memo
+	     , gradeTp
+	     , budAmt
+	     , reqContent
+	     , feature
+	     , buyCond
+	     , dtlContent
 		 , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
 	     , publicYn
 	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
-	     , DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
-	     , firstRegUser firstRegNm
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , frstRegUser frstRegNm
+	     , mbrId
 	  FROM customer
-	 WHERE custNo = #{custNo}
+	 WHERE custId = #{custId}
 	</select>
 	
 	

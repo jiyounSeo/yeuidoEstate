@@ -72,16 +72,26 @@ public class CustomerController {
 	 */
 	@RequestMapping(value= "/insertCustomer.do", method=RequestMethod.POST)
 	public ModelAndView insertCustomer(@RequestParam Map<String,Object> map)  {  
-		
-		try {
-			//logger.debug("hhihih");
-			int result = customerService.insertCustomer(map);
-			logger.debug("result : "+  result );
-		} catch (Exception e) {
-			logger.error("insert error");
-			e.printStackTrace();
-		}
 		ModelAndView mav= new ModelAndView();
+		Map custInfo = new HashMap<String, Object>();
+		try {
+			custInfo = customerService.selectCustomerConfirm(map);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		if (("").equals(custInfo.get("custId")) || custInfo.get("custId") == null) {
+			try {
+				int result = customerService.insertCustomer(map);
+				mav.addObject("messageCd", "1");
+				mav.addObject("message", "고객 등록에 성공하였습니다.");
+				
+			} catch (Exception e) {
+				mav.addObject("messageCd", "2");
+				e.printStackTrace();
+			}
+		} else {
+			mav.addObject("message", "이미 등록된 고객입니다.");
+		}
 		mav.setViewName("jsonView");	
 	    return mav;
 	}
@@ -96,7 +106,11 @@ public class CustomerController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			result = customerService.selectCustomerInfo(map);
+			mav.addObject("messageCd", "1");
+
 		} catch (Exception e) {
+			mav.addObject("messageCd", "2");
+
 			e.printStackTrace();
 		}
 		mav.addObject("custInfo",result);
@@ -109,15 +123,15 @@ public class CustomerController {
 	 */		
 	@RequestMapping(value= "/modifyCustomer.do", method=RequestMethod.POST)
 	public ModelAndView modifyCustomer(@RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
 		
 		try {
 			int result = customerService.modifyCustomer(map);
-			logger.debug("result : "+  result );
+			mav.addObject("messageCd", "1");
 		} catch (Exception e) {
-			logger.error("update error");
+			mav.addObject("messageCd", "2");
 			e.printStackTrace();
 		}
-		ModelAndView mav= new ModelAndView();
 		mav.setViewName("jsonView");	
 	    return mav;
 	}
@@ -129,11 +143,14 @@ public class CustomerController {
 	public String deleteCustomer(HttpServletRequest request,Model model){
 		ListController listView = new ListController();
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("custNo", request.getParameter("custNo"));
+		map.put("custId", request.getParameter("custId"));
 		
 		try {
 			int result = customerService.deleteCustomer(map);
+			model.addAttribute("messageCd", "1");
+			
 		} catch (Exception e) {
+			model.addAttribute("messageCd", "2");
 			e.printStackTrace();
 		}
 		return "/list/commClList";	
@@ -145,10 +162,12 @@ public class CustomerController {
 		try {
 			result = customerService.selectCustomerInfo(map);
 			model.addAllAttributes(result);
+			model.addAttribute("messageCd", "1");
+			
 		} catch (Exception e) {
+			model.addAttribute("messageCd", "2");
 			e.printStackTrace();
 		}
-		
 		//ModelAndView mv = new ModelAndView();
 		return "/listpage/viewClient";
 	

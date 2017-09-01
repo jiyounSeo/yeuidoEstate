@@ -20,17 +20,26 @@ public class CustomerDAO extends AbstractDAO
    public int deleteCustomer(Map<String, Object> map) throws Exception{
        return delete("customerDAO.deleteCustomer",map);
    }
+   @SuppressWarnings("unchecked")
+   public Map selectCustomerInfo(Map map) throws Exception{
+       return selectMap("customerDAO.selectCustomerInfo", map);
+   }
    
    @SuppressWarnings("unchecked")
    public List<Map<String,Object>> selectCustomerList(Map map) throws Exception{
        return selectList("customerDAO.selectCustomerList", map);
    }
    
-
+   /* 고객등록확인 */
    @SuppressWarnings("unchecked")
-   public Map selectCustomerInfo(Map map) throws Exception{
-       return selectMap("customerDAO.selectCustomerInfo", map);
+   public Map selectCustomerConfirm(Map map) throws Exception{
+       return selectMap("customerDAO.selectCustomerConfirm", map);
    }
+   /* 고객 필수입력값만으로 등록 */
+   public int insertNewCustomer(Map<String, Object> map) throws Exception{
+       return insert("customerDAO.insertNewCustomer",map);
+   }
+   
    
    
    

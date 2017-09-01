@@ -32,6 +32,8 @@ public class CustomerServiceImpl  implements CustomerService
    public Map selectCustomerInfo(Map map) throws Exception {
 	   return customerDAO.selectCustomerInfo(map);
    }
-   
+   public Map selectCustomerConfirm(Map map) throws Exception {
+	   return customerDAO.selectCustomerConfirm(map);
+   }
    
 }

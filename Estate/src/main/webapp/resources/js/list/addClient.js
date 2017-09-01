@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	//f_objectDtl_select();
 	formId = $("form").attr("id");
-	if ($("custNo") != "") {
+	if ($("custId") != "") {
 		f_customerDtl_select();
 	}
 	
@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 function f_customerDtl_select() {
 	var param = {
-		custNo : $("#custNo").val()
+		custId : $("#custId").val()
 	};
 	$.ajax({
 		  url : "/estate/selectCustomerDtl.do",
@@ -35,18 +35,18 @@ function f_setting_text(result) {
 	$("#homeTel1").val(result.homeTel1);
 	$("#homeTel2").val(result.homeTel2);
 	$("#homeTel3").val(result.homeTel3);
-	$("#companyTel1").val(result.companyTel1);
-	$("#companyTel2").val(result.companyTel2);
-	$("#companyTel3").val(result.companyTel3);
+	$("#orgnTel1").val(result.orgnTel1);
+	$("#orgnTel2").val(result.orgnTel2);
+	$("#orgnTel3").val(result.orgnTel3);
 	$("#faxTel1").val(result.faxTel1);
 	$("#faxTel2").val(result.faxTel2);
 	$("#faxTel3").val(result.faxTel3);
-	$("#buudgetAmt").val(result.buudgetAmt);
-	$("#requestMemo").val(result.requestMemo);
-	$("#custPoint").val(result.custPoint);
-	$("#memo").val(result.memo);
-	$("#buyCondition").val(result.buyCondition);
-	$('input[name="grade"]:radio:input[value="' + result.grade + '"]').attr('checked', 'checked');
+	$("#budAmt").val(result.budAmt);
+	$("#reqContent").val(result.reqContent);
+	$("#feature").val(result.feature);
+	$("#dtlContent").val(result.dtlContent);
+	$("#buyCond").val(result.buyCond);
+	$('input[name="gradeTp"]:radio:input[value="' + result.gradeTp + '"]').attr('checked', 'checked');
 	$('input[name="activeTp"]:radio:input[value="' + result.activeTp + '"]').attr('checked', 'checked');
 	if (result.publicYn  == "Y") {
 		$('input:checkbox[id="publicYn"]').attr("checked", true); //단일건
@@ -75,7 +75,7 @@ function f_customer_save() {
 	}
 
 	var urlStr = "";
-	if ($("#custNo").val() != "" ) {
+	if ($("#custId").val() != "" ) {
 		urlStr = "modifyCustomer.do";
 	} else {
 		urlStr = "insertCustomer.do";
@@ -88,7 +88,7 @@ function f_customer_save() {
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(responseData){
 		  if ( urlStr == "insertCustomer.do" ) {
-			  alert ("고객 등록에 성공하였습니다.");
+			  alert (responseData.message);
 		  } else {
 			  alert ("고객수정에 성공하였습니다.");
 					  

@@ -14,10 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  ( objtNo
 				  , objtTp
 				  , objtNm
-				  , custNm
-				  , custTel1
-				  , custTel2
-				  , custTel3
+				  , custId
 				  , buildNm
 				  , businessNm
 				  , area
@@ -47,8 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , surtaxYn
 				  , parcelAmt 
 				  , premiumAmt
-				  , firstRegDt
-				  , firstRegUser
+				  , frstRegDt
+				  , frstRegUser
 				  , modfRegDt
 				  , modfRegUser
 				  )
@@ -56,10 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         			#{objtNo}
         		  , #{objtTp}
 				  , #{objtNm}
-				  , #{custNm}
-				  , CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END
-				  , CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END
-				  , CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END
+				  , #{custId}
 				  , #{buildNm}
 				  , #{businessNm}
 				  , CASE WHEN #{area} = '' THEN 0 ELSE #{area} END
@@ -101,10 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update  id="modifyObject" parameterType="java.util.HashMap" >
      UPDATE saleobject
        SET objtNm = #{objtNm}
-		 , custNm = #{custNm}
-		 , custTel1 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel1} END)
-		 , custTel2 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END)
-		 , custTel3 = (CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END)
+		 , custId = #{custId}
 		 , buildNm = #{buildNm}
 		 , businessNm =  #{businessNm}
 		 , area = (CASE WHEN #{area} = '' THEN 0 ELSE #{area} END)
@@ -167,7 +158,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
 	<select id="selectObjectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
+	SELECT DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , objtNo
 	     , objtTp
 	     , objtNm
@@ -183,7 +174,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , ifnull (ondolYn, 'N') ondolYn
 	     , conditionTp 
 	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
-	     , firstRegUser
+	     , frstRegUser
 	     , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
 	     , surtaxYn
@@ -193,7 +184,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , parcelAmt
 	 	 ,  premiumAmt
 	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
-	     , firstRegUser firstRegNm
+	     , frstRegUser frstRegNm
 	  	 , (SELECT COUNT(*) FROM estate.saleobject WHERE objtTp = #{objtTp} and saleTp = #{saleTp} ) totalCnt
 	  FROM estate.saleobject
 	 WHERE objtTp = #{objtTp}
@@ -206,10 +197,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , objtTp
 	     , (select commNm from commcd where commCd = objtTp ) objtTpNm
 	     , objtNm
-	     , custNm
-	     , custTel1
-	     , custTel2
-	     , custTel3
+	     , cust.custId
+	     , cust.custNm
+	     , cust.custTel1
+	     , cust.custTel2
+	     , cust.custTel3
 	     , businessNm
 	     , buildNm
 	     , saleTp
@@ -231,7 +223,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , rightAmt
 	     , conditionTp 
 	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
-	     , firstRegUser
+	     , frstRegUser
 	     , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
 	     , surtaxYn
@@ -242,14 +234,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , premiumAmt
 	 	 , memo
 	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
-	     , DATE_FORMAT(firstRegDt, '%Y-%m-%d') as firstRegDt
-	     , firstRegUser firstRegNm
-	  FROM estate.saleobject
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , frstRegUser frstRegNm
+	  FROM estate.saleobject obj
+	     , customer cust
 	 WHERE objtNo = #{objtNo}
 	   AND objtTp = #{objtTp}
+	   AND cust.custId = obj.custId
 	</select>
-	
-	
-	
 	
 </mapper>

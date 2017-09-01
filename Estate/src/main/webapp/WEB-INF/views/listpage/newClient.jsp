@@ -28,9 +28,9 @@
 		</tr>
 		<tr>
 			<td class="title2">회사 </td>
-				<td><input type="number" style="width:105px;height:90%;" id="companyTel1" name="companyTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
-				 - <input type="number" style="width:105px" id="companyTel2" name="companyTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
-				 - <input type="number" style="width:105px" id="companyTel3" name="companyTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+				<td><input type="number" style="width:105px;height:90%;" id="orgnTel1" name="orgnTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
+				 - <input type="number" style="width:105px" id="orgnTel2" name="orgnTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
+				 - <input type="number" style="width:105px" id="orgnTel3" name="orgnTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
 			<td class="title2">팩스</td>
 			<td><input type="number" style="width:105px" id="faxTel1" name="faxTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
 				 - <input type="number" style="width:105px" id="faxTel2" name="faxTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
@@ -40,31 +40,31 @@
 		<tr>
 			<td class="title">등급</td>
 			<td colspan="2">
-			  <input type="radio" id="grade1" name="grade" value="A"/><label for="grade1">A</label>
-			  <input type="radio" id="grade2" name="grade" value="B"/><label for="grade2">B</label>
-			  <input type="radio" id="grade3" name="grade" value="C"/><label for="grade3">C</label>
+			  <input type="radio" id="grade1" name="gradeTp" value="A"/><label for="grade1">A</label>
+			  <input type="radio" id="grade2" name="gradeTp" value="B"/><label for="grade2">B</label>
+			  <input type="radio" id="grade3" name="gradeTp" value="C"/><label for="grade3">C</label>
 			</td>
 			<td class="title">예산</td>
-			<td><input type="text" style="width:140px" id="budgetAmt" name="budgetAmt"> 만원</td>
+			<td><input type="text" style="width:140px" id="budAmt" name="budAmt"> 만원</td>
 		</tr>
 		<tr>
 			<td class="title">의뢰내용</td>
 			<td colspan="4">
-				<textarea rows="10" cols="50" id="requestMemo" name="requestMemo"></textarea>
+				<textarea rows="10" cols="50" id="reqContent" name="reqContent"></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td class="title">특징</td>
-			<td colspan="4"><input type="text" id="custPoint" name="custPoint"></td>
+			<td colspan="4"><input type="text" id="feature" name="feature"></td>
 		</tr>
 		<tr>
 			<td class="title">구입조건</td>
-			<td colspan="4"><input type="text" id="buyCondition" name="buyCondition"></td>
+			<td colspan="4"><input type="text" id="buyCond" name="buyCond"></td>
 		</tr>
 		<tr>
 			<td class="title">상세내역</td>
 			<td colspan="4">
-				<textarea rows="10" cols="50" id="memo" name="memo"></textarea>
+				<textarea rows="10" cols="50" id="dtlContent" name="dtlContent"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -84,6 +84,6 @@
 		<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
 	</div>
 </div>
-<input type="hidden" name="custNo" id="custNo" value="${custNo}"/>
+<input type="hidden" name="custId" id="custId" value="${custId}"/>
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

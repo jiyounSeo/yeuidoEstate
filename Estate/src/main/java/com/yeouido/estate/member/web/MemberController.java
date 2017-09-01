@@ -33,10 +33,10 @@ public class MemberController {
 		 return mv;
 	}
 	
-	@RequestMapping(value= "/memberListView.do", method=RequestMethod.POST)
-	public ModelAndView memberListView(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/mbr/memberList");
-		 return mv;
+	@RequestMapping(value= "/memberListView.do")
+	public String memberListView(@RequestParam Map<String,Object> map)  {  
+		//return "/mbr/memberList";	
+		return "/home";
 	}
 	
 	@RequestMapping(value= "/loginView.do")

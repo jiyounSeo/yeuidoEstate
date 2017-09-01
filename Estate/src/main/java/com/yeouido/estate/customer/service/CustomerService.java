@@ -14,4 +14,6 @@ public interface CustomerService
 	
 	public Map selectCustomerInfo(Map map) throws Exception;
 	
+	public Map selectCustomerConfirm(Map map) throws Exception;
+	
 }
