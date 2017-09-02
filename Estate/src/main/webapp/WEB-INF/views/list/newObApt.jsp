@@ -33,11 +33,9 @@
 		<tr>
 			<td class="title">단지명/면적</td>
 			<td colspan="2">
-				<select  id="buildNm" name="buildNm" style="width:350px">
-					<option value="AP001">샘플아파트</option>
+				<select  id="buildCd" name="buildCd" style="width:250px">
 				</select>&nbsp;
 				<input type="number" style="width:135px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형
-				<input type= "button" onClick="goPopup();" value= " 팝업 " /> 
 			</td>
 			
 			<td class="title">유형</td>
@@ -60,8 +58,8 @@
 		<tr>
 			<td class="title">동 / 층 / 향</td>
 			<td colspan="2">
-				<select style="width:130px" id="dong" name="dong"><option>A</option></select> 동&nbsp;&nbsp;&nbsp;
-				<input type="number" name="floor" name="floor" style="width:140px" min="0" max="999" oninput="if(this.value.length>3) this.value=this.value.slice(0,3)"  /> 층&nbsp;&nbsp;&nbsp;
+				<input type="text" name="dong" id="dong" style="width:140px" maxlength="5"/> 동&nbsp;&nbsp;&nbsp;
+				<input type="number" name="floor" id="floor" style="width:140px" min="0" max="999" oninput="if(this.value.length>3) this.value=this.value.slice(0,3)"  /> 층&nbsp;&nbsp;&nbsp;
 				<select style="width:130px" id="directionTp" name="directionTp" >
 					<option value="DR001">동</option>
 					<option value="DR002">서</option>
@@ -115,7 +113,7 @@
 		<tr>
 			<td class="title">매물설명</td>
 			<td colspan="4">
-				<textarea rows="6" cols="50" id="memp" name="memo"></textarea>
+				<textarea rows="6" cols="50" id="memo" name="memo"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -135,10 +133,14 @@
 	</table>
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">
-		<a href="#"><img src="./resources/images/btn_add.jpg" onclick="f_building_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="#"><img src="./resources/images/btn_add.jpg" onclick="f_saleobject_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
 	</div>
 </div>
+
+<input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
+<input type="hidden" name="objtTp" id="objtTp" value="OT001">
+
 
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

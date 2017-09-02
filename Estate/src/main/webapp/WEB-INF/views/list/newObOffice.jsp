@@ -17,7 +17,7 @@
 	<table class="new_page_table">
 		<tr>
 			<td class="title">물건명</td>
-			<td colspan="4"><input type="text" id="objtNm" name="objtNm" value="물건명"> </td>
+			<td colspan="4"><input type="text" id="objtNm" name="objtNm" > </td>
 		</tr>
 		<tr>
 			<td class="title">고객정보</td>
@@ -31,8 +31,7 @@
 		<tr>
 			<td class="title">단지명/면적</td>
 			<td colspan="2">
-				<select  id="buildNm" name="buildNm" style="width:150px">
-					<option value="AP001">샘플아파트</option>
+				<select  id="buildCd" name="buildCd" style="width:150px">
 				</select>&nbsp;
 				<input type= "button" onClick="goPopup();" value= " 팝업 " /> 
 			</td>
@@ -101,7 +100,7 @@
 		<tr>
 			<td class="title">매물설명</td>
 			<td colspan="4">
-				<textarea rows="6" cols="50" id="memp" name="memo"></textarea>
+				<textarea rows="6" cols="50" id="memo" name="memo"></textarea>
 			</td>
 		</tr>
 		<tr>

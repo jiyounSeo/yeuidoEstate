@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="buildingDAO">
+
+    <insert id="insertBuilding" parameterType="java.util.HashMap" >
+      <selectKey resultType="int" keyProperty="buildCd" order="BEFORE">
+        SELECT  ifnull (MAX(buildCd)+1,1) from building      
+      </selectKey>
+		INSERT INTO 
+			building (buildCd
+				  , buildNm
+				  , objtTp
+				  , roadAddrPart1
+				  , jibunAddr
+				  , addrDetail
+				  , zipNo
+				  , frstRegDt
+				  , frstRegUser
+				  , modfRegDt
+				  , modfRegUser
+				  )
+		VALUES  (
+        			#{buildCd}
+				  , #{buildNm}
+				  , #{objtTp}
+				  , #{roadAddrPart1}
+				  , #{jibunAddr}
+				  , #{addrDetail}
+				  , #{zipNo}
+				  , now()
+				  , 'test'
+				  , now()
+				  , 'test'
+				  
+        	);
+		
+    </insert>
+    
+    <update  id="modifyBuilding" parameterType="java.util.HashMap" >
+    UPDATE building
+       SET buildNm = #{buildNm}
+       	 , objtTp = #{objtTp}
+       	 , roadAddrPart1 = #{roadAddrPart1}
+		 , jibunAddr = #{jibunAddr}
+		 , addrDetail = #{addrDetail}
+		 , zipNo = #{zipNo}
+		 , modfRegDt = now()
+		 , modfRegUser = 'test'
+     WHERE buildCd = #{buildCd}
+    </update>
+    
+    <delete id="deleteBuilding" parameterType="java.util.HashMap" >
+    DELETE from building 
+    WHERE buildCd = #{buildCd}
+    </delete>
+   	
+	<select id="selectBuildingList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT buildCd
+		  , buildNm
+		  , objtTp
+		  , (select commNm from commcd where commCd = objtTp ) objtTpNm
+		  , roadAddrPart1
+		  , jibunAddr
+		  , addrDetail
+		  , zipNo
+	      , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	      , frstRegUser frstRegNm
+	      , (SELECT COUNT(*) from building) totalCnt
+	  from building
+	 WHERE 1=1 
+	 LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+	
+	<select id="selectBuildingCombo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT buildCd 
+	 	 , buildNm
+	 FROM building
+	where objtTp = #{objtTp}
+	</select>
+	
+	<select id="selectBuildingInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT buildCd
+		  , buildNm
+		  , objtTp
+		  , (select commNm from commcd where commCd = objtTp ) objtTpNm
+		  , roadAddrPart1
+		  , jibunAddr
+		  , addrDetail
+		  , zipNo
+	      , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	      , frstRegUser frstRegNm
+	  from building
+	 WHERE buildCd = #{buildCd}
+	</select>
+	
+	
+	
+	
+</mapper>

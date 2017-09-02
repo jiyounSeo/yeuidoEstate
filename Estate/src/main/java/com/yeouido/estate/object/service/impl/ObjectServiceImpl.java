@@ -20,6 +20,7 @@ public class ObjectServiceImpl  implements ObjectService
    private CustomerDAO customerDAO;
    
    /* 물건등록*/
+   @Override
    public int insertObject(Map map) throws Exception {
 	   Map<String, Object> custMap = customerDAO.selectCustomerConfirm(map);
 	   if (("").equals(custMap.get("custId")) || custMap.get("custId") == null ) {
@@ -31,6 +32,7 @@ public class ObjectServiceImpl  implements ObjectService
 	   return objectDAO.insertObject(map);
    }
    /* 물건수정 */
+   @Override
    public int modifyObject(Map map) throws Exception {
 	   Map<String, Object> custMap = customerDAO.selectCustomerConfirm(map);
 	   if (("").equals(custMap.get("custId")) || custMap.get("custId") == null ) {
@@ -42,19 +44,23 @@ public class ObjectServiceImpl  implements ObjectService
 	   return objectDAO.modifyObject(map);
    }
    /* 물건 정보 */
+   @Override
    public Map selectObjectInfo(Map map) throws Exception {
 	   return objectDAO.selectObjectInfo(map);
    }
    
    /* 물건삭제*/
+   @Override
    public int deleteObject(Map map) throws Exception {
 	   return objectDAO.deleteObject(map);
    }
    /* 물건갯수 */
+   @Override
    public List<Object> selectObjectCnt(Map map) throws Exception {
 	   return objectDAO.selectObjectCnt(map);
    }
    /* 물건리스트 */
+   @Override
    public List<Map<String,Object>> selectObjectList(Map map) throws Exception {
 	   return objectDAO.selectObjectList(map);
    }

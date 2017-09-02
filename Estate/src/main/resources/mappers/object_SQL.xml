@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , objtTp
 				  , objtNm
 				  , custId
-				  , buildNm
+				  , buildCd
 				  , businessNm
 				  , area
 				  , realArea
@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         		  , #{objtTp}
 				  , #{objtNm}
 				  , #{custId}
-				  , #{buildNm}
+				  , #{buildCd}
 				  , #{businessNm}
 				  , CASE WHEN #{area} = '' THEN 0 ELSE #{area} END
 				  , CASE WHEN #{realArea} = '' THEN 0 ELSE #{realArea} END
@@ -96,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      UPDATE saleobject
        SET objtNm = #{objtNm}
 		 , custId = #{custId}
-		 , buildNm = #{buildNm}
+		 , buildCd = #{buildCd}
 		 , businessNm =  #{businessNm}
 		 , area = (CASE WHEN #{area} = '' THEN 0 ELSE #{area} END)
 		 , realArea = ( CASE WHEN #{realArea} = '' THEN 0 ELSE #{realArea} END)
@@ -162,8 +162,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , objtNo
 	     , objtTp
 	     , objtNm
-	     , area
-	     , realArea
+	     , buildCd
+	     , (select buildNm from building b where b.buildCd = obj.buildCd ) buildNm
+	     , CAST(area AS signed integer) area
+	     , CAST(realArea AS signed integer)  realArea
 	     , dong
 	     , floor
 	     , directionTp
@@ -180,13 +182,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , surtaxYn
 	     , advertiseYn
 	     , publicYn
+	     , availableTp
 	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
 	 	 , parcelAmt
 	 	 ,  premiumAmt
 	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
 	     , frstRegUser frstRegNm
 	  	 , (SELECT COUNT(*) FROM estate.saleobject WHERE objtTp = #{objtTp} and saleTp = #{saleTp} ) totalCnt
-	  FROM estate.saleobject
+	  FROM estate.saleobject obj
 	 WHERE objtTp = #{objtTp}
 	   AND saleTp = #{saleTp}	
 	   LIMIT #{rowNum}, #{pagePerRow}
@@ -203,11 +206,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , cust.custTel2
 	     , cust.custTel3
 	     , businessNm
-	     , buildNm
+	     , buildCd
+	     , (select buildNm from building b where b.buildCd = obj.buildCd ) buildNm
 	     , saleTp
 	     , (select commNm from commcd where commCd = saleTp ) saleTpNm
-	     , area
-	     , realArea
+	     , CAST(area AS signed integer)  area
+	     , CAST(realArea AS signed integer)  realArea
 	     , bargainAmt
 	     , depositAmt
 	     , monthlyAmt
@@ -219,23 +223,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , roomCnt
 	 	 , bathCnt
 	     , ifnull (ondolYn, 'N') ondolYn
+	     , availableTp
+	     , (select commNm from commcd where commCd = obj.availableTp ) availableTpNm
 	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
 	 	 , rightAmt
 	     , conditionTp 
 	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
-	     , frstRegUser
-	     , activeTp
-	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
+	     , obj.activeTp
+	     , (select commNm from commcd where commCd = obj.activeTp ) activeTpNm
 	     , surtaxYn
 	     , ifnull (interiorYn, 'N')  interiorYn
 	     , advertiseYn
-	     , publicYn
+	     , obj.publicYn
 	     , parcelAmt
 	 	 , premiumAmt
 	 	 , memo
-	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
-	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
-	     , frstRegUser frstRegNm
+	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN obj.publicYn = 'Y' THEN '공동' END)) etc
+	     , DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , obj.frstRegUser
+	     , obj.frstRegUser frstRegNm
 	  FROM estate.saleobject obj
 	     , customer cust
 	 WHERE objtNo = #{objtNo}

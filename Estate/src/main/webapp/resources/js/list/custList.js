@@ -3,13 +3,10 @@ $(document).ready(function(){
 });
 
 function f_custList_select() {
-	console.log ("!!!!");
-	console.log ("currPage : " + currPage);
 	var param = { currentPage : Number(currPage)
 				   , pagePerRow : 10
 				   , pageSize : 10
 	};
-	console.log (param);
 	$.ajax({
 	  url : "/estate/selectCustomerList.do",
 	  type: "post",
@@ -19,7 +16,6 @@ function f_custList_select() {
 	  success : function(result){
 		  $("#custTbody").empty();
 		  if (result.custList.length != 0) {
-			  console.log ("????");
 			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#page" + currPage).addClass("active");

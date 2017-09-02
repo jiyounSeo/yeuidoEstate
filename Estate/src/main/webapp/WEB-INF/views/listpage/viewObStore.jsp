@@ -12,7 +12,7 @@
 		<tr>
 			<td class="title">고객정보</td>
 			<td class="title2">성명 </td>
-			<td width="365px">${objtNm}<!-- 성명 --></td>
+			<td width="365px">${custNm}<!-- 성명 --></td>
 			<td class="title2">연락처</td>
 			<td>${custTel1}<!-- 연락처1 --> - ${custTel2}<!-- 연락처2 --> - ${custTel3}<!-- 연락처3 --></td>
 		</tr>
@@ -48,7 +48,7 @@
 		</tr>
 		<tr>
 			<td class="title">입주가능일</td>
-			<td colspan="4"><!--  -->${availableDt}</td>
+			<td colspan="4">${availableTpNm}&nbsp;&nbsp;<!--  -->${availableDt}</td>
 		</tr>
 		<tr>
 			<td class="title">매물설명</td>

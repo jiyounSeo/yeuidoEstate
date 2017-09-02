@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <% request.setCharacterEncoding("utf-8");%>
+<input type="hidden" name="getPath" id="getPath" value="<%=request.getContextPath()%>"/>
 <script type="text/javascript" src="./resources/js/list/newBuilding.js"></script>
 
 <table width="365px" cellpadding="0" cellspacing="0" border="0">

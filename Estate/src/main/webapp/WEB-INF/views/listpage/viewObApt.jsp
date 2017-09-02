@@ -12,13 +12,13 @@
 		<tr>
 			<td class="title">고객정보</td>
 			<td class="title2">성명 </td>
-			<td width="365px">${objtNm}<!-- 성명 --></td>
+			<td width="365px">${custNm}<!-- 성명 --></td>
 			<td class="title2">연락처</td>
 			<td>${custTel1}<!-- 연락처1 --> - ${custTel2}<!-- 연락처2 --> - ${custTel3}<!-- 연락처3 --></td>
 		</tr>
 		<tr>
 			<td class="title">단지명/면적</td>
-			<td colspan="2"><!-- 아파트명 -->&nbsp;&nbsp;&nbsp;&nbsp;<!-- 평형 --> ${area}평형</td>
+			<td colspan="2">${buildNm} &nbsp;&nbsp;${area}평형</td>
 			<td class="title">유형</td>
 			<td> ${saleTpNm}
 				<!-- 유형 -->
@@ -35,7 +35,7 @@
 			<td colspan="2">
 				<!-- 동 --> ${dong}동&nbsp;&nbsp;&nbsp;
 				<!-- 층 --> ${floor}층&nbsp;&nbsp;&nbsp;
-				<!-- 향 --> ${directionTpNm}</td>
+				<!-- 향 --> ${directionTpNm}향</td>
 			<td class="title">만기일</td>
 			<td>${dueDt}<!-- 만기일 --></td>
 		</tr>
@@ -47,7 +47,7 @@
 		</tr>
 		<tr>
 			<td class="title">입주가능일</td>
-			<td colspan="4"><!-- 입주가능일 -->${availableDts}</td>
+			<td colspan="4">${availableTpNm}&nbsp;&nbsp;<!--  -->${availableDt}</td>
 		</tr>
 		<tr>
 			<td class="title">상태</td>

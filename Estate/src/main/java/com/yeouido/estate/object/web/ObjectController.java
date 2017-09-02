@@ -72,16 +72,14 @@ public class ObjectController {
 	 */
 	@RequestMapping(value= "/insertObject.do", method=RequestMethod.POST)
 	public ModelAndView insertObject(@RequestParam Map<String,Object> map)  {  
-		
+		ModelAndView mav= new ModelAndView();
 		try {
-			//logger.debug("hhihih");
 			int result = objectService.insertObject(map);
-			logger.debug("result : "+  result );
+			mav.addObject("message", "물건 등록에 성공했습니다.");
 		} catch (Exception e) {
-			logger.error("insert error");
+			mav.addObject("message", "물건 등록에 실패했습니다.");
 			e.printStackTrace();
 		}
-		ModelAndView mav= new ModelAndView();
 		mav.setViewName("jsonView");	
 	    return mav;
 	}
@@ -94,6 +92,7 @@ public class ObjectController {
 			try {
 				objCntList = objectService.selectObjectCnt(map);
 			} catch (Exception e) {
+				mav.addObject("message", "물건 조회에 실패했습니다.");
 				e.printStackTrace();
 			}
 		    mav.addObject("objCntList",objCntList);
@@ -112,6 +111,8 @@ public class ObjectController {
 		try {
 			result = objectService.selectObjectInfo(map);
 		} catch (Exception e) {
+			mav.addObject("message", "물건 상세 조회에 실패했습니다.");
+			
 			e.printStackTrace();
 		}
 		mav.addObject("objtInfo",result);
@@ -124,15 +125,19 @@ public class ObjectController {
 	 */		
 	@RequestMapping(value= "/modifyObject.do", method=RequestMethod.POST)
 	public ModelAndView modifyObject(@RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
 		
 		try {
 			int result = objectService.modifyObject(map);
+			mav.addObject("message", "물건 수정에 성공했습니다.");
+			
 			logger.debug("result : "+  result );
 		} catch (Exception e) {
+			mav.addObject("message", "물건 수정에 실패했습니다.");
+			
 			logger.error("update error");
 			e.printStackTrace();
 		}
-		ModelAndView mav= new ModelAndView();
 		mav.setViewName("jsonView");	
 	    return mav;
 	}
@@ -196,7 +201,6 @@ public class ObjectController {
 	public String goViewObAptView(@RequestParam Map<String,Object> map, Model model){
 		model.addAllAttributes(map);
 		String viewNm = "";
-		
 		String objtTp = map.get("objtTp").toString();
 		
 		if ( ("OT001").equals(objtTp)) {
@@ -215,10 +219,6 @@ public class ObjectController {
 		return "/list/" + viewNm;
 	
 	}
-
-	
-	
-	
 	
 	
 }
