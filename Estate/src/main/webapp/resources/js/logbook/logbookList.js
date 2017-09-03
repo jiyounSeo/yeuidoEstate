@@ -3,7 +3,7 @@ $(document).ready(function(){
 });
 
 function f_custList_select() {
-	var param = { currentPage : Number(currPage)
+/*	var param = { currentPage : Number(currPage)
 				   , pagePerRow : 10
 				   , pageSize : 10
 	};
@@ -26,5 +26,5 @@ function f_custList_select() {
 		  }
 	  }
 	});
-	
+*/	
 }

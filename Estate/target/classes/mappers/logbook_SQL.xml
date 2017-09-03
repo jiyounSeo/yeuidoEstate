@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="LogbookDAO">
+
+    <insert id="insertLogbook" parameterType="java.util.HashMap">
+     <selectKey resultType="int" keyProperty="taskDocId" order="BEFORE">
+        SELECT  ifnull (MAX(taskDocId)+1,1) from taskdoc       
+      </selectKey>
+		INSERT INTO 
+			taskdoc (taskDocId
+			       , mbrId
+			       , taskCont
+			       , tomoAdver
+			       , tomoSaleObj
+			       , tomoBuyer
+			       , tomoEtc
+			       , prob
+			       , sugg
+			       , frstRegDt
+			       , frstRegUser
+			       , modfRegDt
+			       , modfRegUser
+			       )
+			values ( #{taskDocId}
+				  , 'test'
+				  , #{taskCont}
+				  , #{tomoAdver}
+				  , #{tomoSaleObj}
+				  , #{tomoBuyer}
+				  , #{tomoEtc}
+				  , #{prob}
+				  , #{sugg}
+				  , now()
+				  , 'test'
+				  , now()
+				  , 'test'
+			)            			
+    </insert>
+    
+	<select id="selectLogbookInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT taskDocId
+				, mbrId
+				, loginDt
+				, logoutDt
+				, taskCont
+				, tomoAdver
+				, tomoSaleObj
+				, tomoBuyer
+				, tomoEtc
+				, prob
+				, sugg
+				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+				, frstRegUser
+			  FROM taskdoc
+			 WHERE taskDocId = #{taskDocId}
+	</select>
+	
+	<select id="selectLogbookList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT taskDocId
+				, mbrId
+				, loginDt
+				, logoutDt
+				, taskCont
+				, tomoAdver
+				, tomoSaleObj
+				, tomoBuyer
+				, tomoEtc
+				, prob
+				, sugg
+				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+				, frstRegUser
+			  FROM taskdoc
+			  WHERE mbrId = #{mbrId} AND frstRegDt like #{currentDt}
+	</select>
+	
+	<delete id="deleteLogbook" parameterType="java.util.HashMap" >
+	    DELETE FROM taskdoc 
+	    WHERE taskDocId = #{taskDocId}
+    </delete>
+    
+    <update  id="modifyLogbook" parameterType="java.util.HashMap" >
+	    UPDATE taskdoc
+	       SET mbrId = 'test'
+			 , taskCont = #{taskCont}
+			 , tomoAdver =  #{tomoAdver}
+			 , tomoSaleObj = #{tomoSaleObj}
+			 , tomoBuyer = #{tomoBuyer}
+			 , tomoEtc =  #{tomoEtc}
+			 , prob =  #{prob}
+			 , sugg =  #{sugg}
+			 , modfRegDt = now()
+			 , modfRegUser = 'test'
+	    WHERE taskDocId = #{taskDocId}
+    </update>
+    
+    <select id="selectLogbookConfirm" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT taskDocId
+		  FROM taskdoc
+		  WHERE frstRegDt like DATE_FORMAT( now(), '%Y-%m-%d')
+	</select>
+</mapper>

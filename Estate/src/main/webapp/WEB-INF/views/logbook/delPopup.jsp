@@ -28,6 +28,22 @@
         $('#popClose').click(function(e) {
         	$("#divPopup").trigger('close');
         });
+        
+        $('#popOk').click(function(e) {
+        	 var param = {
+        			 taskDocId : $("#taskDocId").val()
+        	    	};
+        	 $.ajax({
+        	  	  url : "/estate/deleteLogbook.do",
+        	  	  type: "post",
+        		  data : param,
+        	  	  dataType : "json",
+        	  	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+        	  	  success : function(result){
+        	  		 location.href="./logbookListView";
+        	  	  }
+       	  	  });
+        });
     });
 </script>
 

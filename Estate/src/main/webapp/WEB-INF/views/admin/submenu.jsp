@@ -37,7 +37,7 @@
 	<tr><td height="6px"></td></tr>
 	<tr>
 		<td>
-			<img src="./resources/images/btn_m9.jpg">&nbsp;
+			<a href="./logbookListView"><img src="./resources/images/btn_m9.jpg"></a>&nbsp;
 			<img src="./resources/images/btn_m10.jpg">
 		</td>
 	</tr>
