@@ -53,20 +53,6 @@ function groupPaging(startPage, pageSize, endPage, lastPage){
 	return html;
 }
 
-//페이징 버튼 클릭이벤트
-currPage = 1;
-
-$(document).on('click', '.pagingBtn', function() {
-	
-	var currPageStr = $(this).attr("id").substr(4);
-	
-	if ( gfn_isNull(currPageStr) == "") {
-		currPage = Number(currPageStr);
-		f_objectList_select();
-	}
-	
-});
-
 
 
 

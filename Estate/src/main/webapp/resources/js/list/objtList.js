@@ -66,3 +66,30 @@ function f_objectList_select() {
 	});
 	
 }
+
+
+//페이징 버튼 클릭이벤트
+currPage = 1;
+$(document).on('click', '.pagingBtn', function() {
+	var div = $(this).closest('div').attr('id');
+	console.log ("div : " + div);
+	
+	var currPageStr = $(this).attr("id").substr(4);
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_objectList_select();
+	}
+	
+});
+
+function f_objtDtl_view (url, objtNo, objtTp) {
+	console.log ("include");
+	$("#viewUrl").val(url);
+	$("#objtNo").val(objtNo);
+	$("#objtTp").val(objtTp);
+	
+   var comSubmit = new ComSubmit($('form').attr('id'));
+   comSubmit.setUrl("/estate/objtDtlView.do");
+   comSubmit.submit();
+	
+}

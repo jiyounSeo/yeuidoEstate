@@ -150,7 +150,7 @@ public class BuildingController {
 			model.addAttribute("messageCd", "2");
 			e.printStackTrace();
 		}
-		return "/list/commClList";	
+		return "/list/newBuilding";	
 	}
 	
 	/*
@@ -176,7 +176,7 @@ public class BuildingController {
 	@RequestMapping(value="/modifyBuildingInfo.do",method = RequestMethod.GET)
 	public String modifyBuildingInfo(@RequestParam Map<String,Object> map, Model model){
 		model.addAllAttributes(map);
-		return "/listpage/newClient" ;
+		return "/listpage/newBuilding" ;
 	
 	}
 	

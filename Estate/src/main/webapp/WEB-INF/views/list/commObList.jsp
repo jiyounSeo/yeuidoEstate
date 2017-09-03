@@ -1,21 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page contentType="text/html; charset=utf-8" %>
-<% request.setCharacterEncoding("utf-8");%>
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
+<%@ page contentType="text/html; charset=utf-8" %>
+<% request.setCharacterEncoding("utf-8");%>
 <script type="text/javascript" src="./resources/js/list/objtList.js"></script>	
-
-	
+<form id="commObjtList" name="commObjtList" action="post">
 <div id="ob_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_comm_ob_list.jpg">
 	</div>
-
 
 	<div class="list_div2">	
 		<table width="1500px" height="520px" cellpadding="0" cellspacing="0" border="0">
@@ -204,22 +196,22 @@
 			</tr>
 		</table>		
 	</div>
-							
-
-
 </div>
-
+<input type="hidden" name="objtNo" id="objtNo"/>
 <input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>
-<input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
 <input type="hidden" name="viewUrl" id="viewUrl" value="${viewUrl[0]}"/>
+<input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
 <input type="hidden" name="pageMark" id="pageMark" value="${pageMark}"/>
+</form>
 
+<!-- <td><a href="f_objtDtl_view({{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.frstRegDt}}</a></td>
+ -->		
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
 <!-- <a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a> -->
 <script id="objtListTemplte1" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.frstRegDt}}</a></td>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.dong}}</td>
@@ -238,7 +230,7 @@
 <script id="objtListTemplte2" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.frstRegDt}}</a></td>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.realArea}}</td>
 		<td>{{html $value.floor}}</td>
@@ -254,7 +246,7 @@
 <script id="objtListTemplte3" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.frstRegDt}}</a></td>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.realArea}}</td>
 		<td>{{html $value.floor}}</td>
@@ -269,7 +261,7 @@
 <script id="objtListTemplte4" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.frstRegDt}}</a></td>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.dong}}</td>
@@ -288,7 +280,7 @@
 <script id="objtListTemplte5" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.frstRegDt}}</a></td>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.dong}}</td>
@@ -306,7 +298,7 @@
 <script id="objtListTemplte6" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr>
-		<td><a href="{{html $value.viewUrl}}.do?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}">{{html $value.frstRegDt}}</a></td>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
 		<td>{{html $value.dong}}</td>

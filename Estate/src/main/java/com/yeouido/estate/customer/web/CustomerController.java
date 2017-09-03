@@ -35,7 +35,7 @@ public class CustomerController {
 	protected CustomerService customerService;
 	
 	/* 
-	 * 물건목록조회
+	 * 고객목록조회
 	 */
 	@RequestMapping(value= "/selectCustomerList.do", method=RequestMethod.POST)
 	public ModelAndView selectCustomerList( @RequestParam Map<String,Object> map)  {  
@@ -68,7 +68,7 @@ public class CustomerController {
 	}
 	
 	/*
-	 * 물건등록 
+	 * 고객등록 
 	 */
 	@RequestMapping(value= "/insertCustomer.do", method=RequestMethod.POST)
 	public ModelAndView insertCustomer(@RequestParam Map<String,Object> map)  {  
@@ -98,7 +98,7 @@ public class CustomerController {
 
 	
 	/*
-	 * 물건 상세 조회
+	 * 고객 상세 조회
 	 */	
 	@RequestMapping(value= "/selectCustomerDtl.do", method=RequestMethod.POST)
 	public ModelAndView selectCustomerDtl(@RequestParam Map<String,Object> map)  {  
@@ -119,7 +119,7 @@ public class CustomerController {
 	}	
 	
 	/*
-	 * 물건 수정 조회
+	 * 고객 수정 조회
 	 */		
 	@RequestMapping(value= "/modifyCustomer.do", method=RequestMethod.POST)
 	public ModelAndView modifyCustomer(@RequestParam Map<String,Object> map)  {  
@@ -137,7 +137,7 @@ public class CustomerController {
 	}
 
 	/*
-	 * 물건 삭제
+	 * 고객 삭제
 	 */	
 	@RequestMapping(value="/deleteCustomer.do",method = RequestMethod.POST)
 	public String deleteCustomer(HttpServletRequest request,Model model){
@@ -172,18 +172,34 @@ public class CustomerController {
 		return "/listpage/viewClient";
 	
 	}
+
+	/* 고객 리스트 화면 */
+	@RequestMapping(value= "/commClList.do", method=RequestMethod.GET)
+	public ModelAndView commClListView(@RequestParam Map<String,Object> map)  {  
+		 ModelAndView mv = new ModelAndView("/list/commClList");
+		 return mv;
+	}	
+
+	@RequestMapping(value="/commClList",method = RequestMethod.GET)
+	public String goCommClList(HttpServletRequest request,Model model){
+		return "/list/commClList";	
+	}
+	
+	@RequestMapping(value= "/newClient.do", method=RequestMethod.GET)
+	public ModelAndView newClientView(@RequestParam Map<String,Object> map)  { 
+		 ModelAndView mv = new ModelAndView("/listpage/newClient");
+		 return mv;
+	}	
 	
 	/*
-	 * 물건 상세페이지에서 물건 선택 시 수정페이지로 이동 
-	 * 물건 신규입력 = 수정 페이지가 같음
+	 * 고객 상세페이지에서 고객 선택 시 수정페이지로 이동 
+	 * 고객 신규입력 = 수정 페이지가 같음
 	 */	
 	@RequestMapping(value="/modifyCustomerInfo.do",method = RequestMethod.GET)
 	public String modifyCustomerInfo(@RequestParam Map<String,Object> map, Model model){
 		model.addAllAttributes(map);
 		return "/listpage/newClient" ;
-	
 	}
-	
 	
 	
 }

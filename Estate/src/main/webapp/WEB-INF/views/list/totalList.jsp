@@ -1,9 +1,11 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
-<%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
+<%@ page contentType="text/html; charset=utf-8" %>
+<% request.setCharacterEncoding("utf-8");%>
+<script type="text/javascript" src="./resources/js/list/totalList.js"></script>	
+<form id="totalList" name="totalList" action="post">
 
-<c:if test="${viewMode==1 || viewMode==2}">
-<div id="ob_list" style="width:1500px;margin:auto;padding:0;">
+<div id="objtList" name="objtList" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_ob_list.jpg">
 	</div>
@@ -83,30 +85,13 @@
 											<td>층</td>
 											<td>향</td>
 											<td>매매가</td>
-											<td>명도</td>
 											<td>온돌</td>
 											<td>상태</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>											
-										</tr>
-										</c:forEach>
+										
 									</c:when>
 									<c:when test="${mainc == 2}">
 											<td>등록일</td>
@@ -115,25 +100,11 @@
 											<td>층</td>
 											<td>보증금 / 월세</td>
 											<td>권리금</td>
-											<td>명도</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>				
+														
 									</c:when>
 									<c:when test="${mainc == 3}">
 											<td>등록일</td>
@@ -141,24 +112,10 @@
 											<td>실평수</td>
 											<td>층</td>
 											<td>매매가</td>
-											<td>명도</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>			
 									</c:when>
 									<c:when test="${mainc == 4}">
 											<td>등록일</td>
@@ -169,27 +126,11 @@
 											<td>향</td>
 											<td>보증금/월세</td>
 											<td>부가세</td>
-											<td>명도</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>					
+														
 									</c:when>
 									<c:when test="${mainc == 5}">
 											<td>등록일</td>
@@ -199,26 +140,11 @@
 											<td>층</td>
 											<td>향</td>
 											<td>보증금</td>
-											<td>명도</td>
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
 										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>			
+													
 									</c:when>
 									<c:when test="${mainc == 6}">
 											<td>등록일</td>
@@ -233,35 +159,24 @@
 											<td>등록인</td>
 											<td>분류</td>
 											<td>기타</td>
-										</tr>
-										<c:forEach var="i" begin="1" end="${numOfRow-1}" step="1">
-										<tr>
-											<td><a href="${viewUrl[0]}?pm=${pageMark}">${viewUrl[0]}</a></td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-										</tr>
-										</c:forEach>		
+										</tr>		
 									</c:when>
-								</c:choose>																			
+								</c:choose>	
+								<tbody id="objtTbody">
+								</tbody>																		
 								</table>
 							</td>
 						</tr>
+						
 						<tr><td height="20px">&nbsp;</td></tr>
 						<tr><!-- paging -->
 							<td align="center">
 								<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
 									<tr>
 										<td width="488px" height="41px">&nbsp;</td>
-										<td width="486px" align="center"><img src="./resources/images/page_temp.jpg"></td>
+										<td width="486px" align="center">
+											<div id="objtPagingDiv" class="pagination"></div>
+										</td>
 										<td width="486px" align="right">
 											<c:if test="${viewMode==2}">
 											<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
@@ -284,12 +199,9 @@
 		</table>		
 	</div>
 </div>
-</c:if>
 
 <div style="height:20px;">&nbsp;</div>
-
-<c:if test="${viewMode==1 || viewMode==3}">
-<div id="cl_list" name="cl_list" style="width:1500px;margin:auto;padding:0;">
+<div id="custList" name="custList" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_cl_list.jpg">
 	</div>
@@ -315,16 +227,8 @@
 										<td>등록자</td>
 										<td>상태</td>
 									</tr>
-									<c:forEach var="i" begin="1" end="${numOfRow}" step="1">
-									<tr>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-										<td>-</td>
-									</tr>
-									</c:forEach>
+									<tbody id="custTbody">
+									</tbody>
 								</table>
 							</td>
 						</tr>
@@ -334,7 +238,9 @@
 								<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
 									<tr>
 										<td width="488px" height="41px">&nbsp;</td>
-										<td width="486px" align="center"><img src="./resources/images/page_temp.jpg"></td>
+										<td width="486px" align="center">
+											<div id="custPagingDiv" class="pagination"></div>
+										</td>
 										<td width="486px" align="right">
 											<c:if test="${viewMode==1 || viewMode==3}">
 											<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
@@ -357,5 +263,143 @@
 		</table>		
 	</div>
 </div>
-</c:if>
+
+<input type="hidden" name="viewMode" id="viewMode" value="${viewMode}"/>
+<input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>
+<input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
+
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 	
+
+<script id="objtListTemplte1" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.ondolYn}}</td>
+		<td>{{html $value.conditionTpNm}}</td>
+		<td>{{html $value.frstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>											
+	</tr>
+{{/each}}	
+</script>
+
+<script id="objtListTemplte2" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.realArea}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.rightAmt}}</td>
+		<td>{{html $value.frstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<script id="objtListTemplte3" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.realArea}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.frstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<script id="objtListTemplte4" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.surtaxYn}}</td>
+		<td>{{html $value.frstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>	
+	</tr>
+{{/each}}	
+</script>
+
+
+<script id="objtListTemplte5" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.frstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>	
+	</tr>
+{{/each}}	
+</script>
+
+	
+<script id="objtListTemplte6" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr>
+		<td><a href="#dtl" onclick="f_objtDtl_view('{{html $value.viewUrl}}','{{html $value.objtNo}}','{{html $value.objtTp}}');return false;">{{html $value.frstRegDt}}</a></td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.parcelAmt}}</td>
+		<td>{{html $value.premiumAmt}}</td>
+		<td>{{html $value.availableDt}}</td>
+		<td>{{html $value.frstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+		<td>{{html $value.etc}}</td>	
+	</tr>
+{{/each}}	
+</script>
+
+<script id="objtListEmptyTemplte" type="text/x-jquery-tmpl">	
+	<tr>
+		<td colspan = {{html col}}>해당하는 물건이 존재하지 않습니다.</td>
+	</tr>
+</script>
+
+
+<script id="custListTemplte" type="text/x-jquery-tmpl">	
+{{each custList}}					
+	<tr>
+		<td><a href="./viewClient.do?custId={{html $value.custId}}">{{html $value.frstRegDt}}</a></td>
+		<td>{{html $value.custNm}}</td>
+		<td>{{html $value.custTel1}}-{{html $value.custTel2}}-{{html $value.custTel3}}</td>
+		<td>{{html $value.reqContent}}</td>
+		<td>{{html $value.frstRegNm}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+							
+{{/each}}
+	
+</script>
+<script id="custListEmptyTemplte" type="text/x-jquery-tmpl">	
+	<tr>
+		<td colspan="6">고객이 존재하지 않습니다.</td>
+	</tr>
+</script>
+

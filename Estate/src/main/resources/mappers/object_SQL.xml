@@ -59,9 +59,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , CASE WHEN #{area} = '' THEN 0 ELSE #{area} END
 				  , CASE WHEN #{realArea} = '' THEN 0 ELSE #{realArea} END
 				  , #{saleTp} 
-				  , CASE WHEN #{bargainAmt} = '' THEN 0 ELSE #{bargainAmt} END 
-				  , CASE WHEN #{depositAmt} = '' THEN 0 ELSE #{depositAmt} END  
-				  , CASE WHEN #{monthlyAmt} = '' THEN 0 ELSE #{monthlyAmt} END  
+				  , CASE WHEN #{bargainAmt} = '' THEN 0 ELSE replace(#{bargainAmt},',','') END 
+				  , CASE WHEN #{depositAmt} = '' THEN 0 ELSE replace(#{depositAmt},',','') END  
+				  , CASE WHEN #{monthlyAmt} = '' THEN 0 ELSE replace(#{monthlyAmt},',','') END  
 				  , #{dong}
 				  , CASE WHEN #{floor} = '' THEN NULL ELSE #{floor} END 
 				  , #{directionTp}
@@ -77,12 +77,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END
 				  , CASE WHEN #{advertiseYn} = 'Y' THEN 'Y' ELSE 'N' END
 				  , CASE WHEN #{parcelArea} = '' THEN 0 ELSE #{parcelArea} END
-				  , CASE WHEN #{rightAmt} = '' THEN 0 ELSE #{rightAmt} END  
-				  , CASE WHEN #{manageAmt} = '' THEN 0 ELSE #{manageAmt} END  
+				  , CASE WHEN #{rightAmt} = '' THEN 0 ELSE replace(#{rightAmt},',','') END  
+				  , CASE WHEN #{manageAmt} = '' THEN 0 ELSE replace(#{manageAmt},',','') END  
 				  , CASE WHEN #{interiorYn} = '' THEN NULL ELSE #{interiorYn} END 
 				  , CASE WHEN #{surtaxYn} = '' THEN NULL ELSE #{surtaxYn} END 
-				  , CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END 
-				  , CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END 
+				  , CASE WHEN #{parcelAmt} = '' THEN 0 ELSE replace(#{parcelAmt},',','') END 
+				  , CASE WHEN #{premiumAmt} = '' THEN 0 ELSE replace(#{premiumAmt},',','') END 
 				  , now()
 				  , 'testUser'
 				  , now()

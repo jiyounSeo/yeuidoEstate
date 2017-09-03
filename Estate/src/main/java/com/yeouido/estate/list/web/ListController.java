@@ -56,70 +56,179 @@ public class ListController {
 	@Resource(name="objectService")
 	protected ObjectService objectService;
 	
+	/* 물건 + 고객 리스트 화면*/
 	@RequestMapping(value= "/totalList.do", method=RequestMethod.GET)
 	public ModelAndView totalListView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/list/totalList");
 		 return mv;
 	}
 	
-	@RequestMapping(value= "/commClList.do", method=RequestMethod.GET)
-	public ModelAndView commClListView(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/list/commClList");
-		 return mv;
-	}	
+	/* 물건 + 고객 리스트 화면*/
+	@RequestMapping(value="/totalList",method = RequestMethod.GET)
+	public String goTotalList(HttpServletRequest request,Model model){
+		
+		int mainc = 1;
+		int tab = 1;
+		int vm = 1;			// viewMode : 1 - default / 2 (object only) / 3 (client only)
+		String subc= request.getParameter("subc");
+		String [] viewUrl = {""};
+		int pageMark = 1;
+				
+		if(request.getParameter("mainc") != null){
+			mainc = Integer.parseInt(request.getParameter("mainc"));
+		}
+		if(request.getParameter("tab") != null){
+			tab = Integer.parseInt(request.getParameter("tab"));			
+		}
+		if(request.getParameter("vm") != null){
+			vm = Integer.parseInt(request.getParameter("vm"));			
+		}
+		
+		String [] main_category_state = new String[OBJECT_MAIN_CATEGORY_NUM+1];
+		ArrayList<String> tab_category_state = new ArrayList<String>();
+		
+		for(int i = 1; i <=OBJECT_MAIN_CATEGORY_NUM; i++){	// Initialize
+			main_category_state[i] = i+"_off";
+		}
+		
+		ArrayList<String> array = objtTpmappingCd (mainc, tab);
+		model.addAttribute("objtTp", array.get(0));
+		model.addAttribute("saleTp", array.get(1));
+		
+		makeString(mainc, tab, main_category_state, tab_category_state, viewUrl);	
+
+		int numOfTab = tab_category_state.size();
+		int numOfRow = 6;
+		
+		if(vm != 1){
+			numOfRow = 15;
+		}
+		
+		ArrayList<String> viewMode_btn_state = new ArrayList<String>();
+		for(int i = 1; i <=3; i++){
+			viewMode_btn_state.add(i+"_off");
+		}
+		viewMode_btn_state.set(vm-1, vm+"_on");
+		
+		model.addAttribute("main_category_state", main_category_state);
+		model.addAttribute("mainc", mainc);
+		model.addAttribute("tab_category_state", tab_category_state);
+		model.addAttribute("numOfTab", numOfTab);
+		model.addAttribute("tab", tab);
+		model.addAttribute("subc", subc);
+		model.addAttribute("viewMode", vm);
+		model.addAttribute("numOfRow", numOfRow);
+		model.addAttribute("viewMode_btn_state", viewMode_btn_state);
+		model.addAttribute("viewUrl", viewUrl);
+		model.addAttribute("pageMark", pageMark);
+		
+		return "/list/totalList";	
+	}
 	
+	
+	/* 물건(아파트) 등록,수정 화면 */
 	@RequestMapping(value= "/newObApt.do", method=RequestMethod.GET)
 	public ModelAndView newObAptView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/list/newObApt");
 		 return mv;
 	}	
-	
+	/* 물건(상가) 등록,수정  화면 */
 	@RequestMapping(value= "/newObStore.do", method=RequestMethod.GET)
 	public ModelAndView newObStoreView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/list/newObStore");
 		 return mv;
 	}	
-	
+	/* 물건(사무실/빌딩) 등록,수정  화면 */
 	@RequestMapping(value= "/newObOffice.do", method=RequestMethod.GET)
 	public ModelAndView newObOfficeView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/list/newObOffice");
 		 return mv;
 	}	
-	
+	/* 물건(오피스텔) 등록,수정  화면 */
 	@RequestMapping(value= "/newObOps.do", method=RequestMethod.GET)
 	public ModelAndView newObOpsView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/list/newObOps");
 		 return mv;
 	}	
-	
+	/* 물건(주상복합) 등록,수정  화면 */
 	@RequestMapping(value= "/newObHrapt.do", method=RequestMethod.GET)
 	public ModelAndView newObHraptView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/list/newObHrapt");
 		 return mv;
 	}	
-	
+	/* 물건(분양권) 등록,수정  화면 */
 	@RequestMapping(value= "/newObTicket.do", method=RequestMethod.GET)
 	public ModelAndView newObTicketView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/list/newObTicket");
 		 return mv;
 	}	
-	
-	@RequestMapping(value= "/newClient.do", method=RequestMethod.GET)
-	public ModelAndView newClientView(@RequestParam Map<String,Object> map)  { 
-		 ModelAndView mv = new ModelAndView("/listpage/newClient");
-		 return mv;
-	}	
-
-	@RequestMapping(value="/commClList",method = RequestMethod.GET)
-	public String goCommClList(HttpServletRequest request,Model model){
-
-		return "/list/commClList";	
-	}
-
+	/* 물건 등록건수 조회 화면 */
 	@RequestMapping(value="/addObject",method = RequestMethod.GET)
 	public String goAddObject(HttpServletRequest request,Model model){
-
 		return "/list/addObject";	
+	}
+	
+	/* 물건 조회 화면 */
+	@RequestMapping(value="/commObList",method = RequestMethod.GET)
+	public String goCommObList(HttpServletRequest request,Model model){
+
+		int mainc = 1;
+		int tab = 1;
+		String subc= request.getParameter("subc");
+		String [] viewUrl = {""};
+		int pageMark = 2;
+		
+		if(request.getParameter("mainc") != null){
+			mainc = Integer.parseInt(request.getParameter("mainc"));
+		}
+		if(request.getParameter("tab") != null){
+			tab = Integer.parseInt(request.getParameter("tab"));			
+		}
+		
+		ArrayList<String> array = objtTpmappingCd (mainc, tab);
+		model.addAttribute("objtTp", array.get(0));
+		model.addAttribute("saleTp", array.get(1));
+		
+		String [] main_category_state = new String[OBJECT_MAIN_CATEGORY_NUM+1];
+		ArrayList<String> tab_category_state = new ArrayList<String>();
+		
+		for(int i = 1; i <=OBJECT_MAIN_CATEGORY_NUM; i++){	// Initialize
+			main_category_state[i] = i+"_off";
+		}
+		
+		makeString(mainc, tab, main_category_state, tab_category_state, viewUrl);	
+	
+		int numOfTab = tab_category_state.size();
+		int numOfRow = 15;
+		
+		model.addAttribute("main_category_state", main_category_state);
+		model.addAttribute("tab_category_state", tab_category_state);
+		model.addAttribute("numOfTab", numOfTab);
+		
+		model.addAttribute("mainc", mainc); // 물건유형
+		model.addAttribute("tab", tab); // 계약유형 (매매,전세,월세,렌트...) 
+		
+		model.addAttribute("subc", subc);
+		model.addAttribute("numOfRow", numOfRow);
+		model.addAttribute("viewUrl", viewUrl);
+		model.addAttribute("pageMark", pageMark);
+		
+		return "/list/commObList";	
+	}
+	
+	/*
+	 * 물건 상세조회 화면 
+	 */
+	@RequestMapping(value="/objtDtlView.do",method = RequestMethod.POST)
+	public String objtDtlView(@RequestParam Map<String,Object> map, Model model){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			result = objectService.selectObjectInfo(map);
+			model.addAllAttributes(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/listpage/" + map.get("viewUrl");
 	}
 	
 	public void makeString(int type, int tab, String [] main_category_state, ArrayList<String> tab_category_state, String [] viewUrl)
@@ -174,50 +283,6 @@ public class ListController {
 		return;
 	}
 	
-	@RequestMapping(value="/commObList",method = RequestMethod.GET)
-	public String goCommObList(HttpServletRequest request,Model model){
-
-		int mainc = 1;
-		int tab = 1;
-		String subc= request.getParameter("subc");
-		String [] viewUrl = {""};
-		int pageMark = 2;
-		
-		if(request.getParameter("mainc") != null){
-			mainc = Integer.parseInt(request.getParameter("mainc"));
-		}
-		if(request.getParameter("tab") != null){
-			tab = Integer.parseInt(request.getParameter("tab"));			
-		}
-		
-		ArrayList<String> array = objtTpmappingCd (mainc, tab);
-		model.addAttribute("objtTp", array.get(0));
-		model.addAttribute("saleTp", array.get(1));
-		
-		String [] main_category_state = new String[OBJECT_MAIN_CATEGORY_NUM+1];
-		ArrayList<String> tab_category_state = new ArrayList<String>();
-		
-		for(int i = 1; i <=OBJECT_MAIN_CATEGORY_NUM; i++){	// Initialize
-			main_category_state[i] = i+"_off";
-		}
-		
-		makeString(mainc, tab, main_category_state, tab_category_state, viewUrl);	
-	
-		int numOfTab = tab_category_state.size();
-		int numOfRow = 15;
-		
-		model.addAttribute("main_category_state", main_category_state);
-		model.addAttribute("mainc", mainc);
-		model.addAttribute("tab_category_state", tab_category_state);
-		model.addAttribute("numOfTab", numOfTab);
-		model.addAttribute("tab", tab);
-		model.addAttribute("subc", subc);
-		model.addAttribute("numOfRow", numOfRow);
-		model.addAttribute("viewUrl", viewUrl);
-		model.addAttribute("pageMark", pageMark);
-		
-		return "/list/commObList";	
-	}
 	
 	public ArrayList objtTpmappingCd (int mainc, int tab) {
 		ArrayList<String> array = new ArrayList<String>();
@@ -358,63 +423,6 @@ public class ListController {
 		return array;
 		
 	}
-	@RequestMapping(value="/totalList",method = RequestMethod.GET)
-	public String goTotalList(HttpServletRequest request,Model model){
-		
-		int mainc = 1;
-		int tab = 1;
-		int vm = 1;			// viewMode : 1 - default / 2 (object only) / 3 (client only)
-		String subc= request.getParameter("subc");
-		String [] viewUrl = {""};
-		int pageMark = 1;
-				
-		if(request.getParameter("mainc") != null){
-			mainc = Integer.parseInt(request.getParameter("mainc"));
-		}
-		if(request.getParameter("tab") != null){
-			tab = Integer.parseInt(request.getParameter("tab"));			
-		}
-		if(request.getParameter("vm") != null){
-			vm = Integer.parseInt(request.getParameter("vm"));			
-		}
-		
-		String [] main_category_state = new String[OBJECT_MAIN_CATEGORY_NUM+1];
-		ArrayList<String> tab_category_state = new ArrayList<String>();
-		
-		for(int i = 1; i <=OBJECT_MAIN_CATEGORY_NUM; i++){	// Initialize
-			main_category_state[i] = i+"_off";
-		}
-
-		makeString(mainc, tab, main_category_state, tab_category_state, viewUrl);	
-
-		int numOfTab = tab_category_state.size();
-		int numOfRow = 6;
-		
-		if(vm != 1){
-			numOfRow = 15;
-		}
-		
-		ArrayList<String> viewMode_btn_state = new ArrayList<String>();
-		for(int i = 1; i <=3; i++){
-			viewMode_btn_state.add(i+"_off");
-		}
-		viewMode_btn_state.set(vm-1, vm+"_on");
-		
-		model.addAttribute("main_category_state", main_category_state);
-		model.addAttribute("mainc", mainc);
-		model.addAttribute("tab_category_state", tab_category_state);
-		model.addAttribute("numOfTab", numOfTab);
-		model.addAttribute("tab", tab);
-		model.addAttribute("subc", subc);
-		model.addAttribute("viewMode", vm);
-		model.addAttribute("numOfRow", numOfRow);
-		model.addAttribute("viewMode_btn_state", viewMode_btn_state);
-		model.addAttribute("viewUrl", viewUrl);
-		model.addAttribute("pageMark", pageMark);
-		
-		return "/list/totalList";	
-	}
-	
 	
 	public Model goView(HttpServletRequest request,Model model)
 	{
@@ -460,7 +468,7 @@ public class ListController {
 		 ModelAndView mv = new ModelAndView("/listpage/viewObApt");
 		 return mv;
 	}	
-*/
+	
 	@RequestMapping(value="/viewObApt.do",method = RequestMethod.GET)
 	public String goViewObAptView(@RequestParam Map<String,Object> map, Model model){
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -539,19 +547,6 @@ public class ListController {
 		}
 		
 		return "/listpage/viewObTicket";	
-	}
-	
-
-	
-	
-	/*@RequestMapping(value= "/viewClient.do", method=RequestMethod.GET)
-	public ModelAndView viewClientView(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/listpage/viewClient");
-		 return mv;
-	}	
-	*/
-	
-
-	
+	}*/
 	
 }
