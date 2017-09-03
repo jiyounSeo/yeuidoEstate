@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/report/listStyle.jsp" %> 
+<script type="text/javascript" src="./resources/js/report/reportList.js"></script>
 
 <div style="width:1500px;margin:auto;padding:0;">
 
