@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="memoDAO">
+
+    <insert id="insertMemo" parameterType="java.util.HashMap">
+     <selectKey resultType="int" keyProperty="memoDocId" order="BEFORE">
+        SELECT  ifnull (MAX(memoDocId)+1,1) from memodoc       
+      </selectKey>
+		INSERT INTO 
+			memodoc (memoDocId
+			       , mbrId
+			       , memoSbj
+			       , memoCont
+			       , frstRegDt
+			       , frstRegUser
+			       , modfRegDt
+			       , modfRegUser
+			       )
+			values ( #{memoDocId}
+				  , 'test'
+				  , #{memoSbj}
+				  , #{memoCont}
+				  , now()
+				  , 'test'
+				  , now()
+				  , 'test'
+			)            			
+    </insert>
+    
+    <select id="selectMemoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT memoDocId
+	       , mbrId
+	       , memoSbj
+	       , memoCont
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , (SELECT COUNT(*) FROM memodoc) totalCnt
+	  FROM memodoc
+	 WHERE mbrId = #{mbrId}
+	 LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+    
+	<select id="selectMemoInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT memoDocId
+		       , mbrId
+		       , memoSbj
+		       , memoCont
+		     	, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+				, frstRegUser
+			  FROM memodoc
+			 WHERE memoDocId = #{memoDocId}
+	</select>
+	
+	
+	<delete id="deleteMemo" parameterType="java.util.HashMap" >
+	    DELETE FROM memodoc 
+	    WHERE memoDocId = #{memoDocId}
+    </delete>
+    
+    <update  id="modifyMemo" parameterType="java.util.HashMap" >
+	    UPDATE memodoc
+	       SET mbrId = 'test'
+			 , memoSbj = #{memoSbj}
+			 , memoCont =  #{memoCont}
+			 , modfRegDt = now()
+			 , modfRegUser = 'test'
+	    WHERE memoDocId = #{memoDocId}
+    </update>
+</mapper>
