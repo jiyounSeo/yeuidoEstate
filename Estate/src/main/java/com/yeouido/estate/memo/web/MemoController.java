@@ -39,6 +39,7 @@ public class MemoController {
 	public ModelAndView insertMemo(@RequestParam Map<String,Object> map)  {  
 		ModelAndView mav= new ModelAndView();
 		try {
+			logger.error("insertTest : ",map);
 			int result = memoService.insertMemo(map);
 			mav.addObject("messageCd", "1");
 			mav.addObject("message", "메모 등록에 성공하였습니다.");
@@ -105,25 +106,22 @@ public class MemoController {
 	}
 	
 	/*
-	 * 삭제
-	 */	
-	@RequestMapping(value="/deleteMemo.do",method = RequestMethod.POST)
-	public String deleteMemo(HttpServletRequest request,Model model){
+	 *  삭제
+	 */		
+	@RequestMapping(value= "/deleteMemo.do", method=RequestMethod.POST)
+	public ModelAndView deleteMemo(@RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memoDocId", request.getParameter("memoDocId"));
-		logger.error("memoDocId:",request.getParameter("memoDocId"));
 		try {
 			int result = memoService.deleteMemo(map);
-			model.addAttribute("messageCd", "1");
-			
+			mav.addObject("messageCd", "1");
 		} catch (Exception e) {
-			model.addAttribute("messageCd", "2");
+			mav.addObject("messageCd", "2");
 			e.printStackTrace();
 		}
-		return "/logbook/lbMain";	
+		mav.setViewName("jsonView");	
+	    return mav;
 	}
-	
 
 	/*
 	 *  수정 등록
