@@ -1,4 +1,5 @@
   <%@ include file="/WEB-INF/views/comm/mbrHeader.jsp" %> 
+  <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
   <%@ page contentType="text/html; charset=utf-8" %>
   <script type="text/javascript" src="./resources/js/mbr/memberList.js"></script>
     <form id="memberList" method="post" > 
@@ -28,29 +29,50 @@
 		<br>
 		<a href="/estate/adminMainView.do"><img src="./resources/images/btn_mbr_main.jpg" border="0"></a>
 	</div> 
+	<div style="width:1200px; aling:center; margin:auto;" id="pagingDiv" class="pagination centerDiv"></div>
+	<div style="width:1200px; text-align:center; margin:auto;">
+		<table style="width: 1200px;" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					
+				</td>
+			</tr>
+		</table>
+	</div>
+	
    
-    <button id="save" type="button" onclick="f_member_insert();return false;">가입하기</button>
+   <!-- Z <button id="save" type="button" onclick="f_member_insert();return false;">가입하기</button> -->
 
     </form>
 
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
 
-  <script id="mbrListTemplte" type="text/x-jquery-tmpl">	
+<script id="mbrListEmptyTemplte" type="text/x-jquery-tmpl">	
+<tr>
+	<td class="mbr_mem" colspan="7">승인처리할 회원이 존재하지 않습니다.</td>
+</tr>
+</script>
+
+<script id="mbrListTemplte" type="text/x-jquery-tmpl">	
 {{each mbrList}}		
 	<tr>
-		<td class="mbr_mem"></td>
-		<td class="mbr_mem">{{html $value.mbr_id}}</td>
-		<td class="mbr_mem">{{html $value.mbr_nm}}</td>
+		<td class="mbr_mem">{{html $index+1}}</td>
+		<td class="mbr_mem">{{html $value.mbrNm}}</td>
+		<td class="mbr_mem">{{html $value.loginId}}</td>
 		<td class="mbr_mem">
-			{{html $value.phone1}}
-			-{{html $value.phone2}}
-			-{{html $value.phone3}}
+			{{html $value.tel1}}
+			-{{html $value.tel2}}
+			-{{html $value.tel3}}
 		</td>
-		<td class="mbr_mem">{{html $value.agency}}</td>
-		<td class="mbr_mem">{{html $value.reg_date}}</td>
+		<td class="mbr_mem">{{html $value.estateNm}}</td>
+		<td class="mbr_mem">{{html $value.frstRegDt}}</td>
 		<td class="mbr_mem">
-			<button type="button" class="mbr"><img src="./resources/images/icon_approve.jpg" width="50px" height="46px"></button>
-			<button type="button" class="mbr"><img src="./resources/images/icon_del.jpg" width="50px" height="46px"></button>
+			<button type="button" class="mbr">
+				<img src="./resources/images/icon_approve.jpg" width="50px" height="46px"  onclick="f_memeber_accept({{html $index}});return false;">
+			</button>
+			<button type="button" class="mbr">
+				<img src="./resources/images/icon_del.jpg" width="50px" height="46px" onclick="f_memeber_reject({{html $index}});return false;">
+			</button>
 		</td>
 	</tr>
 {{/each}}

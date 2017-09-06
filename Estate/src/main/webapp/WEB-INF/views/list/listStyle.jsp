@@ -445,6 +445,8 @@ input[type="checkbox"]:checked + label:after {
   -webkit-transition: -webkit-transform 200ms ease-out;
   transition: transform 200ms ease-out;
 }
+.centerDiv { position:absolute; left:45%; overflow:hidden; }
+
 /*
 input[type=radio].rbbox {
 	position:absolute;

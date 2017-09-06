@@ -53,6 +53,59 @@ function groupPaging(startPage, pageSize, endPage, lastPage){
 	return html;
 }
 
+//페이징 버튼 클릭이벤트
+currPage = 1;
+
+$(document).on('click', '.pagingBtn', function() {
+	
+	var currPageStr = $(this).attr("id").substr(4);
+	
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_objectList_select();
+	}
+	
+});
+/*
+ * 작성일 : 2017-09-03
+ * 작성자 : 서지연
+ * 설명	: input에 onkeydown="return f_inputEngAndNum(event);" 추가
+ * */
+function f_inputEngAndNum(event){
+	if (!(event.keyCode >=37 && event.keyCode<=40))
+		return false;
+	else
+		return true;
+}
+
+/*
+ * 작성일 : 2017-09-03
+ * 작성자 : 서지연
+ * 설명	: f_inputEngAndNum 과 동일
+ * */
+function f_inputOnlyNum(event){
+	if (!(event.keyCode && event.keyCode<=57 ) || (event.keyCode>=96 && event.keyCode<=105))
+		return false;
+	else
+		return true;
+}
+/*
+ * 작성일 : 2017-09-03
+ * 작성자 : 서지연
+ * 설명	: 필수값의 class에 essential 추가, 저장 전 함수실행
+ * */
+function f_essentialCheck(){
+	var obj = $('.essential');
+	
+	for(var i=0;i<obj.length;i++){
+		if(obj[i].value == null || obj[i].value == ''){
+			alert(obj[i].name+" 은(는) 필수항목입니다.");
+			$('#'+obj[i].id).focus();
+			return false;
+		}
+	}
+	return true;
+}
 
 
 

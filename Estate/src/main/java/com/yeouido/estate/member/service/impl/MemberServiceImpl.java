@@ -18,9 +18,28 @@ public class MemberServiceImpl  implements MemberService
    public int insertMemberList(Map map) throws Exception {
 	   return memberDAO.insertMember(map);
    }
-   
-   public List<Object> selectMemberList(Map map) throws Exception {
-	   List<Object> list = memberDAO.selectMemberList(map);
+   @Override
+   public List<Map<String,Object>> selectMemberList(Map map) throws Exception {
+	   List<Map<String,Object>> list = memberDAO.selectMemberList(map);
 	   return list;
    }
+
+	@Override
+	public Map selectOneMember(Map map) throws Exception {
+		return memberDAO.selectOneMember(map);
+	}
+	
+	@Override
+	public List selectEstate(Map map) throws Exception {
+		return memberDAO.selectEstate(map);
+	}
+	@Override
+	public int updateMemberAccept(Map map) throws Exception {
+		return memberDAO.updateMemberAccept(map);
+	}
+	@Override
+	public int deleteMember(Map map) throws Exception {
+		return memberDAO.deleteMember(map);
+	}
+	
 }

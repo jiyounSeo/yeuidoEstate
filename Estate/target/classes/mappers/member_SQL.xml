@@ -15,13 +15,90 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     -->
     <insert id="insertMember" parameterType="java.util.HashMap">
-        INSERT into member  (mbr_id, mbr_pw, mbr_nm, phone1, phone2, phone3, agency, reg_date) 
-        			values  (#{mbr_id}, #{mbr_pw}, #{mbr_nm}, #{phone1}, #{phone2}, #{phone3}, #{agency} , DATE_FORMAT(sysdate(), '%Y-%m-%d'))
-            			
-    </insert>
+    	<selectKey resultType="String" keyProperty="mbrId" order="BEFORE">
+	        SELECT  ifnull (MAX(mbrId)+1,1) from member       
+	    </selectKey>
+        INSERT INTO member  
+        	(
+        		mbrId
+        	  , mbrNm
+        	  , loginId
+        	  , pw
+        	  , mbrTp
+        	  , tel1
+        	  , tel2
+        	  , tel3
+        	  , estateCd
+        	  , frstRegDt
+        	  , frstRegUser
+        	  , modfRegDt
+        	  , modfRegUser
+        	)
+      SELECT  MAX(mbrId)+1
+      		, #{mbrNm}
+        	, #{loginId}
+	       	, #{pw}
+        	, 'MT001'
+        	, #{tel1}
+        	, #{tel2}
+        	, #{tel3}
+        	, #{estateCd}
+        	, NOW()
+        	, 'guest'
+        	, NOW()
+        	, 'guest'
+       	FROM member
+    </insert>    
     
 	<select id="selectMemberList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		select mbr_id, mbr_pw, mbr_nm, phone1, phone2, phone3, agency, DATE_FORMAT(reg_date, '%Y-%m-%d') reg_date
-		  from member
+		select mbrId
+			 , mbrNm
+			 , loginId
+			 , pw
+			 , (SELECT commNm FROM commcd WHERE commCd = mbrTp) mbrTp
+			 , tel1
+			 , tel2
+			 , tel3
+			 , estateCd
+			 , (SELECT estateNm FROM estate e WHERE e.estateCd = m.estateCd ) estateNm
+			 , DATE_FORMAT(frstRegDt, '%Y-%m-%d') frstRegDt
+			 , frstRegUser
+			 , DATE_FORMAT(modfRegDt, '%Y-%m-%d') modfRedDt
+			 , modfRegUser
+			 , (SELECT COUNT(*) FROM member WHERE mbrTp = 'MT001') totalCnt
+		  from member m
+		 where 1=1
+		   and mbrTp = 'MT001' 
+	 LIMIT #{rowNum}, #{pagePerRow}
+	 	   
 	</select>
+	<select id="selectOneMember" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT COUNT(*) as result
+		  FROM member
+		 WHERE 1=1
+		   AND loginId = #{loginId}
+		   <if test="pw != null and pw != '' ">
+		   	AND pw = #{pw}
+		   </if>
+	</select>
+	
+	<select id="selectEstate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select estateCd
+		     , estateNm
+		  from estate
+	</select>
+
+    <update  id="updateMemberAccept" parameterType="java.util.HashMap" >
+    UPDATE member
+       SET mbrTp = #{mbrTp}
+     WHERE mbrId = #{mbrId}
+    </update>
+    
+    <delete id="deleteMember" parameterType="java.util.HashMap" >
+    DELETE FROM member 
+     WHERE mbrId = #{mbrId}
+    </delete>
+    	
+	
+	
 </mapper>
