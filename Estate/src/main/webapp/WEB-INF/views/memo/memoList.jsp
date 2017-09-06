@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 			<td class="btn">
-				<a href="#" onClick="f_cancle_to_list()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onClick="f_cancel_to_list()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="#" id="popOkAdd" ><img src="./resources/images/btn_ok.jpg" onClick="f_memo_save()"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
@@ -59,7 +59,7 @@
 		<tr><td align="center"><div id="pagingDiv" class="pagination"></div></td></tr>
 		<tr>
 			<td class="btn">
-				<a href="#" id="newMemoBtn"><img src="./resources/images/btn_add.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onClick="f_addMeno()"><img src="./resources/images/btn_add.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 		<tr><td height="23px;" colspan="3"><img src="./resources/images/alert_bottom2.jpg"></td></tr>
@@ -80,20 +80,19 @@
 		<tr><td height="34px"><a href="#" onClick="f_closeAll()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
 		<tr>
 			<td class="content">
-				<div id="memoSubject" class="Subject"><img src="./resources/images/alert_memo_subject_title.jpg"></div>
+				<div id="memoSubject" class="Subject"></div>
 			</td>
 		</tr>
 		<tr>
-			<td class="content"><div id="memoContent" class="Content"></div>
-			</td>
+			<td class="content"><div id="memoContent" class="memoCont"></div></td>
 		</tr>
 		<tr>
-			<td><div id="frstRegDt" class="date"></div></td>
+			<td><div id="frstRegDt" class="dtlDate"></div></td>
 		</tr>
 		<tr>
 			<td class="btn">
 				<a href="#" onClick="f_del_memo()"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;
-				<a href="#" onClick="f_edit_memo()"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;
+				<a href="#" onClick="f_edit_memo_view()"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;
 				<a href="#" onClick="f_cancel_to_list()"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
