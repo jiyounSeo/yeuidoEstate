@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +32,14 @@ public class SuggBoardController {
 	
 	@Resource(name="suggbdService")
 	protected SuggBoardService suggbdService;
+	
+	/* 고객 리스트 화면 */
+	@RequestMapping(value= "/suggBoardList.do", method=RequestMethod.GET)
+	public ModelAndView commClListView(@RequestParam Map<String,Object> map)  {  
+		 ModelAndView mv = new ModelAndView("/sugg/suggList");
+		 return mv;
+	}	
+
 
 	/* 
 	 * 목록조회
@@ -44,6 +53,7 @@ public class SuggBoardController {
 			map.put("mbrId", "test");
 			suggList = suggbdService.selectSuggBoardList(map);
 			logger.error("suggdbService : ", suggList.size());
+					
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,21 +65,23 @@ public class SuggBoardController {
 	/*
 	 * 상세 조회
 	 */	
-	@RequestMapping(value= "/selectSuggBoardDtl.do", method=RequestMethod.POST)
-	public ModelAndView selectSuggBoardDtl(@RequestParam Map<String,Object> map)  {  
-		ModelAndView mav= new ModelAndView();
+	@RequestMapping(value="/viewSuggItem.do")
+	public ModelAndView viewSuggItem(HttpServletRequest request, @RequestParam Map<String,Object> map){
+		ModelAndView mav= new ModelAndView();		
 		Map<String, Object> result = new HashMap<String, Object>();
+		map.put("taskDocId", request.getParameter("taskDocId"));
 		try {
+			logger.error("getParam : ", request.getParameter("taskDocId"));
 			result = suggbdService.selectSuggBoardInfo(map);
 			mav.addObject("messageCd", "1");
-
+			
 		} catch (Exception e) {
 			mav.addObject("messageCd", "2");
-
 			e.printStackTrace();
 		}
-		mav.addObject("suggInfo",result);
-	    mav.setViewName("jsonView");
-	    return mav;
-	}	
+		mav.addObject("item", result);
+		mav.setViewName("/sugg/suggView");
+		return mav;	
+	}
+
 }

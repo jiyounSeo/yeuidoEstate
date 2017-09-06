@@ -13,10 +13,10 @@ public class SuggBoardDAO extends AbstractDAO
 {
 	   @SuppressWarnings("unchecked")
 	   public List<Map<String,Object>> selectSuggBoardList(Map map) throws Exception{
-	       return selectList("SuggBoardDAO.selectLogbookList", map);
+	       return selectList("suggbdkDAO.selectSuggBoardList", map);
 	   }
 	   @SuppressWarnings("unchecked")
 	   public Map selectSuggBoardInfo(Map map) throws Exception{
-	       return selectMap("SuggBoardDAO.selectLogbookInfo", map);
+	       return selectMap("suggbdkDAO.selectLogbookInfo", map);
 	   }	   
 }

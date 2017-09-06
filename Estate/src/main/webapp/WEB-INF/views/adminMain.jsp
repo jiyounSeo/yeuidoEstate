@@ -25,7 +25,8 @@
 </table>
 
 
-<%@ include file="/WEB-INF/views/memo/memoList.jsp" %> 	
+<%@ include file="/WEB-INF/views/memo/memoList.jsp" %> 
+	
 <table width="100%" cellpadding="0" cellspaing="0" border="0">
 	<tr><td height="15px" colspan="7"></td></tr>
 	<tr>
@@ -38,7 +39,7 @@
 		<td width="10px"></td>
 		<td width="372px" height="276px" background="./resources/images/lst_notice_bg.jpg">&nbsp;</td>
 		<td width="10px"></td>
-		<td width="372px" height="276px" background="./resources/images/lst_bbs_bg.jpg">&nbsp;</td>
+		<td width="372px" height="276px" ><a href="./suggBoardList.do"><img src="./resources/images/lst_bbs_bg.jpg"></a></td>
 	</tr>
 </table>
 </div>
