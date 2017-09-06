@@ -18,19 +18,13 @@ $(document).ready(function(){
             e.preventDefault();
         });
         
-        $('#newMemoBtn').click(function(e) {
-        	f_closeAll();       	
-        	$("#divAddMemoPopup").lightbox_me({centered: true, onLoad: function() {	}});
-            e.preventDefault();
-        });
-        $('#addMemoBtn').click(function(e) {
-        	f_closeAll();        	
-        	$("#divAddMemoPopup").lightbox_me({centered: true, onLoad: function() {	}});
-            e.preventDefault();
-        });
     });
 });
 
+function f_addMeno() {
+	f_closeAll();       	
+	$("#divAddMemoPopup").lightbox_me({centered: true});
+}
 
 currMemoPage = 1;
 function f_memoList_select() {
@@ -62,28 +56,38 @@ function f_memoList_select() {
 	
 }
 
+function f_memoView(memoId){
+	
+	var param = { memoDocId : memoId };
+	$.ajax({
+		url : "/estate/selectMemoDtl.do",
+		type: "post",
+		data : param,
+		dataType : "json",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		success : function(data){
+			var result = data.MemoInfo;
+			console.log ("search success");
+			console.log (data);
+			f_empty_field();
+			$("#memoDocId").val(result.memoDocId);
+			$("#memoSubject").append("<img src='./resources/images/alert_memo_subject_title.jpg' style='vertical-align:middle'> " + result.memoSbj);
+			$("#memoContent").append(result.memoCont);
+			$("#frstRegDt").append("등록일 : "+result.frstRegDt);
+			
+			$("#memoSbj").val(result.memoSbj);
+			$("#memoCont").val(result.memoCont);
+		}
+	});
+	
+}
+
 function f_memoView_select(memoId) {
 	$("#divListMemoPopup").trigger('close');
-	$("#divViewMemoPopup").lightbox_me({centered: true, onLoad: function() {	
-		var param = { memoDocId : memoId };
-		$.ajax({
-			url : "/estate/selectMemoDtl.do",
-			type: "post",
-			data : param,
-			dataType : "json",
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-			success : function(data){
-				var result = data.MemoInfo;
-				console.log ("search success");
-				console.log (data);
-				f_empty_field();
-				$("#memoDocId").val(result.memoDocId);
-				$("#memoSubject").append(result.memoSbj);
-				$("#memoContent").append(result.memoCont);
-				$("#frstRegDt").append(result.frstRegDt);
-			}
-		});
-	}});
+	
+	f_memoView(memoId);
+	
+	$("#divViewMemoPopup").lightbox_me({centered: true});
 	
 }
 
@@ -115,6 +119,14 @@ function f_memo_save() {
 			  }
 		  }
 		});
+}
+
+function f_edit_memo_view(){
+	var memoDocId = $("#memoDocId").val();
+	f_memoView(memoDocId);
+	f_closeAllDiv();
+	$("#divAddMemoPopup").lightbox_me({centered: true});
+	
 }
 
 function f_del_memo()
@@ -154,14 +166,18 @@ function f_clear_form()
 function f_closeAll(){
 	f_clear_form();
 	f_empty_field();
+	f_closeAllDiv();
+}
+
+function f_closeAllDiv(){
 	$("#divListMemoPopup").trigger('close');  
 	$("#divViewMemoPopup").trigger('close');  
-	$("#divAddMemoPopup").trigger('close');  
+	$("#divAddMemoPopup").trigger('close');  	
 }
 
 function f_cancel_to_list()
 {
 	f_closeAll();
-	f_memoList_select();
+	f_memoView();
 	$('#divListMemoPopup').lightbox_me({centered: true});
 }

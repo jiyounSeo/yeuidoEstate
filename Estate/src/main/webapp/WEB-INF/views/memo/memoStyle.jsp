@@ -21,14 +21,6 @@
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
-.list_div1,
-.list_div2,
-.list_div9,
-.list_div3 {
-	width: 100%;
-	background-color: #fff;
-}
-
 .viewMemoPopup,
 .listMemoPopup,
 .addMemoPopup {
@@ -99,5 +91,23 @@
 .memoList td.date {
 	width:160px;
 	text-align:center;
+}
+
+.dtlDate {
+	padding-left:30px;
+	padding-bottom:20px;
+	margin-top:10px;
+	width:840px;
+	text-align:right;
+}
+
+.memoCont {
+	padding-left:20px;
+	padding-top:10px;
+	margin-top:10px;
+	width:840px;
+	height:300px;
+	border: 1px solid #bfbfbf;
+	
 }
 </style>

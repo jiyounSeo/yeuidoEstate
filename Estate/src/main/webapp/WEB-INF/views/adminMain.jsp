@@ -30,7 +30,7 @@
 	<tr><td height="15px" colspan="7"></td></tr>
 	<tr>
 		<td width="136px">
-			<a href="#" id="addMemoBtn"><img src="./resources/images/btn_new_memo.jpg"><br><div style="height: 16px;"></a></div>
+			<a href="#"  onClick="f_addMeno()"><img src="./resources/images/btn_new_memo.jpg"><br><div style="height: 16px;"></a></div>
 			<a href="#" id="listMemoBtn"><img src="./resources/images/btn_list_memo.jpg"></a>
 		</td>
 		<td width="10px"></td>
