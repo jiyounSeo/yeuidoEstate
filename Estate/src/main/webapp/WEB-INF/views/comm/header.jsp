@@ -2,7 +2,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <% request.setCharacterEncoding("utf-8"); %>
 <% response.setContentType("text/html; charset=utf-8"); %>
-<%@ page session="false" %>
 <c:set var="contextPath" value="./resources"></c:set>  
 <html>
   <head>

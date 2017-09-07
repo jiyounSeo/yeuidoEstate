@@ -8,7 +8,7 @@
 	<tr><td height="6px"></td></tr>
 	<tr>
 		<td height="90px" valign="middle">
-			<a href="./commObList"><img src="./resources/images/btn_m2.jpg"></a>&nbsp;<a href="./commClList"><img src="./resources/images/btn_m3.jpg"></a>
+			<a href="./commObList"><img src="./resources/images/btn_m2.jpg"></a>&nbsp;<a href="./commClListView.do"><img src="./resources/images/btn_m3.jpg"></a>
 		</td>
 	</tr>
 	<tr>

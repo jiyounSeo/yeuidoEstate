@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/views/comm/mbrHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="./resources/js/mbr/joinMember.js"></script>
+<script type="texy/javascript" src="./resources/js/comm/common.js"></script>
 
 
 <form id="joinMember" method="post" > 
@@ -24,9 +25,9 @@
 			<table width="342px" cellpadding="0" cellspacing="0" border="0">
 				<tr><td height="30px">&nbsp;</td></tr>
 				<tr><td height="42px" valign="bottom"><img src="./resources/images/t_id.jpg" valign="bottom"></td></tr>
-				<tr><td height="42px"><input type="text" id="loginId" name="loginId" class="mbr_txt essential onlyEng" maxlength="16" onkeydown="return f_inputEngAndNum(event);" onblur="f_loginIdDupChk();"></td></tr>
+				<tr><td height="42px"><input type="text" id="loginId" name="loginId" class="mbr_txt essential onlyEng" maxlength="16" onblur="f_loginIdDupChk();"></td></tr>
 				<tr><td height="42px" valign="bottom"><img src="./resources/images/t_pw.jpg"></td></tr>
-				<tr><td height="42px"><input type="password" id="pw" name="pw" class="mbr_pw essential onlyEng" maxlength="16" onkeydown="return f_inputEngAndNum(event);"></td></tr>
+				<tr><td height="42px"><input type="password" id="pw" name="pw" class="mbr_pw essential onlyEng" maxlength="16"></td></tr>
 				<tr><td height="5px"></td></tr>
 				<tr><td height="42px" valign="bottom"><img src="./resources/images/t_name.jpg"></td></tr>
 				<tr><td height="42px"><input type="text" id="mbrNm" name="mbrNm" class="mbr_txt essential" maxlength="50"></td></tr>
@@ -34,9 +35,9 @@
 				<tr><td height="42px" valign="bottom"><img src="./resources/images/t_phone.jpg"></td></tr>
 				<tr>
 					<td height="42px">
-						<input type="text" id="tel1" name="tel1" class="mbr_phone essential" maxlength="4" onkeydown="return f_inputOnlyNum(event);">  -  
-						<input type="text" id="tel2" name="tel2" class="mbr_phone essential" maxlength="4" onkeydown="return f_inputOnlyNum(event);">  -  
-						<input type="text" id="tel3" name="tel3" class="mbr_phone essential" maxlength="4" onkeydown="return f_inputOnlyNum(event);">
+						<input type="text" id="tel1" name="tel1" class="mbr_phone essential onlyNum" maxlength="4" >  -  
+						<input type="text" id="tel2" name="tel2" class="mbr_phone essential onlyNum" maxlength="4" >  -  
+						<input type="text" id="tel3" name="tel3" class="mbr_phone essential onlyNum" maxlength="4" >
 					</td>
 				</tr>
 				<tr><td height="10px"></td></tr>

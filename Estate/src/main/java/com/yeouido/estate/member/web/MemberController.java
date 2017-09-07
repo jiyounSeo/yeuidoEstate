@@ -58,9 +58,11 @@ public class MemberController {
 		 return mv;
 	}
 	
+	
 	@RequestMapping(value= "/adminMainView.do")
 	public ModelAndView adminMainView(HttpSession session, @RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/adminMain");
+		 System.out.println(session.getAttribute("user").toString());
 		 mv.addObject("user",session.getAttribute("user"));
 		 return mv;
 	}
@@ -116,10 +118,8 @@ public class MemberController {
 	@RequestMapping(value="/loginMember.go", method=RequestMethod.POST)
 	public ModelAndView loginMember(HttpSession session, @RequestParam Map<String, Object> map) {
 		ModelAndView mav = new ModelAndView();
-		
 		try {
 			Map<String, Object> result = memberService.selectOneMember(map);
-			
 			if(!result.get("result").toString().equals("0")) { 
 				session.setAttribute("user", result);
 				mav.addObject("message", "success");
@@ -131,7 +131,6 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		mav.setViewName("jsonView");
-		
 		return mav;
 	}
 	

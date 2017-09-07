@@ -175,12 +175,13 @@ public class CustomerController {
 
 	/* 고객 리스트 화면 */
 	@RequestMapping(value= "/commClList.do", method=RequestMethod.GET)
-	public ModelAndView commClListView(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView commClListView(@RequestParam Map<String,Object> map)  { 
+		
 		 ModelAndView mv = new ModelAndView("/list/commClList");
 		 return mv;
 	}	
 
-	@RequestMapping(value="/commClList",method = RequestMethod.GET)
+	@RequestMapping(value="/commClListView.do",method = RequestMethod.GET)
 	public String goCommClList(HttpServletRequest request,Model model){
 		return "/list/commClList";	
 	}
