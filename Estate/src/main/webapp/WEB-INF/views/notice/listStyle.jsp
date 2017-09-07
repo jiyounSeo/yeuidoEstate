@@ -29,39 +29,39 @@
 	text-align:left;
 }
 
-.suggbd,
-.new_suggbd_table {
+.notice,
+.new_notice_table {
 	width: 1460px;
 	border-collapse:collapse;
 }
 
-.new_suggbd_table tr,
-.suggbd tr {
+.new_notice_table tr,
+.notice tr {
 	background: #f6f6f8;
 	border-bottom: 0px;
 	border-right: 1px solid #b2b2b2;	
 }
 
-.new_suggbd_table tr:nth-child(even),
-.suggbd tr:nth-child(even) {
+.new_notice_table tr:nth-child(even),
+.notice tr:nth-child(even) {
 	background: #fff;
 }
 
-.new_suggbd_table tr:first-child{
+.new_notice_table tr:first-child{
 	border-top: 1px solid #b2b2b2;	
 }
 
-.new_suggbd_table tr:last-child,
-.new_suggbd_table tr:last-child td.title{
+.new_notice_table tr:last-child,
+.new_notice_table tr:last-child td.title{
 
 	border-bottom: 1px solid #b2b2b2;	
 }
 
-.suggbd tr:last-child {
+.notice tr:last-child {
 	border-bottom:1px solid #b2b2b2;
 }
 
-.suggbd .title td{
+.notice .title td{
 	height: 50px;
 	background-color:#0063b1;
 	border-right: 1px solid #fff;
@@ -69,14 +69,14 @@
 	color: white;
 }
 
-.suggbd td {
+.notice td {
 	height:50px;
 	text-align:center;
 	border-left: 1px solid #b2b2b2;
 }
 
 
-.new_suggbd_table td.title{
+.new_notice_table td.title{
 	height:50px;
 	width:155px;
 	text-align:center;
@@ -86,18 +86,18 @@
 	border-bottom: 1px solid #fff;
 }
 
-.new_suggbd_table td{
+.new_notice_table td{
 	padding-left:5px;
 	padding-right:5px;
 }
 
-.new_suggbd_table td.sub{
+.new_notice_table td.sub{
 	padding-left:0px;
 	padding-right:5px;
 }
 
 
-.new_suggbd_table input[type=text] {
+.new_notice_table input[type=text] {
     width: 100%;
     height: 42px;
     padding: 12px 20px;
@@ -107,7 +107,7 @@
     background-color: #fff;
 }
 
-.new_suggbd_table .sub_table{
+.new_notice_table .sub_table{
 	width:580px;
 	border:0px;
 	margin:0;
@@ -115,18 +115,18 @@
 	background-color : transparent;
 }
 
-.new_suggbd_table .sub_table tr{
+.new_notice_table .sub_table tr{
 	border:0px;
 	background-color : transparent;
 }
 
-.new_suggbd_table .sub_table td{	
+.new_notice_table .sub_table td{	
 	border:0px;
 	padding-right:0px;
 	background-color : transparent;
 }
 
-.new_suggbd_table .sub_table td.title2{
+.new_notice_table .sub_table td.title2{
 	height:50px;
 	border:0px;
 	padding:0px;

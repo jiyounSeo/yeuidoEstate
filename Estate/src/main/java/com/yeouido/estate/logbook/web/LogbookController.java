@@ -89,12 +89,12 @@ public class LogbookController {
 	
 	}
 	
-	@RequestMapping(value= "/logbookListView")
+	@RequestMapping(value= "/logbookListView.do")
 	public String memberListView(@RequestParam Map<String,Object> map)  {  
 		return "/logbook/lbMain";	
 	}
 	
-	@RequestMapping(value= "/newLogbookView")
+	@RequestMapping(value= "/newLogbookView.do")
 	public String newLogbookView(@RequestParam Map<String,Object> map)  {  
 		return "/logbook/newLb";	
 	}

@@ -26,7 +26,7 @@
 	<tr><td height="6px"></td></tr>
 	<tr>
 		<td>
-			<a href="./logbookListView"><img src="./resources/images/btn_m9.jpg"></a>&nbsp;<img src="./resources/images/btn_m10.jpg">
+			<a href="./logbookListView.do"><img src="./resources/images/btn_m9.jpg"></a>&nbsp;<a href="./newLogbookView.do"><img src="./resources/images/btn_m10.jpg"></a>
 		</td>
 	</tr>
 	<tr>

@@ -58,7 +58,7 @@
 	</table>
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">
-		<a href="./logbookListView"><img src="./resources/images/btn_add.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="./logbookListView.do"><img src="./resources/images/btn_add.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a  href="./modifyLogbookInfo.do?taskDocId=${taskDocId}"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>
 	</div>	

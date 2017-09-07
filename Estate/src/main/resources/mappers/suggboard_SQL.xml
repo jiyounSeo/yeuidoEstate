@@ -11,8 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, sugg
 				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 				, frstRegUser
+	     		, (SELECT COUNT(*) FROM taskdoc where sugg !='' AND sugg != null) totalCnt
 			  FROM taskdoc
-			  ORDER BY taskDocId DESC
+			  ORDER BY taskDocId+0 DESC
+			  LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
 	<select id="selectLogbookInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">

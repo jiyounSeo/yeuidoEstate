@@ -46,14 +46,28 @@ public class SuggBoardController {
 	 */
 	@RequestMapping(value= "/selectSuggBoardList.do", method=RequestMethod.POST)
 	public ModelAndView selectSuggBoardList( @RequestParam Map<String,Object> map)  {  
+		
 		ModelAndView mav= new ModelAndView();
+		Paging paging = new Paging();
 		 			
 		List<Map<String,Object>> suggList = new ArrayList<Map<String,Object>>();
 		try {
+			int currentPage = Integer.parseInt(map.get("currentPage").toString());
+			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+			map.put("rowNum", (currentPage-1)*pagePerRow);
+			map.put("pagePerRow", pagePerRow);
 			map.put("mbrId", "test");
 			suggList = suggbdService.selectSuggBoardList(map);
-			logger.error("suggdbService : ", suggList.size());
-					
+			
+			if (!suggList.isEmpty()) {
+				
+				int totalCount = Integer.parseInt(suggList.get(0).get("totalCnt").toString());
+				int pageSize = Integer.parseInt(map.get("pageSize").toString());
+				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+				mav.addAllObjects(pagingMap);
+				
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

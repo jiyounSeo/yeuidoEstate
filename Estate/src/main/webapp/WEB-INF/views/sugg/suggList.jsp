@@ -18,7 +18,12 @@
 		<tbody id="suggTbody">
 
 		</tbody>
+		<tr>
 	</table>
+	<br>
+</div>
+<div class="new_page_container" style="text-align:center;">
+	<div id="pagingDiv" class="pagination" style="margin:0 auto;"></div>
 </div>
 <script id="suggListTemplte" type="text/x-jquery-tmpl">	
 {{each sbList}}					

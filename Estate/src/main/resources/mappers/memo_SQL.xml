@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (SELECT COUNT(*) FROM memodoc) totalCnt
 	  FROM memodoc
 	 WHERE mbrId = #{mbrId}
-     order by memoDocId desc
+     order by memoDocId+0 desc
 	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
     

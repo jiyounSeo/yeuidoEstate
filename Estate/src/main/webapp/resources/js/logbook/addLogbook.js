@@ -55,7 +55,7 @@ function f_customer_save() {
 	  success : function(responseData){
 		  if ( urlStr == "insertLogbook.do" ) {
 			  alert (responseData.message);
-			  location.href="./logbookListView";
+			  location.href="./logbookListView.do";
 		  } else {
 			  alert ("수정에 성공하였습니다.");
 			  location.href="./viewLogbook.do?taskDocId="+taskDocId;

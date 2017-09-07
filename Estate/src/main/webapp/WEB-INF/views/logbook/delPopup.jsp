@@ -40,7 +40,7 @@
         	  	  dataType : "json",
         	  	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
         	  	  success : function(result){
-        	  		 location.href="./logbookListView";
+        	  		 location.href="./logbookListView.do";
         	  	  }
        	  	  });
         });

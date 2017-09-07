@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="noticeDAO">
+
+    <insert id="insertNotice" parameterType="java.util.HashMap">
+		INSERT INTO 
+			notice (mbrId
+			       , ntSbj
+			       , ntConts
+			       , frstRegUser
+			       , modfRegUser
+			       )
+			values ( 'test'
+				  , #{ntSbj}
+				  , #{ntConts}
+				  , 'test'
+				  , 'test'
+			)            			
+    </insert>
+    
+    <select id="selectNoticeList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT noticeId
+	       , mbrId
+	       , ntSbj
+	       , ntConts
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , frstRegUser
+	     , (SELECT COUNT(*) FROM notice) totalCnt
+	     , viewCnt
+	  FROM notice
+      order by noticeId desc
+	 LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+    
+	<select id="selectNoticeInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT noticeId
+		       , mbrId
+		       , ntSbj
+		       , ntConts
+		     	, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+				, frstRegUser
+				, viewCnt
+			  FROM notice
+			 WHERE noticeId = #{noticeId}
+	</select>
+	
+	
+	<delete id="deleteNotice" parameterType="java.util.HashMap" >
+	    DELETE FROM notice 
+	    WHERE noticeId = #{noticeId}
+    </delete>
+    
+    <update  id="modifyNotice" parameterType="java.util.HashMap" >
+	    UPDATE notice
+	       SET mbrId = 'test'
+			 , ntSbj = #{ntSbj}
+			 , ntConts =  #{ntConts}
+	    WHERE noticeId = #{noticeId}
+    </update>
+    
+    <update id="increaseViewCount" parameterType="java.util.HashMap">
+    	UPDATE notice
+    		SET viewCnt = viewCnt+1
+    		WHERE noticeId = #{noticeId}
+    </update>
+</mapper>

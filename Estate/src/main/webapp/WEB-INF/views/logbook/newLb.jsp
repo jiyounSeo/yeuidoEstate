@@ -53,7 +53,7 @@
 		<c:choose>
 			<c:when test="${taskDocId == null}">
 				<a href="#"><img src="./resources/images/btn_add.jpg" onclick="f_customer_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="./logbookListView"><img src="./resources/images/btn_cancel.jpg"></a>
+				<a href="./logbookListView.do"><img src="./resources/images/btn_cancel.jpg"></a>
 			</c:when>
 			<c:otherwise>
 				<a href="#"><img src="./resources/images/btn_save.jpg" onclick="f_customer_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

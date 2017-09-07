@@ -2,6 +2,16 @@ $(document).ready(function(){
 	f_suggList_select();
 });
 
+//페이징 버튼 클릭이벤트
+currPage = 1;
+$(document).on('click', '.pagingBtn', function() {
+	var currPageStr = $(this).attr("id").substr(4);
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_suggList_select();
+	}
+	
+});
 
 function f_suggList_select() {
 	var param = { currentPage : Number(currPage)
