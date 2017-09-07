@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="insertMemo" parameterType="java.util.HashMap">
      <selectKey resultType="int" keyProperty="memoDocId" order="BEFORE">
-        SELECT  ifnull (MAX(memoDocId)+1,1) from memodoc       
+        SELECT  ifnull (MAX(CAST(memoDocId AS signed integer))+1,1) from memodoc 
       </selectKey>
 		INSERT INTO 
 			memodoc (memoDocId

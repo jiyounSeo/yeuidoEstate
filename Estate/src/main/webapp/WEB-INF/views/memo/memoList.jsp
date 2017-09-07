@@ -1,6 +1,7 @@
-
 <%@ include file="/WEB-INF/views/memo/memoStyle.jsp" %> 
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
+<script type="text/javascript" src="./resources/js/comm/common.js"></script>
+
 <script type='text/javascript'>
 
   function fnPopOpen(){

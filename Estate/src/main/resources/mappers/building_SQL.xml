@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="insertBuilding" parameterType="java.util.HashMap" >
       <selectKey resultType="int" keyProperty="buildCd" order="BEFORE">
-        SELECT  ifnull (MAX(buildCd)+1,1) from building      
+        SELECT   ifnull (MAX(CAST(buildCd AS signed integer))+1,1) from building      
       </selectKey>
 		INSERT INTO 
 			building (buildCd

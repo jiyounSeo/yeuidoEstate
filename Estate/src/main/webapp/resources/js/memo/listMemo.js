@@ -1,8 +1,6 @@
 $(document).ready(function(){
-
 	formId = $("form").attr("id");
 	f_memoList_select();
-	
     $(function() {
     	function launch() {
             $('#divListMemoPopup').lightbox_me({centered: true});
@@ -21,15 +19,25 @@ $(document).ready(function(){
     });
 });
 
+//페이징 버튼 클릭이벤트
+currPage = 1;
+$(document).on('click', '.pagingBtn', function() {
+	var currPageStr = $(this).attr("id").substr(4);
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_memoList_select();
+	}
+	
+});
+
 function f_addMeno() {
 	f_closeAll();       	
 	$("#divAddMemoPopup").lightbox_me({centered: true});
 }
 
-currMemoPage = 1;
 function f_memoList_select() {
 
-	var param = { currentPage : Number(currMemoPage)
+	var param = { currentPage : Number(currPage)
 				   , pagePerRow : 10
 				   , pageSize : 10
 	};
@@ -46,7 +54,7 @@ function f_memoList_select() {
 			if (result.memoList.length != 0) {
 				$("#memoListTemplte").tmpl(result).appendTo("#memoTbody");
 				$("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
-				$("#page" + currMemoPage).addClass("active");
+				$("#page" + currPage).addClass("active");
 		  } else {
 			  $("#pagingDiv").empty();
 			  $("#memoListEmptyTemplte").tmpl(result).appendTo("#memoTbody");

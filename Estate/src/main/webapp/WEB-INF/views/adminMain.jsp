@@ -24,7 +24,6 @@
 	</tr>
 </table>
 
-${user.mbrId}
 <%@ include file="/WEB-INF/views/memo/memoList.jsp" %> 	
 <table width="100%" cellpadding="0" cellspaing="0" border="0">
 	<tr><td height="15px" colspan="7"></td></tr>

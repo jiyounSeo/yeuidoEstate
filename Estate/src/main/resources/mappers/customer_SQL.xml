@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="insertCustomer" parameterType="java.util.HashMap" >
       <selectKey resultType="int" keyProperty="custId" order="BEFORE">
-        SELECT  ifnull (MAX(custId)+1,1) from customer       
+        SELECT   ifnull (MAX(CAST(custId AS signed integer))+1,1) from customer       
       </selectKey>
 		INSERT INTO 
 			customer (custId
