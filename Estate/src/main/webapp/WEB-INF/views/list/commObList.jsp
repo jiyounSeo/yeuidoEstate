@@ -8,7 +8,6 @@
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_comm_ob_list.jpg">
 	</div>
-
 	<div class="list_div2">	
 		<table width="1500px" height="520px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
@@ -17,7 +16,10 @@
 					<table style="width:1460;height:465px;" cellpadding="0" cellspacing="0" border="0">
 						<tr><!-- main category -->
 							<td height="45px">
-								<table widht="1460px" height="44px" cellpadding="0" cellspacing="0" border="0">
+								<table width="1460px" height="44px" cellpadding="0" cellspacing="0" border="0">
+									<tr>
+										<td style="width:100%" colspan= "6" class="td_li"><li class="tab_on">매매</li></td>
+									</tr>
 									<tr>
 										<td width="223px" height="44px"><a href="./commObList?mainc=1"><img src="./resources/images/ob_list_mc_${main_category_state[1]}.jpg" border="0"></a></td>
 										<td width="239px"><a href="./commObList?mainc=2"><img src="./resources/images/ob_list_mc_${main_category_state[2]}.jpg" border="0"></a></td>

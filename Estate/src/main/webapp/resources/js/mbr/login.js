@@ -33,10 +33,18 @@ function f_login() {
 	  success : function(data){
 		  if(data.message == "success"){
 			  	alert("로그인 되었습니다.");
-			    var frm = $('#formId')[0];
-			    frm.action = "/estate/adminMainView.do";
-			    frm.method = 'get';
+			  	var frm = $('#formId')[0];
+			    if ( data.user.mbrTp == "MT001") {
+			  		alert("승인되지 않은 사용자입니다. 승인 후 이용가능 합니다.");
+			  		frm.action = "/estate/logout.go";
+			  	    frm.method = 'post';
+			    } else {
+			  		frm.action = "/estate/adminMainView.do";
+				    frm.method = 'get';
+				}
 			    frm.submit();
+			  	
+			    
 		  }
 		  else
 			  alert("등록되지 않은 아이디이거나 비밀번호가 일치하지 않습니다.");

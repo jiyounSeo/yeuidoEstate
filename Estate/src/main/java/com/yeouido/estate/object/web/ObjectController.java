@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class ObjectController {
 	 * 물건목록조회
 	 */
 	@RequestMapping(value= "/selectObjectList.do", method=RequestMethod.POST)
-	public ModelAndView selectObjectList( @RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectObjectList( @RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Paging paging = new Paging();
         			
@@ -48,6 +49,7 @@ public class ObjectController {
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
 			map.put("rowNum", (currentPage-1)*pagePerRow);
 			map.put("pagePerRow", pagePerRow);
+			map.put("user",  session.getAttribute("user"));
 			
 			objtList = objectService.selectObjectList(map);
 			if (!objtList.isEmpty()) {
@@ -71,9 +73,10 @@ public class ObjectController {
 	 * 물건등록 
 	 */
 	@RequestMapping(value= "/insertObject.do", method=RequestMethod.POST)
-	public ModelAndView insertObject(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView insertObject(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		try {
+			map.put("user",  session.getAttribute("user"));
 			int result = objectService.insertObject(map);
 			mav.addObject("message", "물건 등록에 성공했습니다.");
 		} catch (Exception e) {
@@ -86,10 +89,11 @@ public class ObjectController {
 	
 
 	@RequestMapping(value= "/selectObjectCnt.do", method=RequestMethod.POST)
-	public ModelAndView selectObjectCnt( @RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectObjectCnt( @RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		 List<Object> objCntList = new ArrayList<Object>();
 			try {
+				map.put("user",  session.getAttribute("user"));
 				objCntList = objectService.selectObjectCnt(map);
 			} catch (Exception e) {
 				mav.addObject("message", "물건 조회에 실패했습니다.");
@@ -124,10 +128,11 @@ public class ObjectController {
 	 * 물건 수정 조회
 	 */		
 	@RequestMapping(value= "/modifyObject.do", method=RequestMethod.POST)
-	public ModelAndView modifyObject(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView modifyObject(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		
 		try {
+			map.put("user",  session.getAttribute("user"));
 			int result = objectService.modifyObject(map);
 			mav.addObject("message", "물건 수정에 성공했습니다.");
 			

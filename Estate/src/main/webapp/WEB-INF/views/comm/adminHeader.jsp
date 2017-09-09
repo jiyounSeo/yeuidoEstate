@@ -11,11 +11,8 @@
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	/* $("#loginDiv").hide();
-	$("#logoutDiv").hide(); */
 	$("#loginDiv").hide();
 	$("#logoutDiv").hide();
-	//$("#loginDiv").css('visibility','visible');
 	userSession = '${sessionScope.user}';
 	
 	if( '${sessionScope.user.mbrId}' != null && '${sessionScope.user.mbrId}' != ''){
@@ -37,6 +34,7 @@ $(document).ready(function() {
 </script>
 
 <body style="margin:0; background-color: #f6f8f7;overflow-x:hidden;">
+<form id="adminHeaderForm">
 <table width="100%" height="121px" cellpadding="0" cellspacing="0" border="0">
 	<tr>
 		<td align="center" background="./resources/images/bg.jpg"  style="background-repeat:repeat-x;margin: 0; padding: 0; height: 121px;">
@@ -60,3 +58,4 @@ $(document).ready(function() {
 		</td>
 	</tr>
 </table>
+</form>

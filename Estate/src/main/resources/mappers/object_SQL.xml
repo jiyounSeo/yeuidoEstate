@@ -84,9 +84,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , CASE WHEN #{parcelAmt} = '' THEN 0 ELSE replace(#{parcelAmt},',','') END 
 				  , CASE WHEN #{premiumAmt} = '' THEN 0 ELSE replace(#{premiumAmt},',','') END 
 				  , now()
-				  , #{mbrId}
+				  , #{user.mbrId}
 				  , now()
-				  , #{mbrId}
+				  , #{user.mbrId}
         	);
        ]]>
 		
@@ -126,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, parcelAmt = (CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END )
 		, premiumAmt = (CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END )
 		 , modfRegDt = now()
-		 , modfRegUser = #{mbrId}
+		 , modfRegUser = #{user.mbrId}
      WHERE objtNo = #{objtNo}
        AND objtTp = #{objtTp}
     </update>
@@ -149,8 +149,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) AS A
 	LEFT OUTER JOIN 
 	   (SELECT objtTp, saleTp, count(saleTp) cntSaleTp
-		  FROM saleobject
-		  GROUP BY objtTp, saleTp
+		  FROM saleobject s
+			 , ( select mbrId
+				   from member m
+				  where m.mbrId in (
+					<if test="user.mbrTp eq 'MT004'" >
+					   SELECT mbrId
+						 FROM member m1
+					</if>
+					<if test="user.mbrTp eq 'MT003'" >
+					   SELECT mbrId
+						 FROM member m1
+						WHERE mbrTp in ('MT001','MT002', 'MT003')
+						  AND estateCd = #{user.estateCd}
+					</if>
+					<if test="user.mbrTp eq 'MT002'" >
+					   SELECT mbrId
+						 FROM member m1
+						WHERE mbrId = #{user.mbrId}
+						  AND estateCd = #{user.estateCd}
+					</if>
+				 )
+				) m
+         WHERE (s.frstRegUser = m.mbrId OR s.modfRegUser = m.mbrId )
+	  GROUP BY objtTp, saleTp
 		) AS B
 	 ON A.objtTp = B.objtTp
 	 AND A.saleTp = B.saleTp
@@ -190,8 +212,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , frstRegUser frstRegNm
 	  	 , (SELECT COUNT(*) FROM estate.saleobject WHERE objtTp = #{objtTp} and saleTp = #{saleTp} ) totalCnt
 	  FROM estate.saleobject obj
+	    , ( select mbrId
+				   from member m
+				  where m.mbrId in (
+					<if test="user.mbrTp eq 'MT004'" >
+					   SELECT mbrId
+						 FROM member m1
+					</if>
+					<if test="user.mbrTp eq 'MT003'" >
+					   SELECT mbrId
+						 FROM member m1
+						WHERE mbrTp in ('MT001','MT002', 'MT003')
+						  AND estateCd = #{user.estateCd}
+					</if>
+					<if test="user.mbrTp eq 'MT002'" >
+					   SELECT mbrId
+						 FROM member m1
+						WHERE mbrId = #{user.mbrId}
+						  AND estateCd = #{user.estateCd}
+					</if>
+				 )
+				) m
 	 WHERE objtTp = #{objtTp}
 	   AND saleTp = #{saleTp}	
+	   and (obj.frstRegUser = m.mbrId OR obj.modfRegUser = m.mbrId )
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	

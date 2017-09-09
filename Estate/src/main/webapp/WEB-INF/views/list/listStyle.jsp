@@ -1,4 +1,19 @@
 <style>
+
+.td_li .tab_on {
+	display :block;
+	width : 200px;
+	background-color:#3a62ab;
+	border-radius:5px 5px 0 0 ;
+	height : 40px;
+	color : #fff;
+	font-size : 25px;
+	font-weight : 500;
+	text-align : center;
+	text-valign : middle;
+	padding : 12px 10px;
+	
+}
 .pagination {
     display: inline-block;
 }

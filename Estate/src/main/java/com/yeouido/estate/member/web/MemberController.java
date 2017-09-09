@@ -131,6 +131,7 @@ public class MemberController {
 			Map<String, Object> result = memberService.selectOneMember(map);
 			if(!result.get("result").toString().equals("0")) { 
 				session.setAttribute("user", result);
+				mav.addObject("user", result);
 				mav.addObject("message", "success");
 			}
 			else {
