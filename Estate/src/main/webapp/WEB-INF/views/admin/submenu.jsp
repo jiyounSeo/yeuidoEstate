@@ -4,11 +4,11 @@
 <script type="text/javascript" src="./resources/js/list/newBuilding.js"></script>
 
 <table width="365px" cellpadding="0" cellspacing="0" border="0">
-	<tr><td><a href="./totalList"><img src="./resources/images/btn_m1.jpg" border="0"></a></td></tr>
+	<tr><td><a href="./totalListView.do"><img src="./resources/images/btn_m1.jpg" border="0"></a></td></tr>
 	<tr><td height="6px"></td></tr>
 	<tr>
 		<td height="90px" valign="middle">
-			<a href="./commObList"><img src="./resources/images/btn_m2.jpg"></a>&nbsp;<a href="./commClListView.do"><img src="./resources/images/btn_m3.jpg"></a>
+			<a href="./commObListView.do"><img src="./resources/images/btn_m2.jpg"></a>&nbsp;<a href="./commClListView.do"><img src="./resources/images/btn_m3.jpg"></a>
 		</td>
 	</tr>
 	<tr>

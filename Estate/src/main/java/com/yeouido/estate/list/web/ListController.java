@@ -64,7 +64,7 @@ public class ListController {
 	}
 	
 	/* 물건 + 고객 리스트 화면*/
-	@RequestMapping(value="/totalList",method = RequestMethod.GET)
+	@RequestMapping(value="/totalListView.do",method = RequestMethod.GET)
 	public String goTotalList(HttpServletRequest request,Model model){
 		
 		int mainc = 1;
@@ -169,9 +169,12 @@ public class ListController {
 	}
 	
 	/* 물건 조회 화면 */
-	@RequestMapping(value="/commObList",method = RequestMethod.GET)
+	@RequestMapping(value="/commObListView.do",method = RequestMethod.GET)
 	public String goCommObList(HttpServletRequest request,Model model){
-
+		
+		return "/list/commObList";	
+		
+		/*
 		int mainc = 1;
 		int tab = 1;
 		String subc= request.getParameter("subc");
@@ -212,8 +215,8 @@ public class ListController {
 		model.addAttribute("numOfRow", numOfRow);
 		model.addAttribute("viewUrl", viewUrl);
 		model.addAttribute("pageMark", pageMark);
+		*/
 		
-		return "/list/commObList";	
 	}
 	
 	/*
@@ -228,6 +231,8 @@ public class ListController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		String url = "";
+		
 		return "/listpage/" + map.get("viewUrl");
 	}
 	

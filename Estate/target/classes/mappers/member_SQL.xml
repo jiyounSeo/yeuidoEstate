@@ -74,8 +74,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="selectOneMember" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT COUNT(*) as result
-			  ,M.*
-		  FROM member M
+			  , mbrId
+			  , loginId
+			  , mbrNm
+			  , mbrTp
+			  , estateCd
+		  FROM member m
 		 WHERE 1=1
 		   AND M.loginId = #{loginId}
 		   <if test="pw != null and pw != '' ">

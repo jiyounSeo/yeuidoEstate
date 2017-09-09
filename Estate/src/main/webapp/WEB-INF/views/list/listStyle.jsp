@@ -1,19 +1,39 @@
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+body {
+    font-family: "Jeju Gothic", sans-serif;
+}
 
-.td_li .tab_on {
+.tab_bg {
 	display :block;
-	width : 200px;
-	background-color:#3a62ab;
+	width : 100px;
+	background-color:#E47501; 
 	border-radius:5px 5px 0 0 ;
-	height : 40px;
+	height : 25px;
+	color : #fff;
+	font-size : 20px;
+	font-weight : 500;
+	text-align : center;
+	vertical-align : middle;
+	font-family: "Jeju Gothic", sans-serif;
+	padding : 12px 10px;
+}
+.tab_on_txt {
+	display :block;
+	background-color :#F6F8F7;
+	border:2px solid #989898;
+	border-radius:5px 5px 5px 5px ;
+	height : 30px;
 	color : #fff;
 	font-size : 25px;
 	font-weight : 500;
 	text-align : center;
-	text-valign : middle;
+	vertical-align : middle;
+	color : #989898;
+	font-family: "Jeju Gothic", sans-serif;
 	padding : 12px 10px;
-	
 }
+
 .pagination {
     display: inline-block;
 }
@@ -49,12 +69,13 @@
 }
 
 .list_div2 {		/* ( viewMode : ob_list_only ) ob_list_back_div */
-	height: 980px;
+	height: 850px;
 }
 
 .list_div3 {		/* ( viewMode : all ) cl_list_back_div */
 	padding-top: 20px;
 	height: 430px;
+	background-color :#F6F8F7;
 }
 
 .list_div9 {		/* ( viewMode : cl_list_only ) cl_list_back_div */
@@ -65,11 +86,13 @@
 
 .cl_list,
 .ob_list {
-	width: 1460px;
+	width: 1500px;
 	border-collapse:collapse;
 	borde: 1px solid #444444;	
 }
-
+.list_div {
+	background: #f6f8f7;
+}
 .cl_list .title td,
 .ob_list .title1 td,
 .ob_list .title2 td,

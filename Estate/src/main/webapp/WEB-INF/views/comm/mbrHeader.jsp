@@ -65,8 +65,9 @@
 <table width="100%" height="121px" cellpadding="0" cellspacing="0" border="0">
 	<tr>
 		<td align="center" background="./resources/images/bg.jpg"  style="background-repeat:repeat-x;margin: 0; padding: 0; height: 121px;">
-			<img src="./resources/images/logo.jpg" style="height: 121px; border: 0" />
+			<a href="./"><img src="./resources/images/logo.jpg" style="height: 121px; border: 0" /></a>
 		</td>
+		
 	</tr>
 	<tr><td height="60px">&nbsp;</td></tr>
 </table>
