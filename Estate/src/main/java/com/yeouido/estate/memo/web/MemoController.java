@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeouido.estate.Paging;
+import com.yeouido.estate.comm.web.Interceptor;
 import com.yeouido.estate.memo.service.MemoService;
 
 /**
@@ -36,10 +38,11 @@ public class MemoController {
 	 * 등록 
 	 */
 	@RequestMapping(value= "/insertMemo.do", method=RequestMethod.POST)
-	public ModelAndView insertMemo(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView insertMemo(@RequestParam Map<String,Object> map, HttpSession session)  {   // 1. session 값 sql 가져가기 (, HttpSession session) 추가
 		ModelAndView mav= new ModelAndView();
 		try {
 			logger.error("insertTest : ",map);
+			map.put("user",  session.getAttribute("user")); // map에 담기 해당쿼리에 #{user.mbrId} 이렇게 써주기
 			int result = memoService.insertMemo(map);
 			mav.addObject("messageCd", "1");
 			mav.addObject("message", "메모 등록에 성공하였습니다.");
@@ -55,33 +58,34 @@ public class MemoController {
 	 * 목록조회
 	 */
 	@RequestMapping(value= "/selectMemoList.do", method=RequestMethod.POST)
-	public ModelAndView selectCustomerList( @RequestParam Map<String,Object> map)  {  
-		ModelAndView mav= new ModelAndView();
-		Paging paging = new Paging();
-        			
-		List<Map<String,Object>> memoList = new ArrayList<Map<String,Object>>();
-		try {
-			int currentPage = Integer.parseInt(map.get("currentPage").toString());
-			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
-			map.put("rowNum", (currentPage-1)*pagePerRow);
-			map.put("pagePerRow", pagePerRow);
-			map.put("mbrId", "test");
-			
-			memoList = memoService.selectMemoList(map);
-			if (!memoList.isEmpty()) {
-						
-				int totalCount = Integer.parseInt(memoList.get(0).get("totalCnt").toString());
-				int pageSize = Integer.parseInt(map.get("pageSize").toString());
-				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
-				mav.addAllObjects(pagingMap);
+	public ModelAndView selectCustomerList( @RequestParam Map<String,Object> map, HttpSession session)   {  
+		
+			ModelAndView mav= new ModelAndView();
+			Paging paging = new Paging();
+	        			
+			List<Map<String,Object>> memoList = new ArrayList<Map<String,Object>>();
+			try {
+				int currentPage = Integer.parseInt(map.get("currentPage").toString());
+				int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+				map.put("rowNum", (currentPage-1)*pagePerRow);
+				map.put("pagePerRow", pagePerRow);
+				map.put("user",  session.getAttribute("user"));
+				memoList = memoService.selectMemoList(map);
+				if (!memoList.isEmpty()) {
+							
+					int totalCount = Integer.parseInt(memoList.get(0).get("totalCnt").toString());
+					int pageSize = Integer.parseInt(map.get("pageSize").toString());
+					Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+					mav.addAllObjects(pagingMap);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	    mav.addObject("memoList",memoList);
-	    mav.setViewName("jsonView");
-	    return mav;
+		    mav.addObject("memoList",memoList);
+		    mav.setViewName("jsonView");
+		    return mav;
+
 	}
 	
 	/*
@@ -127,10 +131,10 @@ public class MemoController {
 	 *  수정 등록
 	 */		
 	@RequestMapping(value= "/modifyMemo.do", method=RequestMethod.POST)
-	public ModelAndView modifyMemo(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView modifyMemo(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
-		
 		try {
+			map.put("user",  session.getAttribute("user"));
 			int result = memoService.modifyMemo(map);
 			mav.addObject("messageCd", "1");
 		} catch (Exception e) {

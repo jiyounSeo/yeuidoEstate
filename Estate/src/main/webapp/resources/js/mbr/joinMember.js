@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	$(".onlyNum").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/gi,"") );} );
 	$(".onlyEng").keyup(function(){$(this).val( $(this).val().replace(/[^a-z0-9]/gi,"") );} );
+	// 콤보
+	f_estate_select() ;
 });
 
 function f_member_save() {
@@ -29,6 +31,25 @@ function f_member_save() {
 		}
 	});
 
+}
+
+
+function f_estate_select() {
+
+	$.ajax({
+		url : '/estate/selectEstate.go',
+		type : 'post',
+		dataType : 'json',
+		contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+		success : function(data) {
+			console.log (data);
+			if (!gfn_isNull (data.estateList)) {
+				$.each(data.estateList , function(index) {
+					$("#estateCd").append("<option value='"+data.estateList[index].estateCd+"'>"+data.estateList[index].estateNm+"</option>");
+				});
+			}
+		}
+	});
 }
 function f_loginIdDupChk() {
 	if ($('#loginId').val() == '' || $('#loginId').val() == null)

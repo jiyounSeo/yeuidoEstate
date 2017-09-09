@@ -44,9 +44,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	, #{tel3}
         	, #{estateCd}
         	, NOW()
-        	, 'guest'
+        	, #{mbrId}
         	, NOW()
-        	, 'guest'
+        	, #{mbrId}
        	FROM member
     </insert>    
     

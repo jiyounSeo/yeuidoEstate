@@ -3,17 +3,27 @@ package com.yeouido.estate;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.session.SqlSession;
 
 public class AbstractDAO {
 	protected Log log = LogFactory.getLog(AbstractDAO.class);
-	
+/*	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+	 public void setSqlSession(SqlSession sqlSession) {
+		    this.sqlSession = (SqlSessionTemplate) sqlSession;
+		  }*/
+	 private SqlSession sqlSession;
+	 
+	 @Resource(name="sqlSession")
+	 public void setSqlSession(SqlSession sqlSession){
+		 this.sqlSession = sqlSession;
+	 }
+	  
 	protected void printQueryMap(Map queryId) {
 		if(log.isDebugEnabled()){
 			log.debug("\t QueryId  \t:  " + queryId);

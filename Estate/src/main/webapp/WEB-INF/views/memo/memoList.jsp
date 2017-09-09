@@ -1,18 +1,17 @@
 <%@ include file="/WEB-INF/views/memo/memoStyle.jsp" %> 
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
-
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page session="true" %>
+<% request.setCharacterEncoding("utf-8");%>
+<script type="text/javascript" src="./resources/js/memo/listMemo.js"></script>
 <script type='text/javascript'>
-
-  function fnPopOpen(){
-
+/*   function fnPopOpen(){
       $('#divListMemoPopup').lightbox_me(); 
       $('#divViewMemoPopup').lightbox_me(); 
       $('#divAddMemoPopup').lightbox_me(); 
- }
+ } */
 </script>
-
-<script type="text/javascript" src="./resources/js/memo/listMemo.js"></script>
 
 <!-- 신규Memo -->
 <div id="divAddMemoPopup" style="display: none;">

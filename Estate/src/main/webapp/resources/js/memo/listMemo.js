@@ -8,12 +8,18 @@ $(document).ready(function(){
         	$("#divAddMemoPopup").lightbox_me({centered: true});
     	}
     	    	
+    	
         $('#listMemoBtn').click(function(e) {
-        	f_closeAll();
-        	f_memoList_select();
-            $("#divListMemoPopup").lightbox_me({centered: true, onLoad: function() {
-			}});
-            e.preventDefault();
+        	if ( gfn_isNull(userSession)) {
+        		alert ("로그인 이후 이용하세요.");
+        		f_closeAll();
+        	} else {
+        		f_closeAll();
+            	f_memoList_select();
+                $("#divListMemoPopup").lightbox_me({centered: true, onLoad: function() {
+    			}});
+                e.preventDefault();
+        	}
         });
         
     });
@@ -31,8 +37,12 @@ $(document).on('click', '.pagingBtn', function() {
 });
 
 function f_addMeno() {
-	f_closeAll();       	
-	$("#divAddMemoPopup").lightbox_me({centered: true});
+	f_closeAll();
+	if ( gfn_isNull(userSession)) {
+		alert ("로그인 이후 이용하세요.");
+	} else {
+		$("#divAddMemoPopup").lightbox_me({centered: true});
+	}
 }
 
 function f_memoList_select() {
@@ -92,9 +102,7 @@ function f_memoView(memoId){
 
 function f_memoView_select(memoId) {
 	$("#divListMemoPopup").trigger('close');
-	
 	f_memoView(memoId);
-	
 	$("#divViewMemoPopup").lightbox_me({centered: true});
 	
 }

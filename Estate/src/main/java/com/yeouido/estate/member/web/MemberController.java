@@ -36,7 +36,7 @@ public class MemberController {
 		 return mv;
 	}
 	
-	@RequestMapping(value= "/memberListView.do", method=RequestMethod.POST)
+	@RequestMapping(value= "/memberListView.do", method=RequestMethod.GET)
 	public ModelAndView memberListView(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/mbr/memberList");
 		 return mv;
@@ -47,6 +47,15 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView("/mbr/login");
 		return mv;
 	}
+
+	@RequestMapping(value= "/logout.go")
+	public ModelAndView logout(HttpSession session){  
+		//ModelAndView mv = new ModelAndView("/mbr/login");
+		session.setAttribute("user", null);
+		ModelAndView mv = new ModelAndView("/adminMain");
+		return mv;
+	}
+	
 	@RequestMapping(value= "/loginInterceptor.go")
 	public ModelAndView loginInterceptor(@RequestParam Map<String,Object> map)  {  
 		 ModelAndView mv = new ModelAndView("/mbr/loginInterceptor");
@@ -149,7 +158,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value= "/selectEstate.do", method=RequestMethod.POST)
+	@RequestMapping(value= "/selectEstate.go", method=RequestMethod.POST)
 	public ModelAndView selectEstate( @RequestParam Map<String,Object> map)  {  
 		ModelAndView mav= new ModelAndView();
 		 List<Object> estateList = new ArrayList<Object>();

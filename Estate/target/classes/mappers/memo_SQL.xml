@@ -20,13 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , modfRegUser
 			       )
 			values ( #{memoDocId}
-				  , 'test'
+				  ,  #{user.mbrId}  <!-- session값 가져오기 -->
 				  , #{memoSbj}
 				  , #{memoCont}
 				  , now()
-				  , 'test'
+				  , #{user.mbrId}  <!-- session값 가져오기 -->
 				  , now()
-				  , 'test'
+				  , #{user.mbrId}  <!-- session값 가져오기 -->
 			)            			
     </insert>
     
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , (SELECT COUNT(*) FROM memodoc) totalCnt
 	  FROM memodoc
-	 WHERE mbrId = #{mbrId}
+	 WHERE mbrId = #{user.mbrId}
      order by memoDocId+0 desc
 	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
@@ -62,11 +62,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <update  id="modifyMemo" parameterType="java.util.HashMap" >
 	    UPDATE memodoc
-	       SET mbrId = 'test'
+	       SET mbrId = #{user.mbrId}
 			 , memoSbj = #{memoSbj}
 			 , memoCont =  #{memoCont}
 			 , modfRegDt = now()
-			 , modfRegUser = 'test'
+			 , modfRegUser = #{user.mbrId}
 	    WHERE memoDocId = #{memoDocId}
     </update>
 </mapper>

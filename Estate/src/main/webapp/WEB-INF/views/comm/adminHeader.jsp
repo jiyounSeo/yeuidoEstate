@@ -11,13 +11,28 @@
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	if( ${sessionScope.user.mbrId}!=null && ${sessionScope.user.mbrId} !=''){
-		$('#userNm').text('${user.mbrNm}'+'님|');	
-		$('#userNm').css('display','inline');
-		$('#modifyMbrInfo').css('display','inline');
+	/* $("#loginDiv").hide();
+	$("#logoutDiv").hide(); */
+	$("#loginDiv").hide();
+	$("#logoutDiv").hide();
+	//$("#loginDiv").css('visibility','visible');
+	userSession = '${sessionScope.user}';
+	
+	if( '${sessionScope.user.mbrId}' != null && '${sessionScope.user.mbrId}' != ''){
+		$("#logoutDiv").show();
+	 	$('#userNm').text('${sessionScope.user.mbrNm}'+'님|');	
+		//$('#userNm').css('display','inline');
+		//$('#modifyMbrInfo').css('display','inline');
 		$('#login').text('로그아웃|');
-		$('#memberMng').css('display','inline');
-	}
+		if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
+			$('#memberMng').css('display','inline');
+		} else {
+			$('#memberMng').css('display','none');
+		}
+		
+	} else {
+		$("#loginDiv").show();
+	} 
 });
 </script>
 
@@ -31,12 +46,17 @@ $(document).ready(function() {
 	<tr><td height="14px">&nbsp;</td></tr>
 	<tr>
 		<td height="36px" align="center">
-			<div style="width: 1486px; height: 36px; text-align: left;">
-				<span id="userNm" style="display:none;"></span> 
-				<a id="modifyMbrInfo" href="./loginView.go"style="display:none;">회원정보수정|</a>
+			<div id="loginDiv" style="width: 1486px; height: 36px; text-align: left;">
 				<a id="login" href="./loginView.go">로그인</a> 
-				<a id="memberMng" href="./memberListView.do" style="display:none;">회원관리</a>
+				<a id="login" href="./regView.go"> | 회원가입</a> 
 			</div>
+			<div id="logoutDiv" style="width: 1486px; height: 36px; text-align: left;">
+				<span id="userNm" style="display:none;"></span> 
+				<a id="modifyMbrInfo" href="./loginView.go">회원정보수정</a>
+				<a id="login" href="./logout.go"> | 로그아웃</a> 
+				<a id="memberMng" href="./memberListView.do"> | 회원관리</a>
+			</div>
+			
 		</td>
 	</tr>
 </table>

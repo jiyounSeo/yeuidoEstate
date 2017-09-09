@@ -84,9 +84,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , CASE WHEN #{parcelAmt} = '' THEN 0 ELSE replace(#{parcelAmt},',','') END 
 				  , CASE WHEN #{premiumAmt} = '' THEN 0 ELSE replace(#{premiumAmt},',','') END 
 				  , now()
-				  , 'testUser'
+				  , #{mbrId}
 				  , now()
-				  , 'testUser'
+				  , #{mbrId}
         	);
        ]]>
 		
@@ -126,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, parcelAmt = (CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END )
 		, premiumAmt = (CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END )
 		 , modfRegDt = now()
-		 , modfRegUser = 'testUser'
+		 , modfRegUser = #{mbrId}
      WHERE objtNo = #{objtNo}
        AND objtTp = #{objtTp}
     </update>

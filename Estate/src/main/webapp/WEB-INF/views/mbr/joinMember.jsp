@@ -47,8 +47,6 @@
 					<td>
 						<select id="estateCd" name="estateCd" class="mbr_sel essential">
 							<option value="">-- 선택 --</option>
-							<option value="00001">테스트1</option>
-							<option value="00001">테스트2</option>
 						</select>
 					</td>
 				</tr>

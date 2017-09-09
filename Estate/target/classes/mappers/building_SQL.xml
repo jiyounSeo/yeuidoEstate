@@ -31,9 +31,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{addrDetail}
 				  , #{zipNo}
 				  , now()
-				  , 'test'
+				  , #{mbrId}
 				  , now()
-				  , 'test'
+				  , #{mbrId}
 				  
         	);
 		
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , addrDetail = #{addrDetail}
 		 , zipNo = #{zipNo}
 		 , modfRegDt = now()
-		 , modfRegUser = 'test'
+		 , modfRegUser = #{mbrId}
      WHERE buildCd = #{buildCd}
     </update>
     

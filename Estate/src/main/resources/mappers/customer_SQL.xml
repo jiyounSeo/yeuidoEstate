@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES  (
         			#{custId}
 				  , #{custNm}
-				  , 'test'
+				  , #{mbrId}
 				  , CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END
 				  , CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END
 				  , CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END
@@ -64,9 +64,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{activeTp}
 				  , CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END
 				  , now()
-				  , 'test'
+				  , #{mbrId}
 				  , now()
-				  , 'test'
+				  , #{mbrId}
 				  
         	);
 		
@@ -96,8 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , activeTp =  #{activeTp}
 		 , publicYn = (CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END)
 		 , modfRegDt = now()
-		 , modfRegUser = 'test'
-		 , mbrId = 'test'
+		 , modfRegUser = #{mbrId}
+		 , mbrId = #{mbrId}
      WHERE custId = #{custId}
     </update>
     
@@ -133,7 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , custTel3)
 			values (
 				  , #{custId}
-				  , 'test'
+				  , #{mbrId}
 				  , #{custNm}
 				  , #{custTel1}
 				  , #{custTel2}
