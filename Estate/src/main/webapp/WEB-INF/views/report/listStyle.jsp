@@ -134,7 +134,7 @@ input[type=radio].rbbox:checked + label.rb-label {
 	background-position: 0 -28px;
 }
 label.rb-label {
-	background-image:url(./images/rb_back.png);
+	background-image:url(./resources/images/rb_back.png);
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;

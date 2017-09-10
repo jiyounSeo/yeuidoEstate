@@ -1,104 +1,133 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ include file="/WEB-INF/views/report/listStyle.jsp" %> 
+<%@ include file="/WEB-INF/views/report/listStyle.jsp" %>
+<script type="text/javascript" src="./resources/js/report/editReport.js"></script> 
 
-<div style="width:1500px;margin:auto;padding:0;">
-	<div style="width:1500px;height:90px;">
-		<img src="./resources/images/title_new_report.jpg">
+<form id="report" method="post" >
+	<div style="width:1500px;margin:auto;padding:0;">
+		<div style="width:1500px;height:90px;">
+			<img src="./resources/images/title_new_report.jpg">
+		</div>
+		
+		<div class="new_page_container">
+			<table class="new_report_table">
+				<tr>
+					<td class="title">작성자</td>
+					<td><input type="text" id="writer" name="writer"></td>
+					<td class="title">만기일</td>
+					<td><input type="text" id="dueDt" name="dueDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
+				</tr>
+				<tr>
+					<td class="title">계약종류</td>
+					<td class="sub">
+						<table class="sub_table">
+							<tr>
+								<td class="title2" width="100px">구분1</td>
+								<td width="193px">
+									<select id="contTpSelect1" name="contTpSelect1" style="width:183px;height:40px;">
+									    <option value="0">선택</option>
+									    <option value="1">아파트</option>
+									    <option value="2">오피스텔</option>
+									    <option value="3">주상복합</option>
+									    <option value="4">상가</option>
+									    <option value="5">사무실</option>
+									    <option value="6">분양권</option>
+									</select>
+								</td>
+								<td class="title2" width="100px">구분2</td>
+								<td width="192px">
+									<select id="contTpSelect2" name="contTpSelect2" style="width:183px;height:40px;">
+									    <option value="0">선택</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td class="title">계약형태</td>
+					<td class="sub">
+						<table class="sub_table">
+							<tr>
+								<td class="title2" width="100px">양타</td>
+								<td width="193px"><input id="contSe" name="contSe" type="text" style="width:183px;"></td>
+								<td class="title2" width="100px">공동중개</td>
+								<td width="192px"><input id="contSe" name="contSe" type="text"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="title">소재지</td>
+					<td colspan="3"><input id="addr" name="addr" type="text"></td>
+				</tr>
+				<tr>
+					<td class="title">양수인<br>(매수인,<br> 임차인)</td>
+					<td class="sub">
+						<table class="sub_table">
+							<tr><td class="title2">성명</td><td><input id="assignee" name="assignee" type="text"></td></tr>
+							<tr><td class="title2">연락처</td><td><input type="text"></td></tr>
+						</table>
+					</td>
+					<td class="title">양도인<br>(매도인,<br> 임대인)</td>
+					<td class="sub">
+						<table class="sub_table">
+							<tr><td class="title2">성명</td><td><input id="grantor" name="grantor" type="text"></td></tr>
+							<tr><td class="title2">연락처</td><td><input type="text"></td></tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td class="title">계약일</td>
+					<td><input type="text" id="contDt" name="contDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
+					<td class="title">계약금</td>
+					<td><input id="contAmt" name="contAmt" type="text"></td>
+				</tr>
+				<tr>
+					<td class="title">중도일</td>
+					<td><input type="text" id="midContDt" name="midContDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
+					<td class="title">중도금</td>
+					<td><input id="midContAmt" name="midContAmt" type="text"></td>
+				</tr>
+				<tr>
+					<td class="title">잔금일</td>
+					<td><input type="text" id="remainDt" name="remainDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
+					<td class="title">잔금</td>
+					<td><input id="remainAmt" name="remainAmt" type="text"></td>
+				</tr>
+				<tr>
+					<td class="title">특약사항 및 체크사항</td>
+					<td colspan="3"><input id="chkContent" name="chkContent" type="text"></td>
+				</tr>
+				<tr>
+					<td class="title">계약해제사유</td>
+					<td colspan="3"><input id="releaRsn" name="releaRsn" type="text"></td>
+				</tr>
+				<tr>
+					<td class="title">예상수수료</td>
+					<td><input id="preFees" name="preFees" type="text"></td>
+					<td class="title">실제수수료</td>
+					<td><input id="realFees" name="realFees" type="text"></td>
+				</tr>
+				<tr>
+					<td class="title">수수료변동사유</td>
+					<td colspan="3"><input id="chngRsn" name="chngRsn" type="text"></td>
+				</tr>
+				<tr>
+					<td class="title">담당자</td>
+					<td><input id="manager" name="manager" type="text" readonly="readonly" value="who?"></td>
+					<td class="title">사장님</td>
+					<td>
+						<select id="bossSelect" name="bossSelect" style="width:183px;height:40px;">
+							<option value="0">선택</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div style="height:50px;"></div>
+			<div style="width:1400px;margin:auto;text-align:center;">
+				<a href="#"><img id="btn_add" src="./resources/images/btn_add.jpg" onclick="f_report_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
+			</div>
+		</div>
 	</div>
-	
-	<div class="new_page_container">
-		<table class="new_report_table">
-			<tr>
-				<td class="title">작성자</td>
-				<td><input type="text"></td>
-				<td class="title">만기일</td>
-				<td><img src="./resources/images/icon_cal.jpg"></td>
-			</tr>
-			<tr>
-				<td class="title">계약종류</td>
-				<td><input type="text"></td>
-				<td class="title">계약형태</td>
-				<td class="sub">
-					<table class="sub_table">
-						<tr>
-							<td class="title2" width="100px">양타</td>
-							<td width="193px"><input type="text" style="width:183px;"></td>
-							<td class="title2" width="100px">공동중개</td>
-							<td width="192px"><input type="text"></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td class="title">소재지</td>
-				<td colspan="3"><input type="text"></td>
-			</tr>
-			<tr>
-				<td class="title">양수인<br>(매수인,<br> 임차인)</td>
-				<td class="sub">
-					<table class="sub_table">
-						<tr><td class="title2">성명</td><td><input type="text"></td></tr>
-						<tr><td class="title2">연락처</td><td><input type="text"></td></tr>
-					</table>
-				</td>
-				<td class="title">양도인<br>(매도인,<br> 임대인)</td>
-				<td class="sub">
-					<table class="sub_table">
-						<tr><td class="title2">성명</td><td><input type="text"></td></tr>
-						<tr><td class="title2">연락처</td><td><input type="text"></td></tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td class="title">계약일</td>
-				<td><img src="./resources/images/icon_cal.jpg"></td>
-				<td class="title">계약금</td>
-				<td><input type="text"></td>
-			</tr>
-			<tr>
-				<td class="title">중도일</td>
-				<td><img src="./resources/images/icon_cal.jpg"></td>
-				<td class="title">중도금</td>
-				<td><input type="text"></td>
-			</tr>
-			<tr>
-				<td class="title">잔금일</td>
-				<td><img src="./resources/images/icon_cal.jpg"></td>
-				<td class="title">잔금</td>
-				<td><input type="text"></td>
-			</tr>
-			<tr>
-				<td class="title">특약사항 및 체크사항</td>
-				<td colspan="3"><input type="text"></td>
-			</tr>
-			<tr>
-				<td class="title">계약해제사유</td>
-				<td colspan="3"><input type="text"></td>
-			</tr>
-			<tr>
-				<td class="title">예상수수료</td>
-				<td><input type="text"></td>
-				<td class="title">실제수수료</td>
-				<td><input type="text"></td>
-			</tr>
-			<tr>
-				<td class="title">수수료변동사유</td>
-				<td colspan="3"><input type="text"></td>
-			</tr>
-			<tr>
-				<td class="title">담당자</td>
-				<td><input type="text"></td>
-				<td class="title">사장님</td>
-				<td><input type="text"></td>
-			</tr>
-		</table>
-		<div style="height:50px;"></div>
-		<div style="width:1400px;margin:auto;text-align:center;">
-			<a href="#"><img src="./resources/images/btn_add.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
-		</div>	
-	</div>
-</div>
-
+</form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

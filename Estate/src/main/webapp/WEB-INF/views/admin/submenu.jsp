@@ -31,7 +31,7 @@
 	</tr>
 	<tr>
 		<td>
-			<img src="./resources/images/btn_m11.jpg">&nbsp;<img src="./resources/images/btn_m12.jpg">
+			<a href="./commRepList.do"><img src="./resources/images/btn_m11.jpg"></a>&nbsp;<a href="./newReport.do"><img src="./resources/images/btn_m12.jpg"></a>
 		</td>
 	</tr>
 	<tr><td><button id="btnAddrPopup" onclick="buildingPopup();return falase;">건물등록</button></td></tr>

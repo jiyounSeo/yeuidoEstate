@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="reportDAO">
+
+    <insert id="insertReport" parameterType="java.util.HashMap" >
+      <selectKey resultType="string" keyProperty="contractId" order="BEFORE">
+        SELECT ifnull(MAX(CAST(contractId AS UNSIGNED)) + 1, 1) from contract
+      </selectKey>
+    <![CDATA[
+        INSERT into contract
+				(contractId
+				, objtNo
+				, contTp
+				, contSttSe
+				, dueDt
+				, contSe
+				, addr
+				, assignee
+				, grantor
+				, contDt
+				, contAmt
+				, midContDt
+				, midContAmt
+				, remainDt
+				, remainAmt
+				, chkContent
+				, releaRsn
+				, preFees
+				, realFees
+				, chngRsn
+				, manager
+				, boss
+				  )
+        	values ( 
+        			#{contractId}
+        		 	, 1
+        		  	, #{contTpSelect1}#{contTpSelect2}
+				, 1
+				, CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END
+				, #{contSe}
+				, CASE WHEN #{addr} = '' THEN NULL ELSE #{addr} END
+				, #{assignee}
+				, #{grantor}
+				, CASE WHEN #{contDt} = '' THEN NULL ELSE #{contDt} END
+				, CASE WHEN #{contAmt} = '' THEN NULL ELSE #{contAmt} END
+				, CASE WHEN #{midContDt} = '' THEN NULL ELSE #{midContDt} END
+				, CASE WHEN #{midContAmt} = '' THEN NULL ELSE #{midContAmt} END
+				, CASE WHEN #{remainDt} = '' THEN NULL ELSE #{remainDt} END
+				, CASE WHEN #{remainAmt} = '' THEN NULL ELSE #{remainAmt} END
+				, CASE WHEN #{chkContent} = '' THEN NULL ELSE #{chkContent} END
+				, CASE WHEN #{releaRsn} = '' THEN NULL ELSE #{releaRsn} END
+				, CASE WHEN #{preFees} = '' THEN NULL ELSE #{preFees} END
+				, CASE WHEN #{realFees} = '' THEN NULL ELSE #{realFees} END
+				, CASE WHEN #{chngRsn} = '' THEN NULL ELSE #{chngRsn} END
+				, #{manager}
+				, #{bossSelect}
+        	);
+       ]]>
+    </insert>
+
+    <update  id="modifyReport" parameterType="java.util.HashMap" >
+     UPDATE contract
+       SET
+		contTp = #{contTpSelect1}#{contTpSelect2}
+		, contSttSe = #{contSttSe}
+		, dueDt = CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END
+		, contSe = #{contSe}
+		, addr = CASE WHEN #{addr} = '' THEN NULL ELSE #{addr} END
+		, assignee = #{assignee}
+		, grantor = #{grantor}
+		, contDt = CASE WHEN #{contDt} = '' THEN NULL ELSE #{contDt} END
+		, contAmt = CASE WHEN #{contAmt} = '' THEN NULL ELSE #{contAmt} END
+		, midContDt = CASE WHEN #{midContDt} = '' THEN NULL ELSE #{midContDt} END
+		, midContAmt = CASE WHEN #{midContAmt} = '' THEN NULL ELSE #{midContAmt} END
+		, remainDt = CASE WHEN #{remainDt} = '' THEN NULL ELSE #{remainDt} END
+		, remainAmt = CASE WHEN #{remainAmt} = '' THEN NULL ELSE #{remainAmt} END
+		, chkContent = CASE WHEN #{chkContent} = '' THEN NULL ELSE #{chkContent} END
+		, releaRsn = CASE WHEN #{releaRsn} = '' THEN NULL ELSE #{releaRsn} END
+		, preFees = CASE WHEN #{preFees} = '' THEN NULL ELSE #{preFees} END
+		, realFees = CASE WHEN #{realFees} = '' THEN NULL ELSE #{realFees} END
+		, chngRsn = #{chngRsn}
+		, manager = #{manager}
+		, boss = #{bossSelect}
+     WHERE contractId = #{contractId}
+    </update>
+
+    <delete id="deleteReport" parameterType="java.util.HashMap" >
+    DELETE FROM contract 
+    WHERE contractId = #{contractId}
+    </delete>
+    
+	<select id="selectReportList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT contractId
+		, objtNo
+		, contTp
+		, contSttSe
+		, DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
+		, contSe
+		, addr
+		, assignee
+		, grantor
+		, DATE_FORMAT(contDt, '%Y-%m-%d') as contDt
+		, contAmt
+		, DATE_FORMAT(midContDt, '%Y-%m-%d') as midContDt
+		, midContAmt
+		, DATE_FORMAT(remainDt, '%Y-%m-%d') as remainDt
+		, remainAmt
+		, chkContent
+		, releaRsn
+		, preFees
+		, realFees
+		, chngRsn
+		, manager
+		, boss
+		, (SELECT COUNT(*) FROM estate.contract) totalCnt
+	  FROM estate.contract
+	 <!-- WHERE objtTp = #{objtTp}
+	   AND saleTp = #{saleTp}	-->
+	   LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+	
+	<select id="selectBossList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT mbrId
+		,mbrNm
+	  FROM estate.member
+	</select>
+	
+	<select id="selectReportInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT contractId
+		, objtNo
+		, contTp
+		, contSttSe
+		, DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
+		, contSe
+		, addr
+		, assignee
+		, grantor
+		, DATE_FORMAT(contDt, '%Y-%m-%d') as contDt
+		, contAmt
+		, DATE_FORMAT(midContDt, '%Y-%m-%d') as midContDt
+		, midContAmt
+		, DATE_FORMAT(remainDt, '%Y-%m-%d') as remainDt
+		, remainAmt
+		, chkContent
+		, releaRsn
+		, preFees
+		, realFees
+		, chngRsn
+		, manager
+		, boss
+	  FROM estate.contract
+	 WHERE contractId = #{contractId}
+	</select>
+	
+	
+</mapper>

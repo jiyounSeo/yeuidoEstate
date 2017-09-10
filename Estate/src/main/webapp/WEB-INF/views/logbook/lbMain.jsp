@@ -16,7 +16,7 @@
 	</tr>
 	<tr><td height="25px"></td></tr>
 	<tr>
-		<td align="right"><a href="./newLogbookView"><img src="./resources/images/btn_add_lb.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td align="right"><a href="./newLogbookView.do"><img src="./resources/images/btn_add_lb.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 </table>
 

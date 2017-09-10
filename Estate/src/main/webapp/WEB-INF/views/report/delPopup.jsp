@@ -39,7 +39,7 @@
 		<tr>
 			<td align="right" style="background-color:#fafafa;height:48px;background-image:url('./resources/images/alert_bg.jpg');background-repeat:repeat-y;">
 				<a href="#" id="popCancel"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#" id="popOk"><img src="./resources/images/btn_ok.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" id="popOk"><img src="./resources/images/btn_ok.jpg" onclick="f_report_delete();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 		<tr><td height="23px;"><img src="./resources/images/alert_bottom.jpg"></td></tr>
