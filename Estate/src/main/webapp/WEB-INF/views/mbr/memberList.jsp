@@ -67,11 +67,8 @@
 		<td class="mbr_mem">{{html $value.estateNm}}</td>
 		<td class="mbr_mem">{{html $value.frstRegDt}}</td>
 		<td class="mbr_mem">
-			<button type="button" class="mbr">
-				<img src="./resources/images/icon_approve.jpg" width="50px" height="46px"  onclick="f_memeber_accept({{html $index}});return false;">
-			</button>
-			<button type="button" class="mbr">
-				<img src="./resources/images/icon_del.jpg" width="50px" height="46px" onclick="f_memeber_reject({{html $index}});return false;">
+			<a href="#" onclick="f_memeber_accept({{html $index}});return false;"><img src="./resources/images/icon_approve.jpg" width="50px" height="46px"></a>
+			<a href="#" onclick="f_memeber_reject({{html $index}});return false;"><img src="./resources/images/icon_del.jpg" width="50px" height="46px"></a>
 			</button>
 		</td>
 	</tr>
