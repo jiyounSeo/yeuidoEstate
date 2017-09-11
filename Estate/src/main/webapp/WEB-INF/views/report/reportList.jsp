@@ -19,19 +19,16 @@
 			</tr>
 			</table>
 			<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
-			<tr><td height="20px" colspan="8">&nbsp;</td></tr>
+			<tr><td height="20px">&nbsp;</td></tr>
 				<tr>
-					<td width="488px" height="41px">&nbsp;</td>
-					<td width="486px" align="center"><img src="./resources/images/page_temp.jpg"></td>
-					<td width="486px" align="right">
-						<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
-							<a href="./newReport.do"><img src="./resources/images/btn_add_report.jpg"></a>
-						</div>
-					</td>
+					<td width="488px" height="41px" align="right"><a href="./newReport.do"><img src="./resources/images/btn_add_report.jpg"></a></td>
 				</tr>
-				<tr><td height="20px" colspan="8">&nbsp;</td></tr>
+				<tr><td height="20px">&nbsp;</td></tr>
 			</table>				
 		</table>
+</div>
+<div class="new_page_container" style="text-align:center;">
+	<div id="pagingDiv" class="pagination" style="margin:0 auto;"></div>
 </div>
 
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

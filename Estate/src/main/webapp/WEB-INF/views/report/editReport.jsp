@@ -14,7 +14,7 @@
 			<table class="new_report_table">
 				<tr>
 					<td class="title">작성자</td>
-					<td><input type="text" id="writer" name="writer" value="작성자 저장 필요!!"></td>
+					<td>${result.regUser}</td>
 					<td class="title">만기일</td>
 					<td><input type="text" id="dueDt" name="dueDt" value="${result.dueDt}" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 				</tr>
@@ -27,12 +27,12 @@
 								<td width="193px">
 									<select id="contTpSelect1" name="contTpSelect1" style="width:183px;height:40px;">
 									    <option value="0">선택</option>
-									    <option value="1">아파트</option>
-									    <option value="2">오피스텔</option>
-									    <option value="3">주상복합</option>
-									    <option value="4">상가</option>
-									    <option value="5">사무실</option>
-									    <option value="6">분양권</option>
+									    <option value="OT001">아파트</option>
+									    <option value="OT002">상가</option>
+									    <option value="OT003">사무실/빌딩</option>
+									    <option value="OT004">오피스텔</option>
+									    <option value="OT005">주상복합</option>
+									    <option value="OT006">분양권</option>
 									</select>
 								</td>
 								<td class="title2" width="100px">구분2</td>
@@ -63,14 +63,14 @@
 					<td class="sub">
 						<table class="sub_table">
 							<tr><td class="title2">성명</td><td><input type="text" id="assignee" name="assignee" value="${result.assignee}"></td></tr>
-							<tr><td class="title2">연락처</td><td><input type="text" id="assignee" name="assignee" value="${result.assignee}"></td></tr>
+							<tr><td class="title2">연락처</td><td><input type="text" id="assignee" name="assigneeTel" value="${result.assigneeTel}"></td></tr>
 						</table>
 					</td>
 					<td class="title">양도인<br>(매도인,<br> 임대인)</td>
 					<td class="sub">
 						<table class="sub_table">
 							<tr><td class="title2">성명</td><td><input type="text" id="grantor" name="grantor" value="${result.grantor}"></td></tr>
-							<tr><td class="title2">연락처</td><td><input type="text" id="grantor" name="grantor" value="${result.grantor}"></td></tr>
+							<tr><td class="title2">연락처</td><td><input type="text" id="grantor" name="grantorTel" value="${result.grantorTel}"></td></tr>
 						</table>
 					</td>
 				</tr>
@@ -112,7 +112,7 @@
 				</tr>
 				<tr>
 					<td class="title">담당자</td>
-					<td><input type="text" id="manager" name="manager" value="${result.manager}" readonly="readonly"></td>
+					<td><input type="text" id="manager" name="manager" value="${result.manager}"></td>
 					<td class="title">사장님</td>
 					<td>
 						<select id="bossSelect" name="bossSelect" style="width:183px;height:40px;">
@@ -139,7 +139,8 @@
 	</div>
 	<input type="hidden" name="contractId" id="contractId" value="${result.contractId}"/>
 	<input type="hidden" name="contSttSe" id="contSttSe" value="${result.contSttSe}"/>
-	<input type="hidden" name="contTp" id="contTp" value="${result.contTp}">
+	<input type="hidden" name="contTp1" id="contTp1" value="${result.contTp1}">
+	<input type="hidden" name="contTp2" id="contTp2" value="${result.contTp2}">
 	<input type="hidden" name="boss" id="boss" value="${result.boss}">
 </form>
  

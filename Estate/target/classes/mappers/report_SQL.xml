@@ -12,14 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <![CDATA[
         INSERT into contract
 				(contractId
-				, objtNo
-				, contTp
+				, contTp1
+				, contTp2
 				, contSttSe
 				, dueDt
 				, contSe
 				, addr
 				, assignee
+				, assigneeTel
 				, grantor
+				, grantorTel
 				, contDt
 				, contAmt
 				, midContDt
@@ -33,17 +35,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, chngRsn
 				, manager
 				, boss
+				, regDt
+				, regUser
 				  )
         	values ( 
         			#{contractId}
-        		 	, 1
-        		  	, #{contTpSelect1}#{contTpSelect2}
+        		  	, #{contTpSelect1}
+        		  	, #{contTpSelect2}
 				, 1
 				, CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END
 				, #{contSe}
 				, CASE WHEN #{addr} = '' THEN NULL ELSE #{addr} END
 				, #{assignee}
+				, #{assigneeTel}
 				, #{grantor}
+				, #{grantorTel}
 				, CASE WHEN #{contDt} = '' THEN NULL ELSE #{contDt} END
 				, CASE WHEN #{contAmt} = '' THEN NULL ELSE #{contAmt} END
 				, CASE WHEN #{midContDt} = '' THEN NULL ELSE #{midContDt} END
@@ -57,20 +63,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, CASE WHEN #{chngRsn} = '' THEN NULL ELSE #{chngRsn} END
 				, #{manager}
 				, #{bossSelect}
-        	);
+				, now()
+				, #{user.loginId}
+		      	);
        ]]>
     </insert>
 
     <update  id="modifyReport" parameterType="java.util.HashMap" >
      UPDATE contract
        SET
-		contTp = #{contTpSelect1}#{contTpSelect2}
+		contTp1 = #{contTpSelect1}
+		, contTp2 = #{contTpSelect2}
 		, contSttSe = #{contSttSe}
 		, dueDt = CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END
 		, contSe = #{contSe}
 		, addr = CASE WHEN #{addr} = '' THEN NULL ELSE #{addr} END
 		, assignee = #{assignee}
+		, assigneeTel = #{assigneeTel}
 		, grantor = #{grantor}
+		, grantorTel = #{grantorTel}
 		, contDt = CASE WHEN #{contDt} = '' THEN NULL ELSE #{contDt} END
 		, contAmt = CASE WHEN #{contAmt} = '' THEN NULL ELSE #{contAmt} END
 		, midContDt = CASE WHEN #{midContDt} = '' THEN NULL ELSE #{midContDt} END
@@ -84,6 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, chngRsn = #{chngRsn}
 		, manager = #{manager}
 		, boss = #{bossSelect}
+		, regDt = now()
      WHERE contractId = #{contractId}
     </update>
 
@@ -94,14 +106,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
 	<select id="selectReportList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT contractId
-		, objtNo
-		, contTp
+		, contTp1
+		, contTp2
 		, contSttSe
 		, DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
 		, contSe
 		, addr
 		, assignee
+		, assigneeTel
 		, grantor
+		, grantorTel
 		, DATE_FORMAT(contDt, '%Y-%m-%d') as contDt
 		, contAmt
 		, DATE_FORMAT(midContDt, '%Y-%m-%d') as midContDt
@@ -115,29 +129,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, chngRsn
 		, manager
 		, boss
+		, regUser
 		, (SELECT COUNT(*) FROM estate.contract) totalCnt
 	  FROM estate.contract
-	 <!-- WHERE objtTp = #{objtTp}
-	   AND saleTp = #{saleTp}	-->
+	  where regUser = #{user.loginId}
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
 	<select id="selectBossList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT mbrId
 		,mbrNm
-	  FROM estate.member
+		FROM estate.member
+		where (estate.member.mbrTp='MT003' AND estate.member.estateCd = ${user.estateCd} ) OR estate.member.mbrTp='MT004'
 	</select>
 	
 	<select id="selectReportInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT contractId
-		, objtNo
-		, contTp
+		, contTp1
+		, contTp2
 		, contSttSe
 		, DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
 		, contSe
 		, addr
 		, assignee
+		, assigneeTel
 		, grantor
+		, grantorTel
 		, DATE_FORMAT(contDt, '%Y-%m-%d') as contDt
 		, contAmt
 		, DATE_FORMAT(midContDt, '%Y-%m-%d') as midContDt
@@ -151,6 +168,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, chngRsn
 		, manager
 		, boss
+		, DATE_FORMAT(regDt, '%Y-%m-%d') as regDt
+		, regUser
 	  FROM estate.contract
 	 WHERE contractId = #{contractId}
 	</select>

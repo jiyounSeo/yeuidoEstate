@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yeouido.estate.Paging;
+import com.yeouido.estate.comm.web.Interceptor;
 import com.yeouido.estate.list.web.ListController;
 import com.yeouido.estate.report.service.ReportService;
 
@@ -28,14 +30,12 @@ import com.yeouido.estate.report.service.ReportService;
 public class ReportController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReportController.class);
-	final static int OBJECT_MAIN_CATEGORY_NUM = 6; 
-	final static int OBJECT_TAB_CATEGORY_MAX = 4;
 	
 	@Resource(name="reportService")
 	protected ReportService reportService;
 	
 	@RequestMapping(value= "/selectReportList.do", method=RequestMethod.POST)
-	public ModelAndView selectReportList( @RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectReportList( @RequestParam Map<String,Object> map, HttpSession session)   {  
 		ModelAndView mav= new ModelAndView();
 		Paging paging = new Paging();
         			
@@ -46,6 +46,7 @@ public class ReportController {
 			map.put("rowNum", (currentPage-1) * pagePerRow);
 			map.put("pagePerRow", pagePerRow);
 			
+			map.put("user",  session.getAttribute("user"));
 			reportList = reportService.selectReportList(map);
 			if (!reportList.isEmpty()) {
 				int totalCount = Integer.parseInt(reportList.get(0).get("totalCnt").toString());
@@ -115,9 +116,10 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value= "/insertReport.do", method=RequestMethod.POST)
-	public ModelAndView insertReport(@RequestParam Map<String,Object> map)
+	public ModelAndView insertReport(@RequestParam Map<String,Object> map, HttpSession session) 
 	{  
 		try {
+			map.put("user",  session.getAttribute("user"));
 			int result = reportService.insertReport(map);
 			logger.debug("result : "+  result );
 		} catch (Exception e) {
@@ -160,11 +162,12 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value= "/bossListReport.do", method=RequestMethod.POST)
-	public ModelAndView selectBossListReport( @RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectBossListReport( @RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
         			
 		List<Map<String,Object>> reportList = new ArrayList<Map<String,Object>>();
 		try {
+			map.put("user",  session.getAttribute("user"));
 			reportList = reportService.selectBossList(map);
 		} catch (Exception e) {
 			e.printStackTrace();

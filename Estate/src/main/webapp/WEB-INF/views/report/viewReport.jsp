@@ -14,7 +14,7 @@
 			<table class="new_report_table">
 				<tr>
 					<td class="title">작성자</td>
-					<td>// field 만들어야함</td>
+					<td>${result.regUser}</td>
 					<td class="title">만기일</td>
 					<td>${result.dueDt}</td>
 				</tr>
@@ -42,14 +42,14 @@
 					<td class="sub">
 						<table class="sub_table">
 							<tr><td class="title2" width="150px;">성명</td><td>${result.assignee}</td></tr>
-							<tr><td class="title2" width="150px;">연락처</td><td>${result.assignee}</td></tr>
+							<tr><td class="title2" width="150px;">연락처</td><td>${result.assigneeTel}</td></tr>
 						</table>
 					</td>
 					<td class="title">양도인<br>(매도인,<br> 임대인)</td>
 					<td class="sub">
 						<table class="sub_table">
 							<tr><td class="title2" width="150px;">성명</td><td>${result.grantor}</td></tr>
-							<tr><td class="title2" width="150px;">연락처</td><td>${result.grantor}</td></tr>
+							<tr><td class="title2" width="150px;">연락처</td><td>${result.grantorTel}</td></tr>
 						</table>
 					</td>
 				</tr>
@@ -113,7 +113,8 @@
 	</div>
 	<input type="hidden" name="contractId" id="contractId" value="${result.contractId}"/>
 	<input type="hidden" name="contSttSe" id="contSttSe" value="${result.contSttSe}"/>
-	<input type="hidden" name="contTp" id="contTp" value="${result.contTp}">
+	<input type="hidden" name="contTp" id="contTp1" value="${result.contTp1}">
+	<input type="hidden" name="contTp" id="contTp2" value="${result.contTp2}">
 	<input type="hidden" name="boss" id="boss" value="${result.boss}">
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

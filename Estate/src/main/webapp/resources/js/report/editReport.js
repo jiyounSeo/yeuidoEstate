@@ -47,55 +47,54 @@ function init_boss()
 function init_conTp()
 {
 	var option1 = '<option value="0">선택</option>';
-	var option2 = '<option value="0">선택</option><option value="1">전세</option><option value="2">월세</option><option value="3">매매</option>';
-	var option3 = '<option value="0">선택</option><option value="3">매매</option><option value="4">임대</option>';
-	var option4 = '<option value="0">선택</option><option value="3">매매</option>';
+	var option2 = '<option value="0">선택</option><option value="ST001">매매</option><option value="ST002">전세</option><option value="ST003">월세</option><option value="ST004">렌트</option>';
+	var option3 = '<option value="0">선택</option><option value="ST001">매매</option><option value="ST005">임대</option>';
+	var option4 = '<option value="0">선택</option><option value="ST006">분양권</option><option value="ST007">전매</option>';
+	
 	$("#contTpSelect1").change(function ()
 	{
-		switch(($("#contTpSelect1 option").index($("#contTpSelect1 option:selected"))))
+		var selected = "OT00" + $("#contTpSelect1 option").index($("#contTpSelect1 option:selected"));
+		switch(selected)
 		{
-		case 0:	$("#contTpSelect2").html(option1);	break;
-		case 1:
-		case 2:
-		case 3:	$("#contTpSelect2").html(option2);	break;
-		case 4:
-		case 5:	$("#contTpSelect2").html(option3);	break;
-		case 6:	$("#contTpSelect2").html(option4);	break;
+		case "OT001":
+		case "OT004":
+		case "OT005":$("#contTpSelect2").html(option2);	break;
+		case "OT002":
+		case "OT003":$("#contTpSelect2").html(option3);	break;
+		case "OT006":$("#contTpSelect2").html(option4);	break;
+		default: $("#contTpSelect2").html(option1);	break;
 		}
-	})
+	});
 	
 	if($("#btn_add").val() == undefined)	//view, edit page
 	{
-		var conTpArray = $("#contTp").val().split("'");
-		$("#contTpSelect1").val(conTpArray[0]).attr("selected", "selected");
+		var conTp1 = $("#contTp1").val();
+		var conTp2 = $("#contTp2").val();
+		$("#contTpSelect1").val(conTp1).attr("selected", "selected");
 		$("#contTpSelect1").change();
-		$("#contTpSelect2").val(conTpArray[1]).attr("selected", "selected");
-		switch(conTpArray[0])
+		$("#contTpSelect2").val(conTp2).attr("selected", "selected");
+		switch(conTp1)
 		{
-		case "0": conTpArray[0] = ""; break;
-		case "1": conTpArray[0] = "아파트"; break;
-		case "2": conTpArray[0] = "오피스텔"; break;
-		case "3": conTpArray[0] = "주상복합"; break;
-		case "4": conTpArray[0] = "상가"; break;
-		case "5": conTpArray[0] = "사무실"; break;
-		case "6": conTpArray[0] = "분양권"; break;
+		case "OT001": conTp1 = "아파트"; break;
+		case "OT002": conTp1 = "상가"; break;
+		case "OT003": conTp1 = "사무실/빌딩"; break;
+		case "OT004": conTp1 = "오피스텔"; break;
+		case "OT005": conTp1 = "주상복합"; break;
+		case "OT006": conTp1 = "분양권"; break;
+		default: conTp1=""; break;
 		}
-		switch(conTpArray[1])
+		switch(conTp2)
 		{
-		case "0":
-			conTpArray[1] = "";
-			break;
-		case "1":
-			conTpArray[1] = " 전세";
-			break;
-		case "2":
-			conTpArray[1] = " 월세";
-			break;
-		case "3":
-			conTpArray[1] = " 매매";
-			break;
+		case "ST001": conTp2 = "매매"; break;
+		case "ST002": conTp2 = "전세"; break;
+		case "ST003": conTp2 = "월세"; break;
+		case "ST004": conTp2 = "렌트"; break;
+		case "ST005": conTp2 = "임대"; break;
+		case "ST006": conTp2 = "분양권"; break;
+		case "ST007": conTp2 = "전매"; break;
+		default: conTp2 = ""; break;
 		}
-		$("#contTpTd").append(conTpArray[0] + conTpArray[1]);
+		$("#contTpTd").append(conTp1 + " / " + conTp2);
 	}
 }
 
@@ -237,6 +236,11 @@ function f_report_save()
 	  dataType : "json",
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(data){
+		  if ( urlStr == "insertReport.do" ) {
+			  alert ("등록에 성공하였습니다");
+		  }else{
+			  alert ("수정에 성공하였습니다");
+		  }
 		  $(location).attr('href', './commRepList.do')
 	  }
 	});
@@ -251,6 +255,7 @@ function f_report_delete() {
 	  dataType : "json",
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(data){
+		  alert("계약보고서를 삭제하였습니다");
 		  $(location).attr('href', './commRepList.do')
 	  }
 	});

@@ -13,7 +13,7 @@
 			<table class="new_report_table">
 				<tr>
 					<td class="title">작성자</td>
-					<td><input type="text" id="writer" name="writer"></td>
+					<td>${sessionScope.user.mbrNm}</td>
 					<td class="title">만기일</td>
 					<td><input type="text" id="dueDt" name="dueDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 				</tr>
@@ -26,12 +26,12 @@
 								<td width="193px">
 									<select id="contTpSelect1" name="contTpSelect1" style="width:183px;height:40px;">
 									    <option value="0">선택</option>
-									    <option value="1">아파트</option>
-									    <option value="2">오피스텔</option>
-									    <option value="3">주상복합</option>
-									    <option value="4">상가</option>
-									    <option value="5">사무실</option>
-									    <option value="6">분양권</option>
+									    <option value="OT001">아파트</option>
+									    <option value="OT002">상가</option>
+									    <option value="OT003">사무실/빌딩</option>
+									    <option value="OT004">오피스텔</option>
+									    <option value="OT005">주상복합</option>
+									    <option value="OT006">분양권</option>
 									</select>
 								</td>
 								<td class="title2" width="100px">구분2</td>
@@ -64,14 +64,14 @@
 					<td class="sub">
 						<table class="sub_table">
 							<tr><td class="title2">성명</td><td><input id="assignee" name="assignee" type="text"></td></tr>
-							<tr><td class="title2">연락처</td><td><input type="text"></td></tr>
+							<tr><td class="title2">연락처</td><td><input id="assigneeTel" name="assigneeTel" type="text"></td></tr>
 						</table>
 					</td>
 					<td class="title">양도인<br>(매도인,<br> 임대인)</td>
 					<td class="sub">
 						<table class="sub_table">
 							<tr><td class="title2">성명</td><td><input id="grantor" name="grantor" type="text"></td></tr>
-							<tr><td class="title2">연락처</td><td><input type="text"></td></tr>
+							<tr><td class="title2">연락처</td><td><input id="grantorTel" name="grantorTel"  type="text"></td></tr>
 						</table>
 					</td>
 				</tr>

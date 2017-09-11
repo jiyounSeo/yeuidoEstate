@@ -1,13 +1,25 @@
 $(document).ready(function()
 {
 	f_reportList_select();
+
 });
 
+//페이징 버튼 클릭이벤트
+currPage = 1;
+$(document).on('click', '.pagingBtn', function() {
+	var currPageStr = $(this).attr("id").substr(4);
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_noticeList_select();
+	}
+	
+});
+	
 function f_reportList_select()
 {
-	var param = { currentPage : 1
-				   , pagePerRow : 10
-				   , pageSize : 10
+	var param = { currentPage : Number(currPage)
+			   , pagePerRow : 10
+			   , pageSize : 10
 	};
 	console.log (param);
 	$.ajax({
@@ -21,7 +33,7 @@ function f_reportList_select()
 		  for (var i = 0; i < result.reportList.length; i++) {
 			  var data = result.reportList[i];
 			  htmlText = htmlText + '<tr><td><a href="./viewReport?contractId='+ data.contractId + '">' + data.dueDt + '</a></td>' +
-			  '<td>' + convertContTpToText(data.contTp) + '</td>' +
+			  '<td>' + convertContTpToText(data.contTp1, data.contTp2) + '</td>' +
 			  '<td>' + data.addr + '</td>' +
 			  '<td>' + data.contDt + '</td>' +
 			  '<td>' + data.midContDt + '</td>' +
@@ -30,38 +42,35 @@ function f_reportList_select()
 			  '<td>' + data.chkContent + '</td></tr>';
 		  }
 		  $("#reportList").append(htmlText);
+		  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
+		  $("#page" + currPage).addClass("active");
 	  }
 	});
 }
 
-function convertContTpToText(contTp)
+function convertContTpToText(contTp1, contTp2)
 {
-	var conTpArray = contTp.split("'");
-	
-	switch(conTpArray[0])
+	switch(contTp1)
 	{
-	case "0": conTpArray[0] = ""; break;
-	case "1": conTpArray[0] = "아파트"; break;
-	case "2": conTpArray[0] = "오피스텔"; break;
-	case "3": conTpArray[0] = "주상복합"; break;
-	case "4": conTpArray[0] = "상가"; break;
-	case "5": conTpArray[0] = "사무실"; break;
-	case "6": conTpArray[0] = "분양권"; break;
+		case "OT001": contTp1 = "아파트"; break;
+		case "OT002": contTp1 = "상가"; break;
+		case "OT003": contTp1 = "사무실/빌딩"; break;
+		case "OT004": contTp1 = "오피스텔"; break;
+		case "OT005": contTp1 = "주상복합"; break;
+		case "OT006": contTp1 = "분양권"; break;
+		default: contTp1 = ""; break;
 	}
-	switch(conTpArray[1])
+	switch(contTp2)
 	{
-	case "0":
-		conTpArray[1] = "";
-		break;
-	case "1":
-		conTpArray[1] = " 전세";
-		break;
-	case "2":
-		conTpArray[1] = " 월세";
-		break;
-	case "3":
-		conTpArray[1] = " 매매";
-		break;
+		case "ST001": contTp2 = "매매"; break;
+		case "ST002": contTp2 = "전세"; break;
+		case "ST003": contTp2 = "월세"; break;
+		case "ST004": contTp2 = "렌트"; break;
+		case "ST005": contTp2 = "임대"; break;;
+		case "ST006": contTp2 = "분양권"; break;
+		case "ST007": contTp2 = "전매"; break;
+		default: contTp2 = ""; break;
 	}
-	return conTpArray[0] + conTpArray[1];
+
+	return contTp1 + " / " + contTp2;
 }
