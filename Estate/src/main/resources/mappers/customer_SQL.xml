@@ -117,9 +117,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   	   AND custTel3 = #{custTel3}
 		) A, 
 		(
-		SELECT 1 num, IFNULL(MAX(custId) + 1, 1) custId2
+		SELECT 1 num,  ifnull (MAX(CAST(custId AS signed integer))+1,1) custId2
 		  FROM customer
-		)B
+		)B 
 	WHERE A.num = B.num
 	</select>
 
@@ -132,12 +132,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , custTel2
 			       , custTel3)
 			values (
-				  , #{custId}
-				  , #{mbrId}
+				   #{custId}
+				  , #{user.mbrId}
 				  , #{custNm}
 				  , #{custTel1}
 				  , #{custTel2}
-				  , #{custTle3}
+				  , #{custTel3}
 			)
 			
 			   		

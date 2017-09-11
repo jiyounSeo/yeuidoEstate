@@ -63,6 +63,7 @@ public class ListController {
 		 return mv;
 	}
 	
+	
 	/* 물건 + 고객 리스트 화면*/
 	@RequestMapping(value="/totalListView.do",method = RequestMethod.GET)
 	public String goTotalList(HttpServletRequest request,Model model){
@@ -553,5 +554,18 @@ public class ListController {
 		
 		return "/listpage/viewObTicket";	
 	}*/
+	
+	@RequestMapping(value= "/viewResClCardView.do", method=RequestMethod.GET)
+	public ModelAndView viewResClCard(@RequestParam Map<String,Object> map)  {  
+		 ModelAndView mv = new ModelAndView("/card/viewResClCard");
+		 return mv;
+	}
+	
+	@RequestMapping(value= "/viewActClCardView.do", method=RequestMethod.GET)
+	public ModelAndView viewActClCard(@RequestParam Map<String,Object> map)  {  
+		 ModelAndView mv = new ModelAndView("/card/viewActClCard");
+		 return mv;
+	}
+	
 	
 }

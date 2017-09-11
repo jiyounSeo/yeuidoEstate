@@ -56,7 +56,30 @@ function f_objectDtl_select() {
 		objtNo : $("#objtNo").val()
 		, objtTp : $("#objtTp").val()
 	};
-	var serial = $("#"+formId).serialize();
+
+	var objtForm = "";
+	switch (objtTp) {
+		case "OT001":
+			objtForm = "newObApt";
+			break;
+		case "OT002":
+			objtForm = "newObStore";
+			break;
+		case "OT003":
+			objtForm = "newObOffice";
+			break;
+		case "OT004":
+			objtForm = "newObOps";
+			break;
+		case "OT005":
+			objtForm = "newObHrapt";
+			break;
+		case "OT006":
+			objtForm = "newObTicket";
+			break;
+			
+	}
+	var serial = $("#"+objtForm).serialize();
 	console.log (serial);
 	$.ajax({
 		  url : "/estate/selectObjectDtl.do",
@@ -125,8 +148,29 @@ function uncomma(str) {
 }
 
 function f_saleobject_save() {
-	
-	var param = $("#"+formId).serialize();
+	var objtForm = "";
+	switch ($("#objtTp").val()) {
+		case "OT001":
+			objtForm = "newObApt";
+			break;
+		case "OT002":
+			objtForm = "newObStore";
+			break;
+		case "OT003":
+			objtForm = "newObOffice";
+			break;
+		case "OT004":
+			objtForm = "newObOps";
+			break;
+		case "OT005":
+			objtForm = "newObHrapt";
+			break;
+		case "OT006":
+			objtForm = "newObTicket";
+			break;
+			
+	}
+	var param = $("#"+objtForm).serialize();
 	
 	if ( $("#objtNm").val() == "") {
 		alert ("물건명은 필수입력 값입니다.");
@@ -157,6 +201,7 @@ function f_saleobject_save() {
 	}
 	
 
+
 	var urlStr = "";
 	console.log ("objtNo" + $("#objtNo").val());
 	if ($("#objtNo").val() != "" ) {
@@ -165,6 +210,7 @@ function f_saleobject_save() {
 		urlStr = "insertObject.do";
 	}
 	console.log (urlStr);
+	console.log (param);
 	$.ajax({
 	  url : "/estate/" + urlStr,
 	  type: "post",

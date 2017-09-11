@@ -13,12 +13,14 @@
 	</tr>
 	<tr>
 		<td height="90px">
-			<img src="./resources/images/btn_m4.jpg">&nbsp;<img src="./resources/images/btn_m5.jpg">
+			<!-- 활성물건카드 -->
+			<a href="./viewResClCardView.do?activeTp=AT001"><img src="./resources/images/btn_m4.jpg"></a>&nbsp;<a href="./viewActClCardView.do?activeTp=AT001"><img src="./resources/images/btn_m5.jpg"></a>
 		</td>
 	</tr>
 	<tr>
 		<td height="90px">
-			<img src="./resources/images/btn_m6.jpg">&nbsp;<img src="./resources/images/btn_m7.jpg">
+			<!-- 보류물건카드 -->
+			<a href="./viewResClCardView.do?activeTp=AT0O2"><img src="./resources/images/btn_m6.jpg"></a>&nbsp;<a href="./viewResClCardView.do?activeTp=AT0O2"><img src="./resources/images/btn_m7.jpg"></a>
 		</td>
 		
 	</tr>
