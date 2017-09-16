@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	f_custList_select();
 });
-
+var custList = {};
 //페이징 버튼 클릭이벤트
 currPage = 1;
 $(document).on('click', '.pagingBtn', function() {
@@ -14,10 +14,16 @@ $(document).on('click', '.pagingBtn', function() {
 });
 
 function f_custList_select() {
-	var param = { currentPage : Number(currPage)
-				   , pagePerRow : 10
-				   , pageSize : 10
+	//saleTpTr
+	var param = {
+	    publicYn : $("#publicYn").val()
+	   , activeTp : $("#activeTp").val()
+	   , estateRange : $("#estateRange").val()
+	   , currentPage : Number(currPage)
+	   , pagePerRow : 10
+	   , pageSize : 10
 	};
+	
 	$.ajax({
 	  url : "/estate/selectCustomerList.do",
 	  type: "post",
@@ -27,6 +33,8 @@ function f_custList_select() {
 	  success : function(result){
 		  $("#custTbody").empty();
 		  if (result.custList.length != 0) {
+			  custList = result.custList;
+			  console.log (custList);
 			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#page" + currPage).addClass("active");
@@ -39,3 +47,20 @@ function f_custList_select() {
 	});
 	
 }
+
+
+function f_mbrDtl_view (index) {
+	console.log (custList[index]);
+	$("#custId").val(custList[index].custId);
+	var frm = $('#commClList')[0];
+	frm.action = '/estate/viewClient.do';
+	frm.method = 'POST';
+	frm.submit();
+	/*
+   var comSubmit = new ComSubmit($('form').attr('id'));
+   comSubmit.setUrl("/estate/objtDtlView.do");
+   
+   comSubmit.submit();
+*/
+}
+

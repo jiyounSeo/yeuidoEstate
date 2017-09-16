@@ -65,6 +65,7 @@ function f_loginIdDupChk() {
 		success : function(data) {
 			if (data.count != "0") {
 				alert("중복된 아이디입니다. 다시 입력해주세요.");
+				$('#loginId').val("");
 				$('#loginId').focus();
 				dupChk = "N";
 			} else {

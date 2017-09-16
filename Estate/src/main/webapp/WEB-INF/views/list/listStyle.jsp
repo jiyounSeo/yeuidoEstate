@@ -124,6 +124,7 @@ body {
 	background: #409834;
 }
 
+
 .ob_list .title4 td {
 	border-bottom: 2px solid #473d3c;
 	border-top: 2px solid #473d3c;
@@ -298,12 +299,59 @@ body {
 }
 
 .new_page_table td.title3 {
-	width:115px;
 	text-align:center;
-	background:#d4d4d4;
-	color:#000;
+	background: #00AFB2;
+	color:#fff;
+	font-weight: bold;
+	width:155px;
+	border-bottom: 1px solid #fff;
+}
+.new_page_table td.title4 {
+	text-align:left;
+	background: #A2A2AA;
+	color:#fff;
 	font-weight: bold;
 	border-bottom: 1px solid #fff;
+}
+
+
+
+/* ie 용 스크롤 바 *********************************************/
+html { scrollbar-arrow-color: #efefef;
+        scrollbar-Track-Color: #efefef; 
+        scrollbar-base-color: #dfdfdf;
+        scrollbar-Face-Color: #dfdfdf;
+        scrollbar-3dLight-Color: #dfdfdf;         
+        scrollbar-DarkShadow-Color: #dfdfdf;
+        scrollbar-Highlight-Color: #dfdfdf;
+        scrollbar-Shadow-Color: #dfdfdf}
+/* Chrome, Safari용 스크롤 바 */
+::-webkit-scrollbar {width: 20px; height: 12px;  }
+::-webkit-scrollbar-button:start:decrement, 
+::-webkit-scrollbar-button:end:increment {display: block; width: 12px;height: 12px; background: url() rgba(0,0,0,.05);}
+::-webkit-scrollbar-track {     background: rgba(0,0,0,.05); }
+::-webkit-scrollbar-thumb {  background: rgba(0,0,0,.1);  }
+/* ------------------------------------------------------------ */
+.scrollDiv {
+    width: 100%;
+    height: 200px;
+    overflow: auto;
+}
+
+.btn_type1 {
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	-ms-border-radius:3px;
+	-khtml-border-radius:3px;
+	-o-border-radius:3px;
+	font-weight:700;
+	color:#0d69a1;
+	background:#f8fcff;
+	border:#629dc1 1px solid;
+	padding : 3px 10px 3px 10px;
+	height :35px;
+	line-height : 1em;
 }
 
 .new_page_table td:last-child {

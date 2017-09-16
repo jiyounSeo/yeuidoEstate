@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <%@ include file="/WEB-INF/views/comm/viewTitle.jsp" %> 
-<form id="viewObApt">
+<form id="viewObApt" action="/">
 <div class="new_page_container">
 	<table class="new_page_table">
 		<tr>
@@ -67,7 +67,9 @@
 			<td colspan="4">${activeTpNm}, ${etc}<!-- 분류 --></td>
 		</tr>
 	</table>
-
+	<c:if test="${publicYn ne 'Y'}">
+		<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
+	</c:if>
 <%@ include file="/WEB-INF/views/comm/viewObBottom.jsp" %> 
 </div>
 </form>

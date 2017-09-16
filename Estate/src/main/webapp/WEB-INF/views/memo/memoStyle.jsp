@@ -110,4 +110,25 @@
 	border: 1px solid #bfbfbf;
 	
 }
+.btn_delType {
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	-ms-border-radius:3px;
+	-khtml-border-radius:3px;
+	-o-border-radius:3px;
+	font-weight:700;
+	color:#ee513e;
+	background:#fff;
+	border:#ee4d3c 1px solid;
+	padding : 3px 10px 3px 10px;
+	height :35px;
+	line-height : 1em;
+}
+
+
+.contentTitle {
+	color : #609DCE;
+	font-weight:600;
+}
 </style>

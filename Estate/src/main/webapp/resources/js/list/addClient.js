@@ -106,3 +106,10 @@ function f_customer_delete() {
 	}
 }
 
+function f_srchObjt_popup(){ 
+	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
+	//호출하게 됩니다. 
+	var pop = window.open("./resources/popup/srchInterObjt.jsp","_blank","width=870,height=670, scrollbars=yes, resizable=yes");  
+}
+
+

@@ -70,11 +70,14 @@
 		</table>
 	</div>
 </div>
-
+<input type="hidden" name="viewUrl" id="viewUrl" />
 <input type="hidden" name="objtNo" id="objtNo"/>
 <input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>
-<input type="hidden" name="viewUrl" id="viewUrl" />
 <input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
+<input type="hidden" name="publicYn" id="publicYn" value="${publicYn}"/>
+<input type="hidden" name="activeTp" id="activeTp" value="${activeTp}"/>
+<input type="hidden" name="estateRange" id="estateRange" value="${estateRange}"/>
+
 </form>
 </body>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

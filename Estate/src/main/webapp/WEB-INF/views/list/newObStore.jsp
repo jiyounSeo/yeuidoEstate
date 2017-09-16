@@ -47,7 +47,7 @@
 			<td class="title">유형</td>
 			<td colspan="2">
 			  <input type="radio" id="saleTp1" name="saleTp" value="ST001"/><label for="saleTp1">매매</label>
-			  <input type="radio" id="saleTp3" name="saleTp" value="ST003"/><label for="saleTp3">월세</label>
+			  <input type="radio" id="saleTp3" name="saleTp" value="ST005"/><label for="saleTp3">월세</label>
 			</td>
 			<td class="title">업종</td>
 			<td>

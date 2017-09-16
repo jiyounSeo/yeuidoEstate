@@ -171,53 +171,11 @@ public class ListController {
 	
 	/* 물건 조회 화면 */
 	@RequestMapping(value="/commObListView.do",method = RequestMethod.GET)
-	public String goCommObList(HttpServletRequest request,Model model){
-		
-		return "/list/commObList";	
-		
-		/*
-		int mainc = 1;
-		int tab = 1;
-		String subc= request.getParameter("subc");
-		String [] viewUrl = {""};
-		int pageMark = 2;
-		
-		if(request.getParameter("mainc") != null){
-			mainc = Integer.parseInt(request.getParameter("mainc"));
-		}
-		if(request.getParameter("tab") != null){
-			tab = Integer.parseInt(request.getParameter("tab"));			
-		}
-		
-		ArrayList<String> array = objtTpmappingCd (mainc, tab);
-		model.addAttribute("objtTp", array.get(0));
-		model.addAttribute("saleTp", array.get(1));
-		
-		String [] main_category_state = new String[OBJECT_MAIN_CATEGORY_NUM+1];
-		ArrayList<String> tab_category_state = new ArrayList<String>();
-		
-		for(int i = 1; i <=OBJECT_MAIN_CATEGORY_NUM; i++){	// Initialize
-			main_category_state[i] = i+"_off";
-		}
-		
-		makeString(mainc, tab, main_category_state, tab_category_state, viewUrl);	
-	
-		int numOfTab = tab_category_state.size();
-		int numOfRow = 15;
-		
-		model.addAttribute("main_category_state", main_category_state);
-		model.addAttribute("tab_category_state", tab_category_state);
-		model.addAttribute("numOfTab", numOfTab);
-		
-		model.addAttribute("mainc", mainc); // 물건유형
-		model.addAttribute("tab", tab); // 계약유형 (매매,전세,월세,렌트...) 
-		
-		model.addAttribute("subc", subc);
-		model.addAttribute("numOfRow", numOfRow);
-		model.addAttribute("viewUrl", viewUrl);
-		model.addAttribute("pageMark", pageMark);
-		*/
-		
+	public ModelAndView goCommObList(@RequestParam Map<String,Object> map){
+	    ModelAndView mv = new ModelAndView("/list/commObList");
+	    mv.addAllObjects(map);
+		//odel.addAllAttributes(request.getParameterMap());
+		return mv;	
 	}
 	
 	/*
@@ -229,6 +187,7 @@ public class ListController {
 		try {
 			result = objectService.selectObjectInfo(map);
 			model.addAllAttributes(result);
+			model.addAllAttributes(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -563,7 +522,7 @@ public class ListController {
 	
 	@RequestMapping(value= "/viewActClCardView.do", method=RequestMethod.GET)
 	public ModelAndView viewActClCard(@RequestParam Map<String,Object> map)  {  
-		 ModelAndView mv = new ModelAndView("/card/viewActClCard");
+		 ModelAndView mv = new ModelAndView("/card/editActClCard");
 		 return mv;
 	}
 	

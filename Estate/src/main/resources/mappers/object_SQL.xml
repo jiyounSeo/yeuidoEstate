@@ -212,30 +212,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , frstRegUser frstRegNm
 	  	 , (SELECT COUNT(*) FROM estate.saleobject WHERE objtTp = #{objtTp} and saleTp = #{saleTp} ) totalCnt
 	  FROM estate.saleobject obj
-	    , ( select mbrId
-				   from member m
-				  where m.mbrId in (
-					<if test="user.mbrTp eq 'MT004'" >
-					   SELECT mbrId
-						 FROM member m1
-					</if>
-					<if test="user.mbrTp eq 'MT003'" >
-					   SELECT mbrId
-						 FROM member m1
-						WHERE mbrTp in ('MT001','MT002', 'MT003')
-						  AND estateCd = #{user.estateCd}
-					</if>
-					<if test="user.mbrTp eq 'MT002'" >
-					   SELECT mbrId
-						 FROM member m1
-						WHERE mbrId = #{user.mbrId}
-						  AND estateCd = #{user.estateCd}
-					</if>
-				 )
-				) m
 	 WHERE objtTp = #{objtTp}
 	   AND saleTp = #{saleTp}	
-	   and (obj.frstRegUser = m.mbrId OR obj.modfRegUser = m.mbrId )
+	    <if test='publicYn eq "Y"'>
+	   AND publicYn = 'Y'
+	   </if>
+	   <if test="activeTp eq 'AT001'">
+	   AND obj.activeTp = 'AT001'
+	   AND obj.frstRegUser in (    <if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
+	   <if test="activeTp eq 'AT002'"> 
+	   AND obj.activeTp = 'AT002'
+	   AND obj.frstRegUser in ( 	<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	

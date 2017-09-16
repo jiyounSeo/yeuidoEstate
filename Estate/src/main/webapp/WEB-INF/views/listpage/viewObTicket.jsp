@@ -58,6 +58,9 @@
 			<td colspan="4">${activeTpNm}, ${etc}<!-- 분류 --></td>
 		</tr>
 	</table>
+	<c:if test="${publicYn ne 'Y'}">
+		<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
+	</c:if>	
 <%@ include file="/WEB-INF/views/comm/viewObBottom.jsp" %> 
 </div>
 </form>

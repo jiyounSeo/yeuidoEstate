@@ -175,7 +175,7 @@ function f_saleobject_save() {
 	if ( $("#objtNm").val() == "") {
 		alert ("물건명은 필수입력 값입니다.");
 		return;
-	}
+	} 
 	
 	if ( $("#custNm").val() == "") {
 		alert ("고객명은 필수입력 값입니다.");
@@ -204,6 +204,7 @@ function f_saleobject_save() {
 
 	var urlStr = "";
 	console.log ("objtNo" + $("#objtNo").val());
+	console.log (param);
 	if ($("#objtNo").val() != "" ) {
 		urlStr = "modifyObject.do";
 	} else {

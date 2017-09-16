@@ -114,11 +114,13 @@ function f_saleTp_color (saleTp) {
 
 function f_objectList_select(objtTp, saleTp){
 	
-	
 	//saleTpTr
 	var param = {
 		objtTp : objtTp
 	   , saleTp : saleTp
+	   , publicYn : $("#publicYn").val()
+	   , activeTp : $("#activeTp").val()
+	   , estateRange : $("#estateRange").val()
 	   , currentPage : Number(currPage)
 	   , pagePerRow : 10
 	   , pageSize : 10

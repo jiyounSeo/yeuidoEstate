@@ -8,19 +8,20 @@
 	<tr><td height="6px"></td></tr>
 	<tr>
 		<td height="90px" valign="middle">
-			<a href="./commObListView.do"><img src="./resources/images/btn_m2.jpg"></a>&nbsp;<a href="./commClListView.do"><img src="./resources/images/btn_m3.jpg"></a>
+			<!-- 공동물건카드 -->
+			<a href="./commObListView.do?publicYn=Y"><img src="./resources/images/btn_m2.jpg"></a>&nbsp;<a href="./commClListView.do?publicYn=Y"><img src="./resources/images/btn_m3.jpg"></a>
 		</td>
 	</tr>
 	<tr>
 		<td height="90px">
 			<!-- 활성물건카드 -->
-			<a href="./viewResClCardView.do?activeTp=AT001"><img src="./resources/images/btn_m4.jpg"></a>&nbsp;<a href="./viewActClCardView.do?activeTp=AT001"><img src="./resources/images/btn_m5.jpg"></a>
-		</td>
+			<a href="./commObListView.do?activeTp=AT001&estateRange=Y"><img src="./resources/images/btn_m4.jpg"></a>&nbsp;<a href="./commClListView.do?activeTp=AT001&estateRange=Y"><img src="./resources/images/btn_m5.jpg"></a>
+		</td><!-- ./viewActClCardView.do?activeTp=AT001&estateRange=Y -->
 	</tr>
 	<tr>
 		<td height="90px">
 			<!-- 보류물건카드 -->
-			<a href="./viewResClCardView.do?activeTp=AT0O2"><img src="./resources/images/btn_m6.jpg"></a>&nbsp;<a href="./viewResClCardView.do?activeTp=AT0O2"><img src="./resources/images/btn_m7.jpg"></a>
+			<a href="./commObListView.do?activeTp=AT002&estateRange=Y"><img src="./resources/images/btn_m6.jpg"></a>&nbsp;<a href="./commClListView.do?activeTp=AT002&estateRange=Y"><img src="./resources/images/btn_m7.jpg"></a>
 		</td>
 		
 	</tr>
@@ -36,5 +37,5 @@
 			<a href="./commRepList.do"><img src="./resources/images/btn_m11.jpg"></a>&nbsp;<a href="./newReport.do"><img src="./resources/images/btn_m12.jpg"></a>
 		</td>
 	</tr>
-	<tr><td><button id="btnAddrPopup" onclick="buildingPopup();return falase;">건물등록</button></td></tr>
+	<tr><td><button id="btnAddrPopup" onclick="buildingPopup();return false;">건물등록</button></td></tr>
 </table>

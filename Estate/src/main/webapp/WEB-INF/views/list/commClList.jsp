@@ -81,12 +81,18 @@
 		</tr>
 	</table>			
 </div>
+
+<input type="hidden" name="publicYn" id="publicYn" value="${publicYn}"/>
+<input type="hidden" name="activeTp" id="activeTp" value="${activeTp}"/>
+<input type="hidden" name="estateRange" id="estateRange" value="${estateRange}"/>
+<input type="hidden" name="custId" id="custId" />
+
 </form>
 
 <script id="custListTemplte" type="text/x-jquery-tmpl">	
 {{each custList}}					
 	<tr>
-		<td><a href="./viewClient.do?custId={{html $value.custId}}">{{html $value.frstRegDt}}</a></td>
+		<td><a href="#mbr" onclick="f_mbrDtl_view({{html $index}});return false;">{{html $value.frstRegDt}}</a></td>
 		<td>{{html $value.custNm}}</td>
 		<td>{{html $value.custTel1}}-{{html $value.custTel2}}-{{html $value.custTel3}}</td>
 		<td>{{html $value.reqContent}}</td>

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class CustomerController {
 	 * 고객목록조회
 	 */
 	@RequestMapping(value= "/selectCustomerList.do", method=RequestMethod.POST)
-	public ModelAndView selectCustomerList( @RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectCustomerList( @RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Paging paging = new Paging();
         			
@@ -48,7 +49,7 @@ public class CustomerController {
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
 			map.put("rowNum", (currentPage-1)*pagePerRow);
 			map.put("pagePerRow", pagePerRow);
-			
+			map.put("user",  session.getAttribute("user"));
 			custList = customerService.selectCustomerList(map);
 			if (!custList.isEmpty()) {
 				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
@@ -156,7 +157,7 @@ public class CustomerController {
 		return "/list/commClList";	
 	}
 	
-	@RequestMapping(value="/viewClient.do",method = RequestMethod.GET)
+	@RequestMapping(value="/viewClient.do",method = RequestMethod.POST)
 	public String viewClient(@RequestParam Map<String,Object> map, Model model){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
@@ -168,8 +169,14 @@ public class CustomerController {
 			model.addAttribute("messageCd", "2");
 			e.printStackTrace();
 		}
+		String url = "";
+		if ( ("Y").equals(map.get("publicYn")) ) {
+			url = "/listpage/viewClient"; 
+		} else {
+			url = "/listpage/viewClientWork"; 
+		}
 		//ModelAndView mv = new ModelAndView();
-		return "/listpage/viewClient";
+		return url;
 	
 	}
 
@@ -182,8 +189,11 @@ public class CustomerController {
 	}	
 
 	@RequestMapping(value="/commClListView.do",method = RequestMethod.GET)
-	public String goCommClList(HttpServletRequest request,Model model){
-		return "/list/commClList";	
+	public ModelAndView goCommClList(@RequestParam Map<String,Object> map){
+		ModelAndView mv = new ModelAndView("/list/commClList");
+	    mv.addAllObjects(map);
+		//odel.addAllAttributes(request.getParameterMap());
+		return mv;	
 	}
 	
 	@RequestMapping(value= "/newClient.do", method=RequestMethod.GET)

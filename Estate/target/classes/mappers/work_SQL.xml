@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="workDAO">
+
+    <insert id="insertWork" parameterType="java.util.HashMap">
+     <selectKey resultType="int" keyProperty="workNo" order="BEFORE">
+        SELECT  ifnull (MAX(CAST(workNo AS signed integer))+1,1) from workdoc 
+      </selectKey>
+		INSERT INTO 
+			workdoc (workNo
+			       , mbrId
+			       <if test=" custId != null and !custId.equals('')">
+			       , custId
+			       </if>
+			       <if test=" objtNo != null and !objtNo.equals('')">
+			       , objtNo
+			       </if>
+			       , workTitle
+			       , workContent
+			       , frstRegDt
+			       , frstRegUser
+			       , modfRegDt
+			       , modfRegUser
+			       )
+			values ( #{workNo}
+				  , #{user.mbrId}  <!-- session값 가져오기 -->
+				  <if test=" custId != null and !custId.equals('')">
+			       , #{custId}
+			       </if>
+			       <if test=" objtNo != null and !objtNo.equals('')">
+			       , #{objtNo}
+			       </if>
+			      , #{workTitle}
+			      , #{workContent}
+				  , now()
+				  , #{user.mbrId}  <!-- session값 가져오기 -->
+				  , now()
+				  , #{user.mbrId}  <!-- session값 가져오기 -->
+			)            			
+    </insert>
+    
+    <select id="selectWorkList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT workNo
+	     , mbrId
+	     , custId
+	     , objtNo
+	     , workTitle
+	     , workContent
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
+	     , frstRegUser
+	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
+	  FROM workdoc w
+	 WHERE 1=1
+	   <if test=" custId != null and !custId.equals('')">
+       AND custId = #{custId}
+       </if>
+       <if test=" objtNo != null and !objtNo.equals('')">
+       AND objtNo = #{objtNo}
+       </if>
+	   AND frstRegUser in (    		<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+     order by frstRegDt desc
+	</select>
+    
+    
+    <update  id="modifyWork" parameterType="java.util.HashMap" >
+	    UPDATE workdoc
+	       SET workTitle = #{workTitle}
+	         , workContent = #{workContent}
+			 , modfRegDt = now()
+			 , modfRegUser = #{user.mbrId}
+	    WHERE workNo = #{workNo}
+    </update>
+	
+	<delete id="deleteWork" parameterType="java.util.HashMap" >
+	    DELETE FROM workdoc 
+	    WHERE workNo = #{workNo}
+    </delete>
+    
+    <select id="searchObjtList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT o.objtNo
+    	 , o.objtNm
+    	 , o.objtTp
+    	 , (select commNm from commcd where commCd = o.objtTp ) objtTpNm
+    	 , o.saleTp
+    	 , (select commNm from commcd where commCd = o.saleTp ) saleTpNm
+     	 <choose>
+     	 	<when test='rdoAddr eq "2"'>
+     	 	, b.roadAddrPart1 addr
+		 	</when>
+     	 	<otherwise>
+     	 	, b.jibunAddr addr
+		 	</otherwise>
+     	 </choose>
+    	 , CAST(area AS signed integer) area
+	     , CAST(bargainAmt AS signed integer) bargainAmt
+	     , CAST(depositAmt AS signed integer) depositAmt
+	     , CAST(monthlyAmt AS signed integer) monthlyAmt
+	  FROM saleobject o
+	     , building b
+	     , customer c
+	 WHERE 1=1
+	   AND o.buildCd = b.buildCd
+	   AND o.custId = c.custId
+	   AND o.objtNo not in (select objtNo from interobject where custId = #{custId})
+	   <if test=" objtNm != null and !objtNm.equals('')">
+       AND o.objtNm like '%'||#{objtNm}||'%'
+	   </if>
+	   <if test=" objtTp != null and !objtTp.equals('')">
+       AND o.objtTp = #{objtTp}
+	   </if>
+	   <if test=" saleTp != null and !saleTp.equals('')">
+       AND o.saleTp = #{saleTp}
+	   </if>
+	   <if test='rdoAddr eq "1"'>
+	   AND b.roadAddrPart1||' '|| b.addrDetail like '%'||#{addr}||'%'
+	   </if>
+	   <if test='rdoAddr eq "2"'>
+	   AND b.jibunAddr||' '|| b.addrDetail like '%'||#{addr}||'%'
+	   </if>
+	   <if test=" fromArea != null and !fromArea.equals('')">
+       AND CAST(area AS signed integer) between #{fromArea} and #{toArea}
+	   </if>
+	   <if test=" fromBargainAmt != null and !fromBargainAmt.equals('')">
+       AND CAST(bargainAmt AS signed integer) between #{fromBargainAmt} and #{toBargainAmt}
+	   </if>
+	   <if test=" fromDepositAmt != null and !fromDepositAmt.equals('')">
+       AND CAST(depositAmt AS signed integer) between #{fromDepositAmt} and #{toDepositAmt}
+	   </if>
+	   <if test=" fromMonthlyAmt != null and !fromMonthlyAmt.equals('')">
+       AND CAST(monthlyAmt AS signed integer) between #{fromMonthlyAmt} and #{toMonthlyAmt}
+	   </if>
+	   <if test=" custNm != null and !custNm.equals('')">
+       AND c.custNm = #{custNm}
+	   </if>
+	   <if test=" custTel1 != null and !custTel1.equals('')">
+       AND c.custTel1 = #{custTel1} 
+	   </if>
+	   <if test=" custTel2 != null and !custTel2.equals('')">
+       AND c.custTel2 = #{custTel2} 
+	   </if>
+	   <if test=" custTel3 != null and !custTel3.equals('')">
+       AND c.custTel3 = #{custTel3} 
+    	</if>
+    </select>
+    
+   <insert id="insertInterObject" parameterType="java.util.HashMap">
+     <selectKey resultType="int" keyProperty="interNo" order="BEFORE">
+        SELECT  ifnull (MAX(CAST(interNo AS signed integer))+1,1) from interobject 
+      </selectKey>
+		INSERT INTO 
+			interobject (interNo
+			       , objtNo
+			       , custId
+			       , frstRegDt
+			       , frstRegUser
+			       , modfRegDt
+			       , modfRegUser
+			       )
+			values ( #{interNo}
+				  , #{objtNo}
+				  , #{custId}
+				  , now()
+				  , #{user.mbrId}  <!-- session값 가져오기 -->
+				  , now()
+				  , #{user.mbrId}  <!-- session값 가져오기 -->
+			)  
+	</insert>
+	
+	<delete id="deleteInterObject" parameterType="java.util.HashMap" >
+	    DELETE FROM interobject 
+	    WHERE interNo = #{interNo}
+    </delete>
+    
+    <select id="selectInterObject" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT o.objtNo
+    	 , o.objtNm
+    	 , o.objtTp
+    	 , (select commNm from commcd where commCd = o.objtTp ) objtTpNm
+    	 , o.saleTp
+    	 , (select commNm from commcd where commCd = o.saleTp ) saleTpNm
+     	 , (select roadAddrPart1 from building b where  o.buildCd = b.buildCd ) addr
+		 , CAST(area AS signed integer) area
+	     , CAST(bargainAmt AS signed integer) bargainAmt
+	     , CAST(depositAmt AS signed integer) depositAmt
+	     , CAST(monthlyAmt AS signed integer) monthlyAmt
+	     , i.interNo
+	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when i.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
+	  FROM saleobject o
+	     , interobject i
+	 WHERE 1=1
+	   AND i.custId = #{custId}
+	   AND o.objtNo = i.objtNo
+    </select>
+    
+</mapper>
