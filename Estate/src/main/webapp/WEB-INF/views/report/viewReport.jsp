@@ -22,15 +22,9 @@
 					<td class="title">계약종류</td>
 					<td id="contTpTd"></td>
 					<td class="title">계약형태</td>
-					<td class="sub">
-						<table class="sub_table">
-							<tr>
-								<td class="title2" width="100px">양타</td>
-								<td width="193px">${result.contSe}&nbsp;</td>
-								<td class="title2" width="100px">공동중개</td>
-								<td width="192px">${result.contSe}</td>
-							</tr>
-						</table>
+					<td class="sub">					
+						<input type="radio" name="contSe_rb" id="contSe_rb1" class="rbbox" disabled/><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
+						<input type="radio" name="contSe_rb" id="contSe_rb2" class="rbbox" disabled/><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
@@ -91,7 +85,7 @@
 				</tr>
 				<tr>
 					<td class="title">담당자</td>
-					<td>${result.manager}</td>
+					<td id="managerTd"></td>
 					<td class="title">사장님</td>
 					<td id="bossTd"></td>
 				</tr>			
@@ -116,5 +110,7 @@
 	<input type="hidden" name="contTp" id="contTp1" value="${result.contTp1}">
 	<input type="hidden" name="contTp" id="contTp2" value="${result.contTp2}">
 	<input type="hidden" name="boss" id="boss" value="${result.boss}">
+	<input type="hidden" name="contSe" id="contSe" value="${result.contSe}">
+	<input type="hidden" id="manager" name="manager" value="${result.manager}">
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

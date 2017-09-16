@@ -12,6 +12,8 @@ public interface ReportService
 
 	public List<Map<String,Object>> selectBossList(Map map) throws Exception;
 
+	public List<Map<String,Object>> selectManagerList(Map map) throws Exception;
+	
 	public List<Map<String,Object>> selectReportList(Map map) throws Exception;
 
 	public Map selectReportInfo(Map map) throws Exception;

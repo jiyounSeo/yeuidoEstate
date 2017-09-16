@@ -43,15 +43,9 @@
 						</table>
 					</td>
 					<td class="title">계약형태</td>
-					<td class="sub">
-						<table class="sub_table">
-							<tr>
-								<td class="title2" width="100px">양타</td>
-								<td width="193px"><input type="text" id="contSe" name="contSe" value="${result.contSe}" style="width:183px;"></td>
-								<td class="title2" width="100px">공동중개</td>
-								<td width="192px"><input type="text" id="contSe" name="contSe" value="${result.contSe}"></td>
-							</tr>
-						</table>
+					<td class="sub">					
+						<input type="radio" name="contSe_rb" id="contSe_rb1" class="rbbox" /><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
+						<input type="radio" name="contSe_rb" id="contSe_rb2" class="rbbox" /><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
@@ -112,7 +106,11 @@
 				</tr>
 				<tr>
 					<td class="title">담당자</td>
-					<td><input type="text" id="manager" name="manager" value="${result.manager}"></td>
+					<td>
+						<select id="managerSelect" name="managerSelect" style="width:183px;height:40px;">
+							<option value="0">선택</option>
+						</select>
+					</td>
 					<td class="title">사장님</td>
 					<td>
 						<select id="bossSelect" name="bossSelect" style="width:183px;height:40px;">
@@ -133,15 +131,17 @@
 			<div style="width:1400px;margin:auto;text-align:center;">
 				<a href="#"><img src="./resources/images/btn_save.jpg" onclick="f_report_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
+				<a href="./viewReport.do?contractId=${result.contractId}"><img src="./resources/images/btn_cancel.jpg"></a>
 			</div>
 		</div>
 	</div>
 	<input type="hidden" name="contractId" id="contractId" value="${result.contractId}"/>
 	<input type="hidden" name="contSttSe" id="contSttSe" value="${result.contSttSe}"/>
+	<input type="hidden" name="contSe" id="contSe" value="${result.contSe}">
 	<input type="hidden" name="contTp1" id="contTp1" value="${result.contTp1}">
 	<input type="hidden" name="contTp2" id="contTp2" value="${result.contTp2}">
 	<input type="hidden" name="boss" id="boss" value="${result.boss}">
+	<input type="hidden" id="manager" name="manager" value="${result.manager}">
 </form>
  
 

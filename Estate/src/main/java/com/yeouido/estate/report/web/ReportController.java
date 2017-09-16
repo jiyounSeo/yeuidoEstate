@@ -75,7 +75,7 @@ public class ReportController {
 		return "/report/newReport";
 	}
 	
-	@RequestMapping(value="/viewReport", method = RequestMethod.GET)
+	@RequestMapping(value="/viewReport.do", method = RequestMethod.GET)
 	public String goCommViewReport(HttpServletRequest request,Model model){
 		Map<String,Object> map = new HashMap<String, Object>(); 
 		map.put("contractId", request.getParameter("contractId"));
@@ -177,6 +177,22 @@ public class ReportController {
 	    return mav;
 	}
 
+	@RequestMapping(value= "/managerListReport.do", method=RequestMethod.POST)
+	public ModelAndView selectManagerListReport( @RequestParam Map<String,Object> map, HttpSession session)  {  
+		ModelAndView mav= new ModelAndView();
+        			
+		List<Map<String,Object>> managerList = new ArrayList<Map<String,Object>>();
+		try {
+			map.put("user",  session.getAttribute("user"));
+			managerList = reportService.selectManagerList(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("managerList", managerList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}	
+	
 	/*@RequestMapping(value="/chatPage")
 	public String viewChatPage(){
 		return "/report/chatPage";

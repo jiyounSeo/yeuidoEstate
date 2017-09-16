@@ -30,6 +30,10 @@ public class ReportServiceImpl implements ReportService
    public List<Map<String,Object>> selectBossList(Map map) throws Exception {
 	   return reportDAO.selectBossList(map);
    }
+   
+   public List<Map<String,Object>> selectManagerList(Map map) throws Exception {
+	   return reportDAO.selectManagerList(map);
+   }
 
    public List<Map<String,Object>> selectReportList(Map map) throws Exception {
 	   return reportDAO.selectReportList(map);

@@ -26,7 +26,12 @@ public class ReportDAO extends AbstractDAO
    public List<Map<String,Object>> selectBossList(Map map) throws Exception{
        return selectList("reportDAO.selectBossList", map);
    }
-
+   
+   @SuppressWarnings("unchecked")
+   public List<Map<String,Object>> selectManagerList(Map map) throws Exception{
+       return selectList("reportDAO.selectManagerList", map);
+   }
+   
    @SuppressWarnings("unchecked")
    public List<Map<String,Object>> selectReportList(Map map) throws Exception{
        return selectList("reportDAO.selectReportList", map);

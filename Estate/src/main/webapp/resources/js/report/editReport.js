@@ -1,10 +1,13 @@
 $(document).ready(function()
 {
+	var obj = document.getElementsByName('contSe_rb');
 	$("#type_rb" + $("#contSttSe").val()).attr('checked', 'checked');
+	$("#contSe_rb" + $("#contSe").val()).attr('checked', 'checked');
 	
 	init_conTp();
 	init_boss();
-
+	init_manager();
+	
 	$( ".datepicker" ).datepicker({
 	    dateFormat: 'yy-mm-dd',
 	    prevText: '이전 달',
@@ -40,6 +43,30 @@ function init_boss()
 		  $("#bossSelect").append(htmlText);
 		  
 		  $("#bossSelect").val($("#boss").val()).attr("selected", "selected");
+	  }
+	});
+}
+
+function init_manager()
+{
+	$.ajax({
+	  url : "/estate/managerListReport.do",
+	  type: "post",
+	  dataType : "json",
+	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+	  success : function(result){
+		  var htmlText = "";
+		  for (var i = 0; i < result.managerList.length; i++)
+		  {
+			  var data = result.managerList[i];
+			  htmlText = htmlText + '<option value="' + data.mbrId + '">' + data.mbrNm + '</option>';
+			  if(data.mbrId == $("#manager").val()){
+				  $("#managerTd").append(data.mbrNm);
+			  }
+		  }
+		  $("#managerSelect").append(htmlText);
+		  
+		  $("#managerSelect").val($("#manager").val()).attr("selected", "selected");
 	  }
 	});
 }
@@ -223,6 +250,17 @@ function f_report_save()
 			break;
 		}
 	}
+	
+	var reportType = document.getElementsByName('contSe_rb');
+	for( var i = 0; i < reportType.length; i++)
+	{
+		if(reportType[i].checked)
+		{
+			$("#contSe").val(i + 1);
+			break;
+		}
+	}
+	
 	var param = $("#report").serialize();
 	var urlStr;
 	if($("#btn_add").val() == undefined)
@@ -238,10 +276,11 @@ function f_report_save()
 	  success : function(data){
 		  if ( urlStr == "insertReport.do" ) {
 			  alert ("등록에 성공하였습니다");
+			  $(location).attr('href', './commRepList.do');
 		  }else{
 			  alert ("수정에 성공하였습니다");
+			  $(location).attr('href', './viewReport.do?contractId='+$("#contractId").val());
 		  }
-		  $(location).attr('href', './commRepList.do')
 	  }
 	});
 }

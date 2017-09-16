@@ -44,15 +44,9 @@
 						</table>
 					</td>
 					<td class="title">계약형태</td>
-					<td class="sub">
-						<table class="sub_table">
-							<tr>
-								<td class="title2" width="100px">양타</td>
-								<td width="193px"><input id="contSe" name="contSe" type="text" style="width:183px;"></td>
-								<td class="title2" width="100px">공동중개</td>
-								<td width="192px"><input id="contSe" name="contSe" type="text"></td>
-							</tr>
-						</table>
+					<td class="sub">					
+						<input type="radio" name="contSe_rb" id="contSe_rb1" class="rbbox" /><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
+						<input type="radio" name="contSe_rb" id="contSe_rb2" class="rbbox" /><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
@@ -113,7 +107,11 @@
 				</tr>
 				<tr>
 					<td class="title">담당자</td>
-					<td><input id="manager" name="manager" type="text" readonly="readonly" value="who?"></td>
+					<td>
+						<select id="managerSelect" name="managerSelect" style="width:183px;height:40px;">
+							<option value="0">선택</option>
+						</select>
+					</td>
 					<td class="title">사장님</td>
 					<td>
 						<select id="bossSelect" name="bossSelect" style="width:183px;height:40px;">

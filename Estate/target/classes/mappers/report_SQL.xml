@@ -93,7 +93,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, preFees = CASE WHEN #{preFees} = '' THEN NULL ELSE #{preFees} END
 		, realFees = CASE WHEN #{realFees} = '' THEN NULL ELSE #{realFees} END
 		, chngRsn = #{chngRsn}
-		, manager = #{manager}
+		, manager = #{managerSelect}
 		, boss = #{bossSelect}
 		, regDt = now()
      WHERE contractId = #{contractId}
@@ -143,6 +143,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where (estate.member.mbrTp='MT003' AND estate.member.estateCd = ${user.estateCd} ) OR estate.member.mbrTp='MT004'
 	</select>
 	
+	<select id="selectManagerList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT mbrId
+		,mbrNm
+		FROM estate.member
+		where estate.member.estateCd = ${user.estateCd}
+	</select>
+		
 	<select id="selectReportInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT contractId
 		, contTp1
