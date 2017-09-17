@@ -109,6 +109,7 @@
 		<button type="button" style="align:right;" id="btnSave" class="btn_type1" onclick="f_interObjt_insert();return false;">관심물건 등록</button>
 	</div>	
 </div>
+<input type="hidden" name="custId" id="custId" >
 </form>
 <script id="objtListTemplte" type="text/x-jquery-tmpl">	
 {{each srchObjt}}		

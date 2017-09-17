@@ -1,6 +1,27 @@
 $(document).ready(function(){
-	f_objt_select('','');
+	var objtTp = $("#objtTp").val();
+	if ( gfn_isNull ($("#objtTp").val()) ) {
+		objtTp = "";
+	}
+	var saleTp = $("#saleTp").val();
+	if ( gfn_isNull ($("#saleTp").val()) ) {
+		saleTp = "";
+	}
+	f_objt_select(objtTp,saleTp);
+	
 });
+
+function gfn_isNull(str) {
+    if (str == null) return true;
+    if (str == "NaN") return true;
+    if (new String(str).valueOf() == "undefined") return true;   
+    var chkStr = new String(str);
+    if( chkStr.valueOf() == "undefined" ) return true;
+    if (chkStr == null) return true;   
+    if (chkStr.toString().length == 0 ) return true;  
+    return false;
+}
+ 
 
 //페이징 버튼 클릭이벤트
 currPage = 1;
@@ -236,4 +257,12 @@ function f_objtDtl_view (index) {
    
    comSubmit.submit();
 */
+}
+
+function f_add_objt() {
+	var frm = $('#commObjtList')[0];
+	frm.action = '/estate/addObject.do';
+	frm.method = 'POST';
+	frm.submit();
+	
 }

@@ -60,7 +60,7 @@
 							</td>
 							<td width="486px" align="right">
 								<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
-									<a href="./addObject"><img src="./resources/images/btn_new_ob.jpg"></a>
+									<a href="#add" onclick="f_add_objt();return false;"><img src="./resources/images/btn_new_ob.jpg"></a>
 								</div>
 							</td>
 						</tr>

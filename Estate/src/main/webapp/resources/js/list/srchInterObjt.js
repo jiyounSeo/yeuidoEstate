@@ -2,30 +2,31 @@
 $(document).ready(function(){
 	$("#objtTable").hide();
 	$("#btnSave").hide();
-    custId = opener.document.getElementById("custId").value;
+	openCustId = opener.document.getElementById("custId").value;
+	$("#custId").val( openCustId);
 });
 
 function f_objt_search() {
 	var param = $("#srchObjtPop").serialize();
 	param.objtTp = $("input[name=objtTp]:checked").val();
 	param.saleTp = $("input[name=saleTp]:checked").val();
-	var param1 = param;
+	/*var param1 = param;
 	param1.custId = custId;
-	
+	*/
 	$.ajax({
 		  url : "/estate/searchObjtList.do",
 		  type: "post",
-		  data : param1,
+		  data : param,
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
 			  $("#objtTbody").empty();
+			  $("#objtTable").show();
+				
 			  if (data.srchObjt.length != 0) {
 				 $("#objtTable").show();
 				 $("#btnSave").show();
-				 console.log (data);
 				 $("#objtListTemplte").tmpl(data).appendTo("#objtTbody");
-				 
 			  } else {
 				  $("#objtListEmptyTemplte").tmpl().appendTo("#objtTbody");
 			  }
@@ -45,7 +46,7 @@ function f_interObjt_insert() {
 		return;	
 	}
 	var param = {
-			custId : custId
+			custId : openCustId
 	}
 	$.each (objtArr, function(index) {
 		param.objtNo = objtArr[index];

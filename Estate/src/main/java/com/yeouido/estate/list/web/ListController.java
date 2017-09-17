@@ -163,15 +163,27 @@ public class ListController {
 		 ModelAndView mv = new ModelAndView("/list/newObTicket");
 		 return mv;
 	}	
+	
 	/* 물건 등록건수 조회 화면 */
-	@RequestMapping(value="/addObject",method = RequestMethod.GET)
-	public String goAddObject(HttpServletRequest request,Model model){
-		return "/list/addObject";	
+	@RequestMapping(value="/addObject.do",method = RequestMethod.POST)
+	public ModelAndView addObject(@RequestParam Map<String,Object> map){
+	    ModelAndView mv = new ModelAndView("/list/addObject");
+	    mv.addAllObjects(map);
+	    return mv;
 	}
 	
 	/* 물건 조회 화면 */
 	@RequestMapping(value="/commObListView.do",method = RequestMethod.GET)
 	public ModelAndView goCommObList(@RequestParam Map<String,Object> map){
+	    ModelAndView mv = new ModelAndView("/list/commObList");
+	    mv.addAllObjects(map);
+		//odel.addAllAttributes(request.getParameterMap());
+		return mv;	
+	}
+	
+	/* 물건 조회 화면 */
+	@RequestMapping(value="/commObListPostView.do",method = RequestMethod.POST)
+	public ModelAndView commObListPostView(@RequestParam Map<String,Object> map){
 	    ModelAndView mv = new ModelAndView("/list/commObList");
 	    mv.addAllObjects(map);
 		//odel.addAllAttributes(request.getParameterMap());

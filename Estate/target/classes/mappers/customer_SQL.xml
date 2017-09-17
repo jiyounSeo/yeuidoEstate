@@ -205,7 +205,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   </if>
 	   <if test="activeTp eq 'AT001'">
 	   AND activeTp = 'AT001'
-	   AND frstRegUser in (    <if test="user.mbrTp eq 'MT004'" >
+	   AND mbrId in (    <if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1
 									</if>
@@ -219,7 +219,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   </if>
 	   <if test="activeTp eq 'AT002'"> 
 	   AND activeTp = 'AT002'
-	   AND frstRegUser in ( 	<if test="user.mbrTp eq 'MT004'" >
+	   AND mbrId in ( 	<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1
 									</if>

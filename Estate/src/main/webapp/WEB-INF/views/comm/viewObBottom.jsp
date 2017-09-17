@@ -5,7 +5,7 @@
 		<table style="width:1400px;padding:0;margin:0;border:0">
 			<tr>
 				<td align="left" width="50%">
-					<a href="./addObject"><img src="./resources/images/btn_new_ob.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#add" onclick="f_add_objectView();return false;"><img src="./resources/images/btn_new_ob.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="./modifyObjectInfo.do?objtNo=${objtNo}&objtTp=${objtTp}">
 					<img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="image" name="deleteBtn" onclick="f_objt_delete();return false;" src="./resources/images/btn_del.jpg" />

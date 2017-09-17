@@ -2,13 +2,9 @@ $(document).ready(function(){
 	formId = $("form").attr("id");
 	console.log ("!!" +formId);
 	
-	if (formId == "addObject") {
-		f_objectCnt_select();
-	} else {
-		f_objtCombo_select();
-		if ( $("#objtNo").val() != "") {
-			f_objectDtl_select();
-		}
+	f_objtCombo_select();
+	if ( $("#objtNo").val() != "") {
+		f_objectDtl_select();
 	}
 	$( ".datepicker" ).datepicker({
 	    dateFormat: 'yy-mm-dd',
@@ -243,24 +239,4 @@ function f_member_list() {
    var frm = $("#"+this.bodyt)[0];
    
    comSubmit.submit();
-}
-
-
-function f_objectCnt_select() {
-	
-	$.ajax({
-	  url : "/estate/selectObjectCnt.do",
-	  type: "post",
-	  data : '',
-	  dataType : "json",
-	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-	  success : function(result){
-		  var list =result.objCntList; 
-		  $.each (list, function (index){
-			  $("#"+ list[index].objtTp + list[index].saleTp).text (list[index].cntSaleTp);
-		  });
-		
-	  }
-	});
-	
 }
