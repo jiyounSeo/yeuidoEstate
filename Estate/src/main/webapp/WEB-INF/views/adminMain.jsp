@@ -6,9 +6,48 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
-	<script type="text/javascript" src="./resources/js/comm/common.js"></script>				
+	<script type="text/javascript" src="./resources/js/comm/common.js"></script>		
+	<script type="text/javascript" src="./resources/js/comm/latest.js"></script>					
 	
 </head>
+
+<style>
+	.latest_bbs {
+		width:372px;
+		height:276px;
+		border:0;
+		border-spacing:0;
+		padding:0;
+		border-collapse:collapse;
+		valign:top;
+	}
+	.latest_bbs td.latest_title {
+		cursor:pointer;
+	}
+	
+	.todoLatest {
+		width:572px;
+		height:276px;
+		border:0;
+		border-spacing:0;
+		padding:0;
+		border-collapse:collapse;
+		valign:top;
+	}
+	
+	.latest_bbs td.content,
+	.todoLatest td.content {
+		padding-top:15px;
+		padding-left:0px;
+		padding-right:10px;
+		padding-bottom:15px;
+	}
+	
+	.latest_bbs li,
+	.todoLatest li {
+		line-height:30px;
+	}
+</style>
 
 <div style="width:1485px; margin:auto">
 <table width="1485px" cellpadding="0" cellspaing="0" border="0">
@@ -33,11 +72,25 @@
 			<a href="#" id="listMemoBtn"><img src="./resources/images/btn_list_memo.jpg"></a>
 		</td>
 		<td width="10px"></td>
-		<td width="572px" height="276px" background="./resources/images/lst_todo_bg.jpg">-- 메모는 div 로 띄우다보니 *.do 인데도 세션이 안먹는듯함... 확인필요..<br>-- CRUD 기능은 memo, 업무일지, 공지사항, 건의게시판 완료<br>-- 게시판속성들은 내용입력하고나면 엔터가 표시가안됨</td>
+		<td width="572px" height="276px" background="./resources/images/lst_todo_bg.jpg">
+			<table class="todoLatest">
+				<tr><td height="60px;">&nbsp;</td></tr>
+				<tr><td class="content" valign="top">테스트</td></tr>
+			</table>
+		</td>
 		<td width="10px"></td>
-		<td width="372px" height="276px" background="./resources/images/lst_notice_bg.jpg"><a href="./noticeList.do"><br><br>최근게시물처리 필요<br>(테이블생성쿼리는 구글드라이버참고)</a></td>
+		<td width="372px" height="276px" background="./resources/images/lst_notice_bg.jpg">
+			<table class="latest_bbs">
+				<tr><td height="60px;" onClick="location.href='./noticeList.do'" class="latest_title">&nbsp;</td></tr>
+				<tr><td class="content" valign="top" id="notice_latest"></td></tr>
+			</table>
+		</td>
 		<td width="10px"></td>
-		<td width="372px" height="276px" background="./resources/images/lst_bbs_bg.jpg"><a href="./suggBoardList.do"><br><br>최근게시물처리 필요</a></td>
+		<td width="372px" height="276px" background="./resources/images/lst_bbs_bg.jpg">
+			<table class="latest_bbs">
+				<tr><td height="60px;" onClick="location.href='./suggBoardList.do'" class="latest_title">&nbsp;</td></tr>
+				<tr><td class="content" valign="top" id="taskdoc_latest"></td></tr>
+			</table>
 	</tr>
 </table>
 </div>

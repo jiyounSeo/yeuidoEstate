@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,10 +55,11 @@ public class NoticeController {
 	 * 등록 
 	 */
 	@RequestMapping(value= "/insertNotice.do", method=RequestMethod.POST)
-	public ModelAndView insertNotice(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView insertNotice(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		try {
 			logger.error("insertTest : ",map);
+			map.put("user",  session.getAttribute("user")); // map에 담기 해당쿼리에 #{user.mbrId} 이렇게 써주기
 			int result = noticeService.insertNotice(map);
 			mav.addObject("messageCd", "1");
 			mav.addObject("message", "공지사항 등록에 성공하였습니다.");
@@ -83,7 +85,6 @@ public class NoticeController {
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
 			map.put("rowNum", (currentPage-1)*pagePerRow);
 			map.put("pagePerRow", pagePerRow);
-			map.put("mbrId", "test");
 			
 			ntList = noticeService.selectNoticeList(map);
 			if (!ntList.isEmpty()) {
@@ -165,10 +166,11 @@ public class NoticeController {
 	 *  수정 등록
 	 */		
 	@RequestMapping(value= "/modifyNotice.do", method=RequestMethod.POST)
-	public ModelAndView modifyNotice(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView modifyNotice(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		
 		try {
+			map.put("user",  session.getAttribute("user"));
 			int result = noticeService.modifyNotice(map);
 			mav.addObject("messageCd", "1");
 		} catch (Exception e) {
@@ -176,6 +178,26 @@ public class NoticeController {
 			e.printStackTrace();
 		}
 		mav.setViewName("jsonView");	
+	    return mav;
+	}
+	
+	/* 최근게시물 */
+	@RequestMapping(value= "/selectLatestNoticeList.do", method=RequestMethod.POST)
+	public ModelAndView selectLatestNoticeList( @RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			int endNum = Integer.parseInt(map.get("endNum").toString());
+			map.put("endNum", endNum);
+			
+			list = noticeService.selectLatestNoticeList(map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("리스트조회실패");
+		}
+	    mav.addObject("list",list);
+	    mav.setViewName("jsonView");
 	    return mav;
 	}
 }

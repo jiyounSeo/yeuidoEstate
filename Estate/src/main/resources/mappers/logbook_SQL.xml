@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , modfRegUser
 			       )
 			values ( #{taskDocId}
-				  , 'test'
+				  , #{user.mbrId}
 				  , #{taskCont}
 				  , #{tomoAdver}
 				  , #{tomoSaleObj}
@@ -34,9 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{prob}
 				  , #{sugg}
 				  , now()
-				  , 'test'
+				  , #{user.mbrId}
 				  , now()
-				  , 'test'
+				  , #{user.mbrId}
 			)            			
     </insert>
     
@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <update  id="modifyLogbook" parameterType="java.util.HashMap" >
 	    UPDATE taskdoc
-	       SET mbrId = 'test'
+	       SET mbrId = #{user.mbrId}
 			 , taskCont = #{taskCont}
 			 , tomoAdver =  #{tomoAdver}
 			 , tomoSaleObj = #{tomoSaleObj}
@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 , prob =  #{prob}
 			 , sugg =  #{sugg}
 			 , modfRegDt = now()
-			 , modfRegUser = 'test'
+			 , modfRegUser = #{user.mbrId}
 	    WHERE taskDocId = #{taskDocId}
     </update>
     

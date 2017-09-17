@@ -19,4 +19,8 @@ public class SuggBoardDAO extends AbstractDAO
 	   public Map selectSuggBoardInfo(Map map) throws Exception{
 	       return selectMap("suggbdkDAO.selectLogbookInfo", map);
 	   }	   
+	   @SuppressWarnings("unchecked")
+	   public List<Map<String,Object>> selectLatestTaskList(Map map) throws Exception{
+	       return selectList("suggbdkDAO.selectLatestTaskList", map);
+	   }
 }

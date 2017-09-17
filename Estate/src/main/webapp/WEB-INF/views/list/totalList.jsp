@@ -61,7 +61,7 @@
 							</td>
 							<td width="486px" align="right">
 								<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
-									<a href="./addObject"><img src="./resources/images/btn_new_ob.jpg"></a>
+									<a href="#add" onclick="f_add_objt();return false;"><img src="./resources/images/btn_new_ob.jpg"></a>
 								</div>
 							</td>
 						</tr>
@@ -73,14 +73,7 @@
 </div>
 
 
-
-	
-
-
-
-
-
-<div style="height:150px;">&nbsp;</div>
+<div style="height:100px;">&nbsp;</div>
 <div id="custList" name="custList" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_cl_list.jpg">
@@ -115,25 +108,17 @@
 						<tr><td height="20px">&nbsp;</td></tr>
 						<tr><!-- paging -->
 							<td align="center">
-								<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
-									<tr>
-										<td width="488px" height="41px">&nbsp;</td>
-										<td width="486px" align="center">
-											<div id="custPagingDiv" class="pagination"></div>
-										</td>
-										<td width="486px" align="right">
-											<c:if test="${viewMode==1 || viewMode==3}">
-											<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
-												<c:forEach items="${viewMode_btn_state}" var="mode" varStatus="i">
-													<a href="./totalList?mainc=${mainc}&tab=${tab}&vm=${i.index+1}"><img src="./resources/images/btn_viewmode_${mode}.jpg"></a>
-												</c:forEach>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<img src="./resources/images/btn_search.jpg">
-											</div>
-											</c:if>
-										</td>
-									</tr>
-								</table>
+							<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td width="487px" align="left"><a href="#"><img src="./resources/images/btn_search2.jpg"></a></td>
+									<td width="486px" align="center">
+										<div id="custPagingDiv" class="pagination"></div>
+									</td>
+									<td width="487px" align="right">
+										<a href="./newClient.do"><img src="./resources/images/btn_new_cl.jpg"></a>
+									</td>
+								</tr>
+							</table>
 							</td>
 						</tr>
 					</table>
@@ -143,7 +128,21 @@
 		</table>		
 	</div>
 </div>
-
+<div>
+	<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td width="486px" align="right">
+				<c:if test="${viewMode==1 || viewMode==3}">
+				<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
+					<c:forEach items="${viewMode_btn_state}" var="mode" varStatus="i">
+						<a href="./totalListView.do?mainc=${mainc}&tab=${tab}&vm=${i.index+1}"><img src="./resources/images/btn_viewmode_${mode}.jpg"></a>
+					</c:forEach>
+				</div>
+				</c:if>
+			</td>
+		</tr>
+	</table>
+</div>
 
 <input type="hidden" name="objtNo" id="objtNo"/>
 <input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>

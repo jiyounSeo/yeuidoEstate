@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -132,10 +133,11 @@ public class LogbookController {
 	 *  수정 등록
 	 */		
 	@RequestMapping(value= "/modifyLogbook.do", method=RequestMethod.POST)
-	public ModelAndView modifyCustomer(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView modifyCustomer(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		
 		try {
+			map.put("user",  session.getAttribute("user"));
 			int result = logbookService.modifyLogbook(map);
 			mav.addObject("messageCd", "1");
 		} catch (Exception e) {
@@ -150,10 +152,11 @@ public class LogbookController {
 	 * 등록 
 	 */
 	@RequestMapping(value= "/insertLogbook.do", method=RequestMethod.POST)
-	public ModelAndView insertLogbook(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView insertLogbook(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Map logbookInfo = new HashMap<String, Object>();
 		try {
+			map.put("user",  session.getAttribute("user"));
 			logbookInfo = logbookService.selectLogbookConfirm(map);
 		} catch (Exception e1) {
 			e1.printStackTrace();

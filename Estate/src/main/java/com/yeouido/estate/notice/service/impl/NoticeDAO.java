@@ -31,6 +31,9 @@ public class NoticeDAO extends AbstractDAO
 	   @SuppressWarnings("unchecked")
 	   public int increaseViewCount(Map<String, Object> map) throws Exception{
 		   return update("noticeDAO.increaseViewCount", map);
+	   }	   
+	   @SuppressWarnings("unchecked")
+	   public List<Map<String,Object>> selectLatestNoticeList(Map map) throws Exception{
+	       return selectList("noticeDAO.selectLatestNoticeList", map);
 	   }
-	   
 }

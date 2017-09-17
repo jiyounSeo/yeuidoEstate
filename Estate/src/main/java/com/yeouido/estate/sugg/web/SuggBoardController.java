@@ -97,5 +97,24 @@ public class SuggBoardController {
 		mav.setViewName("/sugg/suggView");
 		return mav;	
 	}
-
+	
+	/* 최근게시물 */
+	@RequestMapping(value= "/selectLatestTaskList.do", method=RequestMethod.POST)
+	public ModelAndView selectLatestTaskList( @RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			int endNum = Integer.parseInt(map.get("endNum").toString());
+			map.put("endNum", endNum);
+			
+			list = suggbdService.selectLatestTaskList(map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("리스트조회실패");
+		}
+	    mav.addObject("list",list);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
 }

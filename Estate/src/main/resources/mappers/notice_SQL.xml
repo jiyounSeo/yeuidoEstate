@@ -13,11 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , frstRegUser
 			       , modfRegUser
 			       )
-			values ( 'test'
+			values ( #{user.mbrId}
 				  , #{ntSbj}
 				  , #{ntConts}
-				  , 'test'
-				  , 'test'
+				  , #{user.mbrId}
+				  , #{user.mbrId}
 			)            			
     </insert>
     
@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <update  id="modifyNotice" parameterType="java.util.HashMap" >
 	    UPDATE notice
-	       SET mbrId = 'test'
+	       SET mbrId = #{user.mbrId}
 			 , ntSbj = #{ntSbj}
 			 , ntConts =  #{ntConts}
 	    WHERE noticeId = #{noticeId}
@@ -66,4 +66,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		SET viewCnt = viewCnt+1
     		WHERE noticeId = #{noticeId}
     </update>
+    
+     <select id="selectLatestNoticeList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT noticeId
+	       , mbrId
+	       , ntSbj
+	       , ntConts
+	     , DATE_FORMAT(frstRegDt, '%m/%d') as frstRegDt
+	     , frstRegUser
+	  FROM notice
+      order by noticeId desc
+	 LIMIT 0, #{endNum}
+	</select>
+    
 </mapper>

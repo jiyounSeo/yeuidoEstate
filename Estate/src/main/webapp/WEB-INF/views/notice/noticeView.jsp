@@ -3,6 +3,15 @@
 <%@ include file="/WEB-INF/views/notice/listStyle.jsp" %> 
 <script type="text/javascript" src="./resources/js/notice/crudNotice.js"></script>
 <%@ include file="/WEB-INF/views/notice/delPopup.jsp" %> 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
+		$('#newBtn').append("<a href='./newNoticeView.do'><img src='./resources/images/btn_add.jpg'></a>");
+	}
+	
+});
+</script> 
 <div class="new_page_title">
 	<!-- <img src="./resources/images/title_logbook.jpg"> -->
 	<h1>공지사항</h1>

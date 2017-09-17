@@ -47,7 +47,7 @@ function f_noticeList_select() {
 }
 
 function f_notice_save() {	
-	var param = $("#"+formId).serialize();
+	var param = $("#newNotice").serialize();
 	var noticeId = $("#noticeId").val();
 	var urlStr = "";
 	if (noticeId != "" ) {
@@ -55,7 +55,6 @@ function f_notice_save() {
 	} else {
 		urlStr = "insertNotice.do";
 	}
-	
 	$.ajax({
 		  url : "/estate/" + urlStr,
 		  type: "post",

@@ -227,3 +227,11 @@ $(document).on('click', '.pagingBtn', function() {
 		}
 	}
 });
+
+function f_add_objt() {
+	var frm = $('#totalList')[0];
+	frm.action = '/estate/addObject.do';
+	frm.method = 'POST';
+	frm.submit();
+	
+}

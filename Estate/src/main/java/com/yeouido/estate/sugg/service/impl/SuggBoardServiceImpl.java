@@ -22,4 +22,7 @@ public class SuggBoardServiceImpl  implements SuggBoardService
    public Map selectSuggBoardInfo(Map map) throws Exception {
 	   return suggbdkDAO.selectSuggBoardInfo(map);
    }
+   public List<Map<String,Object>> selectLatestTaskList(Map map) throws Exception {
+	   return suggbdkDAO.selectLatestTaskList(map);
+   }
 }

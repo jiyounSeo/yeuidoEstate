@@ -15,4 +15,6 @@ public interface NoticeService
 	public Map selectNoticeInfo(Map map) throws Exception;
 
 	public int increaseViewCount(Map map) throws Exception;
+	
+	public List<Map<String,Object>> selectLatestNoticeList(Map map) throws Exception;
 }

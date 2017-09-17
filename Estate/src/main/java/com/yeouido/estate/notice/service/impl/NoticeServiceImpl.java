@@ -33,5 +33,8 @@ public class NoticeServiceImpl  implements NoticeService
    }
    public int increaseViewCount(Map map) throws Exception {
 	   return noticeDAO.increaseViewCount(map);
-   }     
+   }  
+   public List<Map<String,Object>> selectLatestNoticeList(Map map) throws Exception {
+	   return noticeDAO.selectLatestNoticeList(map);
+   }
 }
