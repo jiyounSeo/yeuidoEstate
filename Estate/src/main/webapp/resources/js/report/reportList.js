@@ -30,16 +30,20 @@ function f_reportList_select()
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(result){
 		  var htmlText = "";
-		  for (var i = 0; i < result.reportList.length; i++) {
-			  var data = result.reportList[i];
-			  htmlText = htmlText + '<tr><td><a href="./viewReport.do?contractId='+ data.contractId + '">' + data.dueDt + '</a></td>' +
-			  '<td>' + convertContTpToText(data.contTp1, data.contTp2) + '</td>' +
-			  '<td>' + data.addr + '</td>' +
-			  '<td>' + data.contDt + '</td>' +
-			  '<td>' + data.midContDt + '</td>' +
-			  '<td>' + data.remainDt + '</td>' +
-			  '<td>' + data.manager + '</td>' +
-			  '<td>' + data.chkContent + '</td></tr>';
+		  if(result.reportList.length == 0){
+			  htmlText = htmlText + '<tr><td colspan=8>게시글이 존재하지 않습니다.</td></tr>';
+		  } else {
+			  for (var i = 0; i < result.reportList.length; i++) {
+				  var data = result.reportList[i];
+				  htmlText = htmlText + '<tr><td><a href="./viewReport.do?contractId='+ data.contractId + '">' + data.dueDt + '</a></td>' +
+				  '<td>' + convertContTpToText(data.contTp1, data.contTp2) + '</td>' +
+				  '<td>' + data.addr + '</td>' +
+				  '<td>' + data.contDt + '</td>' +
+				  '<td>' + data.midContDt + '</td>' +
+				  '<td>' + data.remainDt + '</td>' +
+				  '<td>' + data.manager + '</td>' +
+				  '<td>' + data.chkContent + '</td></tr>';
+			  }
 		  }
 		  $("#reportList").append(htmlText);
 		  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
