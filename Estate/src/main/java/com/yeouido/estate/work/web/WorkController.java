@@ -186,4 +186,46 @@ public class WorkController {
 	}
 	
 	
+	/* 
+	 * 선택한 날짜에 작업한 작업목록조회
+	 */
+	@RequestMapping(value= "/selectWorkListAtDate.do", method=RequestMethod.POST)
+	public ModelAndView selectWorkListAtDate( @RequestParam Map<String,Object> map, HttpSession session)   {  
+		
+			ModelAndView mav= new ModelAndView();
+			Paging paging = new Paging();
+	        			
+			List<Map<String,Object>> workList = new ArrayList<Map<String,Object>>();
+			try {
+				map.put("user",  session.getAttribute("user")); // map에 담기 해당쿼리에 #{user.mbrId} 이렇게 써주기
+				workList = workService.selectWorkListAtDate(map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		    mav.addObject("workList",workList);
+		    mav.setViewName("jsonView");
+		    return mav;
+	}
+	
+	/* 
+	 * 선택된 달의 작업리스트
+	 */
+	@RequestMapping(value= "/selectWorkListAtMonth.do", method=RequestMethod.POST)
+	public ModelAndView selectWorkListAtMonth( @RequestParam Map<String,Object> map, HttpSession session)   {  
+		
+			ModelAndView mav= new ModelAndView();
+			Paging paging = new Paging();
+	        			
+			List<Map<String,Object>> workListAtMonth = new ArrayList<Map<String,Object>>();
+			try {
+				map.put("user",  session.getAttribute("user")); // map에 담기 해당쿼리에 #{user.mbrId} 이렇게 써주기
+				workListAtMonth = workService.selectWorkListAtMonth(map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		    mav.addObject("workListAtMonth",workListAtMonth);
+		    mav.setViewName("jsonView");
+		    return mav;
+	}	
+	
 }

@@ -206,4 +206,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   AND o.objtNo = i.objtNo
     </select>
     
+     <select id="selectWorkListAtDate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT workNo
+	     , mbrId
+	     , custId
+	     , objtNo
+	     , workTitle
+	     , workContent
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
+	     , frstRegUser
+	     from workdoc w
+	 WHERE frstRegDt = #{selectedDate} 
+     order by frstRegDt desc
+	</select>
+	
+    <select id="selectWorkListAtMonth" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT workNo
+	     , mbrId
+	     , custId
+	     , objtNo
+	     , workTitle
+	     , workContent
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
+	     , frstRegUser
+	     from workdoc w
+	 WHERE frstRegDt like #{selectedMonth}
+	</select>	
 </mapper>

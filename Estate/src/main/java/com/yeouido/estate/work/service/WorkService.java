@@ -19,5 +19,8 @@ public interface WorkService
 	public List<Map<String,Object>> selectInterObject(Map map) throws Exception;
 
 	public int deleteInterObject(Map map) throws Exception;
-	
+
+	public List<Map<String,Object>> selectWorkListAtDate(Map map) throws Exception;
+
+	public List<Map<String,Object>> selectWorkListAtMonth(Map map) throws Exception;
 }

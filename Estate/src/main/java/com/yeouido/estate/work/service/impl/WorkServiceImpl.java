@@ -47,6 +47,14 @@ public class WorkServiceImpl  implements WorkService
    public int deleteInterObject(Map map) throws Exception {
 	   return workDAO.deleteInterObject(map);
    }
+   @Override
+   public List<Map<String,Object>> selectWorkListAtDate(Map map) throws Exception {
+	   return workDAO.selectWorkListAtDate(map);
+   }
+   @Override
+   public List<Map<String,Object>> selectWorkListAtMonth(Map map) throws Exception {
+	   return workDAO.selectWorkListAtMonth(map);
+   }
 
 
 }
