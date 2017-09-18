@@ -66,8 +66,11 @@ public class ListController {
 	
 	/* 물건 + 고객 리스트 화면*/
 	@RequestMapping(value="/totalListView.do",method = RequestMethod.GET)
-	public String goTotalList(HttpServletRequest request,Model model){
-		
+	public ModelAndView goTotalList(@RequestParam Map<String,Object> map)  {  
+		 ModelAndView mv = new ModelAndView("/list/totalList");
+		    mv.addAllObjects(map);
+		    
+		/*
 		int mainc = 1;
 		int tab = 1;
 		int vm = 1;			// viewMode : 1 - default / 2 (object only) / 3 (client only)
@@ -122,8 +125,8 @@ public class ListController {
 		model.addAttribute("viewMode_btn_state", viewMode_btn_state);
 		model.addAttribute("viewUrl", viewUrl);
 		model.addAttribute("pageMark", pageMark);
-		
-		return "/list/totalList";	
+		*/
+		return mv;	
 	}
 	
 	

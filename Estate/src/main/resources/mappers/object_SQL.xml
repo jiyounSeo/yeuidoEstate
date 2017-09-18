@@ -163,7 +163,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
 										   SELECT mbrId
 											 FROM member m1
-											WHERE mbrTp in ('MT001','MT002', 'MT003')
+											WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
 											  AND estateCd = #{user.estateCd}
 										</if>
 					 				)
@@ -177,7 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
 										   SELECT mbrId
 											 FROM member m1
-											WHERE mbrTp in ('MT001','MT002', 'MT003')
+											WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
 											  AND estateCd = #{user.estateCd}
 										</if>
 					 				)
@@ -236,7 +236,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
 									   SELECT mbrId
 										 FROM member m1
-										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
 										  AND estateCd = #{user.estateCd}
 									</if>
 				 				)
@@ -250,7 +250,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
 									   SELECT mbrId
 										 FROM member m1
-										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
 										  AND estateCd = #{user.estateCd}
 									</if>
 				 				)

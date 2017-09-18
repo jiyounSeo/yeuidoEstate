@@ -122,6 +122,7 @@ function f_objectList_select(objtTp, saleTp){
 	   , currentPage : Number(currObjtPage)
 	   , pagePerRow : $("#viewMode").val() == "1"  ? 5 : 10  
 	   , pageSize : 10
+	   , publicYn : $("#publicYn").val()
 	};
 	$.ajax({
 	  url : "/estate/selectObjectList.do",
@@ -182,10 +183,70 @@ function f_objectList_select(objtTp, saleTp){
 }
 
 
+function f_objtDtl_view (index) {
+	console.log (objtList[index]);
+	$("#objtNo").val(objtList[index].objtNo);
+	$("#objtTp").val(objtList[index].objtTp);
+	$("#saleTp").val(objtList[index].saleTp);
+	var url = "";
+	switch (objtList[index].objtTp) {
+		case "OT001"	:
+			url = "viewObApt";
+			break;
+		case "OT002"	:
+			url = "viewObStore";
+			break;
+		case "OT003"	:
+			url = "viewObOffice";
+			break;
+		case "OT004"	:
+			url = "viewObOps";
+			break;
+		case "OT005"	:
+			url = "viewObHrapt";
+			break;
+		case "OT006"	:
+			url = "viewObTicket";
+			break;
+		
+	}
+	$("#viewUrl").val(url);
+	
+	var frm = $('#totalList')[0];
+	frm.action = '/estate/objtDtlView.do';
+	frm.method = 'POST';
+	frm.submit();
+	/*
+   var comSubmit = new ComSubmit($('form').attr('id'));
+   comSubmit.setUrl("/estate/objtDtlView.do");
+   
+   comSubmit.submit();
+*/
+}
+
+
+function f_mbrDtl_view (index) {
+	console.log (custList[index]);
+	$("#custId").val(custList[index].custId);
+	var frm = $('#totalList')[0];
+	frm.action = '/estate/viewClient.do';
+	frm.method = 'POST';
+	frm.submit();
+	/*
+   var comSubmit = new ComSubmit($('form').attr('id'));
+   comSubmit.setUrl("/estate/objtDtlView.do");
+   
+   comSubmit.submit();
+*/
+}
+
+
+
 function f_custList_select() {
 	var param = { currentPage : Number(currCustPage)
 				   , pagePerRow : $("#viewMode").val() == "1" ? 5 : 10 
 				   , pageSize : 10
+				   , publicYn : $("#publicYn").val()
 	};
 	$.ajax({
 	  url : "/estate/selectCustomerList.do",
@@ -196,6 +257,7 @@ function f_custList_select() {
 	  success : function(result){
 		  $("#custTbody").empty();
 		  if (result.custList.length != 0) {
+			  custList = result.custList;
 			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
 			  $("#custPagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#custPagingDiv #page" + currCustPage).addClass("active");
@@ -227,11 +289,3 @@ $(document).on('click', '.pagingBtn', function() {
 		}
 	}
 });
-
-function f_add_objt() {
-	var frm = $('#totalList')[0];
-	frm.action = '/estate/addObject.do';
-	frm.method = 'POST';
-	frm.submit();
-	
-}
