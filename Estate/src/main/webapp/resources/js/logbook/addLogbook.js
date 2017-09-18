@@ -38,7 +38,7 @@ function f_setting_text(result) {
 }
 
 function f_customer_save() {	
-	var param = $("#"+formId).serialize();
+	var param = $("#newLogbook").serialize();
 	var taskDocId = $("#taskDocId").val();
 	var urlStr = "";
 	if (taskDocId != "" ) {
