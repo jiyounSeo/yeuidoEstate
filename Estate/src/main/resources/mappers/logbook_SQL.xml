@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 				, frstRegUser
 			  FROM taskdoc
-			  WHERE mbrId = #{mbrId} AND frstRegDt like #{currentDt}
+			  WHERE mbrId = #{user.mbrId} AND frstRegDt like #{currentDt}
 	</select>
 	
 	<delete id="deleteLogbook" parameterType="java.util.HashMap" >

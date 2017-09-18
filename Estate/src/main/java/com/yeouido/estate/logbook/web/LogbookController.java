@@ -37,12 +37,12 @@ public class LogbookController {
 	 * 목록조회
 	 */
 	@RequestMapping(value= "/selectLogbookList.do", method=RequestMethod.POST)
-	public ModelAndView selectLogbookList( @RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectLogbookList( @RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		 			
 		List<Map<String,Object>> logbookList = new ArrayList<Map<String,Object>>();
 		try {
-			map.put("mbrId", "test");
+			map.put("user",  session.getAttribute("user"));
 			logbookList = logbookService.selectLogbookList(map);
 			logger.error("logbookList : ", logbookList.size());
 		} catch (Exception e) {
