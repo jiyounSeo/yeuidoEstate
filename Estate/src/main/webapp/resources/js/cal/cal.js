@@ -6,6 +6,7 @@ var startMonth = moment().format('M');
 var currentYear;
 var currentMonth;
 var thisMonth;
+var workList;
 
 $(document).ready( function() {
 	
@@ -133,20 +134,97 @@ function selectWorkListAtdate(date){
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
-			  var result = data.workList;
+			  workList = data.workList;
 			  console.log ("search success");
 			  console.log (data);
 			  
 			  $("#workList").empty();
 			  
 			  var htmlText = '<table cellpadding="0" cellspacing="0">';
-			  for(var i=0; i<result.length; i++){
-				  var item = result[i];
-				  htmlText = htmlText + '<tr><td>[' + item.mbrNm + '] ' + item.workTitle + '</td></tr>';
+			  for(var i=0; i<workList.length; i++){
+				  var item = workList[i];
+				  htmlText = htmlText + '<tr><td><a href="#" onclick="f_modifyWork(' + i + ');return false;">[' + item.mbrNm + '] ' + item.workTitle + '</a></td></tr>';
 			  }
 			  htmlText += '</table>';
 			  console.log(htmlText);
 			  $("#workList").append(htmlText);
 		  }
 	});
+}
+
+
+function f_modifyWork(index) {
+	$("#workNo").val(workList[index].workNo);
+	$("#workTitle").val(workList[index].workTitle);
+	$("#workContent").val(workList[index].workContent);
+	$("#divAddWorkPopup").lightbox_me({centered: true});
+}
+
+
+function f_work_save() {	
+	
+	var workContent = $("#workContent").val();
+	var urlStr = "";
+	if ( $("#workNo").val() != "" ) {
+		urlStr = "modifyWork.do";
+	} else {
+		urlStr = "insertWork.do";
+	}
+	
+	if ($("#workTitle").val() == "") {
+		alert ("작업내역 제목을 입력하세요.");
+		$("#workTitle").focus();
+		return;
+	} 
+
+	if ($("#workContent").val() == "") {
+		alert ("작업내역을 입력하세요.");
+		$("#workContent").focus();
+		return;
+	} 
+	
+	var param = {
+		workNo : $("#workNo").val()
+		, workContent : $("#workContent").val()
+		, workTitle : $("#workTitle").val()
+		, objtNo : $("#objtNo").val()
+		, custId : $("#custId").val()
+	}
+	
+	$.ajax({
+		  url : "/estate/" + urlStr,
+		  type: "post",
+		  data : param,
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+			  $("#divAddWorkPopup").trigger('close');
+				  alert (data.message);
+				  $("#divAddWorkPopup").trigger('close');
+				  selectWorkListAtdate(moment().format('YYYY-MM-DD'));
+		  }
+		});
+}
+
+function f_delete_work(index)
+{
+	var isDel = confirm("작업내역을 삭제하시겠습니까?");
+	var param = {workNo : workList[index].workNo};	
+	if(isDel){
+		$.ajax({
+			  url : "/estate/deleteWork.do",
+			  type: "post",
+			  data : param,
+			  dataType : "json",
+			  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+			  success : function(data){
+				  alert (data.message);
+				  selectWorkListAtdate(moment().format('YYYY-MM-DD'));
+			  }
+		});
+	}
+}
+
+function f_closeAll(){
+	$("#divAddWorkPopup").trigger('close');  	
 }
