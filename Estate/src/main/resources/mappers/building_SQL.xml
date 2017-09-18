@@ -4,10 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
 <mapper namespace="buildingDAO">
-
     <insert id="insertBuilding" parameterType="java.util.HashMap" >
       <selectKey resultType="int" keyProperty="buildCd" order="BEFORE">
-        SELECT   ifnull (MAX(CAST(buildCd AS signed integer))+1,1) from building      
+        SELECT   if ( isnull(buildCd), 1, MAX(CAST(buildCd AS signed integer))+1)) from building      
       </selectKey>
 		INSERT INTO 
 			building (buildCd

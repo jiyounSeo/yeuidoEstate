@@ -14,11 +14,10 @@ $(document).ready(function() {
 	$("#loginDiv").hide();
 	$("#logoutDiv").hide();
 	userSession = '${sessionScope.user}';
-	
 	if( '${sessionScope.user.mbrId}' != null && '${sessionScope.user.mbrId}' != ''){
 		$("#logoutDiv").show();
-	 	$('#userNm').text('${sessionScope.user.mbrNm}'+'님|');	
-		//$('#userNm').css('display','inline');
+		$('#userNm').text('${sessionScope.user.mbrNm}'+'님|');	
+		$('#userNm').css('display','inline');
 		//$('#modifyMbrInfo').css('display','inline');
 		$('#login').text('로그아웃|');
 		if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {

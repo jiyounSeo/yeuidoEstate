@@ -28,6 +28,7 @@ import com.yeouido.estate.list.web.ListController;
 @Controller
 public class CustomerController {
 	
+	
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 	final static int OBJECT_MAIN_CATEGORY_NUM = 6; 
 	final static int OBJECT_TAB_CATEGORY_MAX = 4;
@@ -72,16 +73,18 @@ public class CustomerController {
 	 * 고객등록 
 	 */
 	@RequestMapping(value= "/insertCustomer.do", method=RequestMethod.POST)
-	public ModelAndView insertCustomer(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView insertCustomer(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Map custInfo = new HashMap<String, Object>();
 		try {
+			
 			custInfo = customerService.selectCustomerConfirm(map);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		if (("").equals(custInfo.get("custId")) || custInfo.get("custId") == null) {
 			try {
+				map.put("user",  session.getAttribute("user"));
 				int result = customerService.insertCustomer(map);
 				mav.addObject("messageCd", "1");
 				mav.addObject("message", "고객 등록에 성공하였습니다.");
@@ -123,10 +126,12 @@ public class CustomerController {
 	 * 고객 수정 조회
 	 */		
 	@RequestMapping(value= "/modifyCustomer.do", method=RequestMethod.POST)
-	public ModelAndView modifyCustomer(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView modifyCustomer(@RequestParam Map<String,Object> map, HttpSession session )  {  
 		ModelAndView mav= new ModelAndView();
 		
 		try {
+			map.put("user",  session.getAttribute("user"));
+			
 			int result = customerService.modifyCustomer(map);
 			mav.addObject("messageCd", "1");
 		} catch (Exception e) {
