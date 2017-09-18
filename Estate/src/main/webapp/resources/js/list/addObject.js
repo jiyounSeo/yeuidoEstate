@@ -104,13 +104,20 @@ function f_setting_text(result) {
 	$("#custTel3").val(result.custTel3);
 	$("#buildCd").val(result.buildCd);
 	$("#area").val(result.area);
+	$("#businessNm").val(result.businessNm)
 	$("#bargainAmt").val(result.bargainAmt);
 	$("#depositAmt").val(result.depositAmt);
 	$("#monthlyAmt").val(result.monthlyAmt);
+	$("#rightAmt").val(result.rightAmt);
+	$("#manageAmt").val(result.manageAmt);
+	$("#parcelAmt").val(result.parcelAmt);
+	$("#premiumAmt").val(result.premiumAmt);
+	
 	$("#dong").val(result.dong);
 	$("input[name='floor']").val(result.floor);
 	$("#directionTp").val(result.directionTp);
 	$("#dueDt").val(result.dueDt);
+	$("#availableDt").val(result.availableDt);
 	$("#roomCnt").val(result.roomCnt);
 	$("#bathCnt").val(result.bathCnt);
 	$('input[name="saleTp"]:radio:input[value="' + result.saleTp + '"]').attr('checked', 'checked');

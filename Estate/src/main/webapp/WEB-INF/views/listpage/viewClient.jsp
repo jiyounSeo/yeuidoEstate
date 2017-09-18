@@ -17,6 +17,13 @@
 			<td>${mbrId}<!--  --></td>
 		</tr>
 		<tr>
+			<td class="title">고객상태</td>
+			<td colspan="4">
+			  ${custState}
+			
+			</td>
+		</tr>
+		<tr>
 			<td class="title" rowspan="2">고객정보</td>
 			<td class="title2">핸드폰</td>
 			<td>${custTel1}-${custTel2}-${custTel3}</td>
@@ -45,6 +52,11 @@
 			<td colspan="4"><!--  -->${feature}</td>
 		</tr>
 		<tr>
+			<td class="title">접수</td>
+			<td colspan="4"><!--  -->${jeobsu}</td>
+		</tr>
+		
+		<tr>
 			<td class="title">구입조건</td>
 			<td colspan="4"><!--  -->${buyCond}</td>
 		</tr>
@@ -52,6 +64,12 @@
 			<td class="title">상세내역</td>
 			<td colspan="4"><!--  -->${dtlContent}</td>
 		</tr>
+		
+		<tr>
+			<td class="title">담당자메모</td>
+			<td colspan="4"><!--  -->${mbrMemo}</td>
+		</tr>
+		
 	</table>
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">

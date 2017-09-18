@@ -40,10 +40,7 @@
 			<td class="title">유형</td>
 			<td>
 			  <input type="radio" id="saleTp1" name="saleTp" value="ST001"/><label for="saleTp1">매매</label>
-			  <input type="radio" id="saleTp2" name="saleTp" value="ST002"/><label for="saleTp2">전세</label>
-			  <input type="radio" id="saleTp3" name="saleTp" value="ST003"/><label for="saleTp3">월세</label>
-			  <input type="radio" id="saleTp4" name="saleTp" value="ST004"/><label for="saleTp4">렌트</label>
-			
+			  <input type="radio" id="saleTp5" name="saleTp" value="ST005"/><label for="saleTp5">임대</label>
 			</td>
 		</tr>
 		<tr>
@@ -57,7 +54,7 @@
 		<tr>
 			<td class="title">동 / 층 / 향</td>
 			<td colspan="2">
-				<select style="width:130px" id="dong" name="dong"><option>A</option></select> 동&nbsp;&nbsp;&nbsp;
+				<input type="text" name="dong" id="dong" style="width:140px" maxlength="5"/> 동&nbsp;&nbsp;&nbsp;
 				<input type="number" name="floor" name="floor" style="width:140px" min="0" max="999" oninput="if(this.value.length>3) this.value=this.value.slice(0,3)"  /> 층&nbsp;&nbsp;&nbsp;
 				<select style="width:130px" id="directionTp" name="directionTp" >
 					<option value="DR001">동</option>
