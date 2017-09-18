@@ -15,18 +15,6 @@
 			<td colspan="4"><input type="text" style="width:200px" id="custNm" name="custNm"></td>
 		</tr>
 		<tr>
-			<td class="title">고객상태</td>
-			<td colspan="4">
-			  <input type="checkbox" name="contactYn" id="contactYn" value="Y" /><label for="contactYn">계약상황</label>
-			  <input type="checkbox" name="explorYn" id="explorYn" value="Y" /><label for="explorYn">답사추진</label>
-			  <input type="checkbox" name="talkYn" id="talkYn" value="Y" /><label for="talkYn">상담중</label>
-			  <input type="checkbox" name="searchYn" id="searchYn" value="Y" /><label for="searchYn">물건검색</label>
-			  <input type="checkbox" name="visitYn" id="visitYn" value="Y" /><label for="visitYn">방문예정</label>
-			  <input type="checkbox" name="meetYn" id="meetYn" value="Y" /><label for="meetYn">미팅예정</label>
-			  <input type="text" style="width:200px" id="custNm" name="custNm"></td>
-		</tr>
-		
-		<tr>
 			<td class="title" rowspan="2">고객정보</td>
 			<td class="title2">핸드폰</td>
 			<td><input type="number" style="width:105px" id="custTel1" name="custTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
@@ -70,11 +58,6 @@
 			<td colspan="4"><input type="text" id="feature" name="feature"></td>
 		</tr>
 		<tr>
-			<td class="title">접수</td>
-			<td colspan="4"><input type="text" id="jeobsu" name="jeobsu"></td>
-		</tr>
-		
-		<tr>
 			<td class="title">구입조건</td>
 			<td colspan="4"><input type="text" id="buyCond" name="buyCond"></td>
 		</tr>
@@ -84,13 +67,6 @@
 				<textarea rows="10" cols="50" id="dtlContent" name="dtlContent"></textarea>
 			</td>
 		</tr>
-		<tr>
-			<td class="title">상세내역</td>
-			<td colspan="4">
-				<textarea rows="10" cols="50" id="mbrMemo" name="mbrMemo"></textarea>
-			</td>
-		</tr>
-		
 		<tr>
 			<td class="title">분류</td>
 			<td colspan="4">

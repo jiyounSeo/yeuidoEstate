@@ -4,9 +4,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
 <mapper namespace="objectDAO">
+
     <insert id="insertObject" parameterType="java.util.HashMap" >
       <selectKey resultType="string" keyProperty="objtNo" order="BEFORE">
-        SELECT   if ( isnull( objtNo), 1, MAX(CAST(objtNo AS signed integer))+1) from saleobject       
+        SELECT   ifnull (MAX(CAST(objtNo AS signed integer))+1,1) from saleobject       
       </selectKey>
     <![CDATA[
         INSERT into saleobject
@@ -138,7 +139,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     
     <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT a.objtTp, a.saleTp, if(isnull(cntSaleTp), 0, cntSaleTp) cntSaleTp
+	SELECT a.objtTp, a.saleTp, ifnull(cntSaleTp, 0) cntSaleTp
 	FROM
 		(
 		SELECT a.commCd objtTp, b.commCd saleTp
@@ -201,12 +202,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , floor
 	     , directionTp
 	     , (select commNm from commcd where commCd = directionTp ) directionTpNm
-	     , businessNm
 	     , bargainAmt
 	     , concat(depositAmt , '/' , monthlyAmt) depositAmt
 	     , rightAmt
-	     , manageAmt
-	     , if (isnull(ondolYn), 'N', ondolYn) ondolYn
+	     , ifnull (ondolYn, 'N') ondolYn
 	     , conditionTp 
 	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
 	     , frstRegUser
@@ -221,8 +220,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 ,  premiumAmt
 	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
 	     , frstRegUser frstRegNm
-	  	 , (SELECT COUNT(*) FROM saleobject WHERE objtTp = #{objtTp} and saleTp = #{saleTp} ) totalCnt
-	  FROM saleobject obj
+	  	 , (SELECT COUNT(*) FROM estate.saleobject WHERE objtTp = #{objtTp} and saleTp = #{saleTp} ) totalCnt
+	  FROM estate.saleobject obj
 	 WHERE objtTp = #{objtTp}
 	   AND saleTp = #{saleTp}	
 	    <if test='publicYn eq "Y"'>
@@ -279,8 +278,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , bargainAmt
 	     , depositAmt
 	     , monthlyAmt
-	     , rightAmt
-	     , manageAmt
 	     , dong
 	     , floor
 	     , directionTp
@@ -288,16 +285,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
 	 	 , roomCnt
 	 	 , bathCnt
-	     , if (isnull(ondolYn), 'N', ondolYn) ondolYn
+	     , ifnull (ondolYn, 'N') ondolYn
 	     , availableTp
 	     , (select commNm from commcd where commCd = obj.availableTp ) availableTpNm
 	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
-	 	 , conditionTp 
+	 	 , rightAmt
+	     , conditionTp 
 	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
 	     , obj.activeTp
 	     , (select commNm from commcd where commCd = obj.activeTp ) activeTpNm
 	     , surtaxYn
-	     , if ( isnull(interiorYn), '' , 'N')  interiorYn
+	     , ifnull (interiorYn, 'N')  interiorYn
 	     , advertiseYn
 	     , obj.publicYn
 	     , parcelAmt
@@ -307,7 +305,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , obj.frstRegUser
 	     , obj.frstRegUser frstRegNm
-	  FROM saleobject obj
+	  FROM estate.saleobject obj
 	     , customer cust
 	 WHERE objtNo = #{objtNo}
 	   AND objtTp = #{objtTp}

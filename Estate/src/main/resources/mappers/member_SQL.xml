@@ -4,7 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
 <mapper namespace="memberDAO">
-
 <!--
     <resultMap type="com.test.dto.TestDTO" id="TestResultList">
         <result property="id" column="id" />
@@ -17,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     -->
     <insert id="insertMember" parameterType="java.util.HashMap">
     	<selectKey resultType="String" keyProperty="mbrId" order="BEFORE">
-	        SELECT   if ( isnull(mbrId), 1, MAX(CAST(mbrId AS signed integer))+1) from member       
+	        SELECT   ifnull (MAX(CAST(mbrId AS signed integer))+1,1) from member       
 	    </selectKey>
         INSERT INTO member  
         	(
@@ -82,9 +81,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			  , estateCd
 		  FROM member m
 		 WHERE 1=1
-		   AND m.loginId = #{loginId}
+		   AND M.loginId = #{loginId}
 		   <if test="pw != null and pw != '' ">
-		   	AND m.pw = #{pw}
+		   	AND M.pw = #{pw}
 		   </if>
 	</select>
 	

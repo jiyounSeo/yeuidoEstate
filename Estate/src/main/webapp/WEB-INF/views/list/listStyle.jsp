@@ -18,17 +18,6 @@ body {
 	font-family: "Jeju Gothic", sans-serif;
 	padding : 12px 10px;
 }
-
-.title_txt {
-	font-size : 30px;
-	font-weight : 500;
-	text-align : center;
-	vertical-align : middle;
-	color : #777d93;
-	font-family: "Jeju Gothic", sans-serif;
-}
-
-
 .tab_on_txt {
 	display :block;
 	background-color :#F6F8F7;

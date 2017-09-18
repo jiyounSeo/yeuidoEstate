@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	//f_objectDtl_select();
-	if ($("#custId").val() != "") {
+	formId = $("form").attr("id");
+	if ($("custId") != "") {
 		f_customerDtl_select();
 	}
 	
@@ -50,32 +51,12 @@ function f_setting_text(result) {
 	if (result.publicYn  == "Y") {
 		$('input:checkbox[id="publicYn"]').attr("checked", true); //단일건
 	}
-	
-	if (result.contactYn  == "Y") {
-		$('input:checkbox[id="contactYn"]').attr("checked", true); //단일건
-	}
-	if (result.explorYn  == "Y") {
-		$('input:checkbox[id="explorYn"]').attr("checked", true); //단일건
-	}
-	if (result.talkYn  == "Y") {
-		$('input:checkbox[id="talkYn"]').attr("checked", true); //단일건
-	}
-	if (result.searchYn  == "Y") {
-		$('input:checkbox[id="searchYn"]').attr("checked", true); //단일건
-	}
-	if (result.visitYn  == "Y") {
-		$('input:checkbox[id="visitYn"]').attr("checked", true); //단일건
-	}
-	if (result.meetYn  == "Y") {
-		$('input:checkbox[id="meetYn"]').attr("checked", true); //단일건
-	}
-	  
 }
 
 
 function f_customer_save() {
 	
-	var param = $("#newClient").serialize();
+	var param = $("#"+formId).serialize();
 	
 	if ( $("#custNm").val() == "") {
 		alert ("고객명은 필수입력 값입니다.");
@@ -92,15 +73,7 @@ function f_customer_save() {
 	} else {
 		param.activeTp = $("input[name=activeTp]:checked").val();
 	}
-	param.contactYn =  $("input[name=contactYn]:checked").val();
-	param.explorYn =  $("input[name=explorYn]:checked").val();
-	param.talkYn =  $("input[name=talkYn]:checked").val();
-	param.searchYn =  $("input[name=searchYn]:checked").val();
-	param.visitYn =  $("input[name=visitYn]:checked").val();
-	param.meetYn =  $("input[name=meetYn]:checked").val();
-	console.log (param);
-	
-	
+
 	var urlStr = "";
 	if ($("#custId").val() != "" ) {
 		urlStr = "modifyCustomer.do";

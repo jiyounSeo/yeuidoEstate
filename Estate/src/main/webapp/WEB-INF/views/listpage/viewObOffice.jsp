@@ -51,8 +51,8 @@
 			<td colspan="4"><!--  -->${interiorYn}</td>
 		</tr>
 		<tr>
-			<td class="title">상태</td>
-			<td colspan="4">${conditionTpNm}&nbsp;</td>
+			<td class="title">입주가능일</td>
+			<td colspan="4">${availableTpNm}&nbsp;&nbsp;<!--  -->${availableDt}</td>
 		</tr>
 		<tr>
 			<td class="title">매물설명</td>

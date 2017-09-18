@@ -41,7 +41,7 @@
 		<tr>
 			<td class="title">권리금</td>
 			<td colspan="2">
-				권리금 <!--  -->${rightAmt}만원 / 관리비 <!--  -->${manageAmt} 만원	
+				권리금 <!--  --> 만원 / 관리비 <!--  --> 만원	
 			</td>
 			<td class="title">만기일</td>
 			<td><!--  -->${dueDt}</td>
