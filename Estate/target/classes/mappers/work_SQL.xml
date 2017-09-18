@@ -206,6 +206,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   AND o.objtNo = i.objtNo
     </select>
     
+    <!-- 선택된 날짜의 작업리스트를 가져오는 쿼리 -->
+    <!-- ** 같은 소속 부동산 사람들 조건 추가되어야함 !!!! -->
      <select id="selectWorkListAtDate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT workNo
 	     , mbrId
@@ -221,6 +223,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      order by frstRegDt desc
 	</select>
 	
+    <!-- 선택된 달에 작성된 작업리스트를 가져오는 쿼리 -->
+    <!--  ** 총 고객관련 작업이 몇건인지, 물건관련 작업이 몇건인지 count 해야함 -->
+    <!-- ** 같은 소속 부동산 사람들 조건 추가되어야함 !!!! -->
     <select id="selectWorkListAtMonth" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT workNo
 	     , mbrId
