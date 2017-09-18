@@ -29,7 +29,7 @@
 <div id="divAddWorkPopup" style="display: none;">
 	<form id="workForm">
 		<table class="addMemoPopup" >
-			<tr><td height="34px" colspan="2"><a href="#" onClick="f_closeAll()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
+			<tr><td height="34px" colspan="2"><a href="#" onClick="f_closePopup()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
 			<tr>
 				<td width="20%" class="contentTitle" style="text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작업내역 제목</td>
 				<td class="content">
@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<td class="btn" colspan="2">
-					<a href="#" onClick="f_closeAll()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#" onClick="f_closePopup()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="#" id="popOkAdd" ><img src="./resources/images/btn_ok.jpg" onClick="f_work_save()"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>

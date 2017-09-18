@@ -225,6 +225,6 @@ function f_delete_work(index)
 	}
 }
 
-function f_closeAll(){
+function f_closePopup(){
 	$("#divAddWorkPopup").trigger('close');  	
 }
