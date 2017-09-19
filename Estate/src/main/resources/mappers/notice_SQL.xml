@@ -34,7 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , frstRegUser
 	     , (SELECT COUNT(*) FROM notice) totalCnt
 	     , viewCnt
-	  FROM notice
+	     , (SELECT mbrNm FROM member m WHERE m.mbrId = n.mbrId ) mbrNm 
+	  FROM notice n
       order by noticeId desc
 	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
@@ -47,7 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		     	, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 				, frstRegUser
 				, viewCnt
-			  FROM notice
+				, (SELECT mbrNm FROM member m WHERE m.mbrId = n.mbrId ) mbrNm 
+			  FROM notice n
 			 WHERE noticeId = #{noticeId}
 	</select>
 	

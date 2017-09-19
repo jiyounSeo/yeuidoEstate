@@ -15,7 +15,7 @@
 			<td class="title">작성일</td>
 			<td>${frstRegDt}</td>
 			<td class="title">작성자</td>
-			<td>${frstRegUser}</td>
+			<td>${mbrNm}</td>
 		</tr>
 		<tr>
 			<td class="title">로그인</td>

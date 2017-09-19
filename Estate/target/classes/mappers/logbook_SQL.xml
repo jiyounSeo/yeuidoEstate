@@ -54,7 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, sugg
 				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 				, frstRegUser
-			  FROM taskdoc
+	     		, (SELECT mbrNm FROM member m WHERE m.mbrId = t.mbrId ) mbrNm 
+			  FROM taskdoc t
 			 WHERE taskDocId = #{taskDocId}
 	</select>
 	
@@ -72,7 +73,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, sugg
 				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 				, frstRegUser
-			  FROM taskdoc
+	     		, (SELECT mbrNm FROM member m WHERE m.mbrId = t.mbrId ) mbrNm 
+			  FROM taskdoc t
 			  WHERE mbrId = #{user.mbrId} AND frstRegDt like #{currentDt}
 	</select>
 	

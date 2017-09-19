@@ -38,7 +38,7 @@
 	<tr>
 		<td>{{html $value.noticeId}}</td>
 		<td><a href="./viewNoticeItem.do?noticeId={{html $value.noticeId}}">{{html $value.ntSbj}}</a></td>
-		<td>{{html $value.frstRegUser}}</td>
+		<td>{{html $value.mbrNm}}</td>
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.viewCnt}}</td>
 	</tr>							
