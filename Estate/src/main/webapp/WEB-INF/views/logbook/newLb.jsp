@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/logbook/listStyle.jsp" %> 
 <%@ include file="/WEB-INF/views/logbook/delPopup.jsp" %> 
+<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="./resources/js/logbook/addLogbook.js"></script>
 
 <form id="newLogbook">
@@ -20,7 +21,7 @@
 	<table class="new_page_table">
 		<tr>
 			<td class="title">금일</td>
-			<td colspan="2"><textarea rows="20" cols="150" name="taskCont" id="taskCont"></textarea></td>
+			<td colspan="2" class="content_edit"><textarea rows="20" cols="150" name="taskCont" id="taskCont"></textarea></td>
 		</tr>
 		<tr>
 			<td class="title" rowspan="4">익일</td>
@@ -41,11 +42,11 @@
 		</tr>
 		<tr>
 			<td class="title">문제점</td>
-			<td colspan="2"><textarea rows="10" cols="150" name="prob" id="prob"></textarea></td>
+			<td colspan="2" class="content_edit"><textarea rows="10" cols="150" name="prob" id="prob"></textarea></td>
 		</tr>
 		<tr>
 			<td class="title">건의사항</td>
-			<td colspan="2"><textarea rows="10" cols="150" name="sugg" id="sugg"></textarea></td>
+			<td colspan="2" class="content_edit"><textarea rows="10" cols="150" name="sugg" id="sugg"></textarea></td>
 		</tr>
 	</table>
 	<div style="height:50px;"></div>

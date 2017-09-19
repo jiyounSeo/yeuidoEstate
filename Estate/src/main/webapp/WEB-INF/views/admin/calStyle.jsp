@@ -9,7 +9,7 @@
   -ms-user-select: none;
   /* IE10+ */
 }
-h4 {
+.cal1 h4 {
   width: 75%;
   text-align: center;
   font-family: 'Droid Sans Mono';
@@ -20,11 +20,11 @@ h4 {
   padding: 1em;
   background: #b63642;
 }
-h5 {
+.cal1 h5 {
   font-size: 1em;
   font-weight: bold;
 }
-p {
+.cal1 p {
   text-align: center;
   font-family: 'Droid Sans Mono';
   margin: 3em auto 1em auto;

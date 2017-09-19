@@ -37,14 +37,14 @@
 
 .new_suggbd_table tr,
 .suggbd tr {
-	background: #f6f6f8;
+	background: #fff;
 	border-bottom: 0px;
 	border-right: 1px solid #b2b2b2;	
 }
 
 .new_suggbd_table tr:nth-child(even),
 .suggbd tr:nth-child(even) {
-	background: #fff;
+	background: #f6f6f8;
 }
 
 .new_suggbd_table tr:first-child{
@@ -55,6 +55,15 @@
 .new_suggbd_table tr:last-child td.title{
 
 	border-bottom: 1px solid #b2b2b2;	
+}
+
+
+.new_suggbd_table td.content{
+	height:500px;
+	background:#fff;
+	border-top: 1px solid #909090;
+	valign:top;
+	padding:20px;
 }
 
 .suggbd tr:last-child {

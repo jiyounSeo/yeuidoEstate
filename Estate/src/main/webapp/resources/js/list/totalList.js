@@ -271,6 +271,13 @@ function f_custList_select() {
 	
 }
 
+function f_add_objt() {
+	var frm = $('#totalList')[0];
+	frm.action = '/estate/addObject.do';
+	frm.method = 'POST';
+	frm.submit();
+	
+}
 
 //페이징 버튼 클릭이벤트
 currObjtPage = 1;

@@ -102,11 +102,23 @@ function f_customer_save() {
 	
 	
 	var urlStr = "";
+	var custId = "";
 	if ($("#custId").val() != "" ) {
 		urlStr = "modifyCustomer.do";
+		custId = $("#custId").val();
 	} else {
 		urlStr = "insertCustomer.do";
 	}
+	
+	var goUrl = "";
+	if($("input[name=activeTp]:checked").val() == "AT001") {	// 활성인경우 --> 활성리스트로
+		goUrl = "./commClListView.do?activeTp=AT001&estateRange=Y";
+	} else if ($("input[name=activeTp]:checked").val() == "AT002") {	// 보류인경우 --> 보류리스트로
+		goUrl = "./commClListView.do?activeTp=AT002&estateRange=Y";
+	} else {
+		goUrl = "./commObListView.do?publicYn=Y";
+	}
+	
 	$.ajax({
 	  url : "/estate/" + urlStr,
 	  type: "post",
@@ -116,13 +128,26 @@ function f_customer_save() {
 	  success : function(responseData){
 		  if ( urlStr == "insertCustomer.do" ) {
 			  alert (responseData.message);
+			  location.href=goUrl;
 		  } else {
 			  alert ("고객수정에 성공하였습니다.");
+			  f_mbrDtl_view(custId);
 					  
 		  }
 	  }
 	});
 }
+
+
+function f_mbrDtl_view (index) {
+	console.log (index);
+	$("#custId").val(index);
+	var frm = $('#newClient')[0];
+	frm.action = '/estate/viewClient.do';
+	frm.method = 'POST';
+	frm.submit();
+}
+
 
 function f_customer_delete() {
 	if (confirm ("고객을 삭제하시겠습니까?")) {

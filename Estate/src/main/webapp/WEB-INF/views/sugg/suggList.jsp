@@ -4,8 +4,7 @@
 <script type="text/javascript" src="./resources/js/sugg/selectSugg.js"></script>
 
 <div class="new_page_title">
-	<!-- <img src="./resources/images/title_logbook.jpg"> -->
-	<h1>건의게시판</h1>
+	<img src="./resources/images/title_sugg.jpg">
 </div>
 
 <div class="new_page_container">

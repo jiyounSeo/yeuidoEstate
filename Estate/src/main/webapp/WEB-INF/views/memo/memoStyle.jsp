@@ -43,6 +43,22 @@
 	background-repeat:repeat-y;
 }
 
+
+
+.viewMemoPopup td.title,
+.addMemoPopup td.title {
+	width:140px;
+	height:47px;
+	text-align:center;
+	background:#0063b1;
+	color:#fff;
+	font-weight: bold;
+	border-bottom: 1px solid #fff;
+	padding-left:30px;
+	padding-right:30px;
+}
+
+
 .viewMemoPopup td.btn,
 .listMemoPopup td.btn,
 .addMemoPopup td.btn {
@@ -64,7 +80,7 @@
 }
 
 .addMemoPopup textarea {
-	width:100%;
+	width:99%;
 	border: 1px solid #d3d3d3;
 	margin: 5px 0 5px 0;
 }

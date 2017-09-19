@@ -28,7 +28,7 @@
 	<table class="new_page_table">
 		<tr>
 			<td class="title">금일</td>
-			<td colspan="2">${taskCont}</td>
+			<td colspan="2" class="content">${taskCont}</td>
 		</tr>
 		<tr>
 			<td class="title" rowspan="4">익일</td>
@@ -49,11 +49,11 @@
 		</tr>
 		<tr>
 			<td class="title">문제점</td>
-			<td colspan="2">${prob}</td>
+			<td colspan="2" class="content">${prob}</td>
 		</tr>
 		<tr>
 			<td class="title">건의사항</td>
-			<td colspan="2">${sugg}</td>
+			<td colspan="2" class="content">${sugg}</td>
 		</tr>
 	</table>
 	<div style="height:50px;"></div>

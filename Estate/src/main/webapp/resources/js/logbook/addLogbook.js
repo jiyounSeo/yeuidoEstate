@@ -1,9 +1,61 @@
+
+var oEditors_today = [];
+var oEditors_issue = [];
+var oEditors_sugg = [];
+
 $(document).ready(function(){
 	formId = $("form").attr("id");
 	if ($("#taskDocId").val() != "") {
 		f_customerLogbookDtl_select();
 	}
 	
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : oEditors_today,
+		elPlaceHolder : "taskCont",
+		sSkinURI : "./resources/editor/SmartEditor2Skin.html", 	//SmartEditor2Skin.html 파일이 존재하는 경로
+		htParams : {
+		bUseToolbar : true, 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)	
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)	
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		fOnBeforeUnload : function() {
+		}
+	},
+	fOnAppLoad : function() {	
+		oEditors_today.getById["taskCont"].exec("PASTE_HTML", [ "" ]);		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+	}
+	});
+	
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : oEditors_issue,
+		elPlaceHolder : "prob",
+		sSkinURI : "./resources/editor/SmartEditor2Skin.html", 	//SmartEditor2Skin.html 파일이 존재하는 경로
+		htParams : {
+		bUseToolbar : true, 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)	
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)	
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		fOnBeforeUnload : function() {
+		}
+	},
+	fOnAppLoad : function() {	
+		oEditors_issue.getById["prob"].exec("PASTE_HTML", [ "" ]);		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+	}
+	});
+	
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : oEditors_sugg,
+		elPlaceHolder : "sugg",
+		sSkinURI : "./resources/editor/SmartEditor2Skin.html", 	//SmartEditor2Skin.html 파일이 존재하는 경로
+		htParams : {
+		bUseToolbar : true, 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)	
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)	
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		fOnBeforeUnload : function() {
+		}
+	},
+	fOnAppLoad : function() {	
+		oEditors_sugg.getById["sugg"].exec("PASTE_HTML", [ "" ]);		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+	}
+	});
 });
 
 
@@ -38,6 +90,9 @@ function f_setting_text(result) {
 }
 
 function f_customer_save() {	
+	oEditors_today.getById["taskCont"].exec("UPDATE_CONTENTS_FIELD", []);	
+	oEditors_issue.getById["prob"].exec("UPDATE_CONTENTS_FIELD", []);	
+	oEditors_sugg.getById["sugg"].exec("UPDATE_CONTENTS_FIELD", []);	
 	var param = $("#newLogbook").serialize();
 	var taskDocId = $("#taskDocId").val();
 	var urlStr = "";

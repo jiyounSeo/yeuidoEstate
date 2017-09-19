@@ -1,7 +1,27 @@
+
+var oEditors_memo = [];
+
 $(document).ready(function(){
 	formId = $("form").attr("id");
 	f_memoList_select();
     $(function() {
+
+        nhn.husky.EZCreator.createInIFrame({
+    		oAppRef : oEditors_memo,
+    		elPlaceHolder : "memoCont",
+    		sSkinURI : "./resources/editor/SmartEditor2Skin.html", 	//SmartEditor2Skin.html 파일이 존재하는 경로
+    		htParams : {
+    		bUseToolbar : true, 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)	
+    		bUseVerticalResizer : false,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)	
+    		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+    		fOnBeforeUnload : function() {
+    		}
+    	},
+    	fOnAppLoad : function() {	
+    		oEditors_memo.getById["memoCont"].exec("PASTE_HTML", [ "" ]);		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+    	}
+    	});
+        
     	function launch() {
             $('#divListMemoPopup').lightbox_me({centered: true});
         	$("#divViewMemoPopup").lightbox_me({centered: true});
@@ -89,7 +109,7 @@ function f_memoView(memoId){
 			console.log (data);
 			f_empty_field();
 			$("#memoDocId").val(result.memoDocId);
-			$("#memoSubject").append("<img src='./resources/images/alert_memo_subject_title.jpg' style='vertical-align:middle'> " + result.memoSbj);
+			$("#memoSubject").append("&nbsp;&nbsp;"+result.memoSbj);
 			$("#memoContent").append(result.memoCont);
 			$("#frstRegDt").append("등록일 : "+result.frstRegDt);
 			
@@ -108,6 +128,7 @@ function f_memoView_select(memoId) {
 }
 
 function f_memo_save() {	
+	oEditors_memo.getById["memoCont"].exec("UPDATE_CONTENTS_FIELD", []);	
 	var param = $("#newMemo").serialize();
 	var memoDocId = $("#memoDocId").val();
 	var urlStr = "";

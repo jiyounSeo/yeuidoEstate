@@ -4,37 +4,33 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page session="true" %>
 <% request.setCharacterEncoding("utf-8");%>
+<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="./resources/js/memo/listMemo.js"></script>
-<script type='text/javascript'>
-/*   function fnPopOpen(){
-      $('#divListMemoPopup').lightbox_me(); 
-      $('#divViewMemoPopup').lightbox_me(); 
-      $('#divAddMemoPopup').lightbox_me(); 
- } */
-</script>
 
 <!-- 신규Memo -->
 <div id="divAddMemoPopup" style="display: none;">
 <form id="newMemo">
 	<table class="addMemoPopup" >
-		<tr><td height="34px"><a href="#" onClick="f_closeAll()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
+		<tr><td height="34px" colspan="4"><a href="#" onClick="f_closeAll()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
 		<tr>
-			<td class="content">
-				<img src="./resources/images/alert_memo_subject_title.jpg"><input type="text" name="memoSbj" id="memoSbj" />
-			</td>
+			<td width="30px"></td>
+			<td class="title" width="140px">제목</td>
+			<td align="center" width="700px"><input type="text" name="memoSbj" id="memoSbj" style="width:99%" /></td>
+			<td width="30px"></td>
 		</tr>
 		<tr>
-			<td class="content">
-				<textarea rows="20" cols="50" name="memoCont" id="memoCont"></textarea>
+			<td class="content" colspan="4">
+				<textarea name="memoCont" id="memoCont" style="width:99%;height:400px;background-color:white;"></textarea>
 			</td>
 		</tr>
+		<tr><td colspan="4" height="15px"></td></tr>
 		<tr>
-			<td class="btn">
+			<td class="btn" colspan="4">
 				<a href="#" onClick="f_cancel_to_list()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="#" id="popOkAdd" ><img src="./resources/images/btn_ok.jpg" onClick="f_memo_save()"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
-		<tr><td height="23px;" ><img src="./resources/images/alert_bottom2.jpg"></td></tr>
+		<tr><td height="23px;" colspan="4"><img src="./resources/images/alert_bottom2.jpg"></td></tr>
 	</table>
 <input type="hidden" name="memoDocId" id="memoDocId">
 </form>
@@ -77,26 +73,28 @@
 <!-- memo 상세페이지 -->
 <div id="divViewMemoPopup" style="display: none;">
 	<table class="viewMemoPopup">
-		<tr><td height="34px"><a href="#" onClick="f_closeAll()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
+		<tr><td height="34px" colspan="4"><a href="#" onClick="f_closeAll()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
 		<tr>
-			<td class="content">
-				<div id="memoSubject" class="Subject"></div>
-			</td>
+			<td width="30px"></td>
+			<td class="title" width="140px">제목</td>
+			<td width="700px"><div id="memoSubject" class="Subject"></div></td>
+			<td width="30px"></td>
 		</tr>
 		<tr>
-			<td class="content"><div id="memoContent" class="memoCont"></div></td>
+			<td class="content" colspan="4"><div id="memoContent" class="memoCont"></div></td>
 		</tr>
 		<tr>
-			<td><div id="frstRegDt" class="dtlDate"></div></td>
+			<td colspan="4"><div id="frstRegDt" class="dtlDate"></div></td>
 		</tr>
 		<tr>
-			<td class="btn">
+			<td class="btn" colspan="4">
 				<a href="#" onClick="f_del_memo()"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;
 				<a href="#" onClick="f_edit_memo_view()"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;
 				<a href="#" onClick="f_cancel_to_list()"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
-		<tr><td height="23px;" ><img src="./resources/images/alert_bottom2.jpg"></td></tr>
+		<tr><td colspan="4" height="15px"></td></tr>
+		<tr><td height="23px;" colspan="4"><img src="./resources/images/alert_bottom2.jpg"></td></tr>
 	</table>
 </div>
 <!-- memo 상세페이지 -->
