@@ -27,8 +27,6 @@
 	<div id="pagingDiv" class="pagination" style="margin:0 auto;"></div>
 </div>
 
-<input type="hidden" name="noticeId" id="noticeId" value="listPage" />
-
 <script type="text/javascript">console.log("${sessionScope.user.mbrTp}");</script> 
 <c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}">
 	<div class="new_page_container" style="text-align:right;padding-right:100px;" id="newBtn" name="newBtn"><a href='./newNoticeView.do'><img src='./resources/images/btn_add.jpg'></a></div>

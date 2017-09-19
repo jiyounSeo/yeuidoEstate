@@ -11,13 +11,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , ntSbj
 			       , ntConts
 			       , frstRegUser
+			       , frstRegDt
 			       , modfRegUser
+			       , modfRegDt
 			       )
 			values ( #{user.mbrId}
 				  , #{ntSbj}
 				  , #{ntConts}
 				  , #{user.mbrId}
+				  , now()
 				  , #{user.mbrId}
+				  , now()
 			)            			
     </insert>
     
