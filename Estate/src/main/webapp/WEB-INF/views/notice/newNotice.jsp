@@ -1,24 +1,24 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/notice/listStyle.jsp" %> 
+<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="./resources/js/notice/crudNotice.js"></script>
-
 <form id="newNotice">
 <div class="new_page_title">
-	<!-- <img src="./resources/images/title_logbook.jpg"> -->
-	<h1>공지사항</h1>
+	<img src="./resources/images/title_notice.jpg">
 </div>
 
 <div class="new_page_container">
-	<table class="new_page_table">
+	<table class="new_notice_table">
 		<tr>
-			<td class="title">제목</td>
-			<td><input type="text" name="ntSbj" id="ntSbj"></td>
+			<td width="155px" class="title">제목</td>
+			<td width="1285px"><input type="text" name="ntSbj" id="ntSbj"></td>
 		</tr>
-
 		<tr>
-			<td class="title">내용</td>
-			<td><textarea rows="20" cols="150" name="ntConts" id="ntConts"></textarea></td>
+			<td colspan="2" class="content_edit" valign="top">
+				<!-- <textarea rows="20" cols="150" name="ntConts" id="ntConts"></textarea> -->
+				<textarea id="ntConts" name="ntConts" style="width:99%;height:500px;"></textarea>
+			</td>
 		</tr>
 	</table>
 	<div style="height:50px;"></div>

@@ -13,20 +13,21 @@ $(document).ready(function() {
 });
 </script> 
 <div class="new_page_title">
-	<!-- <img src="./resources/images/title_logbook.jpg"> -->
-	<h1>공지사항</h1>
+	<img src="./resources/images/title_notice.jpg">
 </div>
 <form id="noticeView">
 <div class="new_page_container">
-	<table>
-		<tr><td>제목 : ${item.ntSbj}</td></tr>
-		<tr><td>내용 : ${item.ntConts}</td></tr>
-		<tr><td>${item.frstRegUser} / ${item.frstRegDt} / ${item.viewCnt}</td></tr>
+	<table class="new_notice_table">
+		<tr><td width="155px" class="title">제목</td><td width="930px">${item.ntSbj}</td><td width="155px" class="title">날짜</td><td width="200px">${item.frstRegDt}</td></tr>
+		<tr><td width="155px" class="title">글쓴이</td><td width="930px">${item.frstRegUser}</td><td width="155px" class="title">조회수</td><td width="200px">${item.viewCnt}</td></tr>
+		<tr><td colspan="4" class="content" valign="top">${item.ntConts}</td></tr>
 	</table>
+</div>
 	<br>
-	<a href="./noticeList.do"><img src="./resources/images/btn_list.jpg"></a>
-	<a  href="./modifyNoticeInfo.do?noticeId=${item.noticeId}"><img src="./resources/images/btn_edit.jpg"></a>
-	<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>
+<div class="new_page_container" style="text-align: center;">
+	<a href="./noticeList.do"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a  href="./modifyNoticeInfo.do?noticeId=${item.noticeId}"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <input type="hidden" value="${item.noticeId}" name="noticeId" id="noticeId">
 

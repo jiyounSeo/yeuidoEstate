@@ -37,14 +37,15 @@
 
 .new_notice_table tr,
 .notice tr {
-	background: #f6f6f8;
+	background: #fff;
 	border-bottom: 0px;
 	border-right: 1px solid #b2b2b2;	
+	border-left: 1px solid #b2b2b2;	
 }
 
 .new_notice_table tr:nth-child(even),
 .notice tr:nth-child(even) {
-	background: #fff;
+	background: #f6f6f8;
 }
 
 .new_notice_table tr:first-child{
@@ -97,6 +98,22 @@
 }
 
 
+
+.new_notice_table td.content{
+	height:500px;
+	background:#fff;
+	border-top: 1px solid #909090;
+	valign:top;
+	padding:20px;
+}
+
+.new_notice_table td.content_edit{
+	height:500px;
+	background:#fff;
+	border-top: 1px solid #909090;
+	valign:top;
+	padding:20px;
+}
 .new_notice_table input[type=text] {
     width: 100%;
     height: 42px;

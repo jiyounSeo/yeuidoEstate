@@ -4,10 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
 <mapper namespace="customerDAO">
-
     <insert id="insertCustomer" parameterType="java.util.HashMap" >
       <selectKey resultType="int" keyProperty="custId" order="BEFORE">
-        SELECT   ifnull (MAX(CAST(custId AS signed integer))+1,1) from customer       
+        SELECT   if (isnull(custId), 1,  (MAX(CAST(custId AS signed integer))+1)) from customer       
       </selectKey>
 		INSERT INTO 
 			customer (custId
@@ -80,9 +79,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , CASE WHEN #{visitYn} = 'Y' THEN 'Y' ELSE 'N' END 
 				  , CASE WHEN #{meetYn} = 'Y' THEN 'Y' ELSE 'N' END 
 				  , now()
-				  , #{mbrId}
+				  , #{user.mbrId}
 				  , now()
-				  , #{mbrId}
+				  , #{user.mbrId}
         	);
 		
     </insert>
@@ -90,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update  id="modifyCustomer" parameterType="java.util.HashMap" >
     UPDATE customer
        SET custNm = #{custNm}
-		 , custTel1 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel1} END)
+		 , custTel1 = (CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END)
 		 , custTel2 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END)
 		 , custTel3 = (CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END)
 		 , homeTel1 = (CASE WHEN #{homeTel1} = '' THEN NULL ELSE #{homeTel1} END)
@@ -119,8 +118,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , visitYn = (CASE WHEN #{visitYn} = 'Y' THEN 'Y' ELSE 'N' END )
 		 , meetYn = (CASE WHEN #{meetYn} = 'Y' THEN 'Y' ELSE 'N' END )
 		 , modfRegDt = now()
-		 , modfRegUser = #{mbrId}
-		 , mbrId = #{mbrId}
+		 , modfRegUser = #{user.mbrId}
      WHERE custId = #{custId}
     </update>
     
@@ -140,7 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   	   AND custTel3 = #{custTel3}
 		) A, 
 		(
-		SELECT 1 num,  ifnull (MAX(CAST(custId AS signed integer))+1,1) custId2
+		SELECT 1 num,  if (isnull(custId), 1, (MAX(CAST(custId AS signed integer))+1)) custId2
 		  FROM customer
 		)B 
 	WHERE A.num = B.num
@@ -153,7 +151,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , custNm
 			       , custTel1
 			       , custTel2
-			       , custTel3)
+			       , custTel3
+			       , activeTp
+			       , frstRegDt
+				  , frstRegUser
+				  , modfRegDt
+				  , modfRegUser
+			       )
 			values (
 				   #{custId}
 				  , #{user.mbrId}
@@ -161,6 +165,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{custTel1}
 				  , #{custTel2}
 				  , #{custTel3}
+				  , 'AT002'
+				  , now()
+				  , #{user.mbrId}
+				  , now()
+				  , #{user.mbrId}
 			)
 			
 			   		
@@ -192,8 +201,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
 	     , publicYn
 	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
-	     , (CASE WHEN contactYn = 'Y' THEN '계약상황' END)|| (CASE WHEN explorYn = 'Y' THEN ' 답사추진 ' END) || (CASE WHEN talkYn = 'Y' THEN '상담중' END) 
-	     	|| (CASE WHEN searchYn = 'Y' THEN '물건검색' END) || (CASE WHEN visitYn = 'Y' THEN '방문예정' END) || (CASE WHEN meetYn = 'Y' THEN '미팅예정' END) custState
+	     , contactYn
+	     , explorYn
+	     , talkYn
+	     , searchYn
+	     , visitYn
+	     , meetYn
+	     , concat((CASE WHEN contactYn = 'Y' THEN '계약상황' ELSE '' END) , (CASE WHEN explorYn = 'Y' THEN ' 답사추진 ' ELSE ''END) 
+			,(CASE WHEN talkYn = 'Y' THEN '상담중' ELSE ''END) 
+	     	, (CASE WHEN searchYn = 'Y' THEN '물건검색' ELSE ''END) , (CASE WHEN visitYn = 'Y' THEN '방문예정' ELSE ''END) 
+            , (CASE WHEN meetYn = 'Y' THEN '미팅예정' ELSE ''END)) custState
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , frstRegUser frstRegNm
 	     , (SELECT COUNT(*) FROM customer) totalCnt
@@ -257,6 +274,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , dtlContent
 		 , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
+	     , contactYn
+	     , explorYn
+	     , talkYn
+	     , searchYn
+	     , visitYn
+	     , meetYn
+	     
+	     , concat((CASE WHEN contactYn = 'Y' THEN '계약상황' ELSE '' END) , (CASE WHEN explorYn = 'Y' THEN ' 답사추진 ' ELSE ''END) 
+			,(CASE WHEN talkYn = 'Y' THEN '상담중' ELSE ''END) 
+	     	, (CASE WHEN searchYn = 'Y' THEN '물건검색' ELSE ''END) , (CASE WHEN visitYn = 'Y' THEN '방문예정' ELSE ''END) 
+            , (CASE WHEN meetYn = 'Y' THEN '미팅예정' ELSE ''END)) custState, mbrMemo
+	     , jeobsu
 	     , publicYn
 	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
