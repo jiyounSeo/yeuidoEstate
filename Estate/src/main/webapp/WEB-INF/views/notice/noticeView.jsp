@@ -1,17 +1,10 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/notice/listStyle.jsp" %> 
+<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="./resources/js/notice/crudNotice.js"></script>
 <%@ include file="/WEB-INF/views/notice/delPopup.jsp" %> 
-<script type="text/javascript">
-$(document).ready(function() {
-	
-	if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
-		$('#newBtn').append("<a href='./newNoticeView.do'><img src='./resources/images/btn_add.jpg'></a>");
-	}
-	
-});
-</script> 
+
 <div class="new_page_title">
 	<img src="./resources/images/title_notice.jpg">
 </div>
@@ -26,7 +19,9 @@ $(document).ready(function() {
 	<br>
 <div class="new_page_container" style="text-align: center;">
 	<a href="./noticeList.do"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a  href="./modifyNoticeInfo.do?noticeId=${item.noticeId}"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}">
+		<a  href="./modifyNoticeInfo.do?noticeId=${item.noticeId}"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</c:if>
 	<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <input type="hidden" value="${item.noticeId}" name="noticeId" id="noticeId">
