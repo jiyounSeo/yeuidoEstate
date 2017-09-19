@@ -2,6 +2,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <%@ include file="/WEB-INF/views/comm/viewTitle.jsp" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+
 <form id="viewObOffice">
 <div class="new_page_container">
 	<table class="new_page_table">
@@ -33,9 +35,9 @@
 		</tr>
 		<tr>
 			<td class="title">매매가</td>
-			<td colspan="2"><!--  -->${bargainAmt}만원</td>
+			<td colspan="2"><!--  -->  <fmt:formatNumber value="${bargainAmt}" pattern="#,###"/> 만원</td>
 			<td class="title">보증금</td>
-			<td><!--  --> ${depositAmt}만원</td>
+			<td><!--  --> <fmt:formatNumber value="${depositAmt}" pattern="#,###"/>만원</td>
 		</tr>
 		<tr>
 			<td class="title">동 / 층 / 향</td>

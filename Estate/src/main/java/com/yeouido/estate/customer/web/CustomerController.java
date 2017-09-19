@@ -42,14 +42,14 @@ public class CustomerController {
 	public ModelAndView selectCustomerList( @RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Paging paging = new Paging();
-        			
+		map.put("user",  session.getAttribute("user"));
+		
 		List<Map<String,Object>> custList = new ArrayList<Map<String,Object>>();
 		try {
 			int currentPage = Integer.parseInt(map.get("currentPage").toString());
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
 			map.put("rowNum", (currentPage-1)*pagePerRow);
 			map.put("pagePerRow", pagePerRow);
-			map.put("user",  session.getAttribute("user"));
 			custList = customerService.selectCustomerList(map);
 			if (!custList.isEmpty()) {
 				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
@@ -72,10 +72,13 @@ public class CustomerController {
 	 * °í°´µî·Ï 
 	 */
 	@RequestMapping(value= "/insertCustomer.do", method=RequestMethod.POST)
-	public ModelAndView insertCustomer(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView insertCustomer(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Map custInfo = new HashMap<String, Object>();
+		map.put("user",  session.getAttribute("user"));
+		
 		try {
+			
 			custInfo = customerService.selectCustomerConfirm(map);
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -102,9 +105,11 @@ public class CustomerController {
 	 * °í°´ »ó¼¼ Á¶È¸
 	 */	
 	@RequestMapping(value= "/selectCustomerDtl.do", method=RequestMethod.POST)
-	public ModelAndView selectCustomerDtl(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectCustomerDtl(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Map<String, Object> result = new HashMap<String, Object>();
+		map.put("user",  session.getAttribute("user"));
+		
 		try {
 			result = customerService.selectCustomerInfo(map);
 			mav.addObject("messageCd", "1");
@@ -123,8 +128,9 @@ public class CustomerController {
 	 * °í°´ ¼öÁ¤ Á¶È¸
 	 */		
 	@RequestMapping(value= "/modifyCustomer.do", method=RequestMethod.POST)
-	public ModelAndView modifyCustomer(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView modifyCustomer(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
+		map.put("user",  session.getAttribute("user"));
 		
 		try {
 			int result = customerService.modifyCustomer(map);

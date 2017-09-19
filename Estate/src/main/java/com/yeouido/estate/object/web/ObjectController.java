@@ -78,8 +78,10 @@ public class ObjectController {
 		try {
 			map.put("user",  session.getAttribute("user"));
 			int result = objectService.insertObject(map);
+			mav.addObject ("messageCd", 1);
 			mav.addObject("message", "물건 등록에 성공했습니다.");
 		} catch (Exception e) {
+			mav.addObject ("messageCd", 2);
 			mav.addObject("message", "물건 등록에 실패했습니다.");
 			e.printStackTrace();
 		}
@@ -109,10 +111,11 @@ public class ObjectController {
 	 * 물건 상세 조회
 	 */	
 	@RequestMapping(value= "/selectObjectDtl.do", method=RequestMethod.POST)
-	public ModelAndView selectObjectDtl(@RequestParam Map<String,Object> map)  {  
+	public ModelAndView selectObjectDtl(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
+			map.put("user",  session.getAttribute("user"));
 			result = objectService.selectObjectInfo(map);
 		} catch (Exception e) {
 			mav.addObject("message", "물건 상세 조회에 실패했습니다.");
@@ -134,11 +137,13 @@ public class ObjectController {
 		try {
 			map.put("user",  session.getAttribute("user"));
 			int result = objectService.modifyObject(map);
+			mav.addObject ("messageCd", 1);
 			mav.addObject("message", "물건 수정에 성공했습니다.");
 			
 			logger.debug("result : "+  result );
 		} catch (Exception e) {
 			mav.addObject("message", "물건 수정에 실패했습니다.");
+			mav.addObject ("messageCd", 2);
 			
 			logger.error("update error");
 			e.printStackTrace();

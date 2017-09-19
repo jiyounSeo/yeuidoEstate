@@ -1,11 +1,22 @@
 $(document).ready(function(){
 	//f_objectDtl_select();
-	if ($("#custId").val() != "") {
+	if ( !gfn_isNull($("#custId").val())) {
 		f_customerDtl_select();
 	}
 	
 });
 
+function gfn_isNull(str) {
+    if (str == null) return true;
+    if (str == "NaN") return true;
+    if (new String(str).valueOf() == "undefined") return true;   
+    var chkStr = new String(str);
+    if( chkStr.valueOf() == "undefined" ) return true;
+    if (chkStr == null) return true;   
+    if (chkStr.toString().length == 0 ) return true;  
+    return false;
+}
+ 
 
 function f_customerDtl_select() {
 	var param = {
@@ -40,7 +51,7 @@ function f_setting_text(result) {
 	$("#faxTel1").val(result.faxTel1);
 	$("#faxTel2").val(result.faxTel2);
 	$("#faxTel3").val(result.faxTel3);
-	$("#budAmt").val(result.budAmt);
+	$("#budAmt").val( comma(result.budAmt) );
 	$("#reqContent").val(result.reqContent);
 	$("#feature").val(result.feature);
 	$("#dtlContent").val(result.dtlContent);
@@ -73,9 +84,30 @@ function f_setting_text(result) {
 }
 
 
+$(document).on("keyup", "input[id*='Tel']", function() {
+	$(this).val( $(this).val().replace(/[^0-9]/gi, '')); 
+});
+
+function inputNumberFormat(obj) { 
+    obj.value = comma(uncomma(obj.value)); 
+} 
+
+
+function comma(str) { 
+    str = String(str); 
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); 
+} 
+
+function uncomma(str) { 
+    str = String(str); 
+    return str.replace(/[^\d]+/g, ''); 
+}
+
 function f_customer_save() {
+	 $("#budAmt").val( $("#budAmt").val().replace(/,/g, ''));
 	
 	var param = $("#newClient").serialize();
+	console.log (param);
 	
 	if ( $("#custNm").val() == "") {
 		alert ("고객명은 필수입력 값입니다.");

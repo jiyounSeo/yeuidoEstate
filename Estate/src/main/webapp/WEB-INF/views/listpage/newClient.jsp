@@ -23,30 +23,29 @@
 			  <input type="checkbox" name="searchYn" id="searchYn" value="Y" /><label for="searchYn">물건검색</label>
 			  <input type="checkbox" name="visitYn" id="visitYn" value="Y" /><label for="visitYn">방문예정</label>
 			  <input type="checkbox" name="meetYn" id="meetYn" value="Y" /><label for="meetYn">미팅예정</label>
-			  <input type="text" style="width:200px" id="custNm" name="custNm"></td>
 		</tr>
 		
 		<tr>
 			<td class="title" rowspan="2">고객정보</td>
 			<td class="title2">핸드폰</td>
-			<td><input type="number" style="width:105px" id="custTel1" name="custTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
-				 - <input type="number" style="width:105px" id="custTel2" name="custTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
-				 - <input type="number" style="width:105px" id="custTel3" name="custTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+			<td><input type="text" maxLength ="3" style="width:105px" id="custTel1" name="custTel1"  >
+				 - <input type="text" maxLength ="4" style="width:105px" id="custTel2" name="custTel2"  >
+				 - <input type="text" maxLength ="4" style="width:105px" id="custTel3" name="custTel3"  ></td>
 			<td class="title2">자택 </td>
-			<td><input type="number" style="width:105px" id="homeTel1" name="homeTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
-				 - <input type="number" style="width:105px" id="homeTel2" name="homeTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
-				 - <input type="number" style="width:105px" id="homeTel3" name="homeTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+			<td><input type="text" maxLength ="3" style="width:105px" id="homeTel1" name="homeTel1"  >
+				 - <input type="text" maxLength ="4" style="width:105px" id="homeTel2" name="homeTel2"  >
+				 - <input type="text" maxLength ="4" style="width:105px" id="homeTel3" name="homeTel3"  ></td>
 		
 		</tr>
 		<tr>
 			<td class="title2">회사 </td>
-				<td><input type="number" style="width:105px;height:90%;" id="orgnTel1" name="orgnTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
-				 - <input type="number" style="width:105px" id="orgnTel2" name="orgnTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
-				 - <input type="number" style="width:105px" id="orgnTel3" name="orgnTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+				<td><input type="text" maxLength ="3" style="width:105px;height:90%;" id="orgnTel1" name="orgnTel1"  >
+				 - <input type="text" maxLength ="4" style="width:105px" id="orgnTel2" name="orgnTel2"  >
+				 - <input type="text" maxLength ="4" style="width:105px" id="orgnTel3" name="orgnTel3"  ></td>
 			<td class="title2">팩스</td>
-			<td><input type="number" style="width:105px" id="faxTel1" name="faxTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
-				 - <input type="number" style="width:105px" id="faxTel2" name="faxTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
-				 - <input type="number" style="width:105px" id="faxTel3" name="faxTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+			<td><input type="text" maxLength ="3" style="width:105px" id="faxTel1" name="faxTel1">
+				 - <input type="text" maxLength ="4" style="width:105px" id="faxTel2" name="faxTel2">
+				 - <input type="text" maxLength ="4" style="width:105px" id="faxTel3" name="faxTel3"></td>
 		</tr>
 		
 		<tr>
@@ -57,7 +56,7 @@
 			  <input type="radio" id="grade3" name="gradeTp" value="C"/><label for="grade3">C</label>
 			</td>
 			<td class="title">예산</td>
-			<td><input type="text" style="width:140px" id="budAmt" name="budAmt"> 만원</td>
+			<td><input type="text" maxLength="10" style="width:140px" id="budAmt" name="budAmt" onkeyup="inputNumberFormat(this)"> 만원</td>
 		</tr>
 		<tr>
 			<td class="title">의뢰내용</td>
@@ -85,7 +84,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="title">상세내역</td>
+			<td class="title">담당자메모</td>
 			<td colspan="4">
 				<textarea rows="10" cols="50" id="mbrMemo" name="mbrMemo"></textarea>
 			</td>

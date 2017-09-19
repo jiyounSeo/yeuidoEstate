@@ -26,9 +26,9 @@
 			<td class="title2">성명 </td>
 			<td width="365px"><input type="text" id="custNm" name="custNm" ></td>
 			<td class="title2">연락처</td>
-			<td><input type="number" style="width:120px" id="custTel1" name="custTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
-				 - <input type="number" style="width:130px" id="custTel2" name="custTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
-				 - <input type="number" style="width:130px" id="custTel3" name="custTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+			<td><input type="number" style="width:120px" id="custTel1" name="custTel1" maxLength ="3">
+				 - <input type="number" style="width:130px" id="custTel2" name="custTel2" maxLength ="4">
+				 - <input type="number" style="width:130px" id="custTel3" name="custTel3" maxLength ="4"></td>
 		</tr>
 		<tr>
 			<td class="title">단지명/면적</td>
@@ -50,10 +50,10 @@
 		<tr>
 			<td class="title">매매가</td>
 			<td colspan="2">
-			<input type="text" id="bargainAmt" name="bargainAmt"  onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/> 만원</td>
+			<input type="text" id="bargainAmt" name="bargainAmt"  onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
 			<td class="title">보증금</td>
-			<td><input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/> 만원 / 월세 
-				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" style="text-align:right;width:140px"/> 만원</td>
+			<td><input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원 / 월세 
+				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
 		</tr>
 		<tr>
 			<td class="title">동 / 층 / 향</td>
@@ -133,14 +133,13 @@
 	</table>
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">
-		<a href="#"><img src="./resources/images/btn_add.jpg" onclick="f_saleobject_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
+		<a href="#"><img src="./resources/images/btn_save.jpg" onclick="f_saleobject_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="#"><img src="./resources/images/btn_cancel.jpg" onclick="f_objt_dtl_view();return false;"></a>
 	</div>
 </div>
-
+ 
 <input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
 <input type="hidden" name="objtTp" id="objtTp" value="OT001">
-
 
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

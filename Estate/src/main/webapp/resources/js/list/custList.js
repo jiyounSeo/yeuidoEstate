@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	if ($("#publicYn").val() != "Y" ) {
+		$("label[for='activeTp1']").css("display","none");
+		$("label[for='activeTp2']").css("display","none");
+	}
 	f_custList_select();
 });
 var custList = {};
@@ -13,12 +17,33 @@ $(document).on('click', '.pagingBtn', function() {
 	
 });
 
+function gfn_isNull(str) {
+    if (str == null) return true;
+    if (str == "NaN") return true;
+    if (new String(str).valueOf() == "undefined") return true;   
+    var chkStr = new String(str);
+    if( chkStr.valueOf() == "undefined" ) return true;
+    if (chkStr == null) return true;   
+    if (chkStr.toString().length == 0 ) return true;  
+    return false;
+}
+
+
 function f_custList_select() {
+	var activeTpChk= "";
+	if ( $("#publicYn").val() == "Y") {
+		 if ( !gfn_isNull($("input[name='activeTp1']:checked").val()) ) {
+			 activeTpChk = "AT001";
+		 } else if ( !gfn_isNull($("input[name='activeTp2']:checked").val()) ) {
+			 activeTpChk = "AT002";
+		 }
+	} 
+	
 	//saleTpTr
 	var param = {
 	    publicYn : $("#publicYn").val()
-	   , activeTp : $("#activeTp").val()
-	   , estateRange : $("#estateRange").val()
+	   , activeTp :  $("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
+	   , myCust : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
 	   , currentPage : Number(currPage)
 	   , pagePerRow : 10
 	   , pageSize : 10

@@ -66,7 +66,7 @@
 	</div>
 	<table width="1500px" cellpadding="0" cellspacing="0" border="0">
 		<tr><td height="50px"></td></tr>
-		<tr><td style="text-align:center"><a href="#"><img src="./resources/images/btn_cancel.jpg"></a></td></tr>
+		<tr><td style="text-align:center"><a href="#obj" onclick="f_objt_dtl_view();return false;"><img src="./resources/images/btn_cancel.jpg" "></a></td></tr>
 	</table>
 </div>
 

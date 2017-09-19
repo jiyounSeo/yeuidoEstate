@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	formId = $("form").attr("id");
-	console.log ("!!" +formId);
 	
 	f_objtCombo_select();
 	if ( $("#objtNo").val() != "") {
@@ -84,13 +82,13 @@ function f_objectDtl_select() {
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
-			  var result = data.objtInfo;
-			  console.log (result);
-			  f_setting_text(result);
-				
-				
-//		 			 $(sampleTmpl).tmpl(tmplVal).appendTo("#tmplView");
-//		 			$("#listTemplte").tmpl(data).appendTo("#target");
+			  objtInfo = data.objtInfo;
+			  f_setting_text(objtInfo);
+			  if ( $("publicYn").val() == "Y") {
+				  if ( result.modifyYn == "Y") {
+					  $("#viewObjBot").hide();
+				  }
+			  }  
 		  }
 	});
 }
@@ -104,15 +102,14 @@ function f_setting_text(result) {
 	$("#custTel3").val(result.custTel3);
 	$("#buildCd").val(result.buildCd);
 	$("#area").val(result.area);
-	$("#businessNm").val(result.businessNm)
-	$("#bargainAmt").val(result.bargainAmt);
+	$("#businessNm").val(result.businessNm);
+	$("#bargainAmt").val(result.bargainAmt );
 	$("#depositAmt").val(result.depositAmt);
 	$("#monthlyAmt").val(result.monthlyAmt);
 	$("#rightAmt").val(result.rightAmt);
 	$("#manageAmt").val(result.manageAmt);
 	$("#parcelAmt").val(result.parcelAmt);
 	$("#premiumAmt").val(result.premiumAmt);
-	
 	$("#dong").val(result.dong);
 	$("input[name='floor']").val(result.floor);
 	$("#directionTp").val(result.directionTp);
@@ -126,7 +123,7 @@ function f_setting_text(result) {
 	$('input[name="ondolYn"]:radio:input[value="' + result.ondolYn + '"]').attr('checked', 'checked');
 	$('input[name="activeTp"]:radio:input[value="' + result.activeTp + '"]').attr('checked', 'checked');
 	$('input[name="interiorYn"]:radio:input[value="' + result.interiorYn + '"]').attr('checked', 'checked');
-	
+	$("#activeTp").val(result.activeTp);
 	if ( result.advertiseYn == "Y") {
 		$('input:checkbox[id="advertiseYn"]').attr("checked", true); //단일건
 	}
@@ -140,6 +137,7 @@ function inputNumberFormat(obj) {
     obj.value = comma(uncomma(obj.value)); 
 } 
 
+
 function comma(str) { 
     str = String(str); 
     return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); 
@@ -149,6 +147,12 @@ function uncomma(str) {
     str = String(str); 
     return str.replace(/[^\d]+/g, ''); 
 }
+
+$(document).on("keyup", "input[id*='Tel']", function() {
+	alert ("hihihi");
+	$(this).val( $(this).val().replace(/[^0-9]/gi, '')); 
+	
+});
 
 function f_saleobject_save() {
 	var objtForm = "";
@@ -223,12 +227,18 @@ function f_saleobject_save() {
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(data){
 		  alert (data.message);
+		  if (data.messageCd == 1) {
+			  f_objt_dtl_view();
+		  }
 	  
 	//			 $(sampleTmpl).tmpl(tmplVal).appendTo("#tmplView");
 //	 			$("#listTemplte").tmpl(data).appendTo("#target");
 	  }
 	});
 }
+
+
+
 
 function f_objt_delete() {
 	if (confirm ("물건을 삭제하시겠습니까?")) {
@@ -239,11 +249,30 @@ function f_objt_delete() {
 	}
 }
 
-function f_member_list() {
-   var comSubmit = new ComSubmit("joinMember");
-   comSubmit.setUrl("/estate/memberListView.do");
-   
-   var frm = $("#"+this.bodyt)[0];
-   
-   comSubmit.submit();
+function f_objt_dtl_view() {
+	var objtForm = "";
+	switch ($("#objtTp").val()) {
+		case "OT001":
+			objtForm = "newObApt";
+			break;
+		case "OT002":
+			objtForm = "newObStore";
+			break;
+		case "OT003":
+			objtForm = "newObOffice";
+			break;
+		case "OT004":
+			objtForm = "newObOps";
+			break;
+		case "OT005":
+			objtForm = "newObHrapt";
+			break;
+		case "OT006":
+			objtForm = "newObTicket";
+			break;
+	}
+	$("#publicYn").val("");
+	var comSubmit = new ComSubmit($("#"+objtForm).attr('id'));
+	comSubmit.setUrl("/estate/commObListPostView.do");
+	comSubmit.submit();
 }

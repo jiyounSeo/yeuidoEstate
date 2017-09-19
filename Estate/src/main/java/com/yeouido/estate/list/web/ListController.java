@@ -199,6 +199,11 @@ public class ListController {
 	@RequestMapping(value="/objtDtlView.do",method = RequestMethod.POST)
 	public String objtDtlView(@RequestParam Map<String,Object> map, Model model){
 		Map<String, Object> result = new HashMap<String, Object>();
+		model.addAttribute("activeTpChk", map.get("activeTp"));
+		model.addAttribute("publicYnChk", map.get("publicYn"));
+		model.addAttribute("objtTpChk",  map.get("objtTp"));
+		model.addAttribute("saleTpChk", map.get("saleTp"));
+		
 		try {
 			result = objectService.selectObjectInfo(map);
 			model.addAllAttributes(result);

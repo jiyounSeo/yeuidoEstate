@@ -12,8 +12,21 @@
 <form id="commClList">
 <div id="cl_list" name="cl_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
-		<img src="./resources/images/title_comm_cl_list.jpg">
+		<!-- 공동 -->
+		<c:if test="${publicYn eq 'Y' }"> 
+			<img src="./resources/images/title_comm_cl_list.jpg">
+		</c:if>
+		<!-- 활성 -->
+		<c:if test="${activeTp eq 'AT001' }">
+			<img src="./resources/images/title_cl_active.jpg">
+		</c:if>
+		<!-- 보류 -->
+		<c:if test="${activeTp eq 'AT002' }">
+			<img src="./resources/images/title_cl_reserve.jpg">
+		</c:if>
+		
 	</div>
+		
 	
 	<table width="1500px" cellpadding="0" cellspacing="0" border="0">
 		<tr>
@@ -26,10 +39,9 @@
 	<table width="1460px" cellpadding="0" cellspacing="0" border="0">
 		<tr>
 			<td width="100%" align="right" valign="bottom">
-				 <input type="checkbox" name="activeTp1" id="activeTp1" value="AT001" /><label for="activeTp1">활성</label>
-				 <input type="checkbox" name="activeTp2" id="activeTp2" value="AT002" /><label for="activeTp2">보류</label>
-			  	 <input type="checkbox" name="activeTp3" id="activeTp3" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
-			  							 
+				<input type="checkbox" name="activeTp1" id="activeTp1" onclick = "f_custList_select()" value="AT001" /><label for="activeTp1">활성</label>
+				<input type="checkbox" name="activeTp2" id="activeTp2" onclick = "f_custList_select()" value="AT002" /><label for="activeTp2">보류</label>
+				<input type="checkbox" name="activeTp3" id="activeTp3" onclick = "f_custList_select()" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
 			</td>
 		</tr>
 		<tr>

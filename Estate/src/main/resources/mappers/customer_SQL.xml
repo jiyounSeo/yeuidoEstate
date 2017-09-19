@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES  (
         			#{custId}
 				  , #{custNm}
-				  , #{mbrId}
+				  , #{user.mbrId}
 				  , CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END
 				  , CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END
 				  , CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END
@@ -165,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{custTel1}
 				  , #{custTel2}
 				  , #{custTel3}
-				  , 'AT002'
+				  , #{activeTp}
 				  , now()
 				  , #{user.mbrId}
 				  , now()
@@ -208,46 +208,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , visitYn
 	     , meetYn
 	     , concat((CASE WHEN contactYn = 'Y' THEN '계약상황' ELSE '' END) , (CASE WHEN explorYn = 'Y' THEN ' 답사추진 ' ELSE ''END) 
-			,(CASE WHEN talkYn = 'Y' THEN '상담중' ELSE ''END) 
-	     	, (CASE WHEN searchYn = 'Y' THEN '물건검색' ELSE ''END) , (CASE WHEN visitYn = 'Y' THEN '방문예정' ELSE ''END) 
+			,(CASE WHEN talkYn = 'Y' THEN ' 상담중' ELSE ''END) 
+	     	, (CASE WHEN searchYn = 'Y' THEN ' 물건검색' ELSE ''END) , (CASE WHEN visitYn = 'Y' THEN ' 방문예정' ELSE ''END) 
             , (CASE WHEN meetYn = 'Y' THEN '미팅예정' ELSE ''END)) custState
-	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+         , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , frstRegUser frstRegNm
 	     , (SELECT COUNT(*) FROM customer) totalCnt
 	     , mbrId
-	  FROM customer
-	 WHERE 1=1 
-	  <if test='publicYn eq "Y"'>
-	   AND publicYn = 'Y'
-	   </if>
-	   <if test="activeTp eq 'AT001'">
-	   AND activeTp = 'AT001'
-	   AND mbrId in (    <if test="user.mbrTp eq 'MT004'" >
-									   SELECT mbrId
-										 FROM member m1
-									</if>
-									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
-									   SELECT mbrId
-										 FROM member m1
-										WHERE mbrTp in ('MT001','MT002', 'MT003')
-										  AND estateCd = #{user.estateCd}
-									</if>
-				 				)
-	   </if>
-	   <if test="activeTp eq 'AT002'"> 
-	   AND activeTp = 'AT002'
-	   AND mbrId in ( 	<if test="user.mbrTp eq 'MT004'" >
-									   SELECT mbrId
-										 FROM member m1
-									</if>
-									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
-									   SELECT mbrId
-										 FROM member m1
-										WHERE mbrTp in ('MT001','MT002', 'MT003')
-										  AND estateCd = #{user.estateCd}
-									</if>
-				 				)
-	   </if>
+	     , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm
+	  FROM customer c
+	 WHERE 1=1
+		 <if test="myCust != null and myCust != '' ">
+	   	AND c.mbrId = #{user.mbrId}
+	   	</if>
+	   <choose>
+	   	<when test='publicYn eq "Y"'>
+		   	   AND publicYn = 'Y'
+		   	<if test="activeTp eq 'AT001'"> 
+			   AND activeTp = 'AT001'
+			</if>
+			<if test="activeTp eq 'AT002'"> 
+			   AND activeTp = 'AT002'
+			</if>
+	   	</when>
+	   	
+	   	<otherwise>
+		   <if test="activeTp eq 'AT001'">
+		   AND activeTp = 'AT001'
+		   AND mbrId in (    <if test="user.mbrTp eq 'MT004'" >
+										   SELECT mbrId
+											 FROM member m1
+										</if>
+										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+										   SELECT mbrId
+											 FROM member m1
+											WHERE mbrTp in ('MT001','MT002', 'MT003')
+											  AND estateCd = #{user.estateCd}
+										</if>
+					 				)
+		   </if>
+		   <if test="activeTp eq 'AT002'"> 
+		   AND activeTp = 'AT002'
+		   AND mbrId in ( 	<if test="user.mbrTp eq 'MT004'" >
+										   SELECT mbrId
+											 FROM member m1
+										</if>
+										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+										   SELECT mbrId
+											 FROM member m1
+											WHERE mbrTp in ('MT001','MT002', 'MT003')
+											  AND estateCd = #{user.estateCd}
+										</if>
+					 				)
+		   </if>
+	   	</otherwise>
+	   </choose> 
 	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
@@ -267,7 +282,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , faxTel2
 	     , faxTel3
 	     , gradeTp
-	     , budAmt
+	     , if (isNull (budAmt), 0, budAmt) budAmt
 	     , reqContent
 	     , feature
 	     , buyCond
@@ -280,18 +295,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , searchYn
 	     , visitYn
 	     , meetYn
-	     
 	     , concat((CASE WHEN contactYn = 'Y' THEN '계약상황' ELSE '' END) , (CASE WHEN explorYn = 'Y' THEN ' 답사추진 ' ELSE ''END) 
-			,(CASE WHEN talkYn = 'Y' THEN '상담중' ELSE ''END) 
-	     	, (CASE WHEN searchYn = 'Y' THEN '물건검색' ELSE ''END) , (CASE WHEN visitYn = 'Y' THEN '방문예정' ELSE ''END) 
-            , (CASE WHEN meetYn = 'Y' THEN '미팅예정' ELSE ''END)) custState, mbrMemo
+			,(CASE WHEN talkYn = 'Y' THEN ' 상담중' ELSE ''END) 
+	     	, (CASE WHEN searchYn = 'Y' THEN ' 물건검색' ELSE ''END) , (CASE WHEN visitYn = 'Y' THEN ' 방문예정' ELSE ''END) 
+            , (CASE WHEN meetYn = 'Y' THEN ' 미팅예정' ELSE ''END)) custState
+          
+          , mbrMemo
 	     , jeobsu
 	     , publicYn
 	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , frstRegUser frstRegNm
-	     , mbrId
-	  FROM customer
+	     , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm 
+	  FROM customer c
 	 WHERE custId = #{custId}
 	</select>
 	

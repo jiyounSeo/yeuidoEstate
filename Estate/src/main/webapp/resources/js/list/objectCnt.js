@@ -32,3 +32,11 @@ function f_objectCnt_select() {
 	});
 	
 }
+
+
+function f_objt_dtl_view() {
+	var comSubmit = new ComSubmit($("#addObject").attr('id'));
+	comSubmit.setUrl("/estate/commObListPostView.do");
+	comSubmit.submit();
+}
+

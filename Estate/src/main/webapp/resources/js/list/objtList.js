@@ -8,7 +8,6 @@ $(document).ready(function(){
 		saleTp = "";
 	}
 	f_objt_select(objtTp,saleTp);
-	
 });
 
 function gfn_isNull(str) {
@@ -34,20 +33,22 @@ $(document).on('click', '.pagingBtn', function() {
 	}
 	
 });
+var objtTpChk = "OT001";
+var saleTpChk = "ST001";
 
 function f_objt_select (objtTp, saleTp) {
-	if (objtTp == '' ) {
-		objtTp = "OT001";
-	} 
-	if (saleTp == '' ) {
-		saleTp = "ST001";
+	if (objtTp != '' ) {
+		objtTpChk = objtTp;
 	}
-	var saleTpColor = f_saleTp_color (saleTp) ;
+	if (saleTp != '' ) {
+		saleTpChk = saleTp;
+	}
+	var saleTpColor = f_saleTp_color (saleTpChk) ;
 	
 	
 	$("#saleTpTr").empty();
 	$("#objtListTr").empty();
-	switch ( objtTp ) {
+	switch ( objtTpChk ) {
 		case "OT001":
 			tmplTr = "saleTpTrTmpl1";
 			tmplNm = "objtTrTemplte1"; 
@@ -80,16 +81,20 @@ function f_objt_select (objtTp, saleTp) {
 	$(".tab_on_txt").each (function(){
 		$(this).css("color", "#989898");
 	});
-	$("#li_"+objtTp).css("color", "#2573BB");
+	$("#li_"+objtTpChk).css("color", "#2573BB");
 
 	$(".tab_bg").each (function(){
 		$(this).css("background-color", "#6C6C6C");
 	});
-	$("#li_"+saleTp).css("background-color", saleTpColor);
+	$("#li_"+saleTpChk).css("background-color", saleTpColor);
 	$("#objtListTr td").css("background-color", saleTpColor);
 	$("#objtListTr td").css("color", "#fff");
 	
-	f_objectList_select(objtTp, saleTp);
+	if ($("#publicYn").val() != "Y" ) {
+		$("label[for='activeTp1']").css("display","none");
+		$("label[for='activeTp2']").css("display","none");
+	}
+	f_objectList_select(objtTpChk, saleTpChk);
 }
 
 
@@ -133,19 +138,40 @@ function f_saleTp_color (saleTp) {
 	
 }
 
+function gfn_isNull(str) {
+    if (str == null) return true;
+    if (str == "NaN") return true;
+    if (new String(str).valueOf() == "undefined") return true;   
+    var chkStr = new String(str);
+    if( chkStr.valueOf() == "undefined" ) return true;
+    if (chkStr == null) return true;   
+    if (chkStr.toString().length == 0 ) return true;  
+    return false;
+}
+
 function f_objectList_select(objtTp, saleTp){
-	
+	var activeTpChk= "";
+	if ( $("#publicYn").val() == "Y") {
+		 if ( !gfn_isNull($("input[name='activeTp1']:checked").val()) ) {
+			 activeTpChk = "AT001";
+		 } else if ( !gfn_isNull($("input[name='activeTp2']:checked").val()) ) {
+			 activeTpChk = "AT002";
+		 }
+	} 
 	//saleTpTr
 	var param = {
 		objtTp : objtTp
 	   , saleTp : saleTp
 	   , publicYn : $("#publicYn").val()
-	   , activeTp : $("#activeTp").val()
+	   , activeTp :  $("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
 	   , estateRange : $("#estateRange").val()
+	   , myObjt : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
 	   , currentPage : Number(currPage)
 	   , pagePerRow : 10
 	   , pageSize : 10
 	};
+	
+	console.log (param);
 	$.ajax({
 	  url : "/estate/selectObjectList.do",
 	  type: "post",
@@ -198,7 +224,6 @@ function f_objectList_select(objtTp, saleTp){
 			  $("#objtListEmptyTemplte").tmpl({col : colCnt}).appendTo("#objtTbody");
 		  }
 		  
-
 	  }
 	});
 	
@@ -223,6 +248,7 @@ function f_objtDtl_view (index) {
 	$("#objtNo").val(objtList[index].objtNo);
 	$("#objtTp").val(objtList[index].objtTp);
 	$("#saleTp").val(objtList[index].saleTp);
+	
 	var url = "";
 	switch (objtList[index].objtTp) {
 		case "OT001"	:
@@ -264,5 +290,4 @@ function f_add_objt() {
 	frm.action = '/estate/addObject.do';
 	frm.method = 'POST';
 	frm.submit();
-	
 }
