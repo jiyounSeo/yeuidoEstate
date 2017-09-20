@@ -149,7 +149,6 @@ function uncomma(str) {
 }
 
 $(document).on("keyup", "input[id*='Tel']", function() {
-	alert ("hihihi");
 	$(this).val( $(this).val().replace(/[^0-9]/gi, '')); 
 	
 });

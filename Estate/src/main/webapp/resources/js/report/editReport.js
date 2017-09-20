@@ -125,6 +125,7 @@ function init_conTp()
 	}
 }
 
+
 function f_report_save()
 {
 	if($("#writer").val() == "")
@@ -252,6 +253,7 @@ function f_report_save()
 	}
 	
 	var reportType = document.getElementsByName('contSe_rb');
+	
 	for( var i = 0; i < reportType.length; i++)
 	{
 		if(reportType[i].checked)

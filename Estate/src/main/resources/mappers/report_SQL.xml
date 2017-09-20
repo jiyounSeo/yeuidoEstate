@@ -131,7 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, boss
 		, regUser
 		, (SELECT COUNT(*) FROM contract) totalCnt
-	    , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm 
+	    , (SELECT mbrNm FROM member m WHERE m.mbrId = c.manager ) managerNm 
 	  FROM contract c
 	  where regUser = #{user.loginId}
 	   LIMIT #{rowNum}, #{pagePerRow}
@@ -180,7 +180,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, boss
 		, DATE_FORMAT(regDt, '%Y-%m-%d') as regDt
 		, regUser
-	  FROM contract
+	    , (SELECT mbrNm FROM member m WHERE m.loginId = c.regUser ) regUserNm 
+	  FROM contract c
 	 WHERE contractId = #{contractId}
 	</select>
 	

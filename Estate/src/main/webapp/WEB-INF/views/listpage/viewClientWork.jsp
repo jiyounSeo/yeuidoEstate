@@ -77,6 +77,10 @@
 			<td class="title">담당자메모</td>
 			<td colspan="4"><!--  -->${mbrMemo}</td>
 		</tr>
+		<tr>
+			<td class="title">상태</td>
+			<td colspan="4"><!--  -->${activeTpNm} | ${publicYnNm}</td>
+		</tr>
 	</table>
 	<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
 	<%@ include file="/WEB-INF/views/listpage/interListBottom.jsp" %> 	

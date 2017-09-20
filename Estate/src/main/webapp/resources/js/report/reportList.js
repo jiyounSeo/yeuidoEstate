@@ -41,7 +41,7 @@ function f_reportList_select()
 				  '<td>' + data.contDt + '</td>' +
 				  '<td>' + data.midContDt + '</td>' +
 				  '<td>' + data.remainDt + '</td>' +
-				  '<td>' + data.manager + '</td>' +
+				  '<td>' + data.managerNm + '</td>' +
 				  '<td>' + data.chkContent + '</td></tr>';
 			  }
 		  }

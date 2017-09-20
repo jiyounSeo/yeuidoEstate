@@ -14,7 +14,7 @@
 			<table class="new_report_table">
 				<tr>
 					<td class="title">작성자</td>
-					<td>${result.regUser}</td>
+					<td>${result.regUserNm}</td>
 					<td class="title">만기일</td>
 					<td>${result.dueDt}</td>
 				</tr>
@@ -23,8 +23,8 @@
 					<td id="contTpTd"></td>
 					<td class="title">계약형태</td>
 					<td class="sub">					
-						<input type="radio" name="contSe_rb" id="contSe_rb1" class="rbbox" disabled/><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
-						<input type="radio" name="contSe_rb" id="contSe_rb2" class="rbbox" disabled/><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp;
+						<input type="radio" name="contSe" id="contSe_rb1" class="rbbox" /><label for="contSe_rb1" class="rb-label type" style="cursor:default">양타</label>&nbsp;&nbsp;
+						<input type="radio" name="contSe" id="contSe_rb2" class="rbbox" /><label for="contSe_rb2" class="rb-label type" style="cursor:default">공동중개</label>&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>
@@ -100,9 +100,11 @@
 			</table>
 			<div style="height:50px;"></div>
 			<div style="width:1400px;margin:auto;text-align:center;">
-			<a href="./commRepList.do"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="./editReport?contractId=${result.contractId}"><img id="btn_edit" src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>
+				<a href="./commRepList.do"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<c:if test="${result.regUser == sessionScope.user.loginId || sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}">
+					<a href="./editReport?contractId=${result.contractId}"><img id="btn_edit" src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>
+				</c:if>
 			</div>	
 		</div>
 	</div>

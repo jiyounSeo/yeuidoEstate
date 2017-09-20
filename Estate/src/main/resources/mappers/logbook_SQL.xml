@@ -101,6 +101,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectLogbookConfirm" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT taskDocId
 		  FROM taskdoc
-		  WHERE frstRegDt like DATE_FORMAT( now(), '%Y-%m-%d')
+		  WHERE frstRegDt like DATE_FORMAT( now(), '%Y-%m-%d') AND mbrId = #{user.mbrId}
 	</select>
 </mapper>

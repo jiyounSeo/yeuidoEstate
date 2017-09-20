@@ -6,7 +6,7 @@ $(document).ready(function(){
 	f_memoList_select();
     $(function() {
 
-        nhn.husky.EZCreator.createInIFrame({
+   /*     nhn.husky.EZCreator.createInIFrame({
     		oAppRef : oEditors_memo,
     		elPlaceHolder : "memoCont",
     		sSkinURI : "./resources/editor/SmartEditor2Skin.html", 	//SmartEditor2Skin.html 파일이 존재하는 경로
@@ -21,7 +21,7 @@ $(document).ready(function(){
     		oEditors_memo.getById["memoCont"].exec("PASTE_HTML", [ "" ]);		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
     	}
     	});
-        
+   */     
     	function launch() {
             $('#divListMemoPopup').lightbox_me({centered: true});
         	$("#divViewMemoPopup").lightbox_me({centered: true});
@@ -128,7 +128,7 @@ function f_memoView_select(memoId) {
 }
 
 function f_memo_save() {	
-	oEditors_memo.getById["memoCont"].exec("UPDATE_CONTENTS_FIELD", []);	
+//	oEditors_memo.getById["memoCont"].exec("UPDATE_CONTENTS_FIELD", []);	
 	var param = $("#newMemo").serialize();
 	var memoDocId = $("#memoDocId").val();
 	var urlStr = "";

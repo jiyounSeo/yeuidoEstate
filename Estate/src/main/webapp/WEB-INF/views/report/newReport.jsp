@@ -45,8 +45,9 @@
 					</td>
 					<td class="title">계약형태</td>
 					<td class="sub">					
-						<input type="radio" name="contSe" id="contSe_rb1" class="rbbox" /><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
-						<input type="radio" name="contSe" id="contSe_rb2" class="rbbox" /><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp;
+						<input type="radio" name="contSe_rb" id="contSe_rb1" class="rbbox" /><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
+						<input type="radio" name="contSe_rb" id="contSe_rb2" class="rbbox" /><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp
+						<input type="hidden" name="contSe" id="contSe">
 					</td>
 				</tr>
 				<tr>

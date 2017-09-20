@@ -14,7 +14,7 @@
 			<table class="new_report_table">
 				<tr>
 					<td class="title">작성자</td>
-					<td>${result.regUser}</td>
+					<td>${result.regUserNm}</td>
 					<td class="title">만기일</td>
 					<td><input type="text" id="dueDt" name="dueDt" value="${result.dueDt}" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 				</tr>
