@@ -131,13 +131,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, boss
 		, regUser
 		, (SELECT COUNT(*) FROM contract) totalCnt
-	  FROM contract
+	    , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm 
+	  FROM contract c
 	  where regUser = #{user.loginId}
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
 	<select id="selectBossList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT mbrId
+		,loginId
 		,mbrNm
 		FROM member
 		where (member.mbrTp='MT003' AND member.estateCd = ${user.estateCd} ) OR member.mbrTp='MT004'
@@ -145,6 +147,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectManagerList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT mbrId
+		,loginId
 		,mbrNm
 		FROM member
 		where member.estateCd = ${user.estateCd}

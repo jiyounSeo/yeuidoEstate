@@ -8,23 +8,6 @@ $(document).ready(function(){
 	} else {
 		f_NoticeDtl_select();
 	}
-	
-	nhn.husky.EZCreator.createInIFrame({
-		oAppRef : oEditors,
-		elPlaceHolder : "ntConts",
-		sSkinURI : "./resources/editor/SmartEditor2Skin.html", 	//SmartEditor2Skin.html 파일이 존재하는 경로
-		htParams : {
-		bUseToolbar : true, 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)	
-		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)	
-		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-		fOnBeforeUnload : function() {
-		}
-	},
-	fOnAppLoad : function() {	
-		oEditors.getById["ntConts"].exec("PASTE_HTML", [ "" ]);		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-	},
-	fCreator : "createSEditor2"
-	});
 });
 
 //페이징 버튼 클릭이벤트

@@ -47,7 +47,7 @@ function makeNoticeLatestList(listArray){
 	var list = "";
 	for(var i=0; i<listArray.length; i++){
 		var item = listArray[i];
-		list = list + '<li><a href="./viewNoticeItem.do?noticeId='+ item.noticeId + '">' + makeSubject(item.ntSbj) + '    ('+ item.frstRegDt + ')</a></li>';				
+		list = list + '<li><a href="./viewNoticeItem.do?noticeId='+ item.noticeId + '">' + makeSubject(item.ntSbj,17) + '    ('+ item.frstRegDt + ')</a></li>';				
 	}
 	return list;
 }
@@ -57,15 +57,13 @@ function makeSuggLatestList(listArray){
 	var list = "";
 	for(var i=0; i<listArray.length; i++){
 		var item = listArray[i];
-		list = list + '<li><a href="./viewSuggItem.do?taskDocId='+ item.taskDocId + '">' + item.frstRegUser + ' 님이 작성한 건의사항입니다    ('+ item.frstRegDt +')</a></li>';				
+		list = list + '<li><a href="./viewSuggItem.do?taskDocId='+ item.taskDocId + '">' + makeSubject(item.mbrNm + ' 님이 작성한 건의사항입니다',17) + '   ('+ item.frstRegDt +')</a></li>';				
 	}	
 	return list;
 }
 
 
-function makeSubject(sbj){
-	
-	var size = 15;
+function makeSubject(sbj, size){
 	var newSbj = "";
 	
 	if (sbj.length > size){

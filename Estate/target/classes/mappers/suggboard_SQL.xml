@@ -11,8 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, sugg
 				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 				, frstRegUser
-	     		, (SELECT COUNT(*) FROM taskdoc where sugg !='' AND sugg != null) totalCnt
-			  FROM taskdoc
+	     		, (SELECT COUNT(*) FROM taskdoc where sugg !='' || sugg != null) totalCnt
+				, (SELECT mbrNm FROM member m WHERE m.mbrId = t.mbrId ) mbrNm 
+			  FROM taskdoc t
+			  WHERE sugg !='' ||  sugg != null
 			  ORDER BY taskDocId+0 DESC
 			  LIMIT #{rowNum}, #{pagePerRow}
 	</select>
@@ -23,7 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, sugg
 				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 				, frstRegUser
-			  FROM taskdoc
+				, (SELECT mbrNm FROM member m WHERE m.mbrId = t.mbrId ) mbrNm 
+			  FROM taskdoc t
 			  WHERE taskDocId = #{taskDocId}
 	</select>
 	
@@ -33,8 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, sugg
 				, DATE_FORMAT(frstRegDt, '%m/%d') as frstRegDt
 				, frstRegUser
-	     		, (SELECT COUNT(*) FROM taskdoc where sugg !='' AND sugg != null) totalCnt
-			  FROM taskdoc
+	     		, (SELECT COUNT(*) FROM taskdoc where sugg !='' || sugg != null) totalCnt
+				, (SELECT mbrNm FROM member m WHERE m.mbrId = t.mbrId ) mbrNm 
+			  FROM taskdoc t
+			  WHERE sugg !='' ||  sugg != null
 			  ORDER BY taskDocId+0 DESC
 			  LIMIT 0, #{endNum}
 	</select>

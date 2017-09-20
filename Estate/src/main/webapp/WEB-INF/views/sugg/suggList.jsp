@@ -27,9 +27,9 @@
 <script id="suggListTemplte" type="text/x-jquery-tmpl">	
 {{each sbList}}					
 	<tr>
-		<td><a href="./viewSuggItem.do?taskDocId={{html $value.taskDocId}}">{{html $value.frstRegUser}} 님이 작성한 건의사항입니다</a></td>
+		<td><a href="./viewSuggItem.do?taskDocId={{html $value.taskDocId}}">{{html $value.mbrNm}} 님이 작성한 건의사항입니다</a></td>
 		<td>{{html $value.frstRegDt}}</td>
-		<td>{{html $value.frstRegUser}}</td>
+		<td>{{html $value.mbrNm}}</td>
 	</tr>
 							
 {{/each}}
