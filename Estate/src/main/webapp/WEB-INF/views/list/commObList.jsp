@@ -218,7 +218,8 @@
 		<td>분양평수</td>
 		<td>실평수</td>
 		<td>층</td>
-		<td>보증금 / 월세</td>
+		<td>보증금</td>
+		<td>월세</td>
 		<td>권리금</td>
 		<td>등록인</td>
 		<td>분류</td>
@@ -241,7 +242,8 @@
 		<td>동</td>
 		<td>층</td>
 		<td>향</td>
-		<td>보증금/월세</td>
+		<td>보증금</td>
+		<td>월세</td>
 		<td>부가세</td>
 		<td>등록인</td>
 		<td>분류</td>
@@ -301,6 +303,7 @@
 		<td>{{html $value.realArea}}</td>
 		<td>{{html $value.floor}}</td>
 		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.rightAmt}}</td>
 		<td>{{html $value.frstRegNm}}</td>
 		<td>{{html $value.activeTpNm}}</td>
@@ -352,7 +355,8 @@
 		<td>{{html $value.dong}}</td>
 		<td>{{html $value.floor}}</td>
 		<td>{{html $value.directionTpNm}}</td>
-		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.depositAmt}}</td> 
+		<td>{html $value.monthlyAmt}}</td>
 		<td>{{html $value.frstRegNm}}</td>
 		<td>{{html $value.activeTpNm}}</td>
 		<td>{{html $value.etc}}</td>	

@@ -1,26 +1,22 @@
 $(document).ready(function(){
 	//f_objectDtl_select();
+	
+	if ($("#modifyYn").val() == "Y") {
+		$("#modfDiv").show();
+	} else {
+		$("#modfDiv").hide();
+	}
+	
 	if ( !gfn_isNull($("#custId").val())) {
 		f_customerDtl_select();
 	}
 	
 });
 
-function gfn_isNull(str) {
-    if (str == null) return true;
-    if (str == "NaN") return true;
-    if (new String(str).valueOf() == "undefined") return true;   
-    var chkStr = new String(str);
-    if( chkStr.valueOf() == "undefined" ) return true;
-    if (chkStr == null) return true;   
-    if (chkStr.toString().length == 0 ) return true;  
-    return false;
-}
- 
-
 function f_customerDtl_select() {
 	var param = {
 		custId : $("#custId").val()
+		, publicYn : $("#publicYn").val()
 	};
 	$.ajax({
 		  url : "/estate/selectCustomerDtl.do",
@@ -80,6 +76,12 @@ function f_setting_text(result) {
 	if (result.meetYn  == "Y") {
 		$('input:checkbox[id="meetYn"]').attr("checked", true); //단일건
 	}
+	
+	if (result.modifyYn == "Y") {
+		$("#modfDiv").show();
+	} else {
+		$("#modfDiv").hide();
+	}
 	  
 }
 
@@ -107,7 +109,6 @@ function f_customer_save() {
 	 $("#budAmt").val( $("#budAmt").val().replace(/,/g, ''));
 	
 	var param = $("#newClient").serialize();
-	console.log (param);
 	
 	if ( $("#custNm").val() == "") {
 		alert ("고객명은 필수입력 값입니다.");
@@ -130,10 +131,6 @@ function f_customer_save() {
 	param.searchYn =  $("input[name=searchYn]:checked").val();
 	param.visitYn =  $("input[name=visitYn]:checked").val();
 	param.meetYn =  $("input[name=meetYn]:checked").val();
-	
-	
-	console.log (param.budAmt);
-	
 	
 	var urlStr = "";
 	if ($("#custId").val() != "" ) {
@@ -160,10 +157,9 @@ function f_customer_save() {
 
 function f_customer_delete() {
 	if (confirm ("고객을 삭제하시겠습니까?")) {
-	   var comSubmit = new ComSubmit($('form').attr('id'));
+	   var comSubmit = new ComSubmit("viewClient");
 	   comSubmit.setUrl("/estate/deleteCustomer.do");
 	   comSubmit.submit();
-	     
 	}
 }
 

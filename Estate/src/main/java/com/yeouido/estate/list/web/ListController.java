@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
 import com.yeouido.estate.list.service.ListService;
 import com.yeouido.estate.object.service.ObjectService;
@@ -197,7 +199,7 @@ public class ListController {
 	 * 물건 상세조회 화면 
 	 */
 	@RequestMapping(value="/objtDtlView.do",method = RequestMethod.POST)
-	public String objtDtlView(@RequestParam Map<String,Object> map, Model model){
+	public String objtDtlView(@RequestParam Map<String,Object> map, Model model, HttpSession session){
 		Map<String, Object> result = new HashMap<String, Object>();
 		model.addAttribute("activeTpChk", map.get("activeTp"));
 		model.addAttribute("publicYnChk", map.get("publicYn"));
@@ -205,6 +207,7 @@ public class ListController {
 		model.addAttribute("saleTpChk", map.get("saleTp"));
 		
 		try {
+			map.put("user", session.getAttribute("user"));
 			result = objectService.selectObjectInfo(map);
 			model.addAllAttributes(result);
 			model.addAllAttributes(map);

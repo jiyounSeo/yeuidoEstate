@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="insertWork" parameterType="java.util.HashMap">
      <selectKey resultType="int" keyProperty="workNo" order="BEFORE">
-        SELECT  ifnull (MAX(CAST(workNo AS signed integer))+1,1) from workdoc 
+        SELECT  if (isnull(workNo), 1,  (MAX(CAST(workNo AS signed integer))+1)) from workdoc 
       </selectKey>
 		INSERT INTO 
 			workdoc (workNo
@@ -159,7 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
    <insert id="insertInterObject" parameterType="java.util.HashMap">
      <selectKey resultType="int" keyProperty="interNo" order="BEFORE">
-        SELECT  ifnull (MAX(CAST(interNo AS signed integer))+1,1) from interobject 
+        SELECT  if (isnull(interNo), 1,  (MAX(CAST(interNo AS signed integer))+1)) from interobject 
       </selectKey>
 		INSERT INTO 
 			interobject (interNo

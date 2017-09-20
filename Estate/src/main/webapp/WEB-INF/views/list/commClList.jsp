@@ -108,7 +108,7 @@
 		<td>{{html $value.custNm}}</td>
 		<td>{{html $value.custTel1}}-{{html $value.custTel2}}-{{html $value.custTel3}}</td>
 		<td>{{html $value.reqContent}}</td>
-		<td>{{html $value.frstRegNm}}</td>
+		<td>{{html $value.mbrNm}}</td>
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 							

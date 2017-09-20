@@ -28,8 +28,17 @@
 			<tr>
 				<td stlye="width;100%;height:45px;" colspan="11">&nbsp;</td>
 			</tr>
-			
 		</table>
+		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td width="100%" align="right" valign="bottom">
+					<input type="checkbox" name="objt_activeTp1" id="objt_activeTp1" onclick = "f_objt_select('','')" value="AT001" /><label for="objt_activeTp1">활성</label>
+					<input type="checkbox" name="objt_activeTp2" id="objt_activeTp2" onclick = "f_objt_select('','')" value="AT002" /><label for="objt_activeTp2">보류</label>
+					<input type="checkbox" name="objt_activeTp3" id="objt_activeTp3" onclick = "f_objt_select('','')" value="AT003" /><label for="objt_activeTp3">내가등록한물건만보기</label>
+				</td>	
+			</tr>
+		</table>
+		
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr id="saleTpTr">
 				
@@ -51,7 +60,7 @@
 						<tr>
 							<td width="488px" height="41px">
 								<div style="width:488px;height:41px;margin:0;padding:0;text-align:left">
-									<a href="#"><img src="./resources/images/btn_search2.jpg"></a>
+									<!-- <a href="#"><img src="./resources/images/btn_search2.jpg"></a> -->
 									<a href="#"><img src="./resources/images/btn_print.jpg"></a>
 									<a href="#"><img src="./resources/images/btn_export_excel.jpg" border="0"></a>
 								</div>
@@ -71,9 +80,7 @@
 		</table>
 	</div>
 </div>
-
-
-<div style="height:100px;">&nbsp;</div>
+<div id="heightDiv" style="height:100px;">&nbsp;</div>
 <div id="custList" name="custList" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<img src="./resources/images/title_cl_list.jpg">
@@ -84,9 +91,11 @@
 				<td width="20px"></td>
 				<td width="1460px" valign="top">
 					<table width="1460px" cellpadding="0" cellspacing="0" border="0">
-						<tr>
-							<td width="100%" align="right" valign="bottom">
-								<input type="checkbox">활성 <input type="checkbox">보류 <input type="checkbox">내가등록한고객만보기
+						<tr style="height:30px;">
+							<td width="100%" align="right" valign="top">
+								<input type="checkbox" name="cust_activeTp1" id="cust_activeTp1" onclick = "f_custList_select()" value="AT001" /><label for="cust_activeTp1">활성</label>
+								<input type="checkbox" name="cust_activeTp2" id="cust_activeTp2" onclick = "f_custList_select()" value="AT002" /><label for="cust_activeTp2">보류</label>
+								<input type="checkbox" name="cust_activeTp3" id="cust_activeTp3" onclick = "f_custList_select()" value="AT003" /><label for="cust_activeTp3">내가등록한물건만보기</label>
 							</td>
 						</tr>
 						<tr>
@@ -110,7 +119,7 @@
 							<td align="center">
 								<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
  								<tr>
- 									<td width="487px" align="left"><a href="#"><img src="./resources/images/btn_search2.jpg"></a></td>
+ 									<td width="487px" align="left"><!-- <a href="#"><img src="./resources/images/btn_search2.jpg"></a> --></td>
  									<td width="486px" align="center">
  										<div id="custPagingDiv" class="pagination"></div>
  									</td>
@@ -128,28 +137,30 @@
 		</table>		
 	</div>
 </div>
-<div>
-	<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
-		<tr>
-			<td width="486px" align="right">
-				<a href="./totalListView.do?mainc=${mainc}&tab=${tab}&vm=${i.index+1}"><img src="./resources/images/btn_viewmode_1_on.jpg"></a>
-				<a href="./totalListView.do?mainc=${mainc}&tab=${tab}&vm=${i.index+1}"><img src="./resources/images/btn_viewmode_2_off.jpg"></a>
-				<a href="./totalListView.do?mainc=${mainc}&tab=${tab}&vm=${i.index+1}"><img src="./resources/images/btn_viewmode_3_off.jpg"></a>
-			</td>
-		</tr>
-	</table>
+<div style="width:1500px;margin:auto;padding:0;">
+<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
+	<tr style="height:30px;">
+		<td>&nbsp;
+	</tr>
+	<tr>
+		<td width="100%" align="right" valign="bottom">
+			<a href="#btn" onclick="f_view_change('1');return false;"><img src="./resources/images/btn_viewmode_1_on.jpg"></a>
+			<a href="#btn" onclick="f_view_change('2');return false;"><img src="./resources/images/btn_viewmode_2_off.jpg"></a>
+			<a href="#btn" onclick="f_view_change('3');return false;"><img src="./resources/images/btn_viewmode_3_off.jpg"></a>
+		</td>	
+	</tr>
+</table>
 </div>
 
 <input type="hidden" name="custId" id="custId"/>
-
 <input type="hidden" name="objtNo" id="objtNo"/>
-<input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>
 <input type="hidden" name="viewUrl" id="viewUrl" />
+<input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>
 <input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
-
-<input type="hidden" name="publicYn" id="publicYn" value="${publicYn}"/>
+<input type="hidden" name="publicYn" id="publicYn" value="Y"/>
 <input type="hidden" name="activeTp" id="activeTp" value="${activeTp}"/>
-<input type="hidden" name="estateRange" id="estateRange" value="${estateRange}"/>
+<input type="hidden" name="viewMode" id="viewMode" value="1"/>
+
 
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 	
 
@@ -192,9 +203,6 @@
 </td>
 <td width='70%'>&nbsp;</td>
 <td style="width:30%; align:right; valign:middle;">
-	<input type="checkbox" name="activeTp1" id="activeTp1" value="AT001" /><label for="activeTp1">활성</label>
-	<input type="checkbox" name="activeTp2" id="activeTp2" value="AT002" /><label for="activeTp2">보류</label>
-	<input type="checkbox" name="activeTp3" id="activeTp3" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
 </td>	
 </script>
 <script id="objtTrTemplte2" type="text/x-jquery-tmpl">	
@@ -207,9 +215,6 @@
 </td>	
 <td width='76%'>&nbsp;</td>
 <td style="width:24%; align:right; valign:middle;">
-	<input type="checkbox" name="activeTp1" id="activeTp1" value="AT001" /><label for="activeTp1">활성</label>
-	<input type="checkbox" name="activeTp2" id="activeTp2" value="AT002" /><label for="activeTp2">보류</label>
-	<input type="checkbox" name="activeTp3" id="activeTp3" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
 </td>
 </script>
 <script id="objtTrTemplte3" type="text/x-jquery-tmpl">	
@@ -222,9 +227,6 @@
 </td>	
 <td width='76%'>&nbsp;</td>
 <td style="width:24%; align:right; valign:middle;">
-	<input type="checkbox" name="activeTp1" id="activeTp1" value="AT001" /><label for="activeTp1">활성</label>
-	<input type="checkbox" name="activeTp2" id="activeTp2" value="AT002" /><label for="activeTp2">보류</label>
-	<input type="checkbox" name="activeTp3" id="activeTp3" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
 </td>
 </script>
 <script id="objtTrTemplte4" type="text/x-jquery-tmpl">	
@@ -245,9 +247,6 @@
 </td>	
 <td width='70%'>&nbsp;</td>
 <td style="width:30%; align:right; valign:middle;">
-	<input type="checkbox" name="activeTp1" id="activeTp1" value="AT001" /><label for="activeTp1">활성</label>
-	<input type="checkbox" name="activeTp2" id="activeTp2" value="AT002" /><label for="activeTp2">보류</label>
-	<input type="checkbox" name="activeTp3" id="activeTp3" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
 </td>
 </script>
 <script id="objtTrTemplte5" type="text/x-jquery-tmpl">	
@@ -268,9 +267,6 @@
 </td>
 <td width='70%'>&nbsp;</td>
 <td style="width:30%; align:right; valign:middle;">
-	<input type="checkbox" name="activeTp1" id="activeTp1" value="AT001" /><label for="activeTp1">활성</label>
-	<input type="checkbox" name="activeTp2" id="activeTp2" value="AT002" /><label for="activeTp2">보류</label>
-	<input type="checkbox" name="activeTp3" id="activeTp3" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
 </td>
 </script>
 <script id="objtTrTemplte6" type="text/x-jquery-tmpl">	
@@ -283,9 +279,6 @@
 </td>	
 <td width='76%'>&nbsp;</td>
 <td style="width:24%; align:right; valign:middle;">
-	<input type="checkbox" name="activeTp1" id="activeTp1" value="AT001"/><label for="activeTp1">활성</label>
-	<input type="checkbox" name="activeTp2" id="activeTp2" value="AT002" /><label for="activeTp2">보류</label>
-	<input type="checkbox" name="activeTp3" id="activeTp3" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
 </td>
 </script>
 

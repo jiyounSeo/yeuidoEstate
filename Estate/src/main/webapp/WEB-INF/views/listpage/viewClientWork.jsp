@@ -2,8 +2,11 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <script type="text/javascript" src="./resources/js/list/addClient.js"></script>
+<script type="text/javascript" src="./resources/js/comm/common.js"></script>
 
-<form id="viewClient">
+<form id="viewClient" action="/">
+<input type="hidden" name="custId" id="custId" value="${custId}" />
+<input type="hidden" name="activeTp" id="activeTp" value="${activeTp}" />
 <div class="new_page_title">
 	<img src="./resources/images/title_view_cl_list.jpg">
 </div>
@@ -85,6 +88,6 @@
 		<a href="#"><img src="./resources/images/btn_cl_list.jpg"></a>
 	</div>
 </div>
-<input type="hidden" name="custId" id="custId" value="${custId}" />
+
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

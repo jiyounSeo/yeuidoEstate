@@ -2,8 +2,13 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <script type="text/javascript" src="./resources/js/list/addClient.js"></script>
+<script type="text/javascript" src="./resources/js/comm/common.js"></script>
 
-<form id="viewClient">
+<form id="viewClient" action="/">
+<input type="hidden" name="custId" id="custId" value="${custId}" />
+<input type="hidden" name="modifyYn" id="modifyYn" value="${modifyYn}" />
+<input type="hidden" name="publicYn" id="publicYn" value="Y" />
+
 <div class="new_page_title">
 	<img src="./resources/images/title_view_cl_list.jpg">
 </div>
@@ -72,12 +77,11 @@
 		
 	</table>
 	<div style="height:50px;"></div>
-	<div style="width:1400px;margin:auto;text-align:center;">
+	<div style="width:1400px;margin:auto;text-align:center;" id="modfDiv">
 		<a href="./modifyCustomerInfo.do?custId=${custId}"> <img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="#"><img src="./resources/images/btn_del.jpg" onclick="f_customer_delete();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="#"><img src="./resources/images/btn_cl_list.jpg"></a>
 	</div>
 </div>
-<input type="hidden" name="custId" id="custId" value="${custId}" />
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

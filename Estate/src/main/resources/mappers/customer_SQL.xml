@@ -282,7 +282,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , faxTel2
 	     , faxTel3
 	     , gradeTp
-	     , if (isNull (budAmt), 0, budAmt) budAmt
+	     , CASE WHEN (c.budAmt) IS NULL THEN 0 ELSE budAmt END budAmt
 	     , reqContent
 	     , feature
 	     , buyCond
@@ -307,6 +307,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , frstRegUser frstRegNm
 	     , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm 
+	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} != c.mbrId then 'N' else 'Y' END ) ELSE 'Y' END) modifyYn
 	  FROM customer c
 	 WHERE custId = #{custId}
 	</select>

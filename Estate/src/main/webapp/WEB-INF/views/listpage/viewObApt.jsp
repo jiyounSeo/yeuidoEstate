@@ -68,6 +68,11 @@
 			<td class="title">분류</td>
 			<td colspan="4">${activeTpNm}, ${etc}<!-- 분류 --></td>
 		</tr>
+		<tr>
+			<td class="title">등록인</td>
+			<td colspan="4">${frstRegNm}<!-- 분류 --></td>
+		</tr>
+		
 	</table>
 	<c:if test="${publicYn ne 'Y'}">
 		<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	

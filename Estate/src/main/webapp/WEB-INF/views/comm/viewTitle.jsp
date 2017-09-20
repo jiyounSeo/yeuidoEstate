@@ -1,3 +1,3 @@
-<div class="new_page_title"><!-- 이전 url 에 따라 title 결정 -->
-	<img src="./resources/images/${title_img}"> 
+<div class="new_page_title"><!-- ì´ì  url ì ë°ë¼ title ê²°ì  -->
+		<img src="./resources/images/title_ob_list.jpg"> 
 </div>

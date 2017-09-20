@@ -84,7 +84,7 @@ function f_objectDtl_select() {
 		  success : function(data){
 			  objtInfo = data.objtInfo;
 			  f_setting_text(objtInfo);
-			  if ( $("publicYn").val() == "Y") {
+			  if ( $("#publicYn").val() == "Y") {
 				  if ( result.modifyYn == "Y") {
 					  $("#viewObjBot").hide();
 				  }
@@ -237,15 +237,33 @@ function f_saleobject_save() {
 	});
 }
 
-
-
-
 function f_objt_delete() {
+	var objtForm = "";
+	switch ( $("#objtTp").val()) {
+		case "OT001"	:
+			objtForm = "viewObApt";
+			break;
+		case "OT002"	:
+			objtForm = "viewObStore";
+			break;
+		case "OT003"	:
+			objtForm = "viewObOffice";
+			break;
+		case "OT004"	:
+			objtForm = "viewObOps";
+			break;
+		case "OT005"	:
+			objtForm = "viewObHrapt";
+			break;
+		case "OT006"	:
+			objtForm = "viewObTicket";
+			break;
+		
+	}
 	if (confirm ("물건을 삭제하시겠습니까?")) {
-	   var comSubmit = new ComSubmit($('form').attr('id'));
+	   var comSubmit = new ComSubmit(objtForm);
 	   comSubmit.setUrl("/estate/deleteObject.do");
 	   comSubmit.submit();
-	     
 	}
 }
 
@@ -275,4 +293,34 @@ function f_objt_dtl_view() {
 	var comSubmit = new ComSubmit($("#"+objtForm).attr('id'));
 	comSubmit.setUrl("/estate/commObListPostView.do");
 	comSubmit.submit();
+}
+
+function f_list_view_change() {
+	var objtForm = "";
+	switch ( $("#objtTp").val()) {
+		case "OT001"	:
+			objtForm = "viewObApt";
+			break;
+		case "OT002"	:
+			objtForm = "viewObStore";
+			break;
+		case "OT003"	:
+			objtForm = "viewObOffice";
+			break;
+		case "OT004"	:
+			objtForm = "viewObOps";
+			break;
+		case "OT005"	:
+			objtForm = "viewObHrapt";
+			break;
+		case "OT006"	:
+			objtForm = "viewObTicket";
+			break;
+		
+	}
+	 var comSubmit = new ComSubmit(objtForm);
+	 comSubmit.setUrl("/estate/commObListPostView.do");
+	 comSubmit.submit();
+	 
+    
 }

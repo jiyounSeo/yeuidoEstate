@@ -138,11 +138,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     
     <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT a.objtTp, a.saleTp, if(isnull(cntSaleTp), 0, cntSaleTp) cntSaleTp
+	SELECT A.objtTp, A.saleTp, if(isnull(cntSaleTp), 0, cntSaleTp) cntSaleTp
 	FROM
 		(
 		SELECT a.commCd objtTp, b.commCd saleTp
-		  FROM commCd a, commCd b
+		  FROM commcd a, commcd b
 		 where a.groupCd = 'OT'
 		   and b.groupCd = 'ST'
 		) AS A
@@ -188,7 +188,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) AS B
 	 ON A.objtTp = B.objtTp
 	 AND A.saleTp = B.saleTp
-	ORDER BY a.objtTp, a.saleTp
+	ORDER BY A.objtTp, A.saleTp
     </select>
     
 	<select id="selectObjectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -323,7 +323,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , obj.frstRegUser
 	     , (SELECT mbrNm FROM member m WHERE m.mbrId = obj.frstRegUser )  frstRegNm
-	     , (case when #{user.mbrId} != obj.frstRegUser then 'N' else 'Y' END ) modifyYn
+	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} != obj.frstRegUser then 'N' else 'Y' END ) ELSE 'Y' END) modifyYn
 	  FROM saleobject obj
 	     , customer cust
 	 WHERE objtNo = #{objtNo}

@@ -148,9 +148,10 @@ public class CustomerController {
 	 */	
 	@RequestMapping(value="/deleteCustomer.do",method = RequestMethod.POST)
 	public String deleteCustomer(HttpServletRequest request,Model model){
-		ListController listView = new ListController();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("custId", request.getParameter("custId"));
+		map.put("publicYn", request.getParameter("publicYn"));
+		map.put("activeTp", request.getParameter("activeTp"));
 		
 		try {
 			int result = customerService.deleteCustomer(map);
@@ -160,13 +161,15 @@ public class CustomerController {
 			model.addAttribute("messageCd", "2");
 			e.printStackTrace();
 		}
+		model.addAllAttributes(map);
 		return "/list/commClList";	
 	}
 	
 	@RequestMapping(value="/viewClient.do",method = RequestMethod.POST)
-	public String viewClient(@RequestParam Map<String,Object> map, Model model){
+	public String viewClient(@RequestParam Map<String,Object> map, Model model, HttpSession session){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
+			map.put("user",  session.getAttribute("user"));
 			result = customerService.selectCustomerInfo(map);
 			model.addAllAttributes(result);
 			model.addAttribute("messageCd", "1");
@@ -177,6 +180,7 @@ public class CustomerController {
 		}
 		String url = "";
 		if ( ("Y").equals(map.get("publicYn")) ) {
+			model.addAttribute("publicYn", "Y");
 			url = "/listpage/viewClient"; 
 		} else {
 			url = "/listpage/viewClientWork"; 

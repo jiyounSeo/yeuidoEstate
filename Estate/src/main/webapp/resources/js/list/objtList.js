@@ -192,7 +192,7 @@ function f_objectList_select(objtTp, saleTp){
 		  		break; 
 		  	case "OT002" : // 상가
 		  		tmplNm = "objtListTemplte2";
-		  		colCnt = 9;
+		  		colCnt = 10;
 		  		break;
 		  	case "OT003" : //사무실.빌딩
 		  		tmplNm = "objtListTemplte3";
@@ -204,7 +204,7 @@ function f_objectList_select(objtTp, saleTp){
 				break;
 		  	case "OT005" : //주상복합
 		  		tmplNm = "objtListTemplte5";
-		  		colCnt = 10;
+		  		colCnt = 11;
 		  		break;
 		  	case "OT006" : //분양권
 		  		tmplNm = "objtListTemplte6";
