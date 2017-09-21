@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     -->
     <insert id="insertMember" parameterType="java.util.HashMap">
     	<selectKey resultType="String" keyProperty="mbrId" order="BEFORE">
-	        SELECT   if ( isnull(mbrId), 1, MAX(CAST(mbrId AS signed integer))+1) from member       
+	        SELECT   if ( isnull(max(mbrId)), 1, MAX(CAST(mbrId AS signed integer))+1) from member       
 	    </selectKey>
         INSERT INTO member  
         	(

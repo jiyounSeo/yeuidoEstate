@@ -131,6 +131,7 @@ function f_setting_text(result) {
 		$('input:checkbox[id="publicYn"]').attr("checked", true); //단일건
 	}
 	$("#memo").val(result.memo);
+	$("#custId").val(result.custId);
 }
 
 function inputNumberFormat(obj) { 
@@ -323,3 +324,4 @@ function f_list_view_change() {
 	 
     
 }
+

@@ -17,6 +17,10 @@ public class CustomerDAO extends AbstractDAO
    public int modifyCustomer(Map<String, Object> map) throws Exception{
        return update("customerDAO.modifyCustomer",map);
    }
+   public int modifyObjtCustomer(Map<String, Object> map) throws Exception{
+       return update("customerDAO.modifyObjtCustomer",map);
+   }
+   
    public int deleteCustomer(Map<String, Object> map) throws Exception{
        return delete("customerDAO.deleteCustomer",map);
    }

@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="buildingDAO">
     <insert id="insertBuilding" parameterType="java.util.HashMap" >
       <selectKey resultType="int" keyProperty="buildCd" order="BEFORE">
-        SELECT   if ( isnull(buildCd), 1, MAX(CAST(buildCd AS signed integer))+1)) from building      
+        SELECT   if ( isnull(max(buildCd)), 1, MAX(CAST(buildCd AS signed integer))+1)) from building      
       </selectKey>
 		INSERT INTO 
 			building (buildCd

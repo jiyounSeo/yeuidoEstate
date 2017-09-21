@@ -133,7 +133,6 @@ public class ObjectController {
 	@RequestMapping(value= "/modifyObject.do", method=RequestMethod.POST)
 	public ModelAndView modifyObject(@RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
-		
 		try {
 			map.put("user",  session.getAttribute("user"));
 			int result = objectService.modifyObject(map);

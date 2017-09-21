@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="customerDAO">
     <insert id="insertCustomer" parameterType="java.util.HashMap" >
       <selectKey resultType="int" keyProperty="custId" order="BEFORE">
-        SELECT   if (isnull(custId), 1,  (MAX(CAST(custId AS signed integer))+1)) from customer       
+        SELECT   if (isnull(max(custId)), 1,  (MAX(CAST(custId AS signed integer))+1)) from customer       
       </selectKey>
 		INSERT INTO 
 			customer (custId
@@ -86,6 +86,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
     </insert>
     
+    <update  id="modifyObjtCustomer" parameterType="java.util.HashMap" >
+    UPDATE customer
+       SET custNm = #{custNm}
+		 , custTel1 = (CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END)
+		 , custTel2 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END)
+		 , custTel3 = (CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END)
+	 	 , modfRegDt = now()
+		 , modfRegUser = #{user.mbrId}
+     WHERE custId = #{custId}
+    </update>	  
+    
     <update  id="modifyCustomer" parameterType="java.util.HashMap" >
     UPDATE customer
        SET custNm = #{custNm}
@@ -138,7 +149,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   	   AND custTel3 = #{custTel3}
 		) A, 
 		(
-		SELECT 1 num,  if (isnull(custId), 1, (MAX(CAST(custId AS signed integer))+1)) custId2
+		SELECT 1 num,  if (isnull(max(custId)), 1, (MAX(CAST(custId AS signed integer))+1)) custId2
 		  FROM customer
 		)B 
 	WHERE A.num = B.num

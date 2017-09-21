@@ -34,13 +34,7 @@ public class ObjectServiceImpl  implements ObjectService
    /* 물건수정 */
    @Override
    public int modifyObject(Map map) throws Exception {
-	   Map<String, Object> custMap = customerDAO.selectCustomerConfirm(map);
-	   if (("").equals(custMap.get("custId")) || custMap.get("custId") == null ) {
-		   map.put("custId", custMap.get("custId2"));
-		   customerDAO.insertNewCustomer(map);
-	   } else {
-		   map.put("custId", custMap.get("custId"));
-	   }
+	   customerDAO.modifyObjtCustomer(map);
 	   return objectDAO.modifyObject(map);
    }
    /* 물건 정보 */

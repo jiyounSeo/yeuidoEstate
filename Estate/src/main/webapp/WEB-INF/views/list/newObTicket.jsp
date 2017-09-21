@@ -25,9 +25,9 @@
 			<td class="title2">성명 </td>
 			<td width="365px"><input type="text" id="custNm" name="custNm" ></td>
 			<td class="title2">연락처</td>
-			<td><input type="number" style="width:120px" id="custTel1" name="custTel1" maxLength ="3">
-				 - <input type="number" style="width:130px" id="custTel2" name="custTel2" maxLength ="4">
-				 - <input type="number" style="width:130px" id="custTel3" name="custTel3" maxLength ="4"></td>
+			<td><input type="text" maxLength ="3" style="width:105px" id="custTel1" name="custTel1"  >
+				 - <input type="text" maxLength ="4" style="width:105px" id="custTel2" name="custTel2"  >
+				 - <input type="text" maxLength ="4" style="width:105px" id="custTel3" name="custTel3"  ></td>
 		</tr>
 		<tr>
 			<td class="title">건물명/면적</td>
@@ -73,13 +73,13 @@
 			
 			</td>
 			<td class="title">만기일</td>
-			<td><input type="text" id="dueDt" name="dueDt" class="datepicker" style="width:140px"><img src="./resources/images/icon_cal.jpg"></td>
+			<td><input type="text" id="dueDt" name="dueDt" readonly="true"  class="datepicker" style="width:140px"><img src="./resources/images/icon_cal.jpg"></td>
 			
 		</tr>
 		<tr>
 			<td class="title">입주가능일</td>
 			<td colspan="4">
-			  <input type="text" style="width:140px" id="availableDt" name="availableDt" class="datepicker"> 일
+			  <input type="text" style="width:140px" id="availableDt" readonly="true"  name="availableDt" readonly="true"  class="datepicker"> 일
 			</td>
 		</tr>
 		<tr>
@@ -112,5 +112,7 @@
 </div>
 <input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
 <input type="hidden" name="objtTp" id="objtTp" value="OT006"/>
+<input type="hidden" name="custId" id="custId" value="">
+
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

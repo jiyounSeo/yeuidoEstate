@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="insertLogbook" parameterType="java.util.HashMap">
      <selectKey resultType="int" keyProperty="taskDocId" order="BEFORE"> 
-        SELECT  if (isnull(taskDocId), 1, (MAX(CAST(taskDocId AS signed integer))+1)) from taskdoc
+        SELECT  if (isnull(max(taskDocId)), 1, (MAX(CAST(taskDocId AS signed integer))+1)) from taskdoc
       </selectKey>
 		INSERT INTO 
 			taskdoc (taskDocId

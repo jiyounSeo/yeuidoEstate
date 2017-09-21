@@ -17,7 +17,7 @@
 			<td class="title">고객명</td>
 			<td colspan="2">${custNm}<!--  --></td>
 			<td class="title">담당자</td>
-			<td>${mbrId}<!--  --></td>
+			<td>${mbrNm}<!--  --></td>
 		</tr>
 		<tr>
 			<td class="title">고객상태</td>
