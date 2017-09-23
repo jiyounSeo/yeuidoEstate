@@ -92,7 +92,12 @@ function f_setting_text(result) {
 function f_customer_save() {	
 	oEditors_today.getById["taskCont"].exec("UPDATE_CONTENTS_FIELD", []);	
 	oEditors_issue.getById["prob"].exec("UPDATE_CONTENTS_FIELD", []);	
-	oEditors_sugg.getById["sugg"].exec("UPDATE_CONTENTS_FIELD", []);	
+	oEditors_sugg.getById["sugg"].exec("UPDATE_CONTENTS_FIELD", []);
+	
+	if($("#sugg") == "<p>&nbsp;</p>") {
+		$("#sugg").val("");
+	}
+	
 	var param = $("#newLogbook").serialize();
 	var taskDocId = $("#taskDocId").val();
 	var urlStr = "";
