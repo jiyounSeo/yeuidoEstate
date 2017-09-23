@@ -22,62 +22,29 @@
 			<td>${mbrNm}<!--  --></td>
 		</tr>
 		<tr>
-			<td class="title">고객상태</td>
-			<td colspan="4">
-			  ${custState}
-			
-			</td>
+			<td class="title">분류</td>
+			<td colspan="4"><!--  -->${activeTpNm} | ${publicYnNm}</td>
 		</tr>
 		<tr>
 			<td class="title" rowspan="2">고객정보</td>
 			<td class="title2">핸드폰</td>
 			<td>${custTel1}-${custTel2}-${custTel3}</td>
-			<td class="title2">자택 </td>
-			<td>${homeTel1}-${homeTel2}-${homeTel3}</td>
+			<td class="title2">팩스 </td>
+			<td>${faxTel1}-${faxTel2}-${faxTel3}</td>
 		</tr>
 		<tr>
-			<td class="title2">회사 </td>
-			<td>${orgnTel1}-${orgnTel2}-${orgnTel3}</td>
-			<td class="title2">팩스</td>
-			<td>${faxTel1}-${faxTel2}-${faxTel3}</td>
+			<td class="title2">이메일 </td>
+			<td colspan="3">${homeTel1}</td>
 		</tr>
 	
 		<tr>
-			<td class="title">등급</td>
-			<td colspan="2">${gradeTp}<!--  --></td>
 			<td class="title">예산</td>
-			<td><!--  --> ${budAmt}만원</td>
+			<td colspan="4">${budAmt}만원</td>
 		</tr>
 		<tr>
 			<td class="title">의뢰내용</td>
 			<td colspan="4"><!--  -->${reqContent}</td>
-		</tr>
-		<tr>
-			<td class="title">특징</td>
-			<td colspan="4"><!--  -->${feature}</td>
-		</tr>
-		<tr>
-			<td class="title">접수</td>
-			<td colspan="4"><!--  -->${jeobsu}</td>
-		</tr>
-		
-		<tr>
-			<td class="title">구입조건</td>
-			<td colspan="4"><!--  -->${buyCond}</td>
-		</tr>
-		<tr>
-			<td class="title">상세내역</td>
-			<td colspan="4"><!--  -->${dtlContent}</td>
-		</tr>
-		
-		<tr>
-			<td class="title">담당자메모</td>
-			<td colspan="4"><!--  -->${mbrMemo}</td>
-		</tr>
-		<tr>
-			<td class="title">상태</td>
-			<td colspan="4"><!--  -->${activeTpNm} | ${publicYnNm}</td>
-		</tr>
+		</tr>		
 	</table>
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;" id="modfDiv">

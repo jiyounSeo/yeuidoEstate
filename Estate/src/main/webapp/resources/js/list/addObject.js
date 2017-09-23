@@ -1,4 +1,23 @@
+var oEditors = [];
+
 $(document).ready(function(){
+	
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : oEditors,
+		elPlaceHolder : "memo",
+		sSkinURI : "./resources/editor/SmartEditor2Skin.html", 	//SmartEditor2Skin.html 파일이 존재하는 경로
+		htParams : {
+		bUseToolbar : true, 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)	
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)	
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		fOnBeforeUnload : function() {
+		}
+	},
+	fOnAppLoad : function() {	
+		oEditors_today.getById["memo"].exec("PASTE_HTML", [ "" ]);		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+	}
+	});
+	
 	
 	f_objtCombo_select();
 	if ( $("#objtNo").val() != "") {
@@ -177,17 +196,15 @@ function f_saleobject_save() {
 			break;
 			
 	}
+
+	oEditors.getById["memo"].exec("UPDATE_CONTENTS_FIELD", []);	
+	
 	var param = $("#"+objtForm).serialize();
 	
 	if ( $("#objtNm").val() == "") {
 		alert ("물건명은 필수입력 값입니다.");
 		return;
 	} 
-	
-	if ( $("#custNm").val() == "") {
-		alert ("고객명은 필수입력 값입니다.");
-		return;
-	}
 	
 	if (  $("input[name=saleTp]:checked").val() == undefined ) {
 		alert ("유형은 필수입력 값입니다.");
@@ -196,10 +213,6 @@ function f_saleobject_save() {
 		param.saleTp = $("input[name=saleTp]:checked").val();
 	}
 	
-	if ( $("#dueDt").val() == "") {
-		alert ("만기일은 필수입력 값입니다.");
-		return;
-	}
 	if (  $("input[name=activeTp]:checked").val() == undefined ) {
 		alert ("분류 [활성 or 분류]은 필수입력 값입니다.");
 		return;

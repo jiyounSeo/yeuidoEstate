@@ -90,7 +90,7 @@
 				</tr>
 				<tr>
 					<td class="title">특약사항 및 체크사항</td>
-					<td colspan="3"><input id="chkContent" name="chkContent" type="text"></td>
+					<td colspan="3"><textarea rows="6" cols="50" id="chkContent" name="chkContent" style="width:100%;height:450px;"></textarea></td>
 				</tr>
 				<tr>
 					<td class="title">계약해제사유</td>

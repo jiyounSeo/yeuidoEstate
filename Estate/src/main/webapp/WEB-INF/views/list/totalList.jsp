@@ -26,7 +26,7 @@
 				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT006','ST006')"  style='text-decoration: none;'><li id="li_OT006" style="width:100%"class='tab_on_txt'>분양권</li></a></td>
 			</tr>
 			<tr>
-				<td stlye="width;100%;height:45px;" colspan="11">&nbsp;</td>
+				<td stlye="width;100%;height:45px;" colspan="11">아파트 카테고리</td>
 			</tr>
 		</table>
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
@@ -34,7 +34,8 @@
 				<td width="100%" align="right" valign="bottom">
 					<input type="checkbox" name="objt_activeTp1" id="objt_activeTp1" onclick = "f_objt_select('','')" value="AT001" /><label for="objt_activeTp1">활성</label>
 					<input type="checkbox" name="objt_activeTp2" id="objt_activeTp2" onclick = "f_objt_select('','')" value="AT002" /><label for="objt_activeTp2">보류</label>
-					<input type="checkbox" name="objt_activeTp3" id="objt_activeTp3" onclick = "f_objt_select('','')" value="AT003" /><label for="objt_activeTp3">내가등록한물건만보기</label>
+					<input type="checkbox" name="objt_activeTp3" id="objt_activeTp3" onclick = "f_objt_select('','')" value="AT003" /><label for="objt_activeTp3">계약완료</label>
+					<input type="checkbox" name="objt_activeTp3" id="objt_activeTp4" onclick = "f_objt_select('','')" value="AT004" /><label for="objt_activeTp4">내가등록한물건만보기</label>
 				</td>	
 			</tr>
 		</table>
@@ -62,7 +63,6 @@
 								<div style="width:488px;height:41px;margin:0;padding:0;text-align:left">
 									<!-- <a href="#"><img src="./resources/images/btn_search2.jpg"></a> -->
 									<a href="#"><img src="./resources/images/btn_print.jpg"></a>
-									<a href="#"><img src="./resources/images/btn_export_excel.jpg" border="0"></a>
 								</div>
 							</td>
 							<td width="486px" align="center">

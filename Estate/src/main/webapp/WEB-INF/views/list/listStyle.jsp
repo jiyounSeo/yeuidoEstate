@@ -1,3 +1,4 @@
+<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 body {
@@ -165,6 +166,7 @@ body {
 	border-right: 0px;
 }
 
+
 .cl_list tr,
 .ob_list tr {
 	background: #f6f6f8;
@@ -324,7 +326,15 @@ body {
 	font-weight: bold;
 	border-bottom: 1px solid #fff;
 }
-
+.new_page_table td.title_ess {
+	width:155px;
+	text-align:center;
+	background:#0063b1;
+	color:#fff;
+	font-weight: bold;
+	border-bottom: 1px solid #fff;
+	text-decoration:underline;
+}
 
 
 /* ie 용 스크롤 바 *********************************************/

@@ -9,7 +9,9 @@
 	<table class="new_page_table">
 		<tr>
 			<td class="title">물건명</td>
-			<td colspan="4">${objtNm}<!--  --></td>
+			<td colspan="2">${objtNm}<!--  --></td>		
+			<td class="title">등록인</td>
+			<td>${frstRegNm}<!-- 분류 --></td>
 		</tr>
 		<tr>
 			<td class="title">고객정보</td>
@@ -57,16 +59,8 @@
 			<td colspan="4"><!--  -->${memo}</td>
 		</tr>
 		<tr>
-			<td class="title">첨부사진</td>
-			<td colspan="4"><!--  --></td>
-		</tr>
-		<tr>
 			<td class="title">분류</td>
 			<td colspan="4">${activeTpNm}, ${etc}<!-- 분류 --></td>
-		</tr>
-		<tr>
-			<td class="title">등록인</td>
-			<td colspan="4">${frstRegNm}<!-- 분류 --></td>
 		</tr>
 	</table>
 	<c:if test="${publicYn ne 'Y'}">

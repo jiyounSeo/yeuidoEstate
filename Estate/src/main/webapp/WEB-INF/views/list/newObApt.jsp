@@ -17,7 +17,7 @@
 <div class="new_page_container">
 	<table class="new_page_table">
 		<tr>
-			<td class="title">물건명</td>
+			<td class="title_ess">물건명(*)</td>
 			<td colspan="4"><input type="text" id="objtNm" name="objtNm"> </td>
 		</tr>
 		
@@ -48,10 +48,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="title">매매가</td>
+			<td class="title_ess">매매가(*)</td>
 			<td colspan="2">
 			<input type="text" id="bargainAmt" name="bargainAmt"  onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
-			<td class="title">보증금</td>
+			<td class="title_ess">보증금(*)</td>
 			<td><input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원 / 월세 
 				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
 		</tr>
@@ -87,7 +87,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="title">입주가능일</td>
+			<td class="title_ess">명도(*)</td>
 			<td colspan="4">
 			  <input type="radio" id="availableTp1" name="availableTp" value="AD001"/><label for="availableTp1">정상</label>
 			  <input type="radio" id="availableTp2" name="availableTp" value="AD002"/><label for="availableTp2">하시</label>
@@ -95,11 +95,11 @@
 			  <input type="radio" id="availableTp4" name="availableTp" value="AD004"/><label for="availableTp4">주전</label>
 			  <input type="radio" id="availableTp5" name="availableTp" value="AD005"/><label for="availableTp5">세안고</label>
 			  <input type="radio" id="availableTp6" name="availableTp" value="AD006"/><label for="availableTp6">협의</label>
-			  <input type="text" style="width:140px" id="availableDt" name="availableDt" readonly="true"  class="datepicker"> 일
+			  <input type="text" style="width:140px" id="availableDt" name="availableDt"> 일
 			</td>
 		</tr>
 		<tr>
-			<td class="title">상태</td>
+			<td class="title_ess">상태(*)</td>
 			<td colspan="4">
 			  <input type="radio" id="conditionTp1" name="conditionTp" value="CD001"/><label for="conditionTp1">기본</label>
 			  <input type="radio" id="conditionTp2" name="conditionTp" value="CD002"/><label for="conditionTp2">양호</label>
@@ -113,18 +113,15 @@
 		<tr>
 			<td class="title">매물설명</td>
 			<td colspan="4">
-				<textarea rows="6" cols="50" id="memo" name="memo"></textarea>
+				<textarea rows="6" cols="50" id="memo" name="memo" style="width:90%;height:450px;"></textarea>
 			</td>
 		</tr>
 		<tr>
-			<td class="title">첨부사진</td>
-			<td colspan="4"><img src="./resources/images/icon_attach.jpg"></td>
-		</tr>
-		<tr>
-			<td class="title">분류</td>
+			<td class="title_ess">분류(*)</td>
 			<td colspan="4">
 			  <input type="radio" id="activeTp1" name="activeTp" value="AT001"/><label for="activeTp1">활성</label>
 			  <input type="radio" id="activeTp2" name="activeTp" value="AT002"/><label for="activeTp2">보류</label>
+			  <input type="radio" id="activeTp3" name="activeTp" value="AT003"/><label for="activeTp3">계약완료</label>
 			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			  <input type="checkbox" name="publicYn" id="publicYn" value="Y" /><label for="publicYn">공동</label>
 			  <input type="checkbox" name="advertiseYn" id="advertiseYn" value="Y" /><label for="advertiseYn">광고</label>

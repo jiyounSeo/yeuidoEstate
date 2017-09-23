@@ -17,7 +17,7 @@
 <div class="new_page_container">
 	<table class="new_page_table">
 		<tr>
-			<td class="title">물건명</td>
+			<td class="title_ess">물건명(*)</td>
 			<td colspan="4"><input type="text" id="objtNm" name="objtNm"> </td>
 		</tr>
 		<tr>
@@ -39,10 +39,10 @@
 			
 		</tr>
 		<tr>
-			<td class="title">분양가</td>
+			<td class="title_ess">분양가(*)</td>
 			<td colspan="2">
 			<input type="text" id="parcelAmt" name="parcelAmt"  onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
-			<td class="title">프리미엄</td>
+			<td class="title_ess">프리미엄(*)</td>
 			<td>
 			<input type="text" id="premiumAmt" name="premiumAmt"  onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
 		
@@ -85,18 +85,15 @@
 		<tr>
 			<td class="title">매물설명</td>
 			<td colspan="4">
-				<textarea rows="6" cols="50" id="memo" name="memo"></textarea>
+				<textarea rows="6" cols="50" id="memo" name="memo" style="width:90%;height:450px;"></textarea>
 			</td>
-		</tr>
-		<tr>
-			<td class="title">첨부사진</td>
-			<td colspan="4"><img src="./resources/images/icon_attach.jpg"></td>
 		</tr>
 		<tr>
 			<td class="title">분류</td>
 			<td colspan="4">
 			  <input type="radio" id="activeTp1" name="activeTp" value="AT001"/><label for="activeTp1">활성</label>
 			  <input type="radio" id="activeTp2" name="activeTp" value="AT002"/><label for="activeTp2">보류</label>
+			  <input type="radio" id="activeTp3" name="activeTp" value="AT003"/><label for="activeTp3">계약완료</label>
 			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			  <input type="checkbox" name="publicYn" id="publicYn" value="Y" /><label for="publicYn">공동</label>
 			  <input type="checkbox" name="advertiseYn" id="advertiseYn" value="Y" /><label for="advertiseYn">광고</label>
