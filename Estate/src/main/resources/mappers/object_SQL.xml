@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{dong}
 				  , CASE WHEN #{floor} = '' THEN NULL ELSE #{floor} END 
 				  , #{directionTp}
-				  , #{dueDt}
+				  , CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END
 				  , CASE WHEN #{roomCnt} = '' THEN NULL ELSE #{roomCnt} END 
 				  , CASE WHEN #{bathCnt} = '' THEN NULL ELSE #{bathCnt} END 
 				  , #{ondolYn} 
@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , dong =  #{dong}
 		 , floor = (CASE WHEN #{floor} = '' THEN NULL ELSE #{floor} END )
 		 , directionTp = #{directionTp}
-		 , dueDt =  #{dueDt}
+		 , dueDt = (CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END) 
 		 , roomCnt = ( CASE WHEN #{roomCnt} = '' THEN NULL ELSE #{roomCnt} END )
 		 , bathCnt = (CASE WHEN #{bathCnt} = '' THEN NULL ELSE #{bathCnt} END )
 		 , ondolYn = #{ondolYn} 
@@ -206,7 +206,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select commNm from commcd where commCd = directionTp ) directionTpNm
 	     , businessNm
 	     , bargainAmt
-	     , concat(depositAmt , '/' , monthlyAmt) depositAmt
+	     , depositAmt
+	     , monthlyAmt
 	     , rightAmt
 	     , manageAmt
 	     , if (isnull(ondolYn), 'N', ondolYn) ondolYn
@@ -219,6 +220,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , advertiseYn
 	     , publicYn
 	     , availableTp
+	     , (select commNm from commcd where commCd = availableTp ) availableTpNm
 	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
 	 	 , parcelAmt
 	 	 ,  premiumAmt

@@ -45,29 +45,29 @@ function f_objt_select (objtTp, saleTp) {
 	}
 	var saleTpColor = f_saleTp_color (saleTpChk) ;
 	
-	
+	console.log (saleTpChk);
 	$("#saleTpTr").empty();
 	$("#objtListTr").empty();
 	switch ( objtTpChk ) {
-		case "OT001":
-			tmplTr = "saleTpTrTmpl1";
+		case "OT001"://saleTpTrTmpl1_ST001
+			tmplTr = "saleTpTrTmpl1_"+saleTpChk;
 			tmplNm = "objtTrTemplte1"; 
 			break;
 		case "OT002":
-			tmplTr = "saleTpTrTmpl2";
-			tmplNm = "objtTrTemplte2"; 
+			tmplTr = "saleTpTrTmpl2_"+saleTpChk;
+			tmplNm = "objtTrTemplte2";
 			break;
 		case "OT003":
-			tmplTr = "saleTpTrTmpl3";
+			tmplTr = "saleTpTrTmpl3_"+saleTpChk;
 			tmplNm = "objtTrTemplte3"; 
 			break;
 		case "OT004":
-			tmplTr = "saleTpTrTmpl4";
+			tmplTr = "saleTpTrTmpl4_"+saleTpChk;
 			tmplNm = "objtTrTemplte4"; 
 			break;
 		case "OT005":
-			tmplTr = "saleTpTrTmpl5";
-			tmplNm = "objtTrTemplte5"; 
+			tmplTr = "saleTpTrTmpl5_"+saleTpChk;
+			tmplNm = "objtTrTemplte5";
 			break;
 		case "OT006":
 			tmplTr = "saleTpTrTmpl6";
@@ -75,6 +75,7 @@ function f_objt_select (objtTp, saleTp) {
 			break;
 			
 	}
+	
 	$("#"+tmplNm).tmpl().appendTo("#saleTpTr");
 	$("#"+tmplTr).tmpl().appendTo("#objtListTr");
 	
@@ -179,39 +180,28 @@ function f_objectList_select(objtTp, saleTp){
 	  dataType : "json",
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(result){
-		  
 		  $("#objtTbody").empty();
-		  
 		  var tmplNm = "";
-		  var colCnt;
 		  switch ( objtTp ) {
 		  	case "OT001" : // 아파트
-		  		
-		  		tmplNm = "objtListTemplte1";
-		  		colCnt = 12;
+		  		tmplNm = "objtListTemplte1_"+param.saleTp;
 		  		break; 
 		  	case "OT002" : // 상가
-		  		tmplNm = "objtListTemplte2";
-		  		colCnt = 10;
+		  		tmplNm = "objtListTemplte2_"+param.saleTp;
 		  		break;
 		  	case "OT003" : //사무실.빌딩
-		  		tmplNm = "objtListTemplte3";
-		  		colCnt = 8;
+		  		tmplNm = "objtListTemplte3_"+param.saleTp;
 				break;
 		  	case "OT004" : // 오피스텔
-		  		tmplNm = "objtListTemplte4";
-		  		colCnt = 11;
+		  		tmplNm = "objtListTemplte4_"+param.saleTp;
 				break;
 		  	case "OT005" : //주상복합
-		  		tmplNm = "objtListTemplte5";
-		  		colCnt = 11;
+		  		tmplNm = "objtListTemplte5_"+param.saleTp;
 		  		break;
 		  	case "OT006" : //분양권
 		  		tmplNm = "objtListTemplte6";
-		  		colCnt = 12;
 				break;
 		  }
-		 
 		  
 		  if (result.objtList.length != 0) {
 			  objtList = result.objtList;
@@ -221,6 +211,7 @@ function f_objectList_select(objtTp, saleTp){
 
 		  } else {
 			  $("#pagingDiv").empty();
+			  var colCnt = $("#objtListTr td").length;
 			  $("#objtListEmptyTemplte").tmpl({col : colCnt}).appendTo("#objtTbody");
 		  }
 		  

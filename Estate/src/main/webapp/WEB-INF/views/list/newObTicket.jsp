@@ -50,8 +50,8 @@
 		<tr>
 			<td class="title">동 / 층 / 향</td>
 			<td colspan="4">
-				<select style="width:130px" id="dong" name="dong"><option>A</option></select> 동&nbsp;&nbsp;&nbsp;
-				<input type="number" name="floor" name="floor" style="width:140px" min="0" max="999" oninput="if(this.value.length>3) this.value=this.value.slice(0,3)"  /> 층&nbsp;&nbsp;&nbsp;
+				<input type="text" name="dong" id="dong" style="width:140px" maxlength="5">
+			<input type="number" name="floor" name="floor" style="width:140px" min="0" max="999" oninput="if(this.value.length>3) this.value=this.value.slice(0,3)"  /> 층&nbsp;&nbsp;&nbsp;
 				<select style="width:130px" id="directionTp" name="directionTp" >
 					<option value="DR001">동</option>
 					<option value="DR002">서</option>

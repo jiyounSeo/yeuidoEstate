@@ -18,7 +18,6 @@ $(document).ready(function(){
 	}
 	});
 	
-	
 	f_objtCombo_select();
 	if ( $("#objtNo").val() != "") {
 		f_objectDtl_select();
@@ -39,9 +38,10 @@ $(document).ready(function(){
 	 });
 	
 });
-
+/*
+ * 물건 선택 콤보
+ */
 function f_objtCombo_select() {
-	//selectBuildingCombo
 	var param = {
 			objtTp : $("#objtTp").val()
 	};
@@ -57,9 +57,6 @@ function f_objtCombo_select() {
 			  $.each (result, function(index) {
 				  $("#buildCd").append("<option value='" + result[index].buildCd + "'>"+ result[index].buildNm + "</option>");
 			  });
-			  
-//			 			 $(sampleTmpl).tmpl(tmplVal).appendTo("#tmplView");
-//			 			$("#listTemplte").tmpl(data).appendTo("#target");
 		  }
 	});	
 }
@@ -93,7 +90,6 @@ function f_objectDtl_select() {
 			
 	}
 	var serial = $("#"+objtForm).serialize();
-	console.log (serial);
 	$.ajax({
 		  url : "/estate/selectObjectDtl.do",
 		  type: "post",
@@ -113,7 +109,6 @@ function f_objectDtl_select() {
 }
 
 function f_setting_text(result) {
-	console.log (result);
 	$("#objtNm").val(result.objtNm);
 	$("#custNm").val(result.custNm);
 	$("#custTel1").val(result.custTel1);
@@ -198,40 +193,110 @@ function f_saleobject_save() {
 	}
 
 	oEditors.getById["memo"].exec("UPDATE_CONTENTS_FIELD", []);	
-	
 	var param = $("#"+objtForm).serialize();
 	
+	/*
+	 * 필수입력
+	 * 1. 물건명
+	 * 2. 유형 (매매/전세/월세/렌트..)
+	 * 3. 매매가 or 보증금 or 월세
+	 * 4. 명도
+	 * 5. 상태
+	 * 6. 분류
+	 */
+	
+	// 1. 물건명
 	if ( $("#objtNm").val() == "") {
 		alert ("물건명은 필수입력 값입니다.");
+		$("#objtNm").focus();
 		return;
 	} 
 	
+	// 2. 유형
 	if (  $("input[name=saleTp]:checked").val() == undefined ) {
 		alert ("유형은 필수입력 값입니다.");
 		return;
 	} else {
 		param.saleTp = $("input[name=saleTp]:checked").val();
+		var selectSaleTp = $("input[name=saleTp]:checked").val();
+		
+		/*
+		 * ST001 : 매매 
+		 * ST002 : 전세
+		 * ST003 : 월세
+		 * ST004 : 렌트
+		 * ST005 : 임대
+		 */ 
+		// 3. 매매가  or 보증금 or 월세
+		if ( selectSaleTp == "ST001") { //매매
+			if ( $("#bargainAmt").val() == "" ) {
+				alert ("매매는 필수입력 값입니다.");
+				$("#bargainAmt").focus();
+				return; 
+			}
+		} else if ( selectSaleTp == "ST002") { //전세
+			if ( $("#depositAmt").val() == "") {
+				alert ("보증금은 필수입력 값입니다.");
+				$("#depositAmt").focus();
+				return; 
+			}
+				
+		} else if (selectSaleTp == "ST003" || selectSaleTp == "ST004"  || selectSaleTp == "ST005") { //월세, 렌트, 임대
+			if ( $("#depositAmt").val() == "") {
+				alert ("보증금은 필수입력 값입니다.");
+				$("#depositAmt").focus();
+				return; 
+			} else if ( $("#monthlyAmt").val() == "") {
+				alert ("월세는 필수입력 값입니다.");
+				$("#monthlyAmt").focus();
+				return; 
+			}
+		}	
 	}
 	
+	if ($("#objtTp").val() == "OT006" ) {
+		if ( $("#parcelAmt").val() == "") {
+			alert ("분양가는 필수입력 값입니다.");
+			$("#parcelAmt").focus();
+			return; 
+		} else if ( $("#premiumAmt").val() == "") {
+			alert ("프리미엄가는 필수입력 값입니다.");
+			$("#premiumAmt").focus();
+			return; 
+		}
+	}
+	
+	// 4.명도
+	if (  $("input[name=availableTp]:checked").val() == undefined ) {
+		alert ("명도는 필수입력 값입니다.");
+		return;
+	} else {
+		param.availableTp = $("input[name=availableTp]:checked").val();
+	}
+	
+	// 5.상태
+	if (  $("input[name=conditionTp]:checked").val() == undefined ) {
+		alert ("상태는 필수입력 값입니다.");
+		return;
+	} else {
+		param.conditionTp = $("input[name=conditionTp]:checked").val();
+	}
+	
+	// 6. 분류
 	if (  $("input[name=activeTp]:checked").val() == undefined ) {
 		alert ("분류 [활성 or 분류]은 필수입력 값입니다.");
 		return;
 	} else {
 		param.activeTp = $("input[name=activeTp]:checked").val();
 	}
-	
-
 
 	var urlStr = "";
-	console.log ("objtNo" + $("#objtNo").val());
-	console.log (param);
 	if ($("#objtNo").val() != "" ) {
 		urlStr = "modifyObject.do";
 	} else {
 		urlStr = "insertObject.do";
 	}
-	console.log (urlStr);
-	console.log (param);
+	
 	$.ajax({
 	  url : "/estate/" + urlStr,
 	  type: "post",
@@ -243,9 +308,6 @@ function f_saleobject_save() {
 		  if (data.messageCd == 1) {
 			  f_objt_dtl_view();
 		  }
-	  
-	//			 $(sampleTmpl).tmpl(tmplVal).appendTo("#tmplView");
-//	 			$("#listTemplte").tmpl(data).appendTo("#target");
 	  }
 	});
 }

@@ -52,9 +52,9 @@
 <script id="workListTemplte" type="text/x-jquery-tmpl">	
 {{each workList}}		
 	<tr>
-		<td style="width:10%;align:center;"><a href="#dtl" onclick="f_modifyWork('{{html $index}}');return false;">{{html $value.frstRegDt}}</a></td>
+		<td style="width:20%;align:center;"><a href="#dtl" onclick="f_modifyWork('{{html $index}}');return false;">{{html $value.frstRegDt}}</a></td>
 		<td style="width:10%;"> [{{html $value.mbrNm}}]</td>
-		<td style="width:70%;"> {{html $value.workTitle}}</td>
+		<td style="width:60%;"> {{html $value.workTitle}}</td>
 		<td style="width:10%;"><button type="button" style="align:right;" id="btnDel" class="btn_delType" onclick="f_delete_work({{html $index}});return false;">삭제</button></td>
 	</tr>
 {{/each}}	

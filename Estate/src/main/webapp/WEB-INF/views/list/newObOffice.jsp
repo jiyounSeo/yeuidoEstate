@@ -50,14 +50,19 @@
 		</tr>
 		
 		<tr>
-			<td class="title_ess">매매가(*)</td>
-			<td colspan="2">
+			<td rowspan="2" class="title_ess">매매가(*)</td>
+			<td rowspan="2" colspan="2">
 			<input type="text" id="bargainAmt" name="bargainAmt"  onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
 			<td class="title_ess">보증금(*)</td>
 			<td><input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원 / 월세 
-				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원 / 관리비
-				<input type="text" id="" name="" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
+				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원
+			</td>
 		</tr>
+		<tr>
+			<td class="title_ess">관리비(*)</td>
+			<td><input type="text" id="manageAmt" name="manageAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
+		</tr>
+		
 		<tr>
 			<td class="title">인테리어유무</td>
 			<td colspan="2">				
