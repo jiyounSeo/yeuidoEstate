@@ -8,15 +8,15 @@
 <div id="ob_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<!-- 공동 -->
-		<c:if test="${publicYn eq 'Y' }"> 
+		<c:if test="${pageNm eq 'objtPublic' }"> 
 			<img src="./resources/images/title_comm_ob_list.jpg">
 		</c:if>
 		<!-- 활성 -->
-		<c:if test="${activeTp eq 'AT001' }">
+		<c:if test="${pageNm eq 'objtActiveY' }">
 			<img src="./resources/images/title_ob_active.jpg">
 		</c:if>
 		<!-- 보류 -->
-		<c:if test="${activeTp eq 'AT002' }">
+		<c:if test="${pageNm eq 'objtActiveN' }">
 			<img src="./resources/images/title_ob_reserve.jpg">
 		</c:if>
 	</div>
@@ -70,7 +70,6 @@
 								<div style="width:488px;height:41px;margin:0;padding:0;text-align:left">
 									<a href="#"><img src="./resources/images/btn_search2.jpg"></a>
 									<a href="#"><img src="./resources/images/btn_print.jpg"></a>
-									<a href="#"><img src="./resources/images/btn_export_excel.jpg" border="0"></a>
 								</div>
 							</td>
 							<td width="486px" align="center">
@@ -95,7 +94,7 @@
 <input type="hidden" name="publicYn" id="publicYn" value="${publicYn}"/>
 <input type="hidden" name="activeTp" id="activeTp" value="${activeTp}"/>
 <input type="hidden" name="estateRange" id="estateRange" value="${estateRange}"/>
-
+<input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 </form>
 </body>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

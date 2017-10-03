@@ -1,3 +1,74 @@
+// 네이버 지도 id : Z0U9uQFTmyK7bim6HrQ6
+// client screet : ayyDd1KXQS
+
+ //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
+$( document ).ready(function() {
+	
+
+	
+});
+
+function f_map_setting(myaddress) {
+	var pointX;
+	var pointY;
+	
+	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+        }
+        var result = response.result;
+        pointX = result.items[0].point.x;
+        pointY = result.items[0].point.y;
+        
+        // 검색 결과 갯수: result.total
+        // 첫번째 결과 결과 주소: result.items[0].address
+        // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+        //var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+	});
+	
+	//지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
+	 var map = new naver.maps.Map('map', {
+		    center: new naver.maps.LatLng(pointX, pointY),
+		    zoom: 10
+		});
+
+	var marker = new naver.maps.Marker({
+	    position: new naver.maps.LatLng(pointX, pointY),
+	    map: map
+	});
+	
+	/*
+	var map = new naver.maps.Map('map');
+    naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+        }
+        var result = response.result;
+        // 검색 결과 갯수: result.total
+        // 첫번째 결과 결과 주소: result.items[0].address
+        // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+        var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+        map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+        // 마커 표시
+        var marker = new naver.maps.Marker({
+          position: myaddr,
+          map: map
+        });
+        // 마커 클릭 이벤트 처리
+        naver.maps.Event.addListener(marker, "click", function(e) {
+          if (infowindow.getMap()) {
+              infowindow.close();
+          } else {
+              infowindow.open(map, marker);
+          }
+        });
+        // 마크 클릭시 인포윈도우 오픈
+        var infowindow = new naver.maps.InfoWindow({
+            content: '<h4> [네이버 개발자센터]</h4><a href="https://developers.naver.com" target="_blank"><img src="https://developers.naver.com/inc/devcenter/images/nd_img.png"></a>'
+        });
+    });*/
+}
+ 
 function resizeWindow(win)    {
 
 	var wid = win.document.body.offsetWidth + 30;
@@ -29,6 +100,7 @@ function goPopup(){
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){    
 	$("#roadAddrPart1").val(roadAddrPart1);
 	$("#jibunAddr").val(jibunAddr);
+	f_map_setting( jibunAddr );
 	$("#zipNo").val(zipNo);
 	$("#addrDetail").val(addrDetail);
 }

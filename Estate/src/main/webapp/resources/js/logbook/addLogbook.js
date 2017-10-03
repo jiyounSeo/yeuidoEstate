@@ -72,8 +72,6 @@ function f_customerLogbookDtl_select() {
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
 			  var result = data.logbookInfo;
-			  console.log ("search success");
-			  console.log (data);
 			  f_setting_text(result);
 		  }
 	});

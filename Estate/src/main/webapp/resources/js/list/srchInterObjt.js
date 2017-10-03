@@ -50,7 +50,6 @@ function f_interObjt_insert() {
 	}
 	$.each (objtArr, function(index) {
 		param.objtNo = objtArr[index];
-		console.log (param);
 		$.ajax({
 			  url : "/estate/insertInterObject.do" ,
 			  type: "post",

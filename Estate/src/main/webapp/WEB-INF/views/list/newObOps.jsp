@@ -123,6 +123,7 @@
 <input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
 <input type="hidden" name="objtTp" id="objtTp" value="OT004"/>
 <input type="hidden" name="custId" id="custId" value="">
+<input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

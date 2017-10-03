@@ -11,6 +11,7 @@
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	
 	$("#loginDiv").hide();
 	$("#logoutDiv").hide();
 	userSession = '${sessionScope.user}';

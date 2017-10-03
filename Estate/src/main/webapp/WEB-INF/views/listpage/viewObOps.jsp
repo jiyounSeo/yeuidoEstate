@@ -4,8 +4,7 @@
 <%@ include file="/WEB-INF/views/comm/viewTitle.jsp" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
 
-
-<form id="viewObOps">
+<form id="viewObOps" action="/">
 <div class="new_page_container">
 	<table class="new_page_table">
 		<tr>

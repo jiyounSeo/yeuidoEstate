@@ -36,10 +36,8 @@ function f_workList_select() {
 			} else {
 				$("#workListEmptyTemplte").tmpl(result).appendTo("#workTbody");
 			}
-			
-			console.log (userSession.mbrId);
+			// 삭제버튼은 글쓴이 본인만 가능함.
 			$.each (workList, function(index) {
-				console.log (workList[index].frstRegUser);
 				if (workList[index].deleteBtnYn == "N") {
 					$("#workTbody tr:eq("+index+") #btnDel").hide();
 				}
@@ -117,33 +115,3 @@ function f_delete_work(index)
 function f_closeAll(){
 	$("#divAddWorkPopup").trigger('close');  	
 }
-
-/*
-function f_empty_field()
-{
-	$("#memoDocId").val('');
-	$("#memoSubject").empty();
-	$("#memoContent").empty();
-	$("#frstRegDt").empty();
-}
-
-function f_clear_form()
-{
-	$("#memoSbj").empty();
-	$("#memoCont").empty();
-	$("#memoSbj").val('');
-	$("#memoCont").val('');
-}
-
-
-function f_closeAllDiv(){
-	$("#divListMemoPopup").trigger('close');  
-	$("#divViewMemoPopup").trigger('close');  
-
-
-function f_cancel_to_list()
-{
-	f_closeAll();
-	f_memoView();
-	$('#divListMemoPopup').lightbox_me({centered: true});
-}*/

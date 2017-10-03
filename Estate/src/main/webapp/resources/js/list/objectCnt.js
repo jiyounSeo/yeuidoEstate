@@ -7,7 +7,6 @@ function f_add_objectView (objtTp, saleTp) {
 	// action : commObList.do
 	$("#objtTp").val(objtTp);
 	$("#saleTp").val(saleTp);
-	
 	var frm = $('#addObject')[0];
 	frm.action = '/estate/commObListPostView.do';
 	frm.method = 'POST';
@@ -16,7 +15,6 @@ function f_add_objectView (objtTp, saleTp) {
 
 function f_objectCnt_select() {
 	var param = $("#addObject").serialize();
-	console.log (param);
 	$.ajax({
 	  url : "/estate/selectObjectCnt.do",
 	  type: "post",

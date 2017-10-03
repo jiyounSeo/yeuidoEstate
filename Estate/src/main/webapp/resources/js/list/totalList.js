@@ -15,7 +15,7 @@ function f_objt_select (objtTpChk, saleTpChk) {
 		objtTp = objtTpChk;
 	} 
 	if (saleTpChk != '' ) {
-		saleTpChk = saleTpChk;
+		saleTp = saleTpChk;
 	}
 	var saleTpColor = f_saleTp_color (saleTp) ;
 	
@@ -23,30 +23,29 @@ function f_objt_select (objtTpChk, saleTpChk) {
 	$("#objtListTr").empty();
 	switch ( objtTp ) {
 		case "OT001":
-			tmplTr = "saleTpTrTmpl1";
+			tmplTr = "saleTpTrTmpl1_"+saleTp;
 			tmplNm = "objtTrTemplte1"; 
 			break;
 		case "OT002":
-			tmplTr = "saleTpTrTmpl2";
+			tmplTr = "saleTpTrTmpl2_"+saleTp;
 			tmplNm = "objtTrTemplte2"; 
 			break;
 		case "OT003":
-			tmplTr = "saleTpTrTmpl3";
+			tmplTr = "saleTpTrTmpl3_"+saleTp;
 			tmplNm = "objtTrTemplte3"; 
 			break;
 		case "OT004":
-			tmplTr = "saleTpTrTmpl4";
+			tmplTr = "saleTpTrTmpl4_"+saleTp;
 			tmplNm = "objtTrTemplte4"; 
 			break;
 		case "OT005":
-			tmplTr = "saleTpTrTmpl5";
+			tmplTr = "saleTpTrTmpl5_"+saleTp;
 			tmplNm = "objtTrTemplte5"; 
 			break;
 		case "OT006":
 			tmplTr = "saleTpTrTmpl6";
 			tmplNm = "objtTrTemplte6"; 
 			break;
-			
 	}
 	$("#"+tmplNm).tmpl().appendTo("#saleTpTr");
 	$("#"+tmplTr).tmpl().appendTo("#objtListTr");
@@ -77,7 +76,6 @@ function f_saleTp_color (saleTp) {
 	전매 - 블루 - #0E189E
 	임데 - 하늘 - #3486CF
 	*/
-	console.log (saleTp);
 	var color = "";
 	switch (saleTp) {
 		case "ST001" :
@@ -119,18 +117,21 @@ function gfn_isNull(str) {
 
 function f_objectList_select(objtTp, saleTp){
 	var activeTpChk = "";
-	 if ( !gfn_isNull($("input[name='objt_activeTp1']:checked").val()) ) {
+	var activTp1 = $("input[name='objt_activeTp1']:checked").val();
+	var activTp2 = $("input[name='objt_activeTp2']:checked").val();
+	 if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
 		 activeTpChk = "AT001";
-	 } else if ( !gfn_isNull($("input[name='objt_activeTp2']:checked").val()) ) {
+	 } else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
 		 activeTpChk = "AT002";
+	 } else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
+		 activeTpChk = "";
 	 }
-	 
 	//saleTpTr
 	var param = {
 		objtTp : objtTp
 	   , saleTp : saleTp
 	   , publicYn : "Y" 
-	   , activeTp : gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
+	   , activeTp : activeTpChk//gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
 	   , myObjt : gfn_isNull($("input[name='objt_activeTp3']:checked").val()) ? "" : $("input[name='objt_activeTp3']:checked").val()
 	   , currentPage : Number(currObjtPage)
 	   , pagePerRow : $("#viewMode").val() == "1"  ? 5 : 20
@@ -148,35 +149,26 @@ function f_objectList_select(objtTp, saleTp){
 		  $("#objtTbody").empty();
 		  
 		  var tmplNm = "";
-		  var colCnt;
 		  switch ( objtTp ) {
 		  	case "OT001" : // 아파트
-		  		
-		  		tmplNm = "objtListTemplte1";
-		  		colCnt = 12;
+		  		tmplNm = "objtListTemplte1_"+saleTp;
 		  		break; 
 		  	case "OT002" : // 상가
-		  		tmplNm = "objtListTemplte2";
-		  		colCnt = 9;
+		  		tmplNm = "objtListTemplte2_"+saleTp;
 		  		break;
 		  	case "OT003" : //사무실.빌딩
-		  		tmplNm = "objtListTemplte3";
-		  		colCnt = 8;
+		  		tmplNm = "objtListTemplte3_"+saleTp;
 				break;
 		  	case "OT004" : // 오피스텔
-		  		tmplNm = "objtListTemplte4";
-		  		colCnt = 11;
+		  		tmplNm = "objtListTemplte4_"+saleTp;
 				break;
 		  	case "OT005" : //주상복합
-		  		tmplNm = "objtListTemplte5";
-		  		colCnt = 10;
+		  		tmplNm = "objtListTemplte5_"+saleTp;
 		  		break;
 		  	case "OT006" : //분양권
 		  		tmplNm = "objtListTemplte6";
-		  		colCnt = 12;
 				break;
 		  }
-		 
 		  
 		  if (result.objtList.length != 0) {
 			  objtList = result.objtList;
@@ -186,6 +178,7 @@ function f_objectList_select(objtTp, saleTp){
 
 		  } else {
 			  $("#objtPagingDiv").empty();
+			  var colCnt = $("#objtListTr td").length;
 			  $("#objtListEmptyTemplte").tmpl({col : colCnt}).appendTo("#objtTbody");
 		  }
 		  
@@ -197,7 +190,6 @@ function f_objectList_select(objtTp, saleTp){
 
 
 function f_objtDtl_view (index) {
-	console.log (objtList[index]);
 	$("#objtNo").val(objtList[index].objtNo);
 	$("#objtTp").val(objtList[index].objtTp);
 	$("#saleTp").val(objtList[index].saleTp);
@@ -239,7 +231,6 @@ function f_objtDtl_view (index) {
 
 
 function f_mbrDtl_view (index) {
-	console.log (custList[index]);
 	$("#custId").val(custList[index].custId);
 	var frm = $('#totalList')[0];
 	frm.action = '/estate/viewClient.do';

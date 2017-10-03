@@ -7,7 +7,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../js/list/newBuilding.js"></script>
-
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
 <!-- 아파트 -->
 <body >
 <form id="buildingPopup" method="post"> 
@@ -15,15 +15,6 @@
 	<img src="./resources/images/title_popup_ob_1.jpg">
 </div>
 <div class="popup_page_container">
-	
-	<table class="popup_page_table" style="width:100%;">
-		<tr>
-			<td>순번</td>
-			<td>건물유형</td>
-			<td>건물명</td>
-		</tr>
-	</table>
-	<p></p>
 	<table class="popup_page_table" style="width:100%;">
 		<tr>
 			<td class="title">유형</td>
@@ -69,10 +60,8 @@
 				<input type="text" id="addrDetail" name="addrDetail"> 
 			</td>
 		</tr>
-		
-		
 	</table>
-	
+	<div id="map" style="width:100%;height:400px;"></div>
 	<img src="../images/btn_add.jpg" onclick="f_building_save();return false;">
 	
 </div>

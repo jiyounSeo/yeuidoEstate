@@ -9,7 +9,7 @@
 					 -->
 					<c:if test="${modifyYn eq 'Y'}">
 					<div id="viewObjBot">
-						<a href="./modifyObjectInfo.do?objtNo=${objtNo}&objtTp=${objtTp}"><img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="./modifyObjectInfo.do?objtNo=${objtNo}&objtTp=${objtTp}&pageNm=${pageNm}"><img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="image" name="deleteBtn" onclick="f_objt_delete();return false;" src="./resources/images/btn_del.jpg" />
 					</div>
 					</c:if>
@@ -25,7 +25,5 @@
 	<input type=hidden name="saleTp" id="saleTp" value="${saleTp}"/>
 	<input type=hidden name="publicYn" id="publicYn" />
 	<input type=hidden name="activeTp" id="activeTp" />
-	
-	
-	
+	<input type=hidden name="pageNm" id="pageNm" value="${pageNm}"/>
 	

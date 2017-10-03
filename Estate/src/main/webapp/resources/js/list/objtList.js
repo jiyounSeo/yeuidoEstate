@@ -45,7 +45,6 @@ function f_objt_select (objtTp, saleTp) {
 	}
 	var saleTpColor = f_saleTp_color (saleTpChk) ;
 	
-	console.log (saleTpChk);
 	$("#saleTpTr").empty();
 	$("#objtListTr").empty();
 	switch ( objtTpChk ) {
@@ -109,7 +108,6 @@ function f_saleTp_color (saleTp) {
 	전매 - 블루 - #0E189E
 	임데 - 하늘 - #3486CF
 	*/
-	console.log (saleTp);
 	var color = "";
 	switch (saleTp) {
 		case "ST001" :
@@ -151,21 +149,24 @@ function gfn_isNull(str) {
 }
 
 function f_objectList_select(objtTp, saleTp){
-	var activeTpChk= "";
-	if ( $("#publicYn").val() == "Y") {
-		 if ( !gfn_isNull($("input[name='activeTp1']:checked").val()) ) {
-			 activeTpChk = "AT001";
-		 } else if ( !gfn_isNull($("input[name='activeTp2']:checked").val()) ) {
-			 activeTpChk = "AT002";
-		 }
-	} 
-	//saleTpTr
+	var activeTpChk = "";
+	var activTp1 = $("input[name='activeTp1']:checked").val();
+	var activTp2 = $("input[name='activeTp2']:checked").val();
+	 if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
+		 activeTpChk = "AT001";
+	 } else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
+		 activeTpChk = "AT002";
+	 } else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
+		 activeTpChk = "";
+	 }
+	
 	var param = {
 		objtTp : objtTp
 	   , saleTp : saleTp
-	   , publicYn : $("#publicYn").val()
-	   , activeTp :  $("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
-	   , estateRange : $("#estateRange").val()
+	   //, publicYn : $("#publicYn").val()
+	   , pageNm : $("#pageNm").val()
+	   , activeTp :  activeTpChk //$("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
+	   //, estateRange : $("#estateRange").val()
 	   , myObjt : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
 	   , currentPage : Number(currPage)
 	   , pagePerRow : 10
@@ -235,7 +236,6 @@ $(document).on('click', '.pagingBtn', function() {
 });
 
 function f_objtDtl_view (index) {
-	console.log (objtList[index]);
 	$("#objtNo").val(objtList[index].objtNo);
 	$("#objtTp").val(objtList[index].objtTp);
 	$("#saleTp").val(objtList[index].saleTp);
@@ -268,12 +268,6 @@ function f_objtDtl_view (index) {
 	frm.action = '/estate/objtDtlView.do';
 	frm.method = 'POST';
 	frm.submit();
-	/*
-   var comSubmit = new ComSubmit($('form').attr('id'));
-   comSubmit.setUrl("/estate/objtDtlView.do");
-   
-   comSubmit.submit();
-*/
 }
 
 function f_add_objt() {

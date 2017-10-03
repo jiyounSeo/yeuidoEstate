@@ -9,19 +9,19 @@
 	<tr>
 		<td height="90px" valign="middle">
 			<!-- 공동물건카드 -->
-			<a href="./commObListView.do?publicYn=Y"><img src="./resources/images/btn_m2.jpg"></a>&nbsp;<a href="./commClListView.do?publicYn=Y"><img src="./resources/images/btn_m3.jpg"></a>
+			<a href="./commObListView.do?pageNm=objtPublic&publicYn=Y"><img src="./resources/images/btn_m2.jpg"></a>&nbsp;<a href="./commClListView.do?publicYn=Y"><img src="./resources/images/btn_m3.jpg"></a>
 		</td>
 	</tr>
 	<tr>
 		<td height="90px">
 			<!-- 활성물건카드 -->
-			<a href="./commObListView.do?activeTp=AT001&estateRange=Y"><img src="./resources/images/btn_m4.jpg"></a>&nbsp;<a href="./commClListView.do?activeTp=AT001&estateRange=Y"><img src="./resources/images/btn_m5.jpg"></a>
+			<a href="./commObListView.do?pageNm=objtActiveY&activeTp=AT001&estateRange=Y"><img src="./resources/images/btn_m4.jpg"></a>&nbsp;<a href="./commClListView.do?activeTp=AT001&estateRange=Y"><img src="./resources/images/btn_m5.jpg"></a>
 		</td><!-- ./viewActClCardView.do?activeTp=AT001&estateRange=Y -->
 	</tr>
 	<tr>
 		<td height="90px">
 			<!-- 보류물건카드 -->
-			<a href="./commObListView.do?activeTp=AT002&estateRange=Y"><img src="./resources/images/btn_m6.jpg"></a>&nbsp;<a href="./commClListView.do?activeTp=AT002&estateRange=Y"><img src="./resources/images/btn_m7.jpg"></a>
+			<a href="./commObListView.do?pageNm=objtActiveN&activeTp=AT002&estateRange=Y"><img src="./resources/images/btn_m6.jpg"></a>&nbsp;<a href="./commClListView.do?activeTp=AT002&estateRange=Y"><img src="./resources/images/btn_m7.jpg"></a>
 		</td>
 		
 	</tr>

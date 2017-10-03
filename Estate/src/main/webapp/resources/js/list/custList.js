@@ -59,7 +59,6 @@ function f_custList_select() {
 		  $("#custTbody").empty();
 		  if (result.custList.length != 0) {
 			  custList = result.custList;
-			  console.log (custList);
 			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#page" + currPage).addClass("active");
@@ -75,7 +74,6 @@ function f_custList_select() {
 
 
 function f_mbrDtl_view (index) {
-	console.log (custList[index]);
 	$("#custId").val(custList[index].custId);
 	var frm = $('#commClList')[0];
 	frm.action = '/estate/viewClient.do';

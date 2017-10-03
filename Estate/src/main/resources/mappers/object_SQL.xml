@@ -150,13 +150,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   (SELECT objtTp, saleTp, count(saleTp) cntSaleTp
 		  FROM saleobject obj
 		 WHERE 1=1 
-		   <if test='publicYn eq "Y"'>
+		   <if test='pageNm eq "total"'>
+		   
+		   </if>
+		   <if test='pageNm eq "objtPublic"'>
 		   AND publicYn = 'Y'
 		   </if>
 		   <if test="myObjt != null and myObjt != '' ">
 		   AND obj.frstRegUser = #{user.mbrId}
 		   </if>
-		   <if test="activeTp eq 'AT001'">
+		   <if test='pageNm eq "objtActiveY" or (pageNm eq "objtPublic" and activeTp eq "AT001" )'>
 		   AND obj.activeTp = 'AT001'
 		   AND obj.frstRegUser in (    <if test="user.mbrTp eq 'MT004'" >
 										   SELECT mbrId
@@ -170,7 +173,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 										</if>
 					 				)
 		   </if>
-		   <if test="activeTp eq 'AT002'"> 
+		   <if test='pageNm eq "objtActiveN" (pageNm eq "objtPublic" and activeTp eq "AT002" )'>
 		   AND obj.activeTp = 'AT002'
 		   AND obj.frstRegUser in ( 	<if test="user.mbrTp eq 'MT004'" >
 										   SELECT mbrId
@@ -183,6 +186,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 											  AND estateCd = #{user.estateCd}
 										</if>
 					 				)
+		   </if>
+		   
+		   <if test='publicYn eq "Y"'>
+		   
+		   </if>
+		   
+		   <if test="activeTp eq 'AT001'">
+		   
+		   </if>
+		   <if test="activeTp eq 'AT002'"> 
+		   
 		   </if>
 	  GROUP BY objtTp, saleTp
 		) AS B
@@ -233,47 +247,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test="myObjt != null and myObjt != '' ">
 	   AND obj.frstRegUser = #{user.mbrId}
 	   </if>
-	   <choose>
-	   	<when test='publicYn eq "Y"'>
-		   	AND publicYn = 'Y'
-		   	<if test="activeTp eq 'AT001'">
-		   	AND obj.activeTp = 'AT001'
-		   	</if>
-		   	<if test="activeTp eq 'AT002'">
-		   	AND obj.activeTp = 'AT002'
-		   	</if>
-	   	</when>
-	   	<otherwise>
-		   	<if test="activeTp eq 'AT001'">
-		   AND obj.activeTp = 'AT001'
-		   AND obj.frstRegUser in (    <if test="user.mbrTp eq 'MT004'" >
-										   SELECT mbrId
-											 FROM member m1
-										</if>
-										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
-										   SELECT mbrId
-											 FROM member m1
-											WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
-											  AND estateCd = #{user.estateCd}
-										</if>
-					 				)
-		   </if>
-		   <if test="activeTp eq 'AT002'"> 
-		   AND obj.activeTp = 'AT002'
-		   AND obj.frstRegUser in ( 	<if test="user.mbrTp eq 'MT004'" >
-										   SELECT mbrId
-											 FROM member m1
-										</if>
-										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
-										   SELECT mbrId
-											 FROM member m1
-											WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
-											  AND estateCd = #{user.estateCd}
-										</if>
-					 				)
-		   </if>
-	   	</otherwise>
-	   </choose>
+	   <if test="pageNm eq 'objtPublic'">
+	   AND publicYn = 'Y'
+	   	<if test="activeTp eq 'AT001'">
+		AND obj.activeTp = 'AT001'
+	   	</if>
+	   	<if test="activeTp eq 'AT002'">
+	   	AND obj.activeTp = 'AT002'
+	   	</if>
+	   </if>
+	   <if test="pageNm eq 'objtActiveY' or (pageNm eq 'objtPublic' and activeTp eq 'AT001' )">
+	   AND obj.activeTp = 'AT001'
+	   AND obj.frstRegUser in (    <if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
+	   <if test="pageNm eq 'objtActiveN' or (pageNm eq 'objtPublic' and activeTp eq 'AT002' )">
+	   AND obj.activeTp = 'AT002'
+	   AND obj.frstRegUser in ( 	<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
+	 
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	

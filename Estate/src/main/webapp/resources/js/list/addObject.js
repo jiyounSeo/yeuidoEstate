@@ -146,6 +146,7 @@ function f_setting_text(result) {
 	}
 	$("#memo").val(result.memo);
 	$("#custId").val(result.custId);
+	$("#saleTp").val(result.saleTp);
 }
 
 function inputNumberFormat(obj) { 
@@ -275,11 +276,13 @@ function f_saleobject_save() {
 	}
 	
 	// 5.상태
-	if (  $("input[name=conditionTp]:checked").val() == undefined ) {
-		alert ("상태는 필수입력 값입니다.");
-		return;
-	} else {
-		param.conditionTp = $("input[name=conditionTp]:checked").val();
+	if ($("#objtTp").val() == "OT001" ) {
+		if (  $("input[name=conditionTp]:checked").val() == undefined ) {
+			alert ("상태는 필수입력 값입니다.");
+			return;
+		} else {
+			param.conditionTp = $("input[name=conditionTp]:checked").val();
+		}
 	}
 	
 	// 6. 분류

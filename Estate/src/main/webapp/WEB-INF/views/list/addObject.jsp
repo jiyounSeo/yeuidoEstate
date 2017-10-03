@@ -15,7 +15,7 @@
 	</div>
 	<table class="add_ob_list">
 		<tr>
-			<td><a href="./newObApt.do"><img src="./resources/images/btn_add_ob1.jpg"></a></td>
+			<td><a href="./newObApt.do?pageNm=${pageNm}"><img src="./resources/images/btn_add_ob1.jpg"></a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT001','ST001');return false;"><img src="./resources/images/icon_ob1.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT001ST001"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT001','ST002');return false;"><img src="./resources/images/icon_ob2.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT001ST002"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT001','ST003');return false;"><img src="./resources/images/icon_ob3.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT001ST003"></span>건</a></td>
@@ -23,7 +23,7 @@
 		</tr>	
 		<tr><td colspan="6"></td></tr>
 		<tr>
-			<td><a href="./newObStore.do"><img src="./resources/images/btn_add_ob2.jpg"></a></td>
+			<td><a href="./newObStore.do?pageNm=${pageNm}"><img src="./resources/images/btn_add_ob2.jpg"></a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT002','ST001');return false;"><img src="./resources/images/icon_ob1.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT002ST001"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT002','ST005');return false;"><img src="./resources/images/icon_ob5.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT002ST005"></span>건</a></td>
 			<td>&nbsp;</td>
@@ -31,7 +31,7 @@
 		</tr>	
 		<tr><td colspan="6"></td></tr>
 		<tr>
-			<td><a href="./newObOffice.do"><img src="./resources/images/btn_add_ob3.jpg"></a></td>
+			<td><a href="./newObOffice.do?pageNm=${pageNm}"><img src="./resources/images/btn_add_ob3.jpg"></a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT003','ST001');return false;"><img src="./resources/images/icon_ob1.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT003ST001"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT003','ST005');return false;"><img src="./resources/images/icon_ob5.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT003ST005"></span>건</a></td>
 			<td>&nbsp;</td>
@@ -39,7 +39,7 @@
 		</tr>	
 		<tr><td colspan="6"></td></tr>
 		<tr>
-			<td><a href="./newObOps.do"><img src="./resources/images/btn_add_ob4.jpg"></a></td>
+			<td><a href="./newObOps.do?pageNm=${pageNm}"><img src="./resources/images/btn_add_ob4.jpg"></a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT004','ST001');return false;"><img src="./resources/images/icon_ob1.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT004ST001"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT004','ST002');return false;"><img src="./resources/images/icon_ob2.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT004ST002"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT004','ST003');return false;"><img src="./resources/images/icon_ob3.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT004ST003"></span>건</a></td>
@@ -47,7 +47,7 @@
 		</tr>	
 		<tr><td colspan="6"></td></tr>
 		<tr>
-			<td><a href="./newObHrapt.do"><img src="./resources/images/btn_add_ob5.jpg"></a></td>
+			<td><a href="./newObHrapt.do?pageNm=${pageNm}"><img src="./resources/images/btn_add_ob5.jpg"></a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT005','ST001');return false;"><img src="./resources/images/icon_ob1.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT005ST001"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT005','ST002');return false;"><img src="./resources/images/icon_ob2.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT005ST002"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT005','ST003');return false;"><img src="./resources/images/icon_ob3.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT005ST003"></span>건</a></td>
@@ -55,7 +55,7 @@
 		</tr>	
 		<tr><td colspan="6"></td></tr>
 		<tr>
-			<td><a href="./newObTicket.do"><img src="./resources/images/btn_add_ob6.jpg"></a></td>
+			<td><a href="./newObTicket.do?pageNm=${pageNm}"><img src="./resources/images/btn_add_ob6.jpg"></a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT006','ST006');return false;"><img src="./resources/images/icon_ob6.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT006ST006"></span>건</a></td>
 			<td><a href="#objt" onclick="f_add_objectView('OT006','ST007');return false;"><img src="./resources/images/icon_ob7.jpg" style="padding-right:20px;vertical-align:middle"><span id="OT006ST007"></span>건</a></td>
 			<td>&nbsp;</td>
@@ -74,6 +74,6 @@
 <input type="hidden" name="saleTp" id="saleTp"/>
 <input type="hidden" name="publicYn" id="publicYn" value="${publicYn}"/>
 <input type="hidden" name="activeTp" id="activeTp" value="${activeTp}"/>
-<input type="hidden" name="estateRange" id="estateRange" value="${estateRange}"/>
+<input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

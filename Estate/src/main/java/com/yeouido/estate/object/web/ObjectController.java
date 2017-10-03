@@ -169,7 +169,7 @@ public class ObjectController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		/*
 		List mappingArr = listView.mappingObjectTp(request.getParameter("objtTp"), request.getParameter("saleTp"));
 		int mainc = Integer.parseInt(mappingArr.get(0).toString());
 		int tab = Integer.parseInt(mappingArr.get(1).toString());
@@ -198,7 +198,7 @@ public class ObjectController {
 		model.addAttribute("numOfRow", numOfRow);
 		model.addAttribute("viewUrl", viewUrl);
 		model.addAttribute("pageMark", pageMark);
-		
+		*/
 		return "/list/commObList";	
 	}
 	
