@@ -33,16 +33,17 @@ function f_workList_select() {
 			if (result.workList.length != 0) {
 				workList = result.workList;
 				$("#workListTemplte").tmpl(result).appendTo("#workTbody");
+				// 삭제버튼은 글쓴이 본인만 가능함.
+				$.each (workList, function(index) {
+					if (workList[index].deleteBtnYn == "N") {
+						$("#workTbody tr:eq("+index+") #btnDel").hide();
+					}
+					
+				});
 			} else {
 				$("#workListEmptyTemplte").tmpl(result).appendTo("#workTbody");
 			}
-			// 삭제버튼은 글쓴이 본인만 가능함.
-			$.each (workList, function(index) {
-				if (workList[index].deleteBtnYn == "N") {
-					$("#workTbody tr:eq("+index+") #btnDel").hide();
-				}
-				
-			});
+			
 		}
 	});
 	

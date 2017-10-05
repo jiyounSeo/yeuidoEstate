@@ -46,8 +46,11 @@ public class ObjectServiceImpl  implements ObjectService
    /* 물건삭제*/
    @Override
    public int deleteObject(Map map) throws Exception {
+	   objectDAO.deleteWorkDoc(map);
+	   objectDAO.deleteInterObject(map);
 	   return objectDAO.deleteObject(map);
    }
+   
    /* 물건갯수 */
    @Override
    public List<Object> selectObjectCnt(Map map) throws Exception {

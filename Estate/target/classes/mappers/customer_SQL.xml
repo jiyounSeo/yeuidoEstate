@@ -14,32 +14,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , mbrId
 				  , custTel1
 				  , custTel2
-				  , custTel3 
-				  , homeTel1
-				  , homeTel2
-				  , homeTel3
-				  , orgnTel1
-				  , orgnTel2
-				  , orgnTel3
+				  , custTel3
 				  , faxTel1
 				  , faxTel2
 				  , faxTel3
-				  , gradeTp
 				  , budAmt
+				  , email
 				  , reqContent
-				  , feature
-				  , jeobsu
-				  , buyCond
-				  , dtlContent 
-				  , mbrMemo
 				  , activeTp 
 				  , publicYn 
-				  , contactYn
-				  , explorYn
-				  , talkYn
-				  , searchYn
-				  , visitYn
-				  , meetYn
 				  , frstRegDt
 				  , frstRegUser
 				  , modfRegDt
@@ -53,31 +36,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END
 				  , CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END
 				  , CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END
-				  , CASE WHEN #{homeTel1} = '' THEN NULL ELSE #{homeTel1} END
-				  , CASE WHEN #{homeTel2} = '' THEN NULL ELSE #{homeTel2} END
-				  , CASE WHEN #{homeTel3} = '' THEN NULL ELSE #{homeTel3} END
-				  , CASE WHEN #{orgnTel1} = '' THEN NULL ELSE #{orgnTel1} END
-				  , CASE WHEN #{orgnTel2} = '' THEN NULL ELSE #{orgnTel2} END
-				  , CASE WHEN #{orgnTel3} = '' THEN NULL ELSE #{orgnTel3} END
 				  , CASE WHEN #{faxTel1} = '' THEN NULL ELSE #{faxTel1} END
 				  , CASE WHEN #{faxTel2} = '' THEN NULL ELSE #{faxTel2} END
 				  , CASE WHEN #{faxTel3} = '' THEN NULL ELSE #{faxTel3} END
-				  , #{gradeTp}
 				  , CASE WHEN #{budAmt} = '' THEN 0 ELSE #{budAmt} END 
+				  , #{email}
 				  , #{reqContent}
-				  , #{feature}
-				  , #{jeobsu}
-				  , #{buyCond} 
-				  , #{dtlContent}
-				  , #{mbrMemo}
 				  , #{activeTp}
 				  , CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END
-				  , CASE WHEN #{contactYn} = 'Y' THEN 'Y' ELSE 'N' END 
-				  , CASE WHEN #{explorYn} = 'Y' THEN 'Y' ELSE 'N' END 
-				  , CASE WHEN #{talkYn} = 'Y' THEN 'Y' ELSE 'N' END 
-				  , CASE WHEN #{searchYn} = 'Y' THEN 'Y' ELSE 'N' END 
-				  , CASE WHEN #{visitYn} = 'Y' THEN 'Y' ELSE 'N' END 
-				  , CASE WHEN #{meetYn} = 'Y' THEN 'Y' ELSE 'N' END 
 				  , now()
 				  , #{user.mbrId}
 				  , now()
@@ -103,31 +69,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , custTel1 = (CASE WHEN #{custTel1} = '' THEN NULL ELSE #{custTel1} END)
 		 , custTel2 = (CASE WHEN #{custTel2} = '' THEN NULL ELSE #{custTel2} END)
 		 , custTel3 = (CASE WHEN #{custTel3} = '' THEN NULL ELSE #{custTel3} END)
-		 , homeTel1 = (CASE WHEN #{homeTel1} = '' THEN NULL ELSE #{homeTel1} END)
-		 , homeTel2 = (CASE WHEN #{homeTel2} = '' THEN NULL ELSE #{homeTel2} END)
-		 , homeTel3 = (CASE WHEN #{homeTel3} = '' THEN NULL ELSE #{homeTel3} END)
-		 , orgnTel1 = (CASE WHEN #{orgnTel1} = '' THEN NULL ELSE #{orgnTel1} END)
-		 , orgnTel2 = (CASE WHEN #{orgnTel2} = '' THEN NULL ELSE #{orgnTel2} END)
-		 , orgnTel3 = (CASE WHEN #{orgnTel3} = '' THEN NULL ELSE #{orgnTel3} END)
 		 , faxTel1 = (CASE WHEN #{faxTel1} = '' THEN NULL ELSE #{faxTel1} END)
 		 , faxTel2 = (CASE WHEN #{faxTel2} = '' THEN NULL ELSE #{faxTel2} END)
 		 , faxTel3 = (CASE WHEN #{faxTel3} = '' THEN NULL ELSE #{faxTel3} END)
-		 , gradeTp = #{gradeTp}
 		 , budAmt = (CASE WHEN #{budAmt} = '' THEN 0 ELSE #{budAmt} END  )
 		 , reqContent =  #{reqContent}
-		 , feature = #{feature}
-		 , jeobsu = #{jeobsu}
-		 , buyCond = #{buyCond}
-		 , dtlContent =  #{dtlContent}
-		 , mbrMemo = #{mbrMemo}
+		 , email = #{email}
 		 , activeTp =  #{activeTp}
 		 , publicYn = (CASE WHEN #{publicYn} = 'Y' THEN 'Y' ELSE 'N' END)
-		 , contactYn = (CASE WHEN #{contactYn} = 'Y' THEN 'Y' ELSE 'N' END) 
-		 , explorYn = (CASE WHEN #{explorYn} = 'Y' THEN 'Y' ELSE 'N' END )
-		 , talkYn = (CASE WHEN #{talkYn} = 'Y' THEN 'Y' ELSE 'N' END )
-		 , searchYn = (CASE WHEN #{searchYn} = 'Y' THEN 'Y' ELSE 'N' END) 
-		 , visitYn = (CASE WHEN #{visitYn} = 'Y' THEN 'Y' ELSE 'N' END )
-		 , meetYn = (CASE WHEN #{meetYn} = 'Y' THEN 'Y' ELSE 'N' END )
 		 , modfRegDt = now()
 		 , modfRegUser = #{user.mbrId}
      WHERE custId = #{custId}
@@ -191,37 +140,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , custTel1
 	     , custTel2
 	     , custTel3
-	     , homeTel1
-	     , homeTel2
-	     , homeTel3
-	     , orgnTel1
-	     , orgnTel2
-	     , orgnTel3
 	     , faxTel1
 	     , faxTel2
 	     , faxTel3
-	     , gradeTp
 	     , budAmt
 	     , reqContent
-	     , feature
-	     , jeobsu
-	     , buyCond
-	     , dtlContent
-	     , mbrMemo
+	     , email
 		 , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
 	     , publicYn
 	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
-	     , contactYn
-	     , explorYn
-	     , talkYn
-	     , searchYn
-	     , visitYn
-	     , meetYn
-	     , concat((CASE WHEN contactYn = 'Y' THEN '계약상황' ELSE '' END) , (CASE WHEN explorYn = 'Y' THEN ' 답사추진 ' ELSE ''END) 
-			,(CASE WHEN talkYn = 'Y' THEN ' 상담중' ELSE ''END) 
-	     	, (CASE WHEN searchYn = 'Y' THEN ' 물건검색' ELSE ''END) , (CASE WHEN visitYn = 'Y' THEN ' 방문예정' ELSE ''END) 
-            , (CASE WHEN meetYn = 'Y' THEN '미팅예정' ELSE ''END)) custState
          , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , frstRegUser frstRegNm
 	     , (SELECT COUNT(*) FROM customer) totalCnt
@@ -283,36 +211,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , custTel1
 	     , custTel2
 	     , custTel3
-	     , homeTel1
-	     , homeTel2
-	     , homeTel3
-	     , orgnTel1
-	     , orgnTel2
-	     , orgnTel3
 	     , faxTel1
 	     , faxTel2
 	     , faxTel3
-	     , gradeTp
 	     , CASE WHEN (c.budAmt) IS NULL THEN 0 ELSE budAmt END budAmt
 	     , reqContent
-	     , feature
-	     , buyCond
-	     , dtlContent
+	     , email
 		 , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
-	     , contactYn
-	     , explorYn
-	     , talkYn
-	     , searchYn
-	     , visitYn
-	     , meetYn
-	     , concat((CASE WHEN contactYn = 'Y' THEN '계약상황' ELSE '' END) , (CASE WHEN explorYn = 'Y' THEN ' 답사추진 ' ELSE ''END) 
-			,(CASE WHEN talkYn = 'Y' THEN ' 상담중' ELSE ''END) 
-	     	, (CASE WHEN searchYn = 'Y' THEN ' 물건검색' ELSE ''END) , (CASE WHEN visitYn = 'Y' THEN ' 방문예정' ELSE ''END) 
-            , (CASE WHEN meetYn = 'Y' THEN ' 미팅예정' ELSE ''END)) custState
-          
-          , mbrMemo
-	     , jeobsu
 	     , publicYn
 	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
@@ -322,8 +228,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  FROM customer c
 	 WHERE custId = #{custId}
 	</select>
-	
-	
-	
 	
 </mapper>

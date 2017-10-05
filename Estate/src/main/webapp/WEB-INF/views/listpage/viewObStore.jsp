@@ -60,7 +60,10 @@
 		</tr>
 		<tr>
 			<td class="title">분류</td>
-			<td colspan="4">${activeTpNm}, ${etc}<!-- 분류 --></td>
+			<td colspan="4">${activeTpNm}
+							<c:if test="${publicNm != '' && publicNm ne null}">,&nbsp;${publicNm}</c:if>
+							<c:if test="${advertiseNm != '' && advertiseNm ne null}">,&nbsp;${advertiseNm}</c:if>
+			</td>
 		</tr>
 	</table>
 	<c:if test="${publicYn ne 'Y'}">

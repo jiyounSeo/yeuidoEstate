@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , objtNo
 	     , workTitle
 	     , workContent
-	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
 	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn

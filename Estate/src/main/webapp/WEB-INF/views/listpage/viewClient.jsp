@@ -34,7 +34,7 @@
 		</tr>
 		<tr>
 			<td class="title2">이메일 </td>
-			<td colspan="3">${homeTel1}</td>
+			<td colspan="3">${email}</td>
 		</tr>
 	
 		<tr>

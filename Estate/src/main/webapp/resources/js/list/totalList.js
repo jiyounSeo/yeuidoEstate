@@ -130,6 +130,7 @@ function f_objectList_select(objtTp, saleTp){
 	var param = {
 		objtTp : objtTp
 	   , saleTp : saleTp
+	   , pageNm : "total"
 	   , publicYn : "Y" 
 	   , activeTp : activeTpChk//gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
 	   , myObjt : gfn_isNull($("input[name='objt_activeTp3']:checked").val()) ? "" : $("input[name='objt_activeTp3']:checked").val()
@@ -299,7 +300,8 @@ currCustPage = 1;
 $(document).on('click', '.pagingBtn', function() {
 	var divId = $(this).closest('div').attr('id');
 	var currPageStr = $(this).attr("id").substr(4);
-	if ( gfn_isNull(currPageStr) == "") {
+	console.log (currPageStr);
+	if ( !gfn_isNull(currPageStr) ) {
 		if ( divId == "objtPagingDiv") {
 			currObjtPage = Number(currPageStr);
 			f_objectList_select();

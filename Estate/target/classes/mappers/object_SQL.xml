@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{dong}
 				  , CASE WHEN #{floor} = '' THEN NULL ELSE #{floor} END 
 				  , #{directionTp}
-				  , #{dueDt}
+				  , CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END
 				  , CASE WHEN #{roomCnt} = '' THEN NULL ELSE #{roomCnt} END 
 				  , CASE WHEN #{bathCnt} = '' THEN NULL ELSE #{bathCnt} END 
 				  , #{ondolYn} 
@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , dong =  #{dong}
 		 , floor = (CASE WHEN #{floor} = '' THEN NULL ELSE #{floor} END )
 		 , directionTp = #{directionTp}
-		 , dueDt =  #{dueDt}
+		 , dueDt = (CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END) 
 		 , roomCnt = ( CASE WHEN #{roomCnt} = '' THEN NULL ELSE #{roomCnt} END )
 		 , bathCnt = (CASE WHEN #{bathCnt} = '' THEN NULL ELSE #{bathCnt} END )
 		 , ondolYn = #{ondolYn} 
@@ -136,6 +136,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       AND objtTp = #{objtTp}
     </delete>
     
+    <delete id="deleteInterObject" parameterType="java.util.HashMap" >
+    DELETE FROM interobject 
+    WHERE objtNo = #{objtNo}
+    </delete>
+    
+    <delete id="deleteWorkDoc" parameterType="java.util.HashMap" >
+    DELETE FROM workdoc 
+    WHERE objtNo = #{objtNo}
+    </delete>
     
     <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT A.objtTp, A.saleTp, if(isnull(cntSaleTp), 0, cntSaleTp) cntSaleTp
@@ -150,14 +159,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   (SELECT objtTp, saleTp, count(saleTp) cntSaleTp
 		  FROM saleobject obj
 		 WHERE 1=1 
-		   <if test='publicYn eq "Y"'>
+		   <if test='pageNm eq "total"'>
+		   
+		   </if>
+		   <if test='pageNm eq "objtPublic"'>
 		   AND publicYn = 'Y'
 		   </if>
 		   <if test="myObjt != null and myObjt != '' ">
 		   AND obj.frstRegUser = #{user.mbrId}
 		   </if>
-		   <if test="activeTp eq 'AT001'">
-		   AND obj.activeTp = 'AT001'
+		   <if test="pageNm eq 'objtActiveY' or (pageNm eq 'objtPublic' and activeTp eq 'AT001' )">
+	   	   AND obj.activeTp = 'AT001'
 		   AND obj.frstRegUser in (    <if test="user.mbrTp eq 'MT004'" >
 										   SELECT mbrId
 											 FROM member m1
@@ -170,7 +182,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 										</if>
 					 				)
 		   </if>
-		   <if test="activeTp eq 'AT002'"> 
+		   <if test="pageNm eq 'objtActiveN' or (pageNm eq 'objtPublic' and activeTp eq 'AT002' )">
 		   AND obj.activeTp = 'AT002'
 		   AND obj.frstRegUser in ( 	<if test="user.mbrTp eq 'MT004'" >
 										   SELECT mbrId
@@ -183,6 +195,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 											  AND estateCd = #{user.estateCd}
 										</if>
 					 				)
+		   </if>
+		   
+		   <if test='publicYn eq "Y"'>
+		   
+		   </if>
+		   
+		   <if test="activeTp eq 'AT001'">
+		   
+		   </if>
+		   <if test="activeTp eq 'AT002'"> 
+		   
 		   </if>
 	  GROUP BY objtTp, saleTp
 		) AS B
@@ -206,7 +229,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select commNm from commcd where commCd = directionTp ) directionTpNm
 	     , businessNm
 	     , bargainAmt
-	     , concat(depositAmt , '/' , monthlyAmt) depositAmt
+	     , depositAmt
+	     , monthlyAmt
 	     , rightAmt
 	     , manageAmt
 	     , if (isnull(ondolYn), 'N', ondolYn) ondolYn
@@ -219,11 +243,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , advertiseYn
 	     , publicYn
 	     , availableTp
+	     , (select commNm from commcd where commCd = availableTp ) availableTpNm
 	     , DATE_FORMAT(availableDt, '%Y-%m-%d') as availableDt
 	 	 , parcelAmt
-	 	 ,  premiumAmt
-	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN publicYn = 'Y' THEN '공동' END)) etc
-	     , (SELECT mbrNm FROM member m WHERE m.mbrId = obj.frstRegUser ) frstRegNm
+	 	 , premiumAmt
+	     , (CASE WHEN obj.advertiseYn = 'Y' THEN '광고' END) advertiseNm
+         , (CASE WHEN obj.publicYn = 'Y' THEN '공동' END) publicNm
+         , (CASE WHEN obj.advertiseYn = 'Y' THEN '광고' END) advertiseNm
+         , (CASE WHEN obj.publicYn = 'Y' THEN '공동' END) publicNm
+         , (SELECT mbrNm FROM member m WHERE m.mbrId = obj.frstRegUser ) frstRegNm
 	  	 , (SELECT COUNT(*) FROM saleobject WHERE objtTp = #{objtTp} and saleTp = #{saleTp} ) totalCnt
 	  FROM saleobject obj
 	 WHERE objtTp = #{objtTp}
@@ -231,47 +259,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test="myObjt != null and myObjt != '' ">
 	   AND obj.frstRegUser = #{user.mbrId}
 	   </if>
-	   <choose>
-	   	<when test='publicYn eq "Y"'>
-		   	AND publicYn = 'Y'
-		   	<if test="activeTp eq 'AT001'">
-		   	AND obj.activeTp = 'AT001'
-		   	</if>
-		   	<if test="activeTp eq 'AT002'">
-		   	AND obj.activeTp = 'AT002'
-		   	</if>
-	   	</when>
-	   	<otherwise>
-		   	<if test="activeTp eq 'AT001'">
-		   AND obj.activeTp = 'AT001'
-		   AND obj.frstRegUser in (    <if test="user.mbrTp eq 'MT004'" >
-										   SELECT mbrId
-											 FROM member m1
-										</if>
-										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
-										   SELECT mbrId
-											 FROM member m1
-											WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
-											  AND estateCd = #{user.estateCd}
-										</if>
-					 				)
-		   </if>
-		   <if test="activeTp eq 'AT002'"> 
-		   AND obj.activeTp = 'AT002'
-		   AND obj.frstRegUser in ( 	<if test="user.mbrTp eq 'MT004'" >
-										   SELECT mbrId
-											 FROM member m1
-										</if>
-										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
-										   SELECT mbrId
-											 FROM member m1
-											WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
-											  AND estateCd = #{user.estateCd}
-										</if>
-					 				)
-		   </if>
-	   	</otherwise>
-	   </choose>
+	   <if test="pageNm eq 'total'">
+	   AND objtNo in ( 
+				-- 1. 활성+공동인 물건은 누가 등록했든 다 보여야함
+				SELECT objtNo
+				  FROM saleobject objt1
+				WHERE publicYn = 'Y'
+				  AND activeTp = 'AT001'
+                  UNION ALL
+                -- 2. 활성만 체크된 물건은 같은부동산사람이랑 내가 등록한 물건만
+                SELECT objtNo
+                  FROM saleobject objt2
+				 WHERE activeTp = 'AT001'
+				   AND objt2.frstRegUser in ( <if test="user.mbrTp eq 'MT004'" >
+											   SELECT mbrId
+										         FROM member m1
+											  </if>
+											  <if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+											   SELECT mbrId
+												 FROM member m1
+												WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+												  AND estateCd = #{user.estateCd}
+												</if>
+				 							)
+                  UNION ALL
+                -- 3. 보류 체크된 물건은 내가 등록한 물건만 
+	            SELECT objtNo
+                  FROM saleobject objt3
+				 WHERE activeTp = 'AT002'
+                   AND objt3.frstRegUser = #{user.mbrId}
+                  ) 
+	   </if>
+	   <if test="pageNm eq 'objtPublic'">
+	   AND publicYn = 'Y'
+	   	<if test="activeTp eq 'AT001'">
+		AND obj.activeTp = 'AT001'
+	   	</if>
+	   	<if test="activeTp eq 'AT002'">
+	   	AND obj.activeTp = 'AT002'
+	   	</if>
+	   </if>
+	   <if test="pageNm eq 'objtActiveY' or (pageNm eq 'objtPublic' and activeTp eq 'AT001' )">
+	   AND obj.activeTp = 'AT001'
+	   AND obj.frstRegUser in (    <if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
+	   <if test="pageNm eq 'objtActiveN' or (pageNm eq 'objtPublic' and activeTp eq 'AT002' )">
+	   AND obj.activeTp = 'AT002'
+	   AND obj.frstRegUser in ( 	<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
+	 
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
@@ -319,8 +375,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , parcelAmt
 	 	 , premiumAmt
 	 	 , memo
-	     , concat((CASE WHEN advertiseYn = 'Y' THEN '광고' END) , (CASE WHEN advertiseYn = 'Y' THEN ','END)  , (CASE WHEN obj.publicYn = 'Y' THEN '공동' END)) etc
-	     , DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
+	 	 , (CASE WHEN obj.advertiseYn = 'Y' THEN '광고' END) advertiseNm
+         , (CASE WHEN obj.publicYn = 'Y' THEN '공동' END) publicNm
+         , DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , obj.frstRegUser
 	     , (SELECT mbrNm FROM member m WHERE m.mbrId = obj.frstRegUser )  frstRegNm
 	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} != obj.frstRegUser then 'N' else 'Y' END ) ELSE 'Y' END) modifyYn

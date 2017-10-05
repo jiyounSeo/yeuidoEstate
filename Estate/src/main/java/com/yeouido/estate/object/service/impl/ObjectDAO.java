@@ -20,6 +20,12 @@ public class ObjectDAO extends AbstractDAO
    public int deleteObject(Map<String, Object> map) throws Exception{
        return delete("objectDAO.deleteObject",map);
    }
+   public int deleteInterObject(Map<String, Object> map) throws Exception{
+       return delete("objectDAO.deleteInterObject",map);
+   }
+   public int deleteWorkDoc(Map<String, Object> map) throws Exception{
+       return delete("objectDAO.deleteWorkDoc",map);
+   }
 
    @SuppressWarnings("unchecked")
    public List<Object> selectObjectCnt(Map map) throws Exception{

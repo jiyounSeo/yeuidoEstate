@@ -36,45 +36,19 @@ function f_setting_text(result) {
 	$("#custTel1").val(result.custTel1);
 	$("#custTel2").val(result.custTel2);
 	$("#custTel3").val(result.custTel3);
-	$("#homeTel1").val(result.homeTel1);
-	$("#homeTel2").val(result.homeTel2);
-	$("#homeTel3").val(result.homeTel3);
-	$("#orgnTel1").val(result.orgnTel1);
-	$("#orgnTel2").val(result.orgnTel2);
-	$("#orgnTel3").val(result.orgnTel3);
 	$("#faxTel1").val(result.faxTel1);
 	$("#faxTel2").val(result.faxTel2);
 	$("#faxTel3").val(result.faxTel3);
 	$("#budAmt").val( comma(result.budAmt) );
 	$("#reqContent").val(result.reqContent);
-	$("#feature").val(result.feature);
-	$("#dtlContent").val(result.dtlContent);
-	$("#buyCond").val(result.buyCond);
-	$('input[name="gradeTp"]:radio:input[value="' + result.gradeTp + '"]').attr('checked', 'checked');
+	$("#email").val(result.email);
+	
+	
 	$('input[name="activeTp"]:radio:input[value="' + result.activeTp + '"]').attr('checked', 'checked');
 	if (result.publicYn  == "Y") {
 		$('input:checkbox[id="publicYn"]').attr("checked", true); //단일건
 	}
-	
-	if (result.contactYn  == "Y") {
-		$('input:checkbox[id="contactYn"]').attr("checked", true); //단일건
-	}
-	if (result.explorYn  == "Y") {
-		$('input:checkbox[id="explorYn"]').attr("checked", true); //단일건
-	}
-	if (result.talkYn  == "Y") {
-		$('input:checkbox[id="talkYn"]').attr("checked", true); //단일건
-	}
-	if (result.searchYn  == "Y") {
-		$('input:checkbox[id="searchYn"]').attr("checked", true); //단일건
-	}
-	if (result.visitYn  == "Y") {
-		$('input:checkbox[id="visitYn"]').attr("checked", true); //단일건
-	}
-	if (result.meetYn  == "Y") {
-		$('input:checkbox[id="meetYn"]').attr("checked", true); //단일건
-	}
-	
+
 	if (result.modifyYn == "Y") {
 		$("#modfDiv").show();
 	} else {
@@ -123,12 +97,6 @@ function f_customer_save() {
 	} else {
 		param.activeTp = $("input[name=activeTp]:checked").val();
 	}
-	param.contactYn =  $("input[name=contactYn]:checked").val();
-	param.explorYn =  $("input[name=explorYn]:checked").val();
-	param.talkYn =  $("input[name=talkYn]:checked").val();
-	param.searchYn =  $("input[name=searchYn]:checked").val();
-	param.visitYn =  $("input[name=visitYn]:checked").val();
-	param.meetYn =  $("input[name=meetYn]:checked").val();
 	
 	var urlStr = "";
 	if ($("#custId").val() != "" ) {

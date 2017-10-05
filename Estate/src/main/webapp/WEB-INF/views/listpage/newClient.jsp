@@ -38,7 +38,7 @@
 		</tr>
 		<tr>
 			<td class="title2">이메일 </td>
-			<td colspan="3"><input type="text" style="width:320x" id="homeTel1" name="homeTel1"  > <-- 필드명변경필요</td>
+			<td colspan="3"><input type="text" style="width:320x" id="email" name="email"></td>
 		</tr>
 		
 		<tr>

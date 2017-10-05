@@ -17,16 +17,14 @@ function f_interList_select() {
 			if (result.interList.length != 0) {
 				interList = result.interList;
 				$("#objtListTemplte").tmpl(result).appendTo("#objtTbody");
+				$.each (interList, function(index) {
+					if (interList[index].deleteBtnYn == "N") {
+						$("#objtTbody tr:eq("+index+") #btnDel").hide();
+					}
+				});
 			} else {
 				$("#objtListEmptyTemplte").tmpl().appendTo("#objtTbody");
 			}
-			
-			$.each (interList, function(index) {
-				if (interList[index].deleteBtnYn == "N") {
-					$("#objtTbody tr:eq("+index+") #btnDel").hide();
-				}
-			});
-			
 		}
 	});
 	

@@ -34,9 +34,9 @@
 		<tr>
 			<td class="title">동 / 층 / 향</td>
 			<td colspan="4">
-				<!-- 동 --> ${dong}동&nbsp;&nbsp;&nbsp;
-				<!-- 층 --> ${floor}층&nbsp;&nbsp;&nbsp;
-				<!-- 향 --> ${directionTpNm}향</td>
+				<!-- 동 --> <c:if test="${dong != '' && dong ne null}">${dong}동/&nbsp;&nbsp;&nbsp;</c:if>
+				<!-- 층 --> <c:if test="${floor != '' && floor ne null}">${floor}층/&nbsp;&nbsp;&nbsp;</c:if>
+				<!-- 향 --> <c:if test="${directionTpNm != '' && directionTpNm ne null}">${directionTpNm}향</c:if>
 			</td>
 		</tr>
 		<tr>
@@ -55,9 +55,11 @@
 		</tr>
 		<tr>
 			<td class="title">분류</td>
-			<td colspan="4">${activeTpNm}, ${etc}<!-- 분류 --></td>
+			<td colspan="4">${activeTpNm}
+							<c:if test="${publicNm != '' && publicNm ne null}">,&nbsp;${publicNm}</c:if>
+							<c:if test="${advertiseNm != '' && advertiseNm ne null}">,&nbsp;${advertiseNm}</c:if>
+			</td>
 		</tr>
-		
 	</table>
 	<c:if test="${publicYn ne 'Y'}">
 		<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
