@@ -10,7 +10,7 @@ var custList = {};
 currPage = 1;
 $(document).on('click', '.pagingBtn', function() {
 	var currPageStr = $(this).attr("id").substr(4);
-	if ( gfn_isNull(currPageStr) == "") {
+	if ( currPageStr != "") {
 		currPage = Number(currPageStr);
 		f_custList_select();
 	}
@@ -31,19 +31,20 @@ function gfn_isNull(str) {
 
 function f_custList_select() {
 	var activeTpChk= "";
-	if ( $("#publicYn").val() == "Y") {
-		 if ( !gfn_isNull($("input[name='activeTp1']:checked").val()) ) {
-			 activeTpChk = "AT001";
-		 } else if ( !gfn_isNull($("input[name='activeTp2']:checked").val()) ) {
-			 activeTpChk = "AT002";
-		 }
-	} 
-	
-	//saleTpTr
+	var activTp1 = $("input[name='activeTp1']:checked").val();
+	var activTp2 = $("input[name='activeTp2']:checked").val();
+	if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
+		 activeTpChk = "AT001";
+	} else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
+		 activeTpChk = "AT002";
+	} else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
+		 activeTpChk = "";
+	}
 	var param = {
 	    publicYn : $("#publicYn").val()
-	   , activeTp :  $("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
+	   , activeTp : activeTpChk //  $("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
 	   , myCust : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
+	   , pageNm : $("#pageNm").val()
 	   , currentPage : Number(currPage)
 	   , pagePerRow : 10
 	   , pageSize : 10
@@ -57,6 +58,7 @@ function f_custList_select() {
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(result){
 		  $("#custTbody").empty();
+		  $("#pagingDiv").empty();
 		  if (result.custList.length != 0) {
 			  custList = result.custList;
 			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");

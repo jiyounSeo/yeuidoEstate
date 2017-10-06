@@ -28,11 +28,11 @@
 		</table>
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
-				<td width="100%" align="right" valign="bottom">
+				<td align="right" valign="bottom" style="width:100%; height:30px;">
 					<input type="checkbox" name="objt_activeTp1" id="objt_activeTp1" onclick = "f_objt_select('','')" value="AT001" /><label for="objt_activeTp1">활성</label>
 					<input type="checkbox" name="objt_activeTp2" id="objt_activeTp2" onclick = "f_objt_select('','')" value="AT002" /><label for="objt_activeTp2">보류</label>
 					<input type="checkbox" name="objt_activeTp3" id="objt_activeTp3" onclick = "f_objt_select('','')" value="AT003" /><label for="objt_activeTp3">계약완료</label>
-					<input type="checkbox" name="objt_activeTp3" id="objt_activeTp4" onclick = "f_objt_select('','')" value="AT004" /><label for="objt_activeTp4">내가등록한물건만보기</label>
+					<input type="checkbox" name="objt_activeTp4" id="objt_activeTp4" onclick = "f_objt_select('','')" value="AT004" /><label for="objt_activeTp4">내가등록한물건만보기</label>
 				</td>	
 			</tr>
 		</table>

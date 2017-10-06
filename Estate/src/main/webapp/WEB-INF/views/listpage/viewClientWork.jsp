@@ -7,6 +7,8 @@
 <form id="viewClient" action="/">
 <input type="hidden" name="custId" id="custId" value="${custId}" />
 <input type="hidden" name="activeTp" id="activeTp" value="${activeTp}" />
+<input type="hidden" name="pageNm" id="pageNm" value="${pageNm}" />
+
 <div class="new_page_title">
 	<img src="./resources/images/title_view_cl_list.jpg">
 </div>
@@ -45,12 +47,22 @@
 	</table>
 	<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
 	<%@ include file="/WEB-INF/views/listpage/interListBottom.jsp" %> 	
-	
-	<div style="height:50px;"></div>
+	<div style="height:10px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">
-		<a href="./modifyCustomerInfo.do?custId=${custId}"> <img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="#"><img src="./resources/images/btn_del.jpg" onclick="f_customer_delete();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="#"><img src="./resources/images/btn_cl_list.jpg"></a>
+		<table style="width:1400px;padding:0;margin:0;border:0">
+			<tbody><tr>
+				<td align="left" width="50%">
+					<div id="viewObjBot">
+						<a href="./modifyCustomerInfo.do?custId=${custId}&pageNm=${pageNm}"> <img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#"><img src="./resources/images/btn_del.jpg" onclick="f_customer_delete();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</div>
+				</td>
+				<td align="right">
+					<a href="#"><img src="./resources/images/btn_cl_list.jpg" onclick="f_list_view_change2();return false;"></a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
 

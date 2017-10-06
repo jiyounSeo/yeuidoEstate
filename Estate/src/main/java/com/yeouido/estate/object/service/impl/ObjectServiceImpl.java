@@ -42,6 +42,11 @@ public class ObjectServiceImpl  implements ObjectService
    public Map selectObjectInfo(Map map) throws Exception {
 	   return objectDAO.selectObjectInfo(map);
    }
+   /* 물건 정보 */
+   @Override
+   public Map selectObjectTotalCnt(Map map) throws Exception {
+	   return objectDAO.selectObjectTotalCnt(map);
+   }
    
    /* 물건삭제*/
    @Override

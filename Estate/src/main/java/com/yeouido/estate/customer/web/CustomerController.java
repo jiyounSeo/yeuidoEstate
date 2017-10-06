@@ -52,9 +52,7 @@ public class CustomerController {
 			map.put("pagePerRow", pagePerRow);
 			custList = customerService.selectCustomerList(map);
 			if (!custList.isEmpty()) {
-				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
-						
-				int totalCount = Integer.parseInt(custList.get(0).get("totalCnt").toString());
+				int totalCount = Integer.parseInt(customerService.selectCustomerTotalCnt(map).get("totalCnt").toString());
 				int pageSize = Integer.parseInt(map.get("pageSize").toString());
 				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
 				mav.addAllObjects(pagingMap);
@@ -152,7 +150,7 @@ public class CustomerController {
 		map.put("custId", request.getParameter("custId"));
 		map.put("publicYn", request.getParameter("publicYn"));
 		map.put("activeTp", request.getParameter("activeTp"));
-		
+		map.put("pageNm", request.getParameter("pageNm"));
 		try {
 			int result = customerService.deleteCustomer(map);
 			model.addAttribute("messageCd", "1");
@@ -179,32 +177,31 @@ public class CustomerController {
 			e.printStackTrace();
 		}
 		String url = "";
-		if ( ("Y").equals(map.get("publicYn")) ) {
-			model.addAttribute("publicYn", "Y");
+		model.addAllAttributes(map);
+		
+		if ( ("custPublic").equals(map.get("pageNm")) ) {
 			url = "/listpage/viewClient"; 
 		} else {
 			url = "/listpage/viewClientWork"; 
 		}
-		//ModelAndView mv = new ModelAndView();
 		return url;
 	
 	}
-
-	/* 고객 리스트 화면 */
-	@RequestMapping(value= "/commClList.do", method=RequestMethod.GET)
-	public ModelAndView commClListView(@RequestParam Map<String,Object> map)  { 
-		
-		 ModelAndView mv = new ModelAndView("/list/commClList");
-		 return mv;
-	}	
-
+	
 	@RequestMapping(value="/commClListView.do",method = RequestMethod.GET)
 	public ModelAndView goCommClList(@RequestParam Map<String,Object> map){
 		ModelAndView mv = new ModelAndView("/list/commClList");
 	    mv.addAllObjects(map);
-		//odel.addAllAttributes(request.getParameterMap());
 		return mv;	
 	}
+	
+	@RequestMapping(value="/commClListPostView.do",method = RequestMethod.POST)
+	public ModelAndView commObListPostView(@RequestParam Map<String,Object> map){
+	    ModelAndView mv = new ModelAndView("/list/commClList");
+	    mv.addAllObjects(map);
+		return mv;	
+	}
+	
 	
 	@RequestMapping(value= "/newClient.do", method=RequestMethod.GET)
 	public ModelAndView newClientView(@RequestParam Map<String,Object> map)  { 

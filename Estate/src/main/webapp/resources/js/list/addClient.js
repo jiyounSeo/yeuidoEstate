@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	//f_objectDtl_select();
-	
 	if ($("#modifyYn").val() == "Y") {
 		$("#modfDiv").show();
 	} else {
@@ -17,6 +16,7 @@ function f_customerDtl_select() {
 	var param = {
 		custId : $("#custId").val()
 		, publicYn : $("#publicYn").val()
+		, pageNm : $("pageNm").val()
 	};
 	$.ajax({
 		  url : "/estate/selectCustomerDtl.do",
@@ -115,8 +115,8 @@ function f_customer_save() {
 			  alert (responseData.message);
 		  } else {
 			  alert ("고객수정에 성공하였습니다.");
-					  
 		  }
+		  f_list_view_change();
 	  }
 	});
 }
@@ -134,5 +134,20 @@ function f_srchObjt_popup(){
 	//호출하게 됩니다. 
 	var pop = window.open("./resources/popup/srchInterObjt.jsp","_blank","width=870,height=670, scrollbars=yes, resizable=yes");  
 }
+
+
+function f_list_view_change() {
+	 var comSubmit = new ComSubmit("newClient");
+	 comSubmit.setUrl("/estate/commClListPostView.do");
+	 comSubmit.submit();
+}
+
+function f_list_view_change2() {
+	 var comSubmit = new ComSubmit("viewClient");
+	 comSubmit.setUrl("/estate/commClListPostView.do");
+	 comSubmit.submit();
+}
+
+
 
 

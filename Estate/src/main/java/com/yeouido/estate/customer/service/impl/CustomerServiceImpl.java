@@ -29,6 +29,10 @@ public class CustomerServiceImpl  implements CustomerService
 	   return customerDAO.selectCustomerList(map);
    }
    
+   public Map selectCustomerTotalCnt(Map map) throws Exception {
+	   return customerDAO.selectCustomerTotalCnt(map);
+   }
+   
    public Map selectCustomerInfo(Map map) throws Exception {
 	   return customerDAO.selectCustomerInfo(map);
    }

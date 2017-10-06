@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	$('input:checkbox[id="objt_activeTp1"]').attr("checked", true); //단일건
-	$('input:checkbox[id="cust_activeTp1"]').attr("checked", true); //단일건
+	//$('input:checkbox[id="objt_activeTp1"]').attr("checked", true); //단일건
+	//$('input:checkbox[id="cust_activeTp1"]').attr("checked", true); //단일건
 	f_objt_select('','');
 	f_custList_select();
 	$("#objtList").show();
@@ -115,7 +115,7 @@ function gfn_isNull(str) {
     return false;
 }
 
-function f_objectList_select(objtTp, saleTp){
+function f_objectList_select(objtTpChk, saleTpChk){
 	var activeTpChk = "";
 	var activTp1 = $("input[name='objt_activeTp1']:checked").val();
 	var activTp2 = $("input[name='objt_activeTp2']:checked").val();
@@ -126,18 +126,23 @@ function f_objectList_select(objtTp, saleTp){
 	 } else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
 		 activeTpChk = "";
 	 }
+	 if (!gfn_isNull(objtTpChk)) {
+		 objtTp = objtTpChk;
+	 }
+	 if (!gfn_isNull(saleTpChk)) {
+		 saleTp = saleTpChk;
+	 }
+	 console.log ("activeTpChk: "+activeTpChk);
 	//saleTpTr
 	var param = {
 		objtTp : objtTp
 	   , saleTp : saleTp
 	   , pageNm : "total"
-	   , publicYn : "Y" 
 	   , activeTp : activeTpChk//gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
-	   , myObjt : gfn_isNull($("input[name='objt_activeTp3']:checked").val()) ? "" : $("input[name='objt_activeTp3']:checked").val()
+	   , myObjt : gfn_isNull($("input[name='objt_activeTp4']:checked").val()) ? "" : $("input[name='objt_activeTp4']:checked").val()
 	   , currentPage : Number(currObjtPage)
 	   , pagePerRow : $("#viewMode").val() == "1"  ? 5 : 20
 	   , pageSize : 10
-	   , publicYn : $("#publicYn").val()
 	};
 	$.ajax({
 	  url : "/estate/selectObjectList.do",
@@ -148,7 +153,7 @@ function f_objectList_select(objtTp, saleTp){
 	  success : function(result){
 		  
 		  $("#objtTbody").empty();
-		  
+		  $("#objtPagingDiv").empty();
 		  var tmplNm = "";
 		  switch ( objtTp ) {
 		  	case "OT001" : // 아파트
@@ -174,6 +179,7 @@ function f_objectList_select(objtTp, saleTp){
 		  if (result.objtList.length != 0) {
 			  objtList = result.objtList;
 			  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
+			  console.log (result);
 			  $("#objtPagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#objtPagingDiv #page" + currObjtPage).addClass("active");
 
@@ -222,12 +228,6 @@ function f_objtDtl_view (index) {
 	frm.action = '/estate/objtDtlView.do';
 	frm.method = 'POST';
 	frm.submit();
-	/*
-   var comSubmit = new ComSubmit($('form').attr('id'));
-   comSubmit.setUrl("/estate/objtDtlView.do");
-   
-   comSubmit.submit();
-*/
 }
 
 
@@ -237,29 +237,27 @@ function f_mbrDtl_view (index) {
 	frm.action = '/estate/viewClient.do';
 	frm.method = 'POST';
 	frm.submit();
-	/*
-   var comSubmit = new ComSubmit($('form').attr('id'));
-   comSubmit.setUrl("/estate/objtDtlView.do");
-   
-   comSubmit.submit();
-*/
 }
 
 
 
 function f_custList_select() {
 	var activeTpChk = "";
-	 if ( !gfn_isNull($("input[name='cust_activeTp1']:checked").val()) ) {
+	var activTp1 = $("input[name='cust_activeTp1']:checked").val();
+	var activTp2 = $("input[name='cust_activeTp2']:checked").val();
+	if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
 		 activeTpChk = "AT001";
-	 } else if ( !gfn_isNull($("input[name='cust_activeTp2']:checked").val()) ) {
+	} else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
 		 activeTpChk = "AT002";
-	 }
+	} else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
+		 activeTpChk = "";
+	}
 	 
 	var param = { currentPage : Number(currCustPage)
 				   , pagePerRow : $("#viewMode").val() == "1" ? 5 : 20 
 				   , pageSize : 10
-				   , publicYn : "Y" 
-				   , activeTp : gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
+				   , pageNm : "total"
+				   , activeTp : activeTpChk //gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
 				   , myCust : gfn_isNull($("input[name='cust_activeTp3']:checked").val()) ? "" : $("input[name='cust_activeTp3']:checked").val()
 	};
 	$.ajax({
@@ -270,6 +268,7 @@ function f_custList_select() {
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	  success : function(result){
 		  $("#custTbody").empty();
+		  $("#custPagingDiv").empty();
 		  if (result.custList.length != 0) {
 			  custList = result.custList;
 			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
@@ -304,7 +303,7 @@ $(document).on('click', '.pagingBtn', function() {
 	if ( !gfn_isNull(currPageStr) ) {
 		if ( divId == "objtPagingDiv") {
 			currObjtPage = Number(currPageStr);
-			f_objectList_select();
+			f_objectList_select('','');
 		} else {
 			currCustPage = Number(currPageStr);
 			f_custList_select();
@@ -316,6 +315,8 @@ function f_view_change(view) {
 	$("#viewMode").val(view);
 	switch (view) {
 		case "1" : 
+			currObjtPage = 1;
+			currCustPage = 1;
 			f_objt_select('','');
 			f_custList_select() ;
 			$("#heightDiv").show();
@@ -323,13 +324,14 @@ function f_view_change(view) {
 			$("#custList").show();
 			break;
 		case "2" : 
+			currObjtPage = 1;
 			$("#heightDiv").hide();
 			$("#objtList").show();
 			$("#custList").hide();
 			f_objt_select('','');
 			break;
 		case "3" :
-
+			currCustPage = 1;
 			$("#heightDiv").hide();
 			$("#objtList").hide();
 			$("#custList").show();

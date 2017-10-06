@@ -13,20 +13,18 @@
 <div id="cl_list" name="cl_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
 		<!-- 공동 -->
-		<c:if test="${publicYn eq 'Y' }"> 
+		<c:if test="${pageNm eq 'custPublic' }"> 
 			<img src="./resources/images/title_comm_cl_list.jpg">
 		</c:if>
 		<!-- 활성 -->
-		<c:if test="${activeTp eq 'AT001' }">
+		<c:if test="${pageNm eq 'custActiveY' }">
 			<img src="./resources/images/title_cl_active.jpg">
 		</c:if>
 		<!-- 보류 -->
-		<c:if test="${activeTp eq 'AT002' }">
+		<c:if test="${pageNm eq 'custActiveN' }">
 			<img src="./resources/images/title_cl_reserve.jpg">
 		</c:if>
-		
 	</div>
-		
 	
 	<table width="1500px" cellpadding="0" cellspacing="0" border="0">
 		<tr>
@@ -96,7 +94,7 @@
 
 <input type="hidden" name="publicYn" id="publicYn" value="${publicYn}"/>
 <input type="hidden" name="activeTp" id="activeTp" value="${activeTp}"/>
-<input type="hidden" name="estateRange" id="estateRange" value="${estateRange}"/>
+<input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 <input type="hidden" name="custId" id="custId" />
 
 </form>

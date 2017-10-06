@@ -93,7 +93,6 @@
 <input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
 <input type="hidden" name="publicYn" id="publicYn" value="${publicYn}"/>
 <input type="hidden" name="activeTp" id="activeTp" value="${activeTp}"/>
-<input type="hidden" name="estateRange" id="estateRange" value="${estateRange}"/>
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 </form>
 </body>

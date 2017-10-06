@@ -25,11 +25,10 @@ function gfn_isNull(str) {
 //페이징 버튼 클릭이벤트
 currPage = 1;
 $(document).on('click', '.pagingBtn', function() {
-	
 	var currPageStr = $(this).attr("id").substr(4);
-	if ( gfn_isNull(currPageStr) == "") {
+	if ( currPageStr != "") {
 		currPage = Number(currPageStr);
-		f_objectList_select();
+		f_objectList_select('','');
 	}
 	
 });
@@ -159,14 +158,17 @@ function f_objectList_select(objtTp, saleTp){
 	 } else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
 		 activeTpChk = "";
 	 }
-	
+	 if (!gfn_isNull(objtTpChk)) {
+		 objtTp = objtTpChk;
+	 }
+	 if (!gfn_isNull(saleTpChk)) {
+		 saleTp = saleTpChk;
+	 }
 	var param = {
 		objtTp : objtTp
 	   , saleTp : saleTp
-	   //, publicYn : $("#publicYn").val()
 	   , pageNm : $("#pageNm").val()
 	   , activeTp :  activeTpChk //$("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
-	   //, estateRange : $("#estateRange").val()
 	   , myObjt : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
 	   , currentPage : Number(currPage)
 	   , pagePerRow : 10

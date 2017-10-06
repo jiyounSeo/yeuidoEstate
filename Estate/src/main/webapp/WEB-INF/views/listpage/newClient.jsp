@@ -55,9 +55,10 @@
 	<div style="height:50px;"></div>
 	<div style="width:1400px;margin:auto;text-align:center;">
 		<a href="#"><img src="./resources/images/btn_save.jpg" onclick="f_customer_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
+		<a href="#"><img src="./resources/images/btn_cancel.jpg" onclick="f_list_view_change();return false;"></a>
 	</div>
 </div>
+<input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 <input type="hidden" name="custId" id="custId" value="${custId}"/>
 </form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 

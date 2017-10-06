@@ -54,8 +54,7 @@ public class ObjectController {
 			objtList = objectService.selectObjectList(map);
 			if (!objtList.isEmpty()) {
 				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
-						
-				int totalCount = Integer.parseInt(objtList.get(0).get("totalCnt").toString());
+				int totalCount = Integer.parseInt( objectService.selectObjectTotalCnt(map).get("totalCnt").toString());
 				int pageSize = Integer.parseInt(map.get("pageSize").toString());
 				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
 				mav.addAllObjects(pagingMap);

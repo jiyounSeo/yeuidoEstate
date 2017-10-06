@@ -28,6 +28,10 @@ public class CustomerDAO extends AbstractDAO
    public Map selectCustomerInfo(Map map) throws Exception{
        return selectMap("customerDAO.selectCustomerInfo", map);
    }
+   @SuppressWarnings("unchecked")
+   public Map selectCustomerTotalCnt(Map map) throws Exception{
+       return selectMap("customerDAO.selectCustomerTotalCnt", map);
+   }
    
    @SuppressWarnings("unchecked")
    public List<Map<String,Object>> selectCustomerList(Map map) throws Exception{
@@ -43,9 +47,6 @@ public class CustomerDAO extends AbstractDAO
    public int insertNewCustomer(Map<String, Object> map) throws Exception{
        return insert("customerDAO.insertNewCustomer",map);
    }
-   
-   
-   
    
 
 }
