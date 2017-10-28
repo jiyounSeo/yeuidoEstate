@@ -50,7 +50,7 @@ $(document).ready(function() {
 			</div>
 			<div id="logoutDiv" style="width: 1486px; height: 36px; text-align: left;">
 				<span id="userNm" style="display:none;"></span> 
-				<a id="modifyMbrInfo" href="./loginView.go">회원정보수정</a>
+				<a id="modifyMbrInfo" href="./modifyMemberView.do">회원정보수정</a>
 				<a id="login" href="./logout.go"> | 로그아웃</a> 
 				<a id="memberMng" href="./memberListView.do"> | 회원관리</a>
 			</div>

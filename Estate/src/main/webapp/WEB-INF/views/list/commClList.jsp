@@ -101,8 +101,8 @@
 
 <script id="custListTemplte" type="text/x-jquery-tmpl">	
 {{each custList}}					
-	<tr>
-		<td><a href="#mbr" onclick="f_mbrDtl_view({{html $index}});return false;">{{html $value.frstRegDt}}</a></td>
+	<tr  onclick="f_mbrDtl_view({{html $index}});return false;">
+		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.custNm}}</td>
 		<td>{{html $value.custTel1}}-{{html $value.custTel2}}-{{html $value.custTel3}}</td>
 		<td>{{html $value.reqContent}}</td>

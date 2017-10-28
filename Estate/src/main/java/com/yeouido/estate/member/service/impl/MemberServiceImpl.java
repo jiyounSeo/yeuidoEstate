@@ -42,4 +42,14 @@ public class MemberServiceImpl  implements MemberService
 		return memberDAO.deleteMember(map);
 	}
 	
+	@Override
+	public int updateMemberInfo(Map map) throws Exception {
+		return memberDAO.updateMemberInfo(map);
+	}
+	
+	@Override
+	public Map selectMemberInfo(Map map)throws Exception {
+		return memberDAO.selectMemberInfo(map);
+	}
+		
 }

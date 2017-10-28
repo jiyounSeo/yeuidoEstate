@@ -67,6 +67,40 @@ public class ObjectController {
 	    mav.setViewName("jsonView");
 	    return mav;
 	}
+	//
+	/* 
+	 * 통합검색조회
+	 */
+	@RequestMapping(value= "/selectTotalSearch.do", method=RequestMethod.POST)
+	public ModelAndView selectTotalSearch( @RequestParam Map<String,Object> map, HttpSession session)  {  
+		ModelAndView mav= new ModelAndView();
+		Paging paging = new Paging();
+        			
+		List<Map<String,Object>> objtList = new ArrayList<Map<String,Object>>();
+		try {
+			int currentPage = Integer.parseInt(map.get("currentPage").toString());
+			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+			map.put("rowNum", (currentPage-1)*pagePerRow);
+			map.put("pagePerRow", pagePerRow);
+			map.put("user",  session.getAttribute("user"));
+			
+			objtList = objectService.selectTotalSearch(map);
+			if (!objtList.isEmpty()) {
+				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
+				map.put ("notPage",null);
+				int totalCount = objectService.selectTotalSearch(map).size();
+				int pageSize = Integer.parseInt(map.get("pageSize").toString());
+				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+				mav.addAllObjects(pagingMap);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("objtList",objtList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
 	
 	/*
 	 * 물건등록 
@@ -228,5 +262,9 @@ public class ObjectController {
 	
 	}
 	
+	@RequestMapping(value= "/totalSearch.do")
+	public String totalSearch(@RequestParam Map<String,Object> map)  {  
+		return "/search/totalSearch";	
+	}
 	
 }

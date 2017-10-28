@@ -42,6 +42,9 @@ $(document).ready(function(){
  * 물건 선택 콤보
  */
 function f_objtCombo_select() {
+	if ($("#objtTp").val() == "OT002") {
+		return;
+	}
 	var param = {
 			objtTp : $("#objtTp").val()
 	};
@@ -100,7 +103,7 @@ function f_objectDtl_select() {
 			  objtInfo = data.objtInfo;
 			  f_setting_text(objtInfo);
 			  if ( $("#publicYn").val() == "Y") {
-				  if ( result.modifyYn == "Y") {
+				  if ( objtInfo.modifyYn == "Y") {
 					  $("#viewObjBot").hide();
 				  }
 			  }  
@@ -109,12 +112,16 @@ function f_objectDtl_select() {
 }
 
 function f_setting_text(result) {
+	console.log ("!!!");
+	console.log (result);
+	
 	$("#objtNm").val(result.objtNm);
 	$("#custNm").val(result.custNm);
 	$("#custTel1").val(result.custTel1);
 	$("#custTel2").val(result.custTel2);
 	$("#custTel3").val(result.custTel3);
 	$("#buildCd").val(result.buildCd);
+	$("#buildNm").val(result.buildNm);
 	$("#area").val(result.area);
 	$("#businessNm").val(result.businessNm);
 	$("#bargainAmt").val(result.bargainAmt );

@@ -29,7 +29,7 @@
 		</tr>
 		
 		<tr>
-			<td class="title">건물명</td>
+			<td class="title">카테고리명</td>
 			<td colspan="2"><input type="text" id="buildNm" name="buildNm"> </td>
 		</tr>
 		<tr>

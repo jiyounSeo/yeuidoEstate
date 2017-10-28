@@ -1,11 +1,14 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
+<%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
+<% request.setCharacterEncoding("utf-8");%>
+<script type="text/javascript" src="./resources/js/search/totalSearch.js"></script>	
 
 <style>
 .search {
 	width: 1460px;
 	border-collapse:collapse;
-	borde: 1px solid #444444;	
+	borde: 1px solid #444444;
 }
 
 .search td.title {
@@ -42,33 +45,99 @@
 }
 </style>
 
-
+<form id="totalSearch" name="totalSearch" action="post">
 <div style="width:1500px;margin:auto;padding:0;">
-
 	<img src="./resources/images/title_total_search.jpg">
-	
 	<table class="search">
 		<tr>
-			<td class="title">담당자</td>
-			<td><input type="text"></td>
+			<td class="title">물건명</td>
+			<td><input type="text" id="objtNm" name="objtNm" maxLength="50"></td>
 			<td width="50px;">&nbsp;</td>
 			<td class="title">연락처(고객)</td>
-			<td><input type="text"></td>
+			<td>
+				<input style="width:200px;" type="text" id="tel1" name="tel1" maxlength="3">
+				- <input style="width:200px;" type="text" id="tel2" name="tel2" maxlength="4">
+				- <input style="width:200px;" type="text" id="tel3" name="tel3" maxlength="4">
+			</td>
 		</tr>
 		<tr>
-			<td class="title">주소(물건)</td>
-			<td><input type="text"></td>
+			<td class="title">담당자</td>
+			<td><input type="text" id="mbrNm" name="mbrNm" maxlength="50"></td>
 			<td></td>
-			<td class="title">물건명</td>
-			<td><input type="text"></td>
+			<td class="title">주소(물건)</td>
+			<td><input type="text" id="addr" name="addr" maxLength="50"></td>
 		</tr>
 		<tr><td colspan="5" height="10px"></td></tr>
-		<tr><td colspan="5" align="right"><img src="./resources/images/btn_search2.jpg"></td></tr>
+		<tr><td colspan="5" align="right">
+			<a href="#add" onclick="f_objectList_select();return false;"><img src="./resources/images/btn_search2.jpg"></a>
+			</td></tr>
 		<tr><td colspan="5" height="10px"></td></tr>
 	</table>
-	
-	<div class="search_result_box">
-	</div>
-
 </div>
+<input type="hidden" name="objtNo" id="objtNo" value=""/>
+<input type="hidden" name="objtTp" id="objtTp" value=""/>
+<input type="hidden" name="saleTp" id="saleTp" value=""/>
+<input type="hidden" name="viewUrl" id="viewUrl" value=""/>
+
+
+<input type="hidden" name="pageNm" id="pageNm" value="total"/>
+<div style="width:1500px;margin:auto;padding:0;">
+	<table class="cl_list">
+		<tbody>
+		<tr class="title">
+			<td style="width:10%">등록일자</td>
+			<td style="width:10%">물건명</td>
+			<td style="width:10%">물건종류</td>
+			<td style="width:10%">물건유형</td>
+			<td style="width:10%">고객명</td>
+			<td style="width:10%">고객전화번호</td>
+			<td style="width:30%">주소</td>
+			<td style="width:10%">담당자</td>
+		</tr>
+		</tbody>
+		<tbody id="objtTbody">
+		</tbody>
+		
+	</table>
+<table width="1460px" height="70px" cellpadding="0" cellspacing="0" border="0">
+<tbody id="objtPage">
+		<tr><!-- paging -->
+			<td colspan="8" align="center">
+				<div id="pagingDiv" class="pagination"></div>
+			</td>
+		</tr>
+		</tbody>
+</table>			
+</div>
+</form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<script id="objtListEmptyTemplte" type="text/x-jquery-tmpl">	
+	<tr>
+		<td colspan="8">조회결과가 존재하지 않습니다.</td>
+	</tr>
+</script>
+<script id="objtListTemplte" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.objtTpNm}}</td>
+		<td>{{html $value.saleTpNm}}</td>
+		<td>{{html $value.custNm}}</td>
+		<td>{{html $value.custTel}}</td>
+		<td>{{html $value.addr}}</td>
+		<td>{{html $value.frstRegNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<!-- 
+<td style="width:10%">등록일자</td>
+			<td style="width:10%">물건명</td>
+			<td style="width:10%">물건종류</td>
+			<td style="width:10%">물건유형</td>
+			<td style="width:10%">고객명</td>
+			<td style="width:10%">고객전화번호</td>
+			<td style="width:30%">주소</td>
+			<td style="width:10%">담당자</td>
+ -->

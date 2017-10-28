@@ -10,6 +10,43 @@ $(document).ready(function(){
 	f_objt_select(objtTp,saleTp);
 });
 
+/*
+ * 물건 선택 콤보
+ */
+function f_category_combo(objtTpVal) {
+	$("#trCategory").empty();
+	  
+	if ( objtTpVal == "OT003" || objtTpVal == "OT002") {
+		return;
+	}
+	var param = {
+			objtTp : objtTpVal
+	};
+	
+	$.ajax({
+		  url : "/estate/selectBuildingCombo.do",
+		  type: "post",
+		  data : param,
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+			  var result = data.buildCombo;
+			  $("#trCategory").append("<td>");
+			  $("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'\')\">전체</a> | ");
+			  $.each (result, function(index) {
+				  $("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'"+result[index].buildCd+"\')\">"+result[index].buildNm+"</a> | ");
+			  });
+			  $("#trCategory").append("</td>");
+		  }
+	});	
+}
+
+var category = "";
+function f_category_select (cate) {
+	category = cate;
+	f_objt_select ('','');
+}
+
 function gfn_isNull(str) {
     if (str == null) return true;
     if (str == "NaN") return true;
@@ -93,6 +130,7 @@ function f_objt_select (objtTp, saleTp) {
 		$("label[for='activeTp1']").css("display","none");
 		$("label[for='activeTp2']").css("display","none");
 	}
+	
 	f_objectList_select(objtTpChk, saleTpChk);
 }
 
@@ -148,6 +186,7 @@ function gfn_isNull(str) {
 }
 
 function f_objectList_select(objtTp, saleTp){
+	
 	var activeTpChk = "";
 	var activTp1 = $("input[name='activeTp1']:checked").val();
 	var activTp2 = $("input[name='activeTp2']:checked").val();
@@ -164,13 +203,16 @@ function f_objectList_select(objtTp, saleTp){
 	 if (!gfn_isNull(saleTpChk)) {
 		 saleTp = saleTpChk;
 	 }
-	var param = {
+	 f_category_combo(objtTp);
+	 	 
+	 var param = {
 		objtTp : objtTp
 	   , saleTp : saleTp
 	   , pageNm : $("#pageNm").val()
 	   , activeTp :  activeTpChk //$("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
 	   , myObjt : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
 	   , currentPage : Number(currPage)
+	   , category : category
 	   , pagePerRow : 10
 	   , pageSize : 10
 	};

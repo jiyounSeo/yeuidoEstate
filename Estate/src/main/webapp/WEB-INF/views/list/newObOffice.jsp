@@ -31,7 +31,7 @@
 		<tr>
 			<td class="title">건물명</td>
 			<td colspan="2">
-				<input type="text"  id="buildCd" name="buildCd" style="width:90%">
+				<input type="text"  id="buildNm" name="buildNm" style="width:90%">
 			</td>
 			<td class="title">유형</td>
 			<td>

@@ -76,6 +76,44 @@ public class MemberController {
 		 return mv;
 	}
 	
+	// memberModify
+	@RequestMapping(value= "/modifyMemberView.do")
+	public ModelAndView modifyMember(@RequestParam Map<String,Object> map, HttpSession session)  {  
+		 
+		 ModelAndView mv = new ModelAndView("/mbr/modifyMember");
+		 map.put("user",  session.getAttribute("user"));
+		 try {
+			mv.addAllObjects( memberService.selectMemberInfo(map));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return mv;
+	}
+	
+	/*
+	 * 회원정보 수정 
+	 */
+	@RequestMapping(value= "/updateMemberInfo.do", method=RequestMethod.POST)
+	public ModelAndView updateMemberInfo(@RequestParam Map<String,Object> map, HttpSession session)  {  
+		ModelAndView mav= new ModelAndView();
+		try {
+			map.put("user",  session.getAttribute("user"));
+			int result = memberService.updateMemberInfo(map);
+			mav.addObject ("messageCd", 1);
+			session.setAttribute("user", null);
+			mav.addObject("message", "회원정보 변경에 성공했습니다. 로그인을 다시 해주세요.");
+		} catch (Exception e) {
+			mav.addObject ("messageCd", 2);
+			mav.addObject("message", "회원정보 변경에 실패했습니다.");
+			e.printStackTrace();
+		}
+		mav.setViewName("jsonView");	
+	    return mav;
+	}
+	
+	
+	
 	//member insert 
 	@RequestMapping(value= "/joinMember.go", method=RequestMethod.POST)
 	public ModelAndView joinMember(@RequestParam Map<String,Object> map)  {  

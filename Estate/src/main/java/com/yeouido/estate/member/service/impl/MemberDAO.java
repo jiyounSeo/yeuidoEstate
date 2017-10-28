@@ -37,5 +37,12 @@ public class MemberDAO extends AbstractDAO
    public int deleteMember(Map<String, Object> map) throws Exception{
        return delete("memberDAO.deleteMember",map);
    }
-
+   
+   public int updateMemberInfo(Map<String, Object> map) throws Exception{
+       return update("memberDAO.updateMemberInfo",map);
+   }
+   
+   public Map selectMemberInfo(Map<String, Object> map) throws Exception{
+       return selectMap("memberDAO.selectMemberInfo",map);
+   }
 }
