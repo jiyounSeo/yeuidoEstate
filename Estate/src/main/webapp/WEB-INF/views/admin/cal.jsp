@@ -15,11 +15,6 @@
 		<td>
 			<div class="work" style="height:177px; overflow-x:hidden; overflow-y:scroll;border: 1px solid #b2b2b2;" id="workList">
 				<table cellpadding="0" cellspacing="0">
-					<tr><td>test1</td></tr>
-					<tr><td>test2</td></tr>
-					<tr><td>test3</td></tr>
-					<tr><td>test4</td></tr>
-					<tr><td>test5</td></tr>
 				</table>
 			</div>        
 		</td>

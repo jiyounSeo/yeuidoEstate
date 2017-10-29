@@ -107,6 +107,7 @@ function selectCurrentEvent(){
 		var eventArray= new Array();
 		
 		console.log (workList);
+		console.log (workList.length);
 		  
 		for(var i =0; i<workList.length; i++)
 		{
@@ -116,6 +117,25 @@ function selectCurrentEvent(){
 			eventArray.push(item);
 		}
 		calendars.setEvents(eventArray);
+		
+		for(var i =0; i<workList.length; i++)
+		{
+			var day = workList[i].frstRegDt;
+			var dayArray = day.split('-');
+			var itemDivId = '#eventCnt'+dayArray[2];
+			
+			$(itemDivId).empty();
+			var htmlText = "";
+			
+			if(workList[i].objCnt > 0){
+				htmlText = htmlText + "물건(" + workList[i].objCnt + "건)<br>";				
+			}
+			if(workList[i].custCnt > 0){
+				htmlText = htmlText + "고객(" + workList[i].custCnt + "건)";				
+			}
+			$(itemDivId).append(htmlText);
+			console.log(itemDivId + "/" + htmlText);
+		}
 		
   	  }
   	});

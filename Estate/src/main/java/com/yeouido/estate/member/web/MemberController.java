@@ -52,7 +52,7 @@ public class MemberController {
 	public ModelAndView logout(HttpSession session){  
 		//ModelAndView mv = new ModelAndView("/mbr/login");
 		session.setAttribute("user", null);
-		ModelAndView mv = new ModelAndView("/adminMain");
+		ModelAndView mv = new ModelAndView("/index");
 		return mv;
 	}
 	

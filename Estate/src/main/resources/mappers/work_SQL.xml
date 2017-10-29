@@ -209,25 +209,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 선택된 날짜의 작업리스트를 가져오는 쿼리 -->
     <!-- ** 같은 소속 부동산 사람들 조건 추가되어야함 !!!! -->
      <select id="selectWorkListAtDate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT workNo
+ 	SELECT workNo
 	     , mbrId
 	     , custId
 	     , objtNo
 	     , workTitle
 	     , workContent
-	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
-	     from workdoc w
-	 WHERE frstRegDt = #{selectedDate} 
-     order by frstRegDt desc
+	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
+	  FROM workdoc w
+	 WHERE frstRegDt = #{selectedDate}
+	   AND frstRegUser in (    		<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										  AND estateCd = #{user.estateCd}
+									</if>
+									<if test="user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrId = #{user.mbrId}
+									</if>
+				 				)
+     order by frstRegDt desc    
 	</select>
 	
     <!-- 선택된 달에 작성된 작업리스트를 가져오는 쿼리 -->
     <!--  ** 총 고객관련 작업이 몇건인지, 물건관련 작업이 몇건인지 count 해야함 -->
     <!-- ** 같은 소속 부동산 사람들 조건 추가되어야함 !!!! -->
     <select id="selectWorkListAtMonth" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT workNo
+    SELECT workNo
 	     , mbrId
 	     , custId
 	     , objtNo
@@ -236,7 +253,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
-	     from workdoc w
-	 WHERE frstRegDt like #{selectedMonth}
+	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
+	     , (SELECT COUNT(*) FROM workdoc 
+								WHERE frstRegDt = w.frstRegDt
+	  							AND frstRegUser in (    		
+	  								<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										  AND estateCd = #{user.estateCd}
+									</if>
+									<if test="user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrId = #{user.mbrId}
+									</if>
+				 				)
+				 				AND objtNo != ''
+                                ) objCnt
+	     , (SELECT COUNT(*) FROM workdoc 
+								WHERE frstRegDt = w.frstRegDt
+	  							AND frstRegUser in (    		
+	  								<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										  AND estateCd = #{user.estateCd}
+									</if>
+									<if test="user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrId = #{user.mbrId}
+									</if>
+				 				)
+				 				AND custId != ''
+                                ) custCnt 
+	  FROM workdoc w
+	  WHERE frstRegDt like #{selectedMonth}
+	  AND frstRegUser in (    		<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										  AND estateCd = #{user.estateCd}
+									</if>
+									<if test="user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrId = #{user.mbrId}
+									</if>
+				 				)
+     order by frstRegDt desc    
 	</select>	
 </mapper>

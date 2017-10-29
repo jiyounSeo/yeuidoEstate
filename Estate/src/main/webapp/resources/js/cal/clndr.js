@@ -64,6 +64,7 @@
                 "<% var d = j + i * 7; %>" +
                     "<td class='<%= days[d].classes %>'>" +
                         "<div class='day-contents'><%= days[d].day %></div>" +
+                        "<div class='day-events' id='eventCnt<%=d+1%>'></div>" +
                     "</td>" +
                 "<% } %>" +
                 "</tr>" +
