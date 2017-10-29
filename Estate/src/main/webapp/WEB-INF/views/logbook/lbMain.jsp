@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="./resources/js/cal/clndr.js"></script>
 <script type="text/javascript" src="./resources/js/logbook/cal.js"></script>
+<%@ include file="/WEB-INF/views/logbook/delPopup.jsp" %> 
 <%@ include file="/WEB-INF/views/logbook/listStyle.jsp" %> 
 
 <div style="width:1103px;margin:auto;padding:0;">
@@ -19,6 +20,6 @@
 		<td align="right"><a href="./newLogbookView.do"><img src="./resources/images/btn_add_lb.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 </table>
-
+<input type="hidden" id="mbrType" value="${sessionScope.user.mbrTp}">
 </div>
 <%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

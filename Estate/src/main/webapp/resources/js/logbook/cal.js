@@ -19,7 +19,30 @@ $(document).ready( function() {
 	        click: function (target) {
 	            console.log('Cal-1 clicked: ', target);
 	            if(target.events != '') {
-	            	location.href="./viewLogbook.do?taskDocId="+target.events[0].title;
+	            	
+	            	var mbrTp = $("#mbrType").val();
+	            	console.log(mbrTp);
+	            	if (mbrTp  == "MT003" || mbrTp == "MT004") {
+		            	
+		            	$("#divPopup").lightbox_me({centered: true, preventScroll: true, onLoad: function() {
+		            		$("#lb_list").empty();
+		            		
+		            		var htmlText = "<table class='lbList'>";
+		            		htmlText += "<tr><td width='50px' class='title'></td><td width='500px' class='title'>작성자</td></tr>";
+		            		for(var i = 0; i<target.events.length;i++){
+		            			htmlText = htmlText + "<tr>";
+		            			htmlText = htmlText + "<td>" + (i+1) + "</td>";
+		            			htmlText = htmlText + "<td><a href='./viewLogbook.do?taskDocId=" + target.events[i].title + "'>" 
+		            			htmlText = htmlText + target.events[i].mbrNm + "님의 업무일지</a></td>";
+		            			htmlText = htmlText + "</tr>";
+		            		}
+		            		htmlText += "</table>";
+		            		$("#lb_list").append(htmlText);
+		            	}});
+	            	} else {
+	 	            	location.href="./viewLogbook.do?taskDocId="+target.events[0].title;	            		
+	            	}
+
 	            }
 	        },
 	        today: function () {
@@ -109,11 +132,27 @@ function selectCurrentEvent(){
 		{
 			var item = new Object();
 			item.title = LBList[i].taskDocId;
-			item.date = LBList[i].frstRegDt;  			  
+			item.date = LBList[i].frstRegDt;
+			item.mbrNm = LBList[i].mbrNm;
 			eventArray.push(item);
 		}
 		calendars.setEvents(eventArray);
 		
+		for(var i =0; i<LBList.length; i++)
+		{
+			var day = LBList[i].frstRegDt;
+			var dayArray = day.split('-');
+			var itemDivId = '#eventCnt'+dayArray[2];
+			
+			$(itemDivId).empty();
+			var htmlText = "";
+			
+			if(LBList[i].bookCnt > 0){
+				htmlText = htmlText + "업무일지(" + LBList[i].bookCnt + "건)<br>";				
+			}
+			$(itemDivId).append(htmlText);
+			console.log(itemDivId + "/" + htmlText);
+		}
   	  }
   	});
 }

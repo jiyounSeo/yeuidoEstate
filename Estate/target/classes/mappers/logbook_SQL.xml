@@ -74,8 +74,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 				, frstRegUser
 	     		, (SELECT mbrNm FROM member m WHERE m.mbrId = t.mbrId ) mbrNm 
+	     		,(SELECT COUNT(*) FROM taskdoc 
+	     			WHERE frstRegDt = t.frstRegDt
+	     		<if test="user.mbrTp eq 'MT004'" >
+					AND mbrId in (SELECT mbrId FROM member m1)
+				</if>
+				<if test="user.mbrTp eq 'MT003'" >
+					AND mbrId in (SELECT mbrId
+									FROM member m1
+									WHERE mbrTp in ('MT001','MT002', 'MT003')
+									AND estateCd = #{user.estateCd})			
+				</if>
+					) bookCnt
 			  FROM taskdoc t
-			  WHERE mbrId = #{user.mbrId} AND frstRegDt like #{currentDt}
+			  WHERE frstRegDt like #{currentDt}
+			  <if test="user.mbrTp eq 'MT004'" >
+			  	AND mbrId in (SELECT mbrId FROM member m1)
+			  </if>
+			  <if test="user.mbrTp eq 'MT003'" >
+			  	AND mbrId in (SELECT mbrId
+										FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										AND estateCd = #{user.estateCd})			  	
+			  </if>
+			  <if test="user.mbrTp eq 'MT002'" >
+				AND mbrId = #{user.mbrId}  
+			  </if>
 	</select>
 	
 	<delete id="deleteLogbook" parameterType="java.util.HashMap" >
