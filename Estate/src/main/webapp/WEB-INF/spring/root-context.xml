@@ -12,12 +12,14 @@
     </bean>
  -->    
     
- <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
       <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-      <property name="url" value="jdbc:mysql://localhost:3306/estate123" />
-      <property name="username" value="estate123" />
-      <property name="password" value="dudmleh123!" />
+      <property name="url" value="jdbc:mysql://211.233.62.126:3306/greenwear" />
+      <property name="username" value="greenwear" />
+      <property name="password" value="dl7837722!" />
+      <property name="validationQuery" value="select 1" />
     </bean>
+
 
    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
         <constructor-arg ref="dataSourceSpied" />

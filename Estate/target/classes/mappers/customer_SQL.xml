@@ -157,52 +157,169 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm
 	  FROM customer c
 	 WHERE 1=1
-		 <if test="myCust != null and myCust != '' ">
-	   	AND c.mbrId = #{user.mbrId}
-	   	</if>
-	   <choose>
-	   	<when test='publicYn eq "Y"'>
-		   	   AND publicYn = 'Y'
-		   	<if test="activeTp eq 'AT001'"> 
-			   AND activeTp = 'AT001'
-			</if>
-			<if test="activeTp eq 'AT002'"> 
-			   AND activeTp = 'AT002'
-			</if>
-	   	</when>
-	   	
-	   	<otherwise>
+	   <if test="myCust != null and myCust != '' ">
+	   AND c.mbrId = #{user.mbrId}
+	   </if>
+	   <if test="pageNm eq 'total'">
 		   <if test="activeTp eq 'AT001'">
-		   AND activeTp = 'AT001'
-		   AND mbrId in (    <if test="user.mbrTp eq 'MT004'" >
-										   SELECT mbrId
-											 FROM member m1
-										</if>
-										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
-										   SELECT mbrId
-											 FROM member m1
-											WHERE mbrTp in ('MT001','MT002', 'MT003')
-											  AND estateCd = #{user.estateCd}
-										</if>
-					 				)
+			AND c.activeTp = 'AT001'
 		   </if>
-		   <if test="activeTp eq 'AT002'"> 
-		   AND activeTp = 'AT002'
-		   AND mbrId in ( 	<if test="user.mbrTp eq 'MT004'" >
-										   SELECT mbrId
-											 FROM member m1
-										</if>
-										<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
-										   SELECT mbrId
-											 FROM member m1
-											WHERE mbrTp in ('MT001','MT002', 'MT003')
-											  AND estateCd = #{user.estateCd}
-										</if>
-					 				)
+		   <if test="activeTp eq 'AT002'">
+		   	AND c.activeTp = 'AT002'
 		   </if>
-	   	</otherwise>
-	   </choose> 
+		   AND custId in ( 
+					-- 1. 활성+공동인 물건은 누가 등록했든 다 보여야함
+					SELECT custId
+					  FROM customer c1
+					WHERE publicYn = 'Y'
+					  AND activeTp = 'AT001'
+	                  UNION ALL
+	                -- 2. 활성만 체크된 물건은 같은부동산사람이랑 내가 등록한 물건만
+	                SELECT custId
+	                  FROM customer c2
+					 WHERE activeTp = 'AT001'
+					   AND mbrId in (    <if test="user.mbrTp eq 'MT004'" >
+											   SELECT mbrId
+												 FROM member m1
+											</if>
+											<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+											   SELECT mbrId
+												 FROM member m1
+												WHERE mbrTp in ('MT001','MT002', 'MT003')
+												  AND estateCd = #{user.estateCd}
+											</if>
+						 				)
+	                  UNION ALL
+	                -- 3. 보류 체크된 물건은 내가 등록한 물건만 
+		            SELECT custId
+	                  FROM customer c3
+					 WHERE activeTp = 'AT002'
+	                   AND c3.mbrId = #{user.mbrId}
+	                  ) 
+	   </if>
+	   
+	   <if test="pageNm eq 'custPublic'">
+	   AND publicYn = 'Y'
+	   	<if test="activeTp eq 'AT001'">
+		AND c.activeTp = 'AT001'
+	   	</if>
+	   	<if test="activeTp eq 'AT002'">
+	   	AND c.activeTp = 'AT002'
+	   	</if>
+	   </if>
+	   <if test="pageNm eq 'custActiveY'">
+	   AND c.activeTp = 'AT001'
+	   AND c.mbrId in (    <if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
+	   <if test="pageNm eq 'custActiveN'">
+	   AND c.activeTp = 'AT002'
+	   AND c.mbrId in ( 	<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
 	 LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+	
+	<select id="selectCustomerTotalCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT COUNT(*) totalCnt
+	  FROM customer c
+	 WHERE 1=1
+	   <if test="myCust != null and myCust != '' ">
+	   AND c.mbrId = #{user.mbrId}
+	   </if>
+	   <if test="pageNm eq 'total'">
+		   <if test="activeTp eq 'AT001'">
+			AND c.activeTp = 'AT001'
+		   </if>
+		   <if test="activeTp eq 'AT002'">
+		   	AND c.activeTp = 'AT002'
+		   </if>
+		   AND custId in ( 
+					-- 1. 활성+공동인 물건은 누가 등록했든 다 보여야함
+					SELECT custId
+					  FROM customer c1
+					WHERE publicYn = 'Y'
+					  AND activeTp = 'AT001'
+	                  UNION ALL
+	                -- 2. 활성만 체크된 물건은 같은부동산사람이랑 내가 등록한 물건만
+	                SELECT custId
+	                  FROM customer c2
+					 WHERE activeTp = 'AT001'
+					   AND mbrId in (    <if test="user.mbrTp eq 'MT004'" >
+											   SELECT mbrId
+												 FROM member m1
+											</if>
+											<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+											   SELECT mbrId
+												 FROM member m1
+												WHERE mbrTp in ('MT001','MT002', 'MT003')
+												  AND estateCd = #{user.estateCd}
+											</if>
+						 				)
+	                  UNION ALL
+	                -- 3. 보류 체크된 물건은 내가 등록한 물건만 
+		            SELECT custId
+	                  FROM customer c3
+					 WHERE activeTp = 'AT002'
+	                   AND c3.mbrId = #{user.mbrId}
+	                  ) 
+	   </if>
+	   
+	   <if test="pageNm eq 'custPublic'">
+	   AND publicYn = 'Y'
+	   	<if test="activeTp eq 'AT001'">
+		AND c.activeTp = 'AT001'
+	   	</if>
+	   	<if test="activeTp eq 'AT002'">
+	   	AND c.activeTp = 'AT002'
+	   	</if>
+	   </if>
+	   <if test="pageNm eq 'custActiveY'">
+	   AND c.activeTp = 'AT001'
+	   AND c.mbrId in (    <if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
+	   <if test="pageNm eq 'custActiveN'">
+	   AND c.activeTp = 'AT002'
+	   AND c.mbrId in ( 	<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+				 				)
+	   </if>
 	</select>
 	
 	<select id="selectCustomerInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">

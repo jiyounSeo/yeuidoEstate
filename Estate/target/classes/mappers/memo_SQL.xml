@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	       , memoSbj
 	       , memoCont
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
-	     , (SELECT COUNT(*) FROM memodoc) totalCnt
+	     , (SELECT COUNT(*) FROM memodoc where mbrId = #{user.mbrId} ) totalCnt
 	  FROM memodoc
 	 WHERE mbrId = #{user.mbrId}
      order by memoDocId+0 desc

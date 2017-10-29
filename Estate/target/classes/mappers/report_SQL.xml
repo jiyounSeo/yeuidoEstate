@@ -130,8 +130,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, manager
 		, boss
 		, regUser
-		, (SELECT COUNT(*) FROM contract) totalCnt
-	    , (SELECT mbrNm FROM member m WHERE m.mbrId = c.manager ) managerNm 
+		, (SELECT COUNT(*) FROM contract where regUser = #{user.loginId}) totalCnt
+	    , (SELECT mbrNm FROM member m WHERE m.mbrId = c.manager  ) managerNm 
 	  FROM contract c
 	  where regUser = #{user.loginId}
 	   LIMIT #{rowNum}, #{pagePerRow}

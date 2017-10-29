@@ -104,6 +104,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM member 
      WHERE mbrId = #{mbrId}
     </delete>
+    
+    <select id="selectMemberInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT mbrId
+        , mbrNm
+        , loginId
+        , mbrTp
+        , tel1
+        , tel2
+        , tel3
+        , estateCd
+     FROM member
+    WHERE mbrId = #{user.mbrId}
+	</select>
+	
+	<update  id="updateMemberInfo" parameterType="java.util.HashMap" >
+    UPDATE member
+       SET mbrNm = #{mbrNm}
+         , tel1 = #{tel1}
+         , tel2 = #{tel2}
+         , tel3 = #{tel3}
+         , pw = #{pw}
+         , estateCd = #{estateCd}
+     WHERE mbrId = #{user.mbrId}
+    </update>
     	
 	
 	
