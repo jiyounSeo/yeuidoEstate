@@ -122,7 +122,7 @@ function f_building_save() {
 	}
 	
 	$.ajax({
-		  url : "/estate/" + urlStr,
+		  url : "/" + urlStr,
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -140,7 +140,7 @@ function f_building_list() {
 			   , pageSize : 10
 	};
 	$.ajax({
-	url : "/estate/selectBuildingList.do",
+	url : "/selectBuildingList.do",
 	type: "post",
 	data : param,
 	dataType : "json",

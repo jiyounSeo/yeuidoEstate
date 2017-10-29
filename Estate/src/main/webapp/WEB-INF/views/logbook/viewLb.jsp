@@ -60,9 +60,9 @@
 	<div style="width:1400px;margin:auto;text-align:center;">
 		<a href="./logbookListView.do"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a  href="./modifyLogbookInfo.do?taskDocId=${taskDocId}"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>
+		<a href="#" onClick="f_del_logbook()"><img src="./resources/images/btn_del2.jpg"></a>
 	</div>	
 </div>
 <input type="hidden" name="taskDocId" id="taskDocId" value="${taskDocId}" />
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

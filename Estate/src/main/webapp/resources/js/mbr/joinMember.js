@@ -13,7 +13,7 @@ function f_member_save() {
 
 	console.log(JSON.stringify(param));
 	$.ajax({
-		url : '/estate/joinMember.go',
+		url : '/joinMember.go',
 		type : 'post',
 		data : param,
 		dataType : 'json',
@@ -37,7 +37,7 @@ function f_member_save() {
 function f_estate_select() {
 
 	$.ajax({
-		url : '/estate/selectEstate.go',
+		url : '/selectEstate.go',
 		type : 'post',
 		dataType : 'json',
 		contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -57,7 +57,7 @@ function f_loginIdDupChk() {
 
 	var param = $('#joinMember').serialize();
 	$.ajax({
-		url : '/estate/loginIdDupChk.go',
+		url : '/loginIdDupChk.go',
 		type : 'post',
 		data : param,
 		dataType : 'json',
@@ -77,7 +77,7 @@ function f_loginIdDupChk() {
 
 function f_backToLogin() {
 	var frm = $('#formId')[0];
-	frm.action = '/estate/loginView.go';
+	frm.action = '/loginView.go';
 	frm.method = 'get';
 	frm.submit();
 }

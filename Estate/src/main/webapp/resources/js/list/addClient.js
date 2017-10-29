@@ -19,7 +19,7 @@ function f_customerDtl_select() {
 		, pageNm : $("pageNm").val()
 	};
 	$.ajax({
-		  url : "/estate/selectCustomerDtl.do",
+		  url : "/selectCustomerDtl.do",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -105,7 +105,7 @@ function f_customer_save() {
 		urlStr = "insertCustomer.do";
 	}
 	$.ajax({
-	  url : "/estate/" + urlStr,
+	  url : "/" + urlStr,
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -124,7 +124,7 @@ function f_customer_save() {
 function f_customer_delete() {
 	if (confirm ("고객을 삭제하시겠습니까?")) {
 	   var comSubmit = new ComSubmit("viewClient");
-	   comSubmit.setUrl("/estate/deleteCustomer.do");
+	   comSubmit.setUrl("/deleteCustomer.do");
 	   comSubmit.submit();
 	}
 }
@@ -138,13 +138,13 @@ function f_srchObjt_popup(){
 
 function f_list_view_change() {
 	 var comSubmit = new ComSubmit("newClient");
-	 comSubmit.setUrl("/estate/commClListPostView.do");
+	 comSubmit.setUrl("/commClListPostView.do");
 	 comSubmit.submit();
 }
 
 function f_list_view_change2() {
 	 var comSubmit = new ComSubmit("viewClient");
-	 comSubmit.setUrl("/estate/commClListPostView.do");
+	 comSubmit.setUrl("/commClListPostView.do");
 	 comSubmit.submit();
 }
 

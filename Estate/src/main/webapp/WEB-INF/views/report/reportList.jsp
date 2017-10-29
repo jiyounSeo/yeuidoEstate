@@ -31,4 +31,4 @@
 	<div id="pagingDiv" class="pagination" style="margin:0 auto;"></div>
 </div>
 
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

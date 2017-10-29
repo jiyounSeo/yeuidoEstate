@@ -27,7 +27,7 @@
 	</div>
 	<div style="width:1200px; text-align:right; margin:auto;">
 		<br>
-		<a href="/estate/adminMainView.do"><img src="./resources/images/btn_mbr_main.jpg" border="0"></a>
+		<a href="/adminMainView.do"><img src="./resources/images/btn_mbr_main.jpg" border="0"></a>
 	</div> 
 	<div style="width:1200px; aling:center; margin:auto;" id="pagingDiv" class="pagination centerDiv"></div>
 	<div style="width:1200px; text-align:center; margin:auto;">

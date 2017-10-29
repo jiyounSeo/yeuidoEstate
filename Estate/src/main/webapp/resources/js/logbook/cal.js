@@ -95,7 +95,7 @@ function selectCurrentEvent(){
     		currentDt : thisMonth
     	};
     $.ajax({
-  	  url : "/estate/selectLogbookList.do",
+  	  url : "/selectLogbookList.do",
   	  type: "post",
 	  data : param,
   	  dataType : "json",

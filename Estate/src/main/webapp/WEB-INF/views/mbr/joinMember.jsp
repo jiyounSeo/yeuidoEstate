@@ -12,10 +12,10 @@
 			<table width="342px" height="36px" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td width="96px">
-						<a href="/estate/loginView.go"><img src="./resources/images/m_login_off.jpg" border="0"></a>
+						<a href="/loginView.go"><img src="./resources/images/m_login_off.jpg" border="0"></a>
 					</td>
 					<td width="94px">
-						<a href="/estate/regView.go"><img src="./resources/images/m_reg_on.jpg" border="0"></a>
+						<a href="/regView.go"><img src="./resources/images/m_reg_on.jpg" border="0"></a>
 					</td>
 					<td width="152px"></td>
 				</tr>

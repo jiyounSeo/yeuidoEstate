@@ -61,4 +61,4 @@
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 <input type="hidden" name="custId" id="custId" value="${custId}"/>
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

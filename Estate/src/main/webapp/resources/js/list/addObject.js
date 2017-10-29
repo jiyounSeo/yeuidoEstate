@@ -50,7 +50,7 @@ function f_objtCombo_select() {
 	};
 	
 	$.ajax({
-		  url : "/estate/selectBuildingCombo.do",
+		  url : "/selectBuildingCombo.do",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -94,7 +94,7 @@ function f_objectDtl_select() {
 	}
 	var serial = $("#"+objtForm).serialize();
 	$.ajax({
-		  url : "/estate/selectObjectDtl.do",
+		  url : "/selectObjectDtl.do",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -275,7 +275,7 @@ function f_saleobject_save() {
 	}
 	
 	// 4.명도
-	if (  $("input[name=availableTp]:checked").val() == undefined ) {
+	if ( $("#objtTp").val() != "OT006" && $("input[name=availableTp]:checked").val() == undefined ) {
 		alert ("명도는 필수입력 값입니다.");
 		return;
 	} else {
@@ -299,6 +299,15 @@ function f_saleobject_save() {
 	} else {
 		param.activeTp = $("input[name=activeTp]:checked").val();
 	}
+	
+	// pageName (menuBar 에서 등록하는경우 --> 분류에 따라 활성물건카드 / 보류물건카드로 이동)
+	if($("#pageNm").val() == ""){
+		if( $("input[name=activeTp]:").val() == "AT001" ){
+			$("#pageNm").val("objtActiveY");
+		} else if($("input[name=activeTp]:").val() == "AT002") {
+			$("#pageNm").val("objtActiveN");
+		}
+	}
 
 	var urlStr = "";
 	if ($("#objtNo").val() != "" ) {
@@ -308,7 +317,7 @@ function f_saleobject_save() {
 	}
 	
 	$.ajax({
-	  url : "/estate/" + urlStr,
+	  url : "/" + urlStr,
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -347,7 +356,7 @@ function f_objt_delete() {
 	}
 	if (confirm ("물건을 삭제하시겠습니까?")) {
 	   var comSubmit = new ComSubmit(objtForm);
-	   comSubmit.setUrl("/estate/deleteObject.do");
+	   comSubmit.setUrl("/deleteObject.do");
 	   comSubmit.submit();
 	}
 }
@@ -376,7 +385,7 @@ function f_objt_dtl_view() {
 	}
 	$("#publicYn").val("");
 	var comSubmit = new ComSubmit($("#"+objtForm).attr('id'));
-	comSubmit.setUrl("/estate/commObListPostView.do");
+	comSubmit.setUrl("/commObListPostView.do");
 	comSubmit.submit();
 }
 
@@ -404,7 +413,7 @@ function f_list_view_change() {
 		
 	}
 	 var comSubmit = new ComSubmit(objtForm);
-	 comSubmit.setUrl("/estate/commObListPostView.do");
+	 comSubmit.setUrl("/commObListPostView.do");
 	 comSubmit.submit();
 	 
     

@@ -2,8 +2,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/notice/listStyle.jsp" %> 
 <script type="text/javascript" src="./resources/js/notice/crudNotice.js"></script>
-<%@ include file="/WEB-INF/views/notice/delPopup.jsp" %> 
-
 <div class="new_page_title">
 	<img src="./resources/images/title_notice.jpg">
 </div>
@@ -20,10 +18,10 @@
 	<a href="./noticeList.do"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}">
 		<a  href="./modifyNoticeInfo.do?noticeId=${item.noticeId}"><img src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-		<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="#" onClick="f_del_notice()"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</c:if>
 </div>
 <input type="hidden" value="${item.noticeId}" name="noticeId" id="noticeId">
 
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

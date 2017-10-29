@@ -27,7 +27,7 @@ $(document).ready(function()
 function init_boss()
 {
 	$.ajax({
-	  url : "/estate/bossListReport.do",
+	  url : "/bossListReport.do",
 	  type: "post",
 	  dataType : "json",
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
@@ -50,7 +50,7 @@ function init_boss()
 function init_manager()
 {
 	$.ajax({
-	  url : "/estate/managerListReport.do",
+	  url : "/managerListReport.do",
 	  type: "post",
 	  dataType : "json",
 	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
@@ -271,7 +271,7 @@ function f_report_save()
 	else
 		urlStr = "insertReport.do";
 	$.ajax({
-	  url : "/estate/"+urlStr,
+	  url : "/"+urlStr,
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -291,7 +291,7 @@ function f_report_save()
 function f_report_delete() {
 	var param = $("#report").serialize();
 	$.ajax({
-	  url : "/estate/deleteReport.do",
+	  url : "/deleteReport.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",

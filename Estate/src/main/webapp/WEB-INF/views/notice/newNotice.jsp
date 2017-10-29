@@ -50,7 +50,7 @@ $(document).ready(function(){
 			</c:when>
 			<c:otherwise>
 				<a href="#"><img src="./resources/images/btn_save.jpg" onclick="f_notice_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onClick="f_del_notice()"><img src="./resources/images/btn_del2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="./viewNoticeItem.do?noticeId=${noticeId}"><img src="./resources/images/btn_cancel.jpg"></a>			
 			</c:otherwise>
 		</c:choose>		
@@ -58,4 +58,4 @@ $(document).ready(function(){
 </div>
 <input type="hidden" name="noticeId" id="noticeId" value="${noticeId}" />
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

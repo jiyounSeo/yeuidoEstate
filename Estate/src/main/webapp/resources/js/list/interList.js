@@ -7,7 +7,7 @@ function f_interList_select() {
 	param.custId = $("#custId").val();
 	
 	$.ajax({
-		url : "/estate/selectInterObject.do",
+		url : "/selectInterObject.do",
 		type: "post",
 		data : param,
 		dataType : "json",
@@ -36,7 +36,7 @@ function f_delete_inter(index)
 	var param = {interNo : interList[index].interNo};	
 	if(isDel){
 		$.ajax({
-			  url : "/estate/deleteInterObject.do",
+			  url : "/deleteInterObject.do",
 			  type: "post",
 			  data : param,
 			  dataType : "json",

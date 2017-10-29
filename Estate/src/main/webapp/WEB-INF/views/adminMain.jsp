@@ -49,11 +49,10 @@
 	}
 </style>
 
-<div style="width:1485px; margin:auto">
+<div style="width:1485px; margin:auto;">
 <table width="1485px" cellpadding="0" cellspaing="0" border="0">
 	<tr>
-		<td width="1103px" valign="top">
-		
+		<td width="1103px" valign="top">		
 			<%@ include file="/WEB-INF/views/admin/cal.jsp" %> 
 		</td>
 		<td width="17px"></td>
@@ -63,30 +62,24 @@
 	</tr>
 </table>
 
-<%@ include file="/WEB-INF/views/memo/memoList.jsp" %> 	
 <table width="100%" cellpadding="0" cellspaing="0" border="0">
-	<tr><td height="15px" colspan="7"></td></tr>
+	<tr><td height="10px" colspan="7"></td></tr>
 	<tr>
-		<td width="136px">
-			<a href="#"  onClick="f_addMeno()"><img src="./resources/images/btn_new_memo.jpg"><br><div style="height: 16px;"></a></div>
-			<a href="#" id="listMemoBtn"><img src="./resources/images/btn_list_memo.jpg"></a>
-		</td>
-		<td width="10px"></td>
-		<td width="572px" height="276px" background="./resources/images/lst_todo_bg.jpg">
+		<td width="690px" height="275px" background="./resources/images/lst_todo_bg.jpg">
 			<table class="todoLatest">
 				<tr><td height="60px;">&nbsp;</td></tr>
-				<tr><td class="content" valign="top">테스트</td></tr>
+				<tr><td class="content" valign="top"></td></tr>
 			</table>
 		</td>
-		<td width="10px"></td>
-		<td width="372px" height="276px" background="./resources/images/lst_notice_bg.jpg">
+		<td width="5px"></td>
+		<td width="388px" height="275px" background="./resources/images/lst_notice_bg.jpg">
 			<table class="latest_bbs">
 				<tr><td height="60px;" onClick="location.href='./noticeList.do'" class="latest_title">&nbsp;</td></tr>
 				<tr><td class="content" valign="top" id="notice_latest"></td></tr>
 			</table>
 		</td>
-		<td width="10px"></td>
-		<td width="372px" height="276px" background="./resources/images/lst_bbs_bg.jpg">
+		<td width="5px"></td>
+		<td width="388px" height="275px" background="./resources/images/lst_bbs_bg.jpg">
 			<table class="latest_bbs">
 				<tr><td height="60px;" onClick="location.href='./suggBoardList.do'" class="latest_title">&nbsp;</td></tr>
 				<tr><td class="content" valign="top" id="taskdoc_latest"></td></tr>
@@ -94,4 +87,4 @@
 	</tr>
 </table>
 </div>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 	
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 	

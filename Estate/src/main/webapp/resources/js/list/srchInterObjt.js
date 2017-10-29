@@ -14,7 +14,7 @@ function f_objt_search() {
 	param1.custId = custId;
 	*/
 	$.ajax({
-		  url : "/estate/searchObjtList.do",
+		  url : "/searchObjtList.do",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -51,7 +51,7 @@ function f_interObjt_insert() {
 	$.each (objtArr, function(index) {
 		param.objtNo = objtArr[index];
 		$.ajax({
-			  url : "/estate/insertInterObject.do" ,
+			  url : "/insertInterObject.do" ,
 			  type: "post",
 			  data : param,
 			  dataType : "json",

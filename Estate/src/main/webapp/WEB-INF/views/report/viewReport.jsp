@@ -116,4 +116,4 @@
 	<input type="hidden" name="contSe" id="contSe" value="${result.contSe}">
 	<input type="hidden" id="manager" name="manager" value="${result.manager}">
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

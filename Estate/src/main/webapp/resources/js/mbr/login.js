@@ -25,7 +25,7 @@ function f_loginByEnterKey(event){
 }
 function f_login() {
 	$.ajax({
-	  url : "/estate/loginMember.go",
+	  url : "/loginMember.go",
 	  type: "post",
 	  data : {loginId:$('#loginId').val(), pw:$('#pw').val()},
 	  dataType : "json",
@@ -36,10 +36,10 @@ function f_login() {
 			  	var frm = $('#formId')[0];
 			    if ( data.user.mbrTp == "MT001") {
 			  		alert("승인되지 않은 사용자입니다. 승인 후 이용가능 합니다.");
-			  		frm.action = "/estate/logout.go";
+			  		frm.action = "/logout.go";
 			  	    frm.method = 'post';
 			    } else {
-			  		frm.action = "/estate/adminMainView.do";
+			  		frm.action = "/adminMainView.do";
 				    frm.method = 'get';
 				}
 			    frm.submit();

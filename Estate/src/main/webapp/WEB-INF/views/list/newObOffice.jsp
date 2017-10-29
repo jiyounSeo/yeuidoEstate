@@ -31,9 +31,9 @@
 		<tr>
 			<td class="title">건물명</td>
 			<td colspan="2">
-				<input type="text"  id="buildNm" name="buildNm" style="width:90%">
+				<input type="text"  id="buildNm" name="buildNm" style="width:527px;">
 			</td>
-			<td class="title">유형</td>
+			<td class="title_ess">유형(*)</td>
 			<td>
 			  <input type="radio" id="saleTp1" name="saleTp" value="ST001"/><label for="saleTp1">매매</label>
 			  <input type="radio" id="saleTp5" name="saleTp" value="ST005"/><label for="saleTp5">임대</label>
@@ -45,22 +45,20 @@
 			<td colspan="4">
 				분양  <input type="number" style="width:80px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평 &nbsp;&nbsp;
 				실   <input type="number" style="width:80px" id="realArea" name="realArea" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평 &nbsp;&nbsp;
-				<input type="number" style="width:80px" id="floor" name="floor" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 층  <-- 추가됨! 필드확인
+				<input type="number" style="width:80px" id="floor" name="floor" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 층
 			</td>
 		</tr>
 		
 		<tr>
-			<td rowspan="2" class="title_ess">매매가(*)</td>
-			<td rowspan="2" colspan="2">
-			<input type="text" id="bargainAmt" name="bargainAmt"  onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
+			<td class="title_ess">매매가(*)</td>
+			<td colspan="2">
+				<input type="text" id="bargainAmt" name="bargainAmt"  onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
 			<td class="title_ess">보증금(*)</td>
-			<td><input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원 / 월세 
-				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원
+			<td>
+				<input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> 만원 / 월세 
+				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> 만원 / 관리비
+				<input type="text" id="manageAmt" name="manageAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> 만원
 			</td>
-		</tr>
-		<tr>
-			<td class="title_ess">관리비(*)</td>
-			<td><input type="text" id="manageAmt" name="manageAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
 		</tr>
 		
 		<tr>
@@ -116,4 +114,4 @@
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

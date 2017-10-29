@@ -34,7 +34,7 @@
         			 taskDocId : $("#taskDocId").val()
         	    	};
         	 $.ajax({
-        	  	  url : "/estate/deleteLogbook.do",
+        	  	  url : "/deleteLogbook.do",
         	  	  type: "post",
         		  data : param,
         	  	  dataType : "json",

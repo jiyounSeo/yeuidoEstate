@@ -96,7 +96,7 @@ function selectCurrentEvent(){
     	};
     console.log(param)
     $.ajax({
-  	  url : "/estate/selectWorkListAtMonth.do",
+  	  url : "/selectWorkListAtMonth.do",
   	  type: "post",
 	  data : param,
   	  dataType : "json",
@@ -128,7 +128,7 @@ function selectWorkListAtdate(date){
 			selectedDate : selectedDate
 	};
 	$.ajax({
-		  url : "/estate/selectWorkListAtDate.do",
+		  url : "/selectWorkListAtDate.do",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -192,7 +192,7 @@ function f_work_save() {
 	}
 	
 	$.ajax({
-		  url : "/estate/" + urlStr,
+		  url : "/" + urlStr,
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -212,7 +212,7 @@ function f_delete_work(index)
 	var param = {workNo : workList[index].workNo};	
 	if(isDel){
 		$.ajax({
-			  url : "/estate/deleteWork.do",
+			  url : "/deleteWork.do",
 			  type: "post",
 			  data : param,
 			  dataType : "json",

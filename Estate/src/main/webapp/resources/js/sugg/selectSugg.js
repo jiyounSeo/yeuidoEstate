@@ -19,7 +19,7 @@ function f_suggList_select() {
 				   , pageSize : 10
 	};
 	$.ajax({
-	  url : "/estate/selectSuggBoardList.do",
+	  url : "/selectSuggBoardList.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",

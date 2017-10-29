@@ -23,7 +23,7 @@ function f_member_list() {
 	}
 	$("#mbrTbody").empty();
 	$.ajax({
-	  url : "/estate/memberList.do",
+	  url : "/memberList.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -46,14 +46,14 @@ function f_member_list() {
 
 function f_member_insert() {
    var comSubmit = new ComSubmit("memberList");
-     comSubmit.setUrl("/estate/joinMemberView.do");
+     comSubmit.setUrl("/joinMemberView.do");
      comSubmit.submit();
 }
 
 function f_memeber_accept(index) {
 	if (confirm ("["+mbrList[index].mbrNm+"] 회원을 승인처리 하시겠습니까?")) {
 		$.ajax({
-			  url : "/estate/updateMemberAccept.do",
+			  url : "/updateMemberAccept.do",
 			  type: "post",
 			  data : {mbrId: mbrList[index].mbrId, mbrTp : "MT002"},
 			  dataType : "json",
@@ -70,7 +70,7 @@ function f_memeber_accept(index) {
 function f_memeber_reject(index) {
 	if (confirm ("["+mbrList[index].mbrNm+"] 회원을 삭제처리 하시겠습니까?")) {
 		$.ajax({
-		  url : "/estate/deleteMember.do",
+		  url : "/deleteMember.do",
 		  type: "post",
 		  data : {mbrId: mbrList[index].mbrId},
 		  dataType : "json",
@@ -85,7 +85,7 @@ function f_memeber_reject(index) {
 
  /*	function f_member_list() {
  	   var comSubmit = new ComSubmit("joinMember");
-       comSubmit.setUrl("/estate/memberListView.do");
+       comSubmit.setUrl("/memberListView.do");
        comSubmit.submit();
        c]
  	}*/

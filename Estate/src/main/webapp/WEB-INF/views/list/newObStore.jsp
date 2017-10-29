@@ -32,7 +32,7 @@
 		<tr>
 			<td class="title">건물명 </td>
 			<td colspan="2">
-				<input type="text"  id="buildNm" name="buildNm" style="width:350px">
+				<input type="text"  id="buildNm" name="buildNm" style="width:526px">
 			</td>
 			<td class="title">면적/층</td>
 			<td>
@@ -43,7 +43,7 @@
 
 		</tr>
 		<tr>
-			<td class="title">유형</td>
+			<td class="title_ess">유형(*)</td>
 			<td colspan="2">
 			  <input type="radio" id="saleTp1" name="saleTp" value="ST001"/><label for="saleTp1">매매</label>
 			  <input type="radio" id="saleTp5" name="saleTp" value="ST005"/><label for="saleTp5">임대</label>
@@ -113,4 +113,4 @@
 <input type="hidden" name="custId" id="custId" value="">
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

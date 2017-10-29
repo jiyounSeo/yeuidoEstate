@@ -8,7 +8,7 @@ $(document).ready(function(){
 function fn_submit(){
 	alert("로그인이 필요한 페이지입니다.\n로그인 화면으로 이동합니다.");
     var frm = $('#formId')[0];
-    frm.action = "/estate/loginView.go";
+    frm.action = "/loginView.go";
     frm.method = 'get';
     frm.submit();  
 };

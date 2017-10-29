@@ -44,7 +44,7 @@
             "<div class='clndr-control-button'>" +
                 "<span class='clndr-previous-button' style='vertical-align: middle;'><img src='./resources/images/cal_prev_btn.jpg'></span>" +
             "</div>" +
-            "<div class='month'><div class='clndr-today-button'><%= month %><br> <%= year %></div></div>" +
+            "<div class='month'><div class='clndr-today-button'><%= month %> <%= year %></div></div>" +
             "<div class='clndr-control-button rightalign'>" +
                 "<span class='clndr-next-button'><img src='./resources/images/cal_next_btn.jpg'></span>" +
             "</div>" +

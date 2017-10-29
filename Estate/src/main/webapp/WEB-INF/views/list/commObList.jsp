@@ -39,6 +39,7 @@
 				<td stlye="width;100%;height:45px;" colspan="11">&nbsp;</td>
 			</tr>
 		</table>
+
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr id="trCategory">
 
@@ -53,7 +54,6 @@
 				</td>	
 			</tr>
 		</table>
-		
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr id="saleTpTr">
 			</tr>
@@ -63,6 +63,7 @@
 			</tr>
 			<tbody id="objtTbody">
 			</tbody>
+			
 		</table>
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 		<tr><td height="20px">&nbsp;</td></tr>
@@ -73,7 +74,6 @@
 							<td width="488px" height="41px">
 								<div style="width:488px;height:41px;margin:0;padding:0;text-align:left">
 									<a href="#"><img src="./resources/images/btn_search2.jpg"></a>
-									<a href="#"><img src="./resources/images/btn_print.jpg"></a>
 								</div>
 							</td>
 							<td width="486px" align="center">
@@ -100,7 +100,7 @@
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 </form>
 </body>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 
 
 
 <script id="objtTrTemplte1" type="text/x-jquery-tmpl">	
@@ -447,7 +447,6 @@
 		<td>입주일</td>
 		<td>등록인</td>
 		<td>분류</td>
-		<td>기타</td>
 </script>
 
 
@@ -455,7 +454,7 @@
 <!-- 아파트 매매 -->
 <script id="objtListTemplte1_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr  onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -474,7 +473,7 @@
 <!-- 아파트 전세 -->
 <script id="objtListTemplte1_ST002" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -493,7 +492,7 @@
 <!-- 아파트 월세 -->
 <script id="objtListTemplte1_ST003" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -513,7 +512,7 @@
 <!-- 아파트 렌트 -->
 <script id="objtListTemplte1_ST004" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -533,7 +532,7 @@
 <!-- 상가 매매 -->
 <script id="objtListTemplte2_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -552,7 +551,7 @@
 <!-- 상가 임대 -->
 <script id="objtListTemplte2_ST005" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr  onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -572,7 +571,7 @@
 <!-- 사무실/빌딩 매매 -->
 <script id="objtListTemplte3_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr  onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -590,7 +589,7 @@
 <!-- 사무실/빌딩 임대 -->
 <script id="objtListTemplte3_ST005" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -600,7 +599,6 @@
 		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.rightAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
-		<td>{{html $value.businessNm}}</td>
 		<td>{{html $value.frstRegNm}}</td>
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
@@ -610,7 +608,7 @@
 <!-- 오피스텔 매매 -->
 <script id="objtListTemplte4_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -627,7 +625,7 @@
 <!-- 오피스텔 전세 -->
 <script id="objtListTemplte4_ST002" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -644,7 +642,7 @@
 <!-- 오피스텔 월세 -->
 <script id="objtListTemplte4_ST003" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -663,7 +661,7 @@
 <!-- 오피스텔 렌트 -->
 <script id="objtListTemplte4_ST004" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -681,7 +679,7 @@
 <!-- 오피스텔 매매 -->
 <script id="objtListTemplte5_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -698,7 +696,7 @@
 <!-- 오피스텔 전세 -->
 <script id="objtListTemplte5_ST002" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr  onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -715,7 +713,7 @@
 <!-- 오피스텔 월세 -->
 <script id="objtListTemplte5_ST003" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -733,7 +731,7 @@
 <!-- 오피스텔 렌트 -->
 <script id="objtListTemplte5_ST004" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -749,7 +747,7 @@
 	
 <script id="objtListTemplte6" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr class="list_data" onclick="f_objtDtl_view('{{html $index}}');return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
@@ -761,13 +759,12 @@
 		<td>{{html $value.availableDt}}</td>
 		<td>{{html $value.frstRegNm}}</td>
 		<td>{{html $value.activeTpNm}}</td>
-		<td>{{html $value.etc}}</td>	
 	</tr>
 {{/each}}	
 </script>
 
 <script id="objtListEmptyTemplte" type="text/x-jquery-tmpl">	
-	<tr>
+	<tr class="list_data">
 		<td colspan = {{html col}}>해당하는 물건이 존재하지 않습니다.</td>
 	</tr>
 </script>

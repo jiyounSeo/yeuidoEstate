@@ -40,4 +40,4 @@
 		<td colspan="6">게시글이 존재하지 않습니다.</td>
 	</tr>
 </script>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

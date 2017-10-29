@@ -16,7 +16,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
         	HttpSession session = request.getSession();
         	
             if(session == null || session.getAttribute("user") == null ){
-            	response.sendRedirect("/estate/loginInterceptor.go");
+            	response.sendRedirect("/loginInterceptor.go");
                 return false;
             }
         } catch (Exception e) {

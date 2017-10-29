@@ -28,7 +28,7 @@ function f_noticeList_select() {
 				   , pageSize : 10
 	};
 	$.ajax({
-		url : "/estate/selectNoticeList.do",
+		url : "/selectNoticeList.do",
 		type: "post",
 		data : param,
 		dataType : "json",
@@ -61,7 +61,7 @@ function f_notice_save() {
 		urlStr = "insertNotice.do";
 	}
 	$.ajax({
-		  url : "/estate/" + urlStr,
+		  url : "/" + urlStr,
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -83,7 +83,7 @@ function f_NoticeDtl_select() {
 			noticeId : $("#noticeId").val()
 	};
 	$.ajax({
-		  url : "/estate/selectNoticeDtl.do",
+		  url : "/selectNoticeDtl.do",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -101,4 +101,24 @@ function f_setting_text(result) {
 	$("#noticeId").val(result.noticeId);
 	$("#ntSbj").val(result.ntSbj);
 	$("#ntConts").val(result.ntConts);
+}
+
+
+
+function f_del_notice()
+{
+	var isDel = confirm("글을 삭제하시겠습니까?");
+	var param = {noticeId : $("#noticeId").val()};	
+	if(isDel){
+		$.ajax({
+		  	  url : "/deleteNotice.do",
+		  	  type: "post",
+			  data : param,
+		  	  dataType : "json",
+		  	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  	  success : function(result){
+		  		 location.href="./noticeList.do";
+		  	  }
+		});
+	}
 }

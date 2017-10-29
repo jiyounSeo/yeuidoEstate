@@ -23,7 +23,7 @@ function f_workList_select() {
 	param.custId = $("#custId").val();
 	
 	$.ajax({
-		url : "/estate/selectWorkList.do",
+		url : "/selectWorkList.do",
 		type: "post",
 		data : param,
 		dataType : "json",
@@ -80,7 +80,7 @@ function f_work_save() {
 	}
 	
 	$.ajax({
-		  url : "/estate/" + urlStr,
+		  url : "/" + urlStr,
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -100,7 +100,7 @@ function f_delete_work(index)
 	var param = {workNo : workList[index].workNo};	
 	if(isDel){
 		$.ajax({
-			  url : "/estate/deleteWork.do",
+			  url : "/deleteWork.do",
 			  type: "post",
 			  data : param,
 			  dataType : "json",

@@ -18,7 +18,7 @@
 	<script>
 	$(document).ready(function(){
 		$.ajax({
-            url : "/estate/jsonTestList.do",
+            url : "/jsonTestList.do",
             type: "post",
             data : { "id" : "123" }, //$("#id").val()
             contentType: "application/x-www-form-urlencoded; charset=UTF-8", 

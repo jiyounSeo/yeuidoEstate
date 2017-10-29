@@ -200,6 +200,16 @@ body {
 	border-left: 1px solid #b2b2b2;
 }
 
+.cl_list tr.list_data ,
+.ob_list tr.list_data  {
+	cursor:pointer;
+}
+
+.cl_list tr:hover.list_data ,
+.ob_list tr:hover.list_data  {
+	background-color: #eeeeee;
+}
+
 
 .cl_list .title td {
 	border-bottom: 2px solid #777d93;
@@ -337,7 +347,7 @@ body {
 }
 
 
-/* ie 용 스크롤 바 *********************************************/
+/* ex  *********************************************/
 html { scrollbar-arrow-color: #efefef;
         scrollbar-Track-Color: #efefef; 
         scrollbar-base-color: #dfdfdf;
@@ -346,7 +356,7 @@ html { scrollbar-arrow-color: #efefef;
         scrollbar-DarkShadow-Color: #dfdfdf;
         scrollbar-Highlight-Color: #dfdfdf;
         scrollbar-Shadow-Color: #dfdfdf}
-/* Chrome, Safari용 스크롤 바 */
+/* Chrome, Safari*/
 ::-webkit-scrollbar {width: 20px; height: 12px;  }
 ::-webkit-scrollbar-button:start:decrement, 
 ::-webkit-scrollbar-button:end:increment {display: block; width: 12px;height: 12px; background: url() rgba(0,0,0,.05);}
@@ -379,6 +389,7 @@ html { scrollbar-arrow-color: #efefef;
 	border-right: 1px solid #b2b2b2;	
 }
 
+.new_page_table input[type=number],
 .new_page_table input[type=text] {
     width: 100%;
     height: 42px;

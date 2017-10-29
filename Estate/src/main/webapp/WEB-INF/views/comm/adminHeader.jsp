@@ -12,50 +12,86 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$("#loginDiv").hide();
-	$("#logoutDiv").hide();
+	var login_contents = "<a id='login' href='./loginView.go'>로그인</a><a id='login' href='./regView.go'> | 회원가입</a>";
+	
+//	$("#loginDiv").hide();
+//	$("#logoutDiv").hide();
+	
+	$("#memberInfo").empty();
+	
 	userSession = '${sessionScope.user}';
+	
 	if( '${sessionScope.user.mbrId}' != null && '${sessionScope.user.mbrId}' != ''){
-		$("#logoutDiv").show();
-		$('#userNm').text('${sessionScope.user.mbrNm}'+'님|');	
-		$('#userNm').css('display','inline');
+		//$("#logoutDiv").show();
+		//$('#userNm').text('${sessionScope.user.mbrNm}'+'님|');	
+		//$('#userNm').css('display','inline');
 		//$('#modifyMbrInfo').css('display','inline');
-		$('#login').text('로그아웃|');
+		//$('#login').text('로그아웃|');
+		//if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
+		//	$('#memberMng').css('display','inline');
+		//} else {
+		//	$('#memberMng').css('display','none');
+		//}
+		
+		login_contents = "${sessionScope.user.mbrNm}"+ "님 | " + " <a id='modifyMbrInfo' href='./modifyMemberView.do'>회원정보수정</a> | <a id='login' href='./logout.go'>로그아웃</a>";
+		
 		if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
-			$('#memberMng').css('display','inline');
-		} else {
-			$('#memberMng').css('display','none');
+			login_contents += "<a id='memberMng' href='./memberListView.do'> | 회원관리</a>";
 		}
 		
 	} else {
-		$("#loginDiv").show();
+		//$("#loginDiv").show();
 	} 
+	
+	$("#memberInfo").append(login_contents);
+	
+	$('#menubarBtn').click(function(e) {
+		e.preventDefault();
+		var current_url = window.location.href;
+		var pageArr = current_url.split('/');
+		var current_page = pageArr[pageArr.length-1];
+		
+		// adminMain 화면에서는 버튼 동작하지 않도록 처리
+		if(current_page != "" && current_page != "adminMainView.do" && current_page != "adminMainView.do?" && current_page != "logout.go"){
+			if ($(this).attr("mode") == "hide") {
+				$("#menubarBtn_img").attr("src", "./resources/images/btn_menu_hide.png");
+				$('#menu_bar').slideDown(350);
+				$(this).attr("mode", "show");
+
+			} else {
+				$("#menubarBtn_img").attr("src", "./resources/images/btn_menu_show.png");
+				$('#menu_bar').slideUp(350);
+				$(this).attr("mode", "hide");
+			}			
+		}
+
+	});
 });
+
 </script>
 
 <body style="margin:0; background-color: #f6f8f7;overflow-x:hidden;">
-<form id="adminHeaderForm">
-<table width="100%" height="121px" cellpadding="0" cellspacing="0" border="0">
+<form id="adminHeaderForm" style="padding:0; margin:0;">
+<table style="border-spacing:0px; padding:0; border:0; border-collapse:collapse; background-color:#eaebeb; width:100%">
+	<tr><td style="height: 12px; background-color:#393939;"></td></tr>
+	<tr><td height="15px"></td></tr>
 	<tr>
-		<td align="center" background="./resources/images/bg.jpg"  style="background-repeat:repeat-x;margin: 0; padding: 0; height: 121px;">
-			<a href="./"><img src="./resources/images/logo.jpg" style="height: 121px; border: 0" /></a>
-		</td>
-	</tr>
-	<tr><td height="14px">&nbsp;</td></tr>
-	<tr>
-		<td height="36px" align="center">
-			<div id="loginDiv" style="width: 1486px; height: 36px; text-align: left;">
-				<a id="login" href="./loginView.go">로그인</a> 
-				<a id="login" href="./regView.go"> | 회원가입</a> 
+		<td align="center">
+			<div id="memberDiv" style="width:1480px;text-align: left; margin:0; padding-left:5px; padding-top:0; padding-right:0; padding-bottom:5px;position:relative;">
+				<table style="border-spacing:0px; padding:0; border:0; border-collapse:collapse; width:100%">
+					<tr>
+						<td width="1034px" id="memberInfo"></td>
+						<td width="58px" align="right"><a href="./adminMainView.do"><img src="./resources/images/btn_home.png"></a></td>
+						<td width="6px"></td>
+						<td width="364px"><a href="#" id="menubarBtn" mode="hide"><img src="./resources/images/btn_menu_show.png" id="menubarBtn_img"></a></td>
+					</tr>
+				</table>
+				<div id="menu_bar" style="width:364px;display:none;position:absolute;left:1118px;top:46px;background-color:#f6f8f7;z-index:999;">
+					<%@ include file="/WEB-INF/views/admin/submenu.jsp" %> 
+				</div>
 			</div>
-			<div id="logoutDiv" style="width: 1486px; height: 36px; text-align: left;">
-				<span id="userNm" style="display:none;"></span> 
-				<a id="modifyMbrInfo" href="./modifyMemberView.do">회원정보수정</a>
-				<a id="login" href="./logout.go"> | 로그아웃</a> 
-				<a id="memberMng" href="./memberListView.do"> | 회원관리</a>
-			</div>
-			
 		</td>
 	</tr>
 </table>
 </form>
+

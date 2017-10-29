@@ -110,7 +110,7 @@
 </table>			
 </div>
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 
 <script id="objtListEmptyTemplte" type="text/x-jquery-tmpl">	
 	<tr>
 		<td colspan="8">조회결과가 존재하지 않습니다.</td>

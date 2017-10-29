@@ -10,16 +10,15 @@
 <div class="new_page_container">
 	<table class="notice">
 		<tr class="title">
-			<td>번호</td>
-			<td>제목</td>
-			<td>글쓴이</td>
-			<td>날짜</td>
-			<td>조회</td>
+			<td width="5%">번호</td>
+			<td width="70%">제목</td>
+			<td width="10%">글쓴이</td>
+			<td width="10%">날짜</td>
+			<td width="5%">조회</td>
 		</tr>
 		<tbody id="noticeTbody">
 
 		</tbody>
-		<tr>
 	</table>
 	<br>
 </div>
@@ -50,4 +49,4 @@
 		<td colspan="5">게시글이 존재하지 않습니다.</td>
 	</tr>
 </script>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

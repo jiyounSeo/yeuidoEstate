@@ -24,7 +24,7 @@ function f_category_combo(objtTpVal) {
 	};
 	
 	$.ajax({
-		  url : "/estate/selectBuildingCombo.do",
+		  url : "/selectBuildingCombo.do",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -219,7 +219,7 @@ function f_objectList_select(objtTp, saleTp){
 	
 	console.log (param);
 	$.ajax({
-	  url : "/estate/selectObjectList.do",
+	  url : "/selectObjectList.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -309,14 +309,14 @@ function f_objtDtl_view (index) {
 	$("#viewUrl").val(url);
 	
 	var frm = $('#commObjtList')[0];
-	frm.action = '/estate/objtDtlView.do';
+	frm.action = '/objtDtlView.do';
 	frm.method = 'POST';
 	frm.submit();
 }
 
 function f_add_objt() {
 	var frm = $('#commObjtList')[0];
-	frm.action = '/estate/addObject.do';
+	frm.action = '/addObject.do';
 	frm.method = 'POST';
 	frm.submit();
 }

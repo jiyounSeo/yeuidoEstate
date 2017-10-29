@@ -65,7 +65,7 @@ function f_customerLogbookDtl_select() {
 			taskDocId : $("#taskDocId").val()
 	};
 	$.ajax({
-		  url : "/estate/selectLogbookDtl.do",
+		  url : "/selectLogbookDtl.do",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -105,7 +105,7 @@ function f_customer_save() {
 		urlStr = "insertLogbook.do";
 	}
 	$.ajax({
-	  url : "/estate/" + urlStr,
+	  url : "/" + urlStr,
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -123,3 +123,21 @@ function f_customer_save() {
 }
 
 
+function f_del_logbook()
+{
+	var isDel = confirm("업무일지를 삭제하시겠습니까?");
+	var param = {taskDocId : $("#taskDocId").val()};	
+	if(isDel){
+		$.ajax({
+			url : "/deleteLogbook.do",
+			  type: "post",
+			  data : param,
+			  dataType : "json",
+			  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+			  success : function(responseData){
+				  alert (responseData.message);
+				  location.href="./logbookListView.do";
+			  }
+		});
+	}
+}

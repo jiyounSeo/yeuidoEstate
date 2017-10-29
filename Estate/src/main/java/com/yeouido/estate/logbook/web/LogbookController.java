@@ -104,20 +104,21 @@ public class LogbookController {
 	 * 삭제
 	 */	
 	@RequestMapping(value="/deleteLogbook.do",method = RequestMethod.POST)
-	public String deleteCustomer(HttpServletRequest request,Model model){
-		
+	public ModelAndView deleteCustomer(HttpServletRequest request,Model model){
+		ModelAndView mav= new ModelAndView();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("taskDocId", request.getParameter("taskDocId"));
-		logger.error("taskDocId:",request.getParameter("taskDocId"));
 		try {
 			int result = logbookService.deleteLogbook(map);
-			model.addAttribute("messageCd", "1");
+			mav.addObject("messageCd", "1");
+			mav.addObject("message", "업무일지가 삭제되었습니다.");
 			
 		} catch (Exception e) {
-			model.addAttribute("messageCd", "2");
+			mav.addObject("messageCd", "2");
 			e.printStackTrace();
 		}
-		return "/logbook/lbMain";	
+		mav.setViewName("jsonView");	
+	    return mav;
 	}
 	
 	/* 

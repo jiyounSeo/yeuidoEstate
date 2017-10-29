@@ -38,7 +38,7 @@
 				<input type="number" style="width:135px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형
 			</td>
 			
-			<td class="title">유형</td>
+			<td class="title_ess">유형(*)</td>
 			<td>
 			  <input type="radio" id="saleTp1" name="saleTp" value="ST001"/><label for="saleTp1">매매</label>
 			  <input type="radio" id="saleTp2" name="saleTp" value="ST002"/><label for="saleTp2">전세</label>
@@ -140,4 +140,4 @@
 <input type="hidden" name="custId" id="custId" value="">
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

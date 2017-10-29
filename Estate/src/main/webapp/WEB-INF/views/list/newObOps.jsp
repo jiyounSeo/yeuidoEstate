@@ -37,7 +37,7 @@
 				<input type= "button" onClick="goPopup();" value= " 팝업 " /> 
 			</td>
 			
-			<td class="title">유형</td>
+			<td class="title_ess">유형(*)</td>
 			<td>
 			  <input type="radio" id="saleTp1" name="saleTp" value="ST001"/><label for="saleTp1">매매</label>
 			  <input type="radio" id="saleTp2" name="saleTp" value="ST002"/><label for="saleTp2">전세</label>
@@ -103,7 +103,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="title">분류</td>
+			<td class="title_ess">분류(*)</td>
 			<td colspan="4">
 			  <input type="radio" id="activeTp1" name="activeTp" value="AT001"/><label for="activeTp1">활성</label>
 			  <input type="radio" id="activeTp2" name="activeTp" value="AT002"/><label for="activeTp2">보류</label>
@@ -126,4 +126,4 @@
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

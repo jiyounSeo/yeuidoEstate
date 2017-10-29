@@ -33,6 +33,17 @@ public class MemoController {
 	@Resource(name="memoService")
 	protected MemoService memoService;
 	
+	@RequestMapping(value="/memoList.do", method=RequestMethod.GET)
+	public String memoList(){
+		
+		return "/memo/memoList";
+	}	
+	
+	@RequestMapping(value="/newMemo.do", method=RequestMethod.GET)
+	public String newMemoPage(){
+		
+		return "/memo/newMemo";
+	}
 	
 	/*
 	 * 등록 
@@ -109,6 +120,24 @@ public class MemoController {
 	    return mav;
 	}
 	
+	@RequestMapping(value="/viewMemoItem.do")
+	public ModelAndView viewMemoItem(HttpServletRequest request, @RequestParam Map<String,Object> map){
+		ModelAndView mav= new ModelAndView();		
+		Map<String, Object> result = new HashMap<String, Object>();
+		map.put("memoDocId", request.getParameter("memoDocId"));
+		try {
+			result = memoService.selectMemoInfo(map);
+			mav.addObject("messageCd", "1");
+			
+		} catch (Exception e) {
+			mav.addObject("messageCd", "2");
+			e.printStackTrace();
+		}
+		mav.addObject("item", result);
+		mav.setViewName("/memo/memoView");
+		return mav;	
+	}	
+	
 	/*
 	 *  삭제
 	 */		
@@ -127,6 +156,12 @@ public class MemoController {
 	    return mav;
 	}
 
+	@RequestMapping(value="/modifyMemoInfo.do",method = RequestMethod.GET)
+	public String modifyMemoInfo(@RequestParam Map<String,Object> map, Model model){
+		model.addAllAttributes(map);
+		return "/memo/newMemo" ;
+	}
+	
 	/*
 	 *  수정 등록
 	 */		

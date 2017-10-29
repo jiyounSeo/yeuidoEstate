@@ -48,7 +48,7 @@
   width: 100%;
   position: relative;
   margin:0 auto;
-  height:75px;
+  height:44px;
   background-image: url("./resources/images/cal_top_bg.jpg");
   background-repeat: repeat-x;
 }
@@ -56,9 +56,9 @@
   float: left;
   width: 33%;
   text-align: center;
-  height:75px;
-  padding-top: 10px;
-  font-size: 16px;
+  height:44px;
+  padding-top: 12px;
+  font-size: 18px;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
@@ -66,7 +66,7 @@
 .cal1 .clndr .clndr-controls .clndr-control-button {
   float: left;
   width: 33%;
-  padding-top: 20px;
+  padding-top: 7px;
 }
 .cal1 .clndr .clndr-controls .clndr-control-button.rightalign {
   text-align: right;
@@ -117,7 +117,7 @@
   width: 100%;
 }
 .cal1 .clndr .clndr-table .header-days {
-  height: 50px;
+  height: 30px;
   font-size: 15px;
   background: #605e5f;
 }
@@ -130,7 +130,7 @@
   border-right: 1px solid #b2b2b2;
 }
 .cal1 .clndr .clndr-table tr {
-  height: 65px;
+  height: 96px;
   background: #fff;
 }
 
@@ -274,6 +274,60 @@
 
 .work td {
 	padding-left: 30px;
+}
+
+.addMemoPopup {
+	background-color:#fafafa;
+	width:900px;
+	border:0px;
+	padding:0px;
+	margin:0px;
+	border-collapse:collapse;
+}
+
+.addMemoPopup td.content {
+	height:10px;
+	text-align:left;
+	padding-left:30px;
+	padding-right:30px;
+	background-image:url("./resources/images/alert_bg2.jpg");
+	background-repeat:repeat-y;
+}
+
+.addMemoPopup td.title {
+	width:140px;
+	height:47px;
+	text-align:center;
+	background:#0063b1;
+	color:#fff;
+	font-weight: bold;
+	border-bottom: 1px solid #fff;
+	padding-left:30px;
+	padding-right:30px;
+}
+
+.addMemoPopup td.btn {
+	height:30px;
+	text-align:right;
+	background-image:url("./resources/images/alert_bg2.jpg");
+	background-repeat:repeat-y;
+}
+
+.addMemoPopup input[type=text] {
+    width: 90%;
+    height: 42px;
+    padding: 12px 20px;
+    margin: 0;
+    box-sizing: border-box;
+    border: 1px solid #d3d3d3;
+    background-color: #fff;
+    vertical-align:20px;
+}
+
+.addMemoPopup textarea {
+	width:99%;
+	border: 1px solid #d3d3d3;
+	margin: 5px 0 5px 0;
 }
 
 </style>

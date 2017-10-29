@@ -31,12 +31,17 @@
 		</tr>
 		<tr>
 			<td class="title">건물명/면적</td>
-			<td colspan="4">
+			<td colspan="2">
 				<select  id="buildCd" name="buildCd" style="width:350px">
 				</select>&nbsp;
 				<input type="number" style="width:135px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형
 			</td>
+			<td class="title_ess">유형(*)</td>
+			<td>
+			  <input type="radio" id="saleTp1" name="saleTp" value="ST006"/><label for="saleTp1">분양권</label>
+			  <input type="radio" id="saleTp2" name="saleTp" value="ST007"/><label for="saleTp2">전매</label>
 			
+			</td>
 		</tr>
 		<tr>
 			<td class="title_ess">분양가(*)</td>
@@ -65,22 +70,13 @@
 			</td>
 		</tr>
 		<tr>
-			
-			<td class="title">유형</td>
+			<td class="title">입주가능일</td>
 			<td colspan="2">
-			  <input type="radio" id="saleTp1" name="saleTp" value="ST006"/><label for="saleTp1">분양권</label>
-			  <input type="radio" id="saleTp2" name="saleTp" value="ST007"/><label for="saleTp2">전매</label>
-			
-			</td>
+			  <input type="text" style="width:140px" id="availableDt" readonly="true"  name="availableDt" readonly="true"  class="datepicker"> 일
+			</td>			
 			<td class="title">만기일</td>
 			<td><input type="text" id="dueDt" name="dueDt" readonly="true"  class="datepicker" style="width:140px"><img src="./resources/images/icon_cal.jpg"></td>
 			
-		</tr>
-		<tr>
-			<td class="title">입주가능일</td>
-			<td colspan="4">
-			  <input type="text" style="width:140px" id="availableDt" readonly="true"  name="availableDt" readonly="true"  class="datepicker"> 일
-			</td>
 		</tr>
 		<tr>
 			<td class="title">매물설명</td>
@@ -89,7 +85,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="title">분류</td>
+			<td class="title_ess">분류(*)</td>
 			<td colspan="4">
 			  <input type="radio" id="activeTp1" name="activeTp" value="AT001"/><label for="activeTp1">활성</label>
 			  <input type="radio" id="activeTp2" name="activeTp" value="AT002"/><label for="activeTp2">보류</label>
@@ -112,4 +108,4 @@
 <input type="hidden" name="custId" id="custId" value="">
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 </form>
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

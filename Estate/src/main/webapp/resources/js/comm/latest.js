@@ -7,8 +7,8 @@ function latest_bbs(bbs_name, target, listSize){
 	var url;
 	
 	switch(bbs_name){
-		case "notice": url = "/estate/selectLatestNoticeList.do"; break;
-		case "taskdoc": url = "/estate/selectLatestTaskList.do"; break;
+		case "notice": url = "/selectLatestNoticeList.do"; break;
+		case "taskdoc": url = "/selectLatestTaskList.do"; break;
 		default: url = ""; break;
 	}
 	var param = {

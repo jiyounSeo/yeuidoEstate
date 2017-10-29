@@ -73,8 +73,6 @@
 						<td width="488px" height="41px">
 							<div style="width:488px;height:41px;margin:0;padding:0;text-align:left">
 								<a href="#"><img src="./resources/images/btn_search2.jpg"></a>
-								<a href="#"><img src="./resources/images/btn_print.jpg"></a>
-								<a href="#"><img src="./resources/images/btn_export_excel.jpg" border="0"></a>
 							</div>
 						</td>
 						<td width="486px" align="center">
@@ -101,7 +99,7 @@
 
 <script id="custListTemplte" type="text/x-jquery-tmpl">	
 {{each custList}}					
-	<tr  onclick="f_mbrDtl_view({{html $index}});return false;">
+	<tr class="list_data" onclick="f_mbrDtl_view({{html $index}});return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.custNm}}</td>
 		<td>{{html $value.custTel1}}-{{html $value.custTel2}}-{{html $value.custTel3}}</td>
@@ -115,8 +113,8 @@
 </script>
 <script id="custListEmptyTemplte" type="text/x-jquery-tmpl">	
 	<tr>
-		<td colspan="6">고객이 존재하지 않습니다.</td>
+		<td class="list_data" colspan="6">고객이 존재하지 않습니다.</td>
 	</tr>
 </script>
 
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 

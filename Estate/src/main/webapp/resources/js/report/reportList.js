@@ -23,7 +23,7 @@ function f_reportList_select()
 	};
 	console.log (param);
 	$.ajax({
-	  url : "/estate/selectReportList.do",
+	  url : "/selectReportList.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",

@@ -8,7 +8,7 @@ function f_add_objectView (objtTp, saleTp) {
 	$("#objtTp").val(objtTp);
 	$("#saleTp").val(saleTp);
 	var frm = $('#addObject')[0];
-	frm.action = '/estate/commObListPostView.do';
+	frm.action = '/commObListPostView.do';
 	frm.method = 'POST';
 	frm.submit();
 }
@@ -16,7 +16,7 @@ function f_add_objectView (objtTp, saleTp) {
 function f_objectCnt_select() {
 	var param = $("#addObject").serialize();
 	$.ajax({
-	  url : "/estate/selectObjectCnt.do",
+	  url : "/selectObjectCnt.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -34,7 +34,7 @@ function f_objectCnt_select() {
 
 function f_objt_dtl_view() {
 	var comSubmit = new ComSubmit($("#addObject").attr('id'));
-	comSubmit.setUrl("/estate/commObListPostView.do");
+	comSubmit.setUrl("/commObListPostView.do");
 	comSubmit.submit();
 }
 

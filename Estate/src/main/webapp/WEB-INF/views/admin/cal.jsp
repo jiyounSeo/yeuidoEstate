@@ -10,7 +10,7 @@
 			<div class="cal1"></div>        
 		</td>
 	</tr>
-	<tr><td height="12px"></td></tr>
+	<tr><td height="2px"></td></tr>
 	<tr>
 		<td>
 			<div class="work" style="height:177px; overflow-x:hidden; overflow-y:scroll;border: 1px solid #b2b2b2;" id="workList">
@@ -25,7 +25,6 @@
 		</td>
 	</tr>
 </table>
-
 <div id="divAddWorkPopup" style="display: none;">
 	<form id="workForm">
 		<table class="addMemoPopup" >
@@ -33,8 +32,7 @@
 			<tr>
 				<td width="20%" class="contentTitle" style="text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작업내역 제목</td>
 				<td class="content">
-					<input type="text" id="workTitle" name="workTitle" maxlength="50" style="width:80%;"></td>
-				
+					<input type="text" id="workTitle" name="workTitle" maxlength="50" style="width:80%;"></td>				
 			</tr>
 			<tr>
 				<td class="contentTitle" style="text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작업내역 입력</td>

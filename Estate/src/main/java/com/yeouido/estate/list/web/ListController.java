@@ -128,6 +128,13 @@ public class ListController {
 	    return mv;
 	}
 	
+	@RequestMapping(value= "/addObject.do", method=RequestMethod.GET)
+	public ModelAndView addObjectPage(@RequestParam Map<String,Object> map)  { 
+		ModelAndView mv = new ModelAndView("/list/addObject");
+	    mv.addAllObjects(map);
+		 return mv;
+	}	
+	
 	/* 물건 조회 화면 */
 	@RequestMapping(value="/commObListView.do",method = RequestMethod.GET)
 	public ModelAndView goCommObList(@RequestParam Map<String,Object> map){

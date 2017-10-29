@@ -1,48 +1,15 @@
 
-var oEditors_memo = [];
+var oEditors = [];
 
 $(document).ready(function(){
 	formId = $("form").attr("id");
-	f_memoList_select();
-    $(function() {
-
-   /*     nhn.husky.EZCreator.createInIFrame({
-    		oAppRef : oEditors_memo,
-    		elPlaceHolder : "memoCont",
-    		sSkinURI : "./resources/editor/SmartEditor2Skin.html", 	//SmartEditor2Skin.html 파일이 존재하는 경로
-    		htParams : {
-    		bUseToolbar : true, 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)	
-    		bUseVerticalResizer : false,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)	
-    		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-    		fOnBeforeUnload : function() {
-    		}
-    	},
-    	fOnAppLoad : function() {	
-    		oEditors_memo.getById["memoCont"].exec("PASTE_HTML", [ "" ]);		//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-    	}
-    	});
-   */     
-    	function launch() {
-            $('#divListMemoPopup').lightbox_me({centered: true});
-        	$("#divViewMemoPopup").lightbox_me({centered: true});
-        	$("#divAddMemoPopup").lightbox_me({centered: true});
-    	}
-    	    	
-    	
-        $('#listMemoBtn').click(function(e) {
-        	if ( gfn_isNull(userSession)) {
-        		alert ("로그인 이후 이용하세요.");
-        		f_closeAll();
-        	} else {
-        		f_closeAll();
-            	f_memoList_select();
-                $("#divListMemoPopup").lightbox_me({centered: true, onLoad: function() {
-    			}});
-                e.preventDefault();
-        	}
-        });
-        
-    });
+	if($("#memoDocId").val() == '' || $("#memoDocId").val() == null){
+		f_memoList_select();
+	} else {
+		f_memoDtl_select();
+	}	
+	
+	
 });
 
 //페이징 버튼 클릭이벤트
@@ -56,15 +23,6 @@ $(document).on('click', '.pagingBtn', function() {
 	
 });
 
-function f_addMeno() {
-	f_closeAll();
-	if ( gfn_isNull(userSession)) {
-		alert ("로그인 이후 이용하세요.");
-	} else {
-		$("#divAddMemoPopup").lightbox_me({centered: true});
-	}
-}
-
 function f_memoList_select() {
 
 	var param = { currentPage : Number(currPage)
@@ -72,7 +30,7 @@ function f_memoList_select() {
 				   , pageSize : 10
 	};
 	$.ajax({
-		url : "/estate/selectMemoList.do",
+		url : "/selectMemoList.do",
 		type: "post",
 		data : param,
 		dataType : "json",
@@ -94,11 +52,11 @@ function f_memoList_select() {
 	
 }
 
-function f_memoView(memoId){
+function f_memoDtl_select(){
 	
-	var param = { memoDocId : memoId };
+	var param = { memoDocId : $("#memoDocId").val() };
 	$.ajax({
-		url : "/estate/selectMemoDtl.do",
+		url : "/selectMemoDtl.do",
 		type: "post",
 		data : param,
 		dataType : "json",
@@ -107,7 +65,6 @@ function f_memoView(memoId){
 			var result = data.MemoInfo;
 			console.log ("search success");
 			console.log (data);
-			f_empty_field();
 			$("#memoDocId").val(result.memoDocId);
 			$("#memoSubject").append("&nbsp;&nbsp;"+result.memoSbj);
 			$("#memoContent").append(result.memoCont);
@@ -120,15 +77,8 @@ function f_memoView(memoId){
 	
 }
 
-function f_memoView_select(memoId) {
-	$("#divListMemoPopup").trigger('close');
-	f_memoView(memoId);
-	$("#divViewMemoPopup").lightbox_me({centered: true});
-	
-}
-
 function f_memo_save() {	
-//	oEditors_memo.getById["memoCont"].exec("UPDATE_CONTENTS_FIELD", []);	
+	oEditors.getById["memoCont"].exec("UPDATE_CONTENTS_FIELD", []);	
 	var param = $("#newMemo").serialize();
 	var memoDocId = $("#memoDocId").val();
 	var urlStr = "";
@@ -139,7 +89,7 @@ function f_memo_save() {
 	}
 	
 	$.ajax({
-		  url : "/estate/" + urlStr,
+		  url : "/" + urlStr,
 		  type: "post",
 		  data : param,
 		  dataType : "json",
@@ -148,22 +98,13 @@ function f_memo_save() {
 			  $("#divAddMemoPopup").trigger('close');
 			  if ( urlStr == "insertMemo.do" ) {
 				  alert (responseData.message);
-				  f_memoList_select();
-				  $('#divListMemoPopup').lightbox_me({centered: true});
+				  location.href="./memoList.do";
 			  } else {
 				  alert ("수정에 성공하였습니다.");
-				  	f_memoView_select(memoDocId);
+				  location.href="./viewMemoItem.do?memoDocId="+memoDocId;
 			  }
 		  }
 		});
-}
-
-function f_edit_memo_view(){
-	var memoDocId = $("#memoDocId").val();
-	f_memoView(memoDocId);
-	f_closeAllDiv();
-	$("#divAddMemoPopup").lightbox_me({centered: true});
-	
 }
 
 function f_del_memo()
@@ -172,49 +113,14 @@ function f_del_memo()
 	var param = {memoDocId : $("#memoDocId").val()};	
 	if(isDel){
 		$.ajax({
-			  url : "/estate/deleteMemo.do",
+			  url : "/deleteMemo.do",
 			  type: "post",
 			  data : param,
 			  dataType : "json",
 			  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 			  success : function(responseData){
-				  f_cancel_to_list();
+				  location.href="./memoList.do";
 			  }
 		});
 	}
-}
-
-function f_empty_field()
-{
-	$("#memoDocId").val('');
-	$("#memoSubject").empty();
-	$("#memoContent").empty();
-	$("#frstRegDt").empty();
-}
-
-function f_clear_form()
-{
-	$("#memoSbj").empty();
-	$("#memoCont").empty();
-	$("#memoSbj").val('');
-	$("#memoCont").val('');
-}
-
-function f_closeAll(){
-	f_clear_form();
-	f_empty_field();
-	f_closeAllDiv();
-}
-
-function f_closeAllDiv(){
-	$("#divListMemoPopup").trigger('close');  
-	$("#divViewMemoPopup").trigger('close');  
-	$("#divAddMemoPopup").trigger('close');  	
-}
-
-function f_cancel_to_list()
-{
-	f_closeAll();
-	f_memoView();
-	$('#divListMemoPopup').lightbox_me({centered: true});
 }

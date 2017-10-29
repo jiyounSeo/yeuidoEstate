@@ -51,7 +51,7 @@ function f_custList_select() {
 	};
 	
 	$.ajax({
-	  url : "/estate/selectCustomerList.do",
+	  url : "/selectCustomerList.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -78,12 +78,12 @@ function f_custList_select() {
 function f_mbrDtl_view (index) {
 	$("#custId").val(custList[index].custId);
 	var frm = $('#commClList')[0];
-	frm.action = '/estate/viewClient.do';
+	frm.action = '/viewClient.do';
 	frm.method = 'POST';
 	frm.submit();
 	/*
    var comSubmit = new ComSubmit($('form').attr('id'));
-   comSubmit.setUrl("/estate/objtDtlView.do");
+   comSubmit.setUrl("/objtDtlView.do");
    
    comSubmit.submit();
 */

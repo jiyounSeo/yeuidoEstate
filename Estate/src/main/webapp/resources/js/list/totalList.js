@@ -145,7 +145,7 @@ function f_objectList_select(objtTpChk, saleTpChk){
 	   , pageSize : 10
 	};
 	$.ajax({
-	  url : "/estate/selectObjectList.do",
+	  url : "/selectObjectList.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -225,7 +225,7 @@ function f_objtDtl_view (index) {
 	$("#viewUrl").val(url);
 	
 	var frm = $('#totalList')[0];
-	frm.action = '/estate/objtDtlView.do';
+	frm.action = '/objtDtlView.do';
 	frm.method = 'POST';
 	frm.submit();
 }
@@ -234,7 +234,7 @@ function f_objtDtl_view (index) {
 function f_mbrDtl_view (index) {
 	$("#custId").val(custList[index].custId);
 	var frm = $('#totalList')[0];
-	frm.action = '/estate/viewClient.do';
+	frm.action = '/viewClient.do';
 	frm.method = 'POST';
 	frm.submit();
 }
@@ -261,7 +261,7 @@ function f_custList_select() {
 				   , myCust : gfn_isNull($("input[name='cust_activeTp3']:checked").val()) ? "" : $("input[name='cust_activeTp3']:checked").val()
 	};
 	$.ajax({
-	  url : "/estate/selectCustomerList.do",
+	  url : "/selectCustomerList.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -286,7 +286,7 @@ function f_custList_select() {
 
 function f_add_objt() {
 	var frm = $('#totalList')[0];
-	frm.action = '/estate/addObject.do';
+	frm.action = '/addObject.do';
 	frm.method = 'POST';
 	frm.submit();
 	
