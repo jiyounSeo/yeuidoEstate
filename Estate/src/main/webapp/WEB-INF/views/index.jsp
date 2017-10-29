@@ -2,14 +2,9 @@
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 
-	<div style="width:1470px; text-align:left; margin:auto; padding:0">		
-		<table style="width: 1470px;" cellpadding="0" cellspacing="0" border="0">
-			<tr><td height="600px" style="background-color:#e0e0e0;">지도</td></tr>
-			<tr><td height="30px"></td></tr>
-		</table>
-	</div>
-  <div id="ob_list" style="width:1500px;margin:auto;padding:0;">
+<div id="ob_list" style="width:1500px;margin:auto;padding:0;">
 	<div class="list_div2" style="background-color :#F6F8F7;" >	
+		** 각 탭마다.. "전체" 버튼 필요, 선택된 탭에 따라 지도에 매물마킹 표시 --> 그래서 탭을 맨 위로 올림 (하단공백은 왜 안없어질까=_=) 
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT001','ST001')"  style='text-decoration: none;'><li id="li_OT001" style="width:100%" class='tab_on_txt'>아파트</li></a></td>
@@ -24,16 +19,19 @@
 				<td style="width:2%;"></td>
 				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT006','ST006')"  style='text-decoration: none;'><li id="li_OT006" style="width:100%"class='tab_on_txt'>분양권</li></a></td>
 			</tr>
-			<tr>
-				<td stlye="width;100%;height:45px;" colspan="11">&nbsp;</td>
-			</tr>
 		</table>
-
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr id="trCategory">
-
 			</tr>
 		</table>
+</div>
+	<div style="width:1470px; text-align:left; margin:auto; padding:0">		
+		<table style="width: 1470px;" cellpadding="0" cellspacing="0" border="0">
+			<tr><td height="600px" style="background-color:#e0e0e0;">지도</td></tr>
+			<tr><td height="30px"></td></tr>
+		</table>
+	</div>
+  <div id="ob_list" style="width:1500px;margin:auto;padding:0;">
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td width="100%" align="left" valign="bottom">
