@@ -63,6 +63,10 @@ function makeSuggLatestList(listArray){
 }
 
 
+function makeTodoList(listArray){
+	
+}
+
 function makeSubject(sbj, size){
 	var newSbj = "";
 	

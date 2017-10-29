@@ -67,7 +67,7 @@
 	<tr>
 		<td width="690px" height="275px" background="./resources/images/lst_todo_bg.jpg">
 			<table class="todoLatest">
-				<tr><td height="60px;" id='test_text'>&nbsp;</td></tr>
+				<tr><td height="60px;">&nbsp;</td></tr>
 				<tr><td class="content" valign="top"></td></tr>
 			</table>
 		</td>

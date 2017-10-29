@@ -92,7 +92,7 @@ function f_customer_save() {
 	oEditors_issue.getById["prob"].exec("UPDATE_CONTENTS_FIELD", []);	
 	oEditors_sugg.getById["sugg"].exec("UPDATE_CONTENTS_FIELD", []);
 	
-	if($("#sugg") == "<p>&nbsp;</p>") {
+	if($("#sugg").val() == "<p>&nbsp;</p>") {
 		$("#sugg").val("");
 	}
 	
