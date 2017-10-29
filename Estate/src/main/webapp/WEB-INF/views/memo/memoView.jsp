@@ -7,7 +7,7 @@
 <script type="text/javascript" src="./resources/js/memo/listMemo.js"></script>
 
 <div class="new_page_title">
-	<img src="./resources/images/title_notice.jpg">
+	<img src="./resources/images/title_memo.jpg">
 </div>
 
 <div class="new_page_container">

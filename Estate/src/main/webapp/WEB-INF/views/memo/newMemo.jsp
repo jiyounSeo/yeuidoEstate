@@ -29,7 +29,7 @@ $(document).ready(function(){
 </script>
 
 <div class="new_page_title">
-	<img src="./resources/images/title_notice.jpg">
+	<img src="./resources/images/title_memo.jpg">
 </div>
 
 

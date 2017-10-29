@@ -41,7 +41,8 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/adminMain";
+		//return "/adminMain";
+		return "/index";
 	}
 	
 	
