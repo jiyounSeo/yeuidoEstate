@@ -57,8 +57,12 @@
 		</table>
 		<table style="background-color :#F6F8F7;" width="1500px" class="ob_list" id="objtTable">
 			<tr>
-				<td>등록일</td><td>물건명</td><td>평형</td><td>매물가</td><td>연락처</td>
+				<td width="8%">등록일</td><td width="6%">유형</td><td width="6%">종류</td><td width="32%">물건명</td><td width="8%">면적(평형)</td><td width="5%">층</td><td width="15%">매물가(만원)</td><td width="20%">연락처</td>
 			</tr>
+			<tr>
+				<td>YY.MM.DD</td><td>매매</td><td>아파트</td><td>물건명입니다</td><td>123</td><td>1</td><td>28,000</td><td>여의도부동산(02-783-7722)</td>
+			</tr>
+			
 			<tr id="objtListTr">
 			</tr>
 			<tbody id="objtTbody">

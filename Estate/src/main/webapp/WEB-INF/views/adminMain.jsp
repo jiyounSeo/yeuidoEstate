@@ -13,7 +13,7 @@
 
 <style>
 	.latest_bbs {
-		width:372px;
+		width:380px;
 		height:276px;
 		border:0;
 		border-spacing:0;
@@ -21,12 +21,15 @@
 		border-collapse:collapse;
 		valign:top;
 	}
+	.todoLatest td.latest_title,
 	.latest_bbs td.latest_title {
 		cursor:pointer;
+		padding-right:15px;
+		text-align:right;
 	}
 	
 	.todoLatest {
-		width:572px;
+		width:678px;
 		height:276px;
 		border:0;
 		border-spacing:0;
@@ -67,21 +70,26 @@
 	<tr>
 		<td width="690px" height="275px" background="./resources/images/lst_todo_bg.jpg">
 			<table class="todoLatest">
-				<tr><td height="60px;">&nbsp;</td></tr>
-				<tr><td class="content" valign="top"></td></tr>
+				<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 등록한 지시사항 리스트 출력 -->
+					<tr><td height="60px;" onClick="location.href='./selectALLRegDirList.do'" class="latest_title">more</td></tr>
+				</c:if>
+				<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 지시받은 리스트 출력 -->
+					<tr><td height="60px;" onClick="location.href='./selectALLDirList.do'" class="latest_title">more</td></tr>
+				</c:if>
+				<tr><td class="content" valign="top" id="direction_latest"></td></tr>
 			</table>
 		</td>
 		<td width="5px"></td>
 		<td width="388px" height="275px" background="./resources/images/lst_notice_bg.jpg">
 			<table class="latest_bbs">
-				<tr><td height="60px;" onClick="location.href='./noticeList.do'" class="latest_title">&nbsp;</td></tr>
+				<tr><td height="60px;" onClick="location.href='./noticeList.do'" class="latest_title">more</td></tr>
 				<tr><td class="content" valign="top" id="notice_latest"></td></tr>
 			</table>
 		</td>
 		<td width="5px"></td>
 		<td width="388px" height="275px" background="./resources/images/lst_bbs_bg.jpg">
 			<table class="latest_bbs">
-				<tr><td height="60px;" onClick="location.href='./suggBoardList.do'" class="latest_title">&nbsp;</td></tr>
+				<tr><td height="60px;" onClick="location.href='./suggBoardList.do'" class="latest_title">more</td></tr>
 				<tr><td class="content" valign="top" id="taskdoc_latest"></td></tr>
 			</table>
 	</tr>
