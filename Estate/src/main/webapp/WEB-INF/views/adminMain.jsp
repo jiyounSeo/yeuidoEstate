@@ -70,13 +70,8 @@
 	<tr>
 		<td width="690px" height="275px" background="./resources/images/lst_todo_bg.jpg">
 			<table class="todoLatest">
-				<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 등록한 지시사항 리스트 출력 -->
-					<tr><td height="60px;" onClick="location.href='./selectALLRegDirList.do'" class="latest_title">more</td></tr>
-				</c:if>
-				<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 지시받은 리스트 출력 -->
-					<tr><td height="60px;" onClick="location.href='./selectALLDirList.do'" class="latest_title">more</td></tr>
-				</c:if>
-				<tr><td class="content" valign="top" id="direction_latest"></td></tr>
+				<tr><td height="60px;" onClick="location.href='./selectALLDirListPage.do'" class="latest_title">more</td></tr>
+				<tr><td valign="top"><div style="overflow-y:scroll;height:95%;" class="content" id="direction_latest"></div></td></tr>
 			</table>
 		</td>
 		<td width="5px"></td>
@@ -94,5 +89,6 @@
 			</table>
 	</tr>
 </table>
+<input type="hidden" name="memberType" id="memberType" value="${sessionScope.user.mbrTp}" />
 </div>
 <%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 	

@@ -375,4 +375,33 @@
 }
 
 
+.todoBox,
+.workItem {
+	width:100%;
+	border:0px;
+	padding:0px;
+	margin:0px;
+	border-collapse:collapse;
+}
+
+.workItem td.workTitle {
+	text-align:center;
+	width:10%;
+}
+
+.workItem td.workContent {
+	width:90%;
+	text-align:left;
+}
+
+.workItem textarea {
+	width:100%;
+	border: 1px solid #d3d3d3;
+	padding: 12px 20px;
+}
+.todoBox textarea {
+	width:100%;
+	border: 1px solid #d3d3d3;
+	padding: 12px 20px;
+}
 </style>

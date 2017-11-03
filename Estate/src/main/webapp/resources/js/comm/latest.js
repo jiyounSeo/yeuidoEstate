@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	latest_bbs("notice", "#notice_latest", "5");
 	latest_bbs("taskdoc", "#taskdoc_latest", "5");
+	latest_bbs("direction", "#direction_latest", "0");
 });
 
 function latest_bbs(bbs_name, target, listSize){
@@ -9,6 +10,7 @@ function latest_bbs(bbs_name, target, listSize){
 	switch(bbs_name){
 		case "notice": url = "/selectLatestNoticeList.do"; break;
 		case "taskdoc": url = "/selectLatestTaskList.do"; break;
+		case "direction": url = "/selectNotDoneDirList.do"; break;
 		default: url = ""; break;
 	}
 	var param = {
@@ -26,12 +28,20 @@ function latest_bbs(bbs_name, target, listSize){
 			$(target).empty();
 			htmlText = "<ul>";
 			
+			if($("#memberType").val() == 'MT003' || $("#memberType").val() == 'MT004'){
+				bbs_name = "direction_admin";
+			}
+			
 			switch(bbs_name){
 				case "notice": htmlText = htmlText + makeNoticeLatestList(result.list); break;
 				case "taskdoc": htmlText = htmlText + makeSuggLatestList(result.list); break;
+				case "direction": htmlText = htmlText + makeDirLatestList(result.dirList); break;
+				case "direction_admin": htmlText = htmlText + makeDirLatestListForAdmin(result.dirList); break;
 				default: break;
 			}			
 			htmlText = htmlText + '</ul>';
+			console.log(htmlText);
+			console.log(target);
 			$(target).append(htmlText);
 		},
 		error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
@@ -63,9 +73,29 @@ function makeSuggLatestList(listArray){
 }
 
 
-function makeTodoList(listArray){
+function makeDirLatestList(listArray){
+	
+	var list = "";
+	for(var i=0; i<listArray.length; i++){
+		var item = listArray[i];
+		list = list + '<li><a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">' + makeSubject(item.dirContent, 29) + '   (<b>' + item.regUserNm + '</b> / ' + item.regDate +')</a></li>';		
+	}	
+	return list;
 	
 }
+
+function makeDirLatestListForAdmin(listArray){
+	
+	var list = "";
+	for(var i=0; i<listArray.length; i++){
+		var item = listArray[i];
+		list = list + '<li><a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">[<b>' + item.targetUserNm + '</b>] ' + makeSubject(item.dirContent, 29) + '   (' + item.regDate +')</a></li>';		
+	}	
+	
+	return list;
+	
+}
+
 
 function makeSubject(sbj, size){
 	var newSbj = "";

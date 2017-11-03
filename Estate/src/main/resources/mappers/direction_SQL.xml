@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{dirContent}
 				  , now()
 				  , #{user.mbrId}  <!-- session값 가져오기 -->
-				  , #{targetUser}
+				  , (select mbrId from workdoc w where w.workNo=#{workNo})
 			)            			
     </insert>
     
@@ -32,13 +32,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , workNo
 	     , dirContent
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
+	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , (select mbrNm from member m where d.targetUser = m.mbrId) targetUserNm
 	     , isDone
-	     , doneDate
+	     , DATE_FORMAT(doneDate, '%Y-%m-%d %I:%i:%s') as doneDate
+	     , (SELECT COUNT(*) FROM direction) totalCnt
+         , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
+         , (select workContent from workdoc w where w.workNo = d.workNo) workContent
 	  FROM direction d
 	 WHERE 1=1
 	 AND regUser=#{user.mbrId}
      order by regDate desc
+	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
     
     <!-- 수행해야하는 지시사항 리스트(회원) -->
@@ -48,12 +53,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , dirContent
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
+	     , (select mbrNm from member m where d.targetUser = m.mbrId) targetUserNm
 	     , isDone
-	     , doneDate
+	     , DATE_FORMAT(doneDate, '%Y-%m-%d %I:%i:%s') as doneDate
+	     , (SELECT COUNT(*) FROM direction) totalCnt
+         , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
+         , (select workContent from workdoc w where w.workNo = d.workNo) workContent
 	  FROM direction d
 	 WHERE 1=1
 	 AND targetUser=#{user.mbrId}
      order by regDate desc
+	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
  
  	<!-- 완료한 지시사항 리스트(회원) -->
@@ -64,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , isDone
-	     , doneDate
+	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as doneDate
 	  FROM direction d
 	 WHERE 1=1
 	 AND targetUser=#{user.mbrId}
@@ -77,13 +87,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT dirNo
 	     , workNo
 	     , dirContent
-	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
+	     , DATE_FORMAT(regDate, '%Y-%m-%d') as regDate
+	     , (select mbrNm from member m where d.targetUser = m.mbrId) targetUserNm
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
+	     , (SELECT COUNT(*) FROM direction) totalCnt
+         , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
+         , (select workContent from workdoc w where w.workNo = d.workNo) workContent
 	     , isDone
-	     , doneDate
 	  FROM direction d
 	 WHERE 1=1
-	 AND targetUser=#{user.mbrId}
+	 <if test="user.mbrTp eq 'MT004' or user.mbrTp eq 'MT003'" >
+	 	AND regUser=#{user.mbrId}
+	 </if>
+	 <if test="user.mbrTp eq 'MT002'" >
+	 	AND targetUser=#{user.mbrId}
+	 </if>
 	 AND isDone='N'
      order by regDate desc
 	</select>   
@@ -97,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select mbrNm from member m where d.targetUser = m.mbrId) targetUserNm
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , isDone
-	     , doneDate
+	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as doneDate
 	  FROM direction d
 	 WHERE 1=1
 	 AND workNo=#{selectedWorkNo}

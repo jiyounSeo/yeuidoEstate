@@ -62,4 +62,41 @@
 	text-align:center;
 	border-left: 1px solid #b2b2b2;
 }
+
+
+.direction {
+	width: 1460px;
+	border-collapse:collapse;
+}
+
+.direction tr {
+	background: #fff;
+	border-bottom: 0px;
+	border-right: 1px solid #b2b2b2;	
+	border-left: 1px solid #b2b2b2;	
+}
+
+.direction tr:nth-child(even) {
+	background: #f6f6f8;
+}
+
+.direction tr:last-child {
+	border-bottom:1px solid #b2b2b2;
+}
+
+.direction .title td{
+	height: 50px;
+	background-color:#0063b1;
+	border-right: 1px solid #fff;
+	text-align: center;
+	color: white;
+}
+
+.direction td {
+	height:50px;
+	text-align:center;
+	border-left: 1px solid #b2b2b2;
+}
+
+
 </style>

@@ -56,5 +56,8 @@ public class WorkServiceImpl  implements WorkService
 	   return workDAO.selectWorkListAtMonth(map);
    }
 
+   public Map selectWorkItem(Map map) throws Exception {
+	   return workDAO.selectWorkItem(map);
+   }
 
 }

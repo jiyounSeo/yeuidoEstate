@@ -42,6 +42,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)            			
     </insert>
     
+   <select id="selectWorkItem" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+   SELECT workNo
+	     , mbrId
+	     , custId
+	     , objtNo
+	     , workTitle
+	     , workContent
+	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
+	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
+	     , frstRegUser
+	     FROM workdoc w
+		 WHERE 1=1
+		 AND workNo=#{selectedWorkNo}
+   </select>
+    
     <select id="selectWorkList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT workNo
 	     , mbrId

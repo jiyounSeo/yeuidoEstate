@@ -122,7 +122,7 @@ function selectCurrentEvent(){
 		{
 			var day = workList[i].frstRegDt;
 			var dayArray = day.split('-');
-			var itemDivId = '#eventCnt'+dayArray[2];
+			var itemDivId = '#eventCnt'+parseInt(dayArray[2],10);
 			
 			$(itemDivId).empty();
 			var htmlText = "";
@@ -175,15 +175,15 @@ function selectWorkListAtdate(date){
 
 function f_modifyWork(index) {
 	
-	
+	$("#curSelectedItemIdx").val(index);
 	$("#workNo").val(workList[index].workNo);
 	$("#workTitle").val(workList[index].workTitle);
 	$("#workContent").val(workList[index].workContent);
 	
 	var workTitle = "[" + workList[index].mbrNm + "] " + workList[index].workTitle;
 	var workContent = "  →  " + workList[index].workContent;
-	$("#workTitleForAdmin").empty;
-	$("#workContentForAdmin").empty;
+	$("#workTitleForAdmin").empty();
+	$("#workContentForAdmin").empty();
 	$("#workTitleForAdmin").append(workTitle);
 	$("#workContentForAdmin").append(workContent);
 	
@@ -193,6 +193,55 @@ function f_modifyWork(index) {
 	
 	
 }
+
+
+function f_modifyWorkAtTodoList(workNo) {
+	
+	console.log(workNo);
+	f_selectWorkItem(workNo);
+	f_selectDirListAtWork(workNo);
+	
+	$("#divAddWorkPopup").lightbox_me({centered: true});
+	
+	
+}
+
+function f_selectWorkItem(workNo){
+	var selectedWorkNo = workNo;
+	var param = {
+			selectedWorkNo : selectedWorkNo
+	};
+	$.ajax({
+		  url : "/selectWorkItem.do",
+		  type: "post",
+		  data : param,
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+
+			  console.log ("search success");
+			  console.log (data.workItem);
+			  
+			  var Item = data.workItem;
+
+			  $("#workNo").val(Item.workNo);
+			  $("#workTitle").val(Item.workTitle);
+			  $("#workContent").val(Item.workContent);
+			
+			  var workTitle = "[" + Item.mbrNm + "] " + Item.workTitle;
+			  var workContent = "  →  " + data.workContent;
+			  $("#workTitleForAdmin").empty();
+			  $("#workContentForAdmin").empty();
+			  $("#workTitleForAdmin").append(workTitle);
+			  $("#workContentForAdmin").append(workContent);
+				
+		  }
+	});
+	
+	
+	
+}
+
 
 function f_selectDirListAtWork(workNo){
 	var selectedWorkNo = workNo;
@@ -278,6 +327,27 @@ function f_work_save() {
 		});
 }
 
+function f_todo_save() {
+	var param = {
+			workNo : $("#workNo").val()
+			, dirContent : $("#dirContent").val()
+		}
+		
+		$.ajax({
+			  url : "/insertDirection.do",
+			  type: "post",
+			  data : param,
+			  dataType : "json",
+			  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+			  success : function(data){
+				  	$("#divAddWorkPopup").trigger('close');
+					alert (data.message);
+					$("#dirContent").val("");
+					f_modifyWork($("#curSelectedItemIdx").val());
+			  }
+			});
+}
+
 function f_delete_work(index)
 {
 	var isDel = confirm("작업내역을 삭제하시겠습니까?");
@@ -309,9 +379,9 @@ function f_delete_direction(dirNo, i)
 			  dataType : "json",
 			  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 			  success : function(data){
-				  alert (data.message);
-					$("#divAddWorkPopup").trigger('close');  	
-				  f_modifyWork(i);
+				alert (data.message);
+				$("#divAddWorkPopup").trigger('close');  	
+				f_modifyWork($("#curSelectedItemIdx").val());
 			  }
 		});
 	}

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,8 +101,20 @@ public class DirectionController {
 	        			
 			List<Map<String,Object>> dirList = new ArrayList<Map<String,Object>>();
 			try {
+				int currentPage = Integer.parseInt(map.get("currentPage").toString());
+				int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+				map.put("rowNum", (currentPage-1)*pagePerRow);
+				map.put("pagePerRow", pagePerRow);
 				map.put("user",  session.getAttribute("user")); // map에 담기 해당쿼리에 #{user.mbrId} 이렇게 써주기
 				dirList = directionService.selectALLRegDirList(map);
+				
+				if (!dirList.isEmpty()) {
+					
+					int totalCount = Integer.parseInt(dirList.get(0).get("totalCnt").toString());
+					int pageSize = Integer.parseInt(map.get("pageSize").toString());
+					Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+					mav.addAllObjects(pagingMap);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -121,8 +134,20 @@ public class DirectionController {
 	        			
 			List<Map<String,Object>> dirList = new ArrayList<Map<String,Object>>();
 			try {
+				int currentPage = Integer.parseInt(map.get("currentPage").toString());
+				int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+				map.put("rowNum", (currentPage-1)*pagePerRow);
+				map.put("pagePerRow", pagePerRow);
 				map.put("user",  session.getAttribute("user")); // map에 담기 해당쿼리에 #{user.mbrId} 이렇게 써주기
 				dirList = directionService.selectALLDirList(map);
+				
+				if (!dirList.isEmpty()) {
+					
+					int totalCount = Integer.parseInt(dirList.get(0).get("totalCnt").toString());
+					int pageSize = Integer.parseInt(map.get("pageSize").toString());
+					Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+					mav.addAllObjects(pagingMap);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -192,6 +217,15 @@ public class DirectionController {
 		    mav.addObject("dirList",dirList);
 		    mav.setViewName("jsonView");
 		    return mav;
+	}
+	
+	
+	/* 
+	 * 지시사항 리스트 -- page이동
+	 */
+	@RequestMapping(value= "/selectALLDirListPage.do")
+	public String selectALLDirListPage(@RequestParam Map<String,Object> map)  {  
+		return "/admin/allDirectionList";	
 	}
 	
 }

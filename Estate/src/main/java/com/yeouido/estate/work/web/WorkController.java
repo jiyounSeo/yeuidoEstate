@@ -228,4 +228,24 @@ public class WorkController {
 		    return mav;
 	}	
 	
+	/*
+	 *  상세 조회
+	 */	
+	@RequestMapping(value= "/selectWorkItem.do", method=RequestMethod.POST)
+	public ModelAndView selectWorkItem(@RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			result = workService.selectWorkItem(map);
+			mav.addObject("messageCd", "1");
+
+		} catch (Exception e) {
+			mav.addObject("messageCd", "2");
+
+			e.printStackTrace();
+		}
+		mav.addObject("workItem",result);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
 }

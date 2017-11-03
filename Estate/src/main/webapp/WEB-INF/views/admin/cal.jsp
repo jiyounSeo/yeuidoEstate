@@ -4,38 +4,6 @@
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 
-<style>
-.todoBox,
-.workItem {
-	width:100%;
-	border:0px;
-	padding:0px;
-	margin:0px;
-	border-collapse:collapse;
-}
-
-.workItem td.workTitle {
-	text-align:center;
-	width:10%;
-}
-
-.workItem td.workContent {
-	width:90%;
-	text-align:left;
-}
-
-.workItem textarea {
-	width:100%;
-	border: 1px solid #d3d3d3;
-	padding: 12px 20px;
-}
-.todoBox textarea {
-	width:100%;
-	border: 1px solid #d3d3d3;
-	padding: 12px 20px;
-}
-</style>
-
 <table width="1103px" cellpadding="0" cellspacing="0" border="0">
 	<tr>
 		<td>
@@ -58,7 +26,7 @@
 			<tr><td height="34px"><a href="#" onClick="f_closePopup()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
 			<tr>
 				<td align="center" valign="top">
-					<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 지시받은 리스트 출력 -->
+					<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 작업내역 수정가능 -->
 					<fieldset style="width:90%;">
 						<legend align="left" style="margin-bottom:10px;"><b>[ 작업내역 ]</b></legend>
 						<table class="workItem">
@@ -75,7 +43,7 @@
 						</table>
 					</fieldset>
 					</c:if>
-					<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 지시사항입력창 -->
+					<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 작업내역view -->
 					<fieldset style="width:90%;background-color:#f0efef;">
 						<div id="workTitleForAdmin" style="text-align:left;padding:10px 20px 10px 20px;"></div>
 						<div id="workContentForAdmin" style="text-align:left;padding:0 20px 10px 30px;"></div>
@@ -94,7 +62,7 @@
 						<table class="todoBox">
 							<tr>
 								<td width="85%"><textarea rows="5" cols="50" name="dirContent" id="dirContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea></td>
-								<td width="15%"><input type="button" value="지시사항입력" style="width:100%;height:105px;background-color:#0063b1;color:white;" /></td>						
+								<td width="15%"><a href="#"><img src="./resources/images/btn_write_todo.png" onClick="f_todo_save()"></a></td>						
 							</tr>
 						</table>
 					</div>
@@ -109,6 +77,7 @@
 			<tr><td height="23px;"><img src="./resources/images/alert_bottom2.jpg"></td></tr>
 		</table>
 		<input type="hidden" name="workNo" id="workNo">
+		<input type="hidden" name="curSelectedItemIdx" id="curSelectedItemIdx">
 		<input type="hidden" name="memberType" id="memberType" value="${sessionScope.user.mbrTp}" />
 	</form>
 </div>
