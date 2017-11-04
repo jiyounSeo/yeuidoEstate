@@ -22,8 +22,8 @@
 		<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 -->
 			<td width="10%">지시자</td>
 			<td width="10%">수행자</td>
-			<td width="15%">지시날짜</td>
 			<td width="45%">지시사항</td>
+			<td width="15%">지시날짜</td>
 			<td width="5%">완료여부</td>
 			<td width="15%">완료날짜</td>
 		</c:if>
@@ -107,9 +107,13 @@
 	<tr onClick="f_viewWork('{{html $index}}')" style="cursor:pointer;">
 		<td>{{html $value.regUserNm}}</td>
 		<td>{{html $value.targetUserNm}}</td>
+		<td style="text-align:left;padding-left:10px;">{{html $value.dirContent}}</td>
 		<td>{{html $value.regDate}}</td>
-		<td>{{html $value.dirContent}}</td>
-		<td>{{html $value.isDone}}</td>
+		{{if $value.isDone == "Y"}}
+			<td><img src="./resources/images/icon_done.gif"></td>
+		{{else}}
+			<td><img src="./resources/images/icon_n_done.gif"></td>
+		{{/if}}
 		<td>{{html $value.doneDate}}</td>
 	</tr>							
 {{/each}}	
@@ -125,8 +129,12 @@
 	<tr onClick="f_viewWork('{{html $index}}')" style="cursor:pointer;">
 		<td>{{html $value.regUserNm}}</td>
 		<td>{{html $value.regDate}}</td>
-		<td>{{html $value.dirContent}}</td>
-		<td>{{html $value.isDone}}</td>
+		<td style="text-align:left;padding-left:10px;">{{html $value.dirContent}}</td>
+		{{if $value.isDone == "Y"}}
+			<td><img src="./resources/images/icon_done.gif"></td>
+		{{else}}
+			<td><img src="./resources/images/icon_n_done.gif"></td>
+		{{/if}}
 		<td>{{html $value.doneDate}}</td>
 	</tr>							
 {{/each}}	

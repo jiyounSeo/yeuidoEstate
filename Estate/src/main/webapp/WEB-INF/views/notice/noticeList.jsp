@@ -34,9 +34,9 @@
 
 <script id="noticeListTemplte" type="text/x-jquery-tmpl">	
 {{each ntList}}					
-	<tr>
+	<tr onClick="location.href='./viewNoticeItem.do?noticeId={{html $value.noticeId}}'" style="cursor:pointer;">
 		<td>{{html $value.noticeId}}</td>
-		<td><a href="./viewNoticeItem.do?noticeId={{html $value.noticeId}}">{{html $value.ntSbj}}</a></td>
+		<td style="text-align:left;padding-left:10px;">{{html $value.ntSbj}}</td>
 		<td>{{html $value.mbrNm}}</td>
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.viewCnt}}</td>

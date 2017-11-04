@@ -35,7 +35,8 @@ function f_reportList_select()
 		  } else {
 			  for (var i = 0; i < result.reportList.length; i++) {
 				  var data = result.reportList[i];
-				  htmlText = htmlText + '<tr><td><a href="./viewReport.do?contractId='+ data.contractId + '">' + data.dueDt + '</a></td>' +
+				  htmlText = htmlText + '<tr onClick="location.href=\'./viewReport.do?contractId='+ data.contractId + '\'" style="cursor:pointer;">' +
+				  '<td>' + data.dueDt + '</td>' +
 				  '<td>' + convertContTpToText(data.contTp1, data.contTp2) + '</td>' +
 				  '<td>' + data.addr + '</td>' +
 				  '<td>' + data.contDt + '</td>' +

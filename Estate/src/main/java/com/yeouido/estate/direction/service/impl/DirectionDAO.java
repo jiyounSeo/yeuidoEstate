@@ -39,6 +39,8 @@ public class DirectionDAO extends AbstractDAO
 	   public List<Map<String,Object>> selectDirListAtWork(Map map) throws Exception{
 	       return selectList("directionDAO.selectDirListAtWork", map);
 	   }
-
+	   public int changeDoneState(Map<String, Object> map) throws Exception{
+	       return update("directionDAO.changeDoneState",map);
+	   }	
 
 }

@@ -47,6 +47,10 @@ public class DirectionServiceImpl  implements DirectionService
    public int deleteDirection(Map map) throws Exception {
 	   return directionDAO.deleteDirection(map);
    }
+   @Override
+   public int changeDoneState(Map map) throws Exception {
+	   return directionDAO.changeDoneState(map);
+   }
 
 
 }

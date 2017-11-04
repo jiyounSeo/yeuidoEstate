@@ -62,6 +62,11 @@
 	border-bottom:1px solid #b2b2b2;
 }
 
+
+.notice tbody tr:hover {
+  background-color: #eeeeee;
+}
+
 .notice .title td{
 	height: 50px;
 	background-color:#0063b1;

@@ -39,8 +39,8 @@
 
 <script id="memoListTemplte" type="text/x-jquery-tmpl">	
 {{each memoList}}					
-	<tr>
-		<td class="subject"><a href="./viewMemoItem.do?memoDocId={{html $value.memoDocId}}">{{html $value.memoSbj}}</a></td>
+	<tr onClick="location.href='./viewMemoItem.do?memoDocId={{html $value.memoDocId}}'" style="cursor:pointer;">
+		<td class="subject">{{html $value.memoSbj}}</td>
 		<td class="date">{{html $value.frstRegDt}}</td>
 	</tr>
 							

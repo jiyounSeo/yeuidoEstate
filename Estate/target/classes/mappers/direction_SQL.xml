@@ -134,5 +134,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    DELETE FROM direction 
 	    WHERE dirNo = #{dirNo}
     </delete>
-    
+ 
+    <update  id="changeDoneState" parameterType="java.util.HashMap" >
+	    UPDATE direction
+	       SET isDone = #{isDone}
+	    WHERE dirNo = #{dirNo}
+    </update>
+	   
 </mapper>

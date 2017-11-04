@@ -19,4 +19,6 @@ public interface DirectionService
 	public int modifyDirection(Map map) throws Exception;
 	
 	public int deleteDirection(Map map) throws Exception;
+	
+	public int changeDoneState(Map map) throws Exception;
 }

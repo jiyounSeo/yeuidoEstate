@@ -228,4 +228,23 @@ public class DirectionController {
 		return "/admin/allDirectionList";	
 	}
 	
+
+	/*
+	 *  수행여부 update
+	 */		
+	@RequestMapping(value= "/changeDoneState.do", method=RequestMethod.POST)
+	public ModelAndView changeDoneState(@RequestParam Map<String,Object> map, HttpSession session)  {  
+		ModelAndView mav= new ModelAndView();
+		try {
+			map.put("user",  session.getAttribute("user"));
+			int result = directionService.changeDoneState(map);
+			mav.addObject("messageCd", "1");
+			mav.addObject("message", "변경되었습니다.");
+		} catch (Exception e) {
+			mav.addObject("messageCd", "2");
+			e.printStackTrace();
+		}
+		mav.setViewName("jsonView");	
+	    return mav;
+	}
 }

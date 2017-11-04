@@ -84,6 +84,9 @@
 	border-bottom:1px solid #b2b2b2;
 }
 
+.direction tbody tr:hover {
+  background-color: #eeeeee;
+}
 .direction .title td{
 	height: 50px;
 	background-color:#0063b1;

@@ -10,9 +10,9 @@
 <div class="new_page_container">
 	<table class="suggbd">
 		<tr class="title">
-			<td>subject</td>
-			<td>date</td>
-			<td>regUser</td>
+			<td width="10%">등록일</td>
+			<td width="80%">제목</td>
+			<td width="10%">작성자</td>
 		</tr>
 		<tbody id="suggTbody">
 
@@ -26,9 +26,9 @@
 </div>
 <script id="suggListTemplte" type="text/x-jquery-tmpl">	
 {{each sbList}}					
-	<tr>
-		<td><a href="./viewSuggItem.do?taskDocId={{html $value.taskDocId}}">{{html $value.mbrNm}} 님이 작성한 건의사항입니다</a></td>
+	<tr onClick="location.href='./viewSuggItem.do?taskDocId={{html $value.taskDocId}}'" style="cursor:pointer;">
 		<td>{{html $value.frstRegDt}}</td>
+		<td style="text-align:left;padding-left:10px;">{{html $value.mbrNm}} 님이 작성한 건의사항입니다</td>
 		<td>{{html $value.mbrNm}}</td>
 	</tr>
 							

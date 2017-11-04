@@ -70,6 +70,10 @@
 	border-bottom:1px solid #b2b2b2;
 }
 
+.suggbd tbody tr:hover {
+  background-color: #eeeeee;
+}
+
 .suggbd .title td{
 	height: 50px;
 	background-color:#0063b1;

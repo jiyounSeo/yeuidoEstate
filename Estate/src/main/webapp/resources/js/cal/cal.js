@@ -8,6 +8,9 @@ var currentMonth;
 var thisMonth;
 var workList;
 
+var icon_done = "./resources/images/icon_done.gif";
+var icon_n_done = "./resources/images/icon_n_done.gif";
+	
 $(document).ready( function() {
 	
 	currentYear = Number(startYear);
@@ -265,7 +268,13 @@ function f_selectDirListAtWork(workNo){
 				  var item = dirList[i];
 				  htmlText += "<div class='directionBox'><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 
-				  htmlText += "<tr><td rowspan='2' class='isDo'>[ 수행 : " + item.isDone  +" ]</td><td colspan='2' class='todoCont'> " + item.dirContent + "</td></tr>";
+				  htmlText += '<tr><td rowspan="2" class="isDo" align="center"><a href="#" onclick="f_changeDone_state(' + item.dirNo + ',\'' + item.isDone +'\');return false;">';
+				  if(item.isDone == "Y"){
+					  htmlText += "<img src='" + icon_done  +"'></a>";
+				  } else {
+					  htmlText += "<img src='" + icon_n_done  +"'></a>";
+				  }
+				  htmlText += "</td><td colspan='2' class='todoCont'> " + item.dirContent + "</td></tr>";
 				  htmlText += "<tr><td align='right'>From : <b>" + item.regUserNm + "</b> 님 [ "+ item.regDate +"]</td>";
 				  htmlText += "<td align='right'>";
 				  
@@ -279,6 +288,42 @@ function f_selectDirListAtWork(workNo){
 			  $("#todoItemList").append(htmlText);
 		  }
 	});
+}
+
+
+function f_changeDone_state(dirNo, curState){
+	
+	var changingState = "";
+	console.log(curState);
+	if(curState == "Y"){
+		changingState = "N";
+	} else {
+		changingState = "Y";		
+	}
+	
+	var param = {
+			isDone : changingState,
+			dirNo : dirNo
+		}
+		
+		$.ajax({
+			  url : "/changeDoneState.do",
+			  type: "post",
+			  data : param,
+			  dataType : "json",
+			  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+			  success : function(data){
+				  
+				  	$("#divAddWorkPopup").trigger('close');
+					alert (data.message);
+					if(curState=="N"){	// N --> Y
+						location.href='./selectALLDirListPage.do';
+					} else {
+						location.href='./adminMainView.do';
+					}
+					
+			  }
+			});
 }
 
 

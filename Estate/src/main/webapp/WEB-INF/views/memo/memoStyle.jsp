@@ -101,6 +101,10 @@
 	background: #f6f6f8;
 }
 
+.memo tbody tr:hover {
+  background-color: #eeeeee;
+}
+
 .new_memo_table tr:first-child{
 	border-top: 1px solid #b2b2b2;	
 }
