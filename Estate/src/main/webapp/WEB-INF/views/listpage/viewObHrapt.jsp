@@ -11,7 +11,7 @@
 			<td class="title">물건명</td>
 			<td colspan="2">${objtNm}<!--  --></td>			
 			<td class="title">등록인</td>
-			<td>${frstRegNm}<!-- 분류 --></td>
+			<td>${estateInfo}<!-- 분류 --></td>
 		</tr>
 		<tr>
 			<td class="title">고객정보</td>

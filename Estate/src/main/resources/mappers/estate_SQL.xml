@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="estateDAO">
+    <insert id="insertEstate" parameterType="java.util.HashMap" >
+      <selectKey resultType="int" keyProperty="estateCd" order="BEFORE">
+        SELECT   if ( isnull(max(estateCd)), 1, MAX(CAST(estateCd AS signed integer))+1) from estate
+      </selectKey>
+    	INSERT INTO 
+			estate (estateCd
+				  , estateNm
+				  , estateAddr
+				  , estateAddrDtl
+				  , tel1
+				  , tel2
+				  , tel3
+				  , rprsnNm
+				  , rprsnTel1
+				  , rprsnTel2
+				  , rprsnTel3
+				  , frstRegDt
+				  , frstRegUser
+				  , modfRegDt
+				  , modfRegUser
+				  )
+		VALUES  (
+        			#{estateCd}
+				  , #{estateNm}
+				  , #{estateAddr}
+				  , #{estateAddrDtl}
+				  , #{tel1}
+				  , #{tel2}
+				  , #{tel3}
+				  , #{rprsnNm}
+				  , #{rprsnTel1}
+				  , #{rprsnTel2}
+				  , #{rprsnTel3}
+				  , now()
+				  , #{user.mbrId}
+				  , now()
+				  , #{user.mbrId}
+        	);
+		
+    </insert>
+    
+    <update  id="modifyEstate" parameterType="java.util.HashMap" >
+    UPDATE estate
+       SET estateNm = #{estateNm}
+		  , estateAddr = #{estateAddr}
+		  , estateAddrDtl = #{estateAddrDtl}
+		  , tel1 = #{tel1}
+		  , tel1 = #{tel2}
+		  , tel1 = #{tel3}
+		  , rprsnNm = #{rprsnNm}
+		  , rprsnTel1 = #{rprsnTel1}
+		  , rprsnTel2 = #{rprsnTel2}
+		  , rprsnTel3 = #{rprsnTel3}
+		 , modfRegDt = now()
+		 , modfRegUser = #{user.mbrId}
+     WHERE estateCd = #{estateCd}
+    </update>
+    
+    <delete id="deleteEstate" parameterType="java.util.HashMap" >
+    DELETE from estate 
+    WHERE estateCd = #{estateCd}
+    </delete>
+   	
+	<select id="selectEstateList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT estateCd
+	   	  , estateNm
+		  , estateAddr
+		  , estateAddrDtl
+		  , tel1
+		  , tel2
+		  , tel3
+		  , rprsnNm
+		  , rprsnTel1
+		  , rprsnTel2
+		  , rprsnTel3
+		  , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	      , frstRegUser frstRegNm
+	      , (SELECT COUNT(*) from Estate) totalCnt
+	  from estate
+	 WHERE 1=1 
+	 LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+	
+	<select id="selectEstateCombo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT estateCd 
+	 	 , estateNm
+	 FROM estate
+	</select>
+	
+	<select id="selectEstateInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT estateCd
+		  , estateNm
+		  , estateAddr
+		  , estateAddrDtl
+		  , tel1
+		  , tel2
+		  , tel3
+		  , rprsnNm
+		  , rprsnTel1
+		  , rprsnTel2
+		  , rprsnTel3
+  		  , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	      , frstRegUser frstRegNm
+	  from estate
+	 WHERE estateCd = #{estateCd}
+	</select>
+	
+	
+	
+	
+</mapper>

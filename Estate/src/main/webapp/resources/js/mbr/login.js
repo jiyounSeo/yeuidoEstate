@@ -23,6 +23,7 @@ function f_loginByEnterKey(event){
 	}
 		
 }
+
 function f_login() {
 	$.ajax({
 	  url : "/loginMember.go",

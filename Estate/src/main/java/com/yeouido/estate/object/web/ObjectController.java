@@ -35,6 +35,29 @@ public class ObjectController {
 	@Resource(name="objectService")
 	protected ObjectService objectService;
 	
+	@RequestMapping(value= "/selectMainObjtList.go", method=RequestMethod.POST)
+	public ModelAndView selectMainObjtList( @RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		Paging paging = new Paging();
+        			
+		List<Map<String,Object>> objtList = new ArrayList<Map<String,Object>>();
+		try {
+			int currentPage = Integer.parseInt(map.get("currentPage").toString());
+			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+			map.put("rowNum", (currentPage-1)*pagePerRow);
+			map.put("pagePerRow", pagePerRow);
+			
+			objtList = objectService.selectMainObjtList(map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("objtList",objtList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
+	
+	
 	/* 
 	 * 물건목록조회
 	 */

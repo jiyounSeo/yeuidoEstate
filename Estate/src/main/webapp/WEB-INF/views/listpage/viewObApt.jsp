@@ -11,7 +11,7 @@
 			<td class="title">물건명</td>
 			<td colspan="2">${objtNm}<!-- 물건명 --></td>
 			<td class="title">등록인</td>
-			<td>${frstRegNm}</td>
+			<td>${estateInfo}</td>
 		</tr>
 		<tr>
 			<td class="title">고객정보</td>

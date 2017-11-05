@@ -20,8 +20,9 @@
 			<td class="title">유형</td>
 			<td colspan="2">
 			  <input type="radio" id="objtTp1" name="objtTp" value="OT001"/><label for="objtTp1">아파트</label>
-			  <input type="radio" id="objtTp2" name="objtTp" value="OT002"/><label for="objtTp2">상가</label>
+			  <!-- <input type="radio" id="objtTp2" name="objtTp" value="OT002"/><label for="objtTp2">상가</label>
 			  <input type="radio" id="objtTp3" name="objtTp" value="OT003"/><label for="objtTp3">사무실/빌딩</label>
+			   -->
 			  <input type="radio" id="objtTp4" name="objtTp" value="OT004"/><label for="objtTp4">오피스텔</label>
 			  <input type="radio" id="objtTp5" name="objtTp" value="OT005"/><label for="objtTp5">주상복합</label>
 			  <input type="radio" id="objtTp6" name="objtTp" value="OT006"/><label for="objtTp6">분양권</label>
@@ -61,8 +62,8 @@
 			</td>
 		</tr>
 	</table>
-	<div id="map" style="width:100%;height:400px;"></div>
 	<img src="../images/btn_add.jpg" onclick="f_building_save();return false;">
+	<div id="map" style="width:100%;height:400px;"></div>
 	
 </div>
 <input type="hidden" id="buildCd" name="buildCd" />

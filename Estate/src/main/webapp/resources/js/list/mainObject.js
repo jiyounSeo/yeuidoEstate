@@ -1,13 +1,15 @@
 $(document).ready(function(){
-	var objtTp = $("#objtTp").val();
+	/*var objtTp = $("#objtTp").val();
 	if ( gfn_isNull ($("#objtTp").val()) ) {
 		objtTp = "";
 	}
 	var saleTp = $("#saleTp").val();
 	if ( gfn_isNull ($("#saleTp").val()) ) {
 		saleTp = "";
-	}
-	f_objt_select(objtTp,saleTp);
+	}*/
+	//alert ("hi");
+	f_category_combo('OT001');
+	//f_objt('');
 });
 
 /*
@@ -15,14 +17,20 @@ $(document).ready(function(){
  */
 function f_category_combo(objtTpVal) {
 	$("#trCategory").empty();
-	  
+	objtTp = objtTpVal;
+	buildCd = "";
+	orderByColumn = "";
+	f_objectList_select();
+	
 	if ( objtTpVal == "OT003" || objtTpVal == "OT002") {
 		return;
+		 $("#trCategory").append("<td>");
+		 $("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'\')\">전체</a> | ");
+		 $("#trCategory").append("/<td>");
 	}
 	var param = {
 			objtTp : objtTpVal
 	};
-	
 	$.ajax({
 		  url : "/selectBuildingCombo.go",
 		  type: "post",
@@ -34,12 +42,98 @@ function f_category_combo(objtTpVal) {
 			  $("#trCategory").append("<td>");
 			  $("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'\')\">전체</a> | ");
 			  $.each (result, function(index) {
-				  $("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'"+result[index].buildCd+"\')\">"+result[index].buildNm+"</a> | ");
+				  $("#trCategory").append("<a href='#cate' onclick=\"f_build(\'"+result[index].buildCd+"\')\">"+result[index].buildNm+"</a> | ");
 			  });
 			  $("#trCategory").append("</td>");
+			  
 		  }
 	});	
 }
+
+
+var orderByColumn = "";
+var objtTp = "";
+var buildCd = "";
+function f_order (order) {
+	orderByColumn = order;
+	f_objectList_select();
+}
+function f_build (build) {
+	orderByColumn = "";
+	buildCd = build;
+	f_objectList_select();
+}
+
+function f_objectList_select(){
+	 var param = {
+		 currentPage : 1 //Number(currPage)
+	   , orderByColumn : orderByColumn == "" ? "frstRegDt" : orderByColumn
+	   , objtTp : objtTp
+	   , buildCd : buildCd
+	   , pagePerRow : 10
+	   , pageSize : 10
+	};
+	 
+	 $.ajax({
+		  url : "/selectMainObjtList.go",
+		  type: "post",
+		  data : param,
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+			  $("#objtTbody").empty();
+			  $("#map").empty();
+			  var objtList = new Array();
+			  objtList = data.objtList;
+			  if ( objtList.length != 0) {
+				  $("#objtListTemplte").tmpl(data).appendTo("#objtTbody");
+				  //지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
+				  $.each (objtList, function(index){
+					  f_map_setting( objtList[index].jibunAddr);
+				  });
+			  }  else {
+				  $("#objtListEmptyTemplte").tmpl().appendTo("#objtTbody");
+			  }
+		  },
+		  error: function(data){
+			  alert ("문제가 발생했습니다. 관리자에게 문의하세요.")
+		  }
+		});
+}
+
+function f_map_setting(myaddress) {
+	var pointX = 0;
+	var pointY = 0;
+	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+        }
+        var result = response.result;
+        console.log (result);
+        pointX = result.items[0].point.x;
+        pointY = result.items[0].point.y;
+        f_map_draw( pointX, pointY);
+	});
+	
+}
+function f_map_draw(x, y) {
+	// marker1
+
+	//지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
+	var map = new naver.maps.Map('map', {
+		    center: new naver.maps.LatLng(x, y),
+		    zoom: 10
+	});
+	
+	var myaddr = new naver.maps.Point(x, y);
+    map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+    var marker = new naver.maps.Marker({
+	    position: myaddr,
+	    map: map
+	});
+		
+}
+
 
 var category = "";
 function f_category_select (cate) {
@@ -184,87 +278,6 @@ function gfn_isNull(str) {
     if (chkStr.toString().length == 0 ) return true;  
     return false;
 }
-
-function f_objectList_select(objtTp, saleTp){
-	
-	var activeTpChk = "";
-	var activTp1 = $("input[name='activeTp1']:checked").val();
-	var activTp2 = $("input[name='activeTp2']:checked").val();
-	 if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
-		 activeTpChk = "AT001";
-	 } else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "AT002";
-	 } else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "";
-	 }
-	 if (!gfn_isNull(objtTpChk)) {
-		 objtTp = objtTpChk;
-	 }
-	 if (!gfn_isNull(saleTpChk)) {
-		 saleTp = saleTpChk;
-	 }
-	 f_category_combo(objtTp);
-	 	 
-	 var param = {
-		objtTp : objtTp
-	   , saleTp : saleTp
-	   , pageNm : $("#pageNm").val()
-	   , activeTp :  activeTpChk //$("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
-	   , myObjt : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
-	   , currentPage : Number(currPage)
-	   , category : category
-	   , pagePerRow : 10
-	   , pageSize : 10
-	};
-	
-	console.log (param);
-	$.ajax({
-	  url : "/selectObjectList.do",
-	  type: "post",
-	  data : param,
-	  dataType : "json",
-	  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-	  success : function(result){
-		  $("#objtTbody").empty();
-		  var tmplNm = "";
-		  switch ( objtTp ) {
-		  	case "OT001" : // 아파트
-		  		tmplNm = "objtListTemplte1_"+param.saleTp;
-		  		break; 
-		  	case "OT002" : // 상가
-		  		tmplNm = "objtListTemplte2_"+param.saleTp;
-		  		break;
-		  	case "OT003" : //사무실.빌딩
-		  		tmplNm = "objtListTemplte3_"+param.saleTp;
-				break;
-		  	case "OT004" : // 오피스텔
-		  		tmplNm = "objtListTemplte4_"+param.saleTp;
-				break;
-		  	case "OT005" : //주상복합
-		  		tmplNm = "objtListTemplte5_"+param.saleTp;
-		  		break;
-		  	case "OT006" : //분양권
-		  		tmplNm = "objtListTemplte6";
-				break;
-		  }
-		  
-		  if (result.objtList.length != 0) {
-			  objtList = result.objtList;
-			  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
-			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
-			  $("#page" + currPage).addClass("active");
-
-		  } else {
-			  $("#pagingDiv").empty();
-			  var colCnt = $("#objtListTr td").length;
-			  $("#objtListEmptyTemplte").tmpl({col : colCnt}).appendTo("#objtTbody");
-		  }
-		  
-	  }
-	});
-	
-}
-
 
 //페이징 버튼 클릭이벤트
 currPage = 1;

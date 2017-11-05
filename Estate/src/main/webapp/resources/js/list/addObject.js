@@ -50,7 +50,7 @@ function f_objtCombo_select() {
 	};
 	
 	$.ajax({
-		  url : "/selectBuildingCombo.do",
+		  url : "/selectBuildingCombo.go",
 		  type: "post",
 		  data : param,
 		  dataType : "json",

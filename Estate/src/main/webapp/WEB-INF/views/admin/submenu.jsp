@@ -2,6 +2,8 @@
 <% request.setCharacterEncoding("utf-8");%>
 <input type="hidden" name="getPath" id="getPath" value="<%=request.getContextPath()%>"/>
 <script type="text/javascript" src="./resources/js/list/newBuilding.js"></script>
+<script type="text/javascript" src="./resources/js/list/newEstate.js"></script>
+
 
 <table width="365px" cellpadding="0" cellspacing="0" border="0">
 			<!-- 고객/물건목록 -->
@@ -57,6 +59,12 @@
 			<!-- 신규메모등록 / 메모목록 -->
 			<a href="./newMemo.do"><img src="./resources/images/btn_m15.jpg"></a>&nbsp;&nbsp;<a href="./memoList.do"><img src="./resources/images/btn_m16.jpg"></a>
 		</td>
+	</tr>
+	
+	<tr>
+		<td><button id="btnAddrPopup" onclick="buildingPopup();return false;">카테고리등록</button>
+		<button id="btnAddrPopup" onclick="estatePopup();return false;">부동산등록</button></td>
+	
 	</tr>
 	<!-- <tr><td><button id="btnAddrPopup" onclick="buildingPopup();return false;">건물등록</button></td></tr> -->
 </table>
