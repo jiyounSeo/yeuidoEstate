@@ -74,12 +74,12 @@
 		<tr>
 			<td class="title_ess">명도(*)</td>
 			<td colspan="4">
-			  <input type="radio" id="availableTp1" name="availableTp" value="AD001"/><label for="availableTp1">정상</label>
-			  <input type="radio" id="availableTp2" name="availableTp" value="AD002"/><label for="availableTp2">하시</label>
-			  <input type="radio" id="availableTp3" name="availableTp" value="AD003"/><label for="availableTp3">공가</label>
-			  <input type="radio" id="availableTp5" name="availableTp" value="AD005"/><label for="availableTp5">세안고</label>
-			  <input type="radio" id="availableTp6" name="availableTp" value="AD006"/><label for="availableTp6">협의</label>
-			  <input type="text" style="width:140px" id="availableDt" name="availableDt"> 일
+			  <input type="radio" id="availableTp1" name="availableTp" value="AD001" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="availableTp1">정상</label>
+			  <input type="radio" id="availableTp2" name="availableTp" value="AD002" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="availableTp2">하시</label>
+			  <input type="radio" id="availableTp3" name="availableTp" value="AD003" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="availableTp3">공가</label>
+			  <input type="radio" id="availableTp5" name="availableTp" value="AD005" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="availableTp5">세안고</label>
+			  <input type="radio" id="availableTp6" name="availableTp" value="AD006" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="availableTp6">협의</label>
+			  <input type="text" style="width:140px" id="availableDt" name="availableDt" disabled>
 			</td>
 		</tr>
 		

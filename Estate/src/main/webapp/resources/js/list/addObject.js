@@ -419,3 +419,12 @@ function f_list_view_change() {
     
 }
 
+
+function f_disableFieldByRadioBtn(value){
+	if(value == "AD006"){
+		$("#availableDt").attr("disabled",false);
+	} else {
+		$("#availableDt").val("");
+		$("#availableDt").attr("disabled", true); 
+	}
+}

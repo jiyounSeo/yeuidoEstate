@@ -55,7 +55,7 @@ function resizeWindow(win)    {
 function estatePopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
-	var pop = window.open("./resources/popup/newEstate.jsp","_blank","width=570,height=420, scrollbars=yes, resizable=yes");  
+	var pop = window.open("./resources/popup/newEstate.jsp","_blank","width=850,height=520, scrollbars='no', resizable='yes'");  
 }
 
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){    
@@ -67,7 +67,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 function goPopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
-	var pop = window.open("jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");  
+	var pop = window.open("jusoPopup.jsp","pop","width=580,height=580, scrollbars='no', resizable='yes'"); 
 }
 
 function f_estate_save() {

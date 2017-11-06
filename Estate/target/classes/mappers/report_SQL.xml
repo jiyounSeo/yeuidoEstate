@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, contSttSe
 				, dueDt
 				, contSe
+				, contSeText
 				, addr
 				, assignee
 				, assigneeTel
@@ -45,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, 1
 				, CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END
 				, #{contSe}
+				, #{contSeText}
 				, CASE WHEN #{addr} = '' THEN NULL ELSE #{addr} END
 				, #{assignee}
 				, #{assigneeTel}
@@ -77,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, contSttSe = #{contSttSe}
 		, dueDt = CASE WHEN #{dueDt} = '' THEN NULL ELSE #{dueDt} END
 		, contSe = #{contSe}
+		, contSeText = #{contSeText}
 		, addr = CASE WHEN #{addr} = '' THEN NULL ELSE #{addr} END
 		, assignee = #{assignee}
 		, assigneeTel = #{assigneeTel}
@@ -160,6 +163,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, contSttSe
 		, DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
 		, contSe
+		, contSeText
 		, addr
 		, assignee
 		, assigneeTel

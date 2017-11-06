@@ -9,6 +9,8 @@
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
+<script type="text/javascript" src="./resources/js/list/newBuilding.js"></script>
+<script type="text/javascript" src="./resources/js/list/newEstate.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -36,7 +38,9 @@ $(document).ready(function() {
 		login_contents = "${sessionScope.user.mbrNm}"+ "님 | " + " <a id='modifyMbrInfo' href='./modifyMemberView.do'>회원정보수정</a> | <a id='login' href='./logout.go'>로그아웃</a>";
 		
 		if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
-			login_contents += "<a id='memberMng' href='./memberListView.do'> | 회원관리</a>";
+			login_contents += "<a id='memberMng' href='./memberListView.do'> | 회원관리</a> | ";
+			login_contents += "<button id='btnAddrPopup' onclick='buildingPopup();return false;'>카테고리등록</button> | ";
+			login_contents += "<button id='btnAddrPopup' onclick='estatePopup();return false;'>부동산등록</button>";
 		}
 		
 	} else {

@@ -11,7 +11,7 @@
 <body >
 <form id="estatePopup" method="post"> 
 <div class="popup_page_title">
-	<img src="./resources/images/title_popup_ob_1.jpg">
+	<img src="../images/title_estate_add.jpg">
 </div>
 <div class="popup_page_container">
 	<table class="popup_page_table" style="width:100%;">
@@ -41,7 +41,7 @@
 		</tr>
 	
 		<tr>
-			<td style="width:15%" class="title" rowspan="3">주소<input type= "button" onClick="goPopup();" value= "주소찾기 " /> </td>
+			<td style="width:15%" class="title" height="70px;">주소<a href="#"  onClick="goPopup();"><br><img src="../images/btn_search_address.jpg" /></a><!-- input type= "button" onClick="goPopup();" value= "주소찾기 " />--> </td>
 			<td style="width:15%" >
 				도로명주소	 
 			</td>
@@ -51,15 +51,15 @@
 		</tr>
 		<tr>
 			<td style="width:15%" class="title" rowspan="2">상세 주소</td>
-			<td colspan="2">`
+			<td colspan="2">
 				<input type="text" id="estateAddrDtl" name="estateAddrDtl"> 
 			</td>
 		</tr>
 			
 	</table>
-	<img src="../images/btn_add.jpg" onclick="f_estate_save();return false;">
-	<div id="map" style="width:100%;height:400px;"></div>
-	
-</div>
+	<div style="width:97%;height:45px;text-align:right;padding-top:10px;">
+		<a href="#"><img src="../images/btn_add.jpg" onclick="f_estate_save();return false;"></a>
+	</div>
 <input type="hidden" id="estateCd" name="estateCd" />
+</div>
 </form>

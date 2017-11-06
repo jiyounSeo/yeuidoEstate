@@ -43,9 +43,10 @@
 						</table>
 					</td>
 					<td class="title">계약형태</td>
-					<td class="sub">					
-						<input type="radio" name="contSe_rb" id="contSe_rb1" class="rbbox" /><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
-						<input type="radio" name="contSe_rb" id="contSe_rb2" class="rbbox" /><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp;
+					<td class="sub">														
+						<input type="radio" name="contSe_rb" id="contSe_rb1" value="1" class="rbbox" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
+						<input type="radio" name="contSe_rb" id="contSe_rb2" value="2" class="rbbox" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp;
+						<input type="text" name="contSeText" id="contSeText" style="width:200px;" value="${result.contSeText}" disabled>
 					</td>
 				</tr>
 				<tr>

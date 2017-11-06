@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <% request.setCharacterEncoding("utf-8");%>
 <input type="hidden" name="getPath" id="getPath" value="<%=request.getContextPath()%>"/>
-<script type="text/javascript" src="./resources/js/list/newBuilding.js"></script>
-<script type="text/javascript" src="./resources/js/list/newEstate.js"></script>
 
 
 <table width="365px" cellpadding="0" cellspacing="0" border="0">
@@ -61,10 +59,10 @@
 		</td>
 	</tr>
 	
-	<tr>
+	<!-- <tr>
 		<td><button id="btnAddrPopup" onclick="buildingPopup();return false;">카테고리등록</button>
 		<button id="btnAddrPopup" onclick="estatePopup();return false;">부동산등록</button></td>
 	
-	</tr>
+	</tr> -->
 	<!-- <tr><td><button id="btnAddrPopup" onclick="buildingPopup();return false;">건물등록</button></td></tr> -->
 </table>

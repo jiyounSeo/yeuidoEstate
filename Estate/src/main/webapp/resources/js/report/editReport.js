@@ -22,6 +22,13 @@ $(document).ready(function()
 	    changeYear: true,
 	    yearSuffix: '년'
 	 });
+	
+	if($("#contSe").val() == "2"){
+		$("#contSeText").attr("disabled",false);
+	} else {
+		$("#contSeText").attr("disabled", true); 
+	}
+
 });
 
 function init_boss()
@@ -301,4 +308,16 @@ function f_report_delete() {
 		  $(location).attr('href', './commRepList.do')
 	  }
 	});
+}
+
+
+
+function f_disableFieldByRadioBtn(value){
+	console.log(value);
+	if(value == "2"){
+		$("#contSeText").attr("disabled",false);
+	} else {
+		$("#contSeText").val("");
+		$("#contSeText").attr("disabled", true); 
+	}
 }

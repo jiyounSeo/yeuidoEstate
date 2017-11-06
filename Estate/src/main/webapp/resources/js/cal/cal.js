@@ -232,7 +232,7 @@ function f_selectWorkItem(workNo){
 			  $("#workContent").val(Item.workContent);
 			
 			  var workTitle = "[" + Item.mbrNm + "] " + Item.workTitle;
-			  var workContent = "  →  " + data.workContent;
+			  var workContent = "  →  " + Item.workContent;
 			  $("#workTitleForAdmin").empty();
 			  $("#workContentForAdmin").empty();
 			  $("#workTitleForAdmin").append(workTitle);

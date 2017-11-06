@@ -12,7 +12,7 @@
 <body >
 <form id="buildingPopup" method="post"> 
 <div class="popup_page_title">
-	<img src="./resources/images/title_popup_ob_1.jpg">
+	<img src="../images/title_category_add.jpg">
 </div>
 <div class="popup_page_container">
 	<table class="popup_page_table" style="width:100%;">
@@ -34,7 +34,7 @@
 			<td colspan="2"><input type="text" id="buildNm" name="buildNm"> </td>
 		</tr>
 		<tr>
-			<td style="width:15%" class="title" rowspan="3">주소<input type= "button" onClick="goPopup();" value= "주소찾기 " /> </td>
+			<td style="width:15%" class="title" rowspan="3">주소<a href="#"  onClick="goPopup();"><br><img src="../images/btn_search_address.jpg" /></a><!-- <input type= "button" onClick="goPopup();" value= "주소찾기 " />  --></td>
 			<td style="width:15%" >
 				도로명주소	 
 			</td>
@@ -62,9 +62,11 @@
 			</td>
 		</tr>
 	</table>
-	<img src="../images/btn_add.jpg" onclick="f_building_save();return false;">
-	<div id="map" style="width:100%;height:400px;"></div>
-	
+	<div style="width:97%;height:45px;text-align:right;padding:20px 30px 10px 0;">
+		<a href="#"><img src="../images/btn_add.jpg" onclick="f_building_save();return false;"></a>
+	</div>
+	<div id="map" style="width:98%;height:380px;">
+	</div>	
 </div>
 <input type="hidden" id="buildCd" name="buildCd" />
 </form>

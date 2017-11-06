@@ -42,9 +42,19 @@ function f_reportList_select()
 				  '<td>' + data.contDt + '</td>' +
 				  '<td>' + data.midContDt + '</td>' +
 				  '<td>' + data.remainDt + '</td>' +
-				  '<td>' + data.managerNm + '</td>' +
-				  '<td>' + data.chkContent + '</td></tr>';
+				  '<td>' + data.managerNm + '</td>';
+				  
+				  if(data.contSttSe == "1"){
+					  htmlText += '<td>진행</td>';
+				  } else if(data.contSttSe == "2") {
+					  htmlText += '<td>완료</td>';
+				  } else if(data.contSttSe == "3") {
+					  htmlText += '<td>해지</td>';
+				  } else {
+					  htmlText += '<td>-</td>';					  
+				  }
 			  }
+			  htmlText = htmlText + '</tr>';
 		  }
 		  $("#reportList").append(htmlText);
 		  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));

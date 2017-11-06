@@ -22,9 +22,13 @@
 					<td class="title">계약종류</td>
 					<td id="contTpTd"></td>
 					<td class="title">계약형태</td>
-					<td class="sub">					
-						<input type="radio" name="contSe" id="contSe_rb1" class="rbbox" disabled /><label for="contSe_rb1" class="rb-label type" style="cursor:default">양타</label>&nbsp;&nbsp;
-						<input type="radio" name="contSe" id="contSe_rb2" class="rbbox" disabled /><label for="contSe_rb2" class="rb-label type" style="cursor:default">공동중개</label>&nbsp;&nbsp;
+					<td>					
+						<c:if test="${result.contSe == '1'}">
+							양타
+						</c:if>
+						<c:if test="${result.contSe == '2'}">
+							공동중개 [ ${result.contSeText} ]
+						</c:if>
 					</td>
 				</tr>
 				<tr>
@@ -92,9 +96,15 @@
 				<tr>
 					<td class="title">상태</td>
 					<td colspan="3">
-						<input type="radio" name="type_rb" id="type_rb1" class="rbbox" disabled/><label for="type_rb1" class="rb-label state" style="cursor:default">진행</label>&nbsp;&nbsp;
-						<input type="radio" name="type_rb" id="type_rb2" class="rbbox" disabled/><label for="type_rb2" class="rb-label state" style="cursor:default">완료</label>&nbsp;&nbsp;
-						<input type="radio" name="type_rb" id="type_rb3" class="rbbox" disabled/><label for="type_rb3" class="rb-label state" style="cursor:default">해지</label>
+						<c:if test="${result.contSttSe == '1'}">
+							진행
+						</c:if>
+						<c:if test="${result.contSttSe == '2'}">
+							완료
+						</c:if>
+						<c:if test="${result.contSttSe == '3'}">
+							해지
+						</c:if>
 					</td>
 				</tr>
 			</table>
