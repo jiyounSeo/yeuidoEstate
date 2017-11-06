@@ -98,7 +98,7 @@
 	padding-right:5px;
 }
 
-
+.new_report_table input[type=number],
 .new_report_table input[type=text] {
     width: 100%;
     height: 42px;

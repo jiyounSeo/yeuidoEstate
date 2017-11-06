@@ -24,12 +24,12 @@ $(document).ready(function() {
 	
 	if( '${sessionScope.user.mbrId}' != null && '${sessionScope.user.mbrId}' != ''){
 		
-		login_contents = "${sessionScope.user.mbrNm}"+ "님 | " + " <a id='modifyMbrInfo' href='./modifyMemberView.do'>회원정보수정</a> | <a id='login' href='./logout.go'>로그아웃</a>";
+		login_contents = "${sessionScope.user.mbrNm}"+ "님 | " + " <a id='modifyMbrInfo' href='./modifyMemberView.do'>회원정보</a> | <a id='login' href='./logout.go'>로그아웃</a>";
 		
 		if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
 			login_contents += "<a id='memberMng' href='./memberListView.do'> | 회원관리</a> | ";
-			login_contents += "<button id='btnAddrPopup' onclick='buildingPopup();return false;'>카테고리등록</button> | ";
-			login_contents += "<button id='btnAddrPopup' onclick='estatePopup();return false;'>부동산등록</button>";
+			login_contents += "<a href='#' onclick='buildingPopup();return false;'>카테고리등록</a> | ";
+			login_contents += "<a href='#' onclick='estatePopup();return false;'>부동산등록</a>";
 		}
 		
 	} else {

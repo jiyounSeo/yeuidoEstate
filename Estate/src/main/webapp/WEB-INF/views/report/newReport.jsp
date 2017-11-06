@@ -75,19 +75,19 @@
 					<td class="title">계약일</td>
 					<td><input type="text" id="contDt" name="contDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">계약금</td>
-					<td><input id="contAmt" name="contAmt" type="text"></td>
+					<td><input id="contAmt" name="contAmt" type="number"></td>
 				</tr>
 				<tr>
 					<td class="title">중도일</td>
 					<td><input type="text" id="midContDt" name="midContDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">중도금</td>
-					<td><input id="midContAmt" name="midContAmt" type="text"></td>
+					<td><input id="midContAmt" name="midContAmt" type="number"></td>
 				</tr>
 				<tr>
 					<td class="title">잔금일</td>
 					<td><input type="text" id="remainDt" name="remainDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">잔금</td>
-					<td><input id="remainAmt" name="remainAmt" type="text"></td>
+					<td><input id="remainAmt" name="remainAmt" type="number"></td>
 				</tr>
 				<tr>
 					<td class="title">특약사항 및 체크사항</td>
@@ -99,9 +99,9 @@
 				</tr>
 				<tr>
 					<td class="title">예상수수료</td>
-					<td><input id="preFees" name="preFees" type="text"></td>
+					<td><input id="preFees" name="preFees" type="number"></td>
 					<td class="title">실제수수료</td>
-					<td><input id="realFees" name="realFees" type="text"></td>
+					<td><input id="realFees" name="realFees" type="number"></td>
 				</tr>
 				<tr>
 					<td class="title">수수료변동사유</td>
@@ -122,7 +122,7 @@
 					</td>
 				</tr>
 			</table>
-			<div style="height:50px;"></div>
+			<div style="height:50px;"><input type="hidden" id="stateChngDt" name="stateChngDt" value=""></div>
 			<div style="width:1400px;margin:auto;text-align:center;">
 				<a href="#"><img id="btn_add" src="./resources/images/btn_add.jpg" onclick="f_report_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>

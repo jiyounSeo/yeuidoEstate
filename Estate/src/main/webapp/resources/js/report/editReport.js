@@ -273,7 +273,6 @@ function f_report_save()
 		{
 			if($("#contSttSe").val() != i+1){
 				$("#stateChngDt").val(today_full);
-				console.log("state changed!! > " + today_full);
 			}
 			$("#contSttSe").val(i + 1);
 			break;
@@ -281,13 +280,17 @@ function f_report_save()
 	}
 	
 	
-	var param = $("#report").serialize();
 	var urlStr;
 	if($("#btn_add").val() == undefined){
 		urlStr = "modifyReport.do";
 	} else {
 		urlStr = "insertReport.do";
+		$("#stateChngDt").val(today_full);
+		console.log("state changed!! > " + today_full);
 	}
+
+	var param = $("#report").serialize();
+	
 	$.ajax({
 	  url : "/"+urlStr,
 	  type: "post",
