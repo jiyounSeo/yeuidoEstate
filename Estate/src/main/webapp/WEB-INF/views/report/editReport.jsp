@@ -143,6 +143,7 @@
 	<input type="hidden" name="contTp2" id="contTp2" value="${result.contTp2}">
 	<input type="hidden" name="boss" id="boss" value="${result.boss}">
 	<input type="hidden" id="manager" name="manager" value="${result.manager}">
+	<input type="hidden" id="stateChngDt" name="stateChngDt" value="${result.stateChngDt}">
 </form>
  
 

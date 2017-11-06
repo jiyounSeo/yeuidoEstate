@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, boss
 				, regDt
 				, regUser
+				, stateChngDt
 				  )
         	values ( 
         			#{contractId}
@@ -67,6 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, #{bossSelect}
 				, now()
 				, #{user.loginId}
+				, now()
 		      	);
        ]]>
     </insert>
@@ -99,6 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, manager = #{managerSelect}
 		, boss = #{bossSelect}
 		, regDt = now()
+		, stateChngDt = ${stateChngDt}
      WHERE contractId = #{contractId}
     </update>
 
@@ -189,5 +192,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 WHERE contractId = #{contractId}
 	</select>
 	
-	
+	<select id="selectTodayNewReport" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT contractId
+		, contSttSe
+		, (SELECT mbrNm FROM member m WHERE m.loginId = c.regUser ) regUserNm 
+		, (SELECT estateNm FROM estate e, member m WHERE m.estateCd = e.estateCd and m.loginid = c.regUser) estateNm
+		, stateChngDt
+	  FROM contract c
+	  WHERE stateChngDt = #{todayDt}
+	</select>
 </mapper>

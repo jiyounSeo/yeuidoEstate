@@ -39,6 +39,10 @@ public class ReportServiceImpl implements ReportService
 	   return reportDAO.selectReportList(map);
    }
 
+   public List<Map<String,Object>> selectTodayNewReport(Map map) throws Exception {
+	   return reportDAO.selectTodayNewReport(map);
+   }
+   
    public Map selectReportInfo(Map map) throws Exception {
 	   return reportDAO.selectReportInfo(map);
    }

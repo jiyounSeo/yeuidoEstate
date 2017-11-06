@@ -11,29 +11,18 @@
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 <script type="text/javascript" src="./resources/js/list/newBuilding.js"></script>
 <script type="text/javascript" src="./resources/js/list/newEstate.js"></script>
+<script type="text/javascript" src="./resources/js/report/rollingNotice.js"></script>
+<script type="text/javascript" src="./resources/js/comm/jquery.vticker-min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
 	var login_contents = "<a id='login' href='./loginView.go'>로그인</a><a id='login' href='./regView.go'> | 회원가입</a>";
-	
-//	$("#loginDiv").hide();
-//	$("#logoutDiv").hide();
-	
+
 	$("#memberInfo").empty();
 	
 	userSession = '${sessionScope.user}';
 	
 	if( '${sessionScope.user.mbrId}' != null && '${sessionScope.user.mbrId}' != ''){
-		//$("#logoutDiv").show();
-		//$('#userNm').text('${sessionScope.user.mbrNm}'+'님|');	
-		//$('#userNm').css('display','inline');
-		//$('#modifyMbrInfo').css('display','inline');
-		//$('#login').text('로그아웃|');
-		//if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
-		//	$('#memberMng').css('display','inline');
-		//} else {
-		//	$('#memberMng').css('display','none');
-		//}
 		
 		login_contents = "${sessionScope.user.mbrNm}"+ "님 | " + " <a id='modifyMbrInfo' href='./modifyMemberView.do'>회원정보수정</a> | <a id='login' href='./logout.go'>로그아웃</a>";
 		
@@ -70,9 +59,18 @@ $(document).ready(function() {
 		}
 
 	});
+
+	f_getListForNewReportNotice();
+
+
 });
 
 </script>
+<style>
+	#rollingText .viewArea{height:22px;width:510px;position:relative;overflow:hidden;}
+	#rollingText ul{position:absolute; top:0px;}
+	#rollingText li{margin:5px 0;}
+</style>
 
 <body style="margin:0; background-color: #f6f8f7;overflow-x:hidden;">
 <form id="adminHeaderForm" style="padding:0; margin:0;">
@@ -84,8 +82,13 @@ $(document).ready(function() {
 			<div id="memberDiv" style="width:1480px;text-align: left; margin:0; padding-left:5px; padding-top:0; padding-right:0; padding-bottom:5px;position:relative;">
 				<table style="border-spacing:0px; padding:0; border:0; border-collapse:collapse; width:100%">
 					<tr>
-						<td width="1034px" id="memberInfo"></td>
-						<td width="58px" align="right"><a href="./adminMainView.do"><img src="./resources/images/btn_home.png"></a></td>
+						<td width="530px" id="memberInfo" height="40px;"></td>
+						<td width="514px">
+							<div id="rollingText" style="height:22px;"><div class="viewArea"><ul class="notice-list" id="newReportNt" name="newReportNt"></ul></div></div>
+						</td>
+						<td width="58px" align="right" height="40px;">
+							<a href="./adminMainView.do"><img src="./resources/images/btn_home.png"></a>
+						</td>
 						<td width="6px"></td>
 						<td width="364px"><a href="#" id="menubarBtn" mode="hide"><img src="./resources/images/btn_menu_show.png" id="menubarBtn_img"></a></td>
 					</tr>

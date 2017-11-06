@@ -261,10 +261,20 @@ function f_report_save()
 	}
 
 	var obj = document.getElementsByName('type_rb');
+
+	var cur_year = Number(moment().format('YYYY'));
+	var cur_month = Number(moment().format('M'));
+	var cur_day = moment().format('DD');
+	var today_full = cur_year+"-"+cur_month+"-"+cur_day;
+	
 	for( var i = 0; i < obj.length; i++)
 	{
 		if(obj[i].checked)
 		{
+			if($("#contSttSe").val() != i+1){
+				$("#stateChngDt").val(today_full);
+				console.log("state changed!! > " + today_full);
+			}
 			$("#contSttSe").val(i + 1);
 			break;
 		}
@@ -273,10 +283,11 @@ function f_report_save()
 	
 	var param = $("#report").serialize();
 	var urlStr;
-	if($("#btn_add").val() == undefined)
+	if($("#btn_add").val() == undefined){
 		urlStr = "modifyReport.do";
-	else
+	} else {
 		urlStr = "insertReport.do";
+	}
 	$.ajax({
 	  url : "/"+urlStr,
 	  type: "post",

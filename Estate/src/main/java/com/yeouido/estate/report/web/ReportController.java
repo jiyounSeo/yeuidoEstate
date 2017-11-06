@@ -192,7 +192,22 @@ public class ReportController {
 	    mav.setViewName("jsonView");
 	    return mav;
 	}	
-	
+
+	@RequestMapping(value= "/selectTodayNewReport.do", method=RequestMethod.POST)
+	public ModelAndView selectTodayNewReport( @RequestParam Map<String,Object> map, HttpSession session)  {  
+		ModelAndView mav= new ModelAndView();
+        			
+		List<Map<String,Object>> newList = new ArrayList<Map<String,Object>>();
+		try {
+			map.put("user",  session.getAttribute("user"));
+			newList = reportService.selectTodayNewReport(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("newList", newList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}	
 	/*@RequestMapping(value="/chatPage")
 	public String viewChatPage(){
 		return "/report/chatPage";

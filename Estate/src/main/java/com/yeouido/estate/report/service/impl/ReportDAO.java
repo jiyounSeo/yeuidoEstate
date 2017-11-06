@@ -38,6 +38,11 @@ public class ReportDAO extends AbstractDAO
    }
 
    @SuppressWarnings("unchecked")
+   public List<Map<String,Object>> selectTodayNewReport(Map map) throws Exception{
+       return selectList("reportDAO.selectTodayNewReport", map);
+   }
+   
+   @SuppressWarnings("unchecked")
    public Map selectReportInfo(Map map) throws Exception{
        return selectMap("reportDAO.selectReportInfo", map);
    }

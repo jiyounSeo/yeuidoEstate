@@ -16,5 +16,7 @@ public interface ReportService
 	
 	public List<Map<String,Object>> selectReportList(Map map) throws Exception;
 
+	public List<Map<String,Object>> selectTodayNewReport(Map map) throws Exception;
+	
 	public Map selectReportInfo(Map map) throws Exception;
 }
