@@ -112,7 +112,7 @@
 			<div style="width:1400px;margin:auto;text-align:center;">
 				<a href="./commRepList.do"><img src="./resources/images/btn_list.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<c:if test="${result.regUser == sessionScope.user.loginId || sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}">
-					<a href="./editReport?contractId=${result.contractId}"><img id="btn_edit" src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="./editReport.do?contractId=${result.contractId}"><img id="btn_edit" src="./resources/images/btn_edit.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="#" id="delBtn"><img src="./resources/images/btn_del2.jpg"></a>
 				</c:if>
 			</div>	
