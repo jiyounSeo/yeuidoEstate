@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
 <mapper namespace="objectDAO">
-    <insert id="insertObject" parameterType="java.util.HashMap" >
+    <insert id="insertObject"  parameterType="java.util.HashMap" >
       <selectKey resultType="string" keyProperty="objtNo" order="BEFORE">
         SELECT   if ( isnull(max(objtNo)), 1, MAX(CAST(objtNo AS signed integer))+1) from saleobject       
       </selectKey>
@@ -48,6 +48,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , frstRegUser
 				  , modfRegDt
 				  , modfRegUser
+				  , zipNo
+				  , jibunAddr
+				  , roadAddrPart1
+				  , addrDetail
+				  
 				  )
         	values ( 
         			#{objtNo}
@@ -88,6 +93,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{user.mbrId}
 				  , now()
 				  , #{user.mbrId}
+				  , #{zipNo}
+				  , #{jibunAddr}
+				  , #{roadAddrPart1}
+				  , #{addrDetail}
+				  
         	);
        ]]>
 		
@@ -123,12 +133,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , parcelArea = (CASE WHEN #{parcelArea} = '' THEN 0 ELSE #{parcelArea} END)
 		 , rightAmt = (CASE WHEN #{rightAmt} = '' THEN 0 ELSE #{rightAmt} END  )
 		 , manageAmt = ( CASE WHEN #{manageAmt} = '' THEN 0 ELSE #{manageAmt} END  )
-		, interiorYn = (CASE WHEN #{interiorYn} = '' THEN NULL ELSE #{interiorYn} END )
-		, surtaxYn = (CASE WHEN #{surtaxYn} = '' THEN NULL ELSE #{surtaxYn} END )
-		, parcelAmt = (CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END )
-		, premiumAmt = (CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END )
+		 , interiorYn = (CASE WHEN #{interiorYn} = '' THEN NULL ELSE #{interiorYn} END )
+		 , surtaxYn = (CASE WHEN #{surtaxYn} = '' THEN NULL ELSE #{surtaxYn} END )
+		 , parcelAmt = (CASE WHEN #{parcelAmt} = '' THEN 0 ELSE #{parcelAmt} END )
+		 , premiumAmt = (CASE WHEN #{premiumAmt} = '' THEN 0 ELSE #{premiumAmt} END )
 		 , modfRegDt = now()
 		 , modfRegUser = #{user.mbrId}
+		 , zipNo = #{zipNo}
+	 	 , jibunAddr = #{jibunAddr}
+	  	 , roadAddrPart1 = #{roadAddrPart1}
+	  	 , addrDetail = #{addrDetail}
      WHERE objtNo = #{objtNo}
        AND objtTp = #{objtTp}
     </update>
@@ -338,7 +352,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectObjectList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	SELECT DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , objtNo
 	     , objtTp
 	     , objtNm
@@ -359,7 +373,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , if (isnull(ondolYn), 'N', ondolYn) ondolYn
 	     , conditionTp 
 	     , (select commNm from commcd where commCd = conditionTp ) conditionTpNm
-	     , frstRegUser
+	     , obj.frstRegUser
 	     , activeTp
 	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
 	     , surtaxYn
@@ -375,7 +389,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          , (CASE WHEN obj.advertiseYn = 'Y' THEN '광고' END) advertiseNm
          , (CASE WHEN obj.publicYn = 'Y' THEN '공동' END) publicNm
          , mbrNm frstRegNm
-	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-',' e.tel3, ')' ) estateInfo
+	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
+	     , obj.zipNo
+	 	 , obj.jibunAddr
+	  	 , obj.roadAddrPart1 
+	  	 , obj.addrDetail
 	  FROM saleobject obj
 	     , estate e
 	     , member m
@@ -520,7 +538,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , obj.frstRegUser
 	     , m.mbrNm frstRegNm
 	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} != obj.frstRegUser then 'N' else 'Y' END ) ELSE 'Y' END) modifyYn
-	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-',' e.tel3, ')' ) estateInfo
+	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
+	     , obj.zipNo
+	 	 , obj.jibunAddr
+	  	 , obj.roadAddrPart1 
+	  	 , obj.addrDetail
 	  FROM saleobject obj
 	     , customer cust
 	     , member m
@@ -557,7 +579,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          , m.mbrNm frstRegNm
          , custNm
          , concat(custTel1, '-',custTel2,'-',custTel3) custTel
-         , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-',' e.tel3, ')' ) estateInfo
+         , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
+         , obj.zipNo
+	 	 , obj.jibunAddr
+	  	 , obj.roadAddrPart1 
+	  	 , obj.addrDetail
 	  FROM saleobject obj
 	     , customer cust
 	     , member m
@@ -618,8 +644,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select commNm from commcd where commCd = saleTp ) saleTpNm
 	     , obj.objtNm
 	     , obj.buildCd
-	     , (select jibunAddr from building b where b.buildCd = obj.buildCd ) jibunAddr
-         , if (isnull(obj.buildCd), obj.buildNm, (select b.buildNm from building b where b.buildCd = obj.buildCd )) buildNm 
+	     , if (isnull(obj.buildCd), obj.buildNm, (select b.buildNm from building b where b.buildCd = obj.buildCd )) buildNm 
 	     , obj.directionTp
 	     , (select commNm from commcd where commCd = obj.directionTp ) directionTpNm
 	     , obj.frstRegUser
@@ -637,6 +662,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          , concat(e.estateNm, '(', e.tel1, '-', e.tel2,'-', e.tel3, ')') estateInfo
          , custNm
          , concat(custTel1, '-',custTel2,'-',custTel3) custTel
+         , obj.zipNo
+         , if (isnull(obj.jibunAddr), (select jibunAddr from building b where b.buildCd = obj.buildCd ), obj.jibunAddr ) jibunAddr
+	  	 , obj.roadAddrPart1 
+	  	 , obj.addrDetail
 	  FROM saleobject obj
 	     , customer cust
 	     , estate e
@@ -645,7 +674,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   and obj.custId = cust.custId
 	   and obj.frstRegUser = m.mbrId 
 	   and m.estateCd  = e.estateCd
-	   and advertiseYn = 'Y'
+	   and (obj.advertiseYn = 'Y' OR obj.publicYn = 'Y')
 	   <if test = "objtTp != null and objtTp != '' ">
 	   and objtTp = #{objtTp}
 	   </if>
@@ -654,8 +683,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   </if>
 	   order by ${orderByColumn} desc
 	</select>
-	
-	
+
 	<select id="selectDueList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT objtNo
 				 , objtTp
