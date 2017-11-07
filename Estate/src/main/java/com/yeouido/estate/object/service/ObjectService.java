@@ -21,6 +21,7 @@ public interface ObjectService
 	public Map selectObjectTotalCnt(Map map) throws Exception;
 	
 	public Map selectObjectInfo(Map map) throws Exception;
-	
+
+	public List<Map<String,Object>> selectDueList(Map map) throws Exception;
 	
 }

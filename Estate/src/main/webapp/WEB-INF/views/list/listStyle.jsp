@@ -1,9 +1,5 @@
 <script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <style>
-@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
-body {
-    font-family: "Jeju Gothic", sans-serif;
-}
 
 .tab_bg {
 	display :block;
@@ -450,11 +446,6 @@ label.ck-label {
 */
 /* here */
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 
 input[type="checkbox"],
 input[type="radio"] {

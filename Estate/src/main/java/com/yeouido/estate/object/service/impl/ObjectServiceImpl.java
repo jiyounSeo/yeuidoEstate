@@ -77,5 +77,10 @@ public class ObjectServiceImpl  implements ObjectService
    public List<Map<String,Object>> selectTotalSearch(Map map) throws Exception {
 	   return objectDAO.selectTotalSearch(map);
    }
-   
+
+   /* 만기일 물건 리스트 */
+   @Override
+   public List<Map<String,Object>> selectDueList(Map map) throws Exception {
+	   return objectDAO.selectDueList(map);
+   }
 }

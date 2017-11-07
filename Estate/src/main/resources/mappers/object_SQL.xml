@@ -654,5 +654,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   </if>
 	   order by ${orderByColumn} desc
 	</select>
+	
+	
+	<select id="selectDueList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT objtNo
+				 , objtTp
+			     , (select commNm from commcd c where c.commCd = objtTp ) objtTpNm
+			     , saleTP
+			     , (select commNm from commcd c where c.commCd = saleTp ) saleTpNm
+			     , objtNm
+			     , buildCd
+                 , DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
+                 , (TO_DAYS(now()) - TO_DAYS(dueDt)) as intvDay
+			  FROM saleobject
+			  WHERE 1=1
+			  AND frstRegUser = #{user.mbrId} 
+			  AND 
+              (
+				  (
+					DATE_FORMAT(dueDt, '%Y-%m-%d')  -- 만기 3개월 1일전부터 1일후까지 list-up 
+					BETWEEN DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -3 MONTH), interval - 1 DAY), '%Y-%m-%d') 
+					AND DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -3 MONTH), interval + 1 DAY), '%Y-%m-%d')
+				  ) OR (
+					DATE_FORMAT(dueDt, '%Y-%m-%d')  -- 만기 2개월 1일전부터 1일후까지 list-up 
+					BETWEEN DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -2 MONTH), interval - 1 DAY), '%Y-%m-%d') 
+					AND DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -2 MONTH), interval + 1 DAY), '%Y-%m-%d')
+				  ) OR (
+					DATE_FORMAT(dueDt, '%Y-%m-%d')  -- 만기 1개월 1일전부터 1일후까지 list-up
+					BETWEEN DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -1 MONTH), interval - 1 DAY), '%Y-%m-%d') 
+					AND DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -1 MONTH), interval + 1 DAY), '%Y-%m-%d')
+				  ) OR (
+					DATE_FORMAT(dueDt, '%Y-%m-%d')  -- 만기 1주일 남은 물건 list-up 
+					BETWEEN DATE_FORMAT(DATE_ADD(now(), interval - 7 DAY), '%Y-%m-%d') 
+					AND DATE_FORMAT(DATE_ADD(now(),interval -0 DAY), '%Y-%m-%d')
+				  )
+			  )			  
+              order by dueDt desc
+	</select>
 		
 </mapper>

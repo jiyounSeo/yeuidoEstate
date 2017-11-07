@@ -290,4 +290,23 @@ public class ObjectController {
 		return "/search/totalSearch";	
 	}
 	
+	/* 
+	 * 만기일 알람용 물건목록조회
+	 */
+	@RequestMapping(value= "/selectDueList.do", method=RequestMethod.POST)
+	public ModelAndView selectDueList( @RequestParam Map<String,Object> map, HttpSession session)  {  
+		ModelAndView mav= new ModelAndView();
+        			
+		List<Map<String,Object>> dueList = new ArrayList<Map<String,Object>>();
+		try {
+			map.put("user",  session.getAttribute("user"));
+			dueList = objectService.selectDueList(map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("dueList",dueList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
 }

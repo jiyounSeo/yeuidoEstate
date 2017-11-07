@@ -286,7 +286,7 @@ function f_report_save()
 	} else {
 		urlStr = "insertReport.do";
 		$("#stateChngDt").val(today_full);
-		console.log("state changed!! > " + today_full);
+		alert("state changed!! > " + $("#stateChngDt").val());
 	}
 
 	var param = $("#report").serialize();
