@@ -38,6 +38,27 @@ $(document).ready(function(){
 	 });
 	
 });
+
+
+function goPopup(){ 
+	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
+	//호출하게 됩니다. 
+	var pop = window.open("./resources/popup/jusoPopup.jsp","pop","width=580,height=580, scrollbars='no', resizable='yes'"); 
+}
+//INF/views
+	//** 2017년 5월 모바일용 팝업 API 기능 추가제공 **/ 
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서  
+// 실제 주소검색 URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.  
+// var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");  } 
+
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){    
+	$("#roadAddrPart1").val(roadAddrPart1);
+	$("#jibunAddr").val(jibunAddr);
+	$("#zipNo").val(zipNo);
+	$("#addrDetail").val(addrDetail);
+}
+
+
 /*
  * 물건 선택 콤보
  */
@@ -56,10 +77,11 @@ function f_objtCombo_select() {
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
-			  var result = data.buildCombo;
-			  $.each (result, function(index) {
-				  $("#buildCd").append("<option value='" + result[index].buildCd + "'>"+ result[index].buildNm + "</option>");
+			  buildList = data.buildCombo;
+			  $.each (buildList, function(index) {
+				  $("#buildCd").append("<option value='" + buildList[index].buildCd + "'>"+ buildList[index].buildNm + "</option>");
 			  });
+			  
 		  }
 	});	
 }
@@ -154,6 +176,7 @@ function f_setting_text(result) {
 	$("#memo").val(result.memo);
 	$("#custId").val(result.custId);
 	$("#saleTp").val(result.saleTp);
+		
 }
 
 function inputNumberFormat(obj) { 
@@ -202,6 +225,19 @@ function f_saleobject_save() {
 
 	oEditors.getById["memo"].exec("UPDATE_CONTENTS_FIELD", []);	
 	var param = $("#"+objtForm).serialize();
+
+	if ( $("#objtTp").val() == "OT002" || $("#objtTp").val() == "OT003"  ) {
+		param.zipNo = $("#zipNo").val();
+		param.jibunAddr = $("#jibunAddr").val();
+		param.roadAddrPart1 = $("#roadAddrPart1").val();
+		param.addrDetail = $("#addrDetail").val();
+	} else {
+		var index = $("#buildCd option").index($("#buildCd option:selected"));
+		param.zipNo = buildList[index].zipNo;
+		param.jibunAddr = buildList[index].jibunAddr;
+		param.roadAddrPart1 = buildList[index].roadAddrPart1;
+		param.addrDetail = buildList[index].addrDetail;
+	}
 	
 	/*
 	 * 필수입력

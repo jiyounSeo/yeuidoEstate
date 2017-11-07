@@ -23,7 +23,7 @@
 				<tr><td colspan="3" height="30px" ></td></tr>
 				<tr>
 					<td colspan="3" height="90px" >
-						<button type="button" class="mbr" onclick="f_login();"><img src="./resources/images/login_btn.jpg"></button>
+						<button type="button" class="mbr" onclick="f_login();return false;"><img src="./resources/images/login_btn.jpg"></button>
 					</td>
 				</tr>
 				<tr><td colspan="3" height="10px" ></td></tr>

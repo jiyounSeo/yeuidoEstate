@@ -60,18 +60,26 @@
 	    border-bottom: 1px solid #989898;
 	}
 </style>
-
+<script type="text/javascript">
+$(document).ready(function() {
+	if( '${sessionScope.user.mbrId}' != null && '${sessionScope.user.mbrId}' != ''){
+		$("#hrefId").attr('href','./index.do');
+		$("#hrefId2").attr("href", "./adminMainView.do")
+	}
+	
+});
+</script>
 <body style="margin:0; background-color: #f6f8f7">  
 <table width="100%" height="121px" cellpadding="0" cellspacing="0" border="0">
 	<tr>
 		<td align="center" background="./resources/images/bg.jpg"  style="background-repeat:repeat-x;margin: 0; padding: 0; height: 121px;">
-			<a href="./"><img src="./resources/images/logo.jpg" style="height: 121px; border: 0" /></a>
+			<a id="hrefId" href="./"><img src="./resources/images/logo.jpg" style="height: 121px; border: 0" /></a>
 		</td>		
 	</tr>
 	<tr>
 		<td style="height:50px;" align="center" valign="middle">
 			<table style="width: 1470px;" cellpadding="0" cellspacing="0" border="0">
-				<tr><td align="right"><a href='./loginView.go'><img src="./resources/images/admin_button.png"></a></td></tr>
+				<tr><td align="right"><a id="hrefId2" href='./loginView.go'><img src="./resources/images/admin_button.png"></a></td></tr>
 			</table>
 		</td>
 	</tr>

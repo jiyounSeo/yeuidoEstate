@@ -45,6 +45,13 @@ public class HomeController {
 		return "/index";
 	}
 	
+	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
+	public String index(Locale locale, Model model) {
+		
+		//return "/adminMain";
+		return "/index";
+	}
+	
 	
 	// 다중파일업로드
 	  @RequestMapping(value = "/file_uploader_html5.do",

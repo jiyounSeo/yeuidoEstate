@@ -56,6 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 , mbrNm
 			 , loginId
 			 , pw
+			 , mbrTp as mbrTpCd
 			 , (SELECT commNm FROM commcd WHERE commCd = mbrTp) mbrTp
 			 , tel1
 			 , tel2
@@ -66,10 +67,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 , frstRegUser
 			 , DATE_FORMAT(modfRegDt, '%Y-%m-%d') modfRedDt
 			 , modfRegUser
-			 , (SELECT COUNT(*) FROM member WHERE mbrTp = 'MT001') totalCnt
+			 , (SELECT COUNT(*) FROM member) totalCnt
 		  from member m
 		 where 1=1
-		   and mbrTp = 'MT001' 
+		    
 	 LIMIT #{rowNum}, #{pagePerRow}
 	 	   
 	</select>

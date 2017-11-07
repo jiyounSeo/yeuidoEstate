@@ -40,7 +40,19 @@
 				/ 실 <input type="number" style="width:80px" id="realArea" name="realArea" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형&nbsp;&nbsp;&nbsp;
 				<input type="number" name="floor" name="floor" style="width:80px" min="0" max="999" oninput="if(this.value.length>3) this.value=this.value.slice(0,3)"  /> 층
 			</td>
-
+		</tr>
+		<tr>
+			<td rowspan="2" class="title">주소<button id="btnAddrPopup" onclick="goPopup();return false;">주소 찾기</button></td>
+			<td colspan="4">
+				<input type="text"  id="zipNo" name="zipNo" style="width:150px" readonly>
+				<input type="text"  id="jibunAddr" name="jibunAddr" style="width:1000px"readonly>
+				<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"style="width:1203px">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<input type="text"  id="addrDetail" name="addrDetail"  maxlength="150" style="width:1203px">
+			</td>
 		</tr>
 		<tr>
 			<td class="title_ess">유형(*)</td>
