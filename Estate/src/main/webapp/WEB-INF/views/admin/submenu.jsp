@@ -59,10 +59,10 @@
 		</td>
 	</tr>
 	
-	<!-- <tr>
+	 <tr>
 		<td><button id="btnAddrPopup" onclick="buildingPopup();return false;">카테고리등록</button>
 		<button id="btnAddrPopup" onclick="estatePopup();return false;">부동산등록</button></td>
 	
-	</tr> -->
+	</tr>
 	<!-- <tr><td><button id="btnAddrPopup" onclick="buildingPopup();return false;">건물등록</button></td></tr> -->
 </table>

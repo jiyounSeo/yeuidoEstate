@@ -15,10 +15,13 @@ $(document).ready(function(){
  */
 function f_category_combo(objtTpVal) {
 	$("#trCategory").empty();
-	  
 	if ( objtTpVal == "OT003" || objtTpVal == "OT002") {
+		$("#trCategory").append("<td>");
+		$("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'\')\">전체</a> | ");
+		$("#trCategory").append("</td>");
 		return;
 	}
+	
 	var param = {
 			objtTp : objtTpVal
 	};
@@ -27,6 +30,7 @@ function f_category_combo(objtTpVal) {
 		  url : "/selectBuildingCombo.go",
 		  type: "post",
 		  data : param,
+		  async : false,
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
@@ -44,7 +48,7 @@ function f_category_combo(objtTpVal) {
 var category = "";
 function f_category_select (cate) {
 	category = cate;
-	f_objt_select ('','');
+	f_objt_select (objtTpChk,'');
 }
 
 function gfn_isNull(str) {
@@ -73,6 +77,7 @@ var objtTpChk = "OT001";
 var saleTpChk = "ST001";
 
 function f_objt_select (objtTp, saleTp) {
+	f_category_combo(objtTp== '' ? objtTpChk : objtTp);
 	if (objtTp != '' ) {
 		objtTpChk = objtTp;
 	}
@@ -80,7 +85,6 @@ function f_objt_select (objtTp, saleTp) {
 		saleTpChk = saleTp;
 	}
 	var saleTpColor = f_saleTp_color (saleTpChk) ;
-	
 	$("#saleTpTr").empty();
 	$("#objtListTr").empty();
 	switch ( objtTpChk ) {
@@ -130,7 +134,6 @@ function f_objt_select (objtTp, saleTp) {
 		$("label[for='activeTp1']").css("display","none");
 		$("label[for='activeTp2']").css("display","none");
 	}
-	
 	f_objectList_select(objtTpChk, saleTpChk);
 }
 
@@ -203,7 +206,7 @@ function f_objectList_select(objtTp, saleTp){
 	 if (!gfn_isNull(saleTpChk)) {
 		 saleTp = saleTpChk;
 	 }
-	 f_category_combo(objtTp);
+	 
 	 	 
 	 var param = {
 		objtTp : objtTp

@@ -1,6 +1,9 @@
 <%@ include file="/WEB-INF/views/comm/indexHeader.jsp" %> 
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
+<script type="text/javascript" src="./resources/js/list/mainDtlObject.js"></script>
+
 
 <div class="new_page_container">
 	<table class="new_page_table">
@@ -8,7 +11,7 @@
 			<td class="title">물건명</td>
 			<td colspan="2">${objtNm}<!-- 물건명 --></td>
 			<td class="title">등록인</td>
-			<td>등록부동산 이름 / 부동산 전화번호</td>
+			<td>${estateInfo}</td>
 		</tr>
 		<tr>
 			<td class="title">단지명/면적</td>
@@ -56,12 +59,17 @@
 		<tr>
 			<td class="title">위치</td>
 			<td colspan="4">
-				해당 매물의 위치를 지도로 표기 가능?
+				<div id="map" style="width:100%;height:300px;"></div>
 			</td>
 		</tr>		
 	</table>
-	<div id="viewBottomDiv">
+	<%-- <div id="viewBottomDiv">
 		<%@ include file="/WEB-INF/views/comm/viewObBottom.jsp" %> 
 	</div>	
+	 --%>
+	 <input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
+	 <input type="hidden" name="objtNo" id="objtTp" value="${objtTp}"/>
+	 <input type="hidden" name="jibunAddr" id="jibunAddr" value="${jibunAddr}"/>
+	
 </div>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>

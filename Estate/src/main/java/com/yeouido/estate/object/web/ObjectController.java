@@ -35,6 +35,20 @@ public class ObjectController {
 	@Resource(name="objectService")
 	protected ObjectService objectService;
 	
+	@RequestMapping(value= "/indexObjectDtl.go", method=RequestMethod.GET)
+	public ModelAndView joinMemberView(@RequestParam Map<String,Object> map)  {  
+		Map resultMap = new HashMap<String, Object>();
+		try {
+			resultMap = objectService.selectObjectInfo(map);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ModelAndView mv = new ModelAndView("/detailView");
+		mv.addAllObjects(resultMap);
+		return mv;
+	}
+	
 	@RequestMapping(value= "/selectMainObjtList.go", method=RequestMethod.POST)
 	public ModelAndView selectMainObjtList( @RequestParam Map<String,Object> map)  {  
 		ModelAndView mav= new ModelAndView();

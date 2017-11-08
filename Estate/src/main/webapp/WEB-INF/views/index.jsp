@@ -15,23 +15,28 @@
 		</table>
 	</div>
   	<div class="list_div2" style="background-color :#F6F8F7; height:100px;" >	
-		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
+				<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
-				<td style="width:14%;"><a href='#objt' onclick="f_category_combo('OT001')"  style='text-decoration: none;'><li id="li_OT001" style="width:100%" class='tab_on_txt'>아파트</li></a></td>
+				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT001','ST001')"  style='text-decoration: none;'><li id="li_OT001" style="width:100%" class='tab_on_txt'>아파트</li></a></td>
 				<td style="width:2%;"></td>
-				<td style="width:14%;"><a href='#objt' onclick="f_category_combo('OT002')"  style='text-decoration: none;'><li id="li_OT002" style="width:100%"class='tab_on_txt'>상가</li></a></td>
+				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT002','ST001')"  style='text-decoration: none;'><li id="li_OT002" style="width:100%"class='tab_on_txt'>상가</li></a></td>
 				<td style="width:2%;"></td>
-				<td style="width:14%;"><a href='#objt' onclick="f_category_combo('OT003')"  style='text-decoration: none;'><li id="li_OT003" style="width:100%"class='tab_on_txt'>사무실/빌딩</li></a></td>
+				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT003','ST001')"  style='text-decoration: none;'><li id="li_OT003" style="width:100%"class='tab_on_txt'>사무실/빌딩</li></a></td>
 				<td style="width:2%;"></td>
-				<td style="width:14%;"><a href='#objt' onclick="f_category_combo('OT004')"  style='text-decoration: none;'><li id="li_OT004" style="width:100%"class='tab_on_txt'>오피스텔</li></a></td>
+				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT004','ST001')"  style='text-decoration: none;'><li id="li_OT004" style="width:100%"class='tab_on_txt'>오피스텔</li></a></td>
 				<td style="width:2%;"></td>
-				<td style="width:14%;"><a href='#objt' onclick="f_category_combo('OT005')"  style='text-decoration: none;'><li id="li_OT005" style="width:100%"class='tab_on_txt'>주상복합</li></a></td>
+				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT005','ST001')"  style='text-decoration: none;'><li id="li_OT005" style="width:100%"class='tab_on_txt'>주상복합</li></a></td>
 				<td style="width:2%;"></td>
-				<td style="width:14%;"><a href='#objt' onclick="f_category_combo('OT006')"  style='text-decoration: none;'><li id="li_OT006" style="width:100%"class='tab_on_txt'>분양권</li></a></td>
+				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT006','ST006')"  style='text-decoration: none;'><li id="li_OT006" style="width:100%"class='tab_on_txt'>분양권</li></a></td>
+			</tr>
+			<tr>
+				<td stlye="width;100%;height:45px;" colspan="11">&nbsp;</td>
 			</tr>
 		</table>
+
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr id="trCategory">
+
 			</tr>
 		</table>
 	</div>
@@ -59,9 +64,12 @@
 			<tr id="saleTpTr">
 			</tr>
 		</table>
+		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
+			<tr id="saleTpTr">
+			</tr>
+		</table>
 		<table style="background-color :#F6F8F7;" width="1500px" class="ob_list" id="objtTable">
-			<tr>
-				<td width="8%">등록일</td><td width="6%">유형</td><td width="6%">종류</td><td width="32%">물건명</td><td width="8%">면적(평형)</td><td width="5%">층</td><td width="15%">매물가(만원)</td><td width="20%">연락처</td>
+			<tr id="objtListTr">
 			</tr>
 			<tbody id="objtTbody">
 			</tbody>
@@ -73,9 +81,10 @@
 				<td align="center">
 					<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
 						<tr>
-							<td width="486px" align="center">
+							<td width="100%" align="center">
 								<div id="pagingDiv" class="pagination"></div>
 							</td>
+							
 						</tr>
 					</table>
 				</td>
@@ -83,23 +92,673 @@
 		</table>
 	</div>
 </div>
+<input type="hidden" name="objtTp" id="objtTp" />
+<input type="hidden" name="saleTp" id="saleTp" />
+
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
-<script id="objtListTemplte" type="text/x-jquery-tmpl">	
+
+<script id="objtTrTemplte1" type="text/x-jquery-tmpl">	
+<td width='100px' height='25px'>
+	<a href='#objt' onclick="f_objt_select('OT001','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT001','ST002')"  style='text-decoration: none;'><li id="li_ST002" class='tab_bg'>전세</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT001','ST003')" style='text-decoration: none;'><li id="li_ST003" class='tab_bg'>월세</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT001','ST004')" style='text-decoration: none;'><li id="li_ST004" class='tab_bg'>렌트</li></a>
+</td>
+<td width='70%'>&nbsp;</td>
+<td style="width:30%; align:right; valign:middle;">
+</td>	
+</script>
+<script id="objtTrTemplte2" type="text/x-jquery-tmpl">	
+<td width='100px' height='25px'>
+	<a href='#objt' onclick="f_objt_select('OT002','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT002','ST005')"  style='text-decoration: none;'><li id="li_ST005" class='tab_bg'>임대</li></a>
+</td>	
+<td width='76%'>&nbsp;</td>
+<td style="width:24%; align:right; valign:middle;">
+</td>
+</script>
+<script id="objtTrTemplte3" type="text/x-jquery-tmpl">	
+<td width='100px' height='25px'>
+	<a href='#objt' onclick="f_objt_select('OT003','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT003','ST005')"  style='text-decoration: none;'><li id="li_ST005" class='tab_bg'>임대</li></a>
+</td>	
+<td width='76%'>&nbsp;</td>
+<td style="width:24%; align:right; valign:middle;">
+</td>
+</script>
+<script id="objtTrTemplte4" type="text/x-jquery-tmpl">	
+<td width='100px' height='25px'>
+	<a href='#objt' onclick="f_objt_select('OT004','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT004','ST002')"  style='text-decoration: none;'><li id="li_ST002" class='tab_bg'>전세</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT004','ST003')" style='text-decoration: none;'><li id="li_ST003" class='tab_bg'>월세</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT004','ST004')" style='text-decoration: none;'><li id="li_ST004" class='tab_bg'>렌트</li></a>
+</td>	
+<td width='70%'>&nbsp;</td>
+<td style="width:30%; align:right; valign:middle;">
+</td>
+</script>
+<script id="objtTrTemplte5" type="text/x-jquery-tmpl">	
+<td width='100px' height='25px'>
+	<a href='#objt' onclick="f_objt_select('OT005','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT005','ST002')"  style='text-decoration: none;'><li id="li_ST002" class='tab_bg'>전세</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT005','ST003')" style='text-decoration: none;'><li id="li_ST003" class='tab_bg'>월세</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT005','ST004')" style='text-decoration: none;'><li id="li_ST004" class='tab_bg'>렌트</li></a>
+</td>
+<td width='70%'>&nbsp;</td>
+<td style="width:30%; align:right; valign:middle;">
+</td>
+</script>
+<script id="objtTrTemplte6" type="text/x-jquery-tmpl">	
+<td width='100px' height='25px'>
+	<a href='#objt' onclick="f_objt_select('OT006','ST006')" style='text-decoration: none;'><li id="li_ST006" class='tab_bg'>분양권</li></a>
+</td>	
+<td width='20px'>&nbsp;</td>
+<td width='100px'>
+	<a href='#objt' onclick="f_objt_select('OT006','ST007')"  style='text-decoration: none;'><li id="li_ST007" class='tab_bg'>전매</li></a>
+</td>	
+<td width='76%'>&nbsp;</td>
+<td style="width:24%; align:right; valign:middle;">
+</td>
+</script>
+
+<!-- 아파트 매매 -->
+<script id="saleTpTrTmpl1_ST001" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>단지명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>매매가</td>
+		<td>명도</td>
+		<td>온돌</td>
+		<td>상태</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+<!-- 아파트 전세 -->
+<script id="saleTpTrTmpl1_ST002" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>단지명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>보증금</td>
+		<td>명도</td>
+		<td>온돌</td>
+		<td>상태</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+<!-- 아파트 월세 -->
+<script id="saleTpTrTmpl1_ST003" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>단지명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>보증금</td>
+		<td>월세</td>
+		<td>명도</td>
+		<td>온돌</td>
+		<td>상태</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+<!--  아파트 렌트 -->
+<script id="saleTpTrTmpl1_ST004" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>단지명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>렌트비(월)</td>
+		<td>명도</td>
+		<td>온돌</td>
+		<td>상태</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<!-- 상가 매매 -->
+<script id="saleTpTrTmpl2_ST001" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>분양평수</td>
+		<td>실평수</td>
+		<td>층</td>
+		<td>매매가</td>
+		<td>보증금</td>
+		<td>월세</td>
+		<td>명도</td>
+		<td>업종</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<!-- 상가 임대 -->
+<script id="saleTpTrTmpl2_ST005" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>분양평수</td>
+		<td>실평수</td>
+		<td>층</td>
+		<td>보증금</td>
+		<td>월세</td>
+		<td>권리금</td>
+		<td>명도</td>
+		<td>업종</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<!-- 사무실/빌딩  -->
+<script id="saleTpTrTmpl3_ST001" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>분양평수</td>
+		<td>실평수</td>
+		<td>층</td>
+		<td>매매가</td>
+		<td>보증금</td>
+		<td>월세</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+<!-- 사무실/빌딩 임대 -->
+<script id="saleTpTrTmpl3_ST005" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>분양평수</td>
+		<td>실평수</td>
+		<td>층</td>
+		<td>보증금</td>
+		<td>월세</td>
+		<td>관리비</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<!-- 오피스텔 매매 -->
+<script id="saleTpTrTmpl4_ST001" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>매매가</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+<!-- 오피스텔 전세 -->
+<script id="saleTpTrTmpl4_ST002" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>보증금</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+<!-- 오피스텔 월세 -->
+<script id="saleTpTrTmpl4_ST003" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>보증금</td>
+		<td>월세</td>
+		<td>부가세</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+<!-- 오피스텔 렌트 -->
+<script id="saleTpTrTmpl4_ST004" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>렌트비(월)</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<!-- 주상복합 매매 -->
+<script id="saleTpTrTmpl5_ST001" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>매매가</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<!-- 주상복합 전세 -->
+<script id="saleTpTrTmpl5_ST002" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>보증금</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<!-- 주상복합 월세 -->
+<script id="saleTpTrTmpl5_ST003" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>보증금</td>
+		<td>월세</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<!-- 주상복합 렌트 -->
+<script id="saleTpTrTmpl5_ST004" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>평형</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>렌트비(월)</td>
+		<td>명도</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+<script id="saleTpTrTmpl6" type="text/x-jquery-tmpl">	
+		<td>등록일</td>
+		<td>건물명</td>
+		<td>면적</td>
+		<td>동</td>
+		<td>층</td>
+		<td>향</td>
+		<td>분양가</td>
+		<td>프리미엄</td>
+		<td>입주일</td>
+		<td>등록인</td>
+		<td>분류</td>
+</script>
+
+
+
+<!-- 아파트 매매 -->
+<script id="objtListTemplte1_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr class="list_data" >
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
 		<td>{{html $value.frstRegDt}}</td>
-		<td>{{html $value.saleTpNm}}</td>
-		<td>{{html $value.objtTpNm}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
 		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
 		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.ondolYn}}</td>
+		<td>{{html $value.conditionTpNm}}</td>
 		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
 </script>
+<!-- 아파트 전세 -->
+<script id="objtListTemplte1_ST002" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.ondolYn}}</td>
+		<td>{{html $value.conditionTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 아파트 월세 -->
+<script id="objtListTemplte1_ST003" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.ondolYn}}</td>
+		<td>{{html $value.conditionTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 아파트 렌트 -->
+<script id="objtListTemplte1_ST004" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.ondolYn}}</td>
+		<td>{{html $value.conditionTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<!-- 상가 매매 -->
+<script id="objtListTemplte2_ST001" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.realArea}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.businessNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 상가 임대 -->
+<script id="objtListTemplte2_ST005" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.realArea}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.rightAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.businessNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<!-- 사무실/빌딩 매매 -->
+<script id="objtListTemplte3_ST001" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.realArea}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 사무실/빌딩 임대 -->
+<script id="objtListTemplte3_ST005" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.realArea}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.rightAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<!-- 오피스텔 매매 -->
+<script id="objtListTemplte4_ST001" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 오피스텔 전세 -->
+<script id="objtListTemplte4_ST002" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 오피스텔 월세 -->
+<script id="objtListTemplte4_ST003" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.surtaxYn}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 오피스텔 렌트 -->
+<script id="objtListTemplte4_ST004" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+
+<!-- 오피스텔 매매 -->
+<script id="objtListTemplte5_ST001" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.bargainAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 오피스텔 전세 -->
+<script id="objtListTemplte5_ST002" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 오피스텔 월세 -->
+<script id="objtListTemplte5_ST003" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.depositAmt}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 오피스텔 렌트 -->
+<script id="objtListTemplte5_ST004" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.monthlyAmt}}</td>
+		<td>{{html $value.availableTpNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+	
+<script id="objtListTemplte6" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.objtNm}}</td>
+		<td>{{html $value.area}}</td>
+		<td>{{html $value.dong}}</td>
+		<td>{{html $value.floor}}</td>
+		<td>{{html $value.directionTpNm}}</td>
+		<td>{{html $value.parcelAmt}}</td>
+		<td>{{html $value.premiumAmt}}</td>
+		<td>{{html $value.availableDt}}</td>
+		<td>{{html $value.estateInfo}}</td>
+		<td>{{html $value.activeTpNm}}</td>
+	</tr>
+{{/each}}	
+</script>
+
 <script id="objtListEmptyTemplte" type="text/x-jquery-tmpl">	
-	<tr class="list_data" >
-		<td colspan="8">조회된 결과가 존재하지 않습니다.</td>
+	<tr class="list_data">
+		<td colspan = {{html col}}>해당하는 물건이 존재하지 않습니다.</td>
 	</tr>
 </script>

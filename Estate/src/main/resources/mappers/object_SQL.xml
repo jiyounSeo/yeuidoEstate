@@ -539,10 +539,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , m.mbrNm frstRegNm
 	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} != obj.frstRegUser then 'N' else 'Y' END ) ELSE 'Y' END) modifyYn
 	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
-	     , obj.zipNo
-	 	 , obj.jibunAddr
-	  	 , obj.roadAddrPart1 
-	  	 , obj.addrDetail
+	     , if ( isnull(obj.zipNo), (select zipno from building b where b.buildCd = obj.buildCd ) , obj.zipNo) zipno 
+	 	 , if ( isnull(obj.jibunAddr), (select jibunAddr from building b where b.buildCd = obj.buildCd ) , obj.jibunAddr) jibunAddr 
+	 	 , if ( isnull(obj.roadAddrPart1), (select roadAddrPart1 from building b where b.buildCd = obj.buildCd ) , obj.roadAddrPart1) roadAddrPart1 
+	 	 , if ( isnull(obj.addrDetail), (select addrDetail from building b where b.buildCd = obj.buildCd ) , obj.addrDetail) addrDetail 
+	 	 
 	  FROM saleobject obj
 	     , customer cust
 	     , member m
