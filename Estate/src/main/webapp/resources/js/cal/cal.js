@@ -183,7 +183,7 @@ function f_modifyWork(index) {
 	$("#workTitle").val(workList[index].workTitle);
 	$("#workContent").val(workList[index].workContent);
 	
-	var workTitle = "[" + workList[index].mbrNm + "] " + workList[index].workTitle;
+	var workTitle = "[" + workList[index].mbrNm + "] " + workList[index].workTitle + " ( " + workList[index].frstRegDt + " )";
 	var workContent = "  →  " + workList[index].workContent;
 	$("#workTitleForAdmin").empty();
 	$("#workContentForAdmin").empty();
@@ -231,7 +231,7 @@ function f_selectWorkItem(workNo){
 			  $("#workTitle").val(Item.workTitle);
 			  $("#workContent").val(Item.workContent);
 			
-			  var workTitle = "[" + Item.mbrNm + "] " + Item.workTitle;
+			  var workTitle = "[" + Item.mbrNm + "] " + Item.workTitle + " (" + Item.frstRegDt + " )";
 			  var workContent = "  →  " + Item.workContent;
 			  $("#workTitleForAdmin").empty();
 			  $("#workContentForAdmin").empty();

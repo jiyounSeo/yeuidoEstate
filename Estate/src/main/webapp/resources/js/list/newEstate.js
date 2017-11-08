@@ -2,6 +2,7 @@
 $( document ).ready(function() {
 	
 });
+document.domain = "여의도닷컴.com";
 
 function f_map_setting(myaddress) {
 	var pointX = 0;

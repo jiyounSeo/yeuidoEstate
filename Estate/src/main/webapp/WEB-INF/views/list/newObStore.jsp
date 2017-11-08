@@ -12,7 +12,6 @@
 <div class="new_page_title">
 	<img src="./resources/images/title_new_ob_2.jpg">
 </div>
-
 <div class="new_page_container">
 	<table class="new_page_table">
 		<tr>
@@ -42,7 +41,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td rowspan="2" class="title">주소<button id="btnAddrPopup" onclick="goPopup();return false;">주소 찾기</button></td>
+			<td rowspan="2" class="title">주소<a href="#" onClick="goPopup();return false;"><br><img src="./resources/images/btn_search_address.jpg" /></a></td>
 			<td colspan="4">
 				<input type="text"  id="zipNo" name="zipNo" style="width:150px" readonly>
 				<input type="text"  id="jibunAddr" name="jibunAddr" style="width:1000px"readonly>

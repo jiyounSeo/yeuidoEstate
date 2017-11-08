@@ -41,16 +41,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td rowspan="2" class="title">주소<button id="btnAddrPopup" onclick="goPopup();return false;">주소 찾기</button></td>
+			<td rowspan="2" class="title">주소<a href="#" onClick="goPopup();return false;"><br><img src="./resources/images/btn_search_address.jpg" /></a></td>
 			<td colspan="4">
 				<input type="text"  id="zipNo" name="zipNo" style="width:150px" readonly>
-				<input type="text"  id="jibunAddr" name="jibunAddr" style="width:1000px"readonly>
-				<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"style="width:1203px">
+				<input type="text"  id="jibunAddr" name="jibunAddr" style="width:900px"readonly>
+				<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"style="width:100%">
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
-				<input type="text"  id="addrDetail" name="addrDetail"  maxlength="150" style="width:1203px">
+				<input type="text"  id="addrDetail" name="addrDetail"  maxlength="150" style="width:100%">
 			</td>
 		</tr>
 		<tr>
@@ -66,11 +66,11 @@
 			<td class="title_ess">매매가(*)</td>
 			<td colspan="2">
 				<input type="text" id="bargainAmt" name="bargainAmt"  onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:140px"/> 만원</td>
-			<td class="title_ess">보증금(*)</td>
+			<td class="title_ess">보증금(*)<br>(단위:만원)</td>
 			<td>
-				<input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> 만원 / 월세 
-				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> 만원 / 관리비
-				<input type="text" id="manageAmt" name="manageAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> 만원
+				<input type="text" id="depositAmt" name="depositAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> / 월세 
+				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> / 관리비
+				<input type="text" id="manageAmt" name="manageAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> 
 			</td>
 		</tr>
 		

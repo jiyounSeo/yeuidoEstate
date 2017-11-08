@@ -235,7 +235,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , frstRegUser
 	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
 	  FROM workdoc w
-	 WHERE frstRegDt = #{selectedDate}
+	 WHERE DATE_FORMAT(frstRegDt, '%Y-%m-%d') = #{selectedDate}
 	   AND frstRegUser in (    		<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1
@@ -270,7 +270,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , frstRegUser
 	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
 	     , (SELECT COUNT(*) FROM workdoc 
-								WHERE frstRegDt = w.frstRegDt
+								WHERE DATE_FORMAT(frstRegDt, '%Y-%m-%d') = DATE_FORMAT(w.frstRegDt, '%Y-%m-%d')
 	  							AND frstRegUser in (    		
 	  								<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
@@ -291,7 +291,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 				AND objtNo != ''
                                 ) objCnt
 	     , (SELECT COUNT(*) FROM workdoc 
-								WHERE frstRegDt = w.frstRegDt
+								WHERE DATE_FORMAT(frstRegDt, '%Y-%m-%d') = DATE_FORMAT(w.frstRegDt, '%Y-%m-%d')
 	  							AND frstRegUser in (    		
 	  								<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId

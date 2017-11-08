@@ -76,6 +76,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectBuildingCombo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT buildCd 
 	 	 , buildNm
+	 	 , roadAddrPart1
+		  , jibunAddr
+		  , addrDetail
+		  , zipNo
 	 FROM building
 	where objtTp = #{objtTp}
 	</select>
