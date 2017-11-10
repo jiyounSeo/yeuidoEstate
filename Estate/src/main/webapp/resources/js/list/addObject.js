@@ -483,11 +483,12 @@ function f_disableFieldByRadioBtn(value){
 }
 
 
-document.domain = "여의도닷컴.com";
+//document.domain = "여의도닷컴.com";
 
 function goPopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
+	window.document.domain = "여의도닷컴.com";
 	var pop = window.open("./resources/popup/jusoPopup.jsp","pop","width=580,height=580, scrollbars='no', resizable='yes'"); 
 }
 //INF/views

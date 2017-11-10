@@ -6,7 +6,7 @@ $( document ).ready(function() {
 	
 });
 
-document.domain = "여의도닷컴.com";
+//document.domain = "여의도닷컴.com";
 
 function f_map_setting(myaddress) {
 	var pointX = 0;
@@ -59,7 +59,7 @@ function resizeWindow(win)    {
 
 function buildingPopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
-	//호출하게 됩니다. 
+	//호출하게 됩니다. 	
 	var pop = window.open("./resources/popup/newBuilding.jsp","_blank","width=850,height=930, scrollbars='no', resizable='yes'");  
 }
 
@@ -67,6 +67,7 @@ function buildingPopup(){
 function goPopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
+	window.document.domain = "여의도닷컴.com";
 	var pop = window.open("jusoPopup.jsp","pop","width=580,height=580, scrollbars='no', resizable='yes'"); 
 }
 //INF/views
