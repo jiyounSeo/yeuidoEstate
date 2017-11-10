@@ -280,6 +280,13 @@
 	text-align:left;
 }
 
+.bottom_btn_table{
+	width:1400px;
+	border-collapse:collapse;
+	border: 0 solid #b2b2b2;	
+}
+
+
 .new_page_table {
 	width:1400px;
 	border-collapse:collapse;

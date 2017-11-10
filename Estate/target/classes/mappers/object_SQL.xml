@@ -537,7 +537,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          , DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , obj.frstRegUser
 	     , m.mbrNm frstRegNm
-	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} != obj.frstRegUser then 'N' else 'Y' END ) ELSE 'Y' END) modifyYn
+	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} = obj.frstRegUser or #{user.mbrTp} = 'MT003' or #{user.mbrTp} = 'MT004' then 'Y' else 'N' END ) ELSE 'Y' END) modifyYn
 	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
 	     , if ( isnull(obj.zipNo), (select zipno from building b where b.buildCd = obj.buildCd ) , obj.zipNo) zipno 
 	 	 , if ( isnull(obj.jibunAddr), (select jibunAddr from building b where b.buildCd = obj.buildCd ) , obj.jibunAddr) jibunAddr 

@@ -74,7 +74,7 @@ function f_objectDtl_select() {
 	};
 
 	var objtForm = "";
-	switch (objtTp) {
+	switch ($("#objtTp").val()) {
 		case "OT001":
 			objtForm = "newObApt";
 			break;

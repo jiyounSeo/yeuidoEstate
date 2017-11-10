@@ -465,7 +465,11 @@
 		<td>{{html $value.availableTpNm}}</td>
 		<td>{{html $value.ondolYn}}</td>
 		<td>{{html $value.conditionTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -484,7 +488,11 @@
 		<td>{{html $value.availableTpNm}}</td>
 		<td>{{html $value.ondolYn}}</td>
 		<td>{{html $value.conditionTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -504,7 +512,11 @@
 		<td>{{html $value.availableTpNm}}</td>
 		<td>{{html $value.ondolYn}}</td>
 		<td>{{html $value.conditionTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -523,7 +535,11 @@
 		<td>{{html $value.availableTpNm}}</td>
 		<td>{{html $value.ondolYn}}</td>
 		<td>{{html $value.conditionTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -543,7 +559,11 @@
 		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
 		<td>{{html $value.businessNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -562,7 +582,11 @@
 		<td>{{html $value.rightAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
 		<td>{{html $value.businessNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -581,7 +605,11 @@
 		<td>{{html $value.depositAmt}}</td>
 		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -599,7 +627,11 @@
 		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.rightAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -617,7 +649,11 @@
 		<td>{{html $value.directionTpNm}}</td>
 		<td>{{html $value.bargainAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -634,7 +670,11 @@
 		<td>{{html $value.directionTpNm}}</td>
 		<td>{{html $value.depositAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -653,7 +693,11 @@
 		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.surtaxYn}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -670,7 +714,11 @@
 		<td>{{html $value.directionTpNm}}</td>
 		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -688,7 +736,11 @@
 		<td>{{html $value.directionTpNm}}</td>
 		<td>{{html $value.bargainAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -705,7 +757,11 @@
 		<td>{{html $value.directionTpNm}}</td>
 		<td>{{html $value.depositAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -723,7 +779,11 @@
 		<td>{{html $value.depositAmt}}</td>
 		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -739,7 +799,11 @@
 		<td>{{html $value.floor}}</td>
 		<td>{{html $value.monthlyAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 {{/each}}	
@@ -757,8 +821,13 @@
 		<td>{{html $value.parcelAmt}}</td>
 		<td>{{html $value.premiumAmt}}</td>
 		<td>{{html $value.availableDt}}</td>
+	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>
+	{{else}}
+		<td>{{html $value.frstRegNm}}</td>
+	{{/if}}
 		<td>{{html $value.activeTpNm}}</td>
+	
 	</tr>
 {{/each}}	
 </script>
