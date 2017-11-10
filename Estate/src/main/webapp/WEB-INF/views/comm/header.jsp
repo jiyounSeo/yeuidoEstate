@@ -14,3 +14,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
   </head>
+<%@ include file="/WEB-INF/views/comm/style.jsp" %> 

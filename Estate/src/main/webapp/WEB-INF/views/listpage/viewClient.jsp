@@ -46,8 +46,8 @@
 			<td colspan="4"><!--  -->${reqContent}</td>
 		</tr>		
 	</table>
-	<div style="height:10px;"></div>
-	<div style="width:1400px;margin:auto;text-align:center;" id="modfDiv">
+	<div style="height:10px;"></div>	
+	<div style="width:1400px;padding:20px; 0;margin:auto;text-align:center;" id="modfDiv">
 		<table style="width:1400px;padding:0;margin:0;border:0">
 			<tbody><tr>
 				<td align="left" width="50%">
@@ -57,7 +57,7 @@
 					</div>
 					
 				</td>
-				<td align="right">
+				<td align="right" width="50%">
 					<a href="#"><img src="./resources/images/btn_cl_list.jpg" onclick="f_list_view_change2();return false;"></a>
 				</td>
 			</tr>

@@ -30,6 +30,10 @@ public class MemberDAO extends AbstractDAO
    public List selectEstate(Map map) throws Exception{
 	   return selectList("memberDAO.selectEstate", map);
    }
+   public int updateMemberTp(Map<String, Object> map) throws Exception{
+       return update("memberDAO.updateMemberTp",map);
+   }
+   
    public int updateMemberAccept(Map<String, Object> map) throws Exception{
        return update("memberDAO.updateMemberAccept",map);
    }

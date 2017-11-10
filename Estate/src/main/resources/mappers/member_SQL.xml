@@ -101,6 +101,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      WHERE mbrId = #{mbrId}
     </update>
     
+    <update  id="updateMemberTp" parameterType="java.util.HashMap" >
+    UPDATE member
+       SET mbrTp = #{mbrTp}
+     WHERE mbrId = #{mbrId}
+    </update>
+       
     <delete id="deleteMember" parameterType="java.util.HashMap" >
     DELETE FROM member 
      WHERE mbrId = #{mbrId}

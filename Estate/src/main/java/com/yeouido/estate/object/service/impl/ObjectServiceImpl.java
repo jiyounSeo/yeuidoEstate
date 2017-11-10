@@ -24,8 +24,10 @@ public class ObjectServiceImpl  implements ObjectService
    public Map insertObject(Map map) throws Exception {
 	   Map<String, Object> custMap = customerDAO.selectCustomerConfirm(map);
 	   if (("").equals(custMap.get("custId")) || custMap.get("custId") == null ) {
-		   map.put("custId", custMap.get("custId2"));
-		   customerDAO.insertNewCustomer(map);
+		   if (!("").equals(custMap.get("custNm")) && custMap.get("custNm") != null) {
+			   map.put("custId", custMap.get("custId2"));
+			   customerDAO.insertNewCustomer(map);
+		   }
 	   } else {
 		   map.put("custId", custMap.get("custId"));
 	   }
@@ -35,7 +37,10 @@ public class ObjectServiceImpl  implements ObjectService
    /* 물건수정 */
    @Override
    public Map modifyObject(Map map) throws Exception {
-	   customerDAO.modifyObjtCustomer(map);
+	   
+	   if (!("").equals(map.get("custId")) && map.get("custId") != null) {
+		   customerDAO.modifyObjtCustomer(map);
+	   }
 	   objectDAO.modifyObject(map);
 	   return map;
    }

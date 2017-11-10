@@ -232,6 +232,25 @@ public class MemberController {
 		mav.setViewName("jsonView");
 	    return mav;
 	}
+	@RequestMapping(value= "/updateMemberTp.do", method=RequestMethod.POST)
+	public ModelAndView updateMemberTp( @RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		List<Object> estateList = new ArrayList<Object>();
+
+		try {
+			int result = memberService.updateMemberTp(map);
+			mav.addObject("messageCd", "1");
+			mav.addObject("message", "등급변경이 완료 되었습니다.");
+			
+		} catch (Exception e) {
+			mav.addObject("messageCd", "2");
+			mav.addObject("message", "등급변경 중 오류가 발생하였습니다.");
+			e.printStackTrace();
+		}
+		
+		mav.setViewName("jsonView");
+	    return mav;
+	}
 	
 	@RequestMapping(value= "/deleteMember.do", method=RequestMethod.POST)
 	public ModelAndView deleteMember( @RequestParam Map<String,Object> map)  {  

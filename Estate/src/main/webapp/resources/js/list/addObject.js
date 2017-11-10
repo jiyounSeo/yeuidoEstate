@@ -344,7 +344,9 @@ function f_saleobject_save() {
 	  success : function(data){
 		  alert (data.message);
 		  if (data.messageCd == 1) {
-			  if (confirm ("등록하신 고객정보를 수정하시겠습니까?")) {
+			  if ( data.custId != "" && data.custId != null && 
+					  confirm ("등록하신 고객정보를 수정하시겠습니까?")) {
+				  $("#custId").val(data.custId);
 				  f_cust_dtl_view();
 			  } else{
 				  f_objt_dtl_view();
@@ -407,6 +409,7 @@ function f_cust_dtl_view() {
 			break;
 	}
 	$("#publicYn").val("");
+	$("#custNm").val("");
 	var comSubmit = new ComSubmit($("#"+objtForm).attr('id'));
 	comSubmit.setUrl("/viewClient.do");
 	comSubmit.submit();

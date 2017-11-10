@@ -493,11 +493,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , objtTp
 	     , (select commNm from commcd where commCd = objtTp ) objtTpNm
 	     , objtNm
-	     , cust.custId
-	     , cust.custNm
-	     , cust.custTel1
-	     , cust.custTel2
-	     , cust.custTel3
+	     , obj.custId
+	     , (select custNm from customer c where c.custId = obj.custId) custNm
+	     , (select custTel1 from customer c where c.custId = obj.custId) custTel1
+	     , (select custTel2 from customer c where c.custId = obj.custId) custTel2
+	     , (select custTel3 from customer c where c.custId = obj.custId) custTel3
 	     , businessNm
 	     , buildCd
 	     , if (isnull(buildCd), buildNm, (select buildNm from building b where b.buildCd = obj.buildCd )) buildNm 
@@ -545,12 +545,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , if ( isnull(obj.addrDetail), (select addrDetail from building b where b.buildCd = obj.buildCd ) , obj.addrDetail) addrDetail 
 	 	 
 	  FROM saleobject obj
-	     , customer cust
+	     
 	     , member m
 	     , estate e
 	 WHERE objtNo = #{objtNo}
 	   AND objtTp = #{objtTp}
-	   AND cust.custId = obj.custId
 	   and m.mbrId = obj.frstRegUser
 	   and m.estateCd = e.estateCd
 	</select>
@@ -585,14 +584,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , obj.jibunAddr
 	  	 , obj.roadAddrPart1 
 	  	 , obj.addrDetail
-	  FROM saleobject obj
+	  FROM saleobject obj 
 	     , customer cust
 	     , member m
 	     , estate e
 	 WHERE 1=1
-	   and obj.custId = cust.custId
 	   and obj.frstRegUser = m.mbrId 
 	   and m.estateCd = e.estateCd
+	   and obj.custId = cust.custId
 	   <if test="objtNm != null and objtNm != '' ">
 	   and obj.objtNm like concat('%',#{objtNm},'%')
 	   </if>

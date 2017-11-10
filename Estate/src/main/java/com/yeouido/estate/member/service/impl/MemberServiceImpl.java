@@ -38,6 +38,10 @@ public class MemberServiceImpl  implements MemberService
 		return memberDAO.updateMemberAccept(map);
 	}
 	@Override
+	public int updateMemberTp(Map map) throws Exception {
+		return memberDAO.updateMemberTp(map);
+	}
+	@Override
 	public int deleteMember(Map map) throws Exception {
 		return memberDAO.deleteMember(map);
 	}

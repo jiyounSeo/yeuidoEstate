@@ -43,6 +43,14 @@
 	overflow-x:hidden; 
 	overflow-y:scroll;
 }
+
+.cl_list tr.list_data  {
+	cursor:pointer;
+}
+
+.cl_list tr:hover.list_data  {
+	background-color: #eeeeee;
+}
 </style>
 
 <form id="totalSearch" name="totalSearch" action="post">
@@ -118,7 +126,7 @@
 </script>
 <script id="objtListTemplte" type="text/x-jquery-tmpl">	
 {{each objtList}}		
-	<tr onclick="f_objtDtl_view('{{html $index}}');return false;">
+	<tr onclick="f_objtDtl_view('{{html $index}}');return false;" class="list_data">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>

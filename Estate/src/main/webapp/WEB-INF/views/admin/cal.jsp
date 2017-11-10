@@ -1,9 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="./resources/js/cal/clndr.js"></script>
 <script type="text/javascript" src="./resources/js/cal/cal.js"></script>
-<%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
-
+<%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
 <table width="1103px" cellpadding="0" cellspacing="0" border="0">
 	<tr>
 		<td>
@@ -40,12 +39,13 @@
 									<textarea rows="5" cols="50" name="workContent" id="workContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea>
 								</td>
 							</tr>
+							<tr><td colspan="2" align="right"><a href="#work" onclick="f_work_detail();return false;">대상바로가기</a></td></tr>
 						</table>
 					</fieldset>
 					</c:if>
 					<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 작업내역view -->
 					<fieldset style="width:90%;background-color:#f0efef;">
-						<div id="workTitleForAdmin" style="text-align:left;padding:10px 20px 10px 20px;"></div>
+						<a href="#work" onclick="f_work_detail();return false;"><div id="workTitleForAdmin" style="text-align:left;padding:10px 20px 10px 20px;"></div></a>
 						<div id="workContentForAdmin" style="text-align:left;padding:0 20px 10px 30px;"></div>
 					</fieldset>
 					</c:if>
@@ -64,13 +64,11 @@
 								<td width="85%"><textarea rows="5" cols="50" name="dirContent" id="dirContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea></td>
 								<td width="15%"><a href="#"><img src="./resources/images/btn_write_todo.png" onClick="f_todo_save()"></a></td>						
 							</tr>
-							<tr><td colspan="2" style="text-align:right;padding-right:30px;"><a href="#work" onclick="f_work_detail();return false;">대상바로가기</a></td></tr>
 						</table>
 					</div>
 				</c:if>
 				<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 수정버튼 -->
 				<td class="btn">
-							<a href="#work" onclick="f_work_detail();return false;">대상바로가기</a>
 							<a href="#" onClick="f_closePopup()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="#" id="popOkAdd" ><img src="./resources/images/btn_ok.jpg" onClick="f_work_save()"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:if>

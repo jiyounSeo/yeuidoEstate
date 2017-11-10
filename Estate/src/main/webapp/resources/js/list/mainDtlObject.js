@@ -16,7 +16,7 @@ function f_map_setting(myaddress) {
         pointY = result.items[0].point.y;
         f_map_draw( pointX, pointY);
 	});
-s}
+}
 
 function f_map_draw(x, y) {
 	// marker1

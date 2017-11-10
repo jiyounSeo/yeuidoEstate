@@ -62,11 +62,29 @@ function f_memeber_accept(index) {
 				  alert (data.message);
 				  f_member_list();
 			  }
-		});
-		
+		});		
 	} 
-	
 }
+
+function f_changeMbrTp(index, mbrTpValue) {
+	
+	if(mbrTpValue != $("#mbrTp").val()){
+		if (confirm ("["+mbrList[index].mbrNm+"] 회원의 등급을 변경하시겠습니까?")) {
+			$.ajax({
+				  url : "/updateMemberTp.do",
+				  type: "post",
+				  data : {mbrId: mbrList[index].mbrId, mbrTp : mbrTpValue},
+				  dataType : "json",
+				  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+				  success : function(data){
+					  alert (data.message);
+					  f_member_list();
+				  }
+			});		
+		} 
+	}
+}
+
 function f_memeber_reject(index) {
 	if (confirm ("["+mbrList[index].mbrNm+"] 회원을 삭제처리 하시겠습니까?")) {
 		$.ajax({

@@ -34,7 +34,6 @@
 				<select  id="buildCd" name="buildCd" style="width:350px">
 				</select>&nbsp;
 				<input type="number" style="width:135px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형
-				<input type= "button" onClick="goPopup();" value= " 팝업 " /> 
 			</td>
 			
 			<td class="title_ess">유형(*)</td>

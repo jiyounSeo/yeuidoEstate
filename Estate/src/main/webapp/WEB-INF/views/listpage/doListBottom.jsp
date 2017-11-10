@@ -7,12 +7,12 @@
 	<table class="new_page_table">
 		<tr>
 			<td class="title3">작업 &nbsp;입력<br><p>
-			<button type="button" style="align:right;" id="btnAddrPopup" class="btn_type1" onclick="f_addWork();return false;">추가</button>
+			<button type="button" style="align:right;cursor:pointer;" id="btnAddrPopup" class="btn_type1" onclick="f_addWork();return false;">추가</button>
 			</td>
 			<td style="height:200px"><!-- 작업내역 -->
-				<div class="scrollDiv" cellpadding="0" cellspacing="0" >
-					<table cellpadding="0" cellspacing="0" border="0" width="100%">
-						<tbody id="workTbody">
+				<div class="scrollDiv" style="border:0;">
+					<table cellpadding="0" cellspacing="0" width="100%" style="border:0;">
+						<tbody id="workTbody" style="border:0;">
 						</tbody>
 					</table>
 				</div>
@@ -51,17 +51,17 @@
 	
 <script id="workListTemplte" type="text/x-jquery-tmpl">	
 {{each workList}}		
-	<tr>
-		<td style="width:20%;align:center;"><a href="#dtl" onclick="f_modifyWork('{{html $index}}');return false;">{{html $value.frstRegDt}}</a></td>
+	<tr onclick="f_modifyWork('{{html $index}}');return false;" style="cursor:pointer;height:45px;">
+		<td style="width:20%;align:center;">{{html $value.frstRegDt}}</td>
 		<td style="width:10%;"> [{{html $value.mbrNm}}]</td>
 		<td style="width:60%;"> {{html $value.workTitle}}</td>
-		<td style="width:10%;"><button type="button" style="align:right;" id="btnDel" class="btn_delType" onclick="f_delete_work({{html $index}});return false;">삭제</button></td>
+		<td style="width:10%;"><img src="./resources/images/icon_del.png" style="align:right;width:32px;heigh:42px;" id="btnDel" onclick="f_delete_work({{html $index}});return false;"></td>
 	</tr>
 {{/each}}	
 </script>
 
 <script id="workListEmptyTemplte" type="text/x-jquery-tmpl">	
-	<tr>
+	<tr style="height:45px;">
 		<td colspan="3">해당하는 작업내역이 존재하지 않습니다.</td>
 	</tr>
 </script>

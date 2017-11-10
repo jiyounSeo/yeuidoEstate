@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td class="title">단지명/면적</td>
-			<td colspan="2">${buildNm} &nbsp;&nbsp;${area}평형</td>
+			<td colspan="2">${buildNm} &nbsp;&nbsp;<c:if test="${area != 0.00 }">${area}평형</c:if></td>
 			<td class="title">유형</td>
 			<td> ${saleTpNm}
 				<!-- 유형 -->
@@ -34,14 +34,14 @@
 			<td class="title">보증금</td>
 			<td>
 				<c:if test="${depositAmt eq '0' }">--</c:if><c:if test="${depositAmt ne '0' }"><fmt:formatNumber value="${depositAmt}" pattern="#,###"/>만원</c:if> / 
-				<c:if test="${monthlyAmt eq '0' }">--</c:if><c:if test="${monthlyAmt ne '0' }"> / 월세  <fmt:formatNumber value="${monthlyAmt}" pattern="#,###"/> <!-- 월세 --> 만원</c:if>
+				<c:if test="${monthlyAmt eq '0' }">--</c:if><c:if test="${monthlyAmt ne '0' }">월세  <fmt:formatNumber value="${monthlyAmt}" pattern="#,###"/> <!-- 월세 --> 만원</c:if>
 			</td>
 		</tr>
 		<tr>
 			<td class="title">동 / 층 / 향</td>
 			<td colspan="2">
-				<!-- 동 --> <c:if test="${dong eq '' || dong eq null }">--</c:if><c:if test="${dong ne '' && dong ne null}">${dong}동/&nbsp;&nbsp;&nbsp;</c:if> / 
-				<!-- 층 --> <c:if test="${floor eq '' || floor eq null}">--</c:if><c:if test="${floor ne '' && floor ne null}">${floor}층/&nbsp;&nbsp;&nbsp;</c:if> / 
+				<!-- 동 --> <c:if test="${dong eq '' || dong eq null }">--</c:if><c:if test="${dong ne '' && dong ne null}">${dong}동&nbsp;&nbsp;&nbsp;</c:if> / 
+				<!-- 층 --> <c:if test="${floor eq '' || floor eq null}">--</c:if><c:if test="${floor ne '' && floor ne null}">${floor}층&nbsp;&nbsp;&nbsp;</c:if> / 
 				<!-- 향 --> <c:if test="${directionTpNm eq '' || directionTpNm eq null}">--</c:if><c:if test="${directionTpNm ne '' && directionTpNm ne null}">${directionTpNm}향</c:if>
 			</td>
 			<td class="title">만기일</td>

@@ -9,6 +9,7 @@ public interface MemberService
 	public Map selectOneMember(Map map)throws Exception;
 	public List<Object> selectEstate(Map map) throws Exception;
 	public int updateMemberAccept(Map map) throws Exception;
+	public int updateMemberTp(Map map) throws Exception;
 	public int updateMemberInfo(Map map) throws Exception;
 	public Map selectMemberInfo(Map map)throws Exception;
 	public int deleteMember(Map map) throws Exception;

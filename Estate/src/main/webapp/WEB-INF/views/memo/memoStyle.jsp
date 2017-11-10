@@ -21,6 +21,11 @@
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
+.scrollDiv tbody tr:hover {
+  background-color: #eeeeee;
+}
+
+
 .addMemoPopup {
 	background-color:#fafafa;
 	width:900px;
@@ -70,9 +75,9 @@
 }
 
 .addMemoPopup textarea {
-	width:99%;
+	width:100%;
 	border: 1px solid #d3d3d3;
-	margin: 5px 0 5px 0;
+	padding: 12px 20px;
 }
 .new_page_title,
 .new_page_container {

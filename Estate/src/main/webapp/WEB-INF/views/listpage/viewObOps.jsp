@@ -11,7 +11,7 @@
 			<td class="title">물건명</td>
 			<td colspan="2">${objtNm}<!--  --></td>
 			<td class="title">등록인</td>
-			<td>${estateInfo}<!-- 분류 --></td>
+			<td><c:if test="${pageNm eq 'objtPublic'}">${estateInfo}</c:if><c:if test="${pageNm eq 'objtActiveY' || pageNm eq 'objtActiveN'}">${frstRegNm}</c:if></td>
 		</tr>
 		<tr>
 			<td class="title">고객정보</td>
@@ -22,31 +22,37 @@
 		</tr>
 		<tr>
 			<td class="title">단지명/면적</td>
-			<td colspan="2">${buildNm} &nbsp;&nbsp;${area}평형</td>
+			<td colspan="2">${buildNm} &nbsp;&nbsp;<c:if test="${area != 0.00 }">${area}평형</c:if></td>
 			<td class="title">유형</td>
 			<td><!--  -->${saleTpNm}</td>
 		</tr>
 		<tr>
 			<td class="title">매매가</td>
-			<td colspan="2"><fmt:formatNumber value="${bargainAmt}" pattern="#,###"/><!-- 매매가 --> 만원</td>
+			<td colspan="2"><c:if test="${bargainAmt eq '' }">--</c:if><c:if test="${bargainAmt ne '' }"><fmt:formatNumber value="${bargainAmt}" pattern="#,###"/><!-- 매매가 --> 만원</c:if></td>
 			<td class="title">보증금</td>
-			<td><!-- 보증금 --><fmt:formatNumber value="${depositAmt}" pattern="#,###"/> 만원 / 월세  <fmt:formatNumber value="${monthlyAmt}" pattern="#,###"/> <!-- 월세 --> 만원</td>
+			<td>
+				<c:if test="${depositAmt eq '0' }">--</c:if><c:if test="${depositAmt ne '0' }"><fmt:formatNumber value="${depositAmt}" pattern="#,###"/>만원</c:if> / 
+				<c:if test="${monthlyAmt eq '0' }">--</c:if><c:if test="${monthlyAmt ne '0' }">월세  <fmt:formatNumber value="${monthlyAmt}" pattern="#,###"/> <!-- 월세 --> 만원</c:if>
+			</td>
 		</tr>
 		<tr>
 			<td class="title">동 / 층 / 향</td>
 			<td colspan="2">
-				<!-- 동 --> <c:if test="${dong != '' && dong ne null}">${dong}동/&nbsp;&nbsp;&nbsp;</c:if>
-				<!-- 층 --> <c:if test="${floor != '' && floor ne null}">${floor}층/&nbsp;&nbsp;&nbsp;</c:if>
-				<!-- 향 --> <c:if test="${directionTpNm != '' && directionTpNm ne null}">${directionTpNm}향</c:if>
-			</td>	
+				<!-- 동 --> <c:if test="${dong eq '' || dong eq null }">--</c:if><c:if test="${dong ne '' && dong ne null}">${dong}동&nbsp;&nbsp;&nbsp;</c:if> / 
+				<!-- 층 --> <c:if test="${floor eq '' || floor eq null}">--</c:if><c:if test="${floor ne '' && floor ne null}">${floor}층&nbsp;&nbsp;&nbsp;</c:if> / 
+				<!-- 향 --> <c:if test="${directionTpNm eq '' || directionTpNm eq null}">--</c:if><c:if test="${directionTpNm ne '' && directionTpNm ne null}">${directionTpNm}향</c:if>
+			</td>
 			<td class="title">만기일</td>
-			<td>${dueDt}<!-- 만기일 --></td>
+			<td><c:if test="${dueDt eq null }">--</c:if><c:if test="${dueDt ne null }">${dueDt}</c:if><!-- 만기일 --></td>
 		</tr>
 		<tr>
 			<td class="title">방 수 / 욕실 수</td>
-			<td colspan="2"><!-- 방 -->${roomCnt} 개 / <!-- 욕실 -->${bathCnt} 개</td>
+			<td colspan="2">
+				<!-- 방 --><c:if test="${roomCnt eq '0' || roomCnt eq null}">--</c:if><c:if test="${roomCnt ne '0' && roomCnt ne null}">${roomCnt} 개 </c:if> / 
+				<!-- 욕실 --><c:if test="${bathCnt eq '0' || bathCnt eq null}">--</c:if><c:if test="${bathCnt ne '0' && bathCnt ne null}">${bathCnt} 개</c:if>
+			</td>
 			<td class="title">부가세</td>
-			<td><!--  -->${surtaxYn}</td>
+			<td><c:if test="${surtaxYn eq '' || surtaxYn eq null }">--</c:if><c:if test="${surtaxYn ne '' && surtaxYn ne null}">${surtaxYn}</c:if></td>
 		</tr>
 		<tr>
 			<td class="title">명도</td>
@@ -54,7 +60,9 @@
 		</tr>
 		<tr>
 			<td class="title">매물설명</td>
-			<td colspan="4"><!--  -->${memo}</td>
+			<td colspan="4">
+				<c:if test="${memo eq '<p>&nbsp;</p>' || memo eq null}">--</c:if><c:if test="${memo ne '<p>&nbsp;</p>' && memo ne null}"> ${memo}</c:if><!-- 매물설명 -->
+			</td>
 		</tr>
 		<tr>
 			<td class="title">분류</td>

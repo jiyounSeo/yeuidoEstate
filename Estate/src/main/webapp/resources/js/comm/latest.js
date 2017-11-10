@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	latest_bbs("notice", "#notice_latest", "5");
 	latest_bbs("taskdoc", "#taskdoc_latest", "5");
-	latest_bbs("direction", "#direction_latest", "0");
+	makeTodoList();
 });
 
 var cur_year = Number(moment().format('YYYY'));
@@ -10,7 +10,7 @@ var cur_day = moment().format('DD');
 
 var today = cur_month + "/" + cur_day;
 var today_full = cur_year+"-"+cur_month+"-"+cur_day;
-var htmlText;
+
 
 function latest_bbs(bbs_name, target, listSize){
 	var url;
@@ -18,8 +18,6 @@ function latest_bbs(bbs_name, target, listSize){
 	switch(bbs_name){
 		case "notice": url = "/selectLatestNoticeList.do"; break;
 		case "taskdoc": url = "/selectLatestTaskList.do"; break;
-		case "direction": url = "/selectNotDoneDirList.do"; break;
-		case "dueDt": url="/selectDueList.do"; break;
 		default: url = ""; break;
 	}
 	var param = {
@@ -66,6 +64,70 @@ function latest_bbs(bbs_name, target, listSize){
 }
 
 var new_icon = "<img src = './resources/images/icon_new.gif'>";
+
+
+function makeTodoList(){
+
+	var url = "/selectNotDoneDirList.do";
+	var param = { endNum : 0 };
+
+	$.ajax({
+		url : url,
+		type: "post",
+		data : param,
+		dataType : "json",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		success : function(result){
+						
+			var htmlText = "";
+			$("#direction_latest").empty();
+			htmlText = htmlText + "<ul>";
+			htmlText = htmlText + makeDirLatestList(result.dirList);	
+			var listSize = result.dirList.length;
+			makeDueList(htmlText, listSize);
+						
+		
+		},
+		error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
+			//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			console.log("getLatest fail");
+		}
+	});
+
+}
+
+function makeDueList(htmlText, listSize){
+
+	var url = "/selectDueList.do"; 
+	var param = { endNum : 0 };
+
+	$.ajax({
+		url : url,
+		type: "post",
+		data : param,
+		dataType : "json",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		success : function(result){
+			
+			htmlText = htmlText + makeDueDtLatestList(result.dueList);	
+			listSize += result.dueList.length;
+			
+			htmlText = htmlText + '</ul>';
+
+			if(listSize == 0){
+				htmlText = "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- 지시사항이 없습니다";
+			}
+			
+			console.log(htmlText);
+			$("#direction_latest").append(htmlText);	
+		},
+		error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
+			//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			console.log("getLatest fail");
+		}
+	});
+	
+}
 
 function makeNoticeLatestList(listArray){
 	

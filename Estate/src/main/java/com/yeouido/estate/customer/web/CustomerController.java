@@ -167,19 +167,17 @@ public class CustomerController {
 	public String viewClient(@RequestParam Map<String,Object> map, Model model, HttpSession session){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
+			model.addAllAttributes(map);
 			map.put("user",  session.getAttribute("user"));
 			result = customerService.selectCustomerInfo(map);
 			model.addAllAttributes(result);
 			model.addAttribute("messageCd", "1");
-			
 		} catch (Exception e) {
 			model.addAttribute("messageCd", "2");
 			e.printStackTrace();
 		}
 		String url = "";
-		model.addAllAttributes(map);
-		
-		if ( ("custPublic").equals(map.get("pageNm")) ) {
+		if ("custPublic".equals(map.get("pageNm"))) {
 			url = "/listpage/viewClient"; 
 		} else {
 			url = "/listpage/viewClientWork"; 
