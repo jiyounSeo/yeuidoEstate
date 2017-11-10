@@ -166,7 +166,7 @@ function selectWorkListAtdate(date){
 			  var htmlText = '<table cellpadding="0" cellspacing="0">';
 			  for(var i=0; i<workList.length; i++){
 				  var item = workList[i];
-				  htmlText = htmlText + '<tr><td><a href="#" onclick="f_modifyWork(' + i + ');return false;">[' + item.mbrNm + '] ' + item.workTitle + '</a></td></tr>';
+				  htmlText = htmlText + '<tr onclick="f_modifyWork(' + i + ');return false;" style="cursor:pointer;"><td><a href="#">[' + item.mbrNm + '] ' + item.workTitle + '</a></td></tr>';
 			  }
 			  htmlText += '</table>';
 			  console.log(htmlText);

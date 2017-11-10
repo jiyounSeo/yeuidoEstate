@@ -292,11 +292,16 @@
   background: #fff;
 }
 .work tr:nth-child(even) {
-  background: #efefef;
+  background: f6f6f8;
 }
 
 .work td {
 	padding-left: 30px;
+}
+
+
+.work tr:hover {
+  background-color: #eeeeee;
 }
 
 .addMemoPopup {
