@@ -64,13 +64,13 @@
 								<td width="85%"><textarea rows="5" cols="50" name="dirContent" id="dirContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea></td>
 								<td width="15%"><a href="#"><img src="./resources/images/btn_write_todo.png" onClick="f_todo_save()"></a></td>						
 							</tr>
-							<tr><td colspan="2" style="text-align:right;padding-right:30px;"><a href="#">대상바로가기</a></td></tr>
+							<tr><td colspan="2" style="text-align:right;padding-right:30px;"><a href="#work" onclick="f_work_detail();return false;">대상바로가기</a></td></tr>
 						</table>
 					</div>
 				</c:if>
 				<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 수정버튼 -->
 				<td class="btn">
-							<a href="#">대상바로가기</a>
+							<a href="#work" onclick="f_work_detail();return false;">대상바로가기</a>
 							<a href="#" onClick="f_closePopup()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="#" id="popOkAdd" ><img src="./resources/images/btn_ok.jpg" onClick="f_work_save()"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:if>
@@ -79,6 +79,13 @@
 			<tr><td height="23px;"><img src="./resources/images/alert_bottom2.jpg"></td></tr>
 		</table>
 		<input type="hidden" name="workNo" id="workNo">
+		<input type="hidden" name="custId" id="custId">
+		<input type="hidden" name="objtNo" id="objtNo">
+		<input type="hidden" name="saleTp" id="saleTp">
+		<input type="hidden" name="objtTp" id="objtTp">
+		<input type="hidden" name="pageNm" id="pageNm">
+		<input type="hidden" name="viewUrl" id="viewUrl">
+		
 		<input type="hidden" name="curSelectedItemIdx" id="curSelectedItemIdx">
 		<input type="hidden" name="memberType" id="memberType" value="${sessionScope.user.mbrTp}" />
 	</form>

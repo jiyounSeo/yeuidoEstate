@@ -10,7 +10,48 @@ $(document).ready(function(){
 var objtTp = "OT001";
 var saleTp = "ST001";
 
+var category = "";
+function f_category_select (cate) {
+	category = cate;
+	f_objt_select (objtTp,'');
+}
+
+/*
+ * 물건 선택 콤보
+ */
+function f_category_combo(objtTpVal) {
+	$("#trCategory").empty();
+	if ( objtTpVal == "OT003" || objtTpVal == "OT002") {
+		$("#trCategory").append("<td>");
+		$("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'\')\">전체</a> | ");
+		$("#trCategory").append("</td>");
+		return;
+	}
+	var param = {
+			objtTp : objtTpVal
+	};
+	
+	$.ajax({
+		  url : "/selectBuildingCombo.go",
+		  type: "post",
+		  data : param,
+		  async : false,
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+			  var result = data.buildCombo;
+			  $("#trCategory").append("<td>");
+			  $("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'\')\">전체</a> | ");
+			  $.each (result, function(index) {
+				  $("#trCategory").append("<a href='#cate' onclick=\"f_category_select(\'"+result[index].buildCd+"\')\">"+result[index].buildNm+"</a> | ");
+			  });
+			  $("#trCategory").append("</td>");
+		  }
+	});	
+}
+
 function f_objt_select (objtTpChk, saleTpChk) {
+	f_category_combo(objtTpChk== '' ? objtTp : objtTpChk);
 	if (objtTpChk != '' ) {
 		objtTp = objtTpChk;
 	} 
@@ -141,6 +182,7 @@ function f_objectList_select(objtTpChk, saleTpChk){
 	   , activeTp : activeTpChk//gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
 	   , myObjt : gfn_isNull($("input[name='objt_activeTp4']:checked").val()) ? "" : $("input[name='objt_activeTp4']:checked").val()
 	   , currentPage : Number(currObjtPage)
+	   , category : category
 	   , pagePerRow : $("#viewMode").val() == "1"  ? 5 : 20
 	   , pageSize : 10
 	};

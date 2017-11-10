@@ -69,14 +69,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<!-- 완료한 지시사항 리스트(회원) -->
     <select id="selectDoneDirList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT dirNo
-	     , workNo
+	     , d.workNo
+         , w.custId
+         , w.objtNo
 	     , dirContent
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , isDone
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as doneDate
 	  FROM direction d
+	  	 , workdoc w
 	 WHERE 1=1
+	   and d.workNo = w.workNo 
 	 AND targetUser=#{user.mbrId}
 	 AND isDone='Y'
      order by regDate desc
@@ -109,7 +113,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 선택날짜의 지시사항 리스트 -->
     <select id="selectDirListAtWork" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT dirNo
-	     , workNo
+	     , d.workNo
+	     , w.custId
+         , w.objtNo
+         , if (isnull(w.objtNo), '', (select objtTp from saleobject o where w.objtNo = o.objtNo )) objtTp 
+	     , if (isnull(w.objtNo), '', (select saleTp from saleobject o where w.objtNo = o.objtNo )) saleTp 
 	     , dirContent
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
 	     , (select mbrNm from member m where d.targetUser = m.mbrId) targetUserNm
@@ -117,8 +125,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , isDone
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as doneDate
 	  FROM direction d
+	  	 , workdoc w
 	 WHERE 1=1
-	 AND workNo=#{selectedWorkNo}
+	 AND d.workNo=#{selectedWorkNo}
+	 and d.workNo = w.workNo
      order by regDate desc
 	</select>       
     

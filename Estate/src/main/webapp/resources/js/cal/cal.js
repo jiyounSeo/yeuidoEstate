@@ -175,11 +175,63 @@ function selectWorkListAtdate(date){
 	});
 }
 
+function f_work_detail() {
+	if ($("#objtNo").val() != "") {
+		f_objt_detail();
+	} else if ($("#custId").val() != "") {
+		f_mbr_detail();
+	}
+}
+function f_objt_detail() {
+	var url = "";
+	switch ( $("#objtTp").val() ) {
+		case "OT001"	:
+			url = "viewObApt";
+			break;
+		case "OT002"	:
+			url = "viewObStore";
+			break;
+		case "OT003"	:
+			url = "viewObOffice";
+			break;
+		case "OT004"	:
+			url = "viewObOps";
+			break;
+		case "OT005"	:
+			url = "viewObHrapt";
+			break;
+		case "OT006"	:
+			url = "viewObTicket";
+			break;
+		
+	}
+	$("#viewUrl").val(url);
+	
+	var frm = $('#workForm')[0];
+	frm.action = '/objtDtlView.do';
+	frm.method = 'POST';
+	frm.submit();	
+	
+}
+function f_mbr_detail() {
+	var frm = $('#workForm')[0];
+	$("#pageNm").val("custPublic");
+	frm.action = '/viewClient.do';
+	frm.method = 'POST';
+	frm.submit();
+
+}
 
 function f_modifyWork(index) {
 	
 	$("#curSelectedItemIdx").val(index);
 	$("#workNo").val(workList[index].workNo);
+	$("#objtNo").val(workList[index].objtNo);
+	$("#objtTp").val(workList[index].objtTp);
+	console.log (workList[index]);
+	$("#saleTp").val(workList[index].saleTp);
+	$("#custId").val(workList[index].custId);
+	
 	$("#workTitle").val(workList[index].workTitle);
 	$("#workContent").val(workList[index].workContent);
 	
@@ -226,8 +278,11 @@ function f_selectWorkItem(workNo){
 			  console.log (data.workItem);
 			  
 			  var Item = data.workItem;
-
+			  console.log (Item);
 			  $("#workNo").val(Item.workNo);
+//			  $("#custId").val(Item.custId);
+//			  $("#objtNo").val(Item.objtNo);
+//			  
 			  $("#workTitle").val(Item.workTitle);
 			  $("#workContent").val(Item.workContent);
 			

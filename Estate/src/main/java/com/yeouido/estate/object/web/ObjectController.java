@@ -147,7 +147,8 @@ public class ObjectController {
 		ModelAndView mav= new ModelAndView();
 		try {
 			map.put("user",  session.getAttribute("user"));
-			int result = objectService.insertObject(map);
+			Map result = objectService.insertObject(map);
+			mav.addAllObjects(result);
 			mav.addObject ("messageCd", 1);
 			mav.addObject("message", "물건 등록에 성공했습니다.");
 		} catch (Exception e) {
@@ -205,7 +206,8 @@ public class ObjectController {
 		ModelAndView mav= new ModelAndView();
 		try {
 			map.put("user",  session.getAttribute("user"));
-			int result = objectService.modifyObject(map);
+			Map result = objectService.modifyObject(map);
+			mav.addAllObjects(result);
 			mav.addObject ("messageCd", 1);
 			mav.addObject("message", "물건 수정에 성공했습니다.");
 			

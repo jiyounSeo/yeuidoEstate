@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 public interface ObjectService
 {
-	public int insertObject(Map map) throws Exception;
+	public Map insertObject(Map map) throws Exception;
 	
-	public int modifyObject(Map map) throws Exception;
+	public Map modifyObject(Map map) throws Exception;
 	
 	public int deleteObject(Map map) throws Exception;
 	

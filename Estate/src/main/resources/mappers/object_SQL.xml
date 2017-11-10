@@ -679,9 +679,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test = "objtTp != null and objtTp != '' ">
 	   and objtTp = #{objtTp}
 	   </if>
+	   <if test = "saleTp != null and saleTp != '' ">
+	   and saleTp = #{saleTp}
+	   </if>
 	   <if test = "buildCd != null and buildCd != '' ">
 	   and buildCd = #{buildCd}
 	   </if>
+	   
 	   order by ${orderByColumn} desc
 	</select>
 

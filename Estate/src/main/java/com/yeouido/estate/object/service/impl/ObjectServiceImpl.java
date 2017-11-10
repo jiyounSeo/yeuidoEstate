@@ -21,7 +21,7 @@ public class ObjectServiceImpl  implements ObjectService
    
    /* 물건등록*/
    @Override
-   public int insertObject(Map map) throws Exception {
+   public Map insertObject(Map map) throws Exception {
 	   Map<String, Object> custMap = customerDAO.selectCustomerConfirm(map);
 	   if (("").equals(custMap.get("custId")) || custMap.get("custId") == null ) {
 		   map.put("custId", custMap.get("custId2"));
@@ -29,13 +29,15 @@ public class ObjectServiceImpl  implements ObjectService
 	   } else {
 		   map.put("custId", custMap.get("custId"));
 	   }
-	   return objectDAO.insertObject(map);
+	   objectDAO.insertObject(map);
+	   return map;
    }
    /* 물건수정 */
    @Override
-   public int modifyObject(Map map) throws Exception {
+   public Map modifyObject(Map map) throws Exception {
 	   customerDAO.modifyObjtCustomer(map);
-	   return objectDAO.modifyObject(map);
+	   objectDAO.modifyObject(map);
+	   return map;
    }
    /* 물건 정보 */
    @Override

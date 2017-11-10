@@ -26,6 +26,13 @@
 				<td style="width:14%;"><a href='#objt' onclick="f_objt_select('OT006','ST006')"  style='text-decoration: none;'><li id="li_OT006" style="width:100%"class='tab_on_txt'>분양권</li></a></td>
 			</tr>
 		</table>
+		
+		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
+			<tr id="trCategory">
+
+			</tr>
+		</table>
+		
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td align="right" valign="bottom" style="width:100%; height:30px;">

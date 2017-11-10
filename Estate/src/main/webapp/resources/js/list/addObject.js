@@ -207,19 +207,6 @@ function f_saleobject_save() {
 	oEditors.getById["memo"].exec("UPDATE_CONTENTS_FIELD", []);	
 	var param = $("#"+objtForm).serialize();
 
-	if ( $("#objtTp").val() == "OT002" || $("#objtTp").val() == "OT003"  ) {
-		param.zipNo = $("#zipNo").val();
-		param.jibunAddr = $("#jibunAddr").val();
-		param.roadAddrPart1 = $("#roadAddrPart1").val();
-		param.addrDetail = $("#addrDetail").val();
-	} else {
-		var index = $("#buildCd option").index($("#buildCd option:selected"));
-		param.zipNo = buildList[index].zipNo;
-		param.jibunAddr = buildList[index].jibunAddr;
-		param.roadAddrPart1 = buildList[index].roadAddrPart1;
-		param.addrDetail = buildList[index].addrDetail;
-	}
-	
 	/*
 	 * 필수입력
 	 * 1. 물건명
@@ -326,6 +313,21 @@ function f_saleobject_save() {
 		}
 	}
 
+	if ( $("#objtTp").val() != "OT002" && $("#objtTp").val() != "OT003"  ) {
+		var index = $("#buildCd option").index($("#buildCd option:selected"));
+		
+		param.zipNo = buildList[index].zipNo;
+		param.jibunAddr = buildList[index].jibunAddr;
+		param.roadAddrPart1 = buildList[index].roadAddrPart1;
+		param.addrDetail = buildList[index].addrDetail;
+	} else {
+		param.zipNo = $("#zipNo").val();
+		param.jibunAddr = $("#jibunAddr").val();
+		param.roadAddrPart1 = $("#roadAddrPart1").val();
+		param.addrDetail = $("#addrDetail").val();
+	
+	}
+	
 	var urlStr = "";
 	if ($("#objtNo").val() != "" ) {
 		urlStr = "modifyObject.do";
@@ -342,7 +344,11 @@ function f_saleobject_save() {
 	  success : function(data){
 		  alert (data.message);
 		  if (data.messageCd == 1) {
-			  f_objt_dtl_view();
+			  if (confirm ("등록하신 고객정보를 수정하시겠습니까?")) {
+				  f_cust_dtl_view();
+			  } else{
+				  f_objt_dtl_view();
+			  }
 		  }
 	  }
 	});
@@ -378,6 +384,35 @@ function f_objt_delete() {
 	}
 }
 
+function f_cust_dtl_view() {
+	var objtForm = "";
+	switch ($("#objtTp").val()) {
+		case "OT001":
+			objtForm = "newObApt";
+			break;
+		case "OT002":
+			objtForm = "newObStore";
+			break;
+		case "OT003":
+			objtForm = "newObOffice";
+			break;
+		case "OT004":
+			objtForm = "newObOps";
+			break;
+		case "OT005":
+			objtForm = "newObHrapt";
+			break;
+		case "OT006":
+			objtForm = "newObTicket";
+			break;
+	}
+	$("#publicYn").val("");
+	var comSubmit = new ComSubmit($("#"+objtForm).attr('id'));
+	comSubmit.setUrl("/viewClient.do");
+	comSubmit.submit();
+}
+
+
 function f_objt_dtl_view() {
 	var objtForm = "";
 	switch ($("#objtTp").val()) {
@@ -405,6 +440,7 @@ function f_objt_dtl_view() {
 	comSubmit.setUrl("/commObListPostView.do");
 	comSubmit.submit();
 }
+
 
 function f_list_view_change() {
 	var objtForm = "";
