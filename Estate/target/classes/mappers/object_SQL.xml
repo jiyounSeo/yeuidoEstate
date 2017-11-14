@@ -584,18 +584,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , obj.jibunAddr
 	  	 , obj.roadAddrPart1 
 	  	 , obj.addrDetail
-	  FROM saleobject obj 
-	     , customer cust
-	     , member m
-	     , estate e
-	 WHERE 1=1
-	   and obj.frstRegUser = m.mbrId 
-	   and m.estateCd = e.estateCd
-	   and obj.custId = cust.custId
+	   FROM saleobject obj
+	     left outer join customer cust
+         on obj.custId = cust.custId
+		 inner join member m
+         on obj.frstRegUser = m.mbrId 
+	 	 inner join estate e
+         on  m.estateCd  = e.estateCd
+	WHERE 1=1
 	   <if test="objtNm != null and objtNm != '' ">
 	   and obj.objtNm like concat('%',#{objtNm},'%')
 	   </if>
-	   
 	   <if test="tel1 != null and tel1 != '' ">
 	   and cust.custTel1 = #{tel1}
 	   and cust.custTel2 = #{tel2}
@@ -667,14 +666,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	 , obj.roadAddrPart1 
 	  	 , obj.addrDetail
 	  FROM saleobject obj
-	     , customer cust
-	     , estate e
-	     , member m
+	     left outer join customer cust
+         on obj.custId = cust.custId
+		 inner join member m
+         on obj.frstRegUser = m.mbrId 
+	 	 inner join estate e
+         on  m.estateCd  = e.estateCd
 	 WHERE 1=1
-	   and obj.custId = cust.custId
-	   and obj.frstRegUser = m.mbrId 
-	   and m.estateCd  = e.estateCd
-	   and (obj.advertiseYn = 'Y' OR obj.publicYn = 'Y')
+	   and obj.advertiseYn = 'Y'
 	   <if test = "objtTp != null and objtTp != '' ">
 	   and objtTp = #{objtTp}
 	   </if>
