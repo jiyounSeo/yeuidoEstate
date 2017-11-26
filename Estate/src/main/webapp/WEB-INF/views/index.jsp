@@ -8,7 +8,7 @@
 	<div style="width:1470px; text-align:left; margin:auto; padding:0">		
 		<table style="width: 1470px;" cellpadding="0" cellspacing="0" border="0">
 			<tr><td height="600px" style="background-color:#e0e0e0;">
-				<div id="map" style="width:100%;height:600px;"></div>
+				<div id="main_map" style="width:100%;height:600px;"></div>
 			</td>
 			</tr>
 			<tr><td height="30px"></td></tr>

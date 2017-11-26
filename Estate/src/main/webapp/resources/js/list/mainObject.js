@@ -10,6 +10,22 @@ $(document).ready(function(){
 	f_objt_select(objtTp,saleTp);
 });
 
+
+
+//페이징 버튼 클릭이벤트
+currPage = 1;
+$(document).on('click', '.pagingBtn', function() {
+	var div = $(this).closest('div').attr('id');
+	
+	var currPageStr = $(this).attr("id").substr(4);
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_objectList_select();
+	}
+	
+});
+
+
 /*
  * 물건 선택 콤보
  */
@@ -180,8 +196,12 @@ function gfn_isNull(str) {
     if (chkStr.toString().length == 0 ) return true;  
     return false;
 }
+
 var orderByColumn  = "";
+
+
 function f_objectList_select(objtTp, saleTp){
+	
 	 if (!gfn_isNull(objtTpChk)) {
 		 objtTp = objtTpChk;
 	 }
@@ -232,67 +252,106 @@ function f_objectList_select(objtTp, saleTp){
 		  if (result.objtList.length != 0) {
 			  objtList = result.objtList;
 			  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
-			  /*$("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
-			  $("#page" + currPage).addClass("active");
-			  $("#objtListTemplte").tmpl(data).appendTo("#objtTbody");
-			  */
-			  //지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
-			  $.each (objtList, function(index){
-				  f_map_setting( objtList[index].jibunAddr);
-			  });
+			  f_map_make(objtList);
+			   
 			  
 		  } else {
-			  //$("#pagingDiv").empty();
 			  var colCnt = $("#objtListTr td").length;
 			  $("#objtListEmptyTemplte").tmpl({col : colCnt}).appendTo("#objtTbody");
+			  
+			  var map = new naver.maps.Map("main_map", {
+					center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
+					minZoom: 10,
+					zoomControl: true,
+				    zoom: 10,
+				    mapTypeControl: true
+				});
 		  }
-		    
+
 	  }
 	});
 	
 }
 
-
-//페이징 버튼 클릭이벤트
-currPage = 1;
-$(document).on('click', '.pagingBtn', function() {
-	var div = $(this).closest('div').attr('id');
+function f_map_make(list) {	
 	
-	var currPageStr = $(this).attr("id").substr(4);
-	if ( gfn_isNull(currPageStr) == "") {
-		currPage = Number(currPageStr);
-		f_objectList_select();
-	}
+	var map = new naver.maps.Map("main_map", {
+		center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
+		minZoom: 10,
+		zoomControl: true,
+	    zoom: 10,
+	    mapTypeControl: true
+	});
+		
+	var idx = 0;	
+	for(var i=0; i<list.length; i++){
+
+		naver.maps.Service.geocode({address: objtList[i].jibunAddr}, function(status, response) {
+			
+	        if (status !== naver.maps.Service.Status.OK) {
+	            return alert(objtList[i].jibunAddr + '의 검색 결과가 없거나 기타 네트워크 에러');
+	        }
+	        var result = response.result;
+	        
+	        var marker = new naver.maps.Marker({
+	            position: new naver.maps.LatLng(result.items[0].point.y, result.items[0].point.x),
+	            map: map,
+	            draggable: false
+	        });	        
+	        var infowindow = new naver.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:10px;">이름 : <b>' + list[idx].buildNm + '</b></div>'
+	        });
+	        
+	        naver.maps.Event.addListener(marker, "click", function(e) {
+	            if (infowindow.getMap()) {
+	                infowindow.close();
+	            } else {
+	                infowindow.open(map, marker);
+	            }
+	        });
+	        
+	        idx++;
+
+	    });	
+	}	
 	
-});
+}
 
 
+		
+function f_map_setting(myaddress) {
+	var pointX = 0;
+	var pointY = 0;
+	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+        }
+        var result = response.result;
+        console.log (result);
+        pointX = result.items[0].point.x;
+        pointY = result.items[0].point.y;
+        f_map_draw( pointX, pointY);
+	});
+	
+}
 
+function f_map_draw(x, y) {
+	// marker1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	//지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
+	var map = new naver.maps.Map('map', {
+		    center: new naver.maps.LatLng(x, y),
+		    zoom: 10
+	});
+	
+	var myaddr = new naver.maps.Point(x, y);
+    map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+    var marker = new naver.maps.Marker({
+	    position: myaddr,
+	    map: map
+	});
+		
+}
 
 
 
@@ -331,38 +390,5 @@ function f_objectList_select2(){
 			  alert ("문제가 발생했습니다. 관리자에게 문의하세요.")
 		  }
 		});
-}
-
-function f_map_setting(myaddress) {
-	var pointX = 0;
-	var pointY = 0;
-	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
-        if (status !== naver.maps.Service.Status.OK) {
-            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
-        }
-        var result = response.result;
-        console.log (result);
-        pointX = result.items[0].point.x;
-        pointY = result.items[0].point.y;
-        f_map_draw( pointX, pointY);
-	});
-	
-}
-function f_map_draw(x, y) {
-	// marker1
-
-	//지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
-	var map = new naver.maps.Map('map', {
-		    center: new naver.maps.LatLng(x, y),
-		    zoom: 10
-	});
-	
-	var myaddr = new naver.maps.Point(x, y);
-    map.setCenter(myaddr); // 검색된 좌표로 지도 이동
-    var marker = new naver.maps.Marker({
-	    position: myaddr,
-	    map: map
-	});
-		
 }
 

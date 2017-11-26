@@ -646,16 +646,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , if (isnull(obj.buildCd), obj.buildNm, (select b.buildNm from building b where b.buildCd = obj.buildCd )) buildNm 
 	     , obj.directionTp
 	     , (select commNm from commcd where commCd = obj.directionTp ) directionTpNm
+	     , obj.businessNm
+	     , obj.bargainAmt
+	     , obj.depositAmt
+	     , obj.monthlyAmt
+	     , obj.rightAmt
+	     , obj.manageAmt
+	     , if (isnull(obj.ondolYn), 'N', obj.ondolYn) ondolYn
+	     , obj.conditionTp 
+	     , (select commNm from commcd where commCd = obj.conditionTp ) conditionTpNm
 	     , obj.frstRegUser
 	     , obj.activeTp
 	     , (select commNm from commcd where commCd = obj.activeTp ) activeTpNm
 	     , obj.surtaxYn
 	     , obj.advertiseYn
+	     , obj.dong
 	     , obj.floor
-	     , obj.area
-	     , obj.depositAmt
+	     , CAST(obj.area AS signed integer) area
+	     , CAST(obj.realArea AS signed integer) realArea
 	     , obj.publicYn
 	     , obj.availableTp
+	     , (select commNm from commcd where commCd = obj.availableTp ) availableTpNm
+	     , DATE_FORMAT(obj.availableDt, '%Y-%m-%d') as availableDt
+	 	 , obj.parcelAmt
+	 	 , obj.premiumAmt
          , m.mbrNm frstRegNm
          , e.estateNm
          , concat(e.estateNm, '(', e.tel1, '-', e.tel2,'-', e.tel3, ')') estateInfo
