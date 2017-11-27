@@ -249,23 +249,45 @@ function f_objectList_select(objtTp, saleTp){
 				break;
 		  }
 		  
+		  var map = new naver.maps.Map("main_map", {
+				center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
+				minZoom: 7,
+			    zoom: 10,
+			    mapTypeControl: true,
+			    scrollWheel: false,
+			    mapTypeControlOptions: {
+			        style: naver.maps.MapTypeControlStyle.BUTTON,
+			        position: naver.maps.Position.TOP_RIGHT
+			    },
+			    zoomControl: true,
+			    zoomControlOptions: {
+			        style: naver.maps.ZoomControlStyle.LARGE,
+			        position: naver.maps.Position.RIGHT_CENTER
+			    },
+			    scaleControl: true,
+			    scaleControlOptions: {
+			        position: naver.maps.Position.BOTTOM_RIGHT
+			    },
+			    logoControl: true,
+			    logoControlOptions: {
+			        position: naver.maps.Position.TOP_LEFT
+			    },
+			    mapDataControl: true,
+			    mapDataControlOptions: {
+			        position: naver.maps.Position.BOTTOM_LEFT
+			    }
+			});
+			
+		  
 		  if (result.objtList.length != 0) {
 			  objtList = result.objtList;
 			  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
-			  f_map_make(objtList);
+			  f_map_make(objtList, map);
 			   
 			  
 		  } else {
 			  var colCnt = $("#objtListTr td").length;
 			  $("#objtListEmptyTemplte").tmpl({col : colCnt}).appendTo("#objtTbody");
-			  
-			  var map = new naver.maps.Map("main_map", {
-					center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
-					minZoom: 10,
-					zoomControl: true,
-				    zoom: 10,
-				    mapTypeControl: true
-				});
 		  }
 
 	  }
@@ -273,52 +295,52 @@ function f_objectList_select(objtTp, saleTp){
 	
 }
 
-function f_map_make(list) {	
-	
-	var map = new naver.maps.Map("main_map", {
-		center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
-		minZoom: 10,
-		zoomControl: true,
-	    zoom: 10,
-	    mapTypeControl: true
-	});
-		
+function f_map_make(list, map) {	
+			
 	var idx = 0;	
+	var markPosX = new Array();
+	var markPosY = new Array();
+	
 	for(var i=0; i<list.length; i++){
 
-		naver.maps.Service.geocode({address: objtList[i].jibunAddr}, function(status, response) {
-			
-	        if (status !== naver.maps.Service.Status.OK) {
-	            return alert(objtList[i].jibunAddr + '의 검색 결과가 없거나 기타 네트워크 에러');
-	        }
-	        var result = response.result;
-	        
-	        var marker = new naver.maps.Marker({
-	            position: new naver.maps.LatLng(result.items[0].point.y, result.items[0].point.x),
-	            map: map,
-	            draggable: false
-	        });	        
-	        var infowindow = new naver.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:10px;">이름 : <b>' + list[idx].buildNm + '</b></div>'
-	        });
-	        
-	        naver.maps.Event.addListener(marker, "click", function(e) {
-	            if (infowindow.getMap()) {
-	                infowindow.close();
-	            } else {
-	                infowindow.open(map, marker);
-	            }
-	        });
-	        
-	        idx++;
-
-	    });	
-	}	
+		(function(idx) {
+					naver.maps.Service.geocode({address: objtList[idx].jibunAddr}, function(status, response) {
+		
+						if (status !== naver.maps.Service.Status.OK) {
+							return alert(objtList[idx].jibunAddr + '의 검색 결과가 없거나 기타 네트워크 에러');
+						}
+						var result = response.result;
+				        
+				        var marker = new naver.maps.Marker({
+				            position: new naver.maps.LatLng(result.items[0].point.y, result.items[0].point.x),
+				            title: list[idx].buildNm,
+				            map: map,
+				            draggable: false
+				        });	        
+				        var infowindow = new naver.maps.InfoWindow({
+				            content: '<div style="width:150px;text-align:center;padding:10px;">이름 : <b>' + list[idx].buildNm + '</b></div>'
+				        });
+				        
+				        f_marker_setting_event(map, marker, infowindow,  result.items[0].point.x, result.items[0].point.y);
+					});	
+				})(i);
+		}	
+}
+		
+function f_marker_setting_event(map, marker, infowindow, x, y) {
 	
+    naver.maps.Event.addListener(marker, "click", function(e) {
+        if (infowindow.getMap()) {
+            infowindow.close();
+        } else {
+        	var myaddr = new naver.maps.Point(x, y);
+        	map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+            infowindow.open(map, marker);
+        }
+    });	
 }
 
 
-		
 function f_map_setting(myaddress) {
 	var pointX = 0;
 	var pointY = 0;
