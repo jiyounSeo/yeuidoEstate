@@ -1,3 +1,6 @@
+// 네이버 지도 id : Z0U9uQFTmyK7bim6HrQ6
+// client screet : ayyDd1KXQS
+
 var oEditors = [];
 
 $(document).ready(function(){
@@ -320,12 +323,15 @@ function f_saleobject_save() {
 		param.jibunAddr = buildList[index].jibunAddr;
 		param.roadAddrPart1 = buildList[index].roadAddrPart1;
 		param.addrDetail = buildList[index].addrDetail;
+		param.positionX = buildList[index].positionX;
+		param.positionY = buildList[index].positionY;
 	} else {
 		param.zipNo = $("#zipNo").val();
 		param.jibunAddr = $("#jibunAddr").val();
 		param.roadAddrPart1 = $("#roadAddrPart1").val();
 		param.addrDetail = $("#addrDetail").val();
-	
+		param.positionX = $("#positionX").val();
+		param.positionY = $("#positionY").val();
 	}
 	
 	var urlStr = "";
@@ -505,5 +511,33 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	$("#jibunAddr").val(jibunAddr);
 	$("#zipNo").val(zipNo);
 	$("#addrDetail").val(addrDetail);
+	
+	if ( $("#objtTp").val() == "OT002" || $("#objtTp").val() == "OT003"  ) {
+		f_map_setting(jibunAddr);
+	}
 }
 
+var pointX = 0;
+var pointY = 0;
+
+function f_map_setting(myaddress) {
+
+	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
+        }
+        var result = response.result;
+        console.log (result);
+        pointX = result.items[0].point.y;
+        pointY = result.items[0].point.x;       
+    	
+        f_set_position(pointX, pointY);
+	});
+	
+}
+
+function f_set_position(x, y)
+{
+	$("#positionX").val(x);
+	$("#positionY").val(y);
+}

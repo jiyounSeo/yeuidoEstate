@@ -248,6 +248,7 @@ function f_objectList_select(objtTp, saleTp){
 		  		tmplNm = "objtListTemplte6";
 				break;
 		  }
+
 		  
 		  var map = new naver.maps.Map("main_map", {
 				center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
@@ -283,7 +284,6 @@ function f_objectList_select(objtTp, saleTp){
 			  objtList = result.objtList;
 			  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
 			  f_map_make(objtList, map);
-			   
 			  
 		  } else {
 			  var colCnt = $("#objtListTr td").length;
@@ -295,6 +295,61 @@ function f_objectList_select(objtTp, saleTp){
 	
 }
 
+function f_map_make(list, map) {	
+	
+	var idx = 0;	
+	var markPosX = new Array();
+	var markPosY = new Array();
+	
+	for(var i=0; i<list.length; i++){		
+				        
+        var marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(list[i].positionX, list[i].positionY),
+            title: list[i].buildNm,
+            icon: {
+	        	url: 'http://여의도닷컴.com/images/marker.png',
+		        size: new naver.maps.Size(25, 33)
+		    },
+            map: map,
+            draggable: false
+        });	       
+        
+        var contentString = [
+            '<div style="width:260px;padding:0;margin:0">',
+            '   <table style="width:100%" cellpadding="0" cellspacing="0">',
+            '       <tr><td style="background:url(\'./resources/images/info_box_bg.jpg\');background-repeat:repeat-x;color:white;height:35px;padding-left:10px;"><b>' + list[i].buildNm + '</b></td></tr>',
+            '       <tr><td style="padding:10px;"><b>종류</b> : ' + list[i].objtTpNm +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>매물</b> : ' + list[i].saleTpNm + '</td></tr>',
+            '   </table>',
+            '</div>'
+        ].join('');
+        
+        
+        var infowindow = new naver.maps.InfoWindow({
+            content: contentString
+        });
+        
+        f_marker_setting_event(map, marker, infowindow, list[i].positionX, list[i].positionY);
+		
+	}	
+}
+
+
+		
+function f_marker_setting_event(map, marker, infowindow, x, y) {
+	
+    naver.maps.Event.addListener(marker, "click", function(e) {
+        if (infowindow.getMap()) {
+            infowindow.close();
+        } else {
+        	var myaddr = new naver.maps.LatLng(x, y);
+        	map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+            infowindow.open(map, marker);
+        }
+    });	
+}
+
+
+/*
 function f_map_make(list, map) {	
 			
 	var idx = 0;	
@@ -324,93 +379,6 @@ function f_map_make(list, map) {
 				        f_marker_setting_event(map, marker, infowindow,  result.items[0].point.x, result.items[0].point.y);
 					});	
 				})(i);
-		}	
+	}	
 }
-		
-function f_marker_setting_event(map, marker, infowindow, x, y) {
-	
-    naver.maps.Event.addListener(marker, "click", function(e) {
-        if (infowindow.getMap()) {
-            infowindow.close();
-        } else {
-        	var myaddr = new naver.maps.Point(x, y);
-        	map.setCenter(myaddr); // 검색된 좌표로 지도 이동
-            infowindow.open(map, marker);
-        }
-    });	
-}
-
-
-function f_map_setting(myaddress) {
-	var pointX = 0;
-	var pointY = 0;
-	naver.maps.Service.geocode({address: myaddress}, function(status, response) {
-        if (status !== naver.maps.Service.Status.OK) {
-            return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
-        }
-        var result = response.result;
-        console.log (result);
-        pointX = result.items[0].point.x;
-        pointY = result.items[0].point.y;
-        f_map_draw( pointX, pointY);
-	});
-	
-}
-
-function f_map_draw(x, y) {
-	// marker1
-
-	//지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
-	var map = new naver.maps.Map('map', {
-		    center: new naver.maps.LatLng(x, y),
-		    zoom: 10
-	});
-	
-	var myaddr = new naver.maps.Point(x, y);
-    map.setCenter(myaddr); // 검색된 좌표로 지도 이동
-    var marker = new naver.maps.Marker({
-	    position: myaddr,
-	    map: map
-	});
-		
-}
-
-
-
-function f_objectList_select2(){
-	 var param = {
-		 currentPage : 1 //Number(currPage)
-	   , orderByColumn : orderByColumn == "" ? "frstRegDt" : orderByColumn
-	   , objtTp : objtTp
-	   , buildCd : buildCd
-	   , pagePerRow : 10
-	   , pageSize : 10
-	};
-	 
-	 $.ajax({
-		  url : "/selectMainObjtList.go",
-		  type: "post",
-		  data : param,
-		  dataType : "json",
-		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-		  success : function(data){
-			  $("#objtTbody").empty();
-			  $("#map").empty();
-			  var objtList = new Array();
-			  objtList = data.objtList;
-			  if ( objtList.length != 0) {
-				  $("#objtListTemplte").tmpl(data).appendTo("#objtTbody");
-				  //지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
-				  $.each (objtList, function(index){
-					  f_map_setting( objtList[index].jibunAddr);
-				  });
-			  }  else {
-				  $("#objtListEmptyTemplte").tmpl().appendTo("#objtTbody");
-			  }
-		  },
-		  error: function(data){
-			  alert ("문제가 발생했습니다. 관리자에게 문의하세요.")
-		  }
-		});
-}
-
+*/

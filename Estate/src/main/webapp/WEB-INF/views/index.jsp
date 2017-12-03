@@ -8,14 +8,14 @@
 	<div style="width:1470px; text-align:left; margin:auto; padding:0">		
 		<table style="width: 1470px;" cellpadding="0" cellspacing="0" border="0">
 			<tr>
-				<td width="1040px;" height="550px" style="background-color:#e0e0e0;">
+				<td width="1040px;" height="560px" style="background-color:#e0e0e0;">
 					<div id="main_map" style="width:100%;height:550px;"></div>
 				</td>
-				<td width="30px"></td>
+				<td width="20px"></td>
 				<td width="400px" valign="bottom" align="right">
 					<table style="width:100%;border:0;border-collapse:collapse;border: 1px solid #b2b2b2;">
 						<tr>
-							<td style="width:15%;height:70px;text-align:center;background:#0063b1;color:#fff;font-weight: bold;">종류</td>
+							<td style="width:15%;height:70px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">종류</td>
 							<td style="width:75%;padding-left:10px;">
 								<input type="radio" id="caTp1" name="caTp" value="ST001" checked /><label for="caTp1">아파트</label>
 								<input type="radio" id="caTp2" name="caTp" value="ST002"/><label for="caTp2">상가</label>
@@ -27,7 +27,7 @@
 						</tr>
 						<tr><td colspan="2" height="5px"></td></tr>
 						<tr>
-							<td style="width:15%;height:50px;text-align:center;background:#0063b1;color:#fff;font-weight: bold;">유형</td>
+							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">유형</td>
 							<td style="width:75%;padding-left:10px;">
 								<input type="radio" id="saleTp1" name="saleTp" value="ST001" checked /><label for="saleTp1">매매</label>
 								<input type="radio" id="saleTp2" name="saleTp" value="ST002"/><label for="saleTp2">전세</label>
@@ -37,7 +37,7 @@
 						</tr>
 						<tr><td colspan="2" height="5px"></td></tr>
 						<tr>
-							<td style="width:15%;height:50px;text-align:center;background:#0063b1;color:#fff;font-weight: bold;">매매가</td>
+							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">매매가</td>
 							<td style="width:75%;padding-left:10px;">
 								<select  style="width:90px;height:30px;">
 									<option>전체</option>
@@ -53,7 +53,7 @@
 						</tr>
 						<tr><td colspan="2" height="5px"></td></tr>
 						<tr>
-							<td style="width:15%;height:50px;text-align:center;background:#0063b1;color:#fff;font-weight: bold;">보증금</td>
+							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">보증금</td>
 							<td style="width:75%;padding-left:10px;">
 								<select  style="width:90px;height:30px;">
 									<option>전체</option>
@@ -69,7 +69,7 @@
 						</tr>
 						<tr><td colspan="2" height="5px"></td></tr>
 						<tr>
-							<td style="width:15%;height:50px;text-align:center;background:#0063b1;color:#fff;font-weight: bold;">월세</td>
+							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">월세</td>
 							<td style="width:75%;padding-left:10px;">
 								<select  style="width:90px;height:30px;">
 									<option>전체</option>
@@ -85,7 +85,7 @@
 						</tr>
 						<tr><td colspan="2" height="5px"></td></tr>
 						<tr>
-							<td style="width:15%;height:50px;text-align:center;background:#0063b1;color:#fff;font-weight: bold;">면적</td>
+							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">면적</td>
 							<td style="width:75%;padding-left:10px;">
 								<select  style="width:90px;height:30px;">
 									<option>전체</option>
@@ -102,7 +102,7 @@
 							</td>
 						</tr>
 					</table><br>
-					<input type="button" value="초기화">&nbsp;&nbsp;<input type="button" value="검색">
+					<a href="#"><img src="./resources/images/btn_clear_index.jpg"></a>&nbsp;&nbsp;<a href="#"><img src="./resources/images/btn_search_index.jpg"></a>
 				</td>
 			</tr>
 			<tr><td height="30px" colspan="3"></td></tr>

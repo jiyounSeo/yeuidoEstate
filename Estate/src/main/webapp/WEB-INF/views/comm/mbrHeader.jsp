@@ -24,7 +24,7 @@
 	
 	input[type=text].mbr_phone
 	{
-	    width: 30%;
+	    width: 25%;
 	    padding: 12px 20px;
 	    margin: 0;
 	    box-sizing: border-box;

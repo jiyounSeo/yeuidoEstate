@@ -24,13 +24,41 @@ function f_map_draw(x, y) {
 	//지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
 	var map = new naver.maps.Map('map', {
 		    center: new naver.maps.LatLng(x, y),
-		    zoom: 10
+		    minZoom: 7,
+		    zoom: 11,
+		    mapTypeControl: true,
+		    scrollWheel: false,
+		    mapTypeControlOptions: {
+		        style: naver.maps.MapTypeControlStyle.BUTTON,
+		        position: naver.maps.Position.TOP_RIGHT
+		    },
+		    zoomControl: true,
+		    zoomControlOptions: {
+		        style: naver.maps.ZoomControlStyle.LARGE,
+		        position: naver.maps.Position.RIGHT_CENTER
+		    },
+		    scaleControl: true,
+		    scaleControlOptions: {
+		        position: naver.maps.Position.BOTTOM_RIGHT
+		    },
+		    logoControl: true,
+		    logoControlOptions: {
+		        position: naver.maps.Position.TOP_LEFT
+		    },
+		    mapDataControl: true,
+		    mapDataControlOptions: {
+		        position: naver.maps.Position.BOTTOM_LEFT
+		    }
 	});
 	
 	var myaddr = new naver.maps.Point(x, y);
     map.setCenter(myaddr); // 검색된 좌표로 지도 이동
     var marker = new naver.maps.Marker({
 	    position: myaddr,
+	    icon: {
+        	url: 'http://여의도닷컴.com/images/marker.png',
+	        size: new naver.maps.Size(25, 33)
+	    },
 	    map: map
 	});
 		

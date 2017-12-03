@@ -42,18 +42,18 @@ public class BuildingController {
 		ModelAndView mav= new ModelAndView();
 		Paging paging = new Paging();
         			
-		List<Map<String,Object>> custList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> caList = new ArrayList<Map<String,Object>>();
 		try {
 			int currentPage = Integer.parseInt(map.get("currentPage").toString());
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
 			map.put("rowNum", (currentPage-1)*pagePerRow);
 			map.put("pagePerRow", pagePerRow);
 			
-			custList = buildingService.selectBuildingList(map);
-			if (!custList.isEmpty()) {
+			caList = buildingService.selectBuildingList(map);
+			if (!caList.isEmpty()) {
 				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
 						
-				int totalCount = Integer.parseInt(custList.get(0).get("totalCnt").toString());
+				int totalCount = Integer.parseInt(caList.get(0).get("totalCnt").toString());
 				int pageSize = Integer.parseInt(map.get("pageSize").toString());
 				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
 				mav.addAllObjects(pagingMap);
@@ -62,7 +62,7 @@ public class BuildingController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	    mav.addObject("custList",custList);
+	    mav.addObject("caList",caList);
 	    mav.setViewName("jsonView");
 	    return mav;
 	}
@@ -136,22 +136,24 @@ public class BuildingController {
 	/*
 	 * 물건 삭제
 	 */	
-	@RequestMapping(value="/deletebuilding.do",method = RequestMethod.POST)
-	public String deletebuilding(HttpServletRequest request,Model model){
-		ListController listView = new ListController();
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		try {
+	@RequestMapping(value= "/deletebuilding.do", method=RequestMethod.POST)
+	public ModelAndView deletebuilding( @RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		 List<Object> estateList = new ArrayList<Object>();
+		 try {
 			int result = buildingService.deleteBuilding(map);
-			model.addAttribute("messageCd", "1");
-			//model.addObject("message", "물건 삭제에 실패하였습니다.");
-			
-		} catch (Exception e) {
-			model.addAttribute("messageCd", "2");
+			mav.addObject("messageCd", "1");
+			mav.addObject("message", "삭제 완료 되었습니다.");
+		 } catch (Exception e) {
+			mav.addObject("messageCd", "2");
+			mav.addObject("message", "삭제 중 오류가 발생하였습니다.");
 			e.printStackTrace();
-		}
-		return "/list/newBuilding";	
-	}
+		 }
+	 
+	    mav.setViewName("jsonView");
+	    return mav;
+	}	
+	
 	
 	/*
 	 * 물건 콤보
@@ -170,14 +172,12 @@ public class BuildingController {
 	}
 	
 	/*
-	 * 물건 상세페이지에서 물건 선택 시 수정페이지로 이동 
-	 * 물건 신규입력 = 수정 페이지가 같음
+	 * 물건리스트페이지
 	 */	
-	@RequestMapping(value="/modifyBuildingInfo.do",method = RequestMethod.GET)
+	@RequestMapping(value="/categoryList.do",method = RequestMethod.GET)
 	public String modifyBuildingInfo(@RequestParam Map<String,Object> map, Model model){
 		model.addAllAttributes(map);
-		return "/listpage/newBuilding" ;
-	
+		return "/admin/categoryList" ;	
 	}
 	
 	

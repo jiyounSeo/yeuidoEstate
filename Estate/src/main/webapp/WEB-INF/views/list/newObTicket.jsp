@@ -32,7 +32,7 @@
 		<tr>
 			<td class="title">건물명/면적</td>
 			<td colspan="2">
-				<select  id="buildCd" name="buildCd" style="width:350px">
+				<select  id="buildCd" name="buildCd" style="width:340px">
 				</select>&nbsp;
 				<input type="number" style="width:135px" id="area" name="area" min="0" max="999999" oninput="if(this.value.length>7) this.value=this.value.slice(0,6)"> 평형
 			</td>

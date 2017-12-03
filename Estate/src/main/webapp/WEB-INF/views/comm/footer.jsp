@@ -1,11 +1,19 @@
-
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
-	<tr><td height="60px">&nbsp;</td></tr>
-	<tr>
-		<td align="center" bgcolor="#393939" align="center" height="10px">
-			<img src="./resources/images/bottom.jpg" />
-		</td>
-	</tr>
-</table>
+<div style="width:100%;margin:auto;padding:0;background-color:#393939">	
+	<div style="width:1470px; text-align:left; margin:auto; padding:0;background-color:#393939">		
+		<table width="1470px" cellspacing="0" cellpadding="0" border="0" style="background-color:#393939">
+			<tr><td colspan="3" height="30px"></td></tr>
+			<tr>
+				<td width="500px">
+					<img src="./resources/images/bottom_left.png" />
+				</td>
+				<td></td>
+				<td	width="554px">
+					<img src="./resources/images/bottom_right.png" />
+				</td>
+			</tr>
+			<tr><td colspan="3" height="30px"></td></tr>
+		</table>
+	</div>
+</div>
   </body>
 </html>

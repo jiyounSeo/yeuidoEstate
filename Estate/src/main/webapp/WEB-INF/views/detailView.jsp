@@ -185,7 +185,7 @@
 		<tr>
 			<td class="title">위치</td>
 			<td colspan="4">
-				<div id="map" style="width:100%;height:300px;"></div>
+				<div id="map" style="width:100%;height:500px;"></div>
 			</td>
 		</tr>		
 	</table>

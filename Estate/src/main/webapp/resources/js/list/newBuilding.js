@@ -17,8 +17,8 @@ function f_map_setting(myaddress) {
         }
         var result = response.result;
         console.log (result);
-        pointX = result.items[0].point.x;
-        pointY = result.items[0].point.y;
+        pointX = result.items[0].point.y;
+        pointY = result.items[0].point.x;
         f_map_draw( pointX, pointY);
 	});
 	
@@ -30,21 +30,25 @@ function f_map_draw(x, y) {
 		    center: new naver.maps.LatLng(x, y),
 		    zoom: 10
 	});
+	
+	$("#positionX").val(x);
+	$("#positionY").val(y);
+	
 	// marker1
-	var myaddr = new naver.maps.Point(x, y);
+	var myaddr = new naver.maps.LatLng(x, y);
     map.setCenter(myaddr); // 검색된 좌표로 지도 이동
     var marker = new naver.maps.Marker({
 	    position: myaddr,
 	    map: map
 	});
-	
+/*	
     // marker2
     var myaddr2 = new naver.maps.Point(127.3891702, 36.3425441);
     var marker = new naver.maps.Marker({
 	    position: myaddr2,
 	    map: map
 	});
-		
+*/		
 }
 
 function resizeWindow(win)    {
@@ -114,6 +118,8 @@ function f_building_save() {
 		, roadAddrPart1 : $("#roadAddrPart1").val()
 		, jibunAddr : $("#jibunAddr").val()
 		, zipNo : $("#zipNo").val()
+		, positionX : $("#positionX").val()
+		, positionY : $("#positionY").val()
 		, addrDetail : $("#addrDetail").val()
 	}
 	
@@ -137,7 +143,19 @@ function f_building_save() {
 	
 }
 
-function f_building_list() {
+var currPage = 1;
+var caList;
+
+$(document).on('click', '.pagingBtn', function() {
+	var div = $(this).closest('div').attr('id');
+	var currPageStr = $(this).attr("id").substr(4);
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_category_list();
+	}
+});
+
+function f_category_list() {
 	var param = { currentPage : Number(currPage)
 			   , pagePerRow : 10
 			   , pageSize : 10
@@ -149,16 +167,34 @@ function f_building_list() {
 	dataType : "json",
 	contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	success : function(result){
-		  $("#custTbody").empty();
-		  if (result.custList.length != 0) {
-			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
+		  $("#caTbody").empty();
+		  caList = result.caList;
+		  if (result.caList.length != 0) {
+			  $("#caListTemplte").tmpl(result).appendTo("#caTbody");
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#page" + currPage).addClass("active");
 	
 		  } else {
 			  $("#pagingDiv").empty();
-			  $("#custListEmptyTemplte").tmpl(result).appendTo("#custTbody");
+			  $("#caListEmptyTemplte").tmpl(result).appendTo("#caTbody");
 		  }
 	}
 	});
+}
+
+
+function f_category_del(index, delBuildCd) {
+	if (confirm ("["+caList[index].buildNm+"] 삭제처리 하시겠습니까?")) {
+		$.ajax({
+		  url : "/deletebuilding.do",
+		  type: "post",
+		  data : {buildCd: delBuildCd},
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+			  alert (data.message);
+			  f_category_list();
+		  }
+		});
+	}
 }

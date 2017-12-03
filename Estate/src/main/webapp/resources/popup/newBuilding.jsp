@@ -68,5 +68,7 @@
 	<div id="map" style="width:98%;height:380px;">
 	</div>	
 </div>
+<input type="hidden" id="positionX" name="positionX" />
+<input type="hidden" id="positionY" name="positionY" />
 <input type="hidden" id="buildCd" name="buildCd" />
 </form>

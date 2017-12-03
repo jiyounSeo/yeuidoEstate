@@ -56,7 +56,7 @@
 					<td align="left">
 						<button id="save" type="button" class="mbr" onclick="f_member_save();">
 							<img src="./resources/images/mbr_btn_reg.jpg"> 
-						</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="mbr" onclick="f_backToLogin();return false;">
+						</button><button type="button" class="mbr" onclick="f_backToLogin();return false;">
 							<img src="./resources/images/mbr_btn_c.jpg">
 						</button>
 					</td>
@@ -69,5 +69,6 @@
 				
 </form>
 <form id="formId" style="display:none;"></form>
+<br><br>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
 

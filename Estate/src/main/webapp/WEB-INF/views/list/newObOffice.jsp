@@ -8,6 +8,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/list/addObject.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
 
 <form id="newObOffice" method="post" > 
 <div class="new_page_title">
@@ -46,6 +47,8 @@
 				<input type="text"  id="zipNo" name="zipNo" style="width:150px" readonly>
 				<input type="text"  id="jibunAddr" name="jibunAddr" style="width:900px"readonly>
 				<input type="hidden" id="roadAddrPart1" name="roadAddrPart1"style="width:100%">
+				<input type="hidden" id="positionX" name="positionX">
+				<input type="hidden" id="positionY" name="positionY">
 			</td>
 		</tr>
 		<tr>

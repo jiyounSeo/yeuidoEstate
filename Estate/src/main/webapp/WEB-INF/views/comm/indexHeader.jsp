@@ -70,17 +70,19 @@ $(document).ready(function() {
 });
 </script>
 <body style="margin:0; background-color: #f6f8f7">  
-<table width="100%" height="121px" cellpadding="0" cellspacing="0" border="0">
-	<tr>
-		<td align="center" background="./resources/images/bg.jpg"  style="background-repeat:repeat-x;margin: 0; padding: 0; height: 121px;">
-			<a id="hrefId" href="./"><img src="./resources/images/logo.jpg" style="height: 121px; border: 0" /></a>
-		</td>		
-	</tr>
-	<tr>
-		<td style="height:50px;" align="center" valign="middle">
-			<table style="width: 1470px;" cellpadding="0" cellspacing="0" border="0">
-				<tr><td align="right"><a id="hrefId2" href='./loginView.go'><img src="./resources/images/admin_button.png"></a></td></tr>
-			</table>
-		</td>
-	</tr>
-</table>
+<div style="width:100%;margin:auto;padding:0;background:url('/resources/images/bg.jpg');background-repeat:repeat-x;">	
+	<div style="width:1470px; text-align:left; margin:auto; padding:0;background-color:#393939;background:url('/resources/images/bg.jpg');background-repeat:repeat-x;">		
+		<table width="100%" height="121px" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td align="center" background="./resources/images/bg.jpg"  style="background-repeat:repeat-x;margin: 0; padding: 0; height: 121px;">
+					<a id="hrefId" href="./"><img src="./resources/images/logo.jpg" style="height: 121px; border: 0" /></a>
+				</td>		
+			</tr>
+			<tr>
+				<td style="height:30px;" align="right" valign="middle">
+					<div style="margin-top:-65px;"><a id="hrefId2" href='./loginView.go'><img src="./resources/images/admin_button.png"></a></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

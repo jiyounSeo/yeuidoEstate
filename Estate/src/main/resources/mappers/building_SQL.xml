@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , jibunAddr
 				  , addrDetail
 				  , zipNo
+				  , positionX
+				  , positionY
 				  , frstRegDt
 				  , frstRegUser
 				  , modfRegDt
@@ -29,6 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{jibunAddr}
 				  , #{addrDetail}
 				  , #{zipNo}
+				  , #{positionX}
+				  , #{positionY}
 				  , now()
 				  , #{mbrId}
 				  , now()
@@ -46,6 +50,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , jibunAddr = #{jibunAddr}
 		 , addrDetail = #{addrDetail}
 		 , zipNo = #{zipNo}
+		 , positionX = #{positionX}
+		 , positionY = #{positionY}
 		 , modfRegDt = now()
 		 , modfRegUser = #{mbrId}
      WHERE buildCd = #{buildCd}
@@ -65,6 +71,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , jibunAddr
 		  , addrDetail
 		  , zipNo
+		  , positionX
+		  , positionY
 	      , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	      , frstRegUser frstRegNm
 	      , (SELECT COUNT(*) from building) totalCnt
@@ -80,6 +88,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , jibunAddr
 		  , addrDetail
 		  , zipNo
+		  , positionX
+		  , positionY
 	 FROM building
 	where objtTp = #{objtTp}
 	order by buildNm asc
@@ -94,6 +104,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , jibunAddr
 		  , addrDetail
 		  , zipNo
+		  , positionX
+		  , positionY
 	      , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	      , frstRegUser frstRegNm
 	  from building

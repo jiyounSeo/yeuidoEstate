@@ -1,9 +1,69 @@
-  <%@ include file="/WEB-INF/views/comm/mbrHeader.jsp" %> 
+  <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
   <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
   <%@ page contentType="text/html; charset=utf-8" %>
   <script type="text/javascript" src="./resources/js/mbr/memberList.js"></script>
+  <style>
+	input[type=text].mbr_txt 
+	{
+	    width: 100%;
+	    padding: 12px 20px;
+	    margin: 0;
+	    box-sizing: border-box;
+	    border: none;
+	    border-bottom: 2px solid #88b95d;
+	    background-color: rgba(255, 0, 0, 0);
+	}
+	input[type=password].mbr_pw
+	{
+	    width: 100%;
+	    padding: 12px 20px;
+	    margin: 0;
+	    box-sizing: border-box;
+	    border: none;
+	    border-bottom: 2px solid #88b95d;
+	    background-color: rgba(255, 0, 0, 0);
+	}
+	
+	input[type=text].mbr_phone
+	{
+	    width: 30%;
+	    padding: 12px 20px;
+	    margin: 0;
+	    box-sizing: border-box;
+	    border: none;
+	    border-bottom: 2px solid #88b95d;
+	    background-color: rgba(255, 0, 0, 0);
+	}
+	
+	select.mbr_sel
+	{
+	    width: 100%;
+	    padding: 16px 20px;
+	    border: none;
+	    border-radius: 4px;
+	    background-color: #f1f1f1;
+	}
+	
+	button.mbr
+	{
+		padding:0;
+		margin:0;
+		border: none;
+	    background-color: rgba(255, 0, 0, 0);
+	    cursor:pointer;
+	}
+	
+	td.mbr_mem
+	{
+		text-align: center;
+		vertical-align: middle;
+		height:55px;
+		border:none;
+	    border-bottom: 1px solid #989898;
+	}
+</style>
     <form id="memberList" method="post" > 
-    
+<br><br>    
     <div style="width:1205px; text-align:left; margin:auto; padding:0">		
 		<table style="width: 1205px;" cellpadding="0" cellspacing="0" border="0">
 			<tr><td height="40"><img src="./resources/images/mbr_title.jpg"></td></tr>
@@ -46,7 +106,7 @@
 
     </form>
 
-<%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
+<%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 
 
 <script id="mbrListEmptyTemplte" type="text/x-jquery-tmpl">	
 <tr>
