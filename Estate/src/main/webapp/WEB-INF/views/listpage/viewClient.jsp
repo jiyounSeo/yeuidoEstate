@@ -46,9 +46,9 @@
 			<td colspan="4"><!--  -->${reqContent}</td>
 		</tr>		
 	</table>
-	<div style="height:10px;"></div>	
-	<div style="width:1400px;padding:20px; 0;margin:auto;text-align:center;" id="modfDiv">
-		<table style="width:1400px;padding:0;margin:0;border:0">
+<br><br>
+<div class="new_page_container">
+	<table class="bottom_btn_table">
 			<tbody><tr>
 				<td align="left" width="50%">
 					<div id="viewObjBot">

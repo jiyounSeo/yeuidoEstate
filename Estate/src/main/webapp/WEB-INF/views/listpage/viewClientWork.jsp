@@ -47,9 +47,10 @@
 	</table>
 	<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
 	<%@ include file="/WEB-INF/views/listpage/interListBottom.jsp" %> 	
-	<div style="height:10px;"></div>
-	<div style="width:1400px;margin:auto;text-align:center;">
-		<table style="width:1400px;padding:0;margin:0;border:0">
+	
+
+<div class="new_page_container">
+	<table class="bottom_btn_table">
 			<tbody><tr>
 				<td align="left" width="50%">
 					<div id="viewObjBot">

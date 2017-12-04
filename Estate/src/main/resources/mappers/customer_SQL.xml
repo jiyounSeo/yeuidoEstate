@@ -342,6 +342,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , frstRegUser frstRegNm
 	     , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm 
 	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} != c.mbrId then 'N' else 'Y' END ) ELSE 'Y' END) modifyYn
+	     , (CASE WHEN #{user.estateCd} = (SELECT estateCd FROM member m WHERE m.mbrId = c.mbrId ) THEN 'Y' ELSE 'N' END) workListYn
 	  FROM customer c
 	 WHERE custId = #{custId}
 	</select>

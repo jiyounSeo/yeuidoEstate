@@ -72,7 +72,7 @@
 			</td>
 		</tr>
 	</table>
-	<c:if test="${publicYn ne 'Y'}">
+	<c:if test="${workListYn eq 'Y'}">
 		<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
 	</c:if>	
 	<div id="viewBottomDiv">

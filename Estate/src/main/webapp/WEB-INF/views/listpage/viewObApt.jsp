@@ -11,7 +11,7 @@
 			<td class="title">물건명</td>
 			<td colspan="2">${objtNm}<!-- 물건명 --></td>
 			<td class="title">등록인</td>
-			<td><c:if test="${pageNm eq 'objtPublic'}">${estateInfo}</c:if><c:if test="${pageNm eq 'objtActiveY' || pageNm eq 'objtActiveN'}">${frstRegNm}</c:if></td>
+			<td><c:if test="${pageNm eq 'objtPublic'}">${estateInfo}</c:if><c:if test="${pageNm eq 'objtActiveY' || pageNm eq 'objtActiveN' || pageNm eq 'total'}">${frstRegNm}</c:if></td>
 		</tr>
 		<tr>
 			<td class="title">고객정보</td>
@@ -79,7 +79,7 @@
 		</tr>
 		
 	</table>
-	<c:if test="${publicYn ne 'Y'}">
+	<c:if test="${workListYn eq 'Y'}">
 		<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
 	</c:if>
 	<div id="viewBottomDiv">

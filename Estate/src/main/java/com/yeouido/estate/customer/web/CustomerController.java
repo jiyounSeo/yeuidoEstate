@@ -177,10 +177,10 @@ public class CustomerController {
 			e.printStackTrace();
 		}
 		String url = "";
-		if ("custPublic".equals(map.get("pageNm"))) {
-			url = "/listpage/viewClient"; 
-		} else {
+		if ("Y".equals(result.get("workListYn"))) {
 			url = "/listpage/viewClientWork"; 
+		} else {
+			url = "/listpage/viewClient"; 
 		}
 		return url;
 	
