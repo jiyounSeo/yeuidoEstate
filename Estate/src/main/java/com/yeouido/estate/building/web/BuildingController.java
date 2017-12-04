@@ -106,7 +106,7 @@ public class BuildingController {
 			mav.addObject("message", "물건 조회에 실패하였습니다.");
 			e.printStackTrace();
 		}
-		mav.addObject("custInfo",result);
+		mav.addObject("caInfo",result);
 	    mav.setViewName("jsonView");
 	    return mav;
 	}	

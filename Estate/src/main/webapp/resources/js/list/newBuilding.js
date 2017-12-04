@@ -121,6 +121,7 @@ function f_building_save() {
 		, positionX : $("#positionX").val()
 		, positionY : $("#positionY").val()
 		, addrDetail : $("#addrDetail").val()
+		, buildCd : $("#buildCd").val()
 	}
 	
 	var urlStr = "";
@@ -138,6 +139,8 @@ function f_building_save() {
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
 			  alert (data.message);
+			  window.opener.location. reload() ; //부모창 refresh
+			  window.close() ; // 팝업창 닫기
 		  }
 	});
 	
@@ -197,4 +200,50 @@ function f_category_del(index, delBuildCd) {
 		  }
 		});
 	}
+}
+
+
+
+function f_category_modify(index, buildCd){ 
+	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
+	//호출하게 됩니다. 	
+	var pop = window.open("./resources/popup/editBuilding.jsp?buildCd="+buildCd,"_blank","width=850,height=930, scrollbars='no', resizable='yes'");  
+}
+
+function getHttpParam(name) {
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.href);
+    if (results == null) {
+        return "";
+    } else {
+        return results[1];
+    }
+}
+
+
+
+function f_category_dtl(idx) {
+	var param = { buildCd : idx	};
+	$.ajax({
+		url : "/selectBuildingDtl.do",
+		type: "post",
+		data : param,
+		dataType : "json",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		success : function(result){
+			  $("#caTbody").empty();
+			  var caInfo = result.caInfo;
+			  
+			  $("input:radio[name='objtTp']:radio[value='"+caInfo.objtTp+"']").prop("checked", true); 
+			  $("#buildNm").val(caInfo.buildNm);
+			  $("#roadAddrPart1").val(caInfo.roadAddrPart1);
+			  $("#zipNo").val(caInfo.zipNo);
+			  $("#jibunAddr").val(caInfo.jibunAddr);
+			  $("#addrDetail").val(caInfo.addrDetail);
+			  $("#positionX").val(caInfo.positionX);
+			  $("#positionY").val(caInfo.positionY);
+			  $("#buildCd").val(caInfo.buildCd);		  
+		}
+	});
 }
