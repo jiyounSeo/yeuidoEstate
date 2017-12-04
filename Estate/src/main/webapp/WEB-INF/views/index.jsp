@@ -145,8 +145,9 @@
 										<a href="#"><img src="./resources/images/btn_search2.jpg"></a> 새창으로 떠서 검색 후 결과는 현재 페이지로 (검색페이지????페이지도없고...이건 추후개발로하자 11월이후..)
 									</div> -->
 								</td>
-								<td width="30%" align="right">			
-									<a href='#cate' onclick="f_order('frstRegDt');return false">등록일자순</a>|<a href='#cate' onclick="f_order('area');return false;">면적순</a>|<a href='#cate' onclick="f_order('bargainAmt');return false">가격순</a> 
+								<td width="30%" align="right">
+									<div id="order_menu" name="order_menu">
+									</div>									 
 								</td>
 							</tr>
 						</table>

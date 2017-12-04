@@ -154,8 +154,8 @@ public class ListController {
 	/*
 	 * 물건 상세조회 화면 
 	 */
-	@RequestMapping(value="/objtDtlView.do",method = RequestMethod.POST)
-	public String objtDtlView(@RequestParam Map<String,Object> map, Model model, HttpSession session){
+	@RequestMapping(value="/objtDtlView.do",method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	public ModelAndView objtDtlView(@RequestParam Map<String,Object> map, Model model, HttpSession session){
 		Map<String, Object> result = new HashMap<String, Object>();
 		model.addAttribute("activeTpChk", map.get("activeTp"));
 		model.addAttribute("publicYnChk", map.get("publicYn"));
@@ -163,17 +163,26 @@ public class ListController {
 		model.addAttribute("saleTpChk", map.get("saleTp"));
 		model.addAttribute("pageNm", map.get("pageNm"));
 		
+		ModelAndView mv = new ModelAndView("/listpage/" + map.get("viewUrl"));
+		
 		try {
 			map.put("user", session.getAttribute("user"));
 			result = objectService.selectObjectInfo(map);
-			model.addAllAttributes(result);
-			model.addAllAttributes(map);
+
+			logger.error(result.get("objtNm").toString());
+			
+			//model.addAllAttributes(result);
+			//model.addAllAttributes(map);
+			
+			mv.addAllObjects(map);
+			mv.addAllObjects(result);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String url = "";
-		
-		return "/listpage/" + map.get("viewUrl");
+		//String url = "";		
+		//return "/listpage/" + map.get("viewUrl");
+		return mv;	
 	}
 	/*
 	public void makeString(int type, int tab, String [] main_category_state, ArrayList<String> tab_category_state, String [] viewUrl)

@@ -12,20 +12,6 @@ $(document).ready(function(){
 
 
 
-//페이징 버튼 클릭이벤트
-currPage = 1;
-$(document).on('click', '.pagingBtn', function() {
-	var div = $(this).closest('div').attr('id');
-	
-	var currPageStr = $(this).attr("id").substr(4);
-	if ( gfn_isNull(currPageStr) == "") {
-		currPage = Number(currPageStr);
-		f_objectList_select();
-	}
-	
-});
-
-
 /*
  * 물건 선택 콤보
  */
@@ -155,7 +141,7 @@ function f_saleTp_color (saleTp) {
 	렌트 - 검정 - #3D3332 
 	븐양권 - 빨강 - #CA1C04
 	전매 - 블루 - #0E189E
-	임데 - 하늘 - #3486CF
+	임대 - 하늘 - #3486CF
 	*/
 	var color = "";
 	switch (saleTp) {
@@ -197,6 +183,11 @@ function gfn_isNull(str) {
     return false;
 }
 
+function f_orderBy(order){
+	orderByColumn = order;
+	f_objectList_select('','');	
+}
+
 var orderByColumn  = "";
 
 
@@ -208,6 +199,59 @@ function f_objectList_select(objtTp, saleTp){
 	 if (!gfn_isNull(saleTpChk)) {
 		 saleTp = saleTpChk;
 	 }
+	 
+	 var orderMenu = "";
+	 if(saleTp == "ST001" ){	// 매매
+		 if(objtTp == "OT002" || objtTp == "OT003") {
+			 orderMenu = "<a href='#cate' onclick='f_orderBy(\"frstRegDt\");return false'>등록일자순</a>" +
+				"|<a href='#cate' onclick='f_orderBy(\"area\");return false;'>면적순</a>" +
+				"|<a href='#cate' onclick='f_orderBy(\"bargainAmt\");return false'>매매가순</a>" +
+				"|<a href='#cate' onclick='f_orderBy(\"depositAmt\");return false'>보증금순</a>" +
+				"|<a href='#cate' onclick='f_orderBy(\"monthlyAmt\");return false'>월세순</a>";
+
+		 } else {
+			 orderMenu = "<a href='#cate' onclick='f_orderBy(\"frstRegDt\");return false'>등록일자순</a>" +
+				"|<a href='#cate' onclick='f_orderBy(\"area\");return false;'>면적순</a>" +
+				"|<a href='#cate' onclick='f_orderBy(\"bargainAmt\");return false'>매매가격순</a>";
+		 }
+		 
+	 } else if(saleTp == "ST002") {	// 전세
+
+		 orderMenu = "<a href='#cate' onclick='f_orderBy(\"frstRegDt\");return false'>등록일자순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"area\");return false;'>면적순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"depositAmt\");return false'>보증금순</a>";
+	 
+	 } else if(saleTp == "ST003") {	// 월세
+
+		 orderMenu = "<a href='#cate' onclick='f_orderBy(\"frstRegDt\");return false'>등록일자순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"area\");return false;'>면적순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"depositAmt\");return false'>보증금순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"monthlyAmt\");return false'>월세순</a>";
+
+	 } else if(saleTp == "ST004") {	// 렌트
+
+		 orderMenu = "<a href='#cate' onclick='f_orderBy(\"frstRegDt\");return false'>등록일자순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"area\");return false;'>면적순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"monthlyAmt\");return false'>렌트비순</a>";
+		 
+	 } else if(saleTp == "ST006" || saleTp == "ST007") {	// 분양권, 전매
+
+		 orderMenu = "<a href='#cate' onclick='f_orderBy(\"frstRegDt\");return false'>등록일자순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"area\");return false;'>면적순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"parcelAmt\");return false'>분양가순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"premiumAmt\");return false'>프리미엄순</a>";
+		 
+	 }  else if(saleTp == "ST005") {	// 임대
+
+		 orderMenu = "<a href='#cate' onclick='f_orderBy(\"frstRegDt\");return false'>등록일자순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"area\");return false;'>면적순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"depositAmt\");return false'>보증금순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"monthlyAmt\");return false'>월세순</a>" +
+		 				"|<a href='#cate' onclick='f_orderBy(\"rightAmt\");return false'>권리금순</a>";
+		 
+	 }
+	 $("#order_menu").empty();
+	 $("#order_menu").append(orderMenu);
 	 	 
 	 var param = {
 			 currentPage : 1 //Number(currPage)

@@ -86,6 +86,7 @@
 <input type="hidden" name="objtTp" id="objtTp" value=""/>
 <input type="hidden" name="saleTp" id="saleTp" value=""/>
 <input type="hidden" name="viewUrl" id="viewUrl" value=""/>
+<input type="hidden" name="pageNm" id="pageNm" value="objtPublic"/>
 
 
 <input type="hidden" name="pageNm" id="pageNm" value="total"/>

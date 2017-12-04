@@ -72,7 +72,7 @@
 					<tr>
 						<td width="488px" height="41px">
 							<div style="width:488px;height:41px;margin:0;padding:0;text-align:left">
-								<a href="#"><img src="./resources/images/btn_search2.jpg"></a>
+								<a href="./totalSearch.do"><img src="./resources/images/btn_search2.jpg"></a>
 							</div>
 						</td>
 						<td width="486px" align="center">
