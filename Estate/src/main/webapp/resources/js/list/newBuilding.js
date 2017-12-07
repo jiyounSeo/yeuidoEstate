@@ -171,8 +171,9 @@ function f_category_list() {
 	contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	success : function(result){
 		  $("#caTbody").empty();
-		  caList = result.caList;
+		  
 		  if (result.caList.length != 0) {
+			  caList = result.caList;
 			  $("#caListTemplte").tmpl(result).appendTo("#caTbody");
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#page" + currPage).addClass("active");
@@ -232,7 +233,7 @@ function f_category_dtl(idx) {
 		dataType : "json",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		success : function(result){
-			  $("#caTbody").empty();
+			
 			  var caInfo = result.caInfo;
 			  
 			  $("input:radio[name='objtTp']:radio[value='"+caInfo.objtTp+"']").prop("checked", true); 

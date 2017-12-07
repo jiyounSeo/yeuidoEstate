@@ -29,7 +29,7 @@ $(document).ready(function() {
 		if ( '${sessionScope.user.mbrTp}'  == "MT003" || '${sessionScope.user.mbrTp}' == "MT004") {
 			login_contents += " | <a id='memberMng' href='./memberListView.do'>회원관리</a> | ";
 			login_contents += "<a href='./categoryList.do'>카테고리관리</a> | ";
-			login_contents += "<a href='#' onclick='estatePopup();return false;'>부동산관리</a>";
+			login_contents += "<a href='./estateCategoryList.do'>부동산관리</a>";
 		}
 		
 	} else {

@@ -43,18 +43,18 @@ public class EstateController {
 		ModelAndView mav= new ModelAndView();
 		Paging paging = new Paging();
         			
-		List<Map<String,Object>> custList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> caList = new ArrayList<Map<String,Object>>();
 		try {
 			int currentPage = Integer.parseInt(map.get("currentPage").toString());
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
 			map.put("rowNum", (currentPage-1)*pagePerRow);
 			map.put("pagePerRow", pagePerRow);
 			
-			custList = estateService.selectEstateList(map);
-			if (!custList.isEmpty()) {
+			caList = estateService.selectEstateList(map);
+			if (!caList.isEmpty()) {
 				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
 						
-				int totalCount = Integer.parseInt(custList.get(0).get("totalCnt").toString());
+				int totalCount = Integer.parseInt(caList.get(0).get("totalCnt").toString());
 				int pageSize = Integer.parseInt(map.get("pageSize").toString());
 				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
 				mav.addAllObjects(pagingMap);
@@ -63,10 +63,20 @@ public class EstateController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	    mav.addObject("custList",custList);
+	    mav.addObject("caList",caList);
 	    mav.setViewName("jsonView");
 	    return mav;
 	}
+	
+	/*
+	 * 물건리스트페이지
+	 */	
+	@RequestMapping(value="/estateCategoryList.do",method = RequestMethod.GET)
+	public String modifyBuildingInfo(@RequestParam Map<String,Object> map, Model model){
+		model.addAllAttributes(map);
+		return "/admin/estateCategoryList" ;	
+	}
+	
 	
 	/*
 	 * 물건등록 
@@ -109,7 +119,7 @@ public class EstateController {
 			mav.addObject("message", "부동산 조회에 실패하였습니다.");
 			e.printStackTrace();
 		}
-		mav.addObject("custInfo",result);
+		mav.addObject("caInfo",result);
 	    mav.setViewName("jsonView");
 	    return mav;
 	}	
@@ -142,21 +152,23 @@ public class EstateController {
 	 * 물건 삭제
 	 */	
 	@RequestMapping(value="/deleteEstate.do",method = RequestMethod.POST)
-	public String deleteEstate(HttpServletRequest request,Model model){
-		ListController listView = new ListController();
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		try {
+	public ModelAndView deleteEstate( @RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		 List<Object> estateList = new ArrayList<Object>();
+		 try {
 			int result = estateService.deleteEstate(map);
-			model.addAttribute("messageCd", "1");
-			//model.addObject("message", "물건 삭제에 실패하였습니다.");
-			
-		} catch (Exception e) {
-			model.addAttribute("messageCd", "2");
+			mav.addObject("messageCd", "1");
+			mav.addObject("message", "삭제 완료 되었습니다.");
+		 } catch (Exception e) {
+			mav.addObject("messageCd", "2");
+			mav.addObject("message", "삭제 중 오류가 발생하였습니다.");
 			e.printStackTrace();
-		}
-		return "/list/newEstate";	
-	}
+		 }
+	 
+	    mav.setViewName("jsonView");
+	    return mav;
+	}	
+		
 	
 	/*
 	 * 물건 콤보

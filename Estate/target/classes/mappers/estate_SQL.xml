@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , rprsnTel3
 		  , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	      , frstRegUser frstRegNm
-	      , (SELECT COUNT(*) from Estate) totalCnt
+	      , (SELECT COUNT(*) from estate) totalCnt
 	  from estate
 	 WHERE 1=1 
 	 LIMIT #{rowNum}, #{pagePerRow}

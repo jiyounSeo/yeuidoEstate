@@ -94,14 +94,14 @@
 	<table class="cl_list">
 		<tbody>
 		<tr class="title">
-			<td style="width:10%">등록일자</td>
-			<td style="width:10%">물건명</td>
-			<td style="width:10%">물건종류</td>
-			<td style="width:10%">물건유형</td>
-			<td style="width:10%">고객명</td>
+			<td style="width:8%">등록일자</td>
+			<td style="width:30%">물건명</td>
+			<td style="width:6%">물건종류</td>
+			<td style="width:6%">물건유형</td>
+			<td style="width:7%">고객명</td>
 			<td style="width:10%">고객전화번호</td>
-			<td style="width:30%">주소</td>
-			<td style="width:10%">담당자</td>
+			<td style="width:26%">주소</td>
+			<td style="width:7%">담당자</td>
 		</tr>
 		</tbody>
 		<tbody id="objtTbody">
@@ -132,8 +132,16 @@
 		<td>{{html $value.objtNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
 		<td>{{html $value.saleTpNm}}</td>
-		<td>{{html $value.custNm}}</td>
-		<td>{{html $value.custTel}}</td>
+		{{if ${value.custNm eq null } }}
+			<td>--</td>
+		{{else}}
+			<td>{{html $value.custNm}}</td>
+		{{/if}}
+		{{if ${value.custTel eq null } }}
+			<td>--</td>
+		{{else}}
+			<td>{{html $value.custTel}}</td>
+		{{/if}}
 		<td>{{html $value.addr}}</td>
 		<td>{{html $value.frstRegNm}}</td>
 	</tr>

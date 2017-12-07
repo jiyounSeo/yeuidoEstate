@@ -129,15 +129,17 @@ function f_estate_save() {
 	} else {
 		urlStr = "insertEstate.do";
 	}
-	alert (urlStr);
+	
 	$.ajax({
-		  url : "/insertEstate.do",
+		  url : "/" + urlStr,
 		  type: "post",
 		  data : param,
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
 			  alert (data.message);
+			  window.opener.location. reload() ; //부모창 refresh
+			  window.close() ; // 팝업창 닫기
 		  },
 		  error: function(data){
 			  alert("로그인 도중 문제가 발생하였습니다. 관리자에게 문의하세요.");
@@ -146,28 +148,109 @@ function f_estate_save() {
 	
 }
 
-function f_building_list() {
+var currPage = 1;
+var caList;
+
+$(document).on('click', '.pagingBtn', function() {
+	var div = $(this).closest('div').attr('id');
+	var currPageStr = $(this).attr("id").substr(4);
+	if ( gfn_isNull(currPageStr) == "") {
+		currPage = Number(currPageStr);
+		f_estate_list();
+	}
+});
+
+
+function f_estate_list() {
 	var param = { currentPage : Number(currPage)
 			   , pagePerRow : 10
 			   , pageSize : 10
 	};
 	$.ajax({
-	url : "/selectBuildingList.do",
+	url : "/selectEstateList.do",
 	type: "post",
 	data : param,
 	dataType : "json",
 	contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 	success : function(result){
-		  $("#custTbody").empty();
-		  if (result.custList.length != 0) {
-			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
+		  $("#caTbody").empty();
+		  if (result.caList.length != 0) {
+			  caList = result.caList;
+			  $("#caListTemplte").tmpl(result).appendTo("#caTbody");
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#page" + currPage).addClass("active");
 	
 		  } else {
 			  $("#pagingDiv").empty();
-			  $("#custListEmptyTemplte").tmpl(result).appendTo("#custTbody");
+			  $("#caListEmptyTemplte").tmpl(result).appendTo("#caTbody");
 		  }
 	}
 	});
 }
+
+
+function f_estate_del(index, delEstateCd) {
+	if (confirm ("["+caList[index].estateNm+"] 삭제처리 하시겠습니까?")) {
+		$.ajax({
+		  url : "/deleteEstate.do",
+		  type: "post",
+		  data : {estateCd: delEstateCd},
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+			  alert (data.message);
+			  f_estate_list();
+		  }
+		});
+	}
+}
+
+
+
+function f_estate_modify(index, estateCd){ 
+	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
+	//호출하게 됩니다. 
+	var pop = window.open("./resources/popup/editEstate.jsp?estateCd="+estateCd,"_blank","width=850,height=520, scrollbars='no', resizable='yes'");  
+}
+
+function getHttpParam(name) {
+    var regexS = "[\\?&]" + name + "=([^&#]*)";
+    var regex = new RegExp(regexS);
+    var results = regex.exec(window.location.href);
+    if (results == null) {
+        return "";
+    } else {
+        return results[1];
+    }
+}
+
+
+
+function f_estate_dtl(idx) {
+	var param = { estateCd : idx	};
+	$.ajax({
+		url : "/selectEstateInfo.do",
+		type: "post",
+		data : param,
+		dataType : "json",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		success : function(result){
+			
+			  var caInfo = result.caInfo;
+			  
+			  $("#estateNm").val(caInfo.estateNm);
+			  $("#tel1").val(caInfo.tel1);
+			  $("#tel2").val(caInfo.tel2);
+			  $("#tel3").val(caInfo.tel3);
+			  $("#rprsnNm").val(caInfo.rprsnNm);
+			  $("#rprsnTel1").val(caInfo.rprsnTel1);
+			  $("#rprsnTel2").val(caInfo.rprsnTel2);
+			  $("#rprsnTel3").val(caInfo.rprsnTel3);	
+			  $("#estateAddr").val(caInfo.estateAddr);
+			  $("#estateAddrDtl").val(caInfo.estateAddrDtl);	  
+			  $("#estateCd").val(caInfo.estateCd);	  
+		}
+	});
+}
+
+
