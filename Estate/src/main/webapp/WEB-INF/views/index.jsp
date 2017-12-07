@@ -145,9 +145,7 @@
 										<a href="#"><img src="./resources/images/btn_search2.jpg"></a> 새창으로 떠서 검색 후 결과는 현재 페이지로 (검색페이지????페이지도없고...이건 추후개발로하자 11월이후..)
 									</div> -->
 								</td>
-								<td width="30%" align="right">
-									<div id="order_menu" name="order_menu">
-									</div>									 
+								<td width="30%" align="right">							 
 								</td>
 							</tr>
 						</table>
@@ -196,96 +194,96 @@
 <td width='100px' height='25px'>
 	<a href='#objt' onclick="f_objt_select('OT001','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT001','ST002')"  style='text-decoration: none;'><li id="li_ST002" class='tab_bg'>전세</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT001','ST003')" style='text-decoration: none;'><li id="li_ST003" class='tab_bg'>월세</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT001','ST004')" style='text-decoration: none;'><li id="li_ST004" class='tab_bg'>렌트</li></a>
 </td>
-<td width='70%'>&nbsp;</td>
-<td style="width:30%; align:right; valign:middle;">
+<td align='right'>
+	<div id="order_menu" name="order_menu"></div>		
 </td>	
 </script>
 <script id="objtTrTemplte2" type="text/x-jquery-tmpl">	
 <td width='100px' height='25px'>
 	<a href='#objt' onclick="f_objt_select('OT002','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT002','ST005')"  style='text-decoration: none;'><li id="li_ST005" class='tab_bg'>임대</li></a>
-</td>	
-<td width='76%'>&nbsp;</td>
-<td style="width:24%; align:right; valign:middle;">
+</td>
+<td align='right'>
+	<div id="order_menu" name="order_menu"></div>		
 </td>
 </script>
 <script id="objtTrTemplte3" type="text/x-jquery-tmpl">	
 <td width='100px' height='25px'>
 	<a href='#objt' onclick="f_objt_select('OT003','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT003','ST005')"  style='text-decoration: none;'><li id="li_ST005" class='tab_bg'>임대</li></a>
 </td>	
-<td width='76%'>&nbsp;</td>
-<td style="width:24%; align:right; valign:middle;">
+<td align='right'>
+	<div id="order_menu" name="order_menu"></div>		
 </td>
 </script>
 <script id="objtTrTemplte4" type="text/x-jquery-tmpl">	
 <td width='100px' height='25px'>
 	<a href='#objt' onclick="f_objt_select('OT004','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT004','ST002')"  style='text-decoration: none;'><li id="li_ST002" class='tab_bg'>전세</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT004','ST003')" style='text-decoration: none;'><li id="li_ST003" class='tab_bg'>월세</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT004','ST004')" style='text-decoration: none;'><li id="li_ST004" class='tab_bg'>렌트</li></a>
 </td>	
-<td width='70%'>&nbsp;</td>
-<td style="width:30%; align:right; valign:middle;">
+<td align='right'>
+	<div id="order_menu" name="order_menu"></div>		
 </td>
 </script>
 <script id="objtTrTemplte5" type="text/x-jquery-tmpl">	
 <td width='100px' height='25px'>
 	<a href='#objt' onclick="f_objt_select('OT005','ST001')" style='text-decoration: none;'><li id="li_ST001" class='tab_bg'>매매</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT005','ST002')"  style='text-decoration: none;'><li id="li_ST002" class='tab_bg'>전세</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT005','ST003')" style='text-decoration: none;'><li id="li_ST003" class='tab_bg'>월세</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT005','ST004')" style='text-decoration: none;'><li id="li_ST004" class='tab_bg'>렌트</li></a>
 </td>
-<td width='70%'>&nbsp;</td>
-<td style="width:30%; align:right; valign:middle;">
+<td align='right'>
+	<div id="order_menu" name="order_menu"></div>		
 </td>
 </script>
 <script id="objtTrTemplte6" type="text/x-jquery-tmpl">	
 <td width='100px' height='25px'>
 	<a href='#objt' onclick="f_objt_select('OT006','ST006')" style='text-decoration: none;'><li id="li_ST006" class='tab_bg'>분양권</li></a>
 </td>	
-<td width='20px'>&nbsp;</td>
+<td width='5px'>&nbsp;</td>
 <td width='100px'>
 	<a href='#objt' onclick="f_objt_select('OT006','ST007')"  style='text-decoration: none;'><li id="li_ST007" class='tab_bg'>전매</li></a>
 </td>	
-<td width='76%'>&nbsp;</td>
-<td style="width:24%; align:right; valign:middle;">
+<td align='right'>
+	<div id="order_menu" name="order_menu"></div>		
 </td>
 </script>
 
