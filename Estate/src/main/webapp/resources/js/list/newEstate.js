@@ -1,6 +1,6 @@
  //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
 $( document ).ready(function() {
-	
+	window.document.domain = "여의도닷컴.com";
 });
 //document.domain = "여의도닷컴.com";
 
@@ -56,6 +56,7 @@ function resizeWindow(win)    {
 function estatePopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
+	window.document.domain = "여의도닷컴.com";
 	var pop = window.open("./resources/popup/newEstate.jsp","_blank","width=850,height=520, scrollbars='no', resizable='yes'");  
 }
 
@@ -210,6 +211,8 @@ function f_estate_del(index, delEstateCd) {
 function f_estate_modify(index, estateCd){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
+
+	window.document.domain = "여의도닷컴.com";
 	var pop = window.open("./resources/popup/editEstate.jsp?estateCd="+estateCd,"_blank","width=850,height=520, scrollbars='no', resizable='yes'");  
 }
 
