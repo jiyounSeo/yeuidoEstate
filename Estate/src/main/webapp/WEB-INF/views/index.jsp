@@ -71,7 +71,7 @@
 									<option value="330/991">330 ~ 991</option>
 									<option value="self" onclick="f_eabled_value_form('area');">직접입력</option>
 								</select>
-								<input type="text" id="search_area_min_input" name="search_area_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_area_max_input" name="search_area_max_input" style="width:80px;height:30px;" disabled> ㎡							
+								<input type="text" id="search_area_min_input" name="search_area_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_area_max_input" name="search_area_max_input" style="width:80px;height:30px;" disabled> 평형							
 							</td>
 						</tr>						
 					</table>

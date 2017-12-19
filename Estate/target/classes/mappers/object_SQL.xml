@@ -826,6 +826,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test = "(priminum_min != null and priminum_min != '') and (priminum_max == null or priminum_max == '')">
 	   and bargainAmt NOT BETWEEN 0 AND #{bargain_min}
 	   </if>
+	   
+	   <if test = "areaMin != null and areaMin != '' and areaMax != null and areaMax != '' ">
+	   and area BETWEEN #{areaMin} AND #{areaMax}
+	   </if>
 	   order by ${orderByColumn} desc
 	</select>	
 	

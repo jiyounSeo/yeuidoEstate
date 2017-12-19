@@ -469,6 +469,8 @@ function f_search() {
 			  , parcel_max : arrMax[5]
 			  , priminum_min : arrMin[6]
 			  , priminum_max : arrMax[6]
+			  , areaMin : area_min
+			  , areaMax : area_max
 			  , pagePerRow : 10
 			  , pageSize : 10
 	};
