@@ -74,6 +74,10 @@ public class ObjectServiceImpl  implements ObjectService
 	   return objectDAO.selectMainObjtList(map);
    }
 
+   @Override
+   public List<Map<String,Object>> searchMainObjtList(Map map) throws Exception {
+	   return objectDAO.searchMainObjtList(map);
+   }
    /* 물건리스트 */
    @Override
    public List<Map<String,Object>> selectObjectList(Map map) throws Exception {

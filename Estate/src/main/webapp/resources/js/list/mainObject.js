@@ -398,25 +398,157 @@ function f_marker_setting_event(map, marker, infowindow, x, y) {
 
 function f_search() {
 	
+	var selectedSaleTp = $("input[name='search_slTp']:checked").val();
+	var selectedObjtTp = $("input[name='search_obTp']:checked").val();
+	var arr = ["bargain", "deposit", "monthly", "right", "manage", "parcel", "priminum"];
+	
+	var arrMin = new Array(7);
+	var arrMax = new Array(7);
+
+	var area_min, area_max;
+	
+	
+	if($("#search_area option:selected").val() == "self"){
+		area_min = $("#search_area_min_input").val();
+		area_max = $("#search_area_max_input").val();
+	} else if($("#search_area option:selected").val() == "all") {
+		area_min = "";
+		area_max = "";
+	} else {
+		var value = $("#search_area option:selected").val().split("/");
+		area_min = value[0];
+		area_max = value[1];
+	}
+	
+	var logText = selectedSaleTp + "/" + selectedObjtTp + "/";
+	
+	
+	for(var i = 0; i < 7; i++){
+
+		var frmName = arr[i];
+		var selected = $("#search_"+frmName + " option:selected").val();
+	
+		if(typeof selected != "undefined"){
+			if(selected == "self") {
+				arrMin[i] = $("#search_" + frmName + "_min_input").val();
+				arrMax[i] = $("#search_" + frmName + "_max_input").val();
+			} else {
+				var value = selected.split("/");
+				arrMin[i] = value[0];
+				arrMax[i] = value[1];
+			}			
+		} else {
+			arrMin[i] = "";
+			arrMax[i] = "";
+		}		
+		
+		logText += frmName + "[" + arrMin[i] + "/" + arrMax[i] + "] / ";
+	}
+	
+	logText += "area[" + area_min + "/" + area_max + "]";
+
+//	alert(logText);
+	
+	
 	var param = {
 			currentPage : 1 //Number(currPage)
 			  , orderByColumn : orderByColumn == "" ? "frstRegDt" : orderByColumn
-			  , saleTp : $("#formId input[type='radio'][name=fieldname]:checked").val()
-			  , objtTp : objtTp
-			  , buildCd : category
+			  , saleTp : selectedSaleTp
+			  , objtTp : selectedObjtTp
+			  , bargain_min : arrMin[0]
+			  , bargain_max : arrMax[0]
+			  , deposit_min : arrMin[1]
+			  , deposit_max : arrMax[1]
+			  , monthly_min : arrMin[2]
+			  , monthly_max : arrMax[2]
+			  , right_min : arrMin[3]
+			  , right_max : arrMax[3]
+			  , manage_min : arrMin[4]
+			  , manage_max : arrMax[4]
+			  , parcel_min : arrMin[5]
+			  , parcel_max : arrMax[5]
+			  , priminum_min : arrMin[6]
+			  , priminum_max : arrMax[6]
 			  , pagePerRow : 10
 			  , pageSize : 10
 	};
 	
 	$.ajax({
-		  url : "/selectMainObjtList.go",
+		  url : "/searchMainObjtList.go",
 		  type: "post",
 		  data : param,
 		  dataType : "json",
 		  success : function(result){
+			  console.log(result.objtList);
+			  
+			  $("#objtTbody").empty();
+			  var tmplNm = "";
+			  switch ( param.objtTp ) {
+			  	case "OT001" : // 아파트
+			  		tmplNm = "objtListTemplte1_"+param.saleTp;
+			  		break; 
+			  	case "OT002" : // 상가
+			  		tmplNm = "objtListTemplte2_"+param.saleTp;
+			  		break;
+			  	case "OT003" : //사무실.빌딩
+			  		tmplNm = "objtListTemplte3_"+param.saleTp;
+					break;
+			  	case "OT004" : // 오피스텔
+			  		tmplNm = "objtListTemplte4_"+param.saleTp;
+					break;
+			  	case "OT005" : //주상복합
+			  		tmplNm = "objtListTemplte5_"+param.saleTp;
+			  		break;
+			  	case "OT006" : //분양권
+			  		tmplNm = "objtListTemplte6";
+					break;
+			  }
+
+			  
+			  var map = new naver.maps.Map("main_map", {
+					center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
+					minZoom: 7,
+				    zoom: 10,
+				    mapTypeControl: true,
+				    scrollWheel: false,
+				    mapTypeControlOptions: {
+				        style: naver.maps.MapTypeControlStyle.BUTTON,
+				        position: naver.maps.Position.TOP_RIGHT
+				    },
+				    zoomControl: true,
+				    zoomControlOptions: {
+				        style: naver.maps.ZoomControlStyle.LARGE,
+				        position: naver.maps.Position.RIGHT_CENTER
+				    },
+				    scaleControl: true,
+				    scaleControlOptions: {
+				        position: naver.maps.Position.BOTTOM_RIGHT
+				    },
+				    logoControl: true,
+				    logoControlOptions: {
+				        position: naver.maps.Position.TOP_LEFT
+				    },
+				    mapDataControl: true,
+				    mapDataControlOptions: {
+				        position: naver.maps.Position.BOTTOM_LEFT
+				    }
+				});
+				
+			  console.log(tmplNm);
+			  
+			  if (result.objtList.length != 0) {
+				  objtList = result.objtList;
+				  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
+				  f_map_make(objtList, map);
+				  
+			  } else {
+				  var colCnt = $("#objtListTr td").length;
+				  $("#objtListEmptyTemplte").tmpl({col : colCnt}).appendTo("#objtTbody");
+			  }
 
 		  }
 		});
+	
 }
 
 function f_setting_search_form(obType){
@@ -464,15 +596,15 @@ function f_setting_search_form_price(slType) {
 	
 	var spacingText = '<tr><td colspan="2" height="5px"></td></tr>';
 	
-	var optionBoxText = '<option value="all">전체</option>' +
-						'<option value="0">1억이하</option>' +
-						'<option value="20000">1억 ~ 3억</option>' +
-						'<option value="40000">3억 ~ 6억</option>' +
-						'<option value="70000">6억 ~ 9억</option>' +
-						'<option value="90000">9억 이상</option>' +
+	var optionBoxText = '<option value="/">전체</option>' +
+						'<option value="0/10000">1억이하</option>' +
+						'<option value="10000/30000">1억 ~ 3억</option>' +
+						'<option value="30000/60000">3억 ~ 6억</option>' +
+						'<option value="60000/90000">6억 ~ 9억</option>' +
+						'<option value="90000/">9억 이상</option>' +
 						'<option value="self">직접입력</option>';
 	
-	var optionBoxText2 = '<option value="all">전체</option>' +
+	var optionBoxText2 = '<option value="/">전체</option>' +
 						'<option value="self">직접입력</option>';
 	
 	var bargainText = '<tr>' +
@@ -611,18 +743,13 @@ function f_enabled_value_form(frmName) {
 		$(minNmInput).prop('disabled', false);
 		$(maxNmInput).prop('disabled', false);		
 	} else {
-		if(selected == 'all') {
-			$(minNmHidden).val("");
-			$(maxNmHidden).val("");
-		} else {
-			var min = Number(selected) - 10000;
-			var max = Number(selected) + 10000;
-			
-			if(min < 0) min = 0;
-			
-			$(minNmHidden).val(min);
-			$(maxNmHidden).val(max);
-		}
+		var value = selected.split("/");
+		var min = value[0];
+		var max = value[1];
+		
+		$(minNmHidden).val(min);
+		$(maxNmHidden).val(max);
+
 		$(minNmInput).prop('disabled', true);
 		$(maxNmInput).prop('disabled', true);
 	}

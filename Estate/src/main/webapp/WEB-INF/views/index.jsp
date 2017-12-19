@@ -60,23 +60,23 @@
 						<tr>
 							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">면적</td>
 							<td style="width:75%;padding-left:10px;">
-								<select  style="width:90px;height:30px;">
-									<option>전체</option>
-									<option>0 ~ 66</option>
-									<option>66 ~ 99</option>
-									<option>99 ~ 132</option>
-									<option>132 ~ 165</option>
-									<option>165 ~ 198</option>
-									<option>198 ~ 330</option>
-									<option>330 ~ 991</option>
-									<option onclick="f_eabled_value_form('area');">직접입력</option>
+								<select  id="search_area" name="search_area" style="width:90px;height:30px;">
+									<option value="all">전체</option>
+									<option value="0/66">0 ~ 66</option>
+									<option value="66/99">66 ~ 99</option>
+									<option value="99/132">99 ~ 132</option>
+									<option value="132/165">132 ~ 165</option>
+									<option value="165/198">165 ~ 198</option>
+									<option value="198/330">198 ~ 330</option>
+									<option value="330/991">330 ~ 991</option>
+									<option value="self" onclick="f_eabled_value_form('area');">직접입력</option>
 								</select>
 								<input type="text" id="search_area_min_input" name="search_area_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_area_max_input" name="search_area_max_input" style="width:80px;height:30px;" disabled> ㎡							
 							</td>
 						</tr>						
 					</table>
 					<br>
-					<a href="#"><img src="./resources/images/btn_clear_index.jpg"></a>&nbsp;&nbsp;<a href="#"><img src="./resources/images/btn_search_index.jpg"></a>
+					<a href="#"><img src="./resources/images/btn_clear_index.jpg"></a>&nbsp;&nbsp;<a href="#" onclick="f_search()"><img src="./resources/images/btn_search_index.jpg"></a>
 					<input type="hidden" name="searchObjtTp" id="searchObjtTp" />
 					<input type="hidden" name="searchSaleTp" id="searchSaleTp" />
 					<input type="hidden" name="search_bargain_min" id="search_bargain_min" />

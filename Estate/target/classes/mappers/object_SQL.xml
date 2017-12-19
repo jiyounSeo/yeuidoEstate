@@ -713,6 +713,122 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   
 	   order by ${orderByColumn} desc
 	</select>
+	
+
+	<select id="searchMainObjtList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT	DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , obj.objtNo
+	     , obj.objtTp
+	     , (select commNm from commcd where commCd = objtTp ) objtTpNm
+	     , obj.saleTP
+	     , (select commNm from commcd where commCd = saleTp ) saleTpNm
+	     , obj.objtNm
+	     , obj.buildCd
+	     , if (isnull(obj.buildCd), obj.buildNm, (select b.buildNm from building b where b.buildCd = obj.buildCd )) buildNm 
+	     , obj.directionTp
+	     , (select commNm from commcd where commCd = obj.directionTp ) directionTpNm
+	     , obj.businessNm
+	     , obj.bargainAmt
+	     , obj.depositAmt
+	     , obj.monthlyAmt
+	     , obj.rightAmt
+	     , obj.manageAmt
+	     , if (isnull(obj.ondolYn), 'N', obj.ondolYn) ondolYn
+	     , obj.conditionTp 
+	     , (select commNm from commcd where commCd = obj.conditionTp ) conditionTpNm
+	     , obj.frstRegUser
+	     , obj.activeTp
+	     , (select commNm from commcd where commCd = obj.activeTp ) activeTpNm
+	     , obj.surtaxYn
+	     , obj.advertiseYn
+	     , obj.dong
+	     , obj.floor
+	     , CAST(obj.area AS signed integer) area
+	     , CAST(obj.realArea AS signed integer) realArea
+	     , obj.publicYn
+	     , obj.availableTp
+	     , (select commNm from commcd where commCd = obj.availableTp ) availableTpNm
+	     , DATE_FORMAT(obj.availableDt, '%Y-%m-%d') as availableDt
+	 	 , obj.parcelAmt
+	 	 , obj.premiumAmt
+         , m.mbrNm frstRegNm
+         , e.estateNm
+         , concat(e.estateNm, '(', e.tel1, '-', e.tel2,'-', e.tel3, ')') estateInfo
+         , custNm
+         , concat(custTel1, '-',custTel2,'-',custTel3) custTel
+         , obj.zipNo
+         , if (isnull(obj.jibunAddr), (select jibunAddr from building b where b.buildCd = obj.buildCd ), obj.jibunAddr ) jibunAddr
+	  	 , obj.roadAddrPart1 
+	  	 , obj.addrDetail
+	 	 , if ( isnull(obj.positionX), (select positionX from building b where b.buildCd = obj.buildCd ) , obj.positionX) positionX 
+	 	 , if ( isnull(obj.positionY), (select positionY from building b where b.buildCd = obj.buildCd ) , obj.positionY) positionY 
+	  FROM saleobject obj
+	     left outer join customer cust
+         on obj.custId = cust.custId
+		 inner join member m
+         on obj.frstRegUser = m.mbrId 
+	 	 inner join estate e
+         on  m.estateCd  = e.estateCd
+	 WHERE 1=1
+	   and obj.advertiseYn = 'Y'
+	   <if test = "objtTp != null and objtTp != '' ">
+	   and objtTp = #{objtTp}
+	   </if>
+	   <if test = "saleTp != null and saleTp != '' ">
+	   and saleTp = #{saleTp}
+	   </if>
+	   
+	   <if test = "bargain_min != null and bargain_min != '' and bargain_max != null and bargain_max != '' ">
+	   and bargainAmt BETWEEN #{bargain_min} AND #{bargain_max}
+	   </if>	   
+	   <if test = "(bargain_min != null and bargain_min != '') and (bargain_max == null or bargain_max == '')">
+	   and bargainAmt NOT BETWEEN 0 AND #{bargain_min}
+	   </if>
+	   
+	   <if test = "deposit_min != null and deposit_min != '' and deposit_max != null and deposit_max != '' ">
+	   and depositAmt BETWEEN #{deposit_min} AND #{deposit_max}
+	   </if>	   
+	   <if test = "(deposit_min != null and deposit_min != '') and (deposit_max == null or deposit_max == '')">
+	   and depositAmt NOT BETWEEN 0 AND #{deposit_min}
+	   </if>
+	   
+	   <if test = "monthly_min != null and monthly_min != '' and monthly_max != null and monthly_max != '' ">
+	   and monthlyAmt BETWEEN #{monthly_min} AND #{monthly_max}
+	   </if>	   
+	   <if test = "(monthly_min != null and monthly_min != '') and (monthly_max == null or monthly_max == '')">
+	   and monthlyAmt NOT BETWEEN 0 AND #{monthly_min}
+	   </if>
+	   
+	   <if test = "right_min != null and right_min != '' and right_max != null and right_max != '' ">
+	   and rightAmt BETWEEN #{right_min} AND #{right_max}
+	   </if>	   
+	   <if test = "(right_min != null and right_min != '') and (right_max == null or right_max == '')">
+	   and rightAmt NOT BETWEEN 0 AND #{right_min}
+	   </if>
+	   
+	   <if test = "manage_min != null and manage_min != '' and manage_max != null and manage_max != '' ">
+	   and manageAmt BETWEEN #{manage_min} AND #{manage_max}
+	   </if>	   
+	   <if test = "(manage_min != null and manage_min != '') and (manage_max == null or manage_max == '')">
+	   and manageAmt NOT BETWEEN 0 AND #{manage_min}
+	   </if>
+	   
+	   <if test = "parcel_min != null and parcel_min != '' and parcel_max != null and parcel_max != '' ">
+	   and parcelAmt BETWEEN #{parcel_min} AND #{parcel_max}
+	   </if>	   
+	   <if test = "(parcel_min != null and parcel_min != '') and (parcel_max == null or parcel_max == '')">
+	   and parcelAmt NOT BETWEEN 0 AND #{parcel_min}
+	   </if>
+	   
+	   <if test = "priminum_min != null and priminum_min != '' and priminum_max != null and priminum_max != '' ">
+	   and priminumAmt BETWEEN #{priminum_min} AND #{priminum_max}
+	   </if>	   
+	   <if test = "(priminum_min != null and priminum_min != '') and (priminum_max == null or priminum_max == '')">
+	   and bargainAmt NOT BETWEEN 0 AND #{bargain_min}
+	   </if>
+	   order by ${orderByColumn} desc
+	</select>	
+	
 
 	<select id="selectDueList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT objtNo
