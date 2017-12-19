@@ -3,8 +3,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
 <script type="text/javascript" src="./resources/js/list/mainObject.js"></script>
+<form id="indexSearch" name="indexSearch">	
 <div id="ob_list" style="width:1500px;margin:auto;padding:0;">
-	
 	<div style="width:1470px; text-align:left; margin:auto; padding:0">		
 		<table style="width: 1470px;" cellpadding="0" cellspacing="0" border="0">
 			<tr>
@@ -17,73 +17,46 @@
 						<tr>
 							<td style="width:15%;height:70px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">종류</td>
 							<td style="width:75%;padding-left:10px;">
-								<input type="radio" id="caTp1" name="caTp" value="ST001" checked /><label for="caTp1">아파트</label>
-								<input type="radio" id="caTp2" name="caTp" value="ST002"/><label for="caTp2">상가</label>
-								<input type="radio" id="caTp3" name="caTp" value="ST003"/><label for="caTp3">사무실/빌딩</label><br>
-								<input type="radio" id="caTp4" name="caTp" value="ST004"/><label for="caTp4">오피스텔</label>
-								<input type="radio" id="caTp5" name="caTp" value="ST003"/><label for="caTp5">주상복합</label>
-								<input type="radio" id="caTp6" name="caTp" value="ST004"/><label for="caTp6">분양권</label>
+								<input type="radio" onclick="f_setting_search_form('OT001')" id="search_OT001" name="search_obTp" value="OT001" checked /><label for="search_OT001">아파트</label>
+								<input type="radio" onclick="f_setting_search_form('OT002')" id="search_OT002" name="search_obTp" value="OT002"/><label for="search_OT002">상가</label>
+								<input type="radio" onclick="f_setting_search_form('OT003')" id="search_OT003" name="search_obTp" value="OT003"/><label for="search_OT003">사무실/빌딩</label><br>
+								<input type="radio" onclick="f_setting_search_form('OT004')" id="search_OT004" name="search_obTp" value="OT004"/><label for="search_OT004">오피스텔</label>
+								<input type="radio" onclick="f_setting_search_form('OT005')" id="search_OT005" name="search_obTp" value="OT005"/><label for="search_OT005">주상복합</label>
+								<input type="radio" onclick="f_setting_search_form('OT006')" id="search_OT006" name="search_obTp" value="OT006"/><label for="search_OT006">분양권</label>
 							</td>
 						</tr>
 						<tr><td colspan="2" height="5px"></td></tr>
 						<tr>
 							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">유형</td>
-							<td style="width:75%;padding-left:10px;">
-								<input type="radio" id="saleTp1" name="saleTp" value="ST001" checked /><label for="saleTp1">매매</label>
-								<input type="radio" id="saleTp2" name="saleTp" value="ST002"/><label for="saleTp2">전세</label>
-								<input type="radio" id="saleTp3" name="saleTp" value="ST003"/><label for="saleTp3">월세</label>
-								<input type="radio" id="saleTp4" name="saleTp" value="ST004"/><label for="saleTp4">렌트</label>
+							<td style="width:75%;padding-left:10px;" id="search_st_form" name="search_st_form">
+								<input type="radio" onclick="f_setting_search_form_price('ST001')" id="search_ST001" name="search_slTp" value="ST001" checked /><label for="search_ST001">매매</label>
+								<input type="radio" onclick="f_setting_search_form_price('ST002')" id="search_ST002" name="search_slTp" value="ST002"/><label for="search_ST002">전세</label>
+								<input type="radio" onclick="f_setting_search_form_price('ST003')" id="search_ST003" name="search_slTp" value="ST003"/><label for="search_ST003">월세</label>
+								<input type="radio" onclick="f_setting_search_form_price('ST004')" id="search_ST004" name="search_slTp" value="ST004"/><label for="search_ST004">렌트</label>
 							</td>
 						</tr>
-						<tr><td colspan="2" height="5px"></td></tr>
+					</table>
+					<div id="search_detail" name="search_detail" style="margin-top:5px;">
+					<table style="width:100%;border:0;border-collapse:collapse;border: 1px solid #b2b2b2;">
 						<tr>
 							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">매매가</td>
 							<td style="width:75%;padding-left:10px;">
-								<select  style="width:90px;height:30px;">
-									<option>전체</option>
-									<option>1억이하</option>
-									<option>1억 ~ 3억</option>
-									<option>3억 ~ 6억</option>
-									<option>6억 ~ 9억</option>
-									<option>9억 이상</option>
-									<option>직접입력</option>
+								<select id="search_bargain" name="search_bargain" onchange="f_enabled_value_form('bargain');" style="width:90px;height:30px;">
+									<option value="all">전체</option>
+									<option value="10000">1억이하</option>
+									<option value="20000">1억 ~ 3억</option>
+									<option value="40000">3억 ~ 6억</option>
+									<option value="70000">6억 ~ 9억</option>
+									<option value="90000">9억 이상</option>
+									<option value="self">직접입력</option>
 								</select>
-								<input type="text" style="width:80px;height:30px;"> ~ <input type="text" style="width:80px;height:30px;"> 만원
+								<input type="text" id="search_bargain_min_input" name="search_bargain_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_bargain_max_input" name="search_bargain_max_input" style="width:80px;height:30px;" disabled> 만원
 							</td>
 						</tr>
 						<tr><td colspan="2" height="5px"></td></tr>
-						<tr>
-							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">보증금</td>
-							<td style="width:75%;padding-left:10px;">
-								<select  style="width:90px;height:30px;">
-									<option>전체</option>
-									<option>1억이하</option>
-									<option>1억 ~ 3억</option>
-									<option>3억 ~ 6억</option>
-									<option>6억 ~ 9억</option>
-									<option>9억 이상</option>
-									<option>직접입력</option>
-								</select>
-								<input type="text" style="width:80px;height:30px;"> ~ <input type="text" style="width:80px;height:30px;"> 만원
-							</td>
-						</tr>
-						<tr><td colspan="2" height="5px"></td></tr>
-						<tr>
-							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">월세</td>
-							<td style="width:75%;padding-left:10px;">
-								<select  style="width:90px;height:30px;">
-									<option>전체</option>
-									<option>1억이하</option>
-									<option>1억 ~ 3억</option>
-									<option>3억 ~ 6억</option>
-									<option>6억 ~ 9억</option>
-									<option>9억 이상</option>
-									<option>직접입력</option>
-								</select>
-								<input type="text" style="width:80px;height:30px;"> ~ <input type="text" style="width:80px;height:30px;"> 만원
-							</td>
-						</tr>
-						<tr><td colspan="2" height="5px"></td></tr>
+					</table>
+					</div>
+					<table style="margin-top:5px;width:100%;border:0;border-collapse:collapse;border: 1px solid #b2b2b2;">
 						<tr>
 							<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">면적</td>
 							<td style="width:75%;padding-left:10px;">
@@ -96,13 +69,26 @@
 									<option>165 ~ 198</option>
 									<option>198 ~ 330</option>
 									<option>330 ~ 991</option>
-									<option>직접입력</option>
+									<option onclick="f_eabled_value_form('area');">직접입력</option>
 								</select>
-								<input type="text" style="width:80px;height:30px;"> ~ <input type="text" style="width:80px;height:30px;"> ㎡
+								<input type="text" id="search_area_min_input" name="search_area_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_area_max_input" name="search_area_max_input" style="width:80px;height:30px;" disabled> ㎡							
 							</td>
-						</tr>
-					</table><br>
+						</tr>						
+					</table>
+					<br>
 					<a href="#"><img src="./resources/images/btn_clear_index.jpg"></a>&nbsp;&nbsp;<a href="#"><img src="./resources/images/btn_search_index.jpg"></a>
+					<input type="hidden" name="searchObjtTp" id="searchObjtTp" />
+					<input type="hidden" name="searchSaleTp" id="searchSaleTp" />
+					<input type="hidden" name="search_bargain_min" id="search_bargain_min" />
+					<input type="hidden" name="search_bargain_max" id="search_bargain_max" />
+					<input type="hidden" name="search_bargain_min" id="search_bargain_min" />
+					<input type="hidden" name="search_bargain_max" id="search_bargain_max" />				
+					<input type="hidden" name="search_deposit_min" id="search_deposit_min" />
+					<input type="hidden" name="search_deposit_max" id="search_deposit_max" />	
+					<input type="hidden" name="search_monthly_min" id="search_monthly_min" />
+					<input type="hidden" name="search_monthly_max" id="search_monthly_max" />
+					<input type="hidden" name="search_area_min" id="search_area_min" />
+					<input type="hidden" name="search_area_max" id="search_area_max" />
 				</td>
 			</tr>
 			<tr><td height="30px" colspan="3"></td></tr>
@@ -187,7 +173,7 @@
 </div>
 <input type="hidden" name="objtTp" id="objtTp" />
 <input type="hidden" name="saleTp" id="saleTp" />
-
+</form>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %> 
 
 <script id="objtTrTemplte1" type="text/x-jquery-tmpl">	

@@ -8,6 +8,10 @@ $(document).ready(function(){
 		saleTp = "";
 	}
 	f_objt_select(objtTp,saleTp);
+	
+	$("#searchObjtTp").val($("#indexSearch input[type='radio'][name=search_obTp]:checked").val());
+	$("#searchSaleTp").val($("#indexSearch input[type='radio'][name=search_slTp]:checked").val());
+	f_setting_search_form($("#indexSearch input[type='radio'][name=search_obTp]:checked").val());
 });
 
 
@@ -392,6 +396,239 @@ function f_marker_setting_event(map, marker, infowindow, x, y) {
     });	
 }
 
+function f_search() {
+	
+	var param = {
+			currentPage : 1 //Number(currPage)
+			  , orderByColumn : orderByColumn == "" ? "frstRegDt" : orderByColumn
+			  , saleTp : $("#formId input[type='radio'][name=fieldname]:checked").val()
+			  , objtTp : objtTp
+			  , buildCd : category
+			  , pagePerRow : 10
+			  , pageSize : 10
+	};
+	
+	$.ajax({
+		  url : "/selectMainObjtList.go",
+		  type: "post",
+		  data : param,
+		  dataType : "json",
+		  success : function(result){
+
+		  }
+		});
+}
+
+function f_setting_search_form(obType){
+	
+	var htmlText = "";	
+	
+	switch(obType){
+		case "OT002" :
+		case "OT003" :{
+			htmlText += '<input type="radio" onclick="f_setting_search_form_price(\'ST001\')" id="search_ST001" name="search_slTp" value="ST001" checked /><label for="search_ST001">매매</label>' +
+					'<input type="radio" onclick="f_setting_search_form_price(\'ST005\')" id="search_ST005" name="search_slTp" value="ST005"/><label for="search_ST005">임대</label>';
+			break;
+		}
+		case "OT006" : {
+			htmlText += '<input type="radio" onclick="f_setting_search_form_price(\'ST006\')" id="search_ST006" name="search_slTp" value="ST006" checked /><label for="search_ST006">분양권</label>' +
+					'<input type="radio" onclick="f_setting_search_form_price(\'ST007\')" id="search_ST007" name="search_slTp" value="ST007"/><label for="search_ST007">전매</label>';
+			break;
+		}
+		default :{
+			htmlText += '<input type="radio" onclick="f_setting_search_form_price(\'ST001\')" id="search_ST001" name="search_slTp" value="ST001" checked /><label for="search_ST001">매매</label>' +
+					'<input type="radio" onclick="f_setting_search_form_price(\'ST002\')" id="search_ST002" name="search_slTp" value="ST002"/><label for="search_ST002">전세</label>' +
+					'<input type="radio" onclick="f_setting_search_form_price(\'ST003\')" id="search_ST003" name="search_slTp" value="ST003"/><label for="search_ST003">월세</label>' +
+					'<input type="radio" onclick="f_setting_search_form_price(\'ST004\')" id="search_ST004" name="search_slTp" value="ST004"/><label for="search_ST004">렌트</label>';
+			break;
+		}			
+	}	
+	
+	$("#search_st_form").empty();
+	$("#search_st_form").append(htmlText);	
+	
+	$("#searchObjtTp").val(obType);
+	
+	if(obType == "OT006"){
+		f_setting_search_form_price("ST006");
+	} else {
+		f_setting_search_form_price("ST001");
+	}
+}
+
+function f_setting_search_form_price(slType) {
+	
+	htmlText = '<table style="width:100%;border:0;border-collapse:collapse;border: 1px solid #b2b2b2;">';
+	
+	var obType = $("#searchObjtTp").val();
+	
+	var spacingText = '<tr><td colspan="2" height="5px"></td></tr>';
+	
+	var optionBoxText = '<option value="all">전체</option>' +
+						'<option value="0">1억이하</option>' +
+						'<option value="20000">1억 ~ 3억</option>' +
+						'<option value="40000">3억 ~ 6억</option>' +
+						'<option value="70000">6억 ~ 9억</option>' +
+						'<option value="90000">9억 이상</option>' +
+						'<option value="self">직접입력</option>';
+	
+	var optionBoxText2 = '<option value="all">전체</option>' +
+						'<option value="self">직접입력</option>';
+	
+	var bargainText = '<tr>' +
+						'<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">매매가</td>' +
+						'<td style="width:75%;padding-left:10px;">' +
+							'<select id="search_bargain" name="search_bargain" onchange="f_enabled_value_form(\'bargain\');" style="width:90px;height:30px;">' +
+								optionBoxText +
+							'</select>' +
+							'&nbsp;<input type="text" id="search_bargain_min_input" name="search_bargain_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_bargain_max_input" name="search_bargain_max_input" style="width:80px;height:30px;" disabled> 만원' +
+						'</td>' +
+					'</tr>';
+	
+	var depositText = '<tr>' +
+						'<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">보증금</td>' +
+						'<td style="width:75%;padding-left:10px;">' +
+							'<select  id="search_deposit" name="search_deposit" style="width:90px;height:30px;" onchange="f_enabled_value_form(\'deposit\');">' +
+							optionBoxText2 +
+							'</select>' +
+							'&nbsp;<input type="text" id="search_deposit_min_input" name="search_deposit_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_deposit_max_input" name="search_deposit_max_input" style="width:80px;height:30px;" disabled> 만원' +
+						'</td>' +
+					'</tr>';
+	
+	var monthlyText = '<tr>' +
+						'<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">월세</td>' +
+						'<td style="width:75%;padding-left:10px;">' +
+							'<select  id="search_monthly" name="search_monthly" style="width:90px;height:30px;" onchange="f_enabled_value_form(\'monthly\');" >' +
+							optionBoxText2 +
+							'</select>' +
+							'&nbsp;<input type="text" id="search_monthly_min_input" name="search_monthly_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_monthly_max_input" name="search_monthly_max_input" style="width:80px;height:30px;" disabled> 만원' +
+						'</td>' +
+					'</tr>';
+	
+	var rightText = '<tr>' +
+					'<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">권리금</td>' +
+					'<td style="width:75%;padding-left:10px;">' +
+						'<select  id="search_right" name="search_right" style="width:90px;height:30px;" onchange="f_enabled_value_form(\'right\');" >' +
+							optionBoxText +
+						'</select>' +
+						'&nbsp;<input type="text" id="search_right_min_input" name="search_right_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_right_max_input" name="search_right_max_input" style="width:80px;height:30px;" disabled> 만원' +
+					'</td>' +
+				'</tr>';
+	
+	var manageText = '<tr>' +
+						'<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">관리비</td>' +
+						'<td style="width:75%;padding-left:10px;">' +
+							'<select  id="search_manage" name="search_manage" style="width:90px;height:30px;" onchange="f_enabled_value_form(\'manage\');" >' +
+								optionBoxText +
+							'</select>' +
+							'&nbsp;<input type="text" id="search_manage_min_input" name="search_manage_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_manage_max_input" name="search_manage_max_input" style="width:80px;height:30px;" disabled> 만원' +
+						'</td>' +
+					'</tr>';
+	
+	var ticketText = '<tr>' +
+						'<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">분양가</td>' +
+						'<td style="width:75%;padding-left:10px;">' +
+							'<select  id="search_parcel" name="search_parcel" style="width:90px;height:30px;" onchange="f_enabled_value_form(\'parcel\');" >' +
+								optionBoxText +
+							'</select>' +
+							'&nbsp;<input type="text" id="search_parcel_min_input" name="search_parcel_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_parcel_max_input" name="search_parcel_max_input" style="width:80px;height:30px;" disabled> 만원' +
+						'</td>' +
+					'</tr>' +
+					spacingText +
+					'<tr>' +
+						'<td style="width:15%;height:50px;text-align:center;background:#8e81bb;color:#fff;font-weight: bold;">프리미엄</td>' +
+						'<td style="width:75%;padding-left:10px;">' +
+							'<select  id="search_primium" name="search_primium" style="width:90px;height:30px;" onchange="f_enabled_value_form(\'premium\');" >' +
+								optionBoxText +
+							'</select>' +
+							'&nbsp;<input type="text" id="search_premium_min_input" name="search_premium_min_input" style="width:80px;height:30px;" disabled> ~ <input type="text" id="search_premium_max_input" name="search_premium_max_input" style="width:80px;height:30px;" disabled> 만원' +
+						'</td>' +
+					'</tr>';
+					
+						
+	switch(slType){
+		case "ST001":{	// 매매
+			if(obType == "OT002" || obType == "OT003"){
+				htmlText += bargainText + spacingText + depositText + spacingText + monthlyText;				
+			} else {
+				htmlText += bargainText;
+			}
+			break;
+		}
+		
+		case "ST002":{ // 전세 
+			htmlText += depositText;
+			break;
+		}
+		
+		case "ST003": { // 월세
+			htmlText += depositText + spacingText + monthlyText;
+			break;
+		}
+		
+		case "ST004": { // 렌트
+			htmlText += monthlyText;
+			break;
+		}
+		
+		case "ST005": {	// 임대
+			if(obType == "OT002"){
+				htmlText += depositText + spacingText + monthlyText + spacingText + rightText;
+			} else {
+				htmlText += depositText + spacingText + monthlyText + spacingText + manageText;
+			}
+			break;
+		}
+		
+		case "ST006": 	// 분양권
+		case "ST007": {	// 전매
+			
+			htmlText += ticketText;
+			break;
+		}
+	}
+	
+	htmlText += '</table>'
+	
+	$("#search_detail").empty();
+	$("#search_detail").append(htmlText);
+	
+	$("#searchSaleTp").val(slType);
+}
+
+function f_enabled_value_form(frmName) {
+	
+	
+	var minNmInput = "#search_" + frmName + "_min_input";
+	var maxNmInput = "#search_" + frmName + "_max_input";	
+	
+	var minNmHidden = "#search_" + frmName + "_min";
+	var maxNmHidden = "#search_" + frmName + "_max";
+	
+	var selected = $("#search_"+frmName + " option:selected").val();
+	
+	if(selected == 'self'){
+		$(minNmInput).prop('disabled', false);
+		$(maxNmInput).prop('disabled', false);		
+	} else {
+		if(selected == 'all') {
+			$(minNmHidden).val("");
+			$(maxNmHidden).val("");
+		} else {
+			var min = Number(selected) - 10000;
+			var max = Number(selected) + 10000;
+			
+			if(min < 0) min = 0;
+			
+			$(minNmHidden).val(min);
+			$(maxNmHidden).val(max);
+		}
+		$(minNmInput).prop('disabled', true);
+		$(maxNmInput).prop('disabled', true);
+	}
+	
+	console.log($(minNmHidden).val() + "/" + $(maxNmHidden).val());
+}
 
 /*
 function f_map_make(list, map) {	

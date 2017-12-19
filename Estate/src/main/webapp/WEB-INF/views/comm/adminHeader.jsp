@@ -9,8 +9,6 @@
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
-<script type="text/javascript" src="./resources/js/list/newBuilding.js"></script>
-<script type="text/javascript" src="./resources/js/list/newEstate.js"></script>
 <script type="text/javascript" src="./resources/js/report/rollingNotice.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.vticker-min.js"></script>
 <script type="text/javascript">
