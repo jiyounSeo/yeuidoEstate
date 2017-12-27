@@ -625,7 +625,7 @@
 		<td>{{html $value.floor}}</td>
 		<td>{{html $value.depositAmt}}</td>
 		<td>{{html $value.monthlyAmt}}</td>
-		<td>{{html $value.rightAmt}}</td>
+		<td>{{html $value.manageAmt}}</td>
 		<td>{{html $value.availableTpNm}}</td>
 	{{if ${pageNm eq 'objtPublic' } }}
 		<td>{{html $value.estateInfo}}</td>

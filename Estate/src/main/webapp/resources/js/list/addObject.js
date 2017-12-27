@@ -318,13 +318,23 @@ function f_saleobject_save() {
 
 	if ( $("#objtTp").val() != "OT002" && $("#objtTp").val() != "OT003"  ) {
 		var index = $("#buildCd option").index($("#buildCd option:selected"));
-		
-		param.zipNo = buildList[index].zipNo;
-		param.jibunAddr = buildList[index].jibunAddr;
-		param.roadAddrPart1 = buildList[index].roadAddrPart1;
-		param.addrDetail = buildList[index].addrDetail;
-		param.positionX = buildList[index].positionX;
-		param.positionY = buildList[index].positionY;
+		alert(index);
+		if(index == '' || index == null || index == -1){
+			param.zipNo = null;
+			param.jibunAddr = null;
+			param.roadAddrPart1 = null;
+			param.addrDetail = null;
+			param.positionX = null;
+			param.positionY = null;
+		} else {
+			param.zipNo = buildList[index].zipNo;
+			param.jibunAddr = buildList[index].jibunAddr;
+			param.roadAddrPart1 = buildList[index].roadAddrPart1;
+			param.addrDetail = buildList[index].addrDetail;
+			param.positionX = buildList[index].positionX;
+			param.positionY = buildList[index].positionY;			
+		}
+
 	} else {
 		param.zipNo = $("#zipNo").val();
 		param.jibunAddr = $("#jibunAddr").val();
@@ -424,6 +434,7 @@ function f_cust_dtl_view() {
 
 function f_objt_dtl_view() {
 	var objtForm = "";
+	var activeTp = $("input[name=activeTp]:checked").val();
 	switch ($("#objtTp").val()) {
 		case "OT001":
 			objtForm = "newObApt";
