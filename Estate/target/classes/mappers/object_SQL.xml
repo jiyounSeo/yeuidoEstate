@@ -146,7 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	 , roadAddrPart1 = #{roadAddrPart1}
 	  	 , addrDetail = #{addrDetail}
 	  	 , positionX = #{positionX}
-	  	 , positionY = ${positionY}
+	  	 , positionY = #{positionY}
      WHERE objtNo = #{objtNo}
        AND objtTp = #{objtTp}
     </update>
@@ -711,7 +711,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   and buildCd = #{buildCd}
 	   </if>
 	   
-	   order by ${orderByColumn} desc
+	   order by #{orderByColumn} desc
 	</select>
 	
 
@@ -830,7 +830,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test = "areaMin != null and areaMin != '' and areaMax != null and areaMax != '' ">
 	   and area BETWEEN #{areaMin} AND #{areaMax}
 	   </if>
-	   order by ${orderByColumn} desc
+	   order by #{orderByColumn} desc
 	</select>	
 	
 

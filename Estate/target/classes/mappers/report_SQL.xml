@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		,loginId
 		,mbrNm
 		FROM member
-		where (member.mbrTp='MT003' AND member.estateCd = ${user.estateCd} ) OR member.mbrTp='MT004'
+		where (member.mbrTp='MT003' AND member.estateCd = #{user.estateCd} ) OR member.mbrTp='MT004'
 	</select>
 	
 	<select id="selectManagerList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -156,7 +156,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		,loginId
 		,mbrNm
 		FROM member
-		where member.estateCd = ${user.estateCd}
+		where member.estateCd = #{user.estateCd}
 	</select>
 		
 	<select id="selectReportInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
