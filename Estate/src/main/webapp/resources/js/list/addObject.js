@@ -318,7 +318,6 @@ function f_saleobject_save() {
 
 	if ( $("#objtTp").val() != "OT002" && $("#objtTp").val() != "OT003"  ) {
 		var index = $("#buildCd option").index($("#buildCd option:selected"));
-		alert(index);
 		if(index == '' || index == null || index == -1){
 			param.zipNo = null;
 			param.jibunAddr = null;
@@ -456,6 +455,17 @@ function f_objt_dtl_view() {
 			break;
 	}
 	$("#publicYn").val("");
+	var pageName = $("#pageNm").val();
+	switch ($("input[name=activeTp]:checked").val()) {
+	case "AT001" :
+		pageName = "objtActiveY";
+		break;
+	case "AT002" :
+		pageName = "objtActiveN";
+		break;
+	}
+	$("#pageNm").val(pageName);
+		
 	var comSubmit = new ComSubmit($("#"+objtForm).attr('id'));
 	comSubmit.setUrl("/commObListPostView.do");
 	comSubmit.submit();
