@@ -398,8 +398,8 @@ function f_marker_setting_event(map, marker, infowindow, x, y) {
 
 function f_search() {
 	
-	var selectedSaleTp = $("input[name='search_slTp']:checked").val();
-	var selectedObjtTp = $("input[name='search_obTp']:checked").val();
+	var selectedSaleTp = $("input[name='search_slTp']:checked").val(); // 매매. 전세. ...
+	var selectedObjtTp = $("input[name='search_obTp']:checked").val(); // 아파트, 상가, 사무실...
 	var arr = ["bargain", "deposit", "monthly", "right", "manage", "parcel", "priminum"];
 	
 	var arrMin = new Array(7);
@@ -481,32 +481,61 @@ function f_search() {
 		  data : param,
 		  dataType : "json",
 		  success : function(result){
-			  console.log(result.objtList);
-			  
+			  console.log(result);
+			  f_category_combo (param.objtTp);
+
 			  $("#objtTbody").empty();
+			  $("#saleTpTr").empty();
+			  $("#objtListTr").empty();
+			  var saleTpColor = f_saleTp_color (param.saleTp) ;
+			  var objtTr = ""
 			  var tmplNm = "";
+			  var tmplTr = "";
 			  switch ( param.objtTp ) {
 			  	case "OT001" : // 아파트
-			  		tmplNm = "objtListTemplte1_"+param.saleTp;
+			  		objtTr = "objtTrTemplte1";
+			  		tmplTr = "saleTpTrTmpl1_"+param.saleTp;
+					tmplNm = "objtListTemplte1_"+param.saleTp;
 			  		break; 
 			  	case "OT002" : // 상가
-			  		tmplNm = "objtListTemplte2_"+param.saleTp;
+			  		objtTr = "objtTrTemplte2";
+			  		tmplTr = "saleTpTrTmpl2_"+param.saleTp;
+					tmplNm = "objtListTemplte2_"+param.saleTp;
 			  		break;
 			  	case "OT003" : //사무실.빌딩
-			  		tmplNm = "objtListTemplte3_"+param.saleTp;
+			  		objtTr = "objtTrTemplte3";
+			  		tmplTr = "saleTpTrTmpl3_"+param.saleTp;
+					tmplNm = "objtListTemplte3_"+param.saleTp;
 					break;
 			  	case "OT004" : // 오피스텔
-			  		tmplNm = "objtListTemplte4_"+param.saleTp;
+			  		objtTr = "objtTrTemplte4";
+			  		tmplTr = "saleTpTrTmpl4_"+param.saleTp;
+					tmplNm = "objtListTemplte4_"+param.saleTp;
 					break;
 			  	case "OT005" : //주상복합
-			  		tmplNm = "objtListTemplte5_"+param.saleTp;
+			  		objtTr = "objtTrTemplte5";
+			  		tmplTr = "saleTpTrTmpl5_"+param.saleTp;
+					tmplNm = "objtListTemplte5_"+param.saleTp;
 			  		break;
 			  	case "OT006" : //분양권
-			  		tmplNm = "objtListTemplte6";
+			  		objtTr = "objtTrTemplte6";
+			  		tmplTr = "saleTpTrTmpl6";
+					tmplNm = "objtListTemplte6";
 					break;
 			  }
-
-			  
+			  $("#"+objtTr).tmpl().appendTo("#saleTpTr");
+			  $("#"+tmplTr).tmpl().appendTo("#objtListTr");
+			  $(".tab_on_txt").each (function(){
+					$(this).css("color", "#989898");
+			  });
+			  $("#li_"+param.objtTp).css("color", "#2573BB");
+			  $(".tab_bg").each (function(){
+					$(this).css("background-color", "#6C6C6C");
+			  });
+			  $("#li_"+param.saleTp).css("background-color", saleTpColor);
+			  $("#objtListTr td").css("background-color", saleTpColor);
+			  $("#objtListTr td").css("color", "#fff");
+				
 			  var map = new naver.maps.Map("main_map", {
 					center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
 					minZoom: 7,
@@ -535,10 +564,9 @@ function f_search() {
 				        position: naver.maps.Position.BOTTOM_LEFT
 				    }
 				});
-				
-			  console.log(tmplNm);
 			  
 			  if (result.objtList.length != 0) {
+				  console.log (result.objtList);
 				  objtList = result.objtList;
 				  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
 				  f_map_make(objtList, map);
