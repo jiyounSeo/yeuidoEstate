@@ -24,7 +24,7 @@ public class ObjectServiceImpl  implements ObjectService
    public Map insertObject(Map map) throws Exception {
 	   Map<String, Object> custMap = customerDAO.selectCustomerConfirm(map);
 	   if (("").equals(custMap.get("custId")) || custMap.get("custId") == null ) {
-		   if (!("").equals(custMap.get("custNm")) && custMap.get("custNm") != null) {
+		   if (!("").equals(custMap.get("custNm")) || custMap.get("custNm") != null) {
 			   map.put("custId", custMap.get("custId2"));
 			   customerDAO.insertNewCustomer(map);
 		   }
