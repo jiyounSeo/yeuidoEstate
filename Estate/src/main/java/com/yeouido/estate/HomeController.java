@@ -42,7 +42,8 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		//return "/adminMain";
-		return "/index";
+		//return "/index";
+		return "index_new";
 	}
 	
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)

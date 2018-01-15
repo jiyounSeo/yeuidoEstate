@@ -490,14 +490,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									</if>
 				 				)
 	   </if>
-	 
+	   ORDER BY obj.frstRegDt DESC
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
 	<select id="selectObjectInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT objtNo
-	     , objtTp
-	     , (select commNm from commcd where commCd = objtTp ) objtTpNm
+	SELECT obj.objtNo
+	     , obj.objtTp
+	     , (select commNm from commcd where commCd = obj.objtTp ) objtTpNm
 	     , objtNm
 	     , obj.custId
 	     , (select custNm from customer c where c.custId = obj.custId) custNm
@@ -505,8 +505,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select custTel2 from customer c where c.custId = obj.custId) custTel2
 	     , (select custTel3 from customer c where c.custId = obj.custId) custTel3
 	     , businessNm
-	     , buildCd
-	     , if (isnull(buildCd), buildNm, (select buildNm from building b where b.buildCd = obj.buildCd )) buildNm 
+	     , obj.buildCd
+	     , if (isnull(obj.buildCd), obj.buildNm, (select buildNm from building b where b.buildCd = obj.buildCd )) buildNm 
 	     , saleTp
 	     , (select commNm from commcd where commCd = saleTp ) saleTpNm
 	     , CAST(area AS signed integer)  area
@@ -545,22 +545,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , m.mbrNm frstRegNm
 	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} = obj.frstRegUser or #{user.mbrTp} = 'MT003' or #{user.mbrTp} = 'MT004' then 'Y' else 'N' END ) ELSE 'Y' END) modifyYn
 	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
-	     , if ( isnull(obj.zipNo), (select zipno from building b where b.buildCd = obj.buildCd ) , obj.zipNo) zipno 
-	 	 , if ( isnull(obj.jibunAddr), (select jibunAddr from building b where b.buildCd = obj.buildCd ) , obj.jibunAddr) jibunAddr 
-	 	 , if ( isnull(obj.roadAddrPart1), (select roadAddrPart1 from building b where b.buildCd = obj.buildCd ) , obj.roadAddrPart1) roadAddrPart1 
-	 	 , if ( isnull(obj.addrDetail), (select addrDetail from building b where b.buildCd = obj.buildCd ) , obj.addrDetail) addrDetail 
-	 	 , if ( isnull(obj.positionX), (select positionX from building b where b.buildCd = obj.buildCd ) , obj.positionX) positionX 
-	 	 , if ( isnull(obj.positionY), (select positionY from building b where b.buildCd = obj.buildCd ) , obj.positionY) positionY 
+	     , if ( isnull(obj.zipNo), b.zipNo, obj.zipNo) zipno 
+	 	 , if ( isnull(obj.jibunAddr), b.jibunAddr, obj.jibunAddr) jibunAddr 
+	 	 , if ( isnull(obj.roadAddrPart1), b.roadAddrPart1 , obj.roadAddrPart1) roadAddrPart1 
+	 	 , if ( isnull(obj.addrDetail), b.addrDetail, obj.addrDetail) addrDetail 
+	 	 , if ( isnull(obj.positionX), b.positionX, obj.positionX) positionX 
+	 	 , if ( isnull(obj.positionY), b.positionY, obj.positionY) positionY 
 	 	 , (CASE WHEN #{user.estateCd} = (SELECT estateCd FROM member m WHERE m.mbrId = obj.frstRegUser ) THEN 'Y' ELSE 'N' END) workListYn
 	 	 
 	  FROM saleobject obj
-	     
-	     , member m
-	     , estate e
-	 WHERE objtNo = #{objtNo}
-	   AND objtTp = #{objtTp}
-	   and m.mbrId = obj.frstRegUser
-	   and m.estateCd = e.estateCd
+	     left outer join building b
+         on obj.buildCd = b.buildCd
+		 inner join member m
+         on obj.frstRegUser = m.mbrId 
+	 	 inner join estate e
+         on  m.estateCd  = e.estateCd
+	 WHERE obj.objtNo = #{objtNo}
+	   AND obj.objtTp = #{objtTp}
 	</select>
 
 	<select id="selectTotalSearch" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -674,6 +675,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , obj.dong
 	     , obj.floor
 	     , CAST(obj.area AS signed integer) area
+	     , ROUND(CAST(obj.area AS signed integer)*3.3058,2) areaCal
 	     , CAST(obj.realArea AS signed integer) realArea
 	     , obj.publicYn
 	     , obj.availableTp
@@ -683,9 +685,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , obj.premiumAmt
          , m.mbrNm frstRegNm
          , e.estateNm
+         , concat(e.tel1, '-', e.tel2,'-', e.tel3) estateTel
          , concat(e.estateNm, '(', e.tel1, '-', e.tel2,'-', e.tel3, ')') estateInfo
-         , custNm
          , concat(custTel1, '-',custTel2,'-',custTel3) custTel
+         , custNm
          , obj.zipNo
          , if (isnull(obj.jibunAddr), (select jibunAddr from building b where b.buildCd = obj.buildCd ), obj.jibunAddr ) jibunAddr
 	  	 , obj.roadAddrPart1 
@@ -711,7 +714,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   and buildCd = #{buildCd}
 	   </if>
 	   
-	   order by #{orderByColumn} desc
+	   <if test = "orderByColumn == 'frstRegDt' or orderByColumn == '' ">
+	   order by frstRegDt desc
+	   </if>	   
+	   <if test = "orderByColumn == 'area'">
+	   order by area desc
+	   </if>   
+	   <if test = "orderByColumn == 'bargainAmt'">
+	   order by bargainAmt desc
+	   </if>   
+	   <if test = "orderByColumn == 'depositAmt'">
+	   order by depositAmt desc
+	   </if>   
+	   <if test = "orderByColumn == 'monthlyAmt'">
+	   order by monthlyAmt desc
+	   </if>   
+	   <if test = "orderByColumn == 'parcelAmt'">
+	   order by parcelAmt desc
+	   </if>  
+	   <if test = "orderByColumn == 'premiumAmt'">
+	   order by premiumAmt desc
+	   </if>
+	   <if test = "orderByColumn == 'rightAmt'">
+	   order by rightAmt desc
+	   </if>
+	   
+	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
 
@@ -842,6 +870,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			     , (select commNm from commcd c where c.commCd = saleTp ) saleTpNm
 			     , objtNm
 			     , buildCd
+			     , publicYn
+			     , activeTp
                  , DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
                  , (TO_DAYS(now()) - TO_DAYS(dueDt)) as intvDay
 			  FROM saleobject

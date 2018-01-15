@@ -89,6 +89,18 @@
 			</table>
 	</tr>
 </table>
+<form id="frm_item" name="frm_item">
+	<input type="hidden" name="custId" id="custId"/>
+	<input type="hidden" name="objtNo" id="objtNo"/>
+	<input type="hidden" name="viewUrl" id="viewUrl" />
+	<input type="hidden" name="objtTp" id="objtTp"/>
+	<input type="hidden" name="saleTp" id="saleTp"/>
+	<input type="hidden" name="publicYn" id="publicYn"/>
+	<input type="hidden" name="activeTp" id="activeTp"/>
+	<input type="hidden" name="viewMode" id="viewMode" value="1"/>
+	<input type="hidden" name="pageNm" id="pageNm" value="total"/>
+</form>
+
 <input type="hidden" name="memberType" id="memberType" value="${sessionScope.user.mbrTp}" />
 </div>
 <%@ include file="/WEB-INF/views/comm/adminFooter.jsp" %> 	

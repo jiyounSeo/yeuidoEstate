@@ -210,9 +210,9 @@ function makeDueDtLatestList(listArray){
 		var intvMonth = Math.floor((item.intvDay)/30);
 
 		if(intvMonth == 0){
-			list = list + '<li><a href="#" onclick="">[<font color="red"><b>만기' + item.intvDay + '일전</b></font>] '
+			list = list + '<li><a href="#" onclick="f_DueDtDtl_view(' + item.objtNo + ',' + item.objtTp + ',' + item.saleTP + ',' + item.publicYn + ',' + item.activeTp + ');">[<font color="red"><b>만기' + item.intvDay + '일전</b></font>] '
 		} else {
-			list = list + '<li><a href="#" onclick="">[<font color="Green"><b>만기' + intvMonth + '개월전</b></font>] '
+			list = list + '<li><a href="#" onclick="f_DueDtDtl_view(' + item.objtNo + ',' + item.objtTp + ',' + item.saleTP + ',' + item.publicYn + ',' + item.activeTp + ');">[<font color="Green"><b>만기' + intvMonth + '개월전</b></font>] '
 		}
 		list = list + item.objtNm + '(' + item.objtTpNm + '/' + item.saleTpNm + ')</a>';
 		
@@ -234,4 +234,44 @@ function makeSubject(sbj, size){
 	}
 	
     return newSbj;
+}
+
+
+function f_DueDtDtl_view (objtNo, objtTp, saleTp, publicYn, activeTp) {
+	$("#objtNo").val(objtNo);
+	$("#objtTp").val(objtTp);
+	$("#saleTp").val(saleTp);
+	$("#publicYn").val(publicYn);
+	$("#activeTp").val(activeTp);
+	
+	var url = "";
+	switch (objtTp) {
+		case "OT001"	:
+			url = "viewObApt";
+			break;
+		case "OT002"	:
+			url = "viewObStore";
+			break;
+		case "OT003"	:
+			url = "viewObOffice";
+			break;
+		case "OT004"	:
+			url = "viewObOps";
+			break;
+		case "OT005"	:
+			url = "viewObHrapt";
+			break;
+		case "OT006"	:
+			url = "viewObTicket";
+			break;
+		
+	}
+	$("#viewUrl").val(url);
+	
+	alert(objtNo +"/" + objtTp + "/" + saleTp + "/" + publicYn + "/" + activeTp + "/" + url);
+	
+	var frm = $('#frm_item')[0];
+	frm.action = '/objtDtlView.do';
+	frm.method = 'POST';
+	frm.submit();
 }
