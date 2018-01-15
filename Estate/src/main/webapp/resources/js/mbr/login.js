@@ -39,6 +39,10 @@ function f_login() {
 			  		alert("승인되지 않은 사용자입니다. 승인 후 이용가능 합니다.");
 			  		frm.action = "/logout.go";
 			  	    frm.method = 'post';
+			    } else if ( data.user.mbrTp == "MT005") {
+			  		alert("일시정지 된 사용자입니다. 정지가 풀린 후 이용가능 합니다.");
+			  		frm.action = "/logout.go";
+			  	    frm.method = 'post';
 			    } else {
 			  		frm.action = "/adminMainView.do";
 				    frm.method = 'get';

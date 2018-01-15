@@ -2,6 +2,8 @@
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <% request.setCharacterEncoding("utf-8");%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+
 <script type="text/javascript" src="./resources/js/list/objtList.js"></script>	
 <body >
 <form id="commObjtList" name="commObjtList" action="post">

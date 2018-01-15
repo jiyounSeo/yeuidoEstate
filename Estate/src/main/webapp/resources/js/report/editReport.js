@@ -152,11 +152,11 @@ function f_report_save()
 		return;
 	}
 	
-	if($("#dueDt").val() == "")
+	/*if($("#dueDt").val() == "")
 	{
 		alert ("만기일은 필수입력 값입니다.");
 		return;
-	}
+	}*/
 	
 	if(($("#contTpSelect1 option:selected").val() == 0) || ($("#contTpSelect1 option:selected").text() == ""))
 	{
@@ -172,16 +172,16 @@ function f_report_save()
 	
 	if($("#contSe").val() == "")
 	{
-		alert("양타는 필수입력 값입니다.");
+		alert("계약형태는 필수입력 값입니다.");
 		return;
 	}
 	
-	if($("#addr").val() == "")
+	/*if($("#addr").val() == "")
 	{
 		alert("소재지는 필수입력 값입니다.");
 		return;
 	}
-	
+	*/
 	if($("#assignee").val() == "")
 	{
 		alert("양수인은 필수입력 값입니다.");
@@ -194,7 +194,7 @@ function f_report_save()
 		return;
 	}
 	
-	if($("#contDt").val() == "")
+	/*if($("#contDt").val() == "")
 	{
 		alert("계약일은 필수입력 값입니다.");
 		return;
@@ -258,7 +258,7 @@ function f_report_save()
 	{
 		alert("수수료변동사유는 필수입력 값입니다.");
 		return;
-	}
+	}*/
 
 	var obj = document.getElementsByName('type_rb');
 
