@@ -160,6 +160,10 @@ function f_setting_text(result) {
 	$("#memo").val(result.memo);
 	$("#custId").val(result.custId);
 	$("#saleTp").val(result.saleTp);
+	$("#zipNo").val(result.zipNo);
+	$("#jibunAddr").val(result.jibunAddr);
+	$("#roadAddrPart1").val(result.roadAddrPart1);
+	$("#addrDetail").val(result.addrDetail);
 		
 }
 

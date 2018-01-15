@@ -253,6 +253,17 @@ function f_objectList_select(objtTp, saleTp){
 		  
 		  if (result.objtList.length != 0) {
 			  objtList = result.objtList;
+			  console.log (objtList);
+			  $.each (result.objtList, function(index) {
+				  var bargainAmt = result.objtList[index].bargainAmt;
+				  result.objtList[index].bargainAmt = comma(uncomma(bargainAmt)); 
+				  var depositAmt = result.objtList[index].depositAmt;
+				  result.objtList[index].depositAmt = comma(uncomma(depositAmt)); 
+				  var monthlyAmt = result.objtList[index].monthlyAmt;
+				  result.objtList[index].monthlyAmt = comma(uncomma(monthlyAmt)); 
+				  var rightAmt = result.objtList[index].rightAmt;
+				  result.objtList[index].rightAmt = comma(uncomma(rightAmt)); 
+			  });
 			  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#page" + currPage).addClass("active");
@@ -266,6 +277,16 @@ function f_objectList_select(objtTp, saleTp){
 	  }
 	});
 	
+}
+
+function comma(str) { 
+    str = String(str); 
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); 
+} 
+
+function uncomma(str) { 
+    str = String(str); 
+    return str.replace(/[^\d]+/g, ''); 
 }
 
 

@@ -115,6 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, contTp1
 		, contTp2
 		, contSttSe
+		, DATE_FORMAT(regDt, '%Y-%m-%d') as regDt
 		, DATE_FORMAT(dueDt, '%Y-%m-%d') as dueDt
 		, contSe
 		, addr

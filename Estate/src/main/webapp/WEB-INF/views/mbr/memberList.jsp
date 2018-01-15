@@ -131,6 +131,7 @@
 			<select name="mbrTp" id="mbrTp" onchange="f_changeMbrTp({{html $index}}, this.value);">
 				<option value="MT001" {{if $value.mbrTpCd == "MT001"}}selected{{/if}}>미승인</option>
 				<option value="MT002" {{if $value.mbrTpCd == "MT002"}}selected{{/if}}>일반회원</option>
+				<option value="MT005" {{if $value.mbrTpCd == "MT005"}}selected{{/if}}>일시정지회원</option>
 				<option value="MT003" {{if $value.mbrTpCd == "MT003"}}selected{{/if}}>부동산관리자</option>
 				<option value="MT004" {{if $value.mbrTpCd == "MT004"}}selected{{/if}}>최고관리자</option>
 			</select>

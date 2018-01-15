@@ -18,7 +18,7 @@
 					<td><input type="text" id="dueDt" name="dueDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 				</tr>
 				<tr>
-					<td class="title">계약종류</td>
+					<td class="title">* 계약종류</td>
 					<td class="sub">
 						<table class="sub_table">
 							<tr>
@@ -43,7 +43,7 @@
 							</tr>
 						</table>
 					</td>
-					<td class="title">계약형태</td>
+					<td class="title">* 계약형태</td>
 					<td class="sub">					
 						<input type="radio" name="contSe_rb" id="contSe_rb1" value="1" class="rbbox" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="contSe_rb1" class="rb-label type">양타</label>&nbsp;&nbsp;
 						<input type="radio" name="contSe_rb" id="contSe_rb2" value="2" class="rbbox" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="contSe_rb2" class="rb-label type">공동중개</label>&nbsp;&nbsp;
@@ -59,14 +59,14 @@
 					<td class="title">양수인<br>(매수인,<br> 임차인)</td>
 					<td class="sub">
 						<table class="sub_table">
-							<tr><td class="title2">성명</td><td><input id="assignee" name="assignee" type="text"></td></tr>
+							<tr><td class="title2">* 성명</td><td><input id="assignee" name="assignee" type="text"></td></tr>
 							<tr><td class="title2">연락처</td><td><input id="assigneeTel" name="assigneeTel" type="text"></td></tr>
 						</table>
 					</td>
 					<td class="title">양도인<br>(매도인,<br> 임대인)</td>
 					<td class="sub">
 						<table class="sub_table">
-							<tr><td class="title2">성명</td><td><input id="grantor" name="grantor" type="text"></td></tr>
+							<tr><td class="title2">* 성명</td><td><input id="grantor" name="grantor" type="text"></td></tr>
 							<tr><td class="title2">연락처</td><td><input id="grantorTel" name="grantorTel"  type="text"></td></tr>
 						</table>
 					</td>
