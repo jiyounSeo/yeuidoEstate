@@ -511,6 +511,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select commNm from commcd where commCd = saleTp ) saleTpNm
 	     , CAST(area AS signed integer)  area
 	     , CAST(realArea AS signed integer)  realArea
+	     , ROUND(CAST(area AS signed integer)*3.3058,2) areaCal
 	     , bargainAmt
 	     , depositAmt
 	     , monthlyAmt

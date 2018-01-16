@@ -1,38 +1,14 @@
 <%@ include file="/WEB-INF/views/comm/indexHeader.jsp" %> 
 <%@ include file="/WEB-INF/views/mainStyle.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
 <script type="text/javascript" src="./resources/js/list/mainObject.js"></script>
 
-<div id="ob_list" style="width:970px;margin:auto;padding:0;">
-  	<div class="list_div2">	
-		<table style="background-color :#F6F8F7;" width="970px" cellpadding="0" cellspacing="0" border="0">
-			<tr style="background-image:url(./resources/images/index_top_bg.gif);height:38px;">
-				<td width="12px"></td>
-				<td width="40px"><a href='#objt' onclick="f_objt_select('OT001','ST001');"><img src="./resources/images/tab1_off.png" id="tab_OT001" class='tab_on'/></a></td>
-				<td width="2px"></td>
-				<td width="22px"><a href='#objt' onclick="f_objt_select('OT002','ST001');"><img src="./resources/images/tab2_off.png" id="tab_OT002" class='tab_on'/></a></td>
-				<td width="72px"><a href='#objt' onclick="f_objt_select('OT003','ST001');"><img src="./resources/images/tab3_off.png" id="tab_OT003" class='tab_on'/></a></td>
-				<td width="1px"></td>
-				<td width="53px"><a href='#objt' onclick="f_objt_select('OT004','ST001');"><img src="./resources/images/tab4_off.png" id="tab_OT004" class='tab_on'/></a></td>
-				<td width="2px"></td>
-				<td width="53px"><a href='#objt' onclick="f_objt_select('OT005','ST001');"><img src="./resources/images/tab5_off.png" id="tab_OT005" class='tab_on'/></a></td>
-				<td width="5px"></td>
-				<td width="40px"><a href='#objt' onclick="f_objt_select('OT006','ST006');"><img src="./resources/images/tab6_off.png" id="tab_OT006" class='tab_on'/></a></td>
-				<td width="16px"><img src="./resources/images/tab_bar.png"/></td>
-				<td width="652px;" id="saleTpTr" style="vertical-align:middle;padding-top:4px;" ></td>
-			</tr>
-		</table>
-		<table style="width:970px;" cellpadding="0" cellspacing="0" border="0" class="trCategory">
-			<tr><td id="trCategory"></td></tr>
-		</table>
-	</div>
-</div>
+<%@ include file="/WEB-INF/views/tabMenuBar.jsp" %> 
 
 <div style="width:970px;margin:auto;padding:0;">
 	<table style="width: 970px;" cellpadding="0" cellspacing="0" border="0">	
+		<tr><td height="5px"></td></tr>
 		<tr>
 			<td width="970px" height="500px" style="border-bottom:1px solid #cccccc;">
 				<div id="main_map" style="width:100%;height:100%;"></div>

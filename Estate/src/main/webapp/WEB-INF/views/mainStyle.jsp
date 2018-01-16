@@ -23,12 +23,13 @@
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
-
 .trCategory td {
 	font-size:7pt;
 	padding: 10px;
 	background: linear-gradient(#f4f5f9,#eaedf1) fixed;
 	border-bottom: 1px solid #cccccc;
+	border-right:  1px solid #cccccc;
+	border-left:  1px solid #cccccc;
 }
 
 .trCategory a:link, a:visited {
@@ -86,5 +87,38 @@ div.obPrice {
 
 .orderMenu a:link, a:visited {
 	font-size:9pt;
+}
+
+
+/* detail css */
+
+.ob_detail td {
+	border: 1px solid #f2f2f2;
+	font-size:10pt;
+}
+
+.ob_detail td.title {
+	border-top: 2px solid #52596b;
+	border-bottom: 1px solid #cccccc;
+	background-color:#f8f8fa;
+	height:70px;
+	padding-left:20px;
+}
+
+.ob_detail span.obTitle {
+	font-size:16px;
+	font-weight:bold;
+}
+.ob_detail span.areaText1 {
+	font-size:12px;
+	color:#5d5f66;
+}
+.ob_detail span.areaText2 {
+	font-size:12px;
+	color:#8f8f8f;
+}
+.ob_detail span.areaValue {
+	font-size:25px;
+	font-weight:bold;
 }
 </style>

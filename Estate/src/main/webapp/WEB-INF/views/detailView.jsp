@@ -1,9 +1,48 @@
 <%@ include file="/WEB-INF/views/comm/indexHeader.jsp" %> 
-<%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
+<%@ include file="/WEB-INF/views/mainStyle.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
 <script type="text/javascript" src="./resources/js/list/mainDtlObject.js"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+
+<%@ include file="/WEB-INF/views/tabMenuBar.jsp" %> 
+
+<div id="ob_dtail" style="width:950px;margin:auto;padding:10px 0;">		
+	<table style="width:950px" cellpadding="0" cellspacing="0" class="ob_detail">
+		<tr>
+			<td class="title" width="455px"><span class="obTitle">${objtNm}</span></td>
+			<td class="title" width="240px">
+				<span class="areaText1">계약/전용면적</span> <span class="areaText2">(전용률 51.3%)</span><br>
+				<span class="areaValue">${areaCal}<font color="#cccccc">/</font><fmt:formatNumber value="${areaCal*0.513}" pattern="#.##"/></span><span class="areaText1">㎡</span>
+			</td>
+			<td class="title" width="255px">
+				<c:if test="${objtTp eq 'OT001' || objtTp eq 'OT002' || objtTp eq 'OT004' || objtTp eq 'OT005'}">
+					매매가<br>
+					<c:if test="${bargainAmt eq '' }">--</c:if>
+					<c:if test="${bargainAmt ne '' }"><fmt:formatNumber value="${bargainAmt}" pattern="#,###"/><!-- 매매가 -->만원</c:if>
+				</c:if>	
+				<c:if test="${objtTp eq 'OT003'}">
+					보증금/월세<br>
+						<c:if test="${depositAmt eq '0' }">--</c:if><c:if test="${depositAmt ne '0' }"><fmt:formatNumber value="${depositAmt}" pattern="#,###"/>만원</c:if> / 
+						<c:if test="${monthlyAmt eq '0' }">--</c:if><c:if test="${monthlyAmt ne '0' }">  <fmt:formatNumber value="${monthlyAmt}" pattern="#,###"/> <!-- 월세 --> 만원</c:if>
+				</c:if>
+				<c:if test="${objtTp eq 'OT006'}">
+					분양가/프리미엄<br>
+					<c:if test="${parcelAmt == 0.00 }">--</c:if><c:if test="${parcelAmt != 0.00 }"><fmt:formatNumber value="${parcelAmt}" pattern="#,###"/>만원</c:if>/
+					<c:if test="${premiumAmt == 0.00 }">--</c:if><c:if test="${premiumAmt != 0.00 }"><fmt:formatNumber value="${premiumAmt}" pattern="#,###"/>만원</c:if>
+				</c:if>
+			</td>
+		</tr>
+		<tr><td colspan="3"></td></tr>
+</div>
+<br>	
+<br>	
+<div style="width:850px;margin:auto;padding:0;">	
+	<table style="width:850px" cellpadding="0" cellspacing="0" class="ob_detail">
+		<tr><td>${jibunAddr}</td></tr>
+		<tr><td><div id="map" style="width:850px;height:340px;"></div></td></tr>	
+	</table>
+</div>
 
 <div class="new_page_container">
 	<table class="new_page_table">
@@ -182,19 +221,48 @@
 			<td colspan="4"><c:if test="${memo eq '<p>&nbsp;</p>' || memo eq null}">--</c:if><c:if test="${memo ne '<p>&nbsp;</p>' && memo ne null}"> ${memo}</c:if><!-- 매물설명 -->
 			</td>
 		</tr>
-		<tr>
-			<td class="title">위치</td>
-			<td colspan="4">
-				<div id="map" style="width:100%;height:500px;"></div>
-			</td>
-		</tr>		
+			
 	</table>
 	<div style="width:1400px;padding:20px; 0;margin:auto;text-align:center;">
 		<a href="/"><input type="image" name="listBtn" src="./resources/images/btn_ob_list.jpg" ></a>
 	</div>	
 	 <input type="hidden" name="objtNo" id="objtNo" value="${objtNo}"/>
-	 <input type="hidden" name="objtNo" id="objtTp" value="${objtTp}"/>
+	 <input type="hidden" name="objtTp" id="objtTp" value="${objtTp}"/>
+	 <input type="hidden" name="saleTp" id="saleTp" value="${saleTp}"/>
 	 <input type="hidden" name="jibunAddr" id="jibunAddr" value="${jibunAddr}"/>
 	
 </div>
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
+
+
+
+<script id="objtTrTemplte1" type="text/x-jquery-tmpl">	
+	<a href='#objt' onclick="f_objt_select('OT001','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT001','ST002')"><img src="./resources/images/s_tab2_off.png" id="li_ST002" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT001','ST003')"><img src="./resources/images/s_tab3_off.png" id="li_ST003" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT001','ST004')"><img src="./resources/images/s_tab4_off.png" id="li_ST004" class='tab_bg'></a>
+</script>
+<script id="objtTrTemplte2" type="text/x-jquery-tmpl">	
+	<a href='#objt' onclick="f_objt_select('OT002','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT002','ST005')"><img src="./resources/images/s_tab5_off.png" id="li_ST005" class='tab_bg'></a>
+</script>
+<script id="objtTrTemplte3" type="text/x-jquery-tmpl">	
+	<a href='#objt' onclick="f_objt_select('OT003','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT003','ST005')"><img src="./resources/images/s_tab5_off.png" id="li_ST005" class='tab_bg'></a>
+</script>
+<script id="objtTrTemplte4" type="text/x-jquery-tmpl">	
+	<a href='#objt' onclick="f_objt_select('OT004','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT004','ST002')"><img src="./resources/images/s_tab2_off.png" id="li_ST002" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT004','ST003')"><img src="./resources/images/s_tab3_off.png" id="li_ST003" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT004','ST004')"><img src="./resources/images/s_tab4_off.png" id="li_ST004" class='tab_bg'></a>
+</script>
+<script id="objtTrTemplte5" type="text/x-jquery-tmpl">	
+	<a href='#objt' onclick="f_objt_select('OT005','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT005','ST002')"><img src="./resources/images/s_tab2_off.png" id="li_ST002" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT005','ST003')"><img src="./resources/images/s_tab3_off.png" id="li_ST003" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT005','ST004')"><img src="./resources/images/s_tab4_off.png" id="li_ST004" class='tab_bg'></a>
+</script>
+<script id="objtTrTemplte6" type="text/x-jquery-tmpl">	
+	<a href='#objt' onclick="f_objt_select('OT006','ST006')"><img src="./resources/images/s_tab1_off.png" id="li_ST006" class='tab_bg'></a>
+	<a href='#objt' onclick="f_objt_select('OT006','ST007')"><img src="./resources/images/s_tab5_off.png" id="li_ST007" class='tab_bg'></a>
+</script>
