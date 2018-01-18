@@ -176,15 +176,15 @@ function selectWorkListAtdate(date){
 }
 
 function f_work_detail() {
-	if ($("#objtNo").val() != "") {
+	if ($(".workForm #objtNo").val() != "") {
 		f_objt_detail();
-	} else if ($("#custId").val() != "") {
+	} else if ($(".workForm #custId").val() != "") {
 		f_mbr_detail();
 	}
 }
 function f_objt_detail() {
 	var url = "";
-	switch ( $("#objtTp").val() ) {
+	switch ( $(".workForm #objtTp").val() ) {
 		case "OT001"	:
 			url = "viewObApt";
 			break;
@@ -205,9 +205,11 @@ function f_objt_detail() {
 			break;
 		
 	}
-	$("#viewUrl").val(url);
+	alert (url);
+	$(".workForm #viewUrl").val(url);
 	
 	var frm = $('#workForm')[0];
+	console.log (frm);
 	frm.action = '/objtDtlView.do';
 	frm.method = 'POST';
 	frm.submit();	

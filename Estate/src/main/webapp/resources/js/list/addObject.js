@@ -103,6 +103,7 @@ function f_objectDtl_select() {
 		  url : "/selectObjectDtl.do",
 		  type: "post",
 		  data : param,
+		  async: false,
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){

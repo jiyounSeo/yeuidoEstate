@@ -20,7 +20,7 @@
 	</tr>
 </table>
 <div id="divAddWorkPopup" style="display: none;">
-	<form id="workForm">
+	<form id="workForm" class="workForm">
 		<table class="addMemoPopup" >
 			<tr><td height="34px"><a href="#" onClick="f_closePopup()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
 			<tr>
