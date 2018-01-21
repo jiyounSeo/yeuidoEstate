@@ -29,6 +29,19 @@ function f_map_setting(myaddress) {
 	});
 }
 
+function f_select_menu_bar(objtTp,saleTp) {
+
+	var address = unescape(location.href);	
+	var parmStr = address.split("indexObjectDtl");
+	
+	console.log(parmStr.length + "///");
+	
+	if(parmStr.length > 1) {
+		var url = "./?objtTp="+objtTp+"&saleTp="+saleTp;
+		location.href=url;
+	}
+}
+
 function f_map_draw(x, y) {
 	// marker1
 

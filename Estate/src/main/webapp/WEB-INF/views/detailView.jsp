@@ -203,6 +203,8 @@
 			<c:if test="${memo eq '<p>&nbsp;</p>' || memo eq null}"><td class="detail_descript" align="center" height="80px;"><font color="#999999">등록된 매물 설명이 없습니다</font></td></c:if>
 			<c:if test="${memo ne '<p>&nbsp;</p>' && memo ne null}"><td class="detail_descript"> ${memo}</td></c:if>			
 		</tr>
+		<tr><td height="30px"></td></tr>
+		<tr><td align="center"><a href="./?objtTp=${objtTp}&saleTp=${saleTp}"><img src="./resources/images/btn_ob_list.jpg"></a></td></tr>
 	</table>
 </div>
 <br><br><br>
@@ -214,34 +216,3 @@
 <%@ include file="/WEB-INF/views/comm/footer.jsp" %>
 
 
-
-<script id="objtTrTemplte1" type="text/x-jquery-tmpl">	
-	<a href='#objt' onclick="f_objt_select('OT001','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT001','ST002')"><img src="./resources/images/s_tab2_off.png" id="li_ST002" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT001','ST003')"><img src="./resources/images/s_tab3_off.png" id="li_ST003" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT001','ST004')"><img src="./resources/images/s_tab4_off.png" id="li_ST004" class='tab_bg'></a>
-</script>
-<script id="objtTrTemplte2" type="text/x-jquery-tmpl">	
-	<a href='#objt' onclick="f_objt_select('OT002','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT002','ST005')"><img src="./resources/images/s_tab5_off.png" id="li_ST005" class='tab_bg'></a>
-</script>
-<script id="objtTrTemplte3" type="text/x-jquery-tmpl">	
-	<a href='#objt' onclick="f_objt_select('OT003','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT003','ST005')"><img src="./resources/images/s_tab5_off.png" id="li_ST005" class='tab_bg'></a>
-</script>
-<script id="objtTrTemplte4" type="text/x-jquery-tmpl">	
-	<a href='#objt' onclick="f_objt_select('OT004','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT004','ST002')"><img src="./resources/images/s_tab2_off.png" id="li_ST002" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT004','ST003')"><img src="./resources/images/s_tab3_off.png" id="li_ST003" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT004','ST004')"><img src="./resources/images/s_tab4_off.png" id="li_ST004" class='tab_bg'></a>
-</script>
-<script id="objtTrTemplte5" type="text/x-jquery-tmpl">	
-	<a href='#objt' onclick="f_objt_select('OT005','ST001')"><img src="./resources/images/s_tab1_off.png" id="li_ST001" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT005','ST002')"><img src="./resources/images/s_tab2_off.png" id="li_ST002" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT005','ST003')"><img src="./resources/images/s_tab3_off.png" id="li_ST003" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT005','ST004')"><img src="./resources/images/s_tab4_off.png" id="li_ST004" class='tab_bg'></a>
-</script>
-<script id="objtTrTemplte6" type="text/x-jquery-tmpl">	
-	<a href='#objt' onclick="f_objt_select('OT006','ST006')"><img src="./resources/images/s_tab1_off.png" id="li_ST006" class='tab_bg'></a>
-	<a href='#objt' onclick="f_objt_select('OT006','ST007')"><img src="./resources/images/s_tab5_off.png" id="li_ST007" class='tab_bg'></a>
-</script>

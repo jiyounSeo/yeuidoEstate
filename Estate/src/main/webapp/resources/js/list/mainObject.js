@@ -1,4 +1,23 @@
 $(document).ready(function(){
+	var address = unescape(location.href);	
+	var parmStr = address.split("?");
+	
+	if(parmStr.length > 1) {
+		var parm = parmStr[1].split("&");
+		
+		var getObjtTp = parm[0].split("=");
+		var getSaleTp = parm[1].split("=");
+		
+		if(!gfn_isNull(getObjtTp[1])){
+			$("#objtTp").val(getObjtTp[1]);
+		}
+
+		if(!gfn_isNull(getSaleTp[1])){
+			$("#saleTp").val(getSaleTp[1]);
+		}
+	}
+
+	
 	var objtTp = $("#objtTp").val();
 	if ( gfn_isNull ($("#objtTp").val()) ) {
 		objtTp = "";
@@ -7,10 +26,15 @@ $(document).ready(function(){
 	if ( gfn_isNull ($("#saleTp").val()) ) {
 		saleTp = "";
 	}
+	
 	f_objt_select(objtTp,saleTp);
 	
 });
 
+function f_select_menu_bar(objtTp,saleTp) {
+
+	f_objt_select(objtTp,saleTp);		
+}
 
 
 /*
