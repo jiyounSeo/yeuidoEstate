@@ -76,8 +76,18 @@
 }
 
 td.orderMenu {
+	width:830px;
 	height:30px;
 	text-align:right;
+}
+
+td.nav {
+	font-size:10pt;
+	width:140px;
+	height:30px;
+	text-align:left;
+	padding-left:5px;
+	font-weight:bold;
 }
 
 span.obPrice, 

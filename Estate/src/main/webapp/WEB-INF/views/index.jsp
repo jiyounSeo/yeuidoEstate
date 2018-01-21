@@ -21,6 +21,7 @@
 <div id="ob_list" style="width:970px;margin:auto;padding:0;">		
 	<table style="width:970px" cellpadding="0" cellspacing="0" border="0">
 		<tr>
+			<td class="nav" id="selected_list"></td>
 			<td class="orderMenu"><div id="order_menu" name="order_menu"></div></td>		
 		</tr>
 	</table>

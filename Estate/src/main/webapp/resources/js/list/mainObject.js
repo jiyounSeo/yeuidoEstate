@@ -107,28 +107,61 @@ function f_objt_select (objtTp, saleTp) {
 	}
 	$("#saleTpTr").empty();
 	$("#objtListTr").empty();
+	
+	var objtName = "";
+	var saleName = "";
+	
 	switch ( objtTpChk ) {
 		case "OT001"://saleTpTrTmpl1_ST001
 			tmplNm = "objtTrTemplte1"; 
+			objtName = "아파트";
 			break;
 		case "OT002":
 			tmplNm = "objtTrTemplte2";
+			objtName = "상가";
 			break;
 		case "OT003":
 			tmplNm = "objtTrTemplte3"; 
+			objtName = "사무실/빌딩";
 			break;
 		case "OT004":
 			tmplNm = "objtTrTemplte4"; 
+			objtName = "오피스텔";
 			break;
 		case "OT005":
 			tmplNm = "objtTrTemplte5";
+			objtName = "주상복합";
 			break;
 		case "OT006":
 			tmplNm = "objtTrTemplte6"; 
-			break;
-			
+			objtName = "분양권";
+			break;			
 	}
 
+	switch (saleTpChk) {
+		case "ST001":
+			saleName = "매매";
+			break;
+		case "ST002":
+			saleName = "전세";
+			break;	
+		case "ST003":
+			saleName = "월세";
+			break;	
+		case "ST004":
+			saleName = "렌트";
+			break;	
+		case "ST005":
+			saleName = "임대";
+			break;	
+		case "ST006":
+			saleName = "분양권";
+			break;	
+		case "ST007":
+			saleName = "전매";
+			break;	
+	}
+	
 	tmplTr = "saleTpTrTmpl";
 	$("#"+tmplNm).tmpl().appendTo("#saleTpTr");
 	$("#"+tmplTr).tmpl().appendTo("#objtListTr");
@@ -147,7 +180,10 @@ function f_objt_select (objtTp, saleTp) {
 	}	
 	$("#li_"+saleTpChk).attr('src', './resources/images/s_tab'+index_sale_num+'_on.png');
 	
-	
+	var navStr = objtName + " > " + saleName;
+	$("#selected_list").empty();
+	$("#selected_list").append(navStr);
+	 
 	f_objectList_select(objtTpChk, saleTpChk);
 }
 
