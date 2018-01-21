@@ -85,7 +85,7 @@ public class HomeController {
 	      sb.append("&bNewLine=true")
 	        .append("&sFileName=").append(oldName)
 	        //.append("&sFileURL=").append("http://localhost:8080/resources/photoUpload/")
-	        .append("&sFileURL=").append("http://여의도닷컴.com/resources/photoUpload/")
+	        .append("&sFileURL=").append("/resources/photoUpload/")
 	        .append(saveName);
 	    } catch (Exception e) {
 	      e.printStackTrace();
