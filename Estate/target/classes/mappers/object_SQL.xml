@@ -546,6 +546,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , m.mbrNm frstRegNm
 	     , (CASE WHEN #{publicYn} = 'Y' THEN (case when #{user.mbrId} = obj.frstRegUser or #{user.mbrTp} = 'MT003' or #{user.mbrTp} = 'MT004' then 'Y' else 'N' END ) ELSE 'Y' END) modifyYn
 	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
+	     , e.estateNm
+	     , concat(e.tel1, '-' , e.tel2, '-', e.tel3 ) estateTel
 	     , if ( isnull(obj.zipNo), b.zipNo, obj.zipNo) zipno 
 	 	 , if ( isnull(obj.jibunAddr), b.jibunAddr, obj.jibunAddr) jibunAddr 
 	 	 , if ( isnull(obj.roadAddrPart1), b.roadAddrPart1 , obj.roadAddrPart1) roadAddrPart1 

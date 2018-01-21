@@ -80,14 +80,17 @@ $(document).ready(function() {
 			<div id="memberDiv" style="width:1480px;text-align: left; margin:0; padding-left:5px; padding-top:0; padding-right:0; padding-bottom:5px;position:relative;">
 				<table style="border-spacing:0px; padding:0; border:0; border-collapse:collapse; width:100%">
 					<tr>
-						<td width="530px" id="memberInfo" height="40px;"></td>
+						<td width="472px" id="memberInfo" height="40px;"></td>
 						<td width="514px">
 							<div id="rollingText" style="height:22px;"><div class="viewArea"><ul class="notice-list" id="newReportNt" name="newReportNt"></ul></div></div>
 						</td>
 						<td width="58px" align="right" height="40px;">
 							<a href="./adminMainView.do"><img src="./resources/images/btn_home.png"></a>
 						</td>
-						<td width="6px"></td>
+						<td width="58px" align="right" height="40px;">
+							<a href="./"><img src="./resources/images/btn_main.png"></a>
+						</td>
+						<td width="13px"></td>
 						<td width="364px"><a href="#" id="menubarBtn" mode="hide"><img src="./resources/images/btn_menu_show.png" id="menubarBtn_img"></a></td>
 					</tr>
 				</table>

@@ -64,7 +64,7 @@ public class HomeController {
 	      // 파일명을 받는다 - 일반 원본파일명
 	      String oldName = request.getHeader("file-name");
 	      // 파일 기본경로 _ 상세경로
-	      //String filePath = "D:/web/yeuidoEstate/src/main/webapp/resources/photoUpload/";
+	      //String filePath = "D:/workspace/yeuidoEstate/Estate/src/main/webapp/resources/photoUpload/";
 	      String filePath = "/home/user/greenwear/webapps/ROOT/resources/photoUpload/";
 	      
 	      String saveName = sb.append(new SimpleDateFormat("yyyyMMddHHmmss")
@@ -85,7 +85,7 @@ public class HomeController {
 	      sb.append("&bNewLine=true")
 	        .append("&sFileName=").append(oldName)
 	        //.append("&sFileURL=").append("http://localhost:8080/resources/photoUpload/")
-	        .append("&sFileURL=").append("/resources/photoUpload/")
+	        .append("&sFileURL=").append("http://여의도닷컴.com/resources/photoUpload/")
 	        .append(saveName);
 	    } catch (Exception e) {
 	      e.printStackTrace();
