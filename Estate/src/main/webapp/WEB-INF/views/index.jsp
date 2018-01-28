@@ -5,7 +5,6 @@
 <script type="text/javascript" src="./resources/js/list/mainObject.js"></script>
 
 <%@ include file="/WEB-INF/views/tabMenuBar.jsp" %> 
-
 <div style="width:970px;margin:auto;padding:0;">
 	<table style="width: 970px;" cellpadding="0" cellspacing="0" border="0">	
 		<tr><td height="5px"></td></tr>
@@ -22,7 +21,7 @@
 	<table style="width:970px" cellpadding="0" cellspacing="0" border="0">
 		<tr>
 			<td class="nav" id="selected_list"></td>
-			<td class="orderMenu"><div id="order_menu" name="order_menu"></div></td>		
+			<td class="orderMenu"><!-- <div id="order_menu" name="order_menu"></div> --></td>		
 		</tr>
 	</table>
 	<table width="970px" cellpadding="0" cellspacing="0" id="objtTable">
@@ -58,14 +57,14 @@
 
 <!-- 아파트 매매 -->
 <script id="saleTpTrTmpl" type="text/x-jquery-tmpl">	
-		<td width="80px">등록일</td>
+		<td width="80px"><span class="orderTitle" id="oderRegDate" name="oderRegDate">등록일</span></td>
 		<td width="60px">거래</td>
 		<td width="60px">종류</td>
-		<td width="375px">매물명</td>
-		<td width="55px">면적(㎡)</td>
-		<td width="80px">층</td>
-		<td width="110px">매물가(만원)</td>
-		<td width="150px">연락처</td>
+		<td width="390px">매물명</td>
+		<td width="70px"><span class="orderTitle" id="oderArea" name="oderArea">면적(㎡)</span></td>
+		<td width="65px">층</td>
+		<td width="100px"><span class="orderTitle" id="oderPrice" name="oderPrice">매물가(만원)</span></td>
+		<td width="145px">연락처</td>
 </script>
 
 
@@ -76,7 +75,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
@@ -91,7 +90,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.depositAmt}}</div></td>
@@ -106,7 +105,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
@@ -121,7 +120,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.monthlyAmt}}</div></td>
@@ -137,7 +136,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
@@ -152,7 +151,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
@@ -168,7 +167,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
@@ -183,7 +182,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
@@ -199,7 +198,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
@@ -214,7 +213,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.depositAmt}}</div></td>
@@ -229,7 +228,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
@@ -244,7 +243,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.monthlyAmt}}</div></td>
@@ -260,7 +259,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
@@ -275,7 +274,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.depositAmt}}</div></td>
@@ -290,7 +289,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
@@ -305,7 +304,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><div class="obPrice">{{html $value.monthlyAmt}}</div></td>
@@ -320,7 +319,7 @@
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.objtTpNm}}</td>
-		<td class="obName">{{html $value.objtNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
 		<td>{{html $value.areaCal}}</td>
 		<td>{{html $value.floor}}</td>
 		<td><span class="obPrice">{{html $value.parcelAmt}}<span>/&nbsp;<span class="obPrice">{{html $value.premiumAmt}}</span></td>

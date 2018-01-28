@@ -28,7 +28,31 @@ function f_map_draw(x, y) {
 	//지도를 삽입할 HTML 엘리먼트 또는 HTML 엘리먼트의 id를 지정합니다.
 	var map = new naver.maps.Map('map', {
 		    center: new naver.maps.LatLng(x, y),
-		    zoom: 10
+		    minZoom: 7,
+		    zoom: 10,
+		    mapTypeControl: true,
+		    scrollWheel: false,
+		    mapTypeControlOptions: {
+		        style: naver.maps.MapTypeControlStyle.BUTTON,
+		        position: naver.maps.Position.TOP_RIGHT
+		    },
+		    zoomControl: true,
+		    zoomControlOptions: {
+		        style: naver.maps.ZoomControlStyle.LARGE,
+		        position: naver.maps.Position.RIGHT_CENTER
+		    },
+		    scaleControl: true,
+		    scaleControlOptions: {
+		        position: naver.maps.Position.BOTTOM_RIGHT
+		    },
+		    logoControl: true,
+		    logoControlOptions: {
+		        position: naver.maps.Position.TOP_LEFT
+		    },
+		    mapDataControl: true,
+		    mapDataControlOptions: {
+		        position: naver.maps.Position.BOTTOM_LEFT
+		    }
 	});
 	
 	$("#positionX").val(x);
@@ -40,38 +64,22 @@ function f_map_draw(x, y) {
     var marker = new naver.maps.Marker({
 	    position: myaddr,
 	    map: map
-	});
-/*	
-    // marker2
-    var myaddr2 = new naver.maps.Point(127.3891702, 36.3425441);
-    var marker = new naver.maps.Marker({
-	    position: myaddr2,
-	    map: map
-	});
-*/		
+	});	
 }
 
-function resizeWindow(win)    {
-
+function resizeWindow(win){
 	var wid = win.document.body.offsetWidth + 30;
-
 	var hei = win.document.body.offsetHeight + 40;        //30 과 40은 넉넉하게 하려는 임의의 값임
-
 	win.resizeTo(wid,hei);
-
 }
 
 function buildingPopup(){ 
-	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
-	//호출하게 됩니다. 	
 	window.document.domain = "여의도닷컴.com";
 	var pop = window.open("./resources/popup/newBuilding.jsp","_blank","width=850,height=930, scrollbars='no', resizable='yes'");  
 }
 
 
 function goPopup(){ 
-	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
-	//호출하게 됩니다. 
 	window.document.domain = "여의도닷컴.com";
 	var pop = window.open("jusoPopup.jsp","pop","width=580,height=580, scrollbars='no', resizable='yes'"); 
 }
@@ -113,6 +121,8 @@ function f_building_save() {
 		return;
 	}
 	
+	var finish_date = $("#finishedY > option:selected").val() + "." + $("#finishedM > option:selected").val();
+	
 	var param = {
 		objtTp : $("input[name=objtTp]:checked").val()
 		, buildNm : $("#buildNm").val()
@@ -123,6 +133,16 @@ function f_building_save() {
 		, positionY : $("#positionY").val()
 		, addrDetail : $("#addrDetail").val()
 		, buildCd : $("#buildCd").val()
+		, totalDongNum : $("#totalDongNum").val()
+		, totalHouseholdNum : $("#totalHouseholdNum").val()
+		, totalParkingNum : $("#totalParkingNum").val()
+		, heatingType : $("#heatingType").val()
+		, heatingFuel : $("#heatingFuel").val()
+		, builderName : $("#builderName").val()
+		, finishedDate : finish_date
+		, minArea : $("#minArea").val()
+		, maxArea : $("#maxArea").val()
+		, highestFloor : $("#highestFloor").val()
 	}
 	
 	var urlStr = "";
@@ -239,15 +259,76 @@ function f_category_dtl(idx) {
 			
 			  var caInfo = result.caInfo;
 			  
+			  //년도 selectbox만들기               
+			  for(var sy = 1790 ; sy <= 2120 ; sy++) {
+				  $('#finishedY').append('<option value="' + sy + '">' + sy + '년</option>');    
+			  }
+			  // 월별 selectbox 만들기            
+			  for(var i=1; i <= 12; i++) {
+				  var sm = i > 9 ? i : "0"+i ;            
+				  $('#finishedM').append('<option value="' + sm + '">' + sm + '월</option>');    
+			  } 
+			  
+			  var finish_date = caInfo.finishedDate;
+			  var f_data_arr;
+			  
+			  if(finish_date != '' && finish_date != null){
+				  f_data_arr = finish_date.split('.');
+				  
+				  if(f_data_arr.length > 1){
+					  $("#finishedY").val(f_data_arr[0]);
+					  $("#finishedM").val(f_data_arr[1]);
+					  				  
+					  jQuery("#finishedY  > option[value="+f_data_arr[0]+"]").attr("selected", "true");    
+					  jQuery("#finishedM  > option[value="+f_data_arr[1]+"]").attr("selected", "true");   					  
+				  }
+			  }
+			  
 			  $("input:radio[name='objtTp']:radio[value='"+caInfo.objtTp+"']").prop("checked", true); 
 			  $("#buildNm").val(caInfo.buildNm);
+			  $("#totalDongNum").val(caInfo.totalDongNum);
+			  $("#totalHouseholdNum").val(caInfo.totalHouseholdNum);
+			  $("#totalParkingNum").val(caInfo.totalParkingNum);
+			  $("#heatingType").val(caInfo.heatingType);
+			  $("#heatingFuel").val(caInfo.heatingFuel);
+			  $("#builderName").val(caInfo.builderName);
 			  $("#roadAddrPart1").val(caInfo.roadAddrPart1);
 			  $("#zipNo").val(caInfo.zipNo);
 			  $("#jibunAddr").val(caInfo.jibunAddr);
+			  if(caInfo.jibunAddr != '' & caInfo.jibunAddr != null){
+				  f_map_setting( caInfo.jibunAddr );
+			  }
 			  $("#addrDetail").val(caInfo.addrDetail);
 			  $("#positionX").val(caInfo.positionX);
 			  $("#positionY").val(caInfo.positionY);
-			  $("#buildCd").val(caInfo.buildCd);		  
+			  $("#buildCd").val(caInfo.buildCd);		
+			  $("#finishedDate").val(caInfo.finishedDate);  
+			  $("#minArea").val(caInfo.minArea);
+			  $("#maxArea").val(caInfo.maxArea);
+			  $("#highestFloor").val(caInfo.highestFloor);
 		}
 	});
 }
+
+function getYearSelect() {
+	var now = new Date();
+
+	for(i=1998; i < 2020; i++) {
+		if(now.getYear() != i) {
+			document.write('<option value="'+i+'">'+i+" 년");
+		} else {
+			document.write('<option value="'+i+'" selected>'+i+" 년");
+		}
+	}
+}
+
+// 월별 selectbox 만들기
+function getMonSelect() {
+	var now = new Date();  for(var i=0; i<12; i++) {
+		if(now.getMonth() != i) {
+			document.write('<option value="'+i+'">'+i+" 월");
+		} else {
+			document.write('<option value="'+i+'" selected>'+i+" 월");
+		}
+	}
+} 

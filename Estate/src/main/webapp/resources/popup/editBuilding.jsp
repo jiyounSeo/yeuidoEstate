@@ -13,7 +13,7 @@
 <script type="text/javascript">
 $( document ).ready(function() {
 	var buildCd = getHttpParam('buildCd');
-	f_category_dtl(buildCd);
+	f_category_dtl(buildCd);   
 });
 
 </script>
@@ -61,11 +61,46 @@ $( document ).ready(function() {
 			</td>
 		</tr>
 		<tr>
-			<td style="width:15%" class="title" rowspan="2">상세 주소</td>
-			<td colspan="2">
-				<input type="text" id="addrDetail" name="addrDetail"> 
-			</td>
+			<td class="title">상세 주소</td>
+			<td colspan="2"><input type="text" id="addrDetail" name="addrDetail"> </td>
 		</tr>
+	</table>
+	<table class="popup_page_table" style="width:100%;margin-top:10px;">
+		<tr>
+			<td class="title_detail">총 동수</td>
+			<td><input type="text" style="width:150px;" id="totalDongNum" name="totalDongNum">&nbsp;개동</td>
+		
+			<td class="title_detail">총 세대수</td>
+			<td><input type="text" style="width:150px;" id="totalHouseholdNum" name="totalHouseholdNum">&nbsp;세대</td>
+		</tr>
+		<tr>
+			<td class="title_detail">총 주차대수</td>
+			<td><input type="text" style="width:150px;" id="totalParkingNum" name="totalParkingNum">&nbsp;대</td>
+
+			<td class="title_detail">최고증</td>
+			<td><input type="text" style="width:150px;" id="highestFloor" name="highestFloor">층</td>
+		</tr>
+		<tr>
+			<td class="title_detail">난방방식</td>
+			<td><input type="text" id="heatingType" name="heatingType"> </td>
+			
+			<td class="title_detail">난방연료</td>
+			<td><input type="text" id="heatingFuel" name="heatingFuel"> </td>
+		</tr>
+		<tr>
+			<td class="title_detail">면적범위</td>
+			<td><input type="text" style="width:100px;" id="minArea" name="minArea">㎡ ~ <input type="text" style="width:100px;" id="maxArea" name="maxArea">㎡</td>
+			
+			<td class="title_detail">건설사명</td>
+			<td><input type="text" id="builderName" name="builderName"> </td>
+		</tr>
+		<tr>
+			<td class=title_detail>준공년월</td>
+			<td colspan="3">
+				<select id="finishedY" name="finishedY" style="width:130px;"></select> 년
+				<select id="finishedM" name="finishedM" style="width:130px;"></select> 월
+			</td>
+		</tr>	
 	</table>
 	<div style="width:97%;height:45px;text-align:right;padding:20px 30px 10px 0;">
 		<a href="#"><img src="../images/btn_edit.jpg" onclick="f_building_save();return false;"></a>
@@ -75,5 +110,6 @@ $( document ).ready(function() {
 </div>
 <input type="hidden" id="positionX" name="positionX" />
 <input type="hidden" id="positionY" name="positionY" />
+<input type="hidden" id="finishedDate" name="finishedDate" />
 <input type="hidden" id="buildCd" name="buildCd" />
 </form>

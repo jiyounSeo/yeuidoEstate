@@ -401,11 +401,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	 , obj.positionX
 	  	 , obj.positionY
 	  FROM saleobject obj
-	     , estate e
-	     , member m
-	 WHERE obj.frstRegUser = m.mbrId
-	   and e.estateCd = m.estateCd
-	   and objtTp = #{objtTp}
+		inner join member m
+     		on  obj.frstRegUser = m.mbrId
+	 	left outer join estate e
+            on e.estateCd = m.estateCd
+	 WHERE objtTp = #{objtTp}
 	   AND saleTp = #{saleTp}	
 	   <if test="myObjt != null and myObjt != '' ">
 	   AND obj.frstRegUser = #{user.mbrId}
@@ -550,6 +550,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , concat(e.tel1, '-' , e.tel2, '-', e.tel3 ) estateTel
 	     , if ( isnull(obj.zipNo), b.zipNo, obj.zipNo) zipno 
 	 	 , if ( isnull(obj.jibunAddr), b.jibunAddr, obj.jibunAddr) jibunAddr 
+	 	 , b.totalDongNum
+	 	 , b.totalHouseholdNum 
+	 	 , b.totalParkingNum
+	 	 , b.heatingType
+	 	 , b.heatingFuel
+	 	 , b.builderName
+	 	 , b.finishedDate
+	 	 , b.minArea
+	 	 , b.maxArea
+	 	 , b.highestFloor
+	 	 , obj.frontDoorType
+	 	 , obj.sameHouseholdNum
 	 	 , if ( isnull(obj.roadAddrPart1), b.roadAddrPart1 , obj.roadAddrPart1) roadAddrPart1 
 	 	 , if ( isnull(obj.addrDetail), b.addrDetail, obj.addrDetail) addrDetail 
 	 	 , if ( isnull(obj.positionX), b.positionX, obj.positionX) positionX 
@@ -561,7 +573,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          on obj.buildCd = b.buildCd
 		 inner join member m
          on obj.frstRegUser = m.mbrId 
-	 	 inner join estate e
+	 	 left outer join estate e
          on  m.estateCd  = e.estateCd
 	 WHERE obj.objtNo = #{objtNo}
 	   AND obj.objtTp = #{objtTp}
@@ -604,7 +616,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          on obj.custId = cust.custId
 		 inner join member m
          on obj.frstRegUser = m.mbrId 
-	 	 inner join estate e
+	 	 left outer join estate e
          on  m.estateCd  = e.estateCd
 	WHERE 1=1
 	   <if test="objtNm != null and objtNm != '' ">
@@ -696,17 +708,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          , if (isnull(obj.jibunAddr), (select jibunAddr from building b where b.buildCd = obj.buildCd ), obj.jibunAddr ) jibunAddr
 	  	 , obj.roadAddrPart1 
 	  	 , obj.addrDetail
+	 	 , (select totalDongNum from building b where b.buildCd = obj.buildCd ) totalDongNum
+	 	 , (select totalHouseholdNum from building b where b.buildCd = obj.buildCd ) totalHouseholdNum 
+	 	 , (select totalParkingNum from building b where b.buildCd = obj.buildCd ) totalParkingNum
+	 	 , (select heatingType from building b where b.buildCd = obj.buildCd ) heatingType
+	 	 , (select heatingFuel from building b where b.buildCd = obj.buildCd ) heatingFuel
+	 	 , (select builderName from building b where b.buildCd = obj.buildCd ) builderName
+	 	 , (select finishedDate from building b where b.buildCd = obj.buildCd ) finishedDate
+	 	 , (select minArea from building b where b.buildCd = obj.buildCd ) minArea
+	 	 , (select maxArea from building b where b.buildCd = obj.buildCd ) maxArea
+	 	 , (select highestFloor from building b where b.buildCd = obj.buildCd ) highestFloor
 	 	 , if ( isnull(obj.positionX), (select positionX from building b where b.buildCd = obj.buildCd ) , obj.positionX) positionX 
 	 	 , if ( isnull(obj.positionY), (select positionY from building b where b.buildCd = obj.buildCd ) , obj.positionY) positionY 
+	   <if test = "objtTp == 'OT001' or objtTp == 'OT004' or objtTp == 'OT005'">
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST001' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST001
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST002' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST002
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST003' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST003
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST004' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST004
+	 	</if>
+	 	<if test = "objtTp == 'OT002' or objtTp == 'OT003'">
+	 	 , (select count(*) from saleobject where buildNm = obj.buildNm and saleTp = 'ST001' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST001
+	 	 , (select count(*) from saleobject where buildNm = obj.buildNm and saleTp = 'ST005' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST005
+	 	</if>
+	 	<if test = "objtTp == 'OT006'">
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST006' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST006 
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST007' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST007 
+	 	</if>
 	  FROM saleobject obj
 	     left outer join customer cust
          on obj.custId = cust.custId
 		 inner join member m
          on obj.frstRegUser = m.mbrId 
-	 	 inner join estate e
+	 	 left outer join  estate e
          on  m.estateCd  = e.estateCd
 	 WHERE 1=1
-	   and obj.advertiseYn = 'Y'
+	   and advertiseYn = 'Y'
 	   <if test = "objtTp != null and objtTp != '' ">
 	   and objtTp = #{objtTp}
 	   </if>
@@ -717,35 +753,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   and buildCd = #{buildCd}
 	   </if>
 	   
-	   <if test = "orderByColumn == 'frstRegDt' or orderByColumn == '' ">
+	   <if test = "(orderByColumn == 'frstRegDt' and orderByColumnDir == 'desc') or orderByColumn == '' ">
 	   order by frstRegDt desc
+	   </if>	
+	   <if test = "orderByColumn == 'frstRegDt' and orderByColumnDir == 'asc'">
+	   order by frstRegDt asc
 	   </if>	   
-	   <if test = "orderByColumn == 'area'">
+	   <if test = "orderByColumn == 'area' and orderByColumnDir == 'desc'">
 	   order by area desc
+	   </if>      
+	   <if test = "orderByColumn == 'area' and orderByColumnDir == 'asc'">
+	   order by area asc
 	   </if>   
-	   <if test = "orderByColumn == 'bargainAmt'">
+	   <if test = "orderByColumn == 'bargainAmt' and orderByColumnDir == 'desc'">
 	   order by bargainAmt desc
 	   </if>   
-	   <if test = "orderByColumn == 'depositAmt'">
+	   <if test = "orderByColumn == 'bargainAmt' and orderByColumnDir == 'asc'">
+	   order by bargainAmt asc
+	   </if>    
+	   <if test = "orderByColumn == 'depositAmt' and orderByColumnDir == 'desc'">
 	   order by depositAmt desc
-	   </if>   
-	   <if test = "orderByColumn == 'monthlyAmt'">
-	   order by monthlyAmt desc
-	   </if>   
-	   <if test = "orderByColumn == 'parcelAmt'">
-	   order by parcelAmt desc
+	   </if>     
+	   <if test = "orderByColumn == 'depositAmt' and orderByColumnDir == 'asc'">
+	   order by depositAmt asc
 	   </if>  
-	   <if test = "orderByColumn == 'premiumAmt'">
-	   order by premiumAmt desc
-	   </if>
-	   <if test = "orderByColumn == 'rightAmt'">
-	   order by rightAmt desc
-	   </if>
+	   <if test = "orderByColumn == 'monthlyAmt' and orderByColumnDir == 'desc'">
+	   order by monthlyAmt desc
+	   </if>  
+	   <if test = "orderByColumn == 'monthlyAmt' and orderByColumnDir == 'asc'">
+	   order by monthlyAmt asc
+	   </if>   
+	   <if test = "orderByColumn == 'parcelAmt' and orderByColumnDir == 'desc'">
+	   order by parcelAmt desc
+	   </if>     
+	   <if test = "orderByColumn == 'parcelAmt' and orderByColumnDir == 'asc'">
+	   order by parcelAmt asc
+	   </if> 
 	   
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
-
+	<select id="selectMainObjectTotalCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	 SELECT COUNT(*)  totalCnt
+	  FROM saleobject obj
+	     left outer join customer cust
+         on obj.custId = cust.custId
+		 inner join member m
+         on obj.frstRegUser = m.mbrId 
+	 	 left outer join  estate e
+         on  m.estateCd  = e.estateCd
+	 WHERE 1=1
+	 	and objtTp = #{objtTp}
+	   and saleTp = #{saleTp}	
+	   and advertiseYn = 'Y'	  
+	   <if test = "buildCd != null and buildCd != '' ">
+	   and buildCd = #{buildCd}
+	   </if>
+	</select>
+	
 	<select id="searchMainObjtList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT	DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , obj.objtNo
@@ -879,13 +944,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  , (TO_DAYS(now()) - TO_DAYS(dueDt)) as intvDay
 			  FROM saleobject
 			  WHERE 1=1
-			  AND frstRegUser = #{user.mbrId} 
 			  AND 
               (
 				  (
 					DATE_FORMAT(dueDt, '%Y-%m-%d')  -- 만기 3개월 1일전부터 1일후까지 list-up 
 					BETWEEN DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -3 MONTH), interval - 1 DAY), '%Y-%m-%d') 
-					AND DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -3 MONTH), interval + 1 DAY), '%Y-%m-%d')
+					AND DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -3 MONTH), interval + 3 MONTH), '%Y-%m-%d')
 				  ) OR (
 					DATE_FORMAT(dueDt, '%Y-%m-%d')  -- 만기 2개월 1일전부터 1일후까지 list-up 
 					BETWEEN DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -2 MONTH), interval - 1 DAY), '%Y-%m-%d') 

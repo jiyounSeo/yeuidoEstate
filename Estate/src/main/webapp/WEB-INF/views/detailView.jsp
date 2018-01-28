@@ -169,10 +169,10 @@
 			<td>
 				<table style="width:475px;height:230px;" cellpadding="0" cellspacing="0" class="objtCommInfo">
 					<tr><td style="height:10px;background-color:fafafa"></td><td class="info"></td></tr>
-					<tr><td class="title1">해당동</td><td class="info"></td></tr>
-					<tr><td class="title1">해당면적세대수</td><td class="info"></td></tr>
-					<tr><td class="title1">방향</td><td class="info"></td></tr>
-					<tr><td class="title1">현관구조</td><td class="info"></td></tr>
+					<tr><td class="title1">해당동</td><td class="info"><c:if test="${dong eq '' || dong eq null }">--</c:if><c:if test="${dong ne '' && dong ne null}">${dong}동</c:if></td></tr>
+					<tr><td class="title1">해당면적세대수</td><td class="info"><c:if test="${sameHouseholdNum eq '' || sameHouseholdNum eq null}">--</c:if><c:if test="${sameHouseholdNum ne '' && sameHouseholdNum ne null}">${sameHouseholdNum}&nbsp;세대</c:if></td></tr>
+					<tr><td class="title1">방향</td><td class="info"><c:if test="${directionTpNm eq '' || directionTpNm eq null}">--</c:if><c:if test="${directionTpNm ne '' && directionTpNm ne null}">${directionTpNm}향</c:if></td></tr>
+					<tr><td class="title1">현관구조</td><td class="info"><c:if test="${frontDoorType eq '' || frontDoorType eq null}">--</c:if><c:if test="${frontDoorType ne '' && frontDoorType ne null}">${frontDoorType}</c:if></td></tr>
 					<tr><td style="height:100px;background-color:fafafa;border-bottom:1px solid #e1e1e1"></td><td style="background-color:#fff;border-bottom:1px solid #e1e1e1"></td></tr>
 				</table>
 			</td>
@@ -180,14 +180,38 @@
 			<td>
 				<table style="width:475px;height:230px;" cellpadding="0" cellspacing="0" class="objtCommInfo">
 					<tr><td style="height:10px;background-color:fafafa"></td><td></td></tr>
-					<tr><td class="title2">종동수</td><td class="info"></td></tr>
-					<tr><td class="title2">총세대수</td><td class="info"></td></tr>
-					<tr><td class="title2">총주차대수</td><td class="info"></td></tr>
-					<tr><td class="title2">난방방식</td><td class="info"></td></tr>
-					<tr><td class="title2">난방연료</td><td class="info"></td></tr>
-					<tr><td class="title2">세부종류</td><td class="info"></td></tr>
-					<tr><td class="title2">건설사명</td><td class="info"></td></tr>
-					<tr><td class="title2">준공년월</td><td class="info"></td></tr>
+					<tr>
+						<td class="title2">종동수</td>
+						<td class="info"><c:if test="${totalDongNum eq '' || totalDongNum eq null}">--</c:if><c:if test="${totalDongNum ne '' && totalDongNum ne null}">${totalDongNum} 동</c:if></td>
+					</tr>
+					<tr>
+						<td class="title2">총세대수</td>
+						<td class="info"><c:if test="${totalHouseholdNum eq '' || totalHouseholdNum eq null}">--</c:if><c:if test="${totalHouseholdNum ne '' && totalHouseholdNum ne null}">${totalHouseholdNum} 세대</c:if></td>
+					</tr>
+					<tr>
+						<td class="title2">총주차대수</td>
+						<td class="info"><c:if test="${totalParkingNum eq '' || totalParkingNum eq null}">--</c:if><c:if test="${totalParkingNum ne '' && totalParkingNum ne null}">${totalParkingNum} 대</c:if></td>
+					</tr>
+					<tr>
+						<td class="title2">난방방식</td>
+						<td class="info"><c:if test="${heatingType eq '' || heatingType eq null}">--</c:if><c:if test="${heatingType ne '' && heatingType ne null}">${heatingType}</c:if></td>
+					</tr>
+					<tr>
+						<td class="title2">난방연료</td>
+						<td class="info"><c:if test="${heatingFuel eq '' || heatingFuel eq null}">--</c:if><c:if test="${heatingFuel ne '' && heatingFuel ne null}">${heatingFuel}</c:if></td>
+					</tr>
+					<tr>
+						<td class="title2">세부종류</td>
+						<td class="info"><c:if test="${objtTpNm eq '' || objtTpNm eq null}">--</c:if><c:if test="${objtTpNm ne '' && objtTpNm ne null}">${objtTpNm}</c:if></td>
+					</tr>
+					<tr>
+						<td class="title2">건설사명</td>
+						<td class="info"><c:if test="${builderName eq '' || builderName eq null}">--</c:if><c:if test="${builderName ne '' && builderName ne null}">${builderName}</c:if></td>
+					</tr>
+					<tr>
+						<td class="title2">준공년월</td>
+						<td class="info"><c:if test="${finishedDate eq '' || finishedDate eq null}">--</c:if><c:if test="${finishedDate ne '' && finishedDate ne null}">${finishedDate}</c:if></td>
+					</tr>
 					<tr><td style="height:20px;background-color:fafafa;border-bottom:1px solid #e1e1e1"></td><td style="background-color:#fff;border-bottom:1px solid #e1e1e1"></td></tr>
 				</table>
 			</td>

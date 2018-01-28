@@ -63,16 +63,16 @@
 				<td align="center">
 					<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
 						<tr>
-							<td width="488px" height="41px">
-								<div style="width:488px;height:41px;margin:0;padding:0;text-align:left">
+							<td width="150px" height="41px">
+								<div style="width:150px;height:41px;margin:0;padding:0;text-align:left">
 									<!-- <a href="#"><img src="./resources/images/btn_search2.jpg"></a> -->
 								</div>
 							</td>
-							<td width="486px" align="center">
+							<td width="1160px" align="center">
 								<div id="objtPagingDiv" class="pagination"></div>
 							</td>
-							<td width="486px" align="right">
-								<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
+							<td width="150px" align="right">
+								<div style="width:150px;height:41px;margin:0;padding:0;text-align:right">
 									<a href="#add" onclick="f_add_objt();return false;"><img src="./resources/images/btn_new_ob.jpg"></a>
 								</div>
 							</td>
@@ -105,12 +105,12 @@
 							<td>
 								<table class="cl_list">
 									<tr class="title">
-										<td>등록일자</td>
-										<td>고객명</td>
-										<td>연락처</td>
-										<td>의뢰내역</td>
-										<td>등록자</td>
-										<td>상태</td>
+										<td style="width:150px;">등록일자</td>
+										<td style="width:180px">고객명</td>
+										<td style="width:180px">연락처</td>
+										<td style="width:750px">의뢰내역</td>
+										<td style="width:120px">등록자</td>
+										<td style="width:80px">상태</td>
 									</tr>
 									<tbody id="custTbody">
 									</tbody>
@@ -122,11 +122,11 @@
 							<td align="center">
 								<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
  								<tr>
- 									<td width="487px" align="left"><!-- <a href="#"><img src="./resources/images/btn_search2.jpg"></a> --></td>
- 									<td width="486px" align="center">
+ 									<td width="150px" align="left"><!-- <a href="#"><img src="./resources/images/btn_search2.jpg"></a> --></td>
+ 									<td width="1160px" align="center">
  										<div id="custPagingDiv" class="pagination"></div>
  									</td>
- 									<td width="487px" align="right">
+ 									<td width="150px" align="right">
  										<a href="./newClient.do"><img src="./resources/images/btn_new_cl.jpg"></a>
  									</td>
  								</tr>

@@ -51,9 +51,15 @@
 	font-size:10pt;
 }
 
+.objtListTrHeader span.orderTitle {
+	font-weight:bold;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
 .objtListTrBody tr{
 	cursor:pointer;
-	height:60px;
+	height:65px;
 	background-color:#fcfcfc;
 }
 .objtListTrBody tr:nth-child(even){
@@ -76,14 +82,14 @@
 }
 
 td.orderMenu {
-	width:830px;
+	width:670px;
 	height:30px;
 	text-align:right;
 }
 
 td.nav {
 	font-size:10pt;
-	width:140px;
+	width:300px;
 	height:30px;
 	text-align:left;
 	padding-left:5px;
@@ -97,6 +103,14 @@ div.obPrice {
 
 .orderMenu a:link, a:visited {
 	font-size:9pt;
+}
+
+div.nameBox {
+	margin-bottom:5px;
+}
+span.bdName {
+	color:#3d79cc;
+	text-decoration : underline;
 }
 
 
@@ -229,6 +243,26 @@ td.detail_descript {
 	padding-left:10px;
 	font-size:10pt;
 	color:#323232;
+}
+
+.map_info_pop {
+	width:100%;
+	font-size:12px;
+}
+.map_info_pop td.dataText {
+	height:20px;
+	padding-left:17px;
+}
+.map_info_pop td.titleText {
+	background-color:#fafafa;
+	color:#3f3f3f;
+	height:35px;
+	padding-left:17px;
+}
+
+.obNum a:link,
+.obNum a:visited {
+	color:#ff943f;
 }
 
 </style>

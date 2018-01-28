@@ -250,6 +250,14 @@
 	font-weight: bold;
 	border-bottom: 1px solid #fff;
 }
+.popup_page_table td.title_detail {
+	width:100px;
+	text-align:center;
+	background:#0063b1;
+	color:#fff;
+	font-weight: bold;
+	border-bottom: 1px solid #fff;
+}
 .popup_page_table td.title2 {
 	width:145px;
 	text-align:center;
@@ -281,6 +289,15 @@
     border: 1px solid #d3d3d3;
     background-color: #fff;
 }
+.popup_page_table input[type=text].dateT {
+    width: 100px;
+    height: 42px;
+    padding: 12px 20px;
+    margin: 0;
+    box-sizing: border-box;
+    border: 1px solid #d3d3d3;
+    background-color: #fff;
+}
 
 .popup_page_table textarea {
 	width:100%;
@@ -291,10 +308,11 @@
 .popup_page_table select {
 	height:42px;
 	border: 1px solid #d3d3d3;
+	padding-left:10px;
 	-webkit-appearance: none; 
 	-moz-appearance: none;    
 	appearance: none;
-	background: url('./resources/images/icon_sel.jpg') no-repeat 100% 50%;	
+	background: url('../images/icon_sel.jpg') no-repeat 100% 50%;	
 }
 
 .popup_page_table select::-ms-expand {

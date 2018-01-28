@@ -35,7 +35,7 @@ function f_select_menu_bar(objtTp,saleTp) {
 	var parmStr = address.split("indexObjectDtl");
 	
 	console.log(parmStr.length + "///");
-	
+
 	if(parmStr.length > 1) {
 		var url = "./?objtTp="+objtTp+"&saleTp="+saleTp;
 		location.href=url;

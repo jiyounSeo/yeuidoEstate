@@ -12,6 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			building (buildCd
 				  , buildNm
 				  , objtTp
+				  , totalDongNum
+				  , totalHouseholdNum
+				  , totalParkingNum
+				  , heatingType
+				  , heatingFuel
+				  , builderName
+				  , minArea
+				  , maxArea
+				  , highestFloor
+				  , finishedDate
 				  , roadAddrPart1
 				  , jibunAddr
 				  , addrDetail
@@ -27,6 +37,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         			#{buildCd}
 				  , #{buildNm}
 				  , #{objtTp}
+				  , #{totalDongNum}
+				  , #{totalHouseholdNum}
+				  , #{totalParkingNum}
+				  , #{heatingType}
+				  , #{heatingFuel}
+				  , #{builderName}
+				  , #{minArea}
+				  , #{maxArea}
+				  , #{highestFloor}
+				  , #{finishedDate}
 				  , #{roadAddrPart1}
 				  , #{jibunAddr}
 				  , #{addrDetail}
@@ -46,6 +66,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     UPDATE building
        SET buildNm = #{buildNm}
        	 , objtTp = #{objtTp}
+       	 , totalDongNum = #{totalDongNum}
+       	 , totalHouseholdNum = #{totalHouseholdNum}
+       	 , totalParkingNum = #{totalParkingNum}
+       	 , heatingType = #{heatingType}
+       	 , heatingFuel = #{heatingFuel}
+       	 , builderName = #{builderName}
+		 , minArea = #{minArea}
+		 , maxArea = #{maxArea}
+		 , highestFloor = #{highestFloor}
+       	 , finishedDate = #{finishedDate}
        	 , roadAddrPart1 = #{roadAddrPart1}
 		 , jibunAddr = #{jibunAddr}
 		 , addrDetail = #{addrDetail}
@@ -100,6 +130,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , buildNm
 		  , objtTp
 		  , (select commNm from commcd where commCd = objtTp ) objtTpNm
+		  , totalDongNum
+		  , totalHouseholdNum
+		  , totalParkingNum
+		  , heatingType
+		  , heatingFuel
+		  , builderName
+		  , minArea
+		  , maxArea
+		  , highestFloor
+		  , finishedDate
 		  , roadAddrPart1
 		  , jibunAddr
 		  , addrDetail

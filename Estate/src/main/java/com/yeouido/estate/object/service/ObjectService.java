@@ -21,6 +21,8 @@ public interface ObjectService
 	public List<Map<String,Object>> selectTotalSearch(Map map) throws Exception;
 	
 	public Map selectObjectTotalCnt(Map map) throws Exception;
+
+	public Map selectMainObjectTotalCnt(Map map) throws Exception;
 	
 	public Map selectObjectInfo(Map map) throws Exception;
 

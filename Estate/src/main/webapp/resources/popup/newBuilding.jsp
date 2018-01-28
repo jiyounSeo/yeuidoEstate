@@ -9,6 +9,19 @@
 <script type="text/javascript" src="../js/list/newBuilding.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
 <!-- 아파트 -->
+<script type="text/javascript">
+$( document ).ready(function() {
+	//년도 selectbox만들기               
+	for(var sy = 1790 ; sy <= 2120 ; sy++) {
+		  $('#finishedY').append('<option value="' + sy + '">' + sy + '년</option>');    
+	}
+	// 월별 selectbox 만들기            
+	for(var i=1; i <= 12; i++) {
+		  var sm = i > 9 ? i : "0"+i ;            
+		  $('#finishedM').append('<option value="' + sm + '">' + sm + '월</option>');    
+	} 
+});
+</script>
 <body >
 <form id="buildingPopup" method="post"> 
 <div class="popup_page_title">
@@ -61,6 +74,44 @@
 				<input type="text" id="addrDetail" name="addrDetail"> 
 			</td>
 		</tr>
+	</table>
+	
+	<table class="popup_page_table" style="width:100%;margin-top:10px;">
+		<tr>
+			<td class="title_detail">총 동수</td>
+			<td><input type="text" style="width:150px;" id="totalDongNum" name="totalDongNum">&nbsp;개동</td>
+		
+			<td class="title_detail">총 세대수</td>
+			<td><input type="text" style="width:150px;" id="totalHouseholdNum" name="totalHouseholdNum">&nbsp;세대</td>
+		</tr>
+		<tr>
+			<td class="title_detail">총 주차대수</td>
+			<td><input type="text" style="width:150px;" id="totalParkingNum" name="totalParkingNum">&nbsp;대</td>
+
+			<td class="title_detail">최고증</td>
+			<td><input type="text" style="width:150px;" id="highestFloor" name="highestFloor">층</td>
+		</tr>
+		<tr>
+			<td class="title_detail">난방방식</td>
+			<td><input type="text" id="heatingType" name="heatingType"> </td>
+			
+			<td class="title_detail">난방연료</td>
+			<td><input type="text" id="heatingFuel" name="heatingFuel"> </td>
+		</tr>
+		<tr>
+			<td class="title_detail">면적범위</td>
+			<td><input type="text" style="width:100px;" id="minArea" name="minArea">㎡ ~ <input type="text" style="width:100px;" id="maxArea" name="maxArea">㎡</td>
+			
+			<td class="title_detail">건설사명</td>
+			<td><input type="text" id="builderName" name="builderName"> </td>
+		</tr>
+		<tr>
+			<td class=title_detail>준공년월</td>
+			<td colspan="3">
+				<select id="finishedY" name="finishedY" style="width:130px;"></select> 년
+				<select id="finishedM" name="finishedM" style="width:130px;"></select> 월
+			</td>
+		</tr>	
 	</table>
 	<div style="width:97%;height:45px;text-align:right;padding:20px 30px 10px 0;">
 		<a href="#"><img src="../images/btn_add.jpg" onclick="f_building_save();return false;"></a>

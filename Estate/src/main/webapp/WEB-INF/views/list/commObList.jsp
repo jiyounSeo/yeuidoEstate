@@ -73,16 +73,16 @@
 				<td align="center">
 					<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
 						<tr>
-							<td width="488px" height="41px">
-								<div style="width:488px;height:41px;margin:0;padding:0;text-align:left">
+							<td width="150px" height="41px">
+								<div style="width:150px;height:41px;margin:0;padding:0;text-align:left">
 									<a href="./totalSearch.do"><img src="./resources/images/btn_search2.jpg"></a>
 								</div>
 							</td>
-							<td width="486px" align="center">
+							<td width="1160px" align="center">
 								<div id="pagingDiv" class="pagination"></div>
 							</td>
-							<td width="486px" align="right">
-								<div style="width:486px;height:41px;margin:0;padding:0;text-align:right">
+							<td width="150px" align="right">
+								<div style="width:150px;height:41px;margin:0;padding:0;text-align:right">
 									<a href="#add" onclick="f_add_objt();return false;"><img src="./resources/images/btn_new_ob.jpg"></a>
 								</div>
 							</td>
