@@ -561,7 +561,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          on obj.buildCd = b.buildCd
 		 inner join member m
          on obj.frstRegUser = m.mbrId 
-	 	 inner join estate e
+	 	 left outer join estate e
          on  m.estateCd  = e.estateCd
 	 WHERE obj.objtNo = #{objtNo}
 	   AND obj.objtTp = #{objtTp}
@@ -604,7 +604,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          on obj.custId = cust.custId
 		 inner join member m
          on obj.frstRegUser = m.mbrId 
-	 	 inner join estate e
+	 	 left outer join estate e
          on  m.estateCd  = e.estateCd
 	WHERE 1=1
 	   <if test="objtNm != null and objtNm != '' ">
@@ -879,13 +879,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  , (TO_DAYS(now()) - TO_DAYS(dueDt)) as intvDay
 			  FROM saleobject
 			  WHERE 1=1
-			  AND frstRegUser = #{user.mbrId} 
 			  AND 
               (
 				  (
 					DATE_FORMAT(dueDt, '%Y-%m-%d')  -- 만기 3개월 1일전부터 1일후까지 list-up 
 					BETWEEN DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -3 MONTH), interval - 1 DAY), '%Y-%m-%d') 
-					AND DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -3 MONTH), interval + 1 DAY), '%Y-%m-%d')
+					AND DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -3 MONTH), interval + 3 MONTH), '%Y-%m-%d')
 				  ) OR (
 					DATE_FORMAT(dueDt, '%Y-%m-%d')  -- 만기 2개월 1일전부터 1일후까지 list-up 
 					BETWEEN DATE_FORMAT(DATE_ADD(DATE_ADD(now(),interval -2 MONTH), interval - 1 DAY), '%Y-%m-%d') 

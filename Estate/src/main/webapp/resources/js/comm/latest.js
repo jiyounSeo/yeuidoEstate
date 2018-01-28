@@ -210,9 +210,11 @@ function makeDueDtLatestList(listArray){
 		var intvMonth = Math.floor((item.intvDay)/30);
 
 		if(intvMonth == 0){
-			list = list + '<li><a href="#" onclick="f_DueDtDtl_view(' + item.objtNo + ',' + item.objtTp + ',' + item.saleTP + ',' + item.publicYn + ',' + item.activeTp + ');">[<font color="red"><b>만기' + item.intvDay + '일전</b></font>] '
+			list = list + "<li><a href='#' onclick=\"f_DueDtDtl_view(\'" +item.objtNo +"\',\'" + item.objtTp +"\',\'" + item.saleTP +"\',\'" + item.publicYn +"\',\'" + item.activeTp + "\');\">"
+						+'[<font color="red"><b>만기' + item.intvDay + '일전</b></font>] '
 		} else {
-			list = list + '<li><a href="#" onclick="f_DueDtDtl_view(' + item.objtNo + ',' + item.objtTp + ',' + item.saleTP + ',' + item.publicYn + ',' + item.activeTp + ');">[<font color="Green"><b>만기' + intvMonth + '개월전</b></font>] '
+			list = list + "<li><a href='#' onclick=\"f_DueDtDtl_view(\'" +item.objtNo +"\',\'" + item.objtTp +"\',\'" + item.saleTP +"\',\'" + item.publicYn +"\',\'" + item.activeTp + "\');\">"
+						+'[<font color="Green"><b>만기' + intvMonth + '개월전</b></font>] '
 		}
 		list = list + item.objtNm + '(' + item.objtTpNm + '/' + item.saleTpNm + ')</a>';
 		
@@ -238,11 +240,12 @@ function makeSubject(sbj, size){
 
 
 function f_DueDtDtl_view (objtNo, objtTp, saleTp, publicYn, activeTp) {
-	$("#objtNo").val(objtNo);
-	$("#objtTp").val(objtTp);
-	$("#saleTp").val(saleTp);
-	$("#publicYn").val(publicYn);
-	$("#activeTp").val(activeTp);
+	
+	$(".frm_item #objtNo").val(objtNo);
+	$(".frm_item #objtTp").val(objtTp);
+	$(".frm_item #saleTp").val(saleTp);
+	$(".frm_item #publicYn").val(publicYn);
+	$(".frm_item #activeTp").val(activeTp);
 	
 	var url = "";
 	switch (objtTp) {
@@ -266,9 +269,7 @@ function f_DueDtDtl_view (objtNo, objtTp, saleTp, publicYn, activeTp) {
 			break;
 		
 	}
-	$("#viewUrl").val(url);
-	
-	alert(objtNo +"/" + objtTp + "/" + saleTp + "/" + publicYn + "/" + activeTp + "/" + url);
+	$(".frm_item #viewUrl").val(url);
 	
 	var frm = $('#frm_item')[0];
 	frm.action = '/objtDtlView.do';

@@ -89,7 +89,7 @@
 			</table>
 	</tr>
 </table>
-<form id="frm_item" name="frm_item">
+<form id="frm_item" name="frm_item" class="frm_item">
 	<input type="hidden" name="custId" id="custId"/>
 	<input type="hidden" name="objtNo" id="objtNo"/>
 	<input type="hidden" name="viewUrl" id="viewUrl" />

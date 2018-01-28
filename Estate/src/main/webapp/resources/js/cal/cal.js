@@ -205,7 +205,6 @@ function f_objt_detail() {
 			break;
 		
 	}
-	alert (url);
 	$(".workForm #viewUrl").val(url);
 	
 	var frm = $('#workForm')[0];
