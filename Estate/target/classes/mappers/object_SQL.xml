@@ -54,6 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , addrDetail
 				  , positionX
 				  , positionY
+				  , sameHouseholdNum
+				  , frontDoorType
 				  )
         	values ( 
         			#{objtNo}
@@ -100,6 +102,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{addrDetail}
 				  , #{positionX}
 				  , #{positionY}
+				  , #{sameHouseholdNum}
+				  , #{frontDoorType}
         	);
        ]]>
 		
@@ -147,6 +151,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	 , addrDetail = #{addrDetail}
 	  	 , positionX = #{positionX}
 	  	 , positionY = #{positionY}
+	  	 , sameHouseholdNum = #{sameHouseholdNum}
+	  	 , frontDoorType = #{frontDoorType}
      WHERE objtNo = #{objtNo}
        AND objtTp = #{objtTp}
     </update>
@@ -400,6 +406,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	 , obj.addrDetail
 	  	 , obj.positionX
 	  	 , obj.positionY
+	  	 , obj.sameHouseholdNum
+	  	 , obj.frontDoorType
 	  FROM saleobject obj
 		inner join member m
      		on  obj.frstRegUser = m.mbrId
@@ -611,6 +619,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	 , obj.addrDetail
 	  	 , obj.positionX
 	  	 , obj.positionY
+	  	 , obj.sameHouseholdNum
+	  	 , obj.frontDoorType
 	   FROM saleobject obj
 	     left outer join customer cust
          on obj.custId = cust.custId

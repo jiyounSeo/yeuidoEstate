@@ -75,8 +75,17 @@
 				<input type="text" id="monthlyAmt" name="monthlyAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> / 관리비
 				<input type="text" id="manageAmt" name="manageAmt" onkeyup="inputNumberFormat(this)" maxLength="10" style="text-align:right;width:87px"/> 
 			</td>
+		</tr>		
+		<tr>
+			<td class="title">해당면적 세대수</td>
+			<td colspan="2">
+				<input type="number" id="sameHouseholdNum" name="sameHouseholdNum" min="0" max="99" oninput="if(this.value.length>3) this.value=this.value.slice(0,2)" style="width:140px" > 세대
+			</td>
+			<td class="title">현관구조</td>
+			<td>
+				<input type="text" id="frontDoorType" name="frontDoorType" style="width:200px" >
+			</td>
 		</tr>
-		
 		<tr>
 			<td class="title">인테리어유무</td>
 			<td colspan="2">				

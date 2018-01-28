@@ -74,6 +74,16 @@
 			<td><input type="text" id="dueDt" name="dueDt" readonly="true" class="datepicker" style="width:140px"><img src="./resources/images/icon_cal.jpg"></td>
 		</tr>
 		<tr>
+			<td class="title">해당면적 세대수</td>
+			<td colspan="2">
+				<input type="number" id="sameHouseholdNum" name="sameHouseholdNum" min="0" max="99" oninput="if(this.value.length>3) this.value=this.value.slice(0,2)" style="width:140px" > 세대
+			</td>
+			<td class="title">현관구조</td>
+			<td>
+				<input type="text" id="frontDoorType" name="frontDoorType" style="width:200px" >
+			</td>
+		</tr>
+		<tr>
 			<td class="title">방 수 / 욕실 수</td>
 			<td colspan="4">
 				<input type="number" id="roomCnt" name="roomCnt" min="0" max="99" oninput="if(this.value.length>3) this.value=this.value.slice(0,2)" style="width:140px" > 개 / 

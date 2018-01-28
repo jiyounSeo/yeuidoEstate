@@ -46,6 +46,16 @@
 			<td><c:if test="${dueDt eq null }">--</c:if><c:if test="${dueDt ne null }">${dueDt}</c:if><!-- 만기일 --></td>
 		</tr>
 		<tr>
+			<td class="title">해당면적 세대수</td>
+			<td colspan="2">
+				<c:if test="${sameHouseholdNum eq '0' || sameHouseholdNum eq null || sameHouseholdNum eq ''}">--</c:if><c:if test="${sameHouseholdNum ne '0' && sameHouseholdNum ne null && sameHouseholdNum ne ''}">${sameHouseholdNum} 세대</c:if>
+			</td>
+			<td class="title">현관구조</td>
+			<td>
+				<c:if test="${frontDoorType eq '' || frontDoorType eq null}">--</c:if><c:if test="${frontDoorType ne '' && frontDoorType ne null}">${frontDoorType}</c:if>
+			</td>
+		</tr>
+		<tr>
 			<td class="title">방 수 / 욕실 수</td>
 			<td colspan="2">
 				<!-- 방 --><c:if test="${roomCnt eq '0' || roomCnt eq null}">--</c:if><c:if test="${roomCnt ne '0' && roomCnt ne null}">${roomCnt} 개 </c:if> / 

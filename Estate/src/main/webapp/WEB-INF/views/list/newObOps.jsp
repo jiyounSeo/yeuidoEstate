@@ -84,6 +84,16 @@
 			</td>
 		</tr>
 		<tr>
+			<td class="title">해당면적 세대수</td>
+			<td colspan="2">
+				<input type="number" id="sameHouseholdNum" name="sameHouseholdNum" min="0" max="99" oninput="if(this.value.length>3) this.value=this.value.slice(0,2)" style="width:140px" > 세대
+			</td>
+			<td class="title">현관구조</td>
+			<td>
+				<input type="text" id="frontDoorType" name="frontDoorType" style="width:200px" >
+			</td>
+		</tr>
+		<tr>
 			<td class="title_ess">명도(*)</td>
 			<td colspan="4">
 			  <input type="radio" id="availableTp1" name="availableTp" value="AD001" onChange="f_disableFieldByRadioBtn(this.value)" /><label for="availableTp1">정상</label>

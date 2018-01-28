@@ -165,6 +165,8 @@ function f_setting_text(result) {
 	$("#jibunAddr").val(result.jibunAddr);
 	$("#roadAddrPart1").val(result.roadAddrPart1);
 	$("#addrDetail").val(result.addrDetail);
+	$("#sameHouseholdNum").val(result.sameHouseholdNum);
+	$("#frontDoorType").val(result.frontDoorType);
 		
 }
 
