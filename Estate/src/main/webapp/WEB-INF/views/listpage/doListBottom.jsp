@@ -4,6 +4,9 @@
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 <script type="text/javascript" src="./resources/js/list/doList.js"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
+<style>
+input:disabled {background:#ebebe4;}
+</style>
 	<table class="new_page_table">
 		<tr>
 			<td class="title3">작업 &nbsp;입력<br><p>
@@ -37,6 +40,18 @@
 				</td>
 			</tr>
 			<tr>
+				<td height="60px;" style="text-align:right;vertical-align:middle;padding-right:30px;" colspan="2">
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td style="text-align:right;padding-right:10px;"><input type="checkbox" id="endDateYn" name="endDateYn" onClick="f_active_date();"/><label for="endDateYn">종료일 설정</label></td>
+							<td width="140px;"><input type="text" id="endDt" name="endDt" class="datepicker" style="width:140px;" readonly="readonly" disabled="disabled"></td>
+						</tr>
+					</table>
+					
+					
+				</td>
+			</tr>
+			<tr>	
 				<td class="btn" colspan="2">
 					<a href="#" onClick="f_closeAll()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="#" id="popOkAdd" ><img src="./resources/images/btn_ok.jpg" onClick="f_work_save()"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -47,7 +62,7 @@
 		<input type="hidden" name="workNo" id="workNo">
 		
 	</form>
-</div>
+	</div>
 	
 <script id="workListTemplte" type="text/x-jquery-tmpl">	
 {{each workList}}		

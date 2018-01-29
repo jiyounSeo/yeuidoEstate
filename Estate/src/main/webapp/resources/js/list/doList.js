@@ -1,5 +1,22 @@
 $(document).ready(function(){
+
 	f_workList_select();
+	
+	$( ".datepicker" ).datepicker({
+	    dateFormat: 'yy-mm-dd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    changeMonth: true,
+	    changeYear: true,
+	    yearSuffix: '년'
+	 });
+	
 });
 
 function f_addWork() {
@@ -13,6 +30,12 @@ function f_modifyWork(index) {
 	$("#workNo").val(workList[index].workNo);
 	$("#workTitle").val(workList[index].workTitle);
 	$("#workContent").val(workList[index].workContent);
+	$("#endDt").val(workList[index].endDt);
+	
+	if(workList[index].endDateYn == 'Y'){
+		$("#endDateYn").attr("checked", "checked");
+		$("#endDt").attr('disabled', false);
+	}
 	$("#divAddWorkPopup").lightbox_me({centered: true});
 }
 
@@ -71,12 +94,37 @@ function f_work_save() {
 		return;
 	} 
 	
+	var endDt = $("#endDt").val();
+	var endDtYn = $("#endDateYn").is(":checked")? 'Y' : 'N';
+	
+	if(endDtYn == 'Y'){
+		var now = new Date(); 
+		var year= now.getFullYear(); 
+		var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1); 
+		var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate(); 
+		var todayDt = year + '-' + mon + '-' + day;
+		
+		console.log(todayDt + "/" + endDt);
+		if(endDt == '') {
+			alert("종료일을 선택해 주세요");
+			$("#endDt").focus();
+			return;
+		}
+		else if(endDt < todayDt) {
+			alert("종료일은 오늘보다 이전 날짜로 선택할 수 없습니다");
+			$("#endDt").focus();
+			return;
+		}
+	}
+	
 	var param = {
 		workNo : $("#workNo").val()
 		, workContent : $("#workContent").val()
 		, workTitle : $("#workTitle").val()
 		, objtNo : $("#objtNo").val()
 		, custId : $("#custId").val()
+		, endDateYn : endDtYn
+		, endDt : endDt
 	}
 	
 	$.ajax({
@@ -115,4 +163,16 @@ function f_delete_work(index)
 
 function f_closeAll(){
 	$("#divAddWorkPopup").trigger('close');  	
+}
+
+function f_active_date() {
+	
+	var isChecked = $("#endDateYn").is(":checked");
+	if(isChecked){
+		$("#endDt").attr('disabled', false);
+	} else {
+		$("#endDt").attr('disabled', true);
+		$("#endDt").val('');
+	}
+	
 }

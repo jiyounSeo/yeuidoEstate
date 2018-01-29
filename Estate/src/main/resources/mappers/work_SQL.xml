@@ -20,6 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       </if>
 			       , workTitle
 			       , workContent
+			       , endDateYn
+			       , endDt
 			       , frstRegDt
 			       , frstRegUser
 			       , modfRegDt
@@ -35,6 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       </if>
 			      , #{workTitle}
 			      , #{workContent}
+			      , #{endDateYn}
+			      , CASE WHEN #{endDt} = '' THEN NULL ELSE #{endDt} END
 				  , now()
 				  , #{user.mbrId}  <!-- session값 가져오기 -->
 				  , now()
@@ -49,6 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , objtNo
 	     , workTitle
 	     , workContent
+		 , endDateYn
+		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
@@ -64,6 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , objtNo
 	     , workTitle
 	     , workContent
+		 , endDateYn
+		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
@@ -95,6 +103,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    UPDATE workdoc
 	       SET workTitle = #{workTitle}
 	         , workContent = #{workContent}
+			 , endDateYn = #{endDateYn}
+			 , endDt = (CASE WHEN #{endDt} = '' THEN NULL ELSE #{endDt} END) 
 			 , modfRegDt = now()
 			 , modfRegUser = #{user.mbrId}
 	    WHERE workNo = #{workNo}
@@ -232,6 +242,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , objtNo
 	     , workTitle
 	     , workContent
+		 , endDateYn
+		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
@@ -267,6 +279,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , objtNo
 	     , workTitle
 	     , workContent
+		 , endDateYn
+		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser

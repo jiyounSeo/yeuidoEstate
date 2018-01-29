@@ -574,7 +574,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 , if ( isnull(obj.addrDetail), b.addrDetail, obj.addrDetail) addrDetail 
 	 	 , if ( isnull(obj.positionX), b.positionX, obj.positionX) positionX 
 	 	 , if ( isnull(obj.positionY), b.positionY, obj.positionY) positionY 
-	 	 , (CASE WHEN #{user.estateCd} = (SELECT estateCd FROM member m WHERE m.mbrId = obj.frstRegUser ) THEN 'Y' ELSE 'N' END) workListYn
+	 	 , (CASE WHEN (#{user.estateCd} = (SELECT estateCd FROM member m WHERE m.mbrId = obj.frstRegUser) or #{user.mbrTp} = 'MT004') THEN 'Y' ELSE 'N' END) workListYn
 	 	 
 	  FROM saleobject obj
 	     left outer join building b
