@@ -57,6 +57,7 @@ function f_objtCombo_select() {
 	$.ajax({
 		  url : "/selectBuildingCombo.go",
 		  type: "post",
+		  async: false,
 		  data : param,
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 

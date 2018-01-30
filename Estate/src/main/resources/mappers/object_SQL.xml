@@ -282,15 +282,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   AND obj.frstRegUser = #{user.mbrId}
 	   </if>
 	   <if test="pageNm eq 'total'">
-	   <if test="activeTp eq 'AT001'">
-		AND obj.activeTp = 'AT001'
-	   </if>
-	   <if test="activeTp eq 'AT002'">
-	   	AND obj.activeTp = 'AT002'
-	   </if>
-	   <if test="activeTp eq 'AT003'">
-	   	AND obj.activeTp = 'AT003'
-	   </if>
+	   		<if test=" activeTp1 != null or activeTp2 != null or activeTp3 != null">
+	   			AND obj.activeTp IN
+	   			<foreach collection="activeTpList" item="item" separator="," open="(" close=")">
+	    	  	#{item} 
+		     	</foreach>
+	   		</if>		
 	   AND objtNo in ( 
 				-- 1. 활성+공동인 물건은 누가 등록했든 다 보여야함
 				SELECT objtNo
@@ -419,16 +416,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   AND obj.frstRegUser = #{user.mbrId}
 	   </if>
 	   <if test="pageNm eq 'total'">
-	   <if test="activeTp eq 'AT001'">
-		AND obj.activeTp = 'AT001'
-	   </if>
-	   <if test="activeTp eq 'AT002'">
-	   	AND obj.activeTp = 'AT002'
-	   </if>
-	   <if test="activeTp eq 'AT003'">
-	   	AND obj.activeTp = 'AT003'
-	   </if>
-	   AND objtNo in ( 
+	   		<if test=" activeTp1 != null or activeTp2 != null or activeTp3 != null">
+	   			AND obj.activeTp IN
+	   			<foreach collection="activeTpList" item="item" separator="," open="(" close=")">
+	    	  	#{item} 
+		     	</foreach>
+	   		</if>		
+	  AND objtNo in ( 
 				-- 1. 활성+공동인 물건은 누가 등록했든 다 보여야함
 				SELECT objtNo
 				  FROM saleobject objt1
@@ -632,11 +626,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test="objtNm != null and objtNm != '' ">
 	   and obj.objtNm like concat('%',#{objtNm},'%')
 	   </if>
-	   <if test="tel1 != null and tel1 != '' ">
-	   and cust.custTel1 = #{tel1}
-	   and cust.custTel2 = #{tel2}
-	   and cust.custTel3 = #{tel3}
-	   </if>
+	   and concat(cust.custTel1, cust.custTel2, cust.custTel3) like concat('%',#{tel1},#{tel2},#{tel3},'%')
 	   <if test="mbrNm != null and mbrNm != '' ">
 	   and m.mbrNm like concat('%',#{mbrNm},'%')
 	   </if>
@@ -654,7 +644,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   	AND obj.activeTp = 'AT003'
 	   </if>
 	   AND objtNo in ( 
-				-- 1. 활성+공동인 물건은 누가 등록했든 다 보여야함
 				SELECT objtNo
 				  FROM saleobject objt1
 				WHERE publicYn = 'Y'

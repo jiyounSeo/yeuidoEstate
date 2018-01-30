@@ -1,5 +1,7 @@
 package com.yeouido.estate.object.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +72,19 @@ public class ObjectServiceImpl  implements ObjectService
    /* 물건갯수 */
    @Override
    public List<Object> selectObjectCnt(Map map) throws Exception {
+	   if (("total").equals(map.get("pageNm"))) {
+		   List list = new ArrayList<String>();
+		   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+			   list.add(map.get("activeTp1"));
+		   }
+		   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+			   list.add(map.get("activeTp2"));
+		   }
+		   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+			   list.add(map.get("activeTp3"));
+		   }
+		   map.put("activeTpList", list);
+	   }
 	   return objectDAO.selectObjectCnt(map);
    }
    
@@ -85,11 +100,25 @@ public class ObjectServiceImpl  implements ObjectService
    /* 물건리스트 */
    @Override
    public List<Map<String,Object>> selectObjectList(Map map) throws Exception {
+	   if (("total").equals(map.get("pageNm"))) {
+		   List list = new ArrayList<String>();
+		   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+			   list.add(map.get("activeTp1"));
+		   }
+		   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+			   list.add(map.get("activeTp2"));
+		   }
+		   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+			   list.add(map.get("activeTp3"));
+		   }
+		   map.put("activeTpList", list);
+	   }
 	   return objectDAO.selectObjectList(map);
    }
    
    @Override
    public List<Map<String,Object>> selectTotalSearch(Map map) throws Exception {
+	   
 	   return objectDAO.selectTotalSearch(map);
    }
 

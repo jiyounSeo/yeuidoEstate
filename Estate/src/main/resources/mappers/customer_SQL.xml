@@ -235,6 +235,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									</if>
 				 				)
 	   </if>
+	 order by c.frstRegDt DESC
 	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	

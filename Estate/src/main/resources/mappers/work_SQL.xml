@@ -135,11 +135,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , CAST(depositAmt AS signed integer) depositAmt
 	     , CAST(monthlyAmt AS signed integer) monthlyAmt
 	  FROM saleobject o
-	     , building b
-	     , customer c
+	     left outer join customer c
+         on o.custId = c.custId
+	 	 left outer join building b
+         on  o.buildCd  = b.buildCd
 	 WHERE 1=1
-	   AND o.buildCd = b.buildCd
-	   AND o.custId = c.custId
 	   AND o.objtNo not in (select objtNo from interobject where custId = #{custId})
 	   <if test=" objtNm != null and !objtNm.equals('')">
        AND o.objtNm like '%'||#{objtNm}||'%'
@@ -171,15 +171,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test=" custNm != null and !custNm.equals('')">
        AND c.custNm = #{custNm}
 	   </if>
-	   <if test=" custTel1 != null and !custTel1.equals('')">
-       AND c.custTel1 = #{custTel1} 
-	   </if>
-	   <if test=" custTel2 != null and !custTel2.equals('')">
-       AND c.custTel2 = #{custTel2} 
-	   </if>
-	   <if test=" custTel3 != null and !custTel3.equals('')">
-       AND c.custTel3 = #{custTel3} 
-    	</if>
+	   AND CONCAT(c.custTel1,c.custTel2,c.custTel3) like CONCAT('%',#{custTel1},#{custTel2},#{custTel3},'%')
+	   
     </select>
     
    <insert id="insertInterObject" parameterType="java.util.HashMap">
