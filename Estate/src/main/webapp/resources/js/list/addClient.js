@@ -29,9 +29,11 @@ function f_customerDtl_select() {
 			  
 			  var tmp = result.reqContent;
 			  var changed = tmp.replace(/\n/g, '<br>'); 
-			  $("#reqContent").empty();
-			  $("#reqContent").append(changed);
-				
+			  $("#reqContentView").empty();
+			  $("#reqContentView").append(changed);
+			  
+			  $("#budAmtView").empty();
+			  $("#budAmtView").append( comma(result.budAmt) + "만원");
 			  f_setting_text(result);
 		  }
 	});

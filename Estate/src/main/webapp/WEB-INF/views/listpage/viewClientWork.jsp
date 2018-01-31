@@ -38,11 +38,11 @@
 		</tr>
 		<tr>
 			<td class="title">예산</td>
-			<td colspan="4">${budAmt}만원</td>
+			<td colspan="4"><div id="budAmtView" name="budAmtView">${budAmt}만원</div></td>
 		</tr>
 		<tr>
 			<td class="title">의뢰내용</td>
-			<td colspan="4"><!--  --><div style="padding:15px 5px 15px 5px;" id="reqContent" name="reqContent"></div></td>
+			<td colspan="4"><!--  --><div style="padding:15px 5px 15px 5px;" id="reqContentView" name="reqContentView"></div></td>
 		</tr>
 	</table>
 	<%@ include file="/WEB-INF/views/listpage/doListBottom.jsp" %> 	
