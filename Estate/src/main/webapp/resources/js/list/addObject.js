@@ -191,6 +191,10 @@ $(document).on("keyup", "input[id*='Tel']", function() {
 	
 });
 
+function f_removeComma(str){
+	return str.replace(/,/g,"");
+}
+
 function f_saleobject_save() {
 	var objtForm = "";
 	switch ($("#objtTp").val()) {
@@ -215,6 +219,25 @@ function f_saleobject_save() {
 			
 	}
 
+	// 콤마제거
+	if($("#objtTp").val() != "OT006"){
+		$("#bargainAmt").val( f_removeComma($("#bargainAmt").val()));
+		$("#depositAmt").val( f_removeComma($("#depositAmt").val()));
+		$("#monthlyAmt").val( f_removeComma($("#monthlyAmt").val()));		
+	} else {
+		$("#parcelAmt").val( f_removeComma($("#parcelAmt").val()));
+		$("#premiumAmt").val( f_removeComma($("#premiumAmt").val()));
+	}
+
+	if($("#objtTp").val() == "OT003"){
+		$("#manageAmt").val( f_removeComma($("#manageAmt").val()));	
+	}
+	
+	if($("#objtTp").val() == "OT002"){
+		$("#manageAmt").val( f_removeComma($("#manageAmt").val()));	
+		$("#rightAmt").val( f_removeComma($("#rightAmt").val()));	
+	}
+	
 	oEditors.getById["memo"].exec("UPDATE_CONTENTS_FIELD", []);	
 	var param = $("#"+objtForm).serialize();
 
@@ -257,6 +280,7 @@ function f_saleobject_save() {
 				$("#bargainAmt").focus();
 				return; 
 			}
+						
 		} else if ( selectSaleTp == "ST002") { //전세
 			if ( $("#depositAmt").val() == "") {
 				alert ("보증금은 필수입력 값입니다.");
@@ -323,7 +347,9 @@ function f_saleobject_save() {
 			$("#pageNm").val("objtActiveN");
 		}
 	}
-
+	
+	
+	
 	if ( $("#objtTp").val() != "OT002" && $("#objtTp").val() != "OT003"  ) {
 		var index = $("#buildCd option").index($("#buildCd option:selected"));
 		if(index == '' || index == null || index == -1){

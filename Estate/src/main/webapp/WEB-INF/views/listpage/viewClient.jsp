@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td class="title">의뢰내용</td>
-			<td colspan="4"><!--  -->${reqContent}</td>
+			<td colspan="4"><!--  --><div style="padding:15px 5px 15px 5px;" id="reqContent" name="reqContent"></div></td>
 		</tr>		
 	</table>
 <br><br>

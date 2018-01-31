@@ -253,7 +253,7 @@ function f_objectList_select(objtTp, saleTp){
 		  
 		  if (result.objtList.length != 0) {
 			  objtList = result.objtList;
-			  console.log (objtList);
+			  //console.log (objtList);
 			  $.each (result.objtList, function(index) {
 				  var bargainAmt = result.objtList[index].bargainAmt;
 				  result.objtList[index].bargainAmt = comma(uncomma(bargainAmt)); 

@@ -25,7 +25,13 @@ function f_customerDtl_select() {
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
-			  var result = data.custInfo;
+			  var result = data.custInfo;		
+			  
+			  var tmp = result.reqContent;
+			  var changed = tmp.replace(/\n/g, '<br>'); 
+			  $("#reqContent").empty();
+			  $("#reqContent").append(changed);
+				
 			  f_setting_text(result);
 		  }
 	});

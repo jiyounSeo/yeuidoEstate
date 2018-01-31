@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , frstRegUser
 			       , modfRegDt
 			       , modfRegUser
+			       , scheduledDt
 			       )
 			values ( #{workNo}
 				  , #{user.mbrId}  <!-- session값 가져오기 -->
@@ -43,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{user.mbrId}  <!-- session값 가져오기 -->
 				  , now()
 				  , #{user.mbrId}  <!-- session값 가져오기 -->
+			      , CASE WHEN #{scheduledDt} = '' THEN now() ELSE #{scheduledDt} END				  
 			)            			
     </insert>
     
@@ -58,6 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
+		 , DATE_FORMAT(scheduledDt, '%Y-%m-%d') as scheduledDt
 	     FROM workdoc w
 		 WHERE 1=1
 		 AND workNo=#{selectedWorkNo}
@@ -75,6 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
+	     , DATE_FORMAT(scheduledDt, '%Y-%m-%d') as scheduledDt
 	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
 	  FROM workdoc w
 	 WHERE 1=1
@@ -107,12 +111,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 , endDt = (CASE WHEN #{endDt} = '' THEN NULL ELSE #{endDt} END) 
 			 , modfRegDt = now()
 			 , modfRegUser = #{user.mbrId}
+			 , scheduledDt = (CASE WHEN #{scheduledDt} = '' THEN frstRegDt ELSE #{scheduledDt} END) 
 	    WHERE workNo = #{workNo}
     </update>
 	
 	<delete id="deleteWork" parameterType="java.util.HashMap" >
-	    DELETE FROM workdoc 
-	    WHERE workNo = #{workNo}
+	    DELETE w, dir
+ 		FROM workdoc AS w
+ 			LEFT JOIN direction AS dir ON dir.workNo = w.workNo 
+ 			WHERE w.workNo = #{workNo}
     </delete>
     
     <select id="searchObjtList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -135,11 +142,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , CAST(depositAmt AS signed integer) depositAmt
 	     , CAST(monthlyAmt AS signed integer) monthlyAmt
 	  FROM saleobject o
-	     , building b
-	     , customer c
+	     left outer join customer c
+         on o.custId = c.custId
+	 	 left outer join building b
+         on  o.buildCd  = b.buildCd
 	 WHERE 1=1
-	   AND o.buildCd = b.buildCd
-	   AND o.custId = c.custId
 	   AND o.objtNo not in (select objtNo from interobject where custId = #{custId})
 	   <if test=" objtNm != null and !objtNm.equals('')">
        AND o.objtNm like '%'||#{objtNm}||'%'
@@ -171,15 +178,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test=" custNm != null and !custNm.equals('')">
        AND c.custNm = #{custNm}
 	   </if>
-	   <if test=" custTel1 != null and !custTel1.equals('')">
-       AND c.custTel1 = #{custTel1} 
-	   </if>
-	   <if test=" custTel2 != null and !custTel2.equals('')">
-       AND c.custTel2 = #{custTel2} 
-	   </if>
-	   <if test=" custTel3 != null and !custTel3.equals('')">
-       AND c.custTel3 = #{custTel3} 
-    	</if>
+	   AND CONCAT(c.custTel1,c.custTel2,c.custTel3) like CONCAT('%',#{custTel1},#{custTel2},#{custTel3},'%')
+	   
     </select>
     
    <insert id="insertInterObject" parameterType="java.util.HashMap">
@@ -247,9 +247,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d %I:%i:%s') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
+	     , DATE_FORMAT(scheduledDt, '%Y-%m-%d') as scheduledDt
 	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
 	  FROM workdoc w
-	 WHERE DATE_FORMAT(frstRegDt, '%Y-%m-%d') = #{selectedDate}
+	 WHERE DATE_FORMAT(scheduledDt, '%Y-%m-%d') = #{selectedDate}
 	   AND frstRegUser in (    		<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1
@@ -284,9 +285,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
+	     , DATE_FORMAT(scheduledDt, '%Y-%m-%d') as scheduledDt
 	     , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
 	     , (SELECT COUNT(*) FROM workdoc 
-								WHERE DATE_FORMAT(frstRegDt, '%Y-%m-%d') = DATE_FORMAT(w.frstRegDt, '%Y-%m-%d')
+								WHERE DATE_FORMAT(scheduledDt, '%Y-%m-%d') = DATE_FORMAT(w.scheduledDt, '%Y-%m-%d')
 	  							AND frstRegUser in (    		
 	  								<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
@@ -307,7 +309,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 				AND objtNo != ''
                                 ) objCnt
 	     , (SELECT COUNT(*) FROM workdoc 
-								WHERE DATE_FORMAT(frstRegDt, '%Y-%m-%d') = DATE_FORMAT(w.frstRegDt, '%Y-%m-%d')
+								WHERE DATE_FORMAT(scheduledDt, '%Y-%m-%d') = DATE_FORMAT(w.scheduledDt, '%Y-%m-%d')
 	  							AND frstRegUser in (    		
 	  								<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
@@ -328,7 +330,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 				AND custId != ''
                                 ) custCnt 
 	  FROM workdoc w
-	  WHERE frstRegDt like #{selectedMonth}
+	  WHERE scheduledDt like #{selectedMonth}
 	  AND frstRegUser in (    		<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1
@@ -347,4 +349,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 				)
      order by frstRegDt desc    
 	</select>	
+	
+		<!-- 종료일이 설정된 작업내역 리스트 -->
+    <select id="selectWorkListWithEndDate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT workNo
+		     , mbrId
+		     , custId
+		     , objtNo
+		     , workTitle
+		     , workContent
+			 , endDateYn
+			 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
+		     , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+		     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
+		     , frstRegUser
+		     , DATE_FORMAT(scheduledDt, '%Y-%m-%d') as scheduledDt
+             , (TO_DAYS(now()) - TO_DAYS(scheduledDt)) as intvDay
+		  FROM workdoc w
+		  WHERE 1=1
+		  and DATE_FORMAT(scheduledDt, '%Y-%m-%d') >= now()
+		  AND frstRegUser in (    		<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003')
+										  AND estateCd = #{user.estateCd}
+									</if>
+									<if test="user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrId = #{user.mbrId}
+									</if>
+				 				)
+		  order by scheduledDt desc   
+	</select>   
+	
 </mapper>

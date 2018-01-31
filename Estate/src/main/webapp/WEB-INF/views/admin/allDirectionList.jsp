@@ -13,19 +13,21 @@
 	<table class="direction">
 		<tr class="title">
 		<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 -->			
-			<td width="10%">지시자</td>
-			<td width="15%">지시날짜</td>
+			<td width="8%">지시자</td>
+			<td width="12%">지시날짜</td>
 			<td width="55%">지시사항</td>
+			<td width="10%">종료일</td>
 			<td width="5%">완료여부</td>
-			<td width="15%">완료날짜</td>
+			<td width="10%">완료날짜</td>
 		</c:if>
 		<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 -->
-			<td width="10%">지시자</td>
-			<td width="10%">수행자</td>
-			<td width="45%">지시사항</td>
-			<td width="15%">지시날짜</td>
+			<td width="8%">지시자</td>
+			<td width="8%">수행자</td>
+			<td width="49%">지시사항</td>
+			<td width="10%">지시날짜</td>
+			<td width="10%">종료일</td>
 			<td width="5%">완료여부</td>
-			<td width="15%">완료날짜</td>
+			<td width="10%">완료날짜</td>
 		</c:if>
 		</tr>
 		<tbody id="dirTbody">
@@ -109,6 +111,13 @@
 		<td>{{html $value.targetUserNm}}</td>
 		<td style="text-align:left;padding-left:10px;">{{html $value.dirContent}}</td>
 		<td>{{html $value.regDate}}</td>
+
+		{{if $value.endDateYn == "Y" }}
+			<td>{{html $value.endDt}} {{if $value.isDone == "N" }} (D{{html $value.intvDay}}) {{/if}}</td>
+		{{else}}
+			<td>---</td>
+		{{/if}}
+
 		{{if $value.isDone == "Y"}}
 			<td><img src="./resources/images/icon_done.gif"></td>
 		{{else}}
@@ -130,6 +139,13 @@
 		<td>{{html $value.regUserNm}}</td>
 		<td>{{html $value.regDate}}</td>
 		<td style="text-align:left;padding-left:10px;">{{html $value.dirContent}}</td>
+
+		{{if $value.endDateYn == "Y" }}
+			<td>{{html $value.endDt}} {{if $value.isDone == "N" }} (D{{html $value.intvDay}}) {{/if}}</td>
+		{{else}}
+			<td>---</td>
+		{{/if}}
+
 		{{if $value.isDone == "Y"}}
 			<td><img src="./resources/images/icon_done.gif"></td>
 		{{else}}

@@ -25,6 +25,19 @@ function f_loginByEnterKey(event){
 }
 
 function f_login() {
+	
+	if($('#loginId').val() == '' || $('#loginId').val() == null) {
+		alert ("아이디를 입력해주세요");
+		$("#loginId").focus();
+		return;
+	}
+	
+	if($('#pw').val() == '' || $('#pw').val() == null) {
+		alert ("비밀번호를 입력해주세요");
+		$("#pw").focus();
+		return;
+	}
+	
 	$.ajax({
 	  url : "/loginMember.go",
 	  type: "post",

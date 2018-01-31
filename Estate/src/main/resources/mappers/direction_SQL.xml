@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			       , regDate
 			       , regUser
 			       , targetUser
+			       , endDateYn
+			       , endDt
 			       )
 			values ( #{dirNo}
 				  , #{workNo}
@@ -23,6 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , now()
 				  , #{user.mbrId}  <!-- session값 가져오기 -->
 				  , (select mbrId from workdoc w where w.workNo=#{workNo})
+			      , #{endDateYn}
+			      , CASE WHEN #{endDt} = '' THEN NULL ELSE #{endDt} END
 			)            			
     </insert>
     
@@ -39,6 +43,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (SELECT COUNT(*) FROM direction) totalCnt
          , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
          , (select workContent from workdoc w where w.workNo = d.workNo) workContent
+		 , endDateYn
+		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
+         , (TO_DAYS(now()) - TO_DAYS(endDt)) as intvDay
 	  FROM direction d
 	 WHERE 1=1
 	 AND regUser=#{user.mbrId}
@@ -59,6 +66,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (SELECT COUNT(*) FROM direction) totalCnt
          , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
          , (select workContent from workdoc w where w.workNo = d.workNo) workContent
+		 , endDateYn
+		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
+         , (TO_DAYS(now()) - TO_DAYS(endDt)) as intvDay
 	  FROM direction d
 	 WHERE 1=1
 	 AND targetUser=#{user.mbrId}
@@ -77,6 +87,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , isDone
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as doneDate
+		 , d.endDateYn
+		 , DATE_FORMAT(d.endDt, '%Y-%m-%d') as endDt
+         , (TO_DAYS(now()) - TO_DAYS(d.endDt)) as intvDay
 	  FROM direction d
 	  	 , workdoc w
 	 WHERE 1=1
@@ -98,6 +111,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
          , (select workContent from workdoc w where w.workNo = d.workNo) workContent
 	     , isDone
+		 , endDateYn
+		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
+         , (TO_DAYS(now()) - TO_DAYS(endDt)) as intvDay
 	  FROM direction d
 	 WHERE 1=1
 	 <if test="user.mbrTp eq 'MT004' or user.mbrTp eq 'MT003'" >
@@ -124,6 +140,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , isDone
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as doneDate
+		 , d.endDateYn
+		 , DATE_FORMAT(d.endDt, '%Y-%m-%d') as endDt
+         , (TO_DAYS(now()) - TO_DAYS(d.endDt)) as intvDay
 	  FROM direction d
 	  	 , workdoc w
 	 WHERE 1=1
@@ -137,6 +156,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	       SET dirContent = #{dirContent}
 			 , regDate = now()
 			 , regUser = #{user.mbrId}
+			 , endDateYn = #{endDateYn}
+			 , endDt = (CASE WHEN #{endDt} = '' THEN NULL ELSE #{endDt} END) 
 	    WHERE dirNo = #{dirNo}
     </update>
 	
@@ -148,6 +169,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update  id="changeDoneState" parameterType="java.util.HashMap" >
 	    UPDATE direction
 	       SET isDone = #{isDone}
+	       , doneDate = (CASE WHEN #{isDone} = 'Y' THEN now() ELSE NULL END)
 	    WHERE dirNo = #{dirNo}
     </update>
 	   

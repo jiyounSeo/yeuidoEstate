@@ -2,7 +2,9 @@
 <script type="text/javascript" src="./resources/js/cal/clndr.js"></script>
 <script type="text/javascript" src="./resources/js/cal/cal.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
+
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
+
 <table width="1103px" cellpadding="0" cellspacing="0" border="0">
 	<tr>
 		<td>
@@ -61,7 +63,11 @@
 					<div id="todoCommentBox" style="width:90%;">
 						<table class="todoBox">
 							<tr>
-								<td width="85%"><textarea rows="5" cols="50" name="dirContent" id="dirContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea></td>
+								<td width="10%" valign="bottom" style="padding-bottom:5px;">
+									<input type="checkbox" id="endDateYn" name="endDateYn" onClick="f_active_frm();"/><label for="endDateYn">종료일 설정</label><br>
+									<input type="text" id="endDt" name="endDt" class="datepicker" style="width:110px;" readonly="readonly" disabled="disabled">
+								</td>
+								<td width="65%"><textarea rows="5" cols="50" name="dirContent" id="dirContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea></td>
 								<td width="15%"><a href="#"><img src="./resources/images/btn_write_todo.png" onClick="f_todo_save()"></a></td>						
 							</tr>
 						</table>

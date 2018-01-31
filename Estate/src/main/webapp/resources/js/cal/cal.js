@@ -11,7 +11,22 @@ var workList;
 var icon_done = "./resources/images/icon_done.gif";
 var icon_n_done = "./resources/images/icon_n_done.gif";
 	
-$(document).ready( function() {
+jQuery(document).ready( function() {
+	
+	jQuery( ".datepicker" ).datepicker({
+	    dateFormat: 'yy-mm-dd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    changeMonth: true,
+	    changeYear: true,
+	    yearSuffix: '년'
+	 });
 	
 	currentYear = Number(startYear);
 	currentMonth = Number(startMonth);
@@ -92,6 +107,18 @@ $(document).ready( function() {
 	selectCurrentEvent();     
 });
 
+function f_active_frm() {
+	
+	var isChecked = $("#endDateYn").is(":checked");
+	if(isChecked){
+		$("#endDt").attr('disabled', false);
+	} else {
+		$("#endDt").attr('disabled', true);
+		$("#endDt").val('');
+	}
+	
+}
+
 function selectCurrentEvent(){
 	
     var param = {
@@ -116,16 +143,17 @@ function selectCurrentEvent(){
 		{
 			var item = new Object();
 			item.title = workList[i].workTitle;
-			item.date = workList[i].frstRegDt;  			  
+			item.date = workList[i].scheduledDt;  			  
 			eventArray.push(item);
 		}
 		calendars.setEvents(eventArray);
 		
 		for(var i =0; i<workList.length; i++)
 		{
-			var day = workList[i].frstRegDt;
+			var day = workList[i].scheduledDt;
 			var dayArray = day.split('-');
-			var itemDivId = '#eventCnt'+parseInt(dayArray[2],10);
+			var itemDivId = '#eventCnt'+ parseInt(dayArray[2],10);
+			
 			
 			$(itemDivId).empty();
 			var htmlText = "";
@@ -208,7 +236,6 @@ function f_objt_detail() {
 	$(".workForm #viewUrl").val(url);
 	
 	var frm = $('#workForm')[0];
-	console.log (frm);
 	frm.action = '/objtDtlView.do';
 	frm.method = 'POST';
 	frm.submit();	
@@ -229,7 +256,6 @@ function f_modifyWork(index) {
 	$("#workNo").val(workList[index].workNo);
 	$("#objtNo").val(workList[index].objtNo);
 	$("#objtTp").val(workList[index].objtTp);
-	console.log (workList[index]);
 	$("#saleTp").val(workList[index].saleTp);
 	$("#custId").val(workList[index].custId);
 	
@@ -259,7 +285,6 @@ function f_modifyWorkAtTodoList(workNo) {
 	
 	$("#divAddWorkPopup").lightbox_me({centered: true});
 	
-	
 }
 
 function f_selectWorkItem(workNo){
@@ -274,9 +299,6 @@ function f_selectWorkItem(workNo){
 		  dataType : "json",
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
-
-			  console.log ("search success");
-			  console.log (data.workItem);
 			  
 			  var Item = data.workItem;
 			  console.log (Item);
@@ -330,7 +352,24 @@ function f_selectDirListAtWork(workNo){
 				  } else {
 					  htmlText += "<img src='" + icon_n_done  +"'></a>";
 				  }
-				  htmlText += "</td><td colspan='2' class='todoCont'> " + item.dirContent + "</td></tr>";
+				  if(item.endDateYn == "Y" && item.isDone == "N"){
+					  var color = "";
+					  var tmp = (item.intvDay.toString()).split('-');
+					  var sign;
+					  var interv;	
+					  if(tmp.length == 1){
+						  sign = '+';
+						  interv = item.intvDay;
+					  } else {
+						  sign = '-';
+						  interv = item.intvDay * -1;
+					  }
+					  if((interv <= 7 && sign == '-') || sign == '+') { color = "red"; }
+					  else { color = "#009e04"; }
+
+					  htmlText += "<br><span style='margin-top:10px;font-size:12px;'><b><font color='"+ color +"'> D" + item.intvDay;
+				  }
+				  htmlText += "</font></b></span></td><td colspan='2' class='todoCont'> " + item.dirContent + "</td></tr>";
 				  htmlText += "<tr><td align='right'>From : <b>" + item.regUserNm + "</b> 님 [ "+ item.regDate +"]</td>";
 				  htmlText += "<td align='right'>";
 				  
@@ -429,9 +468,36 @@ function f_work_save() {
 }
 
 function f_todo_save() {
+	
+
+	var endDt = $("#endDt").val();
+	var endDtChecked = $("#endDateYn").is(":checked")? 'Y' : 'N';
+	
+	if(endDtChecked == 'Y'){
+		
+		var now = new Date(); 
+		var year= now.getFullYear(); 
+		var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1); 
+		var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate(); 
+		var todayDt = year + '-' + mon + '-' + day;
+		
+		if(endDt == '') {
+			alert("종료일을 선택해 주세요");
+			$("#endDt").focus();
+			return;
+		}
+		else if(endDt < todayDt) {
+			alert("종료일은 오늘보다 이전 날짜로 선택할 수 없습니다");
+			$("#endDt").focus();
+			return;
+		}
+	} 
+	
 	var param = {
 			workNo : $("#workNo").val()
 			, dirContent : $("#dirContent").val()
+			, endDt: endDt
+			, endDateYn : endDtChecked
 		}
 		
 		$.ajax({
@@ -445,6 +511,10 @@ function f_todo_save() {
 					alert (data.message);
 					$("#dirContent").val("");
 					f_modifyWork($("#curSelectedItemIdx").val());
+					
+					$("#endDt").val('');
+					$("#endDateYn").attr("checked", false);
+					$("#endDt").attr('disabled', false);
 			  }
 			});
 }

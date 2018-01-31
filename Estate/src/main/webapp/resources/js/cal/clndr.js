@@ -44,7 +44,7 @@
             "<div class='clndr-control-button'>" +
                 "<span class='clndr-previous-button' style='vertical-align: middle;'><img src='./resources/images/cal_prev_btn.jpg'></span>" +
             "</div>" +
-            "<div class='month'><div class='clndr-today-button'><%= month %> <%= year %></div></div>" +
+            "<div class='month'><div class='clndr-today-button'><%=year %>년 <%=month %>월</div></div>" +
             "<div class='clndr-control-button rightalign'>" +
                 "<span class='clndr-next-button'><img src='./resources/images/cal_next_btn.jpg'></span>" +
             "</div>" +
@@ -64,7 +64,17 @@
                 "<% var d = j + i * 7; %>" +
                     "<td class='<%= days[d].classes %>'>" +
                         "<div class='day-contents'><%= days[d].day %></div>" +
-                        "<div class='day-events' id='eventCnt<%=days[d].day%>'></div>" +
+                        "<% if(i == 0 ){ %>" +
+                        	"<% if( days[d].day < 7) { %>" +
+                        		"<div class='day-events' id='eventCnt<%=days[d].day%>'></div>" +
+                        	"<% } %>" +
+                         "<% } else if(i == (numberOfRows-1) || i == (numberOfRows-2)) { %>" +
+	                         "<% if( days[d].day >15) { %>" +
+		                 		"<div class='day-events' id='eventCnt<%=days[d].day%>'></div>" +
+		                 	"<% } %>" +
+                         "<% } else { %>" +
+	                 		"<div class='day-events' id='eventCnt<%=days[d].day%>'></div>" +
+                         "<% } %>" +
                     "</td>" +
                 "<% } %>" +
                 "</tr>" +
@@ -72,6 +82,7 @@
             "</tbody>" +
         "</table>";
 
+    	
     // Defaults used throughout the application, see docs.
     var defaults = {
         events: [],
@@ -784,7 +795,7 @@
                 year: this.month.year(),
                 eventsThisInterval: null,
                 extras: this.options.extras,
-                month: this.month.format('MMMM'),
+                month: this.month.format('M'),
                 daysOfTheWeek: this.daysOfTheWeek,
                 eventsLastMonth: this.eventsLastMonth,
                 eventsNextMonth: this.eventsNextMonth,

@@ -228,6 +228,26 @@ public class WorkController {
 		    return mav;
 	}	
 	
+	/* 
+	 * 종료일이 남은 작업내역 리스트
+	 */
+	@RequestMapping(value= "/selectWorkListWithEndDate.do", method=RequestMethod.POST)
+	public ModelAndView selectWorkListWithEndDate( @RequestParam Map<String,Object> map, HttpSession session)   {  
+		
+			ModelAndView mav= new ModelAndView();
+			Paging paging = new Paging();
+	        			
+			List<Map<String,Object>> workListEndDt = new ArrayList<Map<String,Object>>();
+			try {
+				map.put("user",  session.getAttribute("user")); // map에 담기 해당쿼리에 #{user.mbrId} 이렇게 써주기
+				workListEndDt = workService.selectWorkListWithEndDate(map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		    mav.addObject("workListEndDt",workListEndDt);
+		    mav.setViewName("jsonView");
+		    return mav;
+	}		
 	/*
 	 *  상세 조회
 	 */	

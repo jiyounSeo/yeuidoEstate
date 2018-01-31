@@ -287,33 +287,33 @@
 
 <!-- 아파트 매매 -->
 <script id="saleTpTrTmpl1_ST001" type="text/x-jquery-tmpl">	
-		<td>등록일</td>
-		<td>단지명</td>
-		<td>평형</td>
-		<td>동</td>
-		<td>층</td>
-		<td>향</td>
-		<td>매매가</td>
-		<td>명도</td>
-		<td>온돌</td>
-		<td>상태</td>
-		<td>등록인</td>
-		<td>분류</td>
+		<td width="120px;">등록일</td>
+		<td width="560px;">단지명</td>
+		<td width="50px;">평형</td>
+		<td width="40px;">동</td>
+		<td width="40px;">층</td>
+		<td width="50px;">향</td>
+		<td width="90px;">매매가</td>
+		<td width="50px;">명도</td>
+		<td width="40px;">온돌</td>
+		<td width="70px;">상태</td>
+		<td width="290px;">등록인</td>
+		<td width="50px;">분류</td>
 </script>
 <!-- 아파트 전세 -->
 <script id="saleTpTrTmpl1_ST002" type="text/x-jquery-tmpl">	
-		<td>등록일</td>
-		<td>단지명</td>
-		<td>평형</td>
-		<td>동</td>
-		<td>층</td>
-		<td>향</td>
-		<td>보증금</td>
-		<td>명도</td>
-		<td>온돌</td>
-		<td>상태</td>
-		<td>등록인</td>
-		<td>분류</td>
+		<td width="120px;">등록일</td>
+		<td width="560px;">단지명</td>
+		<td width="50px;">평형</td>
+		<td width="40px;">동</td>
+		<td width="40px;">층</td>
+		<td width="50px;">향</td>
+		<td width="90px;">보증금</td>
+		<td width="50px;">명도</td>
+		<td width="40px;">온돌</td>
+		<td width="70px;">상태</td>
+		<td width="290px;">등록인</td>
+		<td width="50px;">분류</td>
 </script>
 <!-- 아파트 월세 -->
 <script id="saleTpTrTmpl1_ST003" type="text/x-jquery-tmpl">	
@@ -333,18 +333,18 @@
 </script>
 <!--  아파트 렌트 -->
 <script id="saleTpTrTmpl1_ST004" type="text/x-jquery-tmpl">	
-		<td>등록일</td>
-		<td>단지명</td>
-		<td>평형</td>
-		<td>동</td>
-		<td>층</td>
-		<td>향</td>
-		<td>렌트비(월)</td>
-		<td>명도</td>
-		<td>온돌</td>
-		<td>상태</td>
-		<td>등록인</td>
-		<td>분류</td>
+		<td width="120px;">등록일</td>
+		<td width="560px;">단지명</td>
+		<td width="50px;">평형</td>
+		<td width="40px;">동</td>
+		<td width="40px;">층</td>
+		<td width="50px;">향</td>
+		<td width="90px;">렌트비(월)</td>
+		<td width="50px;">명도</td>
+		<td width="40px;">온돌</td>
+		<td width="70px;">상태</td>
+		<td width="290px;">등록인</td>
+		<td width="50px;">분류</td>
 </script>
 
 <!-- 상가 매매 -->

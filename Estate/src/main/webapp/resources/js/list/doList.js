@@ -30,11 +30,15 @@ function f_modifyWork(index) {
 	$("#workNo").val(workList[index].workNo);
 	$("#workTitle").val(workList[index].workTitle);
 	$("#workContent").val(workList[index].workContent);
-	$("#endDt").val(workList[index].endDt);
 	
 	if(workList[index].endDateYn == 'Y'){
+		$("#endDt").val(workList[index].endDt);
 		$("#endDateYn").attr("checked", "checked");
 		$("#endDt").attr('disabled', false);
+	} else {
+		  $("#endDt").val('');
+		  $("#endDateYn").attr("checked", false);
+		  $("#endDt").attr('disabled', true);
 	}
 	$("#divAddWorkPopup").lightbox_me({centered: true});
 }
@@ -96,8 +100,11 @@ function f_work_save() {
 	
 	var endDt = $("#endDt").val();
 	var endDtYn = $("#endDateYn").is(":checked")? 'Y' : 'N';
+
 	
+	var scheduledDt = '';
 	if(endDtYn == 'Y'){
+		
 		var now = new Date(); 
 		var year= now.getFullYear(); 
 		var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1); 
@@ -115,7 +122,8 @@ function f_work_save() {
 			$("#endDt").focus();
 			return;
 		}
-	}
+		scheduledDt = endDt;
+	} 
 	
 	var param = {
 		workNo : $("#workNo").val()
@@ -125,6 +133,7 @@ function f_work_save() {
 		, custId : $("#custId").val()
 		, endDateYn : endDtYn
 		, endDt : endDt
+		, scheduledDt :scheduledDt
 	}
 	
 	$.ajax({
@@ -138,6 +147,10 @@ function f_work_save() {
 				  alert (data.message);
 				  $("#divAddWorkPopup").trigger('close');
 				  f_workList_select();
+				  
+				  $("#endDt").val('');
+				  $("#endDateYn").attr("checked", false);
+				  $("#endDt").attr('disabled', false);
 		  }
 		});
 }
@@ -146,6 +159,7 @@ function f_delete_work(index)
 {
 	var isDel = confirm("작업내역을 삭제하시겠습니까?");
 	var param = {workNo : workList[index].workNo};	
+	
 	if(isDel){
 		$.ajax({
 			  url : "/deleteWork.do",
@@ -155,10 +169,12 @@ function f_delete_work(index)
 			  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 			  success : function(data){
 				  alert (data.message);
+				  $("#divAddWorkPopup").trigger('close');
 				  f_workList_select();
 			  }
 		});
 	}
+	f_closeAll();
 }
 
 function f_closeAll(){

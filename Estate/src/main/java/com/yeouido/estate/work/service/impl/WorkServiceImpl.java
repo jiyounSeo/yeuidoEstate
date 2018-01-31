@@ -55,6 +55,10 @@ public class WorkServiceImpl  implements WorkService
    public List<Map<String,Object>> selectWorkListAtMonth(Map map) throws Exception {
 	   return workDAO.selectWorkListAtMonth(map);
    }
+   @Override
+   public List<Map<String,Object>> selectWorkListWithEndDate(Map map) throws Exception {
+	   return workDAO.selectWorkListWithEndDate(map);
+   }
 
    public Map selectWorkItem(Map map) throws Exception {
 	   return workDAO.selectWorkItem(map);

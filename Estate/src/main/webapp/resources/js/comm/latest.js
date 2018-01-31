@@ -83,10 +83,10 @@ function makeTodoList(){
 			$("#direction_latest").empty();
 			htmlText = htmlText + "<ul>";
 			htmlText = htmlText + makeDirLatestList(result.dirList);	
+
 			var listSize = result.dirList.length;
-			makeDueList(htmlText, listSize);
-						
-		
+			
+			makeWorkListWithEndDt(htmlText, listSize);	
 		},
 		error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
 			//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -94,6 +94,35 @@ function makeTodoList(){
 		}
 	});
 
+}
+
+function makeWorkListWithEndDt(htmlText, listSize){
+	var url = "/selectWorkListWithEndDate.do";
+	var param = { endNum : 0 };
+
+	$.ajax({
+		url : url,
+		type: "post",
+		data : param,
+		dataType : "json",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		success : function(result){
+						
+			htmlText = htmlText + makeEndDtLatestList(result.workListEndDt);	
+			listSize = listSize + result.workListEndDt.length;
+			
+			console.log(">> get DB : " + htmlText);
+
+			makeDueList(htmlText, listSize);
+		
+		},
+		error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 
+			//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			console.log("getLatest fail");
+		}
+	});
+	
+	
 }
 
 function makeDueList(htmlText, listSize){
@@ -161,6 +190,49 @@ function makeSuggLatestList(listArray){
 	return list;
 }
 
+function selectColor(intvDay){
+
+	var color = "";
+	var tmp = intvDay.split('-');
+	
+	var sign;
+	var interv;
+	
+	if(tmp.length == 1){
+		sign = '+';
+		interv = intvDay;
+	} else {
+		sign = '-';
+		interv = intvDay * -1;
+	}
+	
+	if((interv <= 7 && sign == '-') || sign == '+') {
+		color = "red";
+	} else {
+		color = "#009e04";
+	}
+	
+	return color;
+}
+
+function makeEndDtLatestList(listArray){
+	
+	var list = "";
+	for(var i=0; i<listArray.length; i++){
+		var item = listArray[i];
+		
+		var pColor = selectColor(item.intvDay.toString());
+		
+		list = list + "<li>";
+		if(item.regDate == today_full){
+			list = list + new_icon + "&nbsp;";
+		}
+		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">[<b>작업종료 <font color="' + pColor + '">D' + item.intvDay + '</font></b>] ' + makeSubject(item.workTitle, 29) + '   (' + item.frstRegDt + ')</a>';
+		list = list + '</li>';				
+	}	
+	return list;
+}
+
 
 function makeDirLatestList(listArray){
 
@@ -171,12 +243,14 @@ function makeDirLatestList(listArray){
 	var list = "";
 	for(var i=0; i<listArray.length; i++){
 		var item = listArray[i];
+
+		var pColor = selectColor(item.intvDay.toString());
 		
 		list = list + "<li>";
 		if(item.regDate == today_full){
 			list = list + new_icon + "&nbsp;";
 		}
-		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">' + makeSubject(item.dirContent, 29) + '   (<b>' + item.regUserNm + '</b> / ' + item.regDate +')</a>';
+		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">[<b>Todo</b>][<b><font color="' + pColor + '">D' + item.intvDay + '</font></b>] ' + makeSubject(item.dirContent, 29) + '   (<b>' + item.regUserNm + '</b> / ' + item.regDate +')</a>';
 		list = list + '</li>';				
 	}	
 	return list;
@@ -188,12 +262,14 @@ function makeDirLatestListForAdmin(listArray){
 	var list = "";
 	for(var i=0; i<listArray.length; i++){
 		var item = listArray[i];
+
+		var pColor = selectColor(item.intvDay.toString());
 		
 		list = list + "<li>";
 		if(item.regDate == today_full){
 			list = list + new_icon + "&nbsp;";
 		}
-		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">[<b>' + item.targetUserNm + '</b>] ' + makeSubject(item.dirContent, 29) + '   (' + item.regDate +')</a>';
+		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')"><b>[지시→' + item.targetUserNm + '</b>][<b><font color="' + pColor + '">D' + item.intvDay + '</font></b>] ' + makeSubject(item.dirContent, 29) + '   (' + item.regDate +')</a>';
 		list = list + '</li>';				
 	}	
 	
@@ -276,3 +352,4 @@ function f_DueDtDtl_view (objtNo, objtTp, saleTp, publicYn, activeTp) {
 	frm.method = 'POST';
 	frm.submit();
 }
+

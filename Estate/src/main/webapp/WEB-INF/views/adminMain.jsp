@@ -3,7 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>여의도 부동산</title>
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/common.js"></script>		

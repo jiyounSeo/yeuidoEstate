@@ -140,7 +140,24 @@ function f_selectDirListAtWork(workNo){
 				  } else {
 					  htmlText += "<img src='" + icon_n_done  +"'></a>";
 				  }
-				  htmlText += "</td><td colspan='2' class='todoCont'> " + item.dirContent + "</td></tr>";
+				  if(item.endDateYn == "Y" && item.isDone == "N"){
+					  var color = "";
+					  var tmp = (item.intvDay.toString()).split('-');
+					  var sign;
+					  var interv;	
+					  if(tmp.length == 1){
+						  sign = '+';
+						  interv = item.intvDay;
+					  } else {
+						  sign = '-';
+						  interv = item.intvDay * -1;
+					  }
+					  if((interv <= 7 && sign == '-') || sign == '+') { color = "red"; }
+					  else { color = "#009e04"; }
+
+					  htmlText += "<br><span style='margin-top:10px;font-size:12px;'><b><font color='"+ color +"'> D" + item.intvDay;
+				  }
+				  htmlText += "</font></b></span></td><td colspan='2' class='todoCont'> " + item.dirContent + "</td></tr>";
 				  htmlText += "<tr><td align='right'>From : <b>" + item.regUserNm + "</b> 님 [ "+ item.regDate +"]</td>";
 				  htmlText += "<td align='right'>";
 				  

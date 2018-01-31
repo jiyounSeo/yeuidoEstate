@@ -169,8 +169,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
     <delete id="deleteWorkDoc" parameterType="java.util.HashMap" >
-    DELETE FROM workdoc 
-    WHERE objtNo = #{objtNo}
+    DELETE w, dir
+	FROM workdoc AS w
+		LEFT JOIN direction AS dir ON dir.workNo = w.workNo 
+		WHERE objtNo = #{objtNo}
     </delete>
     
     <select id="selectObjectCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -962,7 +964,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					BETWEEN DATE_FORMAT(DATE_ADD(now(), interval - 7 DAY), '%Y-%m-%d') 
 					AND DATE_FORMAT(DATE_ADD(now(),interval -0 DAY), '%Y-%m-%d')
 				  )
-			  )			  
+			  )		
+			  AND frstRegUser in (    		
+			  		<if test="user.mbrTp eq 'MT004'" >
+					   SELECT mbrId
+						 FROM member m1
+					</if>
+					<if test="user.mbrTp eq 'MT003'" >
+					   SELECT mbrId
+						 FROM member m1
+						WHERE mbrTp in ('MT001','MT002', 'MT003')
+						  AND estateCd = #{user.estateCd}
+					</if>
+					<if test="user.mbrTp eq 'MT002'" >
+					   SELECT mbrId
+						 FROM member m1
+						WHERE mbrId = #{user.mbrId}
+					</if>
+			  )	  
               order by dueDt desc
 	</select>
 		

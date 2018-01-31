@@ -23,6 +23,8 @@ public interface WorkService
 	public List<Map<String,Object>> selectWorkListAtDate(Map map) throws Exception;
 
 	public List<Map<String,Object>> selectWorkListAtMonth(Map map) throws Exception;
+
+	public List<Map<String,Object>> selectWorkListWithEndDate(Map map) throws Exception;
 	
 	public Map selectWorkItem(Map map) throws Exception;
 }

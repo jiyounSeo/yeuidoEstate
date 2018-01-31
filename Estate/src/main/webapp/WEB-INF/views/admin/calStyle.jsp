@@ -372,7 +372,8 @@
 .directionBox table td.isDo {
 	border-right: 1px solid #d3d3d3;
 	width:85px;
-	padding : 0;
+	padding-top : 5px;
+	padding-bottom : 5px;
 }
 
 .directionBox table td.todoCont {

@@ -46,6 +46,10 @@ public class WorkDAO extends AbstractDAO
 	       return selectList("workDAO.selectWorkListAtMonth", map);
 	   }
 	   @SuppressWarnings("unchecked")
+	   public List<Map<String,Object>> selectWorkListWithEndDate(Map map) throws Exception{
+	       return selectList("workDAO.selectWorkListWithEndDate", map);
+	   }
+	   @SuppressWarnings("unchecked")
 	   public Map selectWorkItem(Map map) throws Exception{
 	       return selectMap("workDAO.selectWorkItem", map);
 	   }

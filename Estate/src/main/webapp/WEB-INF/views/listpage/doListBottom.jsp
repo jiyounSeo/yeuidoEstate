@@ -66,11 +66,11 @@ input:disabled {background:#ebebe4;}
 	
 <script id="workListTemplte" type="text/x-jquery-tmpl">	
 {{each workList}}		
-	<tr onclick="f_modifyWork('{{html $index}}');return false;" style="cursor:pointer;height:45px;">
-		<td style="width:20%;align:center;">{{html $value.frstRegDt}}</td>
-		<td style="width:10%;"> [{{html $value.mbrNm}}]</td>
-		<td style="width:60%;"> {{html $value.workTitle}}</td>
-		<td style="width:10%;"><img src="./resources/images/icon_del.png" style="align:right;width:32px;heigh:42px;" id="btnDel" onclick="f_delete_work({{html $index}});return false;"></td>
+	<tr>
+		<td onclick="f_modifyWork('{{html $index}}');return false;" style="cursor:pointer;height:45px;width:20%;align:center;">{{html $value.frstRegDt}}</td>
+		<td onclick="f_modifyWork('{{html $index}}');return false;" style="cursor:pointer;height:45px;width:10%;"> [{{html $value.mbrNm}}]</td>
+		<td onclick="f_modifyWork('{{html $index}}');return false;" style="cursor:pointer;height:45px;width:65%;"> {{html $value.workTitle}}</td>
+		<td style="width:5%;"><img src="./resources/images/icon_del.png" style="cursor:pointer;align:right;width:32px;heigh:42px;" id="btnDel" onclick="f_delete_work({{html $index}});return false;"></td>
 	</tr>
 {{/each}}	
 </script>
