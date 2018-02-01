@@ -1,8 +1,10 @@
  //옵션 없이 지도 객체를 생성하면 서울시청을 중심으로 하는 11레벨의 지도가 생성됩니다.
 $( document ).ready(function() {
-	window.document.domain = "여의도닷컴.com";
+	
+	window.document.domain = sbuURL;
 });
-//document.domain = "여의도닷컴.com";
+var sbuURL =  URLEncoder.encode("여의도닷컴.com", "UTF-8");
+//var sbuURL = "localhost";
 
 function f_map_setting(myaddress) {
 	var pointX = 0;
@@ -56,8 +58,9 @@ function resizeWindow(win)    {
 function estatePopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
-	window.document.domain = "여의도닷컴.com";
-	var pop = window.open("./resources/popup/newEstate.jsp","_blank","width=850,height=520, scrollbars='no', resizable='yes'");  
+
+	window.document.domain = sbuURL;
+	var pop = window.open("./resources/popup/newEstate.jsp","_blank","width=850,height=930, scrollbars='no', resizable='yes'");  
 }
 
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){    
@@ -69,7 +72,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 function goPopup(){ 
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
-	window.document.domain = "여의도닷컴.com";
+	window.document.domain = sbuURL;
 	var pop = window.open("jusoPopup.jsp","pop","width=580,height=580, scrollbars='no', resizable='yes'"); 
 }
 
@@ -224,7 +227,7 @@ function f_estate_modify(index, estateCd){
 	//경로는 시스템에 맞게 수정하여 사용 //호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를  
 	//호출하게 됩니다. 
 
-	window.document.domain = "여의도닷컴.com";
+	window.document.domain = sbuURL;
 	var pop = window.open("./resources/popup/editEstate.jsp?estateCd="+estateCd,"_blank","width=850,height=520, scrollbars='no', resizable='yes'");  
 }
 
