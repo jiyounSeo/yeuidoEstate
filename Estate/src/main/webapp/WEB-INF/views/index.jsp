@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/mainStyle.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
-<script type="text/javascript" src="./resources/js/list/mainObject.js"></script>
+<script type="text/javascript" src="./resources/js/list/mainObject.js?v20180202"></script>
 
 <%@ include file="/WEB-INF/views/tabMenuBar.jsp" %> 
 <div style="width:970px;margin:auto;padding:0;">

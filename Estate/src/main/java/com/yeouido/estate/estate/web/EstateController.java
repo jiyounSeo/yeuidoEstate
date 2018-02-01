@@ -67,7 +67,26 @@ public class EstateController {
 	    mav.setViewName("jsonView");
 	    return mav;
 	}
-	
+
+	/* 
+	 * 물건목록조회
+	 */
+	@RequestMapping(value= "/selectEstateListBottom.go", method=RequestMethod.POST)
+	public ModelAndView selectEstateListBottom( @RequestParam Map<String,Object> map)  {  
+		ModelAndView mav= new ModelAndView();
+		Paging paging = new Paging();
+        			
+		List<Map<String,Object>> esList = new ArrayList<Map<String,Object>>();
+		try {
+			esList = estateService.selectEstateListBottom(map);
+						
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("esList",esList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
 	/*
 	 * 물건리스트페이지
 	 */	
@@ -123,6 +142,8 @@ public class EstateController {
 	    mav.setViewName("jsonView");
 	    return mav;
 	}	
+	
+
 	
 	/*
 	 * 물건 수정 조회

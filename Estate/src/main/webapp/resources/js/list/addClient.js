@@ -130,7 +130,7 @@ function f_customer_save() {
 }
 
 function f_customer_delete() {
-	if (confirm ("고객을 삭제하시겠습니까?")) {
+	if (confirm ("고객을 삭제하시겠습니까?(고객에 기록된 작업내역까지 모두 삭제됩니다)")) {
 	   var comSubmit = new ComSubmit("viewClient");
 	   comSubmit.setUrl("/deleteCustomer.do");
 	   comSubmit.submit();

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<script type="text/javascript" src="./resources/js/cal/clndr.js"></script>
-<script type="text/javascript" src="./resources/js/cal/cal.js"></script>
+<script type="text/javascript" src="./resources/js/cal/clndr.js?v20180201"></script>
+<script type="text/javascript" src="./resources/js/cal/cal.js?v201802022"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
@@ -41,7 +41,19 @@
 									<textarea rows="5" cols="50" name="workContent" id="workContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea>
 								</td>
 							</tr>
-							<tr><td colspan="2" align="right"><a href="#work" onclick="f_work_detail();return false;">대상바로가기</a></td></tr>
+							<tr>
+								<td height="60px;" style="text-align:right;vertical-align:middle;" colspan="2">
+									<table width="100%" cellpadding="0" cellspacing="0" border="0">
+										<tr>
+											<td style="text-align:right;padding-right:10px;"><input type="checkbox" id="endDateYn" name="endDateYn" onClick="f_active_frm();"/><label for="endDateYn">종료일 설정</label></td>
+											<td width="140px;"><input type="text" id="endDt" name="endDt" class="datepicker" style="width:140px;" readonly="readonly" disabled="disabled"></td>
+										</tr>
+									</table>
+									
+									
+								</td>
+							</tr>
+							<tr><td colspan="2" align="right"><a href="#work" onclick="f_work_detail();return false;"> >> 대상바로가기</a></td></tr>
 						</table>
 					</fieldset>
 					</c:if>
@@ -64,8 +76,8 @@
 						<table class="todoBox">
 							<tr>
 								<td width="10%" valign="bottom" style="padding-bottom:5px;">
-									<input type="checkbox" id="endDateYn" name="endDateYn" onClick="f_active_frm();"/><label for="endDateYn">종료일 설정</label><br>
-									<input type="text" id="endDt" name="endDt" class="datepicker" style="width:110px;" readonly="readonly" disabled="disabled">
+									<input type="checkbox" id="endDateYnAdmin" name="endDateYnAdmin" onClick="f_active_frm_admin();"/><label for="endDateYn">종료일 설정</label><br>
+									<input type="text" id="endDtAdmin" name="endDtAdmin" class="datepicker" style="width:110px;" readonly="readonly" disabled="disabled">
 								</td>
 								<td width="65%"><textarea rows="5" cols="50" name="dirContent" id="dirContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea></td>
 								<td width="15%"><a href="#"><img src="./resources/images/btn_write_todo.png" onClick="f_todo_save()"></a></td>						

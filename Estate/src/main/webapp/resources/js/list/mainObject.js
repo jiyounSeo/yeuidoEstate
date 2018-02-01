@@ -27,9 +27,47 @@ $(document).ready(function(){
 		saleTp = "";
 	}
 	f_objt_select(objtTp,saleTp);
-
-
+	f_bottomList();
+	
 });
+
+function f_bottomList(){
+
+	$.ajax({
+		url : "/selectEstateListBottom.go",
+		  type: "post",
+		  async: false,
+		  dataType : "json",
+		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+		  success : function(data){
+			  var esList = data.esList;
+				$("#footList").empty();
+				
+				var htmlText = '';
+				
+				for(var i=0; i<esList.length; i++){
+					var item = esList[i];
+					htmlText += "<div class='bottomInfo'><span class='Btitle'>" + item.estateNm + " | </span>"
+								+"<span class='Bcont'><br>&nbsp;" + item.estateAddr + " " + item.estateAddrDtl + " (Tel. " + item.tel1 + "-" + item.tel2 + "-" + item.tel3 
+								 + ") | ";
+					
+					if(item.estateCode == '' || item.estateCode == null || item.estateCode == undefined) {
+						htmlText += "부동산등록번호 ---";
+					} else {
+						htmlText += "부동산등록번호 " + item.estateCode;
+					}
+					
+					htmlText+= " | 대표 " + item.rprsnNm + "</span></div>";
+				}
+				console.log(htmlText);
+				$("#footList").append(htmlText);
+		  },
+			error: function(jqXHR, textStatus, errorThrown) { 
+				console.log(errorThrown); 
+				console.log(textStatus);
+			}
+	});
+}
 
 function f_orderTitleSet(saleTp){
 	

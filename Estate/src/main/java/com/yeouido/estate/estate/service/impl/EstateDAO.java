@@ -32,7 +32,11 @@ public class EstateDAO extends AbstractDAO
    public List<Map<String,Object>> selectEstateList(Map map) throws Exception{
        return selectList("estateDAO.selectEstateList", map);
    }
-   
+
+   @SuppressWarnings("unchecked")
+   public List<Map<String,Object>> selectEstateListBottom(Map map) throws Exception{
+       return selectList("estateDAO.selectEstateListBottom", map);
+   }
    /* 고객등록확인 */
    @SuppressWarnings("unchecked")
    public Map selectEstateConfirm(Map map) throws Exception{

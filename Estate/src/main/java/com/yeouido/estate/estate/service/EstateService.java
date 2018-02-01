@@ -11,6 +11,8 @@ public interface EstateService
 	public int deleteEstate(Map map) throws Exception;
 	
 	public List<Map<String,Object>> selectEstateList(Map map) throws Exception;
+
+	public List<Map<String,Object>> selectEstateListBottom(Map map) throws Exception;
 	
 	public Map selectEstateInfo(Map map) throws Exception;
 	

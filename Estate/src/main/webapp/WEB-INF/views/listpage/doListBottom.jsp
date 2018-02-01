@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/memo/memoStyle.jsp" %> 
 <% request.setCharacterEncoding("utf-8");%>
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
-<script type="text/javascript" src="./resources/js/list/doList.js"></script>
+<script type="text/javascript" src="./resources/js/list/doList.js?v20180202"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 <style>
 input:disabled {background:#ebebe4;}

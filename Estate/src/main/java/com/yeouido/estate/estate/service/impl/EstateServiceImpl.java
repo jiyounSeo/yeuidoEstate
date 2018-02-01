@@ -31,6 +31,10 @@ public class EstateServiceImpl  implements EstateService
 	   return estateDAO.selectEstateList(map);
    }
    @Override
+   public List<Map<String,Object>> selectEstateListBottom(Map map) throws Exception {
+	   return estateDAO.selectEstateListBottom(map);
+   }
+   @Override
    public Map selectEstateInfo(Map map) throws Exception {
 	   return estateDAO.selectEstateInfo(map);
    }

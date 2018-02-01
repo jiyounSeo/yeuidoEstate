@@ -86,6 +86,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM customer 
     WHERE custId = #{custId}
     </delete>
+    
+    <delete id="deleteWorkDocByCust" parameterType="java.util.HashMap" >
+    DELETE w, dir
+	FROM workdoc AS w
+		LEFT JOIN direction AS dir ON dir.workNo = w.workNo 
+		WHERE custId = #{custId}
+    </delete>
+    
    	
    	<select id="selectCustomerConfirm" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT custId, custId2

@@ -97,7 +97,17 @@ function f_estate_save() {
 		$("#rprsnTel1").focus();
 		return;
 	}
-	
+
+	if ( $("#businessCode").val() == "") {
+		alert ("사업자 등록번호 필수입력 값입니다.");
+		$("#businessCode").focus();
+		return;
+	}
+	if ( $("#estateCode").val() == "") {
+		alert ("부동산 등록번호 필수입력 값입니다.");
+		$("#estateCode").focus();
+		return;
+	}
 	if ( $("#estateAddr").val() == "") {
 		alert ("주소는 필수입력 값입니다.");
 		$("#estateAddr").focus();
@@ -119,6 +129,8 @@ function f_estate_save() {
 		,	rprsnTel1 : $("#rprsnTel1").val()
 		,	rprsnTel2 : $("#rprsnTel2").val()
 		,	rprsnTel3 : $("#rprsnTel3").val()
+		,   businessCode : $("#businessCode").val()
+		,   estateCode : $("#estateCode").val()
 		, estateAddr : $("#estateAddr").val()
 		, estateAddrDtl : $("#estateAddrDtl").val()
 	}
@@ -191,7 +203,7 @@ function f_estate_list() {
 
 
 function f_estate_del(index, delEstateCd) {
-	if (confirm ("["+caList[index].estateNm+"] 삭제처리 하시겠습니까?")) {
+	if (confirm ("["+caList[index].estateNm+"] 삭제 하시겠습니까?")) {
 		$.ajax({
 		  url : "/deleteEstate.do",
 		  type: "post",
@@ -246,6 +258,8 @@ function f_estate_dtl(idx) {
 			  $("#tel2").val(caInfo.tel2);
 			  $("#tel3").val(caInfo.tel3);
 			  $("#rprsnNm").val(caInfo.rprsnNm);
+			  $("#businessCode").val(caInfo.businessCode);
+			  $("#estateCode").val(caInfo.estateCode)
 			  $("#rprsnTel1").val(caInfo.rprsnTel1);
 			  $("#rprsnTel2").val(caInfo.rprsnTel2);
 			  $("#rprsnTel3").val(caInfo.rprsnTel3);	

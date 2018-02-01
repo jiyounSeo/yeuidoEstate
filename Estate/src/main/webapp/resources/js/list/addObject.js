@@ -428,7 +428,7 @@ function f_objt_delete() {
 			break;
 		
 	}
-	if (confirm ("물건을 삭제하시겠습니까?")) {
+	if (confirm ("물건을 삭제하시겠습니까?(물건에 기록된 작업내역까지 모두 삭제됩니다)")) {
 	   var comSubmit = new ComSubmit(objtForm);
 	   comSubmit.setUrl("/deleteObject.do");
 	   comSubmit.submit();

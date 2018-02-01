@@ -66,12 +66,12 @@ $(document).ready(function() {
 		$("#hrefId").attr('href','./index.do');
 		$("#hrefId2").attr("href", "./adminMainView.do")
 	}
-	
 });
+
 </script>
 <body style="margin:0; background-color: #fffff">  
 <div style="width:100%;margin:auto;padding:0;background:url('/resources/images/bg.jpg');background-repeat:repeat-x;">	
-	<div style="width:1470px; text-align:left; margin:auto; padding:0;background-color:#393939;background:url('/resources/images/bg.jpg');background-repeat:repeat-x;">		
+	<div style="width:970px; text-align:left; margin:auto; padding:0;background-color:#393939;background:url('/resources/images/bg.jpg');background-repeat:repeat-x;">		
 		<table width="100%" height="121px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td align="center" background="./resources/images/bg.jpg"  style="background-repeat:repeat-x;margin: 0; padding: 0; height: 121px;">

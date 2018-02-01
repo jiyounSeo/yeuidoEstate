@@ -220,14 +220,18 @@ function makeEndDtLatestList(listArray){
 	var list = "";
 	for(var i=0; i<listArray.length; i++){
 		var item = listArray[i];
-		
-		var pColor = selectColor(item.intvDay.toString());
-		
 		list = list + "<li>";
 		if(item.regDate == today_full){
 			list = list + new_icon + "&nbsp;";
 		}
-		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">[<b>작업종료 <font color="' + pColor + '">D' + item.intvDay + '</font></b>] ' + makeSubject(item.workTitle, 29) + '   (' + item.frstRegDt + ')</a>';
+		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">';
+		
+		var pColor = "";
+		if(item.intvDay != null && item.intvDay != ''){
+			pColor = selectColor(item.intvDay.toString());
+			list = list + '[<b>작업종료 <font color="' + pColor + '">D' + item.intvDay + '</font></b>]';
+		}
+		list = list  + ' ' + makeSubject(item.workTitle, 29) + '   (' + item.frstRegDt + ')</a>';
 		list = list + '</li>';				
 	}	
 	return list;
@@ -243,14 +247,18 @@ function makeDirLatestList(listArray){
 	var list = "";
 	for(var i=0; i<listArray.length; i++){
 		var item = listArray[i];
-
-		var pColor = selectColor(item.intvDay.toString());
-		
 		list = list + "<li>";
 		if(item.regDate == today_full){
 			list = list + new_icon + "&nbsp;";
 		}
-		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">[<b>Todo</b>][<b><font color="' + pColor + '">D' + item.intvDay + '</font></b>] ' + makeSubject(item.dirContent, 29) + '   (<b>' + item.regUserNm + '</b> / ' + item.regDate +')</a>';
+		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')">[<b>Todo</b>]';
+		
+		var pColor = "";
+		if(item.intvDay != null && item.intvDay != ''){
+			pColor = selectColor(item.intvDay.toString());
+			list = list + '[<b><font color="' + pColor + '">D' + item.intvDay + '</font></b>]';
+		}
+		list = list + ' ' + makeSubject(item.dirContent, 29) + '   (<b>' + item.regUserNm + '</b> / ' + item.regDate +')</a>';
 		list = list + '</li>';				
 	}	
 	return list;
@@ -262,14 +270,18 @@ function makeDirLatestListForAdmin(listArray){
 	var list = "";
 	for(var i=0; i<listArray.length; i++){
 		var item = listArray[i];
-
-		var pColor = selectColor(item.intvDay.toString());
-		
 		list = list + "<li>";
 		if(item.regDate == today_full){
 			list = list + new_icon + "&nbsp;";
 		}
-		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')"><b>[지시→' + item.targetUserNm + '</b>][<b><font color="' + pColor + '">D' + item.intvDay + '</font></b>] ' + makeSubject(item.dirContent, 29) + '   (' + item.regDate +')</a>';
+		list = list + '<a href="#" onclick="f_modifyWorkAtTodoList('+ item.workNo + ')"><b>[지시→' + item.targetUserNm + '</b>]';
+		
+		var pColor = "";
+		if(item.intvDay != null && item.intvDay != ''){
+			pColor = selectColor(item.intvDay.toString());
+			list = list + '[<b><font color="' + pColor + '">D' + item.intvDay + '</font></b>]';
+		}		
+		list = list + ' ' + makeSubject(item.dirContent, 29) + '   (' + item.regDate +')</a>';
 		list = list + '</li>';				
 	}	
 	

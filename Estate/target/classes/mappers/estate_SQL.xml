@@ -17,6 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , tel2
 				  , tel3
 				  , rprsnNm
+				  , businessCode
+				  , estateCode
 				  , rprsnTel1
 				  , rprsnTel2
 				  , rprsnTel3
@@ -34,6 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				  , #{tel2}
 				  , #{tel3}
 				  , #{rprsnNm}
+				  , #{businessCode}
+				  , #{estateCode}
 				  , #{rprsnTel1}
 				  , #{rprsnTel2}
 				  , #{rprsnTel3}
@@ -54,6 +58,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , tel1 = #{tel2}
 		  , tel1 = #{tel3}
 		  , rprsnNm = #{rprsnNm}
+		  , businessCode = #{businessCode}
+		  , estateCode = #{estateCode}
 		  , rprsnTel1 = #{rprsnTel1}
 		  , rprsnTel2 = #{rprsnTel2}
 		  , rprsnTel3 = #{rprsnTel3}
@@ -76,6 +82,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , tel2
 		  , tel3
 		  , rprsnNm
+		  , businessCode
+		  , estateCode
 		  , rprsnTel1
 		  , rprsnTel2
 		  , rprsnTel3
@@ -85,6 +93,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  from estate
 	 WHERE 1=1 
 	 LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+	
+	<select id="selectEstateListBottom" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT estateCd
+	   	  , estateNm
+		  , estateAddr
+		  , estateAddrDtl
+		  , tel1
+		  , tel2
+		  , tel3
+		  , rprsnNm
+		  , rprsnTel1
+		  , rprsnTel2
+		  , rprsnTel3
+	  from estate
+	 WHERE 1=1 
 	</select>
 	
 	<select id="selectEstateCombo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -102,6 +126,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , tel2
 		  , tel3
 		  , rprsnNm
+		  , businessCode
+		  , estateCode
 		  , rprsnTel1
 		  , rprsnTel2
 		  , rprsnTel3

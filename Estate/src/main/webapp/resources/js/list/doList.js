@@ -24,6 +24,9 @@ function f_addWork() {
 	$("#workTitle").val("");
 	$("#workContent").val("");
 	$("#divAddWorkPopup").lightbox_me({centered: true});
+	$("#endDt").val('');
+	$("#endDateYn").attr("checked", false);
+	$("#endDt").attr('disabled', true);
 }
 
 function f_modifyWork(index) {
@@ -150,7 +153,7 @@ function f_work_save() {
 				  
 				  $("#endDt").val('');
 				  $("#endDateYn").attr("checked", false);
-				  $("#endDt").attr('disabled', false);
+				  $("#endDt").attr('disabled', true);
 		  }
 		});
 }
@@ -179,6 +182,9 @@ function f_delete_work(index)
 
 function f_closeAll(){
 	$("#divAddWorkPopup").trigger('close');  	
+	  $("#endDt").val('');
+	  $("#endDateYn").attr("checked", false);
+	  $("#endDt").attr('disabled', true);
 }
 
 function f_active_date() {

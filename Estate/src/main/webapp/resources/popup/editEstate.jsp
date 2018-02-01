@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../js/list/newEstate.js"></script>
+<script type="text/javascript" src="../js/list/newEstate.js?v20180202"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
 <body >
 <script type="text/javascript">
@@ -47,7 +47,18 @@ $( document ).ready(function() {
 				 - <input type="text" maxLength ="4" style="width:105px" id="rprsnTel3" name="rprsnTel3"  >
 			</td>
 		</tr>
-	
+		<tr>
+			<td style="width:15%" class="title" >사업자 등록번호</td>
+			<td colspan="2">
+				<input type="text" id="businessCode" name="businessCode"  >
+			</td>
+		</tr>
+		<tr>
+			<td style="width:15%" class="title" >부동산 등록번호</td>
+			<td colspan="2">
+				<input type="text" id="estateCode" name="estateCode"  >
+			</td>
+		</tr>		
 		<tr>
 			<td style="width:15%" class="title" height="70px;">주소<a href="#"  onClick="goPopup();"><br><img src="../images/btn_search_address.jpg" /></a><!-- input type= "button" onClick="goPopup();" value= "주소찾기 " />--> </td>
 			<td style="width:15%" >

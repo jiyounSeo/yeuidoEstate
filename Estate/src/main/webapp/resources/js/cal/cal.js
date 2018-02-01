@@ -119,6 +119,16 @@ function f_active_frm() {
 	
 }
 
+function f_active_frm_admin() {
+	var isChecked = $("#endDateYnAdmin").is(":checked");
+	if(isChecked){
+		$("#endDtAdmin").attr('disabled', false);
+	} else {
+		$("#endDtAdmin").attr('disabled', true);
+		$("#endDtAdmin").val('');
+	}
+}
+
 function selectCurrentEvent(){
 	
     var param = {
@@ -262,13 +272,32 @@ function f_modifyWork(index) {
 	$("#workTitle").val(workList[index].workTitle);
 	$("#workContent").val(workList[index].workContent);
 	
-	var workTitle = "[" + workList[index].mbrNm + "] " + workList[index].workTitle + " ( " + workList[index].frstRegDt + " )";
+	if(workList[index].endDateYn == 'Y'){
+		$("#endDt").val(workList[index].endDt);
+		$("#endDateYn").attr("checked", "checked");
+		$("#endDt").attr('disabled', false);
+	} else {
+		  $("#endDt").val('');
+		  $("#endDateYn").attr("checked", false);
+		  $("#endDt").attr('disabled', true);
+	}
+	
+	var workTitle = "";
+	if(workList[index].endDateYn == "Y"){
+		workTitle += "[종료일 : " + workList[index].endDt + "]";
+	} 
+	workTitle += "[" + workList[index].mbrNm + "] " + workList[index].workTitle + " ( " + workList[index].frstRegDt + " )";
 	var workContent = "  →  " + workList[index].workContent;
 	$("#workTitleForAdmin").empty();
 	$("#workContentForAdmin").empty();
 	$("#workTitleForAdmin").append(workTitle);
 	$("#workContentForAdmin").append(workContent);
-	
+
+	$("#endDtAdmin").val('');
+	$("#endDateYnAdmin").attr("checked", false);
+	$("#endDtAdmin").attr('disabled', true);
+	$("#dirContent").val('');
+		
 	f_selectDirListAtWork(workList[index].workNo);
 	
 	$("#divAddWorkPopup").lightbox_me({centered: true});
@@ -443,6 +472,32 @@ function f_work_save() {
 		$("#workContent").focus();
 		return;
 	} 
+
+	var endDt = $("#endDt").val();
+	var endDtYn = $("#endDateYn").is(":checked")? 'Y' : 'N';
+	
+	var scheduledDt = '';
+	if(endDtYn == 'Y'){
+		
+		var now = new Date(); 
+		var year= now.getFullYear(); 
+		var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1); 
+		var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate(); 
+		var todayDt = year + '-' + mon + '-' + day;
+		
+		console.log(todayDt + "/" + endDt);
+		if(endDt == '') {
+			alert("종료일을 선택해 주세요");
+			$("#endDt").focus();
+			return;
+		}
+		else if(endDt < todayDt) {
+			alert("종료일은 오늘보다 이전 날짜로 선택할 수 없습니다");
+			$("#endDt").focus();
+			return;
+		}
+		scheduledDt = endDt;
+	} 
 	
 	var param = {
 		workNo : $("#workNo").val()
@@ -450,6 +505,9 @@ function f_work_save() {
 		, workTitle : $("#workTitle").val()
 		, objtNo : $("#objtNo").val()
 		, custId : $("#custId").val()
+		, endDt: endDt
+		, endDateYn : endDtYn
+		, scheduledDt :scheduledDt
 	}
 	
 	$.ajax({
@@ -462,7 +520,8 @@ function f_work_save() {
 			  $("#divAddWorkPopup").trigger('close');
 				  alert (data.message);
 				  $("#divAddWorkPopup").trigger('close');
-				  selectWorkListAtdate(moment().format('YYYY-MM-DD'));
+				  //selectWorkListAtdate(moment().format('YYYY-MM-DD'));
+				  location.href="./adminMainView.do";
 		  }
 		});
 }
@@ -470,8 +529,8 @@ function f_work_save() {
 function f_todo_save() {
 	
 
-	var endDt = $("#endDt").val();
-	var endDtChecked = $("#endDateYn").is(":checked")? 'Y' : 'N';
+	var endDt = $("#endDtAdmin").val();
+	var endDtChecked = $("#endDateYnAdmin").is(":checked")? 'Y' : 'N';
 	
 	if(endDtChecked == 'Y'){
 		
@@ -483,12 +542,12 @@ function f_todo_save() {
 		
 		if(endDt == '') {
 			alert("종료일을 선택해 주세요");
-			$("#endDt").focus();
+			$("#endDtAdmin").focus();
 			return;
 		}
 		else if(endDt < todayDt) {
 			alert("종료일은 오늘보다 이전 날짜로 선택할 수 없습니다");
-			$("#endDt").focus();
+			$("#endDtAdmin").focus();
 			return;
 		}
 	} 
@@ -510,11 +569,12 @@ function f_todo_save() {
 				  	$("#divAddWorkPopup").trigger('close');
 					alert (data.message);
 					$("#dirContent").val("");
-					f_modifyWork($("#curSelectedItemIdx").val());
+					location.href="./adminMainView.do";
+					//f_modifyWork($("#curSelectedItemIdx").val());
 					
-					$("#endDt").val('');
-					$("#endDateYn").attr("checked", false);
-					$("#endDt").attr('disabled', false);
+					//$("#endDt").val('');
+					//$("#endDateYn").attr("checked", false);
+					//$("#endDt").attr('disabled', false);
 			  }
 			});
 }
@@ -532,7 +592,8 @@ function f_delete_work(index)
 			  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 			  success : function(data){
 				  alert (data.message);
-				  selectWorkListAtdate(moment().format('YYYY-MM-DD'));
+				  //selectWorkListAtdate(moment().format('YYYY-MM-DD'));
+				  location.href="./adminMainView.do";
 			  }
 		});
 	}
@@ -552,7 +613,9 @@ function f_delete_direction(dirNo, i)
 			  success : function(data){
 				alert (data.message);
 				$("#divAddWorkPopup").trigger('close');  	
-				f_modifyWork($("#curSelectedItemIdx").val());
+				//f_modifyWork($("#curSelectedItemIdx").val());
+
+				location.href="./adminMainView.do";
 			  }
 		});
 	}
