@@ -3,7 +3,7 @@ $( document ).ready(function() {
 	
 	window.document.domain = sbuURL;
 });
-var sbuURL =  URLEncoder.encode("여의도닷컴.com", "UTF-8");
+var sbuURL = "여의도닷컴.com";
 //var sbuURL = "localhost";
 
 function f_map_setting(myaddress) {
