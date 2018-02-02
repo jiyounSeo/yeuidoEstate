@@ -55,8 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , estateAddr = #{estateAddr}
 		  , estateAddrDtl = #{estateAddrDtl}
 		  , tel1 = #{tel1}
-		  , tel1 = #{tel2}
-		  , tel1 = #{tel3}
+		  , tel2 = #{tel2}
+		  , tel3 = #{tel3}
 		  , rprsnNm = #{rprsnNm}
 		  , businessCode = #{businessCode}
 		  , estateCode = #{estateCode}
@@ -104,6 +104,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  , tel2
 		  , tel3
 		  , rprsnNm
+		  , businessCode
+		  , estateCode
 		  , rprsnTel1
 		  , rprsnTel2
 		  , rprsnTel3
