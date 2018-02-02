@@ -50,7 +50,8 @@ function f_objtDtl_view (index) {
 }
 
 
-function f_objectList_select(){
+function f_objectList_select(srch){
+	currPage = (srch == "pageBtn" ? Number(currPage) : 1);
 	 var param = {
 				tel1 : $("#tel1").val()
 			   , tel2 : $("#tel2").val()
@@ -58,11 +59,10 @@ function f_objectList_select(){
 			   , addr : $("#addr").val()
 			   , objtNm : $("#objtNm").val()
 			   , mbrNm : $("#mbrNm").val()
-			   , currentPage : Number(currPage)
+			   , currentPage : currPage
 			   , pageNm :  'total'
 			   //, pageNm : $("#pageNm").val()
 			   , activeTp :  "" //$("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
-			   , currentPage : Number(currPage)
 			   , pagePerRow : 10
 			   , pageSize : 10
 			};
@@ -108,7 +108,7 @@ $(document).on('click', '.pagingBtn', function() {
 	var currPageStr = $(this).attr("id").substr(4);
 	if ( gfn_isNull(currPageStr) == "") {
 		currPage = Number(currPageStr);
-		f_objectList_select();
+		f_objectList_select("pageBtn");
 	}
 	
 });

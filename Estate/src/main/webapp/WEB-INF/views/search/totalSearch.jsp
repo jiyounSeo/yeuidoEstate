@@ -77,7 +77,7 @@
 		</tr>
 		<tr><td colspan="5" height="10px"></td></tr>
 		<tr><td colspan="5" align="right">
-			<a href="#add" onclick="f_objectList_select();return false;"><img src="./resources/images/btn_search2.jpg"></a>
+			<a href="#add" onclick="f_objectList_select('srchBtn');return false;"><img src="./resources/images/btn_search2.jpg"></a>
 			</td></tr>
 		<tr><td colspan="5" height="10px"></td></tr>
 	</table>

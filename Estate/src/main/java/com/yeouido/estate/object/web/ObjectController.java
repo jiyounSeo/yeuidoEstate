@@ -142,6 +142,8 @@ public class ObjectController {
         			
 		List<Map<String,Object>> objtList = new ArrayList<Map<String,Object>>();
 		try {
+			map.put ("notPage",1);
+			
 			int currentPage = Integer.parseInt(map.get("currentPage").toString());
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
 			map.put("rowNum", (currentPage-1)*pagePerRow);

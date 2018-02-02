@@ -585,7 +585,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectTotalSearch" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	select obj.*
-		,concat(b.roadAddrPart1,' ', b.addrDetail )as addr
 	  from (
 	SELECT DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
 	     , obj.objtNo
@@ -610,13 +609,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          , concat(custTel1, '-',custTel2,'-',custTel3) custTel
          , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
          , obj.zipNo
-	 	 , obj.jibunAddr
 	  	 , obj.roadAddrPart1 
 	  	 , obj.addrDetail
 	  	 , obj.positionX
 	  	 , obj.positionY
 	  	 , obj.sameHouseholdNum
 	  	 , obj.frontDoorType
+	  	 , concat( if(isnull(obj.buildCd), obj.roadAddrPart1, (select b.roadAddrPart1 from building b where b.buildCd = obj.buildCd)) ) as addr
+	  	 , concat( if(isnull(obj.buildCd), obj.jibunAddr, (select b.jibunAddr from building b where b.buildCd = obj.buildCd)) ) as jibunAddr
 	   FROM saleobject obj
 	     left outer join customer cust
          on obj.custId = cust.custId
@@ -654,10 +654,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			      ) 
 	   </if>
 	   ) obj
-	   left join building b
-	   on obj.buildCd = b.buildCd
+	   where 1=1  
 	   <if test="addr != null and addr != '' ">
-	    and concat(b.roadAddrPart1,' ', b.addrDetail ) like concat('%',#{addr},'%')
+	    and ( addr like concat('%', #{addr},'%') or jibunAddr like concat('%', #{addr},'%') ) 
 	   </if>
 	   <if test="notPage != null and notPage != '' ">
 	   LIMIT #{rowNum}, #{pagePerRow}
