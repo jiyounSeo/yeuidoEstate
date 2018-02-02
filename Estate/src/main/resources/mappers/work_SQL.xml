@@ -149,7 +149,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 WHERE 1=1
 	   AND o.objtNo not in (select objtNo from interobject where custId = #{custId})
 	   <if test=" objtNm != null and !objtNm.equals('')">
-       AND o.objtNm like '%'||#{objtNm}||'%'
+       AND o.objtNm like concat('%',#{objtNm},'%')
 	   </if>
 	   <if test=" objtTp != null and !objtTp.equals('')">
        AND o.objtTp = #{objtTp}
@@ -158,10 +158,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        AND o.saleTp = #{saleTp}
 	   </if>
 	   <if test='rdoAddr eq "1"'>
-	   AND b.roadAddrPart1||' '|| b.addrDetail like '%'||#{addr}||'%'
+	   AND b.roadAddrPart1||' '|| b.addrDetail like concat('%',#{addr},'%')
 	   </if>
 	   <if test='rdoAddr eq "2"'>
-	   AND b.jibunAddr||' '|| b.addrDetail like '%'||#{addr}||'%'
+	   AND b.jibunAddr||' '|| b.addrDetail like concat('%',#{addr},'%')
 	   </if>
 	   <if test=" fromArea != null and !fromArea.equals('')">
        AND CAST(area AS signed integer) between #{fromArea} and #{toArea}
@@ -178,7 +178,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test=" custNm != null and !custNm.equals('')">
        AND c.custNm = #{custNm}
 	   </if>
+	   <if test=" ( custTel1 != null and custTel1 != '') or ( custTel2 != null and custTel2 != '') or ( custTel3 != null and custTel3 != '')  ">
 	   AND CONCAT(c.custTel1,c.custTel2,c.custTel3) like CONCAT('%',#{custTel1},#{custTel2},#{custTel3},'%')
+	   </if>
 	   
     </select>
     

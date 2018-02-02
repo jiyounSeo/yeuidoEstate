@@ -78,9 +78,9 @@
 			<td class="title2">고객성명 </td>
 			<td width="365px"><input type="text" id="custNm" name="custNm" ></td>
 			<td class="title2">고객연락처</td>
-			<td><input type="number" style="width:60px" id="custTel1" name="custTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
-				 - <input type="number" style="width:70px" id="custTel2" name="custTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
-				 - <input type="number" style="width:70px" id="custTel3" name="custTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
+			<td><input type="number" style="width:100px" id="custTel1" name="custTel1" min="0" max="999" oninput="if(this.value.length>4) this.value=this.value.slice(0,3)">
+				 - <input type="number" style="width:100px" id="custTel2" name="custTel2" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)">
+				 - <input type="number" style="width:100px" id="custTel3" name="custTel3" min="0" max="9999" oninput="if(this.value.length>5) this.value=this.value.slice(0,4)"></td>
 		</tr>
 	</table>	
 	<div width="100%" style="text-align: right;margin:10px;">

@@ -628,7 +628,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test="objtNm != null and objtNm != '' ">
 	   and obj.objtNm like concat('%',#{objtNm},'%')
 	   </if>
+	   <if test=" ( tel1 != null and tel1 != '') or ( tel2 != null and tel2 != '') or (tel3 != null and tel3 != '')  ">
 	   and concat(cust.custTel1, cust.custTel2, cust.custTel3) like concat('%',#{tel1},#{tel2},#{tel3},'%')
+	   </if>
 	   <if test="mbrNm != null and mbrNm != '' ">
 	   and m.mbrNm like concat('%',#{mbrNm},'%')
 	   </if>
@@ -655,7 +657,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   left join building b
 	   on obj.buildCd = b.buildCd
 	   <if test="addr != null and addr != '' ">
-	    and concat(b.roadAddrPart1,' ', b.addrDetail ) like '%'||#{addr}||'%'
+	    and concat(b.roadAddrPart1,' ', b.addrDetail ) like concat('%',#{addr},'%')
 	   </if>
 	   <if test="notPage != null and notPage != '' ">
 	   LIMIT #{rowNum}, #{pagePerRow}
