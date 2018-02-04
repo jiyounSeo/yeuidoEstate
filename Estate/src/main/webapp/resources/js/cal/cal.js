@@ -44,7 +44,7 @@ jQuery(document).ready( function() {
 	        	currentYear = Number(moment().format('YYYY'));
 	        	currentMonth = Number(moment().format('M'));
 	        	selectCurrentEvent();
-	            console.log('Cal-1 today');
+	            //console.log('Cal-1 today');
 	        },
 	        nextMonth: function () {
 	        	
@@ -54,7 +54,7 @@ jQuery(document).ready( function() {
 	        	} else{
 	        		currentMonth++;
 	        	}  	            	
-	            console.log('Cal-1 next month');
+	            //console.log('Cal-1 next month');
 	        },
 	        previousMonth: function () {
 	        	
@@ -64,7 +64,7 @@ jQuery(document).ready( function() {
 	        	} else {
 	        		currentMonth--;
 	        	}  	            	
-	        	console.log('Cal-1 previous month');
+	        	//console.log('Cal-1 previous month');
 	        },
 	        onMonthChange: function () {
 	        	if(currentMonth < 10){
@@ -73,25 +73,25 @@ jQuery(document).ready( function() {
 	            	thisMonth = String(currentYear)+"-"+String(currentMonth)+"%"
 	        	}
 	        	selectCurrentEvent();
-	            console.log('Cal-1 month changed -->'+thisMonth);
+	           // console.log('Cal-1 month changed -->'+thisMonth);
 	        },
             nextYear: function () {
-                console.log('Cal-1 next year');
+               // console.log('Cal-1 next year');
             },
             previousYear: function () {
-                console.log('Cal-1 previous year');
+                //console.log('Cal-1 previous year');
             },
             onYearChange: function () {
-                console.log('Cal-1 year changed');
+                //console.log('Cal-1 year changed');
             },
             nextInterval: function () {
-                console.log('Cal-1 next interval');
+                //console.log('Cal-1 next interval');
             },
             previousInterval: function () {
-                console.log('Cal-1 previous interval');
+                //console.log('Cal-1 previous interval');
             },
             onIntervalChange: function () {
-                console.log('Cal-1 interval changed');
+                //console.log('Cal-1 interval changed');
             }
         },
         multiDayEvents: {
@@ -134,7 +134,7 @@ function selectCurrentEvent(){
     var param = {
     		selectedMonth : thisMonth
     	};
-    console.log(param)
+    //console.log(param)
     $.ajax({
   	  url : "/selectWorkListAtMonth.do",
   	  type: "post",
@@ -146,8 +146,8 @@ function selectCurrentEvent(){
 		var workList = result.workListAtMonth;
 		var eventArray= new Array();
 		
-		console.log (workList);
-		console.log (workList.length);
+		//console.log (workList);
+		//console.log (workList.length);
 		  
 		for(var i =0; i<workList.length; i++)
 		{
@@ -175,7 +175,7 @@ function selectCurrentEvent(){
 				htmlText = htmlText + "고객(" + workList[i].custCnt + "건)";				
 			}
 			$(itemDivId).append(htmlText);
-			console.log(itemDivId + "/" + htmlText);
+			//console.log(itemDivId + "/" + htmlText);
 		}
 		
   	  }
@@ -196,8 +196,8 @@ function selectWorkListAtdate(date){
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
 			  workList = data.workList;
-			  console.log ("search success");
-			  console.log (data);
+			  //console.log ("search success");
+			  //console.log (data);
 			  
 			  $("#workList").empty();
 			  
@@ -207,13 +207,14 @@ function selectWorkListAtdate(date){
 				  htmlText = htmlText + '<tr onclick="f_modifyWork(' + i + ');return false;" style="cursor:pointer;"><td><a href="#">[' + item.mbrNm + '] ' + item.workTitle + '</a></td></tr>';
 			  }
 			  htmlText += '</table>';
-			  console.log(htmlText);
+			  //console.log(htmlText);
 			  $("#workList").append(htmlText);
 		  }
 	});
 }
 
 function f_work_detail() {
+	console.log(">> go work detail : objtNo(" + $(".workForm #objtNo").val() + ") / custId(" + $(".workForm #custId").val() + ")" );
 	if ($(".workForm #objtNo").val() != "") {
 		f_objt_detail();
 	} else if ($(".workForm #custId").val() != "") {
@@ -248,6 +249,8 @@ function f_objt_detail() {
 	var frm = $('#workForm')[0];
 	frm.action = '/objtDtlView.do';
 	frm.method = 'POST';
+
+	console.log(">> f_objt_detail() : url(" + url +"), form(" + frm +")");	
 	frm.submit();	
 	
 }
@@ -256,6 +259,9 @@ function f_mbr_detail() {
 	$("#pageNm").val("custPublic");
 	frm.action = '/viewClient.do';
 	frm.method = 'POST';
+	
+
+	console.log(">> f_mbr_detail() : form(" + frm +")");
 	frm.submit();
 
 }
@@ -330,7 +336,7 @@ function f_selectWorkItem(workNo){
 		  success : function(data){
 			  
 			  var Item = data.workItem;
-			  console.log (Item);
+//			  console.log (Item);
 			  $("#workNo").val(Item.workNo);
 //			  $("#custId").val(Item.custId);
 //			  $("#objtNo").val(Item.objtNo);
@@ -366,8 +372,8 @@ function f_selectDirListAtWork(workNo){
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
 			  dirList = data.dirList;
-			  console.log ("search success");
-			  console.log (data);
+//			  console.log ("search success");
+//			  console.log (data);
 			  
 			  $("#todoItemList").empty();
 			  var htmlText = "";
@@ -408,7 +414,7 @@ function f_selectDirListAtWork(workNo){
 				  htmlText += "</td></tr>";
 				  htmlText += "</table></div>"
 			  }
-			  console.log(htmlText);
+//			  console.log(htmlText);
 			  $("#todoItemList").append(htmlText);
 		  }
 	});
@@ -418,7 +424,7 @@ function f_selectDirListAtWork(workNo){
 function f_changeDone_state(dirNo, curState){
 	
 	var changingState = "";
-	console.log(curState);
+//	console.log(curState);
 	if(curState == "Y"){
 		changingState = "N";
 	} else {
@@ -466,13 +472,13 @@ function f_work_save() {
 		$("#workTitle").focus();
 		return;
 	} 
-
+/*
 	if ($("#workContent").val() == "") {
 		alert ("작업내역을 입력하세요.");
 		$("#workContent").focus();
 		return;
 	} 
-
+*/
 	var endDt = $("#endDt").val();
 	var endDtYn = $("#endDateYn").is(":checked")? 'Y' : 'N';
 	
@@ -485,7 +491,7 @@ function f_work_save() {
 		var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate(); 
 		var todayDt = year + '-' + mon + '-' + day;
 		
-		console.log(todayDt + "/" + endDt);
+//		console.log(todayDt + "/" + endDt);
 		if(endDt == '') {
 			alert("종료일을 선택해 주세요");
 			$("#endDt").focus();

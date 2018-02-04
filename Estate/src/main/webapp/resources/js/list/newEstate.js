@@ -3,8 +3,8 @@ $( document ).ready(function() {
 	
 	window.document.domain = sbuURL;
 });
-//var sbuURL = "여의도닷컴.com";
-var sbuURL = "localhost";
+var sbuURL = "여의도닷컴.com";
+//var sbuURL = "localhost";
 
 function f_map_setting(myaddress) {
 	var pointX = 0;
@@ -60,7 +60,8 @@ function estatePopup(){
 	//호출하게 됩니다. 
 
 	window.document.domain = sbuURL;
-	var pop = window.open("./resources/popup/newEstate.jsp","_blank","width=850, height=950, scrollbars=yes, resizable=yes");  
+	var pop = window.open("./resources/popup/newEstate.jsp","_blank","width=850,height=630, scrollbars='no', resizable='yes'");  
+
 }
 
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){    
@@ -101,11 +102,12 @@ function f_estate_save() {
 		return;
 	}
 
-	if ( $("#businessCode").val() == "") {
+/*	if ( $("#businessCode").val() == "") {
 		alert ("사업자 등록번호 필수입력 값입니다.");
 		$("#businessCode").focus();
 		return;
 	}
+*/	
 	if ( $("#estateCode").val() == "") {
 		alert ("부동산 등록번호 필수입력 값입니다.");
 		$("#estateCode").focus();

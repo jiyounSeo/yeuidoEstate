@@ -2,7 +2,6 @@ function f_getListForNewReportNotice(){
 
 	var today_date = Number(moment().format('YYYY'))+"-"+Number(moment().format('M'))+"-"+moment().format('DD');
 	//var today_date = "2017-11-07"; 
-	console.log("start select new report!! :: "+today_date);
 	 
 	 var param = { todayDt : today_date}
 	$.ajax({
@@ -13,7 +12,7 @@ function f_getListForNewReportNotice(){
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(result){
 			  
-			  console.log("select success, list size : " + result.newList.length);
+			  console.log("success[" + today_date + "], list size : " + result.newList.length);
 			  
 			 var htmlText = "";
 			 $("#newReportNt").empty();
@@ -30,7 +29,7 @@ function f_getListForNewReportNotice(){
 				 htmlText += " 하였습니다.</li>"
 			 }			 
 			 $("#newReportNt").append(htmlText);
-			 console.log(htmlText);
+			 //console.log(htmlText);
 			 fn_article3('rollingText',true);
 		  }
 		});

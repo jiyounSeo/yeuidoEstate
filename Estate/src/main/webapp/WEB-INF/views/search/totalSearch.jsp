@@ -53,6 +53,7 @@
 }
 </style>
 
+<!--  검색대상 : 부동산소속 관계없이 활성&공동, 보류&공동 물건 -->
 <form id="totalSearch" name="totalSearch" action="post">
 <div style="width:1500px;margin:auto;padding:0;">
 	<img src="./resources/images/title_total_search.jpg">

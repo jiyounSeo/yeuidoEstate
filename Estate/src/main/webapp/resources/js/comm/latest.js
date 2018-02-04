@@ -50,8 +50,8 @@ function latest_bbs(bbs_name, target, listSize){
 			if(bbs_name == "direction"){
 				latest_bbs("dueDt", "#direction_latest", "0");
 			} else {
-				console.log(htmlText);
-				console.log(target);
+				//console.log(htmlText);
+				//console.log(target);
 				$(target).append(htmlText);				
 			}
 		},
@@ -111,7 +111,7 @@ function makeWorkListWithEndDt(htmlText, listSize){
 			htmlText = htmlText + makeEndDtLatestList(result.workListEndDt);	
 			listSize = listSize + result.workListEndDt.length;
 			
-			console.log(">> get DB : " + htmlText);
+			//console.log(">> get DB : " + htmlText);
 
 			makeDueList(htmlText, listSize);
 		
@@ -147,7 +147,7 @@ function makeDueList(htmlText, listSize){
 				htmlText = "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-- 지시사항이 없습니다";
 			}
 			
-			console.log(htmlText);
+			//console.log(htmlText);
 			$("#direction_latest").append(htmlText);	
 		},
 		error : function(request, status, error ) {   // 오류가 발생했을 때 호출된다. 

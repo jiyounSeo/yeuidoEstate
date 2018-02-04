@@ -94,13 +94,13 @@ function f_work_save() {
 		$("#workTitle").focus();
 		return;
 	} 
-
+/*
 	if ($("#workContent").val() == "") {
 		alert ("작업내역을 입력하세요.");
 		$("#workContent").focus();
 		return;
 	} 
-	
+*/	
 	var endDt = $("#endDt").val();
 	var endDtYn = $("#endDateYn").is(":checked")? 'Y' : 'N';
 

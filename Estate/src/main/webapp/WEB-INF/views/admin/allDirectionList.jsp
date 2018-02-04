@@ -130,7 +130,7 @@
 
 <script id="dirListEmptyTemplteAdmin" type="text/x-jquery-tmpl">	
 	<tr>
-		<td colspan="6">게시글이 존재하지 않습니다.</td>
+		<td colspan="7">게시글이 존재하지 않습니다.</td>
 	</tr>
 </script>
 <script id="dirListTemplteMbr" type="text/x-jquery-tmpl">	
@@ -158,7 +158,7 @@
 
 <script id="dirListEmptyTemplteMbr" type="text/x-jquery-tmpl">	
 	<tr>
-		<td colspan="5">게시글이 존재하지 않습니다.</td>
+		<td colspan="6">게시글이 존재하지 않습니다.</td>
 	</tr>
 </script>
 

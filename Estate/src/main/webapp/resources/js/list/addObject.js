@@ -25,6 +25,7 @@ $(document).ready(function(){
 	if ( $("#objtNo").val() != "") {
 		f_objectDtl_select();
 	}
+	
 	$( ".datepicker" ).datepicker({
 	    dateFormat: 'yy-mm-dd',
 	    prevText: '이전 달',

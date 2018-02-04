@@ -6,7 +6,7 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/common.js"></script>		
-	<script type="text/javascript" src="./resources/js/comm/latest.js?20180202"></script>					
+	<script type="text/javascript" src="./resources/js/comm/latest.js?20180203"></script>					
 	
 </head>
 
@@ -70,7 +70,7 @@
 		<td width="690px" height="275px" background="./resources/images/lst_todo_bg.jpg">
 			<table class="todoLatest">
 				<tr><td height="60px;" onClick="location.href='./selectALLDirListPage.do'" class="latest_title">more</td></tr>
-				<tr><td valign="top"><div style="overflow-y:scroll;height:95%;" class="content" id="direction_latest"></div></td></tr>
+				<tr><td valign="top"><div  style="overflow-x:hidden; overflow-y:scroll;height:190px;" class="content" id="direction_latest"></div></td></tr>
 			</table>
 		</td>
 		<td width="5px"></td>

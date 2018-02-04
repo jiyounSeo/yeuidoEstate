@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="./resources/js/cal/clndr.js?v20180201"></script>
-<script type="text/javascript" src="./resources/js/cal/cal.js?v201802022"></script>
+<script type="text/javascript" src="./resources/js/cal/cal.js?v20180202"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 

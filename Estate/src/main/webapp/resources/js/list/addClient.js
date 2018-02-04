@@ -28,9 +28,14 @@ function f_customerDtl_select() {
 			  var result = data.custInfo;		
 			  
 			  var tmp = result.reqContent;
-			  var changed = tmp.replace(/\n/g, '<br>'); 
+			  console.log(tmp);
 			  $("#reqContentView").empty();
-			  $("#reqContentView").append(changed);
+			  if(tmp == null || tmp == '' || tmp == undefined){
+				  $("#reqContentView").append(tmp); 
+			  } else {
+				  var changed = tmp.replace(/\n/g, '<br>'); 
+				  $("#reqContentView").append(changed);
+			  }
 			  
 			  $("#budAmtView").empty();
 			  $("#budAmtView").append( comma(result.budAmt) + "만원");

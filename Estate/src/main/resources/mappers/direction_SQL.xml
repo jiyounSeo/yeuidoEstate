@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  FROM direction d
 	 WHERE 1=1
 	 AND targetUser=#{user.mbrId}
-     order by regDate desc
+     order by intvDay desc
 	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
  
@@ -123,7 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	AND targetUser=#{user.mbrId}
 	 </if>
 	 AND isDone='N'
-     order by regDate desc
+     order by intvDay desc
 	</select>   
 
 	<!-- 선택날짜의 지시사항 리스트 -->
