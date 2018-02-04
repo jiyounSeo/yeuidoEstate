@@ -76,7 +76,7 @@ function resizeWindow(win){
 
 function buildingPopup(){ 
 	window.document.domain = sbuURL;
-	var pop = window.open("./resources/popup/newBuilding.jsp","_blank","width=850,height=930, scrollbars='no', resizable='yes'");  
+	var pop = window.open("./resources/popup/newBuilding.jsp","_blank","width=850,height=900, scrollbars='yes', resizable='yes'");  
 }
 
 
@@ -232,7 +232,7 @@ function f_category_modify(index, buildCd){
 	//호출하게 됩니다. 	
 
 	window.document.domain = sbuURL;
-	var pop = window.open("./resources/popup/editBuilding.jsp?buildCd="+buildCd,"_blank","width=850,height=930, scrollbars='no', resizable='yes'");  
+	var pop = window.open("./resources/popup/editBuilding.jsp?buildCd="+buildCd,"_blank","width=850,height=900, scrollbars='yes', resizable='yes'");  
 }
 
 function getHttpParam(name) {
