@@ -151,6 +151,13 @@ function f_srchObjt_popup(){
 
 function f_list_view_change() {
 	 var comSubmit = new ComSubmit("newClient");
+	 if ($("input[name=activeTp]:checked").val() == 'AT001') {
+		 $("#pageNm").val('custActiveY'); 
+	 } else if ($("input[name=activeTp]:checked").val() == 'AT002') {
+		 $("#pageNm").val('custActiveN'); 
+	 } else {
+		 $("#pageNm").val('custPublic'); 
+	 }
 	 comSubmit.setUrl("/commClListPostView.do");
 	 comSubmit.submit();
 }

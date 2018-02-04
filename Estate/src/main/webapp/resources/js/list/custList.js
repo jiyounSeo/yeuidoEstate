@@ -40,6 +40,11 @@ function f_custList_select() {
 	} else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
 		 activeTpChk = "";
 	}
+	/* 
+	 * custPublic : 공동
+	 * custActiveY : 활성카드
+	 * custActiveN : 보류카드
+	 */
 	var param = {
 	    publicYn : $("#publicYn").val()
 	   , activeTp : activeTpChk //  $("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
