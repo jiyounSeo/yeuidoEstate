@@ -242,15 +242,19 @@ function f_objt_detail() {
 		case "OT006"	:
 			url = "viewObTicket";
 			break;
-		
 	}
 	$(".workForm #viewUrl").val(url);
+	
+	if($(".workForm #viewUrl").val() == ''){
+		console.log(">> go work detail : objtNo(" + $(".workForm #objtNo").val() + ") / custId(" + $(".workForm #custId").val() + ")" );
+		console.log(">> f_objt_detail() : url(" + url +"), form(" + frm +")");	
+		return;
+	}
 	
 	var frm = $('#workForm')[0];
 	frm.action = '/objtDtlView.do';
 	frm.method = 'POST';
 
-	console.log(">> f_objt_detail() : url(" + url +"), form(" + frm +")");	
 	frm.submit();	
 	
 }
@@ -338,8 +342,7 @@ function f_selectWorkItem(workNo){
 		  success : function(data){
 			  
 			  var Item = data.workItem;
-			  console.log (Item);
-
+			  
 				$(".workForm #curSelectedItemIdx").val(workNo);
 				$(".workForm #workNo").val(Item.workNo);
 				$(".workForm #objtNo").val(Item.objtNo);
@@ -356,7 +359,8 @@ function f_selectWorkItem(workNo){
 			  $("#workContentForAdmin").empty();
 			  $("#workTitleForAdmin").append(workTitle);
 			  $("#workContentForAdmin").append(workContent);
-				
+			
+			  console.log(">> open : " + $(".workForm #curSelectedItemIdx").val() + "/" + $(".workForm #workNo").val() + "/" + $(".workForm #objtNo").val() + "/" + $(".workForm #objtTp").val() + "/" + $(".workForm #saleTp").val() + "/" + $(".workForm #custId").val());
 		  }
 	});
 	

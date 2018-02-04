@@ -52,6 +52,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    SELECT workNo
 	     , mbrId
 	     , custId
+	     , if (isnull(w.objtNo), '', (select objtTp from saleobject o where w.objtNo = o.objtNo )) objtTp 
+	     , if (isnull(w.objtNo), '', (select saleTp from saleobject o where w.objtNo = o.objtNo )) saleTp 
 	     , objtNo
 	     , workTitle
 	     , workContent
@@ -61,6 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , (select mbrNm from member m where w.frstRegUser = m.mbrId) mbrNm
 	     , frstRegUser
 		 , DATE_FORMAT(scheduledDt, '%Y-%m-%d') as scheduledDt
+		 , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE ( case when w.frstRegUser = #{user.mbrId} then 'Y' else 'N' END ) END deleteBtnYn
 	     FROM workdoc w
 		 WHERE 1=1
 		 AND workNo=#{selectedWorkNo}

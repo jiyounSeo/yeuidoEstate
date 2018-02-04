@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="./resources/js/cal/clndr.js?v20180205"></script>
 <script type="text/javascript" src="./resources/js/cal/holiday.js?v20180205"></script>
-<script type="text/javascript" src="./resources/js/cal/cal.js?v20180204"></script>
+<script type="text/javascript" src="./resources/js/cal/cal.js?v20180205"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
