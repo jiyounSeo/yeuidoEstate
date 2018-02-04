@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<script type="text/javascript" src="./resources/js/cal/clndr.js?v20180201"></script>
-<script type="text/javascript" src="./resources/js/cal/cal.js?v20180202"></script>
+<script type="text/javascript" src="./resources/js/cal/clndr.js?v20180205"></script>
+<script type="text/javascript" src="./resources/js/cal/holiday.js?v20180205"></script>
+<script type="text/javascript" src="./resources/js/cal/cal.js?v20180204"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
@@ -49,8 +50,6 @@
 											<td width="140px;"><input type="text" id="endDt" name="endDt" class="datepicker" style="width:140px;" readonly="readonly" disabled="disabled"></td>
 										</tr>
 									</table>
-									
-									
 								</td>
 							</tr>
 							<tr><td colspan="2" align="right"><a href="#work" onclick="f_work_detail();return false;"> >> 대상바로가기</a></td></tr>

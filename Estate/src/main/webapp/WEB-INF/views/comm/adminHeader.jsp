@@ -9,7 +9,7 @@
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
-<script type="text/javascript" src="./resources/js/report/rollingNotice.js"></script>
+<script type="text/javascript" src="./resources/js/report/rollingNotice.js?v20180204"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.vticker-min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {

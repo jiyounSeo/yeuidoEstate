@@ -275,6 +275,8 @@ function f_modifyWork(index) {
 	$("#saleTp").val(workList[index].saleTp);
 	$("#custId").val(workList[index].custId);
 	
+	console.log(workList[index].workNo + "/" + workList[index].objtNo + "/" + workList[index].objtTp + "/" + workList[index].saleTp + "/" + workList[index].custId);
+	
 	$("#workTitle").val(workList[index].workTitle);
 	$("#workContent").val(workList[index].workContent);
 	
@@ -336,11 +338,15 @@ function f_selectWorkItem(workNo){
 		  success : function(data){
 			  
 			  var Item = data.workItem;
-//			  console.log (Item);
-			  $("#workNo").val(Item.workNo);
-//			  $("#custId").val(Item.custId);
-//			  $("#objtNo").val(Item.objtNo);
-//			  
+			  console.log (Item);
+
+				$(".workForm #curSelectedItemIdx").val(workNo);
+				$(".workForm #workNo").val(Item.workNo);
+				$(".workForm #objtNo").val(Item.objtNo);
+				$(".workForm #objtTp").val(Item.objtTp);
+				$(".workForm #saleTp").val(Item.saleTp);
+				$(".workForm #custId").val(Item.custId);
+
 			  $("#workTitle").val(Item.workTitle);
 			  $("#workContent").val(Item.workContent);
 			

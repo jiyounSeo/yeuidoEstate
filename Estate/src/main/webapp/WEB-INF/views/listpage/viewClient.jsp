@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
-<script type="text/javascript" src="./resources/js/list/addClient.js?v20180203"></script>
+<script type="text/javascript" src="./resources/js/list/addClient.js?v20180204"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 
 <form id="viewClient" action="/">
@@ -51,11 +51,12 @@
 	<table class="bottom_btn_table">
 			<tbody><tr>
 				<td align="left" width="50%">
+				<c:if test="${modifyYn eq 'Y'}">
 					<div id="viewObjBot">
 						<a href="./modifyCustomerInfo.do?custId=${custId}&pageNm=${pageNm}"> <img src="./resources/images/btn_modify.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a href="#"><img src="./resources/images/btn_del.jpg" onclick="f_customer_delete();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</div>
-					
+				</c:if>	
 				</td>
 				<td align="right" width="50%">
 					<a href="#"><img src="./resources/images/btn_cl_list.jpg" onclick="f_list_view_change2();return false;"></a>

@@ -28,7 +28,7 @@ function f_customerDtl_select() {
 			  var result = data.custInfo;		
 			  
 			  var tmp = result.reqContent;
-			  console.log(tmp);
+			  //console.log(tmp);
 			  $("#reqContentView").empty();
 			  if(tmp == null || tmp == '' || tmp == undefined){
 				  $("#reqContentView").append(tmp); 

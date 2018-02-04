@@ -6,7 +6,7 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
 	<script type="text/javascript" src="./resources/js/comm/common.js"></script>		
-	<script type="text/javascript" src="./resources/js/comm/latest.js?20180203"></script>					
+	<script type="text/javascript" src="./resources/js/comm/latest.js?v20180204"></script>					
 	
 </head>
 

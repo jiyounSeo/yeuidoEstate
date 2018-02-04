@@ -18,6 +18,7 @@
  * Further changes, comments: @addyosmani
  * Licensed under the MIT license
  */
+
 (function (factory) {
     // Multiple loading methods are supported depending on
     // what is available globally. While moment is loaded
@@ -63,7 +64,20 @@
                 "<% for(var j = 0; j < 7; j++){ %>" +
                 "<% var d = j + i * 7; %>" +
                     "<td class='<%= days[d].classes %>'>" +
-                        "<div class='day-contents'><%= days[d].day %></div>" +
+                        "<div class='day-contents'>" +
+                        		"<% var dataArr = (days[d].classes).split(' '); %>" +
+                        		"<% var strIndex = dataArr.length - 2; %>" +
+                        		"<% var sDateArr = (dataArr[strIndex]).split('calendar-day-'); %>" +
+                        		"<% var getDay = new Date(sDateArr[1]); %>" +
+							    "<% var getWeekDay = week[getDay.getDay()]; %>" +
+							    "<% var monthdayArr = sDateArr[1].split('-'); %>" + 
+							    "<% var monthday = monthdayArr[1] + '-' + monthdayArr[2]; %>" + 
+							    "<% if((getWeekDay == 'sun' || holiday.indexOf(monthday) != -1 || solaHoliday.indexOf(sDateArr[1]) != -1) && dataArr[1] != 'adjacent-month' && (dataArr[2] != 'adjacent-month')){ %>" + 
+						    		"<font color='#ce0000'>" + "<%= days[d].day %>" + "</font>" +
+							    "<% } else { %>" +
+							    	"<%= days[d].day %>" +
+							    "<% } %>" +
+                        "</div>" +
                         "<% if(i == 0 ){ %>" +
                         	"<% if( days[d].day < 7) { %>" +
                         		"<div class='day-events' id='eventCnt<%=days[d].day%>'></div>" +
@@ -143,6 +157,7 @@
         },
     };
 
+    
     /**
      * The actual plugin constructor.
      * Parses the events and lengthOfTime options to build a calendar of day

@@ -8,7 +8,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
-<script type="text/javascript" src="./resources/js/list/custList.js"></script>	
+<script type="text/javascript" src="./resources/js/list/custList.js?v20180204"></script>	
 <form id="commClList">
 <div id="cl_list" name="cl_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
