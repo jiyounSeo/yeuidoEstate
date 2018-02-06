@@ -143,14 +143,13 @@
 <div style="width:1500px;margin:auto;padding:0;">
 <table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 	<tr style="height:30px;">
-		<td>&nbsp;
+		<td colspan="4">&nbsp;</td>
 	</tr>
 	<tr>
-		<td width="100%" align="right" valign="bottom">
-			<a href="#btn" onclick="f_view_change('1');return false;"><img src="./resources/images/btn_viewmode_1_on.jpg"></a>
-			<a href="#btn" onclick="f_view_change('2');return false;"><img src="./resources/images/btn_viewmode_2_off.jpg"></a>
-			<a href="#btn" onclick="f_view_change('3');return false;"><img src="./resources/images/btn_viewmode_3_off.jpg"></a>
-		</td>	
+		<td width="1260px" align="right" valign="bottom" height="60"></td>	
+		<td style="width:80px;cursor:pointer;text-align:center;" onclick="f_view_change('1');return false;"><img src="./resources/images/btn_viewmode_1_on.jpg"></td>
+		<td style="width:80px;cursor:pointer;text-align:center;" onclick="f_view_change('2');return false;"><img src="./resources/images/btn_viewmode_2_off.jpg"></td>
+		<td style="width:80px;cursor:pointer;text-align:center;" onclick="f_view_change('3');return false;"><img src="./resources/images/btn_viewmode_3_off.jpg"></td>
 	</tr>
 </table>
 </div>

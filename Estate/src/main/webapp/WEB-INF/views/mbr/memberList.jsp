@@ -118,8 +118,8 @@
 {{each mbrList}}		
 	<tr>
 		<td class="mbr_mem">{{html $index+1}}</td>
-		<td class="mbr_mem">{{html $value.mbrNm}}</td>
 		<td class="mbr_mem">{{html $value.loginId}}</td>
+		<td class="mbr_mem">{{html $value.mbrNm}}</td>
 		<td class="mbr_mem">
 			{{html $value.tel1}}
 			-{{html $value.tel2}}
