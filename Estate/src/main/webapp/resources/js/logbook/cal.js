@@ -138,21 +138,24 @@ function selectCurrentEvent(){
 		}
 		calendars.setEvents(eventArray);
 		
-		for(var i =0; i<LBList.length; i++)
-		{
-			var day = LBList[i].frstRegDt;
-			var dayArray = day.split('-');
-			var itemDivId = '#eventCnt'+dayArray[2];
-			
-			$(itemDivId).empty();
-			var htmlText = "";
-			
-			if(LBList[i].bookCnt > 0){
-				htmlText = htmlText + "업무일지(" + LBList[i].bookCnt + "건)<br>";				
+		var mbrTp = $("#mbrType").val();
+    	if (mbrTp  == "MT003" || mbrTp == "MT004") {
+			for(var i =0; i<LBList.length; i++)
+			{
+				var day = LBList[i].frstRegDt;
+				var dayArray = day.split('-');
+				var itemDivId = '#eventCnt'+dayArray[2];
+				
+				$(itemDivId).empty();
+				var htmlText = "";
+				
+				if(LBList[i].bookCnt > 0){
+					htmlText = htmlText + "업무일지(" + LBList[i].bookCnt + "건)<br>";				
+				}
+				$(itemDivId).append(htmlText);
+				console.log(itemDivId + "/" + htmlText);
 			}
-			$(itemDivId).append(htmlText);
-			console.log(itemDivId + "/" + htmlText);
-		}
+    	}
   	  }
   	});
 }
