@@ -8,13 +8,11 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../js/comm/jquery.tmpl.js"></script>
-<script type="text/javascript" src="../js/list/srchInterObjt.js"></script>
+<script type="text/javascript" src="../js/list/srchInterObjt.js?v20180207"></script>
 <!-- 아파트 -->
 <body >
 <form id="srchObjtPop" method="post"> 
-<div class="popup_page_title">
-	<img src="./resources/images/title_popup_ob_1.jpg">
-</div>
+
 <div  style="text-align: right;">
 	<table class="new_page_table" style="width:100%;">
 		<tr>
@@ -27,29 +25,32 @@
 		<tr>
 			<td class="title2">물건종류</td>
 			<td colspan="3">
-			  <input type="radio" id="objtTp1" name="objtTp" value="OT001"/><label for="objtTp1">아파트</label>
-			  <input type="radio" id="objtTp2" name="objtTp" value="OT002"/><label for="objtTp2">상가</label>
-			  <input type="radio" id="objtTp3" name="objtTp" value="OT003"/><label for="objtTp3">사무실/빌딩</label>
-			  <input type="radio" id="objtTp4" name="objtTp" value="OT004"/><label for="objtTp4">오피스텔</label>
-			  <input type="radio" id="objtTp5" name="objtTp" value="OT005"/><label for="objtTp5">주상복합</label>
-			  <input type="radio" id="objtTp6" name="objtTp" value="OT006"/><label for="objtTp6">분양권</label>
+			  <input type="checkbox" id="objtTp1" name="objtTp1" value="OT001"/><label for="objtTp1">아파트</label>
+			  <input type="checkbox" id="objtTp2" name="objtTp2" value="OT002"/><label for="objtTp2">상가</label>
+			  <input type="checkbox" id="objtTp3" name="objtTp3" value="OT003"/><label for="objtTp3">사무실/빌딩</label>
+			  <input type="checkbox" id="objtTp4" name="objtTp4" value="OT004"/><label for="objtTp4">오피스텔</label>
+			  <input type="checkbox" id="objtTp5" name="objtTp5" value="OT005"/><label for="objtTp5">주상복합</label>
+			  <input type="checkbox" id="objtTp6" name="objtTp6" value="OT006"/><label for="objtTp6">분양권</label>
 			</td>
 		</tr>
 		<tr>
 			<td class="title2">물건유형</td>
 			<td colspan="3">
-			  <input type="radio" id="saleTp1" name="saleTp" value="ST001"/><label for="saleTp1">매매</label>
-			  <input type="radio" id="saleTp2" name="saleTp" value="ST002"/><label for="saleTp2">전세</label>
-			  <input type="radio" id="saleTp3" name="saleTp" value="ST003"/><label for="saleTp3">월세</label>
-			  <input type="radio" id="saleTp4" name="saleTp" value="ST004"/><label for="saleTp4">렌트</label>
+			  <input type="checkbox" id="saleTp1" name="saleTp1" value="ST001"/><label for="saleTp1">매매</label>
+			  <input type="checkbox" id="saleTp2" name="saleTp2" value="ST002"/><label for="saleTp2">전세</label>
+			  <input type="checkbox" id="saleTp3" name="saleTp3" value="ST003"/><label for="saleTp3">월세</label>
+			  <input type="checkbox" id="saleTp4" name="saleTp4" value="ST004"/><label for="saleTp4">렌트</label>
 			</td>
 		</tr>
 		<tr>
 			<td class="title2">주소</td>
-			<td><input type="radio" id="rdoAddr1" name="rdoAddr" value="1"/><label for="rdoAddr1">도로명</label>
-			  <input type="radio" id="rdoAddr2" name="rdoAddr" value="2"/><label for="rdoAddr1">지번</label>
-			 </td>
-			<td colspan="2"><input type="text" id="addr" name="addr"> </td>
+			<td colspan="3">
+				<input type="text" id="addr" name="addr" style="width:65%;" onKeydown="f_controlTypeBox()"  onChange="f_controlTypeBox()">&nbsp;&nbsp; 
+				<span id="addrType" name="addrType" style="visibility:hidden">
+					<input type="radio" id="rdoAddr1" name="rdoAddr" value="1"/><label for="rdoAddr1">도로명</label>
+					<input type="radio" id="rdoAddr2" name="rdoAddr" value="2"/><label for="rdoAddr1">지번</label>
+				</span>
+			</td>
 		</tr>
 		<tr>
 			<td class="title2">평수</td>

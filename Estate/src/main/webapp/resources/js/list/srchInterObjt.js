@@ -118,4 +118,13 @@ function f_interObjt_insert() {
 	
 }
 
-
+function f_controlTypeBox(){
+	if($("#addr").val() != ''){
+		$("#addrType").css("visibility","visible"); 
+	} else {
+		$("#addrType").css("visibility","hidden");
+		$("input[name=rdoAddr]:checked").each(function(){
+		     $(this).attr("checked",false);
+		    });
+	}
+}
