@@ -128,20 +128,32 @@
 		<td class="mbr_mem">{{html $value.estateNm}}</td>
 		<td class="mbr_mem">{{html $value.frstRegDt}}</td>
 		<td class="mbr_mem">
+			{{if $value.isSameEstate == "Y" || $value.isRootAdmin == "Y"}}
 			<select name="mbrTp" id="mbrTp" onchange="f_changeMbrTp({{html $index}}, this.value);">
 				<option value="MT001" {{if $value.mbrTpCd == "MT001"}}selected{{/if}}>미승인</option>
 				<option value="MT002" {{if $value.mbrTpCd == "MT002"}}selected{{/if}}>일반회원</option>
 				<option value="MT005" {{if $value.mbrTpCd == "MT005"}}selected{{/if}}>일시정지회원</option>
 				<option value="MT003" {{if $value.mbrTpCd == "MT003"}}selected{{/if}}>부동산관리자</option>
+				{{if $value.isRootAdmin == "Y"}}
 				<option value="MT004" {{if $value.mbrTpCd == "MT004"}}selected{{/if}}>최고관리자</option>
+				{{/if}}
 			</select>
+			{{else}}
+				{{if $value.mbrTpCd == "MT001" }} 미승인
+				{{else $value.mbrTpCd == "MT002" }} 일반회원
+				{{else $value.mbrTpCd == "MT003" }} 부동산관리자
+				{{else $value.mbrTpCd == "MT004" }} 최고관리자
+				{{else $value.mbrTpCd == "MT005" }} 일시정지회원
+				{{/if}}
+			{{/if}}
 		</td>
 		<td class="mbr_mem">
-			{{if $value.mbrTpCd == "MT001"}}
-			<a href="#" onclick="f_memeber_accept({{html $index}});return false;"><img src="./resources/images/icon_approve.png" width="50px" height="46px"></a>
-			{{/if}}			
-			<a href="#" onclick="f_memeber_reject({{html $index}});return false;"><img src="./resources/images/icon_del.png" width="50px" height="46px"></a>
-			</button>
+			{{if $value.isSameEstate == "Y" || $value.isRootAdmin == "Y"}}
+				{{if $value.mbrTpCd == "MT001"}}
+					<a href="#" onclick="f_memeber_accept({{html $index}});return false;"><img src="./resources/images/icon_approve.png" width="50px" height="46px"></a>
+				{{/if}}
+				<a href="#" onclick="f_memeber_reject({{html $index}});return false;"><img src="./resources/images/icon_del.png" width="50px" height="46px"></a>
+			{{/if}}
 		</td>
 	</tr>
 {{/each}}

@@ -133,13 +133,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value= "/memberList.do", method=RequestMethod.POST)
-	public ModelAndView memberList( @RequestParam Map<String,Object> map)  {  
+	public ModelAndView memberList( @RequestParam Map<String,Object> map, HttpSession session)  {  
 		ModelAndView mav= new ModelAndView();
 		Paging paging = new Paging();
         
 		List<Map<String,Object>> mbrList = new ArrayList<Map<String,Object>>();
 		 
 		try {
+			map.put("user",  session.getAttribute("user"));
+			
 			int currentPage = Integer.parseInt(map.get("currentPage").toString());
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
 			map.put("rowNum", (currentPage-1)*pagePerRow);

@@ -69,6 +69,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 , DATE_FORMAT(modfRegDt, '%Y-%m-%d') modfRedDt
 			 , modfRegUser
 			 , (SELECT COUNT(*) FROM member) totalCnt
+			 , case when #{user.mbrTp} = 'MT004' then 'Y' ELSE 'N' END isRootAdmin
+			 , case when m.estateCd = #{user.estateCd} then 'Y' else 'N' END isSameEstate
 		  from member m
 		 where 1=1
 		    
