@@ -25,6 +25,27 @@
   background-color: #eeeeee;
 }
 
+.directionBox {
+	width:90%;
+	border:1px dashed #d3d3d3;
+	padding:5px;
+	margin:5px 0 5px 0;
+	text-align:left;
+}
+
+.directionBox table td {
+	padding: 3px 0 3px 0;
+}
+.directionBox table td.isDo {
+	border-right: 1px solid #d3d3d3;
+	width:85px;
+	padding-top : 5px;
+	padding-bottom : 5px;
+}
+
+.directionBox table td.todoCont {
+	padding : 0 10px 0 10px;
+}
 
 .addMemoPopup {
 	background-color:#fafafa;

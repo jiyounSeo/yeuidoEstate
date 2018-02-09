@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="./resources/js/cal/clndr.js?v20180205"></script>
 <script type="text/javascript" src="./resources/js/cal/holiday.js?v20180205"></script>
-<script type="text/javascript" src="./resources/js/cal/cal.js?v2018020"></script>
+<script type="text/javascript" src="./resources/js/cal/cal.js?v20180207"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
@@ -38,8 +38,8 @@
 				<td align="right" style="padding:5px 40px 5px 0;" id="todoItemList">
 				</td>
 			</tr>
+			<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 지시사항입력창 -->
 			<tr>
-				<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 지시사항입력창 -->
 				<td align="center" valign="top">
 					<div id="todoCommentBox" style="width:90%;">
 						<table class="todoBox">
@@ -53,9 +53,9 @@
 							</tr>
 						</table>
 					</div>
-				</c:if>
 				</td>
 			</tr>
+			</c:if>
 			<tr><td height="23px;"><img src="./resources/images/alert_bottom2.jpg"></td></tr>
 		</table>
 		<input type="hidden" name="workNo" id="workNo">

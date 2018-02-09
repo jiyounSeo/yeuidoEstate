@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
-<script type="text/javascript" src="./resources/js/direction/crudDirection.js?v20180203"></script>
+<script type="text/javascript" src="./resources/js/direction/crudDirection.js?v20180207"></script>
 
 <%@ include file="/WEB-INF/views/admin/dirListStyle.jsp" %> 
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 

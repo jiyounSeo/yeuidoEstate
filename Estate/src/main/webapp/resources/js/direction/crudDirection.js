@@ -103,10 +103,16 @@ function f_viewWork(index) {
 	$("#workNo").val(todoList[index].workNo);
 	
 	var workTitle = "[" + todoList[index].targetUserNm + "] " + todoList[index].workTitle;
-	var workContent = "  →  " + todoList[index].workContent;
 	$("#workTitle").empty();
 	$("#workContent").empty();
 	$("#workTitle").append(workTitle);
+
+	var chContent;
+	var tmp = todoList[index].workContent;
+	if(tmp != ''){
+		chContent = tmp.replace(/\n/g, '<br>&nbsp;&nbsp;&nbsp;&nbsp;'); 
+	}
+	var workContent = "  →  " + chContent;
 	
 	if(todoList[index].workContent != ''){
 		$("#workContent").append(workContent);		
