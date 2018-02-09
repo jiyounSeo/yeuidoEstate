@@ -281,29 +281,26 @@ function f_modifyWork(index) {
 	
 	console.log(workList[index].workNo + "/" + workList[index].objtNo + "/" + workList[index].objtTp + "/" + workList[index].saleTp + "/" + workList[index].custId);
 	
-	$("#workTitle").val(workList[index].workTitle);
-	$("#workContent").val(workList[index].workContent);
-	
-	if(workList[index].endDateYn == 'Y'){
-		$("#endDt").val(workList[index].endDt);
-		$("#endDateYn").attr("checked", "checked");
-		$("#endDt").attr('disabled', false);
-	} else {
-		  $("#endDt").val('');
-		  $("#endDateYn").attr("checked", false);
-		  $("#endDt").attr('disabled', true);
-	}
+	$("#workTitle").empty();
+	$("#workContent").empty();	
 	
 	var workTitle = "";
 	if(workList[index].endDateYn == "Y"){
 		workTitle += "[종료일 : " + workList[index].endDt + "]";
 	} 
 	workTitle += "[" + workList[index].mbrNm + "] " + workList[index].workTitle + " ( " + workList[index].frstRegDt + " )";
-	var workContent = "  →  " + workList[index].workContent;
-	$("#workTitleForAdmin").empty();
-	$("#workContentForAdmin").empty();
-	$("#workTitleForAdmin").append(workTitle);
-	$("#workContentForAdmin").append(workContent);
+
+	var tmp = workList[index].workContent;
+	var chContent = tmp.replace(/\n/g, '<br>&nbsp;&nbsp;&nbsp;&nbsp;'); 
+	var workContent = "  →  " + chContent;
+	
+	$("#workTitle").append(workTitle);
+	if(workList[index].workContent != ''){
+		$("#workContent").append(workContent);
+	}
+	
+	
+//	================================ For Admin Direction View ==================================
 
 	$("#endDtAdmin").val('');
 	$("#endDateYnAdmin").attr("checked", false);
@@ -350,17 +347,25 @@ function f_selectWorkItem(workNo){
 				$(".workForm #saleTp").val(Item.saleTp);
 				$(".workForm #custId").val(Item.custId);
 
-			  $("#workTitle").val(Item.workTitle);
-			  $("#workContent").val(Item.workContent);
-			
-			  var workTitle = "[" + Item.mbrNm + "] " + Item.workTitle + " (" + Item.frstRegDt + " )";
-			  var workContent = "  →  " + Item.workContent;
-			  $("#workTitleForAdmin").empty();
-			  $("#workContentForAdmin").empty();
-			  $("#workTitleForAdmin").append(workTitle);
-			  $("#workContentForAdmin").append(workContent);
-			
-			  console.log(">> open : " + $(".workForm #curSelectedItemIdx").val() + "/" + $(".workForm #workNo").val() + "/" + $(".workForm #objtNo").val() + "/" + $(".workForm #objtTp").val() + "/" + $(".workForm #saleTp").val() + "/" + $(".workForm #custId").val());
+				$("#workTitle").empty();
+				$("#workContent").empty();	
+				
+				var workTitle = "";
+				if(Item.endDateYn == "Y"){
+					workTitle += "[종료일 : " + Item.endDt + "]";
+				} 
+				workTitle += "[" + Item.mbrNm + "] " +Item.workTitle + " ( " + Item.frstRegDt + " )";
+
+				var tmp = Item.workContent;
+				var chContent = tmp.replace(/\n/g, '<br>&nbsp;&nbsp;&nbsp;&nbsp;'); 
+				var workContent = "  →  " + chContent;
+				
+				$("#workTitle").append(workTitle);
+				if(Item.workContent != ''){
+					$("#workContent").append(workContent);
+				}
+				
+				console.log(">> open : " + $(".workForm #curSelectedItemIdx").val() + "/" + $(".workForm #workNo").val() + "/" + $(".workForm #objtNo").val() + "/" + $(".workForm #objtTp").val() + "/" + $(".workForm #saleTp").val() + "/" + $(".workForm #custId").val());
 		  }
 	});
 	
@@ -391,12 +396,23 @@ function f_selectDirListAtWork(workNo){
 				  var item = dirList[i];
 				  htmlText += "<div class='directionBox'><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 
-				  htmlText += '<tr><td rowspan="2" class="isDo" align="center"><a href="#" onclick="f_changeDone_state(' + item.dirNo + ',\'' + item.isDone +'\');return false;">';
-				  if(item.isDone == "Y"){
-					  htmlText += "<img src='" + icon_done  +"'></a>";
-				  } else {
-					  htmlText += "<img src='" + icon_n_done  +"'></a>";
+				  htmlText += '<tr><td rowspan="2" class="isDo" align="center">';
+				  
+				  if(item.doneBtnYn == 'Y'){
+					  htmlText += '<a href="#" onclick="f_changeDone_state(' + item.dirNo + ',\'' + item.isDone +'\');return false;">';
 				  }
+				  
+				  if(item.isDone == "Y"){
+					  htmlText += "<img src='" + icon_done  +"'>";
+				  } else {
+					  htmlText += "<img src='" + icon_n_done  +"'>";
+				  }
+				  
+				  if(item.doneBtnYn == 'Y'){
+					  htmlText += '</a>';
+				  }
+				  
+				  
 				  if(item.endDateYn == "Y" && item.isDone == "N"){
 					  var color = "";
 					  var tmp = (item.intvDay.toString()).split('-');

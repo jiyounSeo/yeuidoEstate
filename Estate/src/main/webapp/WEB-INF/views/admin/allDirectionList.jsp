@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
-<script type="text/javascript" src="./resources/js/direction/crudDirection.js"></script>
+<script type="text/javascript" src="./resources/js/direction/crudDirection.js?v20180203"></script>
 
 <%@ include file="/WEB-INF/views/admin/dirListStyle.jsp" %> 
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
@@ -48,29 +48,10 @@
 			<tr><td height="34px"><a href="#" onClick="f_closePopup()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
 			<tr>
 				<td align="center" valign="top">
-					<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 지시받은 리스트 출력 -->
-					<fieldset style="width:90%;">
-						<legend align="left" style="margin-bottom:10px;"><b>[ 작업내역 ]</b></legend>
-						<table class="workItem">
-							<tr>
-								<td class="workTitle">제목</td>
-								<td class="workContent"><input type="text" id="workTitle" name="workTitle" maxlength="150" style="width:100%;"></td>
-							</tr>
-							<tr>
-								<td class="workTitle">내용</td>
-								<td class="workContent">
-									<textarea rows="5" cols="50" name="workContent" id="workContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea>
-								</td>
-							</tr>
-						</table>
-					</fieldset>
-					</c:if>
-					<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 지시사항입력창 -->
 					<fieldset style="width:90%;background-color:#f0efef;">
-						<div id="workTitleForAdmin" style="text-align:left;padding:10px 20px 10px 20px;"></div>
-						<div id="workContentForAdmin" style="text-align:left;padding:0 20px 10px 30px;"></div>
+						<a href="#work" onclick="f_work_detail();return false;"><div id="workTitle" style="text-align:left;padding:10px 20px 10px 20px;"></div></a>
+						<div id="workContent" style="text-align:left;padding:0 20px 10px 30px;"></div>
 					</fieldset>
-					</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -89,17 +70,20 @@
 						</table>
 					</div>
 				</c:if>
-				<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 수정버튼 -->
-				<td class="btn">
-							<a href="#" onClick="f_closePopup()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="#" id="popOkAdd" ><img src="./resources/images/btn_ok.jpg" onClick="f_work_save()"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				</c:if>
 				</td>
 			</tr>
 			<tr><td height="23px;"><img src="./resources/images/alert_bottom2.jpg"></td></tr>
 		</table>
 		<input type="hidden" name="workNo" id="workNo">
 		<input type="hidden" name="curSelectedItemIdx" id="curSelectedItemIdx">
+		
+		<input type="hidden" name="custId" id="custId">
+		<input type="hidden" name="objtNo" id="objtNo">
+		<input type="hidden" name="saleTp" id="saleTp">
+		<input type="hidden" name="objtTp" id="objtTp">
+		<input type="hidden" name="pageNm" id="pageNm">
+		<input type="hidden" name="viewUrl" id="viewUrl">
+		
 		<input type="hidden" name="memberType" id="memberType" value="${sessionScope.user.mbrTp}" />
 	</form>
 </div>

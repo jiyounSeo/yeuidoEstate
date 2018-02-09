@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="./resources/js/cal/clndr.js?v20180205"></script>
 <script type="text/javascript" src="./resources/js/cal/holiday.js?v20180205"></script>
-<script type="text/javascript" src="./resources/js/cal/cal.js?v20180205"></script>
+<script type="text/javascript" src="./resources/js/cal/cal.js?v2018020"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.lightbox_me.js"></script>
 
 <%@ include file="/WEB-INF/views/admin/calStyle.jsp" %> 
@@ -28,40 +28,10 @@
 			<tr><td height="34px"><a href="#" onClick="f_closePopup()"><img src="./resources/images/alert_close2.jpg"></a></td></tr>
 			<tr>
 				<td align="center" valign="top">
-					<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 작업내역 수정가능 -->
-					<fieldset style="width:90%;">
-						<legend align="left" style="margin-bottom:10px;"><b>[ 작업내역 ]</b></legend>
-						<table class="workItem">
-							<tr>
-								<td class="workTitle">제목</td>
-								<td class="workContent"><input type="text" id="workTitle" name="workTitle" maxlength="150" style="width:100%;"></td>
-							</tr>
-							<tr>
-								<td class="workTitle">내용</td>
-								<td class="workContent">
-									<textarea rows="5" cols="50" name="workContent" id="workContent" maxlength="3000" style="margin: 5px 0 5px 0;"></textarea>
-								</td>
-							</tr>
-							<tr>
-								<td height="60px;" style="text-align:right;vertical-align:middle;" colspan="2">
-									<table width="100%" cellpadding="0" cellspacing="0" border="0">
-										<tr>
-											<td style="text-align:right;padding-right:10px;"><input type="checkbox" id="endDateYn" name="endDateYn" onClick="f_active_frm();"/><label for="endDateYn">종료일 설정</label></td>
-											<td width="140px;"><input type="text" id="endDt" name="endDt" class="datepicker" style="width:140px;" readonly="readonly" disabled="disabled"></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr><td colspan="2" align="right"><a href="#work" onclick="f_work_detail();return false;"> >> 대상바로가기</a></td></tr>
-						</table>
-					</fieldset>
-					</c:if>
-					<c:if test="${sessionScope.user.mbrTp == 'MT003' || sessionScope.user.mbrTp == 'MT004'}"> <!-- 관리자 : 작업내역view -->
 					<fieldset style="width:90%;background-color:#f0efef;">
-						<a href="#work" onclick="f_work_detail();return false;"><div id="workTitleForAdmin" style="text-align:left;padding:10px 20px 10px 20px;"></div></a>
-						<div id="workContentForAdmin" style="text-align:left;padding:0 20px 10px 30px;"></div>
+						<a href="#work" onclick="f_work_detail();return false;"><div id="workTitle" style="text-align:left;padding:10px 20px 10px 20px;"></div></a>
+						<div id="workContent" style="text-align:left;padding:0 20px 10px 30px;"></div>
 					</fieldset>
-					</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -83,11 +53,6 @@
 							</tr>
 						</table>
 					</div>
-				</c:if>
-				<c:if test="${sessionScope.user.mbrTp == 'MT002'}"> <!-- 일반회원 : 수정버튼 -->
-				<td class="btn">
-							<a href="#" onClick="f_closePopup()"><img src="./resources/images/btn_cancel2.jpg"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="#" id="popOkAdd" ><img src="./resources/images/btn_ok.jpg" onClick="f_work_save()"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</c:if>
 				</td>
 			</tr>

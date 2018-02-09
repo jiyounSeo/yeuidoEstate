@@ -32,21 +32,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 내가 등록한 지시사항 리스트(관리자) -->
     <select id="selectALLRegDirList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT dirNo
-	     , workNo
-	     , dirContent
-	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
+	SELECT d.dirNo
+	     , d.workNo
+	     , d.dirContent
+         , w.objtNo
+         , w.custId
+	     , if (isnull(w.objtNo), '', (select objtTp from saleobject o where w.objtNo = o.objtNo )) objtTp 
+	     , if (isnull(w.objtNo), '', (select saleTp from saleobject o where w.objtNo = o.objtNo )) saleTp 
+	     , DATE_FORMAT(d.regDate, '%Y-%m-%d %I:%i:%s') as regDate
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , (select mbrNm from member m where d.targetUser = m.mbrId) targetUserNm
-	     , isDone
-	     , DATE_FORMAT(doneDate, '%Y-%m-%d %I:%i:%s') as doneDate
+	     , d.isDone
+	     , DATE_FORMAT(d.doneDate, '%Y-%m-%d %I:%i:%s') as doneDate
 	     , (SELECT COUNT(*) FROM direction) totalCnt
-         , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
-         , (select workContent from workdoc w where w.workNo = d.workNo) workContent
-		 , endDateYn
-		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
-         , (TO_DAYS(now()) - TO_DAYS(endDt)) as intvDay
+         , w.workTitle
+         , w.workContent
+		 , d.endDateYn
+		 , DATE_FORMAT(d.endDt, '%Y-%m-%d') as endDt
+         , (TO_DAYS(now()) - TO_DAYS(d.endDt)) as intvDay
+         , CASE WHEN d.targetUser = #{user.mbrId} THEN 'Y' ELSE 'N' END doneBtnYn
 	  FROM direction d
+      left outer join workdoc w
+         on  w.workNo = d.workNo
 	 WHERE 1=1
 	 AND regUser=#{user.mbrId}
      order by regDate desc
@@ -55,21 +62,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 수행해야하는 지시사항 리스트(회원) -->
     <select id="selectALLDirList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT dirNo
-	     , workNo
-	     , dirContent
-	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
+	SELECT d.dirNo
+	     , d.workNo
+	     , d.dirContent
+         , w.objtNo
+         , w.custId
+	     , if (isnull(w.objtNo), '', (select objtTp from saleobject o where w.objtNo = o.objtNo )) objtTp 
+	     , if (isnull(w.objtNo), '', (select saleTp from saleobject o where w.objtNo = o.objtNo )) saleTp 
+	     , DATE_FORMAT(d.regDate, '%Y-%m-%d %I:%i:%s') as regDate
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , (select mbrNm from member m where d.targetUser = m.mbrId) targetUserNm
-	     , isDone
-	     , DATE_FORMAT(doneDate, '%Y-%m-%d %I:%i:%s') as doneDate
+	     , d.isDone
+	     , DATE_FORMAT(d.doneDate, '%Y-%m-%d %I:%i:%s') as doneDate
 	     , (SELECT COUNT(*) FROM direction) totalCnt
-         , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
-         , (select workContent from workdoc w where w.workNo = d.workNo) workContent
-		 , endDateYn
-		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
-         , (TO_DAYS(now()) - TO_DAYS(endDt)) as intvDay
+         , w.workTitle
+         , w.workContent
+		 , d.endDateYn
+		 , DATE_FORMAT(d.endDt, '%Y-%m-%d') as endDt
+         , (TO_DAYS(now()) - TO_DAYS(d.endDt)) as intvDay
+         , CASE WHEN d.targetUser = #{user.mbrId} THEN 'Y' ELSE 'N' END doneBtnYn
 	  FROM direction d
+      left outer join workdoc w
+         on  w.workNo = d.workNo
 	 WHERE 1=1
 	 AND targetUser=#{user.mbrId}
      order by intvDay desc
@@ -82,6 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	     , d.workNo
          , w.custId
          , w.objtNo
+	     , if (isnull(w.objtNo), '', (select objtTp from saleobject o where w.objtNo = o.objtNo )) objtTp 
+	     , if (isnull(w.objtNo), '', (select saleTp from saleobject o where w.objtNo = o.objtNo )) saleTp 
 	     , dirContent
 	     , DATE_FORMAT(regDate, '%Y-%m-%d %I:%i:%s') as regDate
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
@@ -90,10 +106,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , d.endDateYn
 		 , DATE_FORMAT(d.endDt, '%Y-%m-%d') as endDt
          , (TO_DAYS(now()) - TO_DAYS(d.endDt)) as intvDay
+         , CASE WHEN d.targetUser = #{user.mbrId} THEN 'Y' ELSE 'N' END doneBtnYn
 	  FROM direction d
-	  	 , workdoc w
+      left outer join workdoc w
+         on  w.workNo = d.workNo
 	 WHERE 1=1
-	   and d.workNo = w.workNo 
 	 AND targetUser=#{user.mbrId}
 	 AND isDone='Y'
      order by regDate desc
@@ -101,20 +118,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 미완료한 지시사항 리스트(회원) -->
     <select id="selectNotDoneDirList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT dirNo
-	     , workNo
-	     , dirContent
-	     , DATE_FORMAT(regDate, '%Y-%m-%d') as regDate
+	SELECT d.dirNo
+	     , d.workNo
+	     , d.dirContent
+         , w.objtNo
+         , w.custId
+	     , if (isnull(w.objtNo), '', (select objtTp from saleobject o where w.objtNo = o.objtNo )) objtTp 
+	     , if (isnull(w.objtNo), '', (select saleTp from saleobject o where w.objtNo = o.objtNo )) saleTp 
+	     , DATE_FORMAT(d.regDate, '%Y-%m-%d') as regDate
 	     , (select mbrNm from member m where d.targetUser = m.mbrId) targetUserNm
 	     , (select mbrNm from member m where d.regUser = m.mbrId) regUserNm
 	     , (SELECT COUNT(*) FROM direction) totalCnt
-         , (select workTitle from workdoc w where w.workNo = d.workNo) workTitle
-         , (select workContent from workdoc w where w.workNo = d.workNo) workContent
-	     , isDone
-		 , endDateYn
-		 , DATE_FORMAT(endDt, '%Y-%m-%d') as endDt
-         , (TO_DAYS(now()) - TO_DAYS(endDt)) as intvDay
+         , w.workTitle
+         , w.workContent
+	     , d.isDone
+		 , d.endDateYn
+		 , DATE_FORMAT(d.endDt, '%Y-%m-%d') as endDt
+         , (TO_DAYS(now()) - TO_DAYS(d.endDt)) as intvDay
+         , CASE WHEN d.targetUser = #{user.mbrId} THEN 'Y' ELSE 'N' END doneBtnYn
 	  FROM direction d
+      left outer join workdoc w
+         on  w.workNo = d.workNo
 	 WHERE 1=1
 	 <if test="user.mbrTp eq 'MT004' or user.mbrTp eq 'MT003'" >
 	 	AND regUser=#{user.mbrId}
@@ -143,6 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , d.endDateYn
 		 , DATE_FORMAT(d.endDt, '%Y-%m-%d') as endDt
          , (TO_DAYS(now()) - TO_DAYS(d.endDt)) as intvDay
+         , CASE WHEN d.targetUser = #{user.mbrId} THEN 'Y' ELSE 'N' END doneBtnYn
 	  FROM direction d
 	  	 , workdoc w
 	 WHERE 1=1

@@ -260,16 +260,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									   SELECT mbrId
 										 FROM member m1
 									</if>
-									<if test="user.mbrTp eq 'MT003'" >
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
 									   SELECT mbrId
 										 FROM member m1
 										WHERE mbrTp in ('MT001','MT002', 'MT003')
 										  AND estateCd = #{user.estateCd}
-									</if>
-									<if test="user.mbrTp eq 'MT002'" >
-									   SELECT mbrId
-										 FROM member m1
-										WHERE mbrId = #{user.mbrId}
 									</if>
 				 				)
      order by frstRegDt desc    
@@ -299,17 +294,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									   SELECT mbrId
 										 FROM member m1
 									</if>
-									<if test="user.mbrTp eq 'MT003'" >
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
 									   SELECT mbrId
 										 FROM member m1
 										WHERE mbrTp in ('MT001','MT002', 'MT003')
 										  AND estateCd = #{user.estateCd}
 									</if>
-									<if test="user.mbrTp eq 'MT002'" >
-									   SELECT mbrId
-										 FROM member m1
-										WHERE mbrId = #{user.mbrId}
-									</if>
+									
 				 				)
 				 				AND objtNo != ''
                                 ) objCnt
@@ -320,16 +311,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									   SELECT mbrId
 										 FROM member m1
 									</if>
-									<if test="user.mbrTp eq 'MT003'" >
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
 									   SELECT mbrId
 										 FROM member m1
 										WHERE mbrTp in ('MT001','MT002', 'MT003')
 										  AND estateCd = #{user.estateCd}
-									</if>
-									<if test="user.mbrTp eq 'MT002'" >
-									   SELECT mbrId
-										 FROM member m1
-										WHERE mbrId = #{user.mbrId}
 									</if>
 				 				)
 				 				AND custId != ''
@@ -340,22 +326,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									   SELECT mbrId
 										 FROM member m1
 									</if>
-									<if test="user.mbrTp eq 'MT003'" >
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
 									   SELECT mbrId
 										 FROM member m1
 										WHERE mbrTp in ('MT001','MT002', 'MT003')
 										  AND estateCd = #{user.estateCd}
 									</if>
-									<if test="user.mbrTp eq 'MT002'" >
-									   SELECT mbrId
-										 FROM member m1
-										WHERE mbrId = #{user.mbrId}
-									</if>
 				 				)
      order by frstRegDt desc    
 	</select>	
 	
-		<!-- 종료일이 설정된 작업내역 리스트 -->
+		<!-- 종료일이 설정된 작업내역 리스트 :: todo list -->
     <select id="selectWorkListWithEndDate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT workNo
 		     , mbrId

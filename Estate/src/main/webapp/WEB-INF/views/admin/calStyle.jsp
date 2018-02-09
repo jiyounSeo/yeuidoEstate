@@ -391,7 +391,9 @@
 }
 
 .workItem td.workTitle {
-	text-align:center;
+	text-align:right;
+	padding-right:5px;
+	vertical-align:top;
 	width:10%;
 }
 

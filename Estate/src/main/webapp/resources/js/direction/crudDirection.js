@@ -45,7 +45,7 @@ function selectALLRegDirList() {
 			$("#dirTbody").empty();
 			
 			todoList = result.dirList;
-			console.log (todoList);
+			//console.log (todoList);
 			if (result.dirList.length != 0) {
 				$("#dirListTemplteAdmin").tmpl(result).appendTo("#dirTbody");
 				$("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
@@ -77,7 +77,7 @@ function selectALLDirList() {
 			$("#dirTbody").empty();
 
 			todoList = result.dirList;
-			console.log (todoList);
+			//console.log (todoList);
 			if (result.dirList.length != 0) {
 				$("#dirListTemplteMbr").tmpl(result).appendTo("#dirTbody");
 				$("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
@@ -95,21 +95,81 @@ function f_viewWork(index) {
 
 	$("#curSelectedItemIdx").val(index);
 	$("#workNo").val(todoList[index].workNo);
-	$("#workTitle").val(todoList[index].workTitle);
-	$("#workContent").val(todoList[index].workContent);
+	$("#objtNo").val(todoList[index].objtNo);
+	$("#objtTp").val(todoList[index].objtTp);
+	$("#saleTp").val(todoList[index].saleTp);
+	$("#custId").val(todoList[index].custId);
+
+	$("#workNo").val(todoList[index].workNo);
 	
 	var workTitle = "[" + todoList[index].targetUserNm + "] " + todoList[index].workTitle;
 	var workContent = "  →  " + todoList[index].workContent;
-	$("#workTitleForAdmin").empty();
-	$("#workContentForAdmin").empty();
-	$("#workTitleForAdmin").append(workTitle);
-	$("#workContentForAdmin").append(workContent);
+	$("#workTitle").empty();
+	$("#workContent").empty();
+	$("#workTitle").append(workTitle);
+	
+	if(todoList[index].workContent != ''){
+		$("#workContent").append(workContent);		
+	}
 	
 	f_selectDirListAtWork(todoList[index].workNo);
 	
-	$("#divAddWorkPopup").lightbox_me({centered: true});
+	$("#divAddWorkPopup").lightbox_me({centered: true});	
+}
+
+function f_work_detail() {
+	console.log(">> go work detail : objtNo(" + $("#objtNo").val() + ") / custId(" + $("#custId").val() + ")" );
+	if ($("#objtNo").val() != "") {
+		f_objt_detail();
+	} else if ($("#custId").val() != "") {
+		f_mbr_detail();
+	}
+}
+function f_objt_detail() {
+	var url = "";
+	switch ( $("#objtTp").val() ) {
+		case "OT001"	:
+			url = "viewObApt";
+			break;
+		case "OT002"	:
+			url = "viewObStore";
+			break;
+		case "OT003"	:
+			url = "viewObOffice";
+			break;
+		case "OT004"	:
+			url = "viewObOps";
+			break;
+		case "OT005"	:
+			url = "viewObHrapt";
+			break;
+		case "OT006"	:
+			url = "viewObTicket";
+			break;
+	}
+	$("#viewUrl").val(url);
 	
+	if($("#viewUrl").val() == ''){
+		console.log(">> go work detail : objtNo(" + $("#objtNo").val() + ") / custId(" + $("#custId").val() + ")" );
+		console.log(">> f_objt_detail() : url(" + url +"), form(" + frm +")");	
+		return;
+	}
 	
+	var frm = $('#workForm')[0];
+	frm.action = '/objtDtlView.do';
+	frm.method = 'POST';
+
+	frm.submit();	
+	
+}
+function f_mbr_detail() {
+	var frm = $('#workForm')[0];
+	$("#pageNm").val("custPublic");
+	frm.action = '/viewClient.do';
+	frm.method = 'POST';	
+	console.log(">> f_mbr_detail() : form(" + frm +")");
+	frm.submit();
+
 }
 
 function f_selectDirListAtWork(workNo){
@@ -125,8 +185,8 @@ function f_selectDirListAtWork(workNo){
 		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 		  success : function(data){
 			  dirList = data.dirList;
-			  console.log ("search success");
-			  console.log (data);
+			  //console.log ("search success");
+			  //console.log (data);
 			  			  
 			  $("#todoItemList").empty();
 			  var htmlText = "";
@@ -167,7 +227,7 @@ function f_selectDirListAtWork(workNo){
 				  htmlText += "</td></tr>";
 				  htmlText += "</table></div>"
 			  }
-			  console.log(htmlText);
+			  //console.log(htmlText);
 			  $("#todoItemList").append(htmlText);
 		  }
 	});
