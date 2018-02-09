@@ -1,7 +1,8 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
-<script type="text/javascript" src="./resources/js/logbook/clndr.js"></script>
-<script type="text/javascript" src="./resources/js/logbook/cal.js?v20180201"></script>
+<script type="text/javascript" src="./resources/js/cal/holiday.js?v20180205"></script>
+<script type="text/javascript" src="./resources/js/cal/clndr.js?v20180205"></script>
+<script type="text/javascript" src="./resources/js/logbook/cal.js?v20180202"></script>
 <%@ include file="/WEB-INF/views/logbook/delPopup.jsp" %> 
 <%@ include file="/WEB-INF/views/logbook/listStyle.jsp" %> 
 

@@ -144,7 +144,7 @@ function selectCurrentEvent(){
 			{
 				var day = LBList[i].frstRegDt;
 				var dayArray = day.split('-');
-				var itemDivId = '#eventCnt'+dayArray[2];
+				var itemDivId = '#eventCnt'+ parseInt(dayArray[2],10);
 				
 				$(itemDivId).empty();
 				var htmlText = "";
