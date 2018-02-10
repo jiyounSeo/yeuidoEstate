@@ -11,6 +11,8 @@ public interface CustomerService
 	public int deleteCustomer(Map map) throws Exception;
 	
 	public List<Map<String,Object>> selectCustomerList(Map map) throws Exception;
+
+	public List<Map<String,Object>> custSearchName(Map map) throws Exception;
 	
 	public Map selectCustomerTotalCnt(Map map) throws Exception;
 	   

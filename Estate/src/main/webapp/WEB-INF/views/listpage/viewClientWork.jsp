@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
-<script type="text/javascript" src="./resources/js/list/addClient.js?v20180207"></script>
+<script type="text/javascript" src="./resources/js/list/addClient.js?v20180208"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 
 <form id="viewClient" action="/">
@@ -61,7 +61,8 @@
 				</c:if>	
 				</td>
 				<td align="right">
-					<a href="#"><img src="./resources/images/btn_cl_list.jpg" onclick="f_list_view_change2();return false;"></a>
+					<c:set var="referURL" value="${header.referer}" /><input type="hidden" name="beforUrl" id="beforUrl" value="${referURL}">
+					<a href="#"><img src="./resources/images/btn_cl_list.jpg" onclick="f_list_link();return false;"></a>					
 				</td>
 			</tr>
 			</tbody>

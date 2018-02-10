@@ -154,12 +154,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test=" objtNm != null and !objtNm.equals('')">
        AND o.objtNm like concat('%',#{objtNm},'%')
 	   </if>
-	   <if test=" objtTp != null and !objtTp.equals('')">
-       AND o.objtTp = #{objtTp}
-	   </if>
-	   <if test=" saleTp != null and !saleTp.equals('')">
-       AND o.saleTp = #{saleTp}
-	   </if>
+	   <if test=" objtTp1 != null or objtTp2 != null or objtTp3 != null
+	   			or  objtTp4 != null or objtTp5 != null or objtTp6 != null ">
+   			AND o.objtTp in
+	   		<foreach collection="objtTpList" item="item" separator="," open="(" close=")">
+    	  	#{item} 
+	     	</foreach>
+   	   </if>
+	   <if test=" saleTp1 != null or saleTp2 != null or saleTp3 != null or  saleTp4 != null">
+   			AND o.saleTp in
+	   		<foreach collection="saleTpList" item="item" separator="," open="(" close=")">
+    	  	#{item} 
+	     	</foreach>
+   	   </if>
 	   <if test='rdoAddr eq "1"'>
 	   AND b.roadAddrPart1||' '|| b.addrDetail like concat('%',#{addr},'%')
 	   </if>

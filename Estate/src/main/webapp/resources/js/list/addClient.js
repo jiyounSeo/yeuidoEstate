@@ -169,5 +169,30 @@ function f_list_view_change2() {
 }
 
 
+function f_list_link() {
+	
+	var url = "";
+	var tmp = "";
+	var activeTp = $("#activeTp").val();
+	var beforeFullUrl = $("#beforUrl").val();
+	
+	if(beforeFullUrl != ""){
+		tmp = beforeFullUrl.split("/");
+	}
+	var beforePage = tmp[tmp.length-1];
+	
+	if(beforePage == "custSearchNamePage.do"){
+		history.back();
+		return;
+	} else {
+		if(activeTp == "AT001"){
+			url = "./commClListView.do?pageNm=custActiveY&activeTp=AT001";
+		} else if (activeTp == "AT002") {
+			url = "./commClListView.do?pageNm=custActiveN&activeTp=AT002";
+		}
+	}
+	location.href = url;
+	return;
+}
 
 

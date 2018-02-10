@@ -1,10 +1,7 @@
 $(document).ready(function(){
-	if ($("#publicYn").val() != "Y" ) {
-		$("label[for='activeTp1']").css("display","none");
-		$("label[for='activeTp2']").css("display","none");
-	}
 	f_custList_select();
 });
+
 var custList = {};
 //페이징 버튼 클릭이벤트
 currPage = 1;
@@ -14,13 +11,13 @@ $(document).on('click', '.pagingBtn', function() {
 		currPage = Number(currPageStr);
 		f_custList_select();
 	}
-	
 });
 
 
 function f_show_searchbox(){
 	$("#searchbox").toggle();
 }
+
 
 function f_search_custName(){	
 	var keyword = $("#keyname").val();
@@ -42,6 +39,7 @@ function f_enter(val) {
 		f_search_custName();
 	}	
 }
+
 
 function gfn_isNull(str) {
     if (str == null) return true;
@@ -79,10 +77,11 @@ function f_custList_select() {
 	   , currentPage : Number(currPage)
 	   , pagePerRow : 10
 	   , pageSize : 10
+	   , keyname : $("#keyname").val()
 	};
 	
 	$.ajax({
-	  url : "/selectCustomerList.do",
+	  url : "/custSearchName.do",
 	  type: "post",
 	  data : param,
 	  dataType : "json",
@@ -106,17 +105,13 @@ function f_custList_select() {
 }
 
 
+
+
 function f_mbrDtl_view (index) {
 	$("#custId").val(custList[index].custId);
 	var frm = $('#commClList')[0];
 	frm.action = '/viewClient.do';
 	frm.method = 'POST';
 	frm.submit();
-	/*
-   var comSubmit = new ComSubmit($('form').attr('id'));
-   comSubmit.setUrl("/objtDtlView.do");
-   
-   comSubmit.submit();
-*/
-}
 
+}

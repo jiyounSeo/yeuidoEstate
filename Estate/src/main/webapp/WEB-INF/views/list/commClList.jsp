@@ -1,14 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("utf-8");%>
+
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
-<script type="text/javascript" src="./resources/js/list/custList.js?v20180204"></script>	
+<script type="text/javascript" src="./resources/js/list/custList.js?v20180207"></script>	
 <form id="commClList">
 <div id="cl_list" name="cl_list" style="width:1500px;margin:auto;padding:0;">
 	<div style="width:1500px;height:78px;">
@@ -68,17 +69,24 @@
 	<tr><td height="20px">&nbsp;</td></tr>
 		<tr><!-- paging -->
 			<td align="center">
-				<table width="1460px" height="41px" cellpadding="0" cellspacing="0" border="0">
+				<table width="1500px" height="41px" cellpadding="0" cellspacing="0" border="0">
 					<tr>
-						<td width="150px" height="41px">
-							<div style="width:150px;height:41px;margin:0;padding:0;text-align:left">
-								<a href="./totalSearch.do"><img src="./resources/images/btn_search2.jpg"></a>
+						<td width="440px" height="41px">
+							<div style="width:440px;height:41px;margin:0;padding:0;text-align:left">
+								<a href="#" onClick="f_show_searchbox();"><img src="./resources/images/btn_search2.jpg"></a>&nbsp;
+								<span id="searchbox" name="searchbox" style="display:none;">
+									<select style="width:80px;height:40px;vertical-align:top">
+										<option>고객명</option>
+									</select>
+									<input type="text" id="keyname" name="keyname" style="width:190px;height:40px;;vertical-align:top;padding-left:10px;" onkeydown="f_enter(this.value);">
+									<a href="#" onClick="f_search_custName();"><img src="./resources/images/sBnt.png"></a>
+								</span>
 							</div>
 						</td>
-						<td width="1160px" align="center">
+						<td width="620px" align="center">
 							<div id="pagingDiv" class="pagination"></div>
 						</td>
-						<td width="150px" align="right">
+						<td width="440px" align="right">
 							<div style="width:150px;height:41px;margin:0;padding:0;text-align:right">
 								<a href="./newClient.do"><img src="./resources/images/btn_new_cl.jpg"></a>
 							</div>
@@ -94,6 +102,7 @@
 <input type="hidden" name="activeTp" id="activeTp" value="${activeTp}"/>
 <input type="hidden" name="pageNm" id="pageNm" value="${pageNm}"/>
 <input type="hidden" name="custId" id="custId" />
+<input type="hidden" name="keyword" id="keyword" />
 
 </form>
 

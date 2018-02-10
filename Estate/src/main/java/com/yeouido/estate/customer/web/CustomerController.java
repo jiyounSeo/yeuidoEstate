@@ -1,5 +1,6 @@
 package com.yeouido.estate.customer.web;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +65,48 @@ public class CustomerController {
 	    mav.addObject("custList",custList);
 	    mav.setViewName("jsonView");
 	    return mav;
+	}
+	
+	
+	/* 
+	 * 고객목록검색 -- 이름
+	 */
+	@RequestMapping(value= "/custSearchName.do", method=RequestMethod.POST)
+	public ModelAndView custSearchName( @RequestParam Map<String,Object> map, HttpSession session)  {  
+		ModelAndView mav= new ModelAndView();
+		Paging paging = new Paging();
+		map.put("user",  session.getAttribute("user"));
+		
+		List<Map<String,Object>> custList = new ArrayList<Map<String,Object>>();
+		try {
+			int currentPage = Integer.parseInt(map.get("currentPage").toString());
+			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+			map.put("rowNum", (currentPage-1)*pagePerRow);
+			map.put("pagePerRow", pagePerRow);
+			custList = customerService.custSearchName(map);
+			if (!custList.isEmpty()) {
+				int totalCount = custList.size();
+				int pageSize = Integer.parseInt(map.get("pageSize").toString());
+				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+				mav.addAllObjects(pagingMap);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("custList",custList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
+	
+
+	@RequestMapping(value="/custSearchNamePage.do", method = RequestMethod. POST)
+	public ModelAndView custSearchNamePage(@RequestParam Map<String,Object> map){
+		
+		ModelAndView mv = new ModelAndView("/search/custSearch");
+		logger.error(map.get("keyword").toString());
+	    mv.addAllObjects(map);
+		return mv;	
 	}
 	
 	/*

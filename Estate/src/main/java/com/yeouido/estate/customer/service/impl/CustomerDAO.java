@@ -39,6 +39,11 @@ public class CustomerDAO extends AbstractDAO
    @SuppressWarnings("unchecked")
    public List<Map<String,Object>> selectCustomerList(Map map) throws Exception{
        return selectList("customerDAO.selectCustomerList", map);
+   }   
+
+   @SuppressWarnings("unchecked")
+   public List<Map<String,Object>> custSearchName(Map map) throws Exception{
+       return selectList("customerDAO.custSearchName", map);
    }
    
    /* 고객등록확인 */

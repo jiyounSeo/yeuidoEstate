@@ -142,6 +142,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			
 			   		
 	</insert>
+	
+	
+	<select id="custSearchName" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT custId
+	     , custNm
+	     , custTel1
+	     , custTel2
+	     , custTel3
+	     , faxTel1
+	     , faxTel2
+	     , faxTel3
+	     , budAmt
+	     , reqContent
+	     , email
+		 , activeTp
+	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
+	     , publicYn
+	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
+         , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , frstRegUser frstRegNm
+	     , mbrId
+	     , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm
+	  FROM customer c
+	 WHERE 1=1
+	   <if test="myCust != null and myCust != '' ">
+	   AND c.mbrId = #{user.mbrId}
+	   </if>
+	   AND custNm like concat('%',#{keyname},'%')
+	   AND (c.publicYn = 'Y'	 -- 1. 공동이 체크된 카드거나
+	   		OR c.frstRegUser in ( -- 2. 같은부동산 사람이 올린 물건카드 중 검색 (최고관리자는 부동산소속 관계없이 모두다 보임)
+	   								<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+								)
+	   		)	   
+	 order by c.frstRegDt DESC
+	 LIMIT #{rowNum}, #{pagePerRow}
+	</select>
+	
 	<select id="selectCustomerList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT custId
 	     , custNm
