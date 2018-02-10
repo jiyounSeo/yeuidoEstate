@@ -8,8 +8,17 @@ $(document).ready(function(){
 
 function f_objt_search() {
 	var param = $("#srchObjtPop").serialize();
-	param.objtTp = $("input[name=objtTp]:checked").val();
-	param.saleTp = $("input[name=saleTp]:checked").val();
+	param.objtTp1 = $("input[name=objtTp1]:checked").val();
+	param.objtTp2 = $("input[name=objtTp2]:checked").val();
+	param.objtTp3 = $("input[name=objtTp3]:checked").val();
+	param.objtTp4 = $("input[name=objtTp4]:checked").val();
+	param.objtTp5 = $("input[name=objtTp5]:checked").val();
+	param.objtTp6 = $("input[name=objtTp6]:checked").val();
+	
+	param.saleTp1 = $("input[name=saleTp1]:checked").val();
+	param.saleTp2 = $("input[name=saleTp2]:checked").val();
+	param.saleTp3 = $("input[name=saleTp3]:checked").val();
+	param.saleTp4 = $("input[name=saleTp4]:checked").val();
 	
 	/*var param1 = param;
 	param1.custId = custId;
