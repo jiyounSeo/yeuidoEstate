@@ -29,7 +29,7 @@
 			<tr>
 				<td align="center" valign="top">
 					<fieldset style="width:90%;background-color:#f0efef;">
-						<a href="#work" onclick="f_work_detail();return false;"><div id="workTitle" style="text-align:left;padding:10px 20px 10px 20px;"></div></a>
+						<div id="workTitle" style="text-align:left;padding:10px 20px 10px 20px;"></div>
 						<div id="workContent" style="text-align:left;padding:0 20px 10px 30px;"></div>
 					</fieldset>
 				</td>

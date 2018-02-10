@@ -213,17 +213,10 @@ function selectWorkListAtdate(date){
 	});
 }
 
-function f_work_detail() {
-	console.log(">> go work detail : objtNo(" + $(".workForm #objtNo").val() + ") / custId(" + $(".workForm #custId").val() + ")" );
-	if ($(".workForm #objtNo").val() != "") {
-		f_objt_detail();
-	} else if ($(".workForm #custId").val() != "") {
-		f_mbr_detail();
-	}
-}
-function f_objt_detail() {
+function f_objt_detail(workno, objtno, objttp, saletp) {
 	var url = "";
-	switch ( $(".workForm #objtTp").val() ) {
+		
+	switch (objttp) {
 		case "OT001"	:
 			url = "viewObApt";
 			break;
@@ -243,32 +236,54 @@ function f_objt_detail() {
 			url = "viewObTicket";
 			break;
 	}
-	$(".workForm #viewUrl").val(url);
 	
-	if($(".workForm #viewUrl").val() == ''){
-		console.log(">> go work detail : objtNo(" + $(".workForm #objtNo").val() + ") / custId(" + $(".workForm #custId").val() + ")" );
-		console.log(">> f_objt_detail() : url(" + url +"), form(" + frm +")");	
+	if(url == ''){
+		console.log(">> go work detail : workNo(" + workno + ") / objtNo(" + objtno + ")" );
+		console.log(">> objtTp(" + objttp + ") / saleTp(" + saletp + ")" );
+		console.log(">> f_objt_detail() : url(" + url +")");	
 		return;
 	}
 	
 	var frm = $('#workForm')[0];
 	frm.action = '/objtDtlView.do';
 	frm.method = 'POST';
-
+	
+	frm.workNo.value = workno;
+	frm.objtNo.value = objtno;
+	frm.objtTp.value = objttp;
+	frm.saleTp.value = saletp;
+	frm.custId.value = '';
+	frm.viewUrl.value = url;
+	frm.pageNm.value = 'total';
+	
 	frm.submit();	
 	
 }
-function f_mbr_detail() {
+function f_mbr_detail(custid) {
+	
 	var frm = $('#workForm')[0];
-	$("#pageNm").val("custPublic");
 	frm.action = '/viewClient.do';
 	frm.method = 'POST';
-	
 
-	console.log(">> f_mbr_detail() : form(" + frm +")");
+	frm.objtNo.value = '';
+	frm.custId.value = custid;
+	frm.pageNm = "custPublic";
+
 	frm.submit();
-
 }
+
+
+function gfn_isNull(str) {
+    if (str == null) return true;
+    if (str == "NaN") return true;
+    if (new String(str).valueOf() == "undefined") return true;   
+    var chkStr = new String(str);
+    if( chkStr.valueOf() == "undefined" ) return true;
+    if (chkStr == null) return true;   
+    if (chkStr.toString().length == 0 ) return true;  
+    return false;
+}
+
 
 function f_modifyWork(index) {
 	
@@ -279,17 +294,26 @@ function f_modifyWork(index) {
 	$("#saleTp").val(workList[index].saleTp);
 	$("#custId").val(workList[index].custId);
 	
-	console.log(workList[index].workNo + "/" + workList[index].objtNo + "/" + workList[index].objtTp + "/" + workList[index].saleTp + "/" + workList[index].custId);
-	
 	$("#workTitle").empty();
 	$("#workContent").empty();	
 	
-	var workTitle = "";
+	var workTitle = '';
+	
+	if(gfn_isNull(workList[index].objtNo) == false && gfn_isNull(workList[index].custId) == true){		
+		workTitle = "<a href='#' onclick='f_objt_detail(\"" + workList[index].workNo + "\", \"" + workList[index].objtNo + "\", \"" + workList[index].objtTp + "\", \"" + workList[index].saleTp + "\");return false;'>";	
+		
+	} else if (gfn_isNull(workList[index].objtNo) == true && gfn_isNull(workList[index].custId) == false){		
+		workTitle = "<a href='#' onclick='f_mbr_detail(\"" + workList[index].custId + "\");return false;'>";	
+	
+	} else {		
+		console.log("Link error >> " + workList[index].workNo + "/" + workList[index].objtNo + "/" + workList[index].objtTp + "/" + workList[index].saleTp + "/" + workList[index].custId);
+	}
+	
 	if(workList[index].endDateYn == "Y"){
 		workTitle += "[종료일 : " + workList[index].endDt + "]";
 	} 
-	workTitle += "[" + workList[index].mbrNm + "] " + workList[index].workTitle + " ( " + workList[index].frstRegDt + " )";
-
+	workTitle += "[" + workList[index].mbrNm + "] " + workList[index].workTitle + " ( " + workList[index].frstRegDt + " )</a>";
+	
 	var tmp = workList[index].workContent;
 	var chContent = tmp.replace(/\n/g, '<br>&nbsp;&nbsp;&nbsp;&nbsp;'); 
 	var workContent = "  →  " + chContent;
@@ -351,10 +375,22 @@ function f_selectWorkItem(workNo){
 				$("#workContent").empty();	
 				
 				var workTitle = "";
+				
+				if(gfn_isNull(Item.objtNo) == false && gfn_isNull(Item.custId) == true){		
+					workTitle = "<a href='#' onclick='f_objt_detail(\"" + Item.workNo + "\", \"" + Item.objtNo + "\", \"" + Item.objtTp + "\", \"" + Item.saleTp + "\");return false;'>";
+					
+				} else if (gfn_isNull(Item.objtNo) == true && gfn_isNull(Item.custId) == false){		
+					workTitle = "<a href='#' onclick='f_mbr_detail(\"" + Item.custId + "\");return false;'>";	
+				
+				} else {		
+					console.log("Link error >> " + Item.workNo + "/" + Item.objtNo + "/" + Item.objtTp + "/" + Item.saleTp + "/" + Item.custId);
+				}
+				
+				
 				if(Item.endDateYn == "Y"){
 					workTitle += "[종료일 : " + Item.endDt + "]";
 				} 
-				workTitle += "[" + Item.mbrNm + "] " +Item.workTitle + " ( " + Item.frstRegDt + " )";
+				workTitle += "[" + Item.mbrNm + "] " +Item.workTitle + " ( " + Item.frstRegDt + " )</a>";
 
 				var tmp = Item.workContent;
 				var chContent = tmp.replace(/\n/g, '<br>&nbsp;&nbsp;&nbsp;&nbsp;'); 

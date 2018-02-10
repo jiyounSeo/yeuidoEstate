@@ -164,10 +164,19 @@ public class ListController {
 		model.addAttribute("pageNm", map.get("pageNm"));
 		
 		ModelAndView mv = new ModelAndView("/listpage/" + map.get("viewUrl"));
+		String url = map.get("viewUrl").toString();
 		
 		try {
 			map.put("user", session.getAttribute("user"));
 			result = objectService.selectObjectInfo(map);
+			
+			if(result == null || url.equals("")){
+				String gourl = "/adminMainView.do";
+				model.addAttribute("msg", "해당 물건카드가 존재하지 않습니다. 잘못된 접근입니다"); 
+				model.addAttribute("url", gourl); 
+				ModelAndView tmpMv = new ModelAndView("/comm/redirect");
+				return tmpMv;
+			}
 
 			logger.error(result.get("objtNm").toString());
 			

@@ -170,6 +170,14 @@ public class CustomerController {
 			model.addAllAttributes(map);
 			map.put("user",  session.getAttribute("user"));
 			result = customerService.selectCustomerInfo(map);
+					
+			if(result == null){				
+				String url = "/adminMainView.do";
+				model.addAttribute("msg", "해당 고객카드가 존재하지 않습니다. 잘못된 접근입니다"); 
+				model.addAttribute("url", url); 
+				return "/comm/redirect";
+			}
+			
 			model.addAllAttributes(result);
 			model.addAttribute("messageCd", "1");
 		} catch (Exception e) {
