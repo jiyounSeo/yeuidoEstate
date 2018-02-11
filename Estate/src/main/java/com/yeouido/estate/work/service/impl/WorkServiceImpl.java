@@ -69,6 +69,10 @@ public class WorkServiceImpl  implements WorkService
 	   if (!("").equals(map.get("saleTp4")) && map.get("saleTp4") != null ) {
 		   list2.add(map.get("saleTp4"));
 	   }
+	   if ( ( (!("").equals(map.get("objtTp2")) && map.get("objtTp2") != null) || (!("").equals(map.get("objtTp3")) && map.get("objtTp3") != null) )
+			   && (!("").equals(map.get("saleTp3")) && map.get("saleTp3") != null)  ) {
+		   list2.add("ST005");
+	   }
 	   map.put("saleTpList", list2);
 	   
 	   return workDAO.searchObjtList(map);
