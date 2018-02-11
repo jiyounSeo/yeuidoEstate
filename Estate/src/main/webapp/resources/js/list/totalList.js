@@ -156,19 +156,31 @@ function gfn_isNull(str) {
     return false;
 }
 
+function f_objtCkbox_check(box){
+	
+	var cnt = 0;
+	
+	if(gfn_isNull($("input[name='objt_activeTp1']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='objt_activeTp2']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='objt_activeTp3']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='objt_activeTp4']:checked").val()) == false){ cnt++; }
+	
+	if(cnt > 0) {
+		f_objectList_select('', '');		
+	} else {
+		alert("목록을 구성하기위해서는 한개 이상 체크되어야 합니다");
+		$("#"+box.name).attr("checked", "checked");
+		return;
+	}
+}
+
+
 function f_objectList_select(objtTpChk, saleTpChk){
 	var activeTpChk = "";
 	var activTp1 = $("input[name='objt_activeTp1']:checked").val();
 	var activTp2 = $("input[name='objt_activeTp2']:checked").val();
 	var activTp3 = $("input[name='objt_activeTp3']:checked").val();
 	
-	/*if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
-		 activeTpChk = "AT001";
-	 } else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "AT002";
-	 } else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "";
-	 }*/
 	 if (!gfn_isNull(objtTpChk)) {
 		 objtTp = objtTpChk;
 	 }
@@ -307,26 +319,40 @@ function f_mbrDtl_view (index) {
 	frm.submit();
 }
 
-
+function f_custCkbox_check(box){
+	
+	var cnt = 0;
+	
+	if(gfn_isNull($("input[name='cust_activeTp1']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='cust_activeTp2']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='cust_activeTp3']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='cust_activeTp4']:checked").val()) == false){ cnt++; }
+	
+	if(cnt > 0) {
+		f_custList_select();		
+	} else {
+		alert("목록을 구성하기위해서는 한개 이상 체크되어야 합니다");
+		$("#"+box.name).attr("checked", "checked");
+		return;
+	}
+}
 
 function f_custList_select() {
+	
 	var activeTpChk = "";
 	var activTp1 = $("input[name='cust_activeTp1']:checked").val();
 	var activTp2 = $("input[name='cust_activeTp2']:checked").val();
-	if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
-		 activeTpChk = "AT001";
-	} else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "AT002";
-	} else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "";
-	}
-	 
+	var activTp3 = $("input[name='cust_activeTp3']:checked").val();
+	
 	var param = { currentPage : Number(currCustPage)
 				   , pagePerRow : $("#viewMode").val() == "1" ? 5 : 20 
 				   , pageSize : 10
 				   , pageNm : "total"
-				   , activeTp : activeTpChk //gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
-				   , myCust : gfn_isNull($("input[name='cust_activeTp3']:checked").val()) ? "" : $("input[name='cust_activeTp3']:checked").val()
+				   , activeTp : activTp1+activTp2+activTp3//gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
+				   , activeTp1 : activTp1
+				   , activeTp2 : activTp2
+				   , activeTp3 : activTp3
+				   , myCust : gfn_isNull($("input[name='cust_activeTp4']:checked").val()) ? "" : $("input[name='cust_activeTp4']:checked").val()
 	};
 	$.ajax({
 	  url : "/selectCustomerList.do",

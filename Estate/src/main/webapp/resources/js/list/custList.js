@@ -1,7 +1,23 @@
 $(document).ready(function(){
-	if ($("#publicYn").val() != "Y" ) {
+	if ($("#pageNm").val() == "custActiveY") {
+
+		$("input[name='activeTp2']").attr("checked",false);	
+		$("input[name='activeTp3']").attr("checked",false);	
+		
 		$("label[for='activeTp1']").css("display","none");
 		$("label[for='activeTp2']").css("display","none");
+	}
+	else if ($("#pageNm").val() == "custActiveN") {
+
+		$("input[name='activeTp1']").attr("checked",false);	
+		$("input[name='activeTp3']").attr("checked",false);	
+		
+		$("label[for='activeTp1']").css("display","none");
+		$("label[for='activeTp2']").css("display","none");
+	}
+	else if($("#pageNm").val() == "custPublic"){
+		$("input[name='activeTp3']").attr("checked",false);	
+		$("label[for='activeTp3']").css("display","none");	
 	}
 	f_custList_select();
 });
@@ -55,26 +71,42 @@ function gfn_isNull(str) {
 }
 
 
+function f_custCkbox_check(box){
+	
+	var cnt = 0;
+	
+	if(gfn_isNull($("input[name='activeTp1']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='activeTp2']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='activeTp3']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='activeTp4']:checked").val()) == false){ cnt++; }
+	
+	if(cnt > 0) {
+		f_custList_select();		
+	} else {
+		alert("목록을 구성하기위해서는 한개 이상 체크되어야 합니다");
+		$("#"+box.name).attr("checked", "checked");
+		return;
+	}
+}
+
 function f_custList_select() {
-	var activeTpChk= "";
+	var activeTpChk = "";
 	var activTp1 = $("input[name='activeTp1']:checked").val();
 	var activTp2 = $("input[name='activeTp2']:checked").val();
-	if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
-		 activeTpChk = "AT001";
-	} else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "AT002";
-	} else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "";
-	}
+	var activTp3 = $("input[name='activeTp3']:checked").val();
+	
 	/* 
 	 * custPublic : 공동
 	 * custActiveY : 활성카드
 	 * custActiveN : 보류카드
 	 */
 	var param = {
-	    publicYn : $("#publicYn").val()
-	   , activeTp : activeTpChk //  $("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
-	   , myCust : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
+	    publicYn : $("#publicYn").val()		
+		, activeTp : activTp1+activTp2+activTp3//gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
+	   	, activeTp1 : activTp1
+	   	, activeTp2 : activTp2
+	   	, activeTp3 : activTp3
+	   , myCust : gfn_isNull($("input[name='activeTp4']:checked").val()) ? "" : $("input[name='activeTp4']:checked").val()
 	   , pageNm : $("#pageNm").val()
 	   , currentPage : Number(currPage)
 	   , pagePerRow : 10
@@ -92,7 +124,13 @@ function f_custList_select() {
 		  $("#pagingDiv").empty();
 		  if (result.custList.length != 0) {
 			  custList = result.custList;
-			  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
+			  
+			  if( $("#pageNm").val() == 'custActiveY' || $("#pageNm").val() == 'custActiveN' ){
+				  $("#custListTemplte").tmpl(result).appendTo("#custTbody");
+			  } else {
+				  $("#custPublicListTemplte").tmpl(result).appendTo("#custTbody");				  
+			  }
+			  
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#page" + currPage).addClass("active");
 

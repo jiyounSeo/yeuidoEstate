@@ -69,7 +69,7 @@ public class MemoController {
 	 * 목록조회
 	 */
 	@RequestMapping(value= "/selectMemoList.do", method=RequestMethod.POST)
-	public ModelAndView selectCustomerList( @RequestParam Map<String,Object> map, HttpSession session)   {  
+	public ModelAndView selectMemoList( @RequestParam Map<String,Object> map, HttpSession session)   {  
 		
 			ModelAndView mav= new ModelAndView();
 			Paging paging = new Paging();

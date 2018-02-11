@@ -1,5 +1,6 @@
 package com.yeouido.estate.customer.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,15 +28,64 @@ public class CustomerServiceImpl  implements CustomerService
    }
    
    public List<Map<String,Object>> selectCustomerList(Map map) throws Exception {
+	      List list = new ArrayList<String>();
+		   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+			   list.add(map.get("activeTp1"));
+		   }
+		   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+			   list.add(map.get("activeTp2"));
+		   }
+		   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+			   list.add(map.get("activeTp3"));
+		   }
+		   map.put("activeTpList", list);
 	   return customerDAO.selectCustomerList(map);
    }
 
+   public Map selectCustomerTotalCnt(Map map) throws Exception {
+		   List list = new ArrayList<String>();
+		   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+			   list.add(map.get("activeTp1"));
+		   }
+		   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+			   list.add(map.get("activeTp2"));
+		   }
+		   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+			   list.add(map.get("activeTp3"));
+		   }
+		   map.put("activeTpList", list);
+	   return customerDAO.selectCustomerTotalCnt(map);
+   }
+   
    public List<Map<String,Object>> custSearchName(Map map) throws Exception {
+	   List list = new ArrayList<String>();
+	   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+		   list.add(map.get("activeTp1"));
+	   }
+	   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+		   list.add(map.get("activeTp2"));
+	   }
+	   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+		   list.add(map.get("activeTp3"));
+	   }
+	   map.put("activeTpList", list);
+	   
 	   return customerDAO.custSearchName(map);
    }
    
-   public Map selectCustomerTotalCnt(Map map) throws Exception {
-	   return customerDAO.selectCustomerTotalCnt(map);
+   public Map custSearchNameTotalCnt(Map map) throws Exception {
+	   List list = new ArrayList<String>();
+	   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+		   list.add(map.get("activeTp1"));
+	   }
+	   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+		   list.add(map.get("activeTp2"));
+	   }
+	   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+		   list.add(map.get("activeTp3"));
+	   }
+	   map.put("activeTpList", list);	   
+	   return customerDAO.custSearchNameTotalCnt(map);
    }
    
    public Map selectCustomerInfo(Map map) throws Exception {

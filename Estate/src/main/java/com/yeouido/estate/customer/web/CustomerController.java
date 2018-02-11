@@ -85,7 +85,7 @@ public class CustomerController {
 			map.put("pagePerRow", pagePerRow);
 			custList = customerService.custSearchName(map);
 			if (!custList.isEmpty()) {
-				int totalCount = custList.size();
+				int totalCount = Integer.parseInt(customerService.custSearchNameTotalCnt(map).get("totalCnt").toString());
 				int pageSize = Integer.parseInt(map.get("pageSize").toString());
 				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
 				mav.addAllObjects(pagingMap);

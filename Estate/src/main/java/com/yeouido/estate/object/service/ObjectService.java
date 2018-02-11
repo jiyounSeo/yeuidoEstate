@@ -16,6 +16,8 @@ public interface ObjectService
 	
 	public List<Map<String,Object>> searchMainObjtList(Map map) throws Exception;
 
+	public List<Map<String,Object>> objtSearchName(Map map) throws Exception;
+	
 	public List<Map<String,Object>> selectObjectList(Map map) throws Exception;
 	
 	public List<Map<String,Object>> selectTotalSearch(Map map) throws Exception;

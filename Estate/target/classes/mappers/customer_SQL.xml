@@ -141,30 +141,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			)
 			
 			   		
-	</insert>
-	
+	</insert>	
 	
 	<select id="custSearchName" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT custId
-	     , custNm
-	     , custTel1
-	     , custTel2
-	     , custTel3
-	     , faxTel1
-	     , faxTel2
-	     , faxTel3
-	     , budAmt
-	     , reqContent
-	     , email
-		 , activeTp
-	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
-	     , publicYn
-	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
-         , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
-	     , frstRegUser frstRegNm
-	     , mbrId
-	     , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm
+	SELECT c.custId
+	     , c.custNm
+	     , c.custTel1
+	     , c.custTel2
+	     , c.custTel3
+	     , c.faxTel1
+	     , c.faxTel2
+	     , c.faxTel3
+	     , c.budAmt
+	     , c.reqContent
+	     , c.email
+		 , c.activeTp
+	     , (select commNm from commcd where commCd = c.activeTp ) activeTpNm
+	     , c.publicYn
+	     , (CASE WHEN c.publicYn = 'Y' THEN '공동' END) publicYnNm
+         , DATE_FORMAT(c.frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , c.frstRegUser
+	     , m.mbrNm
+	     , (CASE WHEN c.publicYn = 'Y' 
+	     			THEN (CASE WHEN e.estateCd = #{user.estateCd} 
+	     						THEN m.mbrNm 
+	     						ELSE concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')') END)
+	     			ELSE m.mbrNm END) frstRegNm
 	  FROM customer c
+	  inner join member m
+     		on  c.frstRegUser = m.mbrId
+	  left outer join estate e
+            on e.estateCd = m.estateCd
 	 WHERE 1=1
 	   <if test="myCust != null and myCust != '' ">
 	   AND c.mbrId = #{user.mbrId}
@@ -183,44 +190,93 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 										  AND estateCd = #{user.estateCd}
 									</if>
 								)
-	   		)	   
+	   		)	  
+	   <if test=" activeTp1 != null or activeTp2 != null or activeTp3 != null">
+   			AND c.activeTp IN
+   			<foreach collection="activeTpList" item="item" separator="," open="(" close=")">
+    	  	#{item} 
+	     	</foreach>
+   		</if>		
 	 order by c.frstRegDt DESC
 	 LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
-	<select id="selectCustomerList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	SELECT custId
-	     , custNm
-	     , custTel1
-	     , custTel2
-	     , custTel3
-	     , faxTel1
-	     , faxTel2
-	     , faxTel3
-	     , budAmt
-	     , reqContent
-	     , email
-		 , activeTp
-	     , (select commNm from commcd where commCd = activeTp ) activeTpNm
-	     , publicYn
-	     , (CASE WHEN publicYn = 'Y' THEN '공동' END) publicYnNm
-         , DATE_FORMAT(frstRegDt, '%Y-%m-%d') as frstRegDt
-	     , frstRegUser frstRegNm
-	     , (SELECT COUNT(*) FROM customer) totalCnt
-	     , mbrId
-	     , (SELECT mbrNm FROM member m WHERE m.mbrId = c.mbrId ) mbrNm
+	<select id="custSearchNameTotalCnt" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT COUNT(*) totalCnt
 	  FROM customer c
+	  inner join member m
+     		on  c.frstRegUser = m.mbrId
+	  left outer join estate e
+            on e.estateCd = m.estateCd
 	 WHERE 1=1
 	   <if test="myCust != null and myCust != '' ">
 	   AND c.mbrId = #{user.mbrId}
 	   </if>
-	   <if test="pageNm eq 'total'">
-		   <if test="activeTp eq 'AT001'">
-			AND c.activeTp = 'AT001'
-		   </if>
-		   <if test="activeTp eq 'AT002'">
-		   	AND c.activeTp = 'AT002'
-		   </if>
+	   AND custNm like concat('%',#{keyname},'%')
+	   AND (c.publicYn = 'Y'	 -- 1. 공동이 체크된 카드거나
+	   		OR c.frstRegUser in ( -- 2. 같은부동산 사람이 올린 물건카드 중 검색 (최고관리자는 부동산소속 관계없이 모두다 보임)
+	   								<if test="user.mbrTp eq 'MT004'" >
+									   SELECT mbrId
+										 FROM member m1
+									</if>
+									<if test="user.mbrTp eq 'MT003' or user.mbrTp eq 'MT002'" >
+									   SELECT mbrId
+										 FROM member m1
+										WHERE mbrTp in ('MT001','MT002', 'MT003','MT004')
+										  AND estateCd = #{user.estateCd}
+									</if>
+								)
+	   		)	  
+	   <if test=" activeTp1 != null or activeTp2 != null or activeTp3 != null">
+   			AND c.activeTp IN
+   			<foreach collection="activeTpList" item="item" separator="," open="(" close=")">
+    	  	#{item} 
+	     	</foreach>
+   		</if>	
+	</select>
+	
+	<select id="selectCustomerList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT c.custId
+	     , c.custNm
+	     , c.custTel1
+	     , c.custTel2
+	     , c.custTel3
+	     , c.faxTel1
+	     , c.faxTel2
+	     , c.faxTel3
+	     , c.budAmt
+	     , c.reqContent
+	     , c.email
+		 , c.activeTp
+	     , (select commNm from commcd where commCd = c.activeTp ) activeTpNm
+	     , c.publicYn
+	     , (CASE WHEN c.publicYn = 'Y' THEN '공동' END) publicYnNm
+         , DATE_FORMAT(c.frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , (CASE WHEN c.publicYn = 'Y' 
+	     			THEN (CASE WHEN e.estateCd = #{user.estateCd} 
+	     						THEN m.mbrNm 
+	     						ELSE concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')') END)
+	     			ELSE m.mbrNm END) frstRegNm
+	     , (SELECT COUNT(*) FROM customer) totalCnt
+	     , concat(e.estateNm, '(', e.tel1, '-' , e.tel2, '-', e.tel3, ')' ) estateInfo
+	     , c.mbrId
+	     , m.mbrNm
+	  FROM customer c
+	  inner join member m
+     		on  c.frstRegUser = m.mbrId
+	  left outer join estate e
+            on e.estateCd = m.estateCd
+	 WHERE 1=1
+	   <if test="myCust != null and myCust != '' ">
+	   AND c.mbrId = #{user.mbrId}
+	   </if>
+	   <if test=" activeTp1 != null or activeTp2 != null or activeTp3 != null">
+   			AND c.activeTp IN
+   			<foreach collection="activeTpList" item="item" separator="," open="(" close=")">
+    	  	#{item} 
+	     	</foreach>
+   		</if>
+	   	<if test="pageNm eq 'total'">
 		   AND custId in ( 
 					-- 1. 활성+공동인 물건은 누가 등록했든 다 보여야함
 					SELECT custId
@@ -228,10 +284,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					WHERE publicYn = 'Y'
 					  AND activeTp = 'AT001'
 	                  UNION ALL
-	                -- 2. 활성만 체크된 물건은 같은부동산사람이랑 내가 등록한 물건만
+	                -- 2. 활성만 체크된 물건은 같은부동산사람이랑 내가 등록한 물건만 (+ 계약완료 추가)
 	                SELECT custId
 	                  FROM customer c2
-					 WHERE activeTp = 'AT001'
+					 WHERE (activeTp = 'AT001' OR activeTp = 'AT003')
 					   AND mbrId in (    <if test="user.mbrTp eq 'MT004'" >
 											   SELECT mbrId
 												 FROM member m1
@@ -254,15 +310,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   
 	   <if test="pageNm eq 'custPublic'">
 	   AND publicYn = 'Y'
-	   	<if test="activeTp eq 'AT001'">
-		AND c.activeTp = 'AT001'
-	   	</if>
-	   	<if test="activeTp eq 'AT002'">
-	   	AND c.activeTp = 'AT002'
-	   	</if>
 	   </if>
 	   <if test="pageNm eq 'custActiveY'">
-	   AND c.activeTp = 'AT001'
 	   AND c.mbrId in (    <if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1
@@ -276,7 +325,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 				)
 	   </if>
 	   <if test="pageNm eq 'custActiveN'">
-	   AND c.activeTp = 'AT002'
 	   AND c.mbrId in ( 	<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1
@@ -300,13 +348,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test="myCust != null and myCust != '' ">
 	   AND c.mbrId = #{user.mbrId}
 	   </if>
-	   <if test="pageNm eq 'total'">
-		   <if test="activeTp eq 'AT001'">
-			AND c.activeTp = 'AT001'
-		   </if>
-		   <if test="activeTp eq 'AT002'">
-		   	AND c.activeTp = 'AT002'
-		   </if>
+	   <if test=" activeTp1 != null or activeTp2 != null or activeTp3 != null">
+ 			AND c.activeTp IN
+ 			<foreach collection="activeTpList" item="item" separator="," open="(" close=")">
+  	  			#{item} 
+    		</foreach>
+ 		</if>
+	   <if test="pageNm eq 'total'">		   
 		   AND custId in ( 
 					-- 1. 활성+공동인 물건은 누가 등록했든 다 보여야함
 					SELECT custId
@@ -314,10 +362,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					WHERE publicYn = 'Y'
 					  AND activeTp = 'AT001'
 	                  UNION ALL
-	                -- 2. 활성만 체크된 물건은 같은부동산사람이랑 내가 등록한 물건만
+	                -- 2. 활성만 체크된 물건은 같은부동산사람이랑 내가 등록한 물건만 (+ 계약완료 추가)
 	                SELECT custId
 	                  FROM customer c2
-					 WHERE activeTp = 'AT001'
+					 WHERE (activeTp = 'AT001' OR activeTp = 'AT003')
 					   AND mbrId in (    <if test="user.mbrTp eq 'MT004'" >
 											   SELECT mbrId
 												 FROM member m1
@@ -340,15 +388,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   
 	   <if test="pageNm eq 'custPublic'">
 	   AND publicYn = 'Y'
-	   	<if test="activeTp eq 'AT001'">
-		AND c.activeTp = 'AT001'
-	   	</if>
-	   	<if test="activeTp eq 'AT002'">
-	   	AND c.activeTp = 'AT002'
-	   	</if>
 	   </if>
 	   <if test="pageNm eq 'custActiveY'">
-	   AND c.activeTp = 'AT001'
 	   AND c.mbrId in (    <if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1
@@ -362,7 +403,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 				)
 	   </if>
 	   <if test="pageNm eq 'custActiveN'">
-	   AND c.activeTp = 'AT002'
 	   AND c.mbrId in ( 	<if test="user.mbrTp eq 'MT004'" >
 									   SELECT mbrId
 										 FROM member m1

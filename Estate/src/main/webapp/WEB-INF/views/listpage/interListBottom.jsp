@@ -11,7 +11,7 @@
 			</td>
 			<td class="title4">
 				<div style="text-align: right;margin:10px;">
-					<button type="button" style="align:right;" id="btnAddrPopup" class="btn_type1" onclick="f_srchObjt_popup();return false;">물건검색</button>
+					<button type="button" style="align:right;cursor:pointer;" id="btnAddrPopup" class="btn_type1" onclick="f_srchObjt_popup();return false;">물건검색</button>
 				</div>	
 			</td>
 		</tr>

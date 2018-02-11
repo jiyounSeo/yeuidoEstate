@@ -1,4 +1,26 @@
 $(document).ready(function(){
+	
+	if ($("#pageNm").val() == "objtActiveY") {
+
+		$("input[name='activeTp2']").attr("checked",false);	
+		$("input[name='activeTp3']").attr("checked",false);	
+		
+		$("label[for='activeTp1']").css("display","none");
+		$("label[for='activeTp2']").css("display","none");
+	}
+	else if ($("#pageNm").val() == "objtActiveN") {
+
+		$("input[name='activeTp1']").attr("checked",false);	
+		$("input[name='activeTp3']").attr("checked",false);	
+		
+		$("label[for='activeTp1']").css("display","none");
+		$("label[for='activeTp2']").css("display","none");
+	}
+	else if($("#pageNm").val() == "objtPublic"){
+		$("input[name='activeTp3']").attr("checked",false);	
+		$("label[for='activeTp3']").css("display","none");	
+	}	
+	
 	var objtTp = $("#objtTp").val();
 	if ( gfn_isNull ($("#objtTp").val()) ) {
 		objtTp = "";
@@ -9,6 +31,34 @@ $(document).ready(function(){
 	}
 	f_objt_select(objtTp,saleTp);
 });
+
+
+function f_show_searchbox(){
+	$("#searchbox").toggle();
+}
+
+function f_search_obName(){	
+	
+	var keyword = $("#keyname").val();
+	
+	if(keyword == ""){ alert('검색어를 입력하세요.'); return false; } //입력폼에 값이 있으면
+	
+	var frm = $('#commObjtList')[0];
+	frm.action = '/objtSearchNamePage.do';
+	frm.method = 'POST';
+	frm.keyword.value = keyword;
+	frm.submit();	
+
+}
+
+function f_enter(val) {
+	if(event.keyCode == 13){ //눌렀다 땐 키값이 13(엔터키)라면
+		if(val == ""){ alert('검색어를 입력하세요.'); return false; } //입력폼에 값이 있으면
+
+		f_search_obName();
+	}	
+}
+
 
 /*
  * 물건 선택 콤보
@@ -188,18 +238,32 @@ function gfn_isNull(str) {
     return false;
 }
 
-function f_objectList_select(objtTp, saleTp){
+
+function f_objtCkbox_check(box){
 	
+	var cnt = 0;
+	
+	if(gfn_isNull($("input[name='activeTp1']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='activeTp2']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='activeTp3']:checked").val()) == false){ cnt++; }
+	if(gfn_isNull($("input[name='activeTp4']:checked").val()) == false){ cnt++; }
+	
+	if(cnt > 0) {
+		f_objectList_select('', '');		
+	} else {
+		alert("목록을 구성하기위해서는 한개 이상 체크되어야 합니다");
+		$("#"+box.name).attr("checked", "checked");
+		return;
+	}
+}
+
+
+function f_objectList_select(objtTp, saleTp){
 	var activeTpChk = "";
 	var activTp1 = $("input[name='activeTp1']:checked").val();
 	var activTp2 = $("input[name='activeTp2']:checked").val();
-	 if ( !gfn_isNull(activTp1) && gfn_isNull(activTp2)) {
-		 activeTpChk = "AT001";
-	 } else if ( gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "AT002";
-	 } else if  ( !gfn_isNull(activTp1) && !gfn_isNull(activTp2)) {
-		 activeTpChk = "";
-	 }
+	var activTp3 = $("input[name='activeTp3']:checked").val();
+	
 	 if (!gfn_isNull(objtTpChk)) {
 		 objtTp = objtTpChk;
 	 }
@@ -212,8 +276,11 @@ function f_objectList_select(objtTp, saleTp){
 		objtTp : objtTp
 	   , saleTp : saleTp
 	   , pageNm : $("#pageNm").val()
-	   , activeTp :  activeTpChk //$("#publicYn").val() == "Y" ?  activeTpChk : $("#activeTp").val()
-	   , myObjt : gfn_isNull($("input[name='activeTp3']:checked").val()) ? "" : $("input[name='activeTp3']:checked").val()
+	   , activeTp : activTp1+activTp2+activTp3//gfn_isNull (activeTpChk) ? "AT001" : activeTpChk
+	   , activeTp1 : activTp1
+	   , activeTp2 : activTp2
+	   , activeTp3 : activTp3
+	   , myObjt : gfn_isNull($("input[name='activeTp4']:checked").val()) ? "" : $("input[name='activeTp4']:checked").val()
 	   , currentPage : Number(currPage)
 	   , category : category
 	   , pagePerRow : 10

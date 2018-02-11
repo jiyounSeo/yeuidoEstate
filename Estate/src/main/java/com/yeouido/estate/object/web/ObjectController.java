@@ -99,6 +99,49 @@ public class ObjectController {
 	    return mav;
 	}
 	
+
+	/* 
+	 * 물건목록검색 -- 이름
+	 */
+	@RequestMapping(value= "/objtSearchName.do", method=RequestMethod.POST)
+	public ModelAndView objtSearchName( @RequestParam Map<String,Object> map, HttpSession session)  {  
+		ModelAndView mav= new ModelAndView();
+		Paging paging = new Paging();
+		map.put("user",  session.getAttribute("user"));
+		
+		List<Map<String,Object>> objtList = new ArrayList<Map<String,Object>>();
+		try {
+			int currentPage = Integer.parseInt(map.get("currentPage").toString());
+			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
+			map.put("rowNum", (currentPage-1)*pagePerRow);
+			map.put("pagePerRow", pagePerRow);
+			objtList = objectService.objtSearchName(map);
+			if (!objtList.isEmpty()) {
+				int totalCount = objtList.size();
+				int pageSize = Integer.parseInt(map.get("pageSize").toString());
+				Map<String, Object> pagingMap = paging.pagingMethod( currentPage, totalCount, pagePerRow, pageSize);
+				mav.addAllObjects(pagingMap);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    mav.addObject("objtList",objtList);
+	    mav.setViewName("jsonView");
+	    return mav;
+	}
+	
+
+	@RequestMapping(value="/objtSearchNamePage.do", method = RequestMethod. POST)
+	public ModelAndView objtSearchNamePage(@RequestParam Map<String,Object> map){
+		
+		ModelAndView mv = new ModelAndView("/search/objtSearch");
+		logger.error(map.get("keyword").toString());
+	    mv.addAllObjects(map);
+		return mv;	
+	}
+	
+	
 	/* 
 	 * 물건목록조회
 	 */

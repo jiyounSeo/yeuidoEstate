@@ -3,7 +3,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <% request.setCharacterEncoding("utf-8");%>
 
-<script type="text/javascript" src="./resources/js/list/totalList.js"></script>	
+<script type="text/javascript" src="./resources/js/list/totalList.js?v20180206"></script>	
 <form id="totalList" name="totalList" action="post">
 
 <div id="objtList" name="objtList" style="width:1500px;margin:auto;padding:0;">
@@ -36,10 +36,10 @@
 		<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td align="right" valign="bottom" style="width:100%; height:30px;">
-					<input type="checkbox" name="objt_activeTp1" id="objt_activeTp1" onclick = "f_objt_select('','')" value="AT001" /><label for="objt_activeTp1">활성</label>
-					<input type="checkbox" name="objt_activeTp2" id="objt_activeTp2" onclick = "f_objt_select('','')" value="AT002" /><label for="objt_activeTp2">보류</label>
-					<input type="checkbox" name="objt_activeTp3" id="objt_activeTp3" onclick = "f_objt_select('','')" value="AT003" /><label for="objt_activeTp3">계약완료</label>
-					<input type="checkbox" name="objt_activeTp4" id="objt_activeTp4" onclick = "f_objt_select('','')" value="AT004" /><label for="objt_activeTp4">내가등록한물건만보기</label>
+					<input type="checkbox" name="objt_activeTp1" id="objt_activeTp1" onclick = "f_objtCkbox_check(this)" value="AT001" checked /><label for="objt_activeTp1">활성</label>
+					<input type="checkbox" name="objt_activeTp2" id="objt_activeTp2" onclick = "f_objtCkbox_check(this)" value="AT002" checked /><label for="objt_activeTp2">보류</label>
+					<input type="checkbox" name="objt_activeTp3" id="objt_activeTp3" onclick = "f_objtCkbox_check(this)" value="AT003" checked /><label for="objt_activeTp3">계약완료</label>
+					<input type="checkbox" name="objt_activeTp4" id="objt_activeTp4" onclick = "f_objtCkbox_check(this)" value="AT004" /><label for="objt_activeTp4">내가등록한물건만보기</label>
 				</td>	
 			</tr>
 		</table>
@@ -96,9 +96,10 @@
 					<table width="1460px" cellpadding="0" cellspacing="0" border="0">
 						<tr style="height:30px;">
 							<td width="100%" align="right" valign="top">
-								<input type="checkbox" name="cust_activeTp1" id="cust_activeTp1" onclick = "f_custList_select()" value="AT001" /><label for="cust_activeTp1">활성</label>
-								<input type="checkbox" name="cust_activeTp2" id="cust_activeTp2" onclick = "f_custList_select()" value="AT002" /><label for="cust_activeTp2">보류</label>
-								<input type="checkbox" name="cust_activeTp3" id="cust_activeTp3" onclick = "f_custList_select()" value="AT003" /><label for="cust_activeTp3">내가등록한물건만보기</label>
+								<input type="checkbox" name="cust_activeTp1" id="cust_activeTp1" onclick = "f_custCkbox_check(this)" value="AT001" checked /><label for="cust_activeTp1">활성</label>
+								<input type="checkbox" name="cust_activeTp2" id="cust_activeTp2" onclick = "f_custCkbox_check(this)" value="AT002" checked /><label for="cust_activeTp2">보류</label>
+								<input type="checkbox" name="cust_activeTp3" id="cust_activeTp3" onclick = "f_custCkbox_check(this)" value="AT003" checked /><label for="cust_activeTp3">계약완료</label>
+								<input type="checkbox" name="cust_activeTp4" id="cust_activeTp4" onclick = "f_custCkbox_check(this)" value="AT004" /><label for="cust_activeTp4">내가등록한물건만보기</label>
 							</td>
 						</tr>
 						<tr>
@@ -108,8 +109,8 @@
 										<td style="width:150px;">등록일자</td>
 										<td style="width:180px">고객명</td>
 										<td style="width:180px">연락처</td>
-										<td style="width:750px">의뢰내역</td>
-										<td style="width:120px">등록자</td>
+										<td style="width:580px">의뢰내역</td>
+										<td style="width:290px">등록인</td>
 										<td style="width:80px">상태</td>
 									</tr>
 									<tbody id="custTbody">
@@ -173,7 +174,7 @@
 		<td>{{html $value.custNm}}</td>
 		<td>{{html $value.custTel1}}-{{html $value.custTel2}}-{{html $value.custTel3}}</td>
 		<td>{{html $value.reqContent}}</td>
-		<td>{{html $value.mbrNm}}</td>
+		<td>{{html $value.estateInfo}}</td>
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>
 							

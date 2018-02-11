@@ -54,7 +54,7 @@ public class WorkController {
 	 * 목록조회
 	 */
 	@RequestMapping(value= "/selectWorkList.do", method=RequestMethod.POST)
-	public ModelAndView selectCustomerList( @RequestParam Map<String,Object> map, HttpSession session)   {  
+	public ModelAndView selectWorkList( @RequestParam Map<String,Object> map, HttpSession session)   {  
 		
 			ModelAndView mav= new ModelAndView();
 			Paging paging = new Paging();
