@@ -1,4 +1,4 @@
-<script type="text/javascript" src="./resources/js/list/addObject.js"></script>
+<script type="text/javascript" src="./resources/js/list/addObject.js?v20180203"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 	<div style="height:50px;"></div>
 <div class="new_page_container">
@@ -15,11 +15,13 @@
 					</c:if>
 				</td>
 				<td width="50%" align="right">
-					<a href="#list" onclick="f_list_view_change();return false;"><input type="image" name="listBtn" src="./resources/images/btn_ob_list.jpg" ></a>
+					<c:set var="referURL" value="${header.referer}" /><input type="hidden" name="beforUrl" id="beforUrl" value="${referURL}">
+					<a href="#list" onclick="f_list_link();return false;"><input type="image" name="listBtn" src="./resources/images/btn_ob_list.jpg" ></a>
 				</td>
 			</tr>
 		</table>
 	</div>
+	<input type="hidden" id="activeTp" name="activeTp" value="${activeTp}">
 	<input type=hidden name="objtNo" id="objtNo" value="${objtNo}"/>
 	<input type=hidden name="objtTp" id="objtTp" value="${objtTp}"/>
 	<input type=hidden name="saleTp" id="saleTp" value="${saleTp}"/>

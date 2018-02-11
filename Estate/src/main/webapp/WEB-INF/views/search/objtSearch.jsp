@@ -9,7 +9,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
-<script type="text/javascript" src="./resources/js/search/objtSearch.js?v20180201"></script>	
+<script type="text/javascript" src="./resources/js/search/objtSearch.js?v20180208"></script>	
 
 <form id="commObjtList">
 <div id="ob_list" name="ob_list" style="width:1500px;margin:auto;padding:0;">
@@ -21,17 +21,18 @@
 	<table style="background-color :#F6F8F7;" width="1500px" cellpadding="0" cellspacing="0" border="0">
 		<tr>
 			<td width="100%" align="right" valign="bottom">
-				<input type="checkbox" name="activeTp1" id="activeTp1" onclick = "f_objt_select('','')" value="AT001" /><label for="activeTp1">활성</label>
-				<input type="checkbox" name="activeTp2" id="activeTp2" onclick = "f_objt_select('','')" value="AT002" /><label for="activeTp2">보류</label>
-				<input type="checkbox" name="activeTp3" id="activeTp3" onclick = "f_objt_select('','')" value="AT003" /><label for="activeTp3">내가등록한물건만보기</label>
-			</td>	
+				<input type="checkbox" name="activeTp1" id="activeTp1" onclick = "f_objtCkbox_check(this)" value="AT001" checked /><label for="activeTp1">활성</label>
+				<input type="checkbox" name="activeTp2" id="activeTp2" onclick = "f_objtCkbox_check(this)" value="AT002" checked /><label for="activeTp2">보류</label>
+				<input type="checkbox" name="activeTp3" id="activeTp3" onclick = "f_objtCkbox_check(this)" value="AT003" checked /><label for="activeTp3">계약완료</label>
+				<input type="checkbox" name="activeTp4" id="activeTp4" onclick = "f_objtCkbox_check(this)" value="AT004" /><label for="activeTp4">내가등록한물건만보기</label>
+			</td>
 		</tr>
 		<tr>
 			<td height="10px"></td>
 		</tr>
 		<tr>
 			<td>
-				<table class="ob_list">
+				<table class="cl_list">
 					<tr class="title">
 						<td style="width:150px;">등록일자</td>
 						<td style="width:750px">물건명</td>
@@ -61,7 +62,7 @@
 									<select style="width:80px;height:40px;vertical-align:top">
 										<option>물건명</option>
 									</select>
-									<input type="text" id="keyname" name="keyname" style="width:190px;height:40px;;vertical-align:top;padding-left:10px;" onkeydown="f_enter(this.value);">
+									<input type="text" id="keyname" name="keyname" style="width:190px;height:40px;;vertical-align:top;padding-left:10px;" onkeydown="f_enter(this.value);" value="${keyword}">
 									<a href="#" onClick="f_search_obName();"><img src="./resources/images/sBnt.png"></a>
 								</span>
 							</div>
@@ -81,6 +82,10 @@
 	</table>	
 </div>
 
+<input type="hidden" name="objtNo" id="objtNo" />
+<input type="hidden" name="objtTp" id="objtTp" />
+<input type="hidden" name="saleTp" id="saleTp" />
+<input type="hidden" name="viewUrl" id="viewUrl" />
 <input type="hidden" name="keyword" id="keyword" />
 
 </form>
@@ -88,12 +93,12 @@
 
 
 <script id="objtListTemplte" type="text/x-jquery-tmpl">	
-{{each custList}}					
+{{each objtList}}					
 	<tr class="list_data" onclick="f_objtDtl_view({{html $index}});return false;">
 		<td>{{html $value.frstRegDt}}</td>
 		<td>{{html $value.objtNm}}</td>
-		<td>{{html $value.objtTp}}</td>
-		<td>{{html $value.saleTp}}</td>
+		<td>{{html $value.objtTpNm}}</td>
+		<td>{{html $value.saleTpNm}}</td>
 		<td>{{html $value.mbrNm}}</td>
 		<td>{{html $value.activeTpNm}}</td>
 	</tr>

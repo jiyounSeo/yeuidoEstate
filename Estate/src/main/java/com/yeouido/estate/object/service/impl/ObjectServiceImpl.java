@@ -54,6 +54,17 @@ public class ObjectServiceImpl  implements ObjectService
    /* 물건 정보 */
    @Override
    public Map selectObjectTotalCnt(Map map) throws Exception {
+	   List list = new ArrayList<String>();
+	   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+		   list.add(map.get("activeTp1"));
+	   }
+	   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+		   list.add(map.get("activeTp2"));
+	   }
+	   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+		   list.add(map.get("activeTp3"));
+	   }
+	   map.put("activeTpList", list);
 	   return objectDAO.selectObjectTotalCnt(map);
    }
    /* 물건 정보 */
@@ -72,18 +83,6 @@ public class ObjectServiceImpl  implements ObjectService
    /* 물건갯수 */
    @Override
    public List<Object> selectObjectCnt(Map map) throws Exception {
-	   List list = new ArrayList<String>();
-	   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
-		   list.add(map.get("activeTp1"));
-	   }
-	   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
-		   list.add(map.get("activeTp2"));
-	   }
-	   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
-		   list.add(map.get("activeTp3"));
-	   }
-	   map.put("activeTpList", list);
-   
 	   return objectDAO.selectObjectCnt(map);
    }
    
@@ -115,9 +114,35 @@ public class ObjectServiceImpl  implements ObjectService
    /* 물건리스트 -- 물건명검색 */
    @Override
    public List<Map<String,Object>> objtSearchName(Map map) throws Exception {
+	   List list = new ArrayList<String>();
+	   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+		   list.add(map.get("activeTp1"));
+	   }
+	   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+		   list.add(map.get("activeTp2"));
+	   }
+	   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+		   list.add(map.get("activeTp3"));
+	   }
+	   map.put("activeTpList", list);
 	   return objectDAO.objtSearchName(map);
    }
-   
+   /* 물건리스트 -- 물건명검색 결과 개수 */
+   @Override
+   public Map objtSearchNameTotalCnt(Map map) throws Exception {
+	   List list = new ArrayList<String>();
+	   if (!("").equals(map.get("activeTp1")) && map.get("activeTp1") != null ) {
+		   list.add(map.get("activeTp1"));
+	   }
+	   if (!("").equals(map.get("activeTp2")) && map.get("activeTp2") != null ) {
+		   list.add(map.get("activeTp2"));
+	   }
+	   if (!("").equals(map.get("activeTp3")) && map.get("activeTp3") != null ) {
+		   list.add(map.get("activeTp3"));
+	   }
+	   map.put("activeTpList", list);
+	   return objectDAO.objtSearchNameTotalCnt(map);
+   }
    @Override
    public List<Map<String,Object>> selectTotalSearch(Map map) throws Exception {
 	   

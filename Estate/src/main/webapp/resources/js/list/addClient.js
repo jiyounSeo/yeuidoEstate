@@ -170,8 +170,8 @@ function f_list_view_change2() {
 
 
 function f_list_link() {
-	
-	var url = "";
+
+	var url = "./totalListView.do";
 	var tmp = "";
 	var activeTp = $("#activeTp").val();
 	var beforeFullUrl = $("#beforUrl").val();

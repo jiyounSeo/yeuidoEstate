@@ -538,6 +538,34 @@ function f_list_view_change() {
 }
 
 
+function f_list_link() {
+	
+	var url = "./totalListView.do";
+	var tmp = "";
+	var activeTp = $("#activeTp").val();
+	var beforeFullUrl = $("#beforUrl").val();
+	
+	if(beforeFullUrl != ""){
+		tmp = beforeFullUrl.split("/");
+	}
+	var beforePage = tmp[tmp.length-1];
+	
+	if(beforePage == "objtSearchNamePage.do"){
+		history.back();
+		return;
+		
+	} else {
+		if(activeTp == "AT001"){
+			url = "./commObListView.do?pageNm=objtActiveY&activeTp=AT001";
+		} else if (activeTp == "AT002") {
+			url = "./commObListView.do?pageNm=objtActiveN&activeTp=AT002";
+		}
+	}
+	location.href = url;
+	return;
+}
+
+
 function f_disableFieldByRadioBtn(value){
 	if(value == "AD006"){
 		$("#availableDt").attr("disabled",false);

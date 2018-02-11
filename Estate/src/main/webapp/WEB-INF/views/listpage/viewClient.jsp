@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/list/listStyle.jsp" %> 
-<script type="text/javascript" src="./resources/js/list/addClient.js?v20180208"></script>
+<script type="text/javascript" src="./resources/js/list/addClient.js?v20180209"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
 
 <form id="viewClient" action="/">
