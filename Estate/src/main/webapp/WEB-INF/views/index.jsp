@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/mainStyle.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Z0U9uQFTmyK7bim6HrQ6&submodules=geocoder"></script>
-<script type="text/javascript" src="./resources/js/list/mainObject.js?v20180202"></script>
+<script type="text/javascript" src="./resources/js/list/mainObject.js?v20180204"></script>
 
 <%@ include file="/WEB-INF/views/tabMenuBar.jsp" %> 
 <div style="width:970px;margin:auto;padding:0;">
@@ -68,6 +68,32 @@
 </script>
 
 
+<!-- 아파트 전체 -->
+<script id="objtListTemplte1_ST000" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.saleTpNm}}</td>
+		<td>{{html $value.objtTpNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
+		<td>{{html $value.areaCal}}</td>
+		<td>{{html $value.floor}}</td>
+		{{if $value.saleTpNm == '매매'}}
+			<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
+		{{/if}}
+		{{if $value.saleTpNm == '전세'}}
+			<td><div class="obPrice">{{html $value.depositAmt}}</div></td>
+		{{/if}}
+		{{if $value.saleTpNm == '월세'}}
+			<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
+		{{/if}}
+		{{if $value.saleTpNm == '렌트'}}
+			<td><div class="obPrice">{{html $value.monthlyAmt}}</div></td>
+		{{/if}}
+		<td>{{html $value.estateNm}}<br>({{html $value.estateTel}})</td>
+	</tr>
+{{/each}}	
+</script>
 <!-- 아파트 매매 -->
 <script id="objtListTemplte1_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
@@ -129,6 +155,26 @@
 {{/each}}	
 </script>
 
+<!-- 상가 전체 -->
+<script id="objtListTemplte2_ST000" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.saleTpNm}}</td>
+		<td>{{html $value.objtTpNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
+		<td>{{html $value.areaCal}}</td>
+		<td>{{html $value.floor}}</td>
+		{{if $value.saleTpNm == '매매'}}
+			<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
+		{{/if}}
+		{{if $value.saleTpNm == '임대'}}
+			<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
+		{{/if}}
+		<td>{{html $value.estateNm}}<br>({{html $value.estateTel}})</td>
+	</tr>
+{{/each}}	
+</script>
 <!-- 상가 매매 -->
 <script id="objtListTemplte2_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
@@ -160,6 +206,27 @@
 {{/each}}	
 </script>
 
+
+<!-- 사무실/빌딩 전체 -->
+<script id="objtListTemplte3_ST000" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.saleTpNm}}</td>
+		<td>{{html $value.objtTpNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
+		<td>{{html $value.areaCal}}</td>
+		<td>{{html $value.floor}}</td>
+		{{if $value.saleTpNm == '매매'}}
+			<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
+		{{/if}}
+		{{if $value.saleTpNm == '임대'}}
+			<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
+		{{/if}}
+		<td>{{html $value.estateNm}}<br>({{html $value.estateTel}})</td>
+	</tr>
+{{/each}}	
+</script>
 <!-- 사무실/빌딩 매매 -->
 <script id="objtListTemplte3_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
@@ -191,6 +258,32 @@
 {{/each}}	
 </script>
 
+<!-- 오피스텔 전체 -->
+<script id="objtListTemplte4_ST000" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.saleTpNm}}</td>
+		<td>{{html $value.objtTpNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
+		<td>{{html $value.areaCal}}</td>
+		<td>{{html $value.floor}}</td>
+		{{if $value.saleTpNm == '매매'}}
+			<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
+		{{/if}}
+		{{if $value.saleTpNm == '전세'}}
+			<td><div class="obPrice">{{html $value.depositAmt}}</div></td>
+		{{/if}}
+		{{if $value.saleTpNm == '월세'}}
+			<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
+		{{/if}}
+		{{if $value.saleTpNm == '렌트'}}
+			<td><div class="obPrice">{{html $value.monthlyAmt}}</div></td>
+		{{/if}}
+		<td>{{html $value.estateNm}}<br>({{html $value.estateTel}})</td>
+	</tr>
+{{/each}}	
+</script>
 <!-- 오피스텔 매매 -->
 <script id="objtListTemplte4_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
@@ -252,7 +345,34 @@
 {{/each}}	
 </script>
 
-<!-- 오피스텔 매매 -->
+
+<!-- 주상복합 전체 -->
+<script id="objtListTemplte5_ST000" type="text/x-jquery-tmpl">	
+{{each objtList}}		
+	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
+		<td>{{html $value.frstRegDt}}</td>
+		<td>{{html $value.saleTpNm}}</td>
+		<td>{{html $value.objtTpNm}}</td>
+		<td class="obName"><div class="nameBox"><span class="bdName">{{html $value.buildNm}}</span><font-color="#e5e5e5">&nbsp;&nbsp;|&nbsp;&nbsp;</font></div>{{html $value.objtNm}}</td>
+		<td>{{html $value.areaCal}}</td>
+		<td>{{html $value.floor}}</td>
+		{{if $value.saleTpNm == '매매'}}
+			<td><div class="obPrice">{{html $value.bargainAmt}}</div></td>
+		{{/if}}
+		{{if $value.saleTpNm == '전세'}}
+			<td><div class="obPrice">{{html $value.depositAmt}}</div></td>
+		{{/if}}
+		{{if $value.saleTpNm == '월세'}}
+			<td><span class="obPrice">{{html $value.depositAmt}}</span>/&nbsp;<span class="obPrice">{{html $value.monthlyAmt}}</span></td>
+		{{/if}}
+		{{if $value.saleTpNm == '렌트'}}
+			<td><div class="obPrice">{{html $value.monthlyAmt}}</div></td>
+		{{/if}}
+		<td>{{html $value.estateNm}}<br>({{html $value.estateTel}})</td>
+	</tr>
+{{/each}}	
+</script>
+<!-- 주상복합 매매 -->
 <script id="objtListTemplte5_ST001" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
@@ -267,7 +387,7 @@
 	</tr>
 {{/each}}	
 </script>
-<!-- 오피스텔 전세 -->
+<!-- 주상복합 전세 -->
 <script id="objtListTemplte5_ST002" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
@@ -282,7 +402,7 @@
 	</tr>
 {{/each}}	
 </script>
-<!-- 오피스텔 월세 -->
+<!-- 주상복합 월세 -->
 <script id="objtListTemplte5_ST003" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
@@ -297,7 +417,7 @@
 	</tr>
 {{/each}}	
 </script>
-<!-- 오피스텔 렌트 -->
+<!-- 주상복합 렌트 -->
 <script id="objtListTemplte5_ST004" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">
@@ -312,7 +432,7 @@
 	</tr>
 {{/each}}	
 </script>
-	
+
 <script id="objtListTemplte6" type="text/x-jquery-tmpl">	
 {{each objtList}}		
 	<tr class="list_data" onclick="location.href='./indexObjectDtl.go?objtNo={{html $value.objtNo}}&objtTp={{html $value.objtTp}}'">

@@ -36,6 +36,10 @@ public class ObjectDAO extends AbstractDAO
        return selectList("objectDAO.selectMainObjtList", map);
    }
    @SuppressWarnings("unchecked")
+   public List<Map<String,Object>> selectMainObjtListMap(Map map) throws Exception{
+       return selectList("objectDAO.selectMainObjtListMap", map);
+   }
+   @SuppressWarnings("unchecked")
    public List<Map<String,Object>> searchMainObjtList(Map map) throws Exception{
        return selectList("objectDAO.searchMainObjtList", map);
    }

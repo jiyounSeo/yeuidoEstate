@@ -55,6 +55,7 @@ public class ObjectController {
 		Paging paging = new Paging();
         			
 		List<Map<String,Object>> objtList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> objtListForMap = new ArrayList<Map<String,Object>>();
 		try {
 			int currentPage = Integer.parseInt(map.get("currentPage").toString());
 			int pagePerRow = Integer.parseInt(map.get("pagePerRow").toString() );
@@ -62,6 +63,7 @@ public class ObjectController {
 			map.put("pagePerRow", pagePerRow);
 			
 			objtList = objectService.selectMainObjtList(map);
+			objtListForMap = objectService.selectMainObjtListMap(map);
 			if (!objtList.isEmpty()) {
 				// ("").equals(map.get("pagePerRow"))) ? 10 : map.get("pagePerRow").toString() 
 				int totalCount = Integer.parseInt( objectService.selectMainObjectTotalCnt(map).get("totalCnt").toString());
@@ -73,6 +75,7 @@ public class ObjectController {
 			e.printStackTrace();
 		}
 	    mav.addObject("objtList",objtList);
+	    mav.addObject("objtListForMap",objtListForMap);
 	    mav.setViewName("jsonView");
 	    return mav;
 	}

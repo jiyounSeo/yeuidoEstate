@@ -196,6 +196,7 @@ var category = "";
 var categoryArr = new Array();
 
 function f_category_select (cate, stType) {
+	console.log(">>> category : " + cate);
 	category = cate;
 	f_objt_select (objtTpChk, stType);	
 }
@@ -223,7 +224,7 @@ $(document).on('click', '.pagingBtn', function() {
 	
 });
 var objtTpChk = "OT001";
-var saleTpChk = "ST001";
+var saleTpChk = "ST000";
 function f_objt_select (objtTp, saleTp) {
 	f_category_combo(objtTp== '' ? objtTpChk : objtTp);
 	if (objtTp != '' ) {
@@ -266,6 +267,9 @@ function f_objt_select (objtTp, saleTp) {
 	}
 
 	switch (saleTpChk) {
+		case "ST000":
+			saleName = "전체";
+			break;
 		case "ST001":
 			saleName = "매매";
 			break;
@@ -303,16 +307,19 @@ function f_objt_select (objtTp, saleTp) {
 	}	
 	$("#tab_"+objtTpChk).attr('src', './resources/images/tab'+index_ob_num+'_on.png');
 	
-	for(var i=1; i<=7; i++){
+	for(var i=0; i<=7; i++){
 		$("#li_ST00"+i).attr('src', './resources/images/s_tab'+i+'_off.png');
 	}	
 	$("#li_"+saleTpChk).attr('src', './resources/images/s_tab'+index_sale_num+'_on.png');
 	
 	var navStr = objtName + " > " + saleName;
-	if(category == ''){
-		navStr += " > 전체";
-	} else {
-		navStr += " > " + categoryArr[category];
+	
+	if(objtTpChk != "OT002" && objtTpChk !="OT003" && objtTpChk != "OT004"){
+		if(gfn_isNull(category)){
+			navStr += " > 전체";
+		} else {
+			navStr += " > " + categoryArr[category];
+		}		
 	}
 	$("#selected_list").empty();
 	$("#selected_list").append(navStr);
@@ -404,19 +411,26 @@ function f_objectList_select(objtTp, saleTp){
 	 $("#order_menu").empty();
 	 $("#order_menu").append(orderMenu);
 	 
-	 console.log(currPage);
+	 var bdcd = "";
+	 var bdnm = "";
+	 if(objtTp == "OT002" || objtTp == "OT003" || objtTp == "OT006" ){
+		 bdnm = category;
+	 } else {
+		 bdcd = category;
+	 }
+	 
 	 var param = {
 			 currentPage : Number(currPage)
 			   , orderByColumn : orderByColumn == "" ? "frstRegDt" : orderByColumn
 			   , orderByColumnDir : orderByColumnDir == "" ? "desc" : orderByColumnDir
 			   , saleTp : saleTp
 			   , objtTp : objtTp
-			   , buildCd : category
+			   , buildCd : bdcd
+			   , buildNm : bdnm
 			   , pagePerRow : 20
 			   , pageSize : 20
 	};
 	
-	console.log (param);
 	$.ajax({
 	  url : "/selectMainObjtList.go",
 	  type: "post",
@@ -425,27 +439,29 @@ function f_objectList_select(objtTp, saleTp){
 	  success : function(result){
 		  $("#objtTbody").empty();
 		  var tmplNm = "";
+		  var saletype = param.saleTp;
 		  switch ( objtTp ) {
 		  	case "OT001" : // 아파트
-		  		tmplNm = "objtListTemplte1_"+param.saleTp;
+		  		tmplNm = "objtListTemplte1_"+saletype;
 		  		break; 
 		  	case "OT002" : // 상가
-		  		tmplNm = "objtListTemplte2_"+param.saleTp;
+		  		tmplNm = "objtListTemplte2_"+saletype;
 		  		break;
 		  	case "OT003" : //사무실.빌딩
-		  		tmplNm = "objtListTemplte3_"+param.saleTp;
+		  		tmplNm = "objtListTemplte3_"+saletype;
 				break;
 		  	case "OT004" : // 오피스텔
-		  		tmplNm = "objtListTemplte4_"+param.saleTp;
+		  		tmplNm = "objtListTemplte4_"+saletype;
 				break;
 		  	case "OT005" : //주상복합
-		  		tmplNm = "objtListTemplte5_"+param.saleTp;
+		  		tmplNm = "objtListTemplte5_"+saletype;
 		  		break;
 		  	case "OT006" : //분양권
 		  		tmplNm = "objtListTemplte6";
 				break;
 		  }
 
+		  console.log(objtTp + "/" + tmplNm);
 		  
 		  var map = new naver.maps.Map("main_map", {
 				center: new naver.maps.LatLng(37.5249989,126.9253099),		// IFC몰
@@ -479,8 +495,10 @@ function f_objectList_select(objtTp, saleTp){
 		  
 		  if (result.objtList.length != 0) {
 			  objtList = result.objtList;
+			  objtListForMap = result.objtListForMap;
+			  
 			  $("#"+tmplNm).tmpl(result).appendTo("#objtTbody");
-			  f_map_make(objtList, map);
+			  f_map_make(objtListForMap, map);
 			  $("#pagingDiv").html(groupPaging(result.startPage, result.pageSize, result.endPage, result.lastPage));
 			  $("#pagingDiv #page" + currPage).addClass("active");
 			  
@@ -492,8 +510,7 @@ function f_objectList_select(objtTp, saleTp){
 		  $("div.obPrice").number(true);
 		  $("span.obPrice").number(true);
 	  }
-	});
-	
+	});	
 }
 
 function f_map_make(list, map) {	
@@ -545,8 +562,8 @@ function f_map_make(list, map) {
 	            '       <tr><td class="dataText"><b>규모</b>&nbsp;&nbsp;<font color="#7c7c7c">' + f_textProcessing_blank(list[i].totalHouseholdNum) +'&nbsp;/&nbsp;총' + f_textProcessing_blank(list[i].totalDongNum) + '개동&nbsp;/&nbsp;최고'+ f_textProcessing_blank(list[i].highestFloor) +'층</font></td></tr>',
 	            '       <tr><td class="dataText"><b>면적</b>&nbsp;&nbsp;<font color="#7c7c7c">' + f_textProcessing_blank(list[i].minArea) +'㎡&nbsp;~&nbsp;' + f_textProcessing_blank(list[i].maxArea) + '㎡</font></td></tr>',
 	            '       <tr><td class="dataText"><span class="obNum"><b>매물</b>&nbsp;&nbsp;',
-	            '			매매 : <b><a href="#" onClick="f_category_select(\'' + list[i].buildCd + '\', \'ST001\')">' + f_textProcessing_blank(list[i].numOfST001) +'</a></b>&nbsp;',
-	            '			임대 : <b><a href="#" onClick="f_category_select(\'' + list[i].buildCd + '\', \'ST005\')">' + f_textProcessing_blank(list[i].numOfST005) + '</b></font></td></tr>',
+	            '			매매 : <b><a href="#" onClick="f_category_select(\'' + list[i].buildNm + '\', \'ST001\')">' + f_textProcessing_blank(list[i].numOfST001) +'</a></b>&nbsp;',
+	            '			임대 : <b><a href="#" onClick="f_category_select(\'' + list[i].buildNm + '\', \'ST005\')">' + f_textProcessing_blank(list[i].numOfST005) + '</b></font></td></tr>',
 	            '       <tr><td style="height:9px;"></td></tr>',
 	            '   </table>',
 	            '</div>'
@@ -561,8 +578,8 @@ function f_map_make(list, map) {
 	            '       <tr><td class="dataText"><b>규모</b>&nbsp;&nbsp;<font color="#7c7c7c">' + f_textProcessing_blank(list[i].totalHouseholdNum) +'&nbsp;/&nbsp;총' + f_textProcessing_blank(list[i].totalDongNum) + '개동&nbsp;/&nbsp;최고'+ f_textProcessing_blank(list[i].highestFloor) +'층</font></td></tr>',
 	            '       <tr><td class="dataText"><b>면적</b>&nbsp;&nbsp;<font color="#7c7c7c">' + f_textProcessing_blank(list[i].minArea) +'㎡&nbsp;~&nbsp;' + f_textProcessing_blank(list[i].maxArea) + '㎡</font></td></tr>',
 	            '       <tr><td class="dataText"><span class="obNum"><b>매물</b>&nbsp;&nbsp;',
-	            '			분양권 : <b><a href="#" onClick="f_category_select(\'' + list[i].buildCd + '\', \'ST006\')">' + f_textProcessing_blank(list[i].numOfST006) + '</a></b>&nbsp;',
-	            '			전매 : <b><a href="#" onClick="f_category_select(\'' + list[i].buildCd + '\', \'ST007\')">' + f_textProcessing_blank(list[i].numOfST007) + '</b></font></td></tr>',
+	            '			분양권 : <b><a href="#" onClick="f_category_select(\'' + list[i].buildNm + '\', \'ST006\')">' + f_textProcessing_blank(list[i].numOfST006) + '</a></b>&nbsp;',
+	            '			전매 : <b><a href="#" onClick="f_category_select(\'' + list[i].buildNm + '\', \'ST007\')">' + f_textProcessing_blank(list[i].numOfST007) + '</b></font></td></tr>',
 	            '       <tr><td style="height:9px;"></td></tr>',
 	            '   </table>',
 	            '</div>'
@@ -570,9 +587,9 @@ function f_map_make(list, map) {
         }
         
         var infowindow = new naver.maps.InfoWindow({
-            content: contentString
+            content: contentString,
+            removable : true
         });
-        
         f_marker_setting_event(map, marker, infowindow, list[i].positionX, list[i].positionY);
 		
 	}	
@@ -598,6 +615,9 @@ function f_marker_setting_event(map, marker, infowindow, x, y) {
         	map.setCenter(myaddr); // 검색된 좌표로 지도 이동
             infowindow.open(map, marker);
         }
+    });	
+    naver.maps.Event.addListener(map, "click", function(e) {
+        infowindow.close();
     });	
 }
 

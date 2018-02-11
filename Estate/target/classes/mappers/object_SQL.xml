@@ -577,6 +577,101 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   LIMIT #{rowNum}, #{pagePerRow}
 	   </if>
 	</select>
+	<select id="selectMainObjtListMap" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT	DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
+	     , obj.objtNo
+	     , obj.objtTp
+	     , (select commNm from commcd where commCd = objtTp ) objtTpNm
+	     , obj.saleTP
+	     , (select commNm from commcd where commCd = saleTp ) saleTpNm
+	     , obj.objtNm
+	     , obj.buildCd
+	     , if (isnull(obj.buildCd), obj.buildNm, (select b.buildNm from building b where b.buildCd = obj.buildCd )) buildNm 
+	     , obj.directionTp
+	     , (select commNm from commcd where commCd = obj.directionTp ) directionTpNm
+	     , obj.businessNm
+	     , obj.bargainAmt
+	     , obj.depositAmt
+	     , obj.monthlyAmt
+	     , obj.rightAmt
+	     , obj.manageAmt
+	     , if (isnull(obj.ondolYn), 'N', obj.ondolYn) ondolYn
+	     , obj.conditionTp 
+	     , (select commNm from commcd where commCd = obj.conditionTp ) conditionTpNm
+	     , obj.frstRegUser
+	     , obj.activeTp
+	     , (select commNm from commcd where commCd = obj.activeTp ) activeTpNm
+	     , obj.surtaxYn
+	     , obj.advertiseYn
+	     , obj.dong
+	     , obj.floor
+	     , CAST(obj.area AS signed integer) area
+	     , ROUND(CAST(obj.area AS signed integer)*3.3058,2) areaCal
+	     , CAST(obj.realArea AS signed integer) realArea
+	     , obj.publicYn
+	     , obj.availableTp
+	     , (select commNm from commcd where commCd = obj.availableTp ) availableTpNm
+	     , DATE_FORMAT(obj.availableDt, '%Y-%m-%d') as availableDt
+	 	 , obj.parcelAmt
+	 	 , obj.premiumAmt
+         , m.mbrNm frstRegNm
+         , e.estateNm
+         , concat(e.tel1, '-', e.tel2,'-', e.tel3) estateTel
+         , concat(e.estateNm, '(', e.tel1, '-', e.tel2,'-', e.tel3, ')') estateInfo
+         , concat(custTel1, '-',custTel2,'-',custTel3) custTel
+         , custNm
+         , obj.zipNo
+         , if (isnull(obj.jibunAddr), (select jibunAddr from building b where b.buildCd = obj.buildCd ), obj.jibunAddr ) jibunAddr
+	  	 , obj.roadAddrPart1 
+	  	 , obj.addrDetail
+	 	 , (select totalDongNum from building b where b.buildCd = obj.buildCd ) totalDongNum
+	 	 , (select totalHouseholdNum from building b where b.buildCd = obj.buildCd ) totalHouseholdNum 
+	 	 , (select totalParkingNum from building b where b.buildCd = obj.buildCd ) totalParkingNum
+	 	 , (select heatingType from building b where b.buildCd = obj.buildCd ) heatingType
+	 	 , (select heatingFuel from building b where b.buildCd = obj.buildCd ) heatingFuel
+	 	 , (select builderName from building b where b.buildCd = obj.buildCd ) builderName
+	 	 , (select finishedDate from building b where b.buildCd = obj.buildCd ) finishedDate
+	 	 , (select minArea from building b where b.buildCd = obj.buildCd ) minArea
+	 	 , (select maxArea from building b where b.buildCd = obj.buildCd ) maxArea
+	 	 , (select highestFloor from building b where b.buildCd = obj.buildCd ) highestFloor
+	 	 , if ( isnull(obj.positionX), (select positionX from building b where b.buildCd = obj.buildCd ) , obj.positionX) positionX 
+	 	 , if ( isnull(obj.positionY), (select positionY from building b where b.buildCd = obj.buildCd ) , obj.positionY) positionY 
+	   <if test = "objtTp == 'OT001' or objtTp == 'OT004' or objtTp == 'OT005'">
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST001' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST001
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST002' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST002
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST003' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST003
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST004' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST004
+	 	</if>
+	 	<if test = "objtTp == 'OT002' or objtTp == 'OT003'">
+	 	 , (select count(*) from saleobject where buildNm = obj.buildNm and saleTp = 'ST001' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST001
+	 	 , (select count(*) from saleobject where buildNm = obj.buildNm and saleTp = 'ST005' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST005
+	 	</if>
+	 	<if test = "objtTp == 'OT006'">
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST006' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST006 
+	 	 , (select count(*) from saleobject where buildCd = obj.buildCd and saleTp = 'ST007' and objtTp = obj.objtTp and advertiseYn = 'Y') numOfST007 
+	 	</if>
+	  FROM saleobject obj
+	     left outer join customer cust
+         on obj.custId = cust.custId
+		 inner join member m
+         on obj.frstRegUser = m.mbrId 
+	 	 left outer join  estate e
+         on  m.estateCd  = e.estateCd
+	 WHERE 1=1
+	   and advertiseYn = 'Y'
+	   <if test = "objtTp != null and objtTp != '' ">
+	   and objtTp = #{objtTp}
+	   </if>
+	   <if test = "saleTp != null and saleTp != '' and saleTp != 'ST000'">
+	   and saleTp = #{saleTp}
+	   </if>
+	   <if test = "buildCd != null and buildCd != '' ">
+	   and buildCd = #{buildCd}
+	   </if>
+	   <if test = "buildNm != null and buildNm != '' ">
+	   and buildNm = #{buildNm}
+	   </if>
+	</select>	
 	
 	<select id="selectMainObjtList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT	DATE_FORMAT(obj.frstRegDt, '%Y-%m-%d') as frstRegDt
@@ -663,11 +758,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   <if test = "objtTp != null and objtTp != '' ">
 	   and objtTp = #{objtTp}
 	   </if>
-	   <if test = "saleTp != null and saleTp != '' ">
+	   <if test = "saleTp != null and saleTp != '' and saleTp != 'ST000'">
 	   and saleTp = #{saleTp}
 	   </if>
 	   <if test = "buildCd != null and buildCd != '' ">
 	   and buildCd = #{buildCd}
+	   </if>
+	   <if test = "buildNm != null and buildNm != '' ">
+	   and buildNm = #{buildNm}
 	   </if>
 	   
 	   <if test = "(orderByColumn == 'frstRegDt' and orderByColumnDir == 'desc') or orderByColumn == '' ">
@@ -720,11 +818,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	 left outer join  estate e
          on  m.estateCd  = e.estateCd
 	 WHERE 1=1
-	 	and objtTp = #{objtTp}
-	   and saleTp = #{saleTp}	
-	   and advertiseYn = 'Y'	  
+	   and advertiseYn = 'Y'
+	   <if test = "objtTp != null and objtTp != '' ">
+	   and objtTp = #{objtTp}
+	   </if>
+	   <if test = "saleTp != null and saleTp != '' and saleTp != 'ST000'">
+	   and saleTp = #{saleTp}
+	   </if>
 	   <if test = "buildCd != null and buildCd != '' ">
 	   and buildCd = #{buildCd}
+	   </if>
+	   <if test = "buildNm != null and buildNm != '' ">
+	   and buildNm = #{buildNm}
 	   </if>
 	</select>
 	
