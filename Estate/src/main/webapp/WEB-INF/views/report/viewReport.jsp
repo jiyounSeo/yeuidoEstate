@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/report/listStyle.jsp" %> 
 <%@ include file="/WEB-INF/views/report/delPopup.jsp" %> 
-<script type="text/javascript" src="./resources/js/report/editReport.js"></script>
+<script type="text/javascript" src="./resources/js/report/editReport.js?v20180219"></script>
 
 <form id="report" method="post" >
 	<div style="width:1500px;margin:auto;padding:0;">
@@ -53,21 +53,63 @@
 				</tr>
 				<tr>
 					<td class="title">계약일</td>
-					<td>${result.contDt}</td>
+					<td>
+						<c:if test="${result.contDt eq null}">
+							---
+						</c:if>
+						<c:if test="${result.contDt ne null}">					
+							${result.contDt}
+						</c:if>
+					</td>
 					<td class="title">계약금</td>
-					<td>${result.contAmt}</td>
+					<td>
+						<c:if test="${result.contAmt == 0 || result.contAmt eq null}">
+							---
+						</c:if>
+						<c:if test="${result.contAmt != 0 && result.contAmt ne null}">					
+							<script type="text/javascript">document.write(comma('${result.contAmt}'));</script> 만원
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td class="title">중도일</td>
-					<td>${result.midContDt}</td>
+					<td>
+						<c:if test="${result.midContDt eq null}">
+							---
+						</c:if>
+						<c:if test="${result.midContDt ne null}">					
+							${result.midContDt}
+						</c:if>
+					</td>
 					<td class="title">중도금</td>
-					<td>${result.midContAmt}</td>
+					<td>
+						<c:if test="${result.midContAmt == 0 || result.midContAmt eq null}">
+							---
+						</c:if>
+						<c:if test="${result.midContAmt != 0 && result.midContAmt ne null}">					
+							<script type="text/javascript">document.write(comma('${result.midContAmt}'));</script> 만원
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td class="title">잔금일</td>
-					<td>${result.remainDt}</td>
+					<td>
+						<c:if test="${result.remainDt eq null}">
+							---
+						</c:if>
+						<c:if test="${result.remainDt ne null}">					
+							${result.remainDt}
+						</c:if>
+					</td>
 					<td class="title">잔금</td>
-					<td>${result.remainAmt}</td>
+					<td>
+						<c:if test="${result.remainAmt == 0 || result.remainAmt eq null}">
+							---
+						</c:if>
+						<c:if test="${result.remainAmt != 0 && result.remainAmt ne null}">					
+							<script type="text/javascript">document.write(comma('${result.remainAmt}'));</script> 만원
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td class="title">특약사항 및 체크사항</td>
@@ -79,9 +121,23 @@
 				</tr>
 				<tr>
 					<td class="title">예상수수료</td>
-					<td>${result.preFees}</td>
+					<td>
+					<c:if test="${result.preFees == 0 || result.preFees eq null}">
+						---
+					</c:if>
+					<c:if test="${result.preFees != 0 && result.preFees ne null}">					
+						<script type="text/javascript">document.write(comma('${result.preFees}'));</script> 만원
+					</c:if>
+					</td>
 					<td class="title">실제수수료</td>
-					<td>${result.realFees}</td>
+					<td>
+					<c:if test="${result.realFees == 0 || result.realFees eq null}">
+						---
+					</c:if>
+					<c:if test="${result.realFees != 0 && result.realFees ne null}">					
+						<script type="text/javascript">document.write(comma('${result.realFees}'));</script> 만원
+					</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td class="title">수수료변동사유</td>

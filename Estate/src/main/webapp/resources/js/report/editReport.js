@@ -279,6 +279,11 @@ function f_report_save()
 		}
 	}
 	
+	$("#contAmt").val( f_removeComma($("#contAmt").val()));
+	$("#midContAmt").val( f_removeComma($("#midContAmt").val()));
+	$("#remainAmt").val( f_removeComma($("#remainAmt").val()));
+	$("#preFees").val( f_removeComma($("#preFees").val()));
+	$("#realFees").val( f_removeComma($("#realFees").val()));
 	
 	var urlStr;
 	if($("#btn_add").val() == undefined){
@@ -307,6 +312,25 @@ function f_report_save()
 		  }
 	  }
 	});
+}
+
+
+function inputNumberFormat(obj) { 
+    obj.value = comma(uncomma(obj.value)); 
+} 
+
+function comma(str) { 
+    str = String(str); 
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); 
+} 
+
+function uncomma(str) { 
+    str = String(str); 
+    return str.replace(/[^\d]+/g, ''); 
+}
+
+function f_removeComma(str){
+	return str.replace(/,/g,"");
 }
 
 function f_report_delete() {

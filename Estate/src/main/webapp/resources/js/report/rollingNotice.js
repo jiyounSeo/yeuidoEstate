@@ -18,7 +18,7 @@ function f_getListForNewReportNotice(){
 			 $("#newReportNt").empty();
 			 for (var i = 0; i < result.newList.length; i++){
 				 var item = result.newList[i];
-				 htmlText += "<li>" + today_date +" :: <b>" + item.regUserNm + "(" + item.estateNm + ")</b> 님이 계약을 ";
+				 htmlText += "<li>→ [" + today_date +"] <b>" + item.regUserNm + "(" + item.estateNm + ")</b>님이 계약을 ";
 				 if(item.contSttSe == "1"){
 					 htmlText += "<b><font color='#00a30f'>[ 진행 ]</font></b>";
 				 } else if(item.contSttSe == "2") {

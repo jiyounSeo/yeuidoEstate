@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/report/listStyle.jsp" %> 
 <%@ include file="/WEB-INF/views/report/delPopup.jsp" %>
-<script type="text/javascript" src="./resources/js/report/editReport.js"></script> 
+<script type="text/javascript" src="./resources/js/report/editReport.js?v20180219"></script> 
 
 <form id="report" method="post" >
 	<div style="width:1500px;margin:auto;padding:0;">
@@ -73,19 +73,19 @@
 					<td class="title">계약일</td>
 					<td><input type="text" id="contDt" name="contDt" value="${result.contDt}" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">계약금</td>
-					<td><input type="text" id="contAmt" name="contAmt" value="${result.contAmt}"></td>
+					<td><input type="text" onkeyup="inputNumberFormat(this)" maxLength="15" style="width:60%" id="contAmt" name="contAmt" value="${result.contAmt}"></td>
 				</tr>
 				<tr>
 					<td class="title">중도일</td>
 					<td><input type="text" id="midContDt" name="midContDt" value="${result.midContDt}" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">중도금</td>
-					<td><input type="text" id="midContAmt" name="midContAmt" value="${result.midContAmt}"></td>
+					<td><input type="text" onkeyup="inputNumberFormat(this)" maxLength="15" style="width:60%" id="midContAmt" name="midContAmt" value="${result.midContAmt}"></td>
 				</tr>
 				<tr>
 					<td class="title">잔금일</td>
 					<td><input type="text" id="remainDt" name="remainDt" value="${result.remainDt}" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">잔금</td>
-					<td><input type="text" id="remainAmt" name="remainAmt" value="${result.remainAmt}"></td>
+					<td><input type="text" onkeyup="inputNumberFormat(this)" maxLength="15" style="width:60%" id="remainAmt" name="remainAmt" value="${result.remainAmt}"></td>
 				</tr>
 				<tr>
 					<td class="title">특약사항 및 체크사항</td>
@@ -97,9 +97,9 @@
 				</tr>
 				<tr>
 					<td class="title">예상수수료</td>
-					<td><input type="text" id="preFees" name="preFees" value="${result.preFees}"></td>
+					<td><input type="text" onkeyup="inputNumberFormat(this)" maxLength="10" style="width:50%" id="preFees" name="preFees" value="${result.preFees}"></td>
 					<td class="title">실제수수료</td>
-					<td><input type="text" id="realFees" name="realFees" value="${result.realFees}"></td>
+					<td><input type="text" onkeyup="inputNumberFormat(this)" maxLength="10" style="width:50%" id="realFees" name="realFees" value="${result.realFees}"></td>
 				</tr>
 				<tr>
 					<td class="title">수수료변동사유</td>

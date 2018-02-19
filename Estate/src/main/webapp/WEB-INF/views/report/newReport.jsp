@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/report/listStyle.jsp" %>
-<script type="text/javascript" src="./resources/js/report/editReport.js"></script> 
+<script type="text/javascript" src="./resources/js/report/editReport.js?v20180219"></script> 
 
 <form id="report" method="post" >
 	<div style="width:1500px;margin:auto;padding:0;">
@@ -75,19 +75,19 @@
 					<td class="title">계약일</td>
 					<td><input type="text" id="contDt" name="contDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">계약금</td>
-					<td><input id="contAmt" name="contAmt" type="number"></td>
+					<td><input id="contAmt" name="contAmt" type="text" onkeyup="inputNumberFormat(this)" maxLength="15" style="width:60%"> 만원</td>
 				</tr>
 				<tr>
 					<td class="title">중도일</td>
 					<td><input type="text" id="midContDt" name="midContDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">중도금</td>
-					<td><input id="midContAmt" name="midContAmt" type="number"></td>
+					<td><input id="midContAmt" name="midContAmt" type="text" onkeyup="inputNumberFormat(this)" maxLength="15" style="width:60%"> 만원</td>
 				</tr>
 				<tr>
 					<td class="title">잔금일</td>
 					<td><input type="text" id="remainDt" name="remainDt" class="datepicker" style="width:140px" readonly="readonly"><img src="./resources/images/icon_cal.jpg"></td>
 					<td class="title">잔금</td>
-					<td><input id="remainAmt" name="remainAmt" type="number"></td>
+					<td><input id="remainAmt" name="remainAmt" type="text" onkeyup="inputNumberFormat(this)" maxLength="15" style="width:60%"> 만원</td>
 				</tr>
 				<tr>
 					<td class="title">특약사항 및 체크사항</td>
@@ -99,9 +99,9 @@
 				</tr>
 				<tr>
 					<td class="title">예상수수료</td>
-					<td><input id="preFees" name="preFees" type="number"></td>
+					<td><input id="preFees" name="preFees" type="text" onkeyup="inputNumberFormat(this)" maxLength="10" style="width:50%"> 만원</td>
 					<td class="title">실제수수료</td>
-					<td><input id="realFees" name="realFees" type="number"></td>
+					<td><input id="realFees" name="realFees"  type="text" onkeyup="inputNumberFormat(this)" maxLength="10" style="width:50%"> 만원</td>
 				</tr>
 				<tr>
 					<td class="title">수수료변동사유</td>

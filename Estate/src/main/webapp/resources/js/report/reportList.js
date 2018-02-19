@@ -38,12 +38,28 @@ function f_reportList_select()
 				  htmlText = htmlText + '<tr onClick="location.href=\'./viewReport.do?contractId='+ data.contractId + '\'" style="cursor:pointer;">' +
 				  '<td>' + data.regDt + '</td>' +
 				  //'<td>' + data.dueDt + '</td>' +
-				  '<td>' + convertContTpToText(data.contTp1, data.contTp2) + '</td>' +
-				  '<td>' + data.addr + '</td>' +
-				  '<td>' + data.contDt + '</td>' +
-				  '<td>' + data.midContDt + '</td>' +
-				  '<td>' + data.remainDt + '</td>' +
-				  '<td>' + data.managerNm + '</td>';
+				  '<td>' + convertContTpToText(data.contTp1, data.contTp2) + '</td>';
+				  if(data.addr == null){
+					  htmlText += '<td>---</td>';
+				  } else {
+					  htmlText += '<td>' + data.addr + '</td>';				  
+				  }
+				  if(data.contDt == null){
+					  htmlText += '<td>---</td>';
+				  } else {
+					  htmlText += '<td>' + data.contDt + '</td>';				  
+				  }
+				  if(data.midContDt == null){
+					  htmlText += '<td>---</td>';
+				  } else {
+					  htmlText += '<td>' + data.midContDt + '</td>';				  
+				  }
+				  if(data.remainDt == null){
+					  htmlText += '<td>---</td>';
+				  } else {
+					  htmlText += '<td>' + data.remainDt + '</td>';				  
+				  }
+				  htmlText += '<td>' + data.managerNm + '</td>';
 				  
 				  if(data.contSttSe == "1"){
 					  htmlText += '<td>진행</td>';

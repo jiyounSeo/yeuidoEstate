@@ -9,7 +9,7 @@
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.tmpl.js"></script>
 <script type="text/javascript" src="./resources/js/comm/common.js"></script>
-<script type="text/javascript" src="./resources/js/report/rollingNotice.js?v20180204"></script>
+<script type="text/javascript" src="./resources/js/report/rollingNotice.js?v20180219"></script>
 <script type="text/javascript" src="./resources/js/comm/jquery.vticker-min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -65,9 +65,9 @@ $(document).ready(function() {
 
 </script>
 <style>
-	#rollingText .viewArea{height:22px;width:510px;position:relative;overflow:hidden;}
-	#rollingText ul{position:absolute; top:0px;}
-	#rollingText li{margin:5px 0;}
+	#rollingText .viewArea{height:22px;width:544px;position:relative;overflow:hidden; font-size:14px;}
+	#rollingText ul{position:absolute; top:0px;list-style: none; font-size:14px;}
+	#rollingText li{margin:5px 0px; font-size:14px;}
 </style>
 
 <body style="margin:0; background-color: #f6f8f7;overflow-x:hidden;">
@@ -80,8 +80,8 @@ $(document).ready(function() {
 			<div id="memberDiv" style="width:1480px;text-align: left; margin:0; padding-left:5px; padding-top:0; padding-right:0; padding-bottom:5px;position:relative;">
 				<table style="border-spacing:0px; padding:0; border:0; border-collapse:collapse; width:100%">
 					<tr>
-						<td width="472px" id="memberInfo" height="40px;"></td>
-						<td width="514px">
+						<td width="432px" id="memberInfo" height="40px;"></td>
+						<td width="544px">
 							<div id="rollingText" style="height:22px;"><div class="viewArea"><ul class="notice-list" id="newReportNt" name="newReportNt"></ul></div></div>
 						</td>
 						<td width="58px" align="right" height="40px;">

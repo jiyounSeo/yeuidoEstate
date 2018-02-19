@@ -137,10 +137,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, manager
 		, boss
 		, regUser
+		<if test="user.mbrTp eq 'MT002'" >
 		, (SELECT COUNT(*) FROM contract where regUser = #{user.loginId}) totalCnt
+		</if>
+		<if test="user.mbrTp eq 'MT003'" >		
+		, (SELECT COUNT(*) FROM contract 
+			where regUser in (SELECT loginId
+							FROM member m1
+							WHERE mbrTp in ('MT001','MT002', 'MT003')
+							AND estateCd = #{user.estateCd})) totalCnt		
+		</if>
+		<if test="user.mbrTp eq 'MT004'" >		
+		, (SELECT COUNT(*) FROM contract) totalCnt
+		</if>	
 	    , (SELECT mbrNm FROM member m WHERE m.mbrId = c.manager  ) managerNm 
 	  FROM contract c
-	  where regUser = #{user.loginId}
+		<if test="user.mbrTp eq 'MT002'" >
+			where regUser = #{user.loginId}
+		</if>
+		<if test="user.mbrTp eq 'MT003'" >
+			where regUser in (SELECT loginId
+							FROM member m1
+							WHERE mbrTp in ('MT001','MT002', 'MT003')
+							AND estateCd = #{user.estateCd})			
+		</if>
+	  
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	
