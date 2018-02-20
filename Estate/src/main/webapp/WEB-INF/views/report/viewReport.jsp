@@ -67,7 +67,7 @@
 							---
 						</c:if>
 						<c:if test="${result.contAmt != 0 && result.contAmt ne null}">					
-							<script type="text/javascript">document.write(comma('${result.contAmt}'));</script> 만원
+							<script type="text/javascript">document.write(comma('${result.contAmt}'));</script> 원
 						</c:if>
 					</td>
 				</tr>
@@ -87,7 +87,7 @@
 							---
 						</c:if>
 						<c:if test="${result.midContAmt != 0 && result.midContAmt ne null}">					
-							<script type="text/javascript">document.write(comma('${result.midContAmt}'));</script> 만원
+							<script type="text/javascript">document.write(comma('${result.midContAmt}'));</script> 원
 						</c:if>
 					</td>
 				</tr>
@@ -107,7 +107,7 @@
 							---
 						</c:if>
 						<c:if test="${result.remainAmt != 0 && result.remainAmt ne null}">					
-							<script type="text/javascript">document.write(comma('${result.remainAmt}'));</script> 만원
+							<script type="text/javascript">document.write(comma('${result.remainAmt}'));</script> 원
 						</c:if>
 					</td>
 				</tr>
@@ -126,7 +126,7 @@
 						---
 					</c:if>
 					<c:if test="${result.preFees != 0 && result.preFees ne null}">					
-						<script type="text/javascript">document.write(comma('${result.preFees}'));</script> 만원
+						<script type="text/javascript">document.write(comma('${result.preFees}'));</script> 원
 					</c:if>
 					</td>
 					<td class="title">실제수수료</td>
@@ -135,7 +135,7 @@
 						---
 					</c:if>
 					<c:if test="${result.realFees != 0 && result.realFees ne null}">					
-						<script type="text/javascript">document.write(comma('${result.realFees}'));</script> 만원
+						<script type="text/javascript">document.write(comma('${result.realFees}'));</script> 원
 					</c:if>
 					</td>
 				</tr>
