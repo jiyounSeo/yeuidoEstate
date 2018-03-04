@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/comm/adminHeader.jsp" %> 
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="/WEB-INF/views/report/listStyle.jsp" %>
-<script type="text/javascript" src="./resources/js/report/editReport.js?v20180219"></script> 
+<script type="text/javascript" src="./resources/js/report/editReport.js?v20180301"></script> 
 
 <form id="report" method="post" >
 	<div style="width:1500px;margin:auto;padding:0;">
@@ -125,7 +125,7 @@
 			<div style="height:50px;"><input type="hidden" id="stateChngDt" name="stateChngDt" value=""></div>
 			<div style="width:1400px;margin:auto;text-align:center;">
 				<a href="#"><img id="btn_add" src="./resources/images/btn_add.jpg" onclick="f_report_save();return false;"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#"><img src="./resources/images/btn_cancel.jpg"></a>
+				<a href="./commRepList.do"><img src="./resources/images/btn_cancel.jpg"></a>
 			</div>
 		</div>
 	</div>

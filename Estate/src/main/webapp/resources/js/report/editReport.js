@@ -260,6 +260,19 @@ function f_report_save()
 		return;
 	}*/
 
+	if($("#managerSelect").val() == "0")
+	{
+		alert ("담당자를 선택해주세요.");
+		$("#managerSelect").focus();
+		return;
+	}
+
+	if($("#bossSelect").val() == "0")
+	{
+		alert ("사장님을 선택해주세요.");
+		$("#bossSelect").focus();
+		return;
+	}	
 	var obj = document.getElementsByName('type_rb');
 
 	var cur_year = Number(moment().format('YYYY'));

@@ -18,12 +18,15 @@
 			<img src="./resources/images/title_comm_cl_list.jpg">
 		</c:if>
 		<!-- 활성 -->
-		<c:if test="${pageNm eq 'custActiveY' }">
+		<c:if test="${pageNm eq 'custActiveY'  || pageNm eq ''}">
 			<img src="./resources/images/title_cl_active.jpg">
 		</c:if>
 		<!-- 보류 -->
 		<c:if test="${pageNm eq 'custActiveN' }">
 			<img src="./resources/images/title_cl_reserve.jpg">
+		</c:if>		
+		<c:if test="${pageNm ne 'custPublic' and pageNm ne 'custActiveY' and pageNm ne 'custActiveN'}">
+			<img src="./resources/images/title_cl_active.jpg">
 		</c:if>
 	</div>
 	
@@ -61,6 +64,10 @@
 						<c:if test="${pageNm eq 'custActiveY' or pageNm eq 'custActiveN' }">
 							<td style="width:750px">의뢰내역</td>
 							<td style="width:120px">등록인</td>
+						</c:if>
+						<c:if test="${pageNm ne 'custPublic' and pageNm ne 'custActiveY' and pageNm ne 'custActiveN'}">
+							<td style="width:750px">의뢰내역</td>
+							<td style="width:120px">등록인</td>					
 						</c:if>
 						<td style="width:80px">상태</td>
 					</tr>

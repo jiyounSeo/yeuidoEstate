@@ -100,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		, chngRsn = #{chngRsn}
 		, manager = #{managerSelect}
 		, boss = #{bossSelect}
-		, regDt = now()
+		, modifyDt = now()
 		, stateChngDt = #{stateChngDt}
      WHERE contractId = #{contractId}
     </update>
@@ -160,8 +160,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							FROM member m1
 							WHERE mbrTp in ('MT001','MT002', 'MT003')
 							AND estateCd = #{user.estateCd})			
-		</if>
-	  
+		</if>	  
+	   order by regDt desc
 	   LIMIT #{rowNum}, #{pagePerRow}
 	</select>
 	

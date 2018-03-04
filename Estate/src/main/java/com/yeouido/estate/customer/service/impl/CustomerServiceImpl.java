@@ -24,6 +24,7 @@ public class CustomerServiceImpl  implements CustomerService
    }
    public int deleteCustomer(Map map) throws Exception {
 	   customerDAO.deleteWorkDocByCust(map);
+	   customerDAO.deleteCustomerLinkInObject(map);
 	   return customerDAO.deleteCustomer(map);
    }
    

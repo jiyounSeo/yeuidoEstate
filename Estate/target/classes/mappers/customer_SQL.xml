@@ -93,7 +93,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN direction AS dir ON dir.workNo = w.workNo 
 		WHERE custId = #{custId}
     </delete>
-    
+	
+	<update  id="deleteCustomerLinkInObject" parameterType="java.util.HashMap" >
+		UPDATE saleobject
+			SET custId = ''
+		WHERE custId = #{custId}
+	</update>
    	
    	<select id="selectCustomerConfirm" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	SELECT custId, custId2

@@ -26,7 +26,7 @@ public class ObjectServiceImpl  implements ObjectService
    public Map insertObject(Map map) throws Exception {
 	   Map<String, Object> custMap = customerDAO.selectCustomerConfirm(map);
 	   if (("").equals(custMap.get("custId")) || custMap.get("custId") == null ) {
-		   if (!("").equals(custMap.get("custNm")) || custMap.get("custNm") != null) {
+		   if (!(("").equals(map.get("custNm"))) && map.get("custNm") != null) {
 			   map.put("custId", custMap.get("custId2"));
 			   customerDAO.insertNewCustomer(map);
 		   }
@@ -40,8 +40,23 @@ public class ObjectServiceImpl  implements ObjectService
    @Override
    public Map modifyObject(Map map) throws Exception {
 	   
-	   if (!("").equals(map.get("custId")) && map.get("custId") != null) {
-		   customerDAO.modifyObjtCustomer(map);
+	   if (("").equals(map.get("custId")) || map.get("custId") == null ) {
+		   if (!(("").equals(map.get("custNm"))) && map.get("custNm") != null) {
+			   Map<String, Object> custMap = customerDAO.selectCustomerConfirm(map);
+			   if (("").equals(custMap.get("custId")) || custMap.get("custId") == null ) {
+				   map.put("custId", custMap.get("custId2"));
+				   customerDAO.insertNewCustomer(map);
+			   }
+		   }
+	   } else if (!("").equals(map.get("custId")) && map.get("custId") != null) {
+		   if (("").equals(map.get("custNm")) || map.get("custNm") == null ) {
+			   customerDAO.deleteWorkDocByCust(map);
+			   customerDAO.deleteCustomerLinkInObject(map);
+			   customerDAO.deleteCustomer(map);
+			   map.put("custId", "");
+		   } else {
+			   customerDAO.modifyObjtCustomer(map);
+		   }
 	   }
 	   objectDAO.modifyObject(map);
 	   return map;

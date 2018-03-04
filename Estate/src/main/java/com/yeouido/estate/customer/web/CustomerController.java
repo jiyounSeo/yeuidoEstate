@@ -193,7 +193,11 @@ public class CustomerController {
 		map.put("custId", request.getParameter("custId"));
 		map.put("publicYn", request.getParameter("publicYn"));
 		map.put("activeTp", request.getParameter("activeTp"));
-		map.put("pageNm", request.getParameter("pageNm"));
+		if( request.getParameter("pageNm") == null ||  request.getParameter("pageNm").equals("") ){
+			map.put("pageNm", "custPublic");			
+		} else {
+			map.put("pageNm", request.getParameter("pageNm"));
+		}
 		try {
 			int result = customerService.deleteCustomer(map);
 			model.addAttribute("messageCd", "1");

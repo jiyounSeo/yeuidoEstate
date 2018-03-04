@@ -27,6 +27,9 @@ public class CustomerDAO extends AbstractDAO
    public int deleteWorkDocByCust(Map<String, Object> map) throws Exception{
        return delete("customerDAO.deleteWorkDocByCust",map);
    }
+   public int deleteCustomerLinkInObject(Map<String, Object> map) throws Exception{
+       return delete("customerDAO.deleteCustomerLinkInObject",map);
+   }
    @SuppressWarnings("unchecked")
    public Map selectCustomerInfo(Map map) throws Exception{
        return selectMap("customerDAO.selectCustomerInfo", map);

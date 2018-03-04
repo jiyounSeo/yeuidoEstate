@@ -381,6 +381,16 @@ function f_saleobject_save() {
 	var urlStr = "";
 	if ($("#objtNo").val() != "" ) {
 		urlStr = "modifyObject.do";
+		
+		if($("#custId").val() != '' && $("#custNm").val() == '' ){
+			if( confirm ("기존에 등록되어있던 고객정보를 삭제하시겠습니까? (해당 고객카드도 삭제됩니다)")) {
+				
+			} else {
+				$("#custNm").focus();
+				return;
+			}
+		}
+		
 	} else {
 		urlStr = "insertObject.do";
 	}
@@ -394,10 +404,13 @@ function f_saleobject_save() {
 	  success : function(data){
 		  alert (data.message);
 		  if (data.messageCd == 1) {
-			  if ( data.custId != "" && data.custId != null && 
-					  confirm ("등록하신 고객정보를 수정하시겠습니까?")) {
-				  $("#custId").val(data.custId);
-				  f_cust_dtl_view();
+			  if(data.custId != ''){
+				  if( confirm ("등록하신 고객정보를 수정하시겠습니까?")) {
+					  $("#custId").val(data.custId);
+					  f_cust_dtl_view();
+				  } else{
+					  f_objt_dtl_view();
+				  }  
 			  } else{
 				  f_objt_dtl_view();
 			  }
